@@ -1,0 +1,105 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบรายงาน</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">ข้อมูลรายคลังสินค้า</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="table-responsive">
+            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="text-center">ครั้งที่</th>
+                        <th class="text-center">จังหวัด</th>
+                        <th class="text-center">ปีโครงการ</th>
+                        <th class="text-center">รอบ</th>
+                        <th class="text-center">คลังสินค้า</th>
+                        <th class="text-center">หน่วยงาน</th>
+                        <th class="text-center">ชนิด</th>
+                        <th class="text-center">หลัง</th>
+                        <th class="text-center">กอง</th>
+                        <th class="text-center">เกรด</th>
+                        <th class="text-center">ปริมาณ (ตัน)</th>
+                        <th class="text-center">มูลค่าขั้นต่ำ (บาท)</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#example').dataTable({
+            "ajax": '{{_context_path}}/api/report/it/stack',
+            "columns": [
+                {"class": "text-center", "data": "auctionCode"},
+                {"class": "text-center", "data": "province"},
+                {"class": "text-center", "data": "project"},
+                {"class": "text-center", "data": "projectRound"},
+                {"class": "text-left", "data": "wareHouseCode"},
+                {"class": "text-center", "data": "associate"},
+                {"class": "text-center", "data": "typeName"},
+                {"class": "text-center", "data": "warehouse"},
+                {"class": "text-center", "data": "stack"},
+                {"class": "text-center", "data": "grade"},
+                {"class": "text-right", "data": "oweightAll"},
+                {"class": "text-right", "data": "fv2"}
+            ],
+            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+            "pageLength": 20,
+            "columnDefs": [
+                {
+                    "targets": 2,
+                    "render": function (data, type, row) {
+                        if (data.substr(-1, 1) == ")") {
+                            return data.substr(0, (data.length - 3));
+                        } else {
+                            return data;
+                        }
+                    }
+                },
+                {
+                    "targets": 3,
+                    "render": function (data, type, row) {
+                        if (data == 0) {
+                            return "-";
+                        } else {
+                            return data;
+                        }
+                    }
+                },
+                {
+                    "targets": 10,
+                    "render": function (data, type, row) {
+                        var data = accounting.formatNumber(data, 6, ",", ".");
+                        return data;
+                    }
+                },
+                {
+                    "targets": 11,
+                    "render": function (data, type, row) {
+                        var data = accounting.formatNumber(data, 2, ",", ".");
+                        return data;
+                    }
+                }
+            ]
+        });
+    });
+</script>

@@ -1,0 +1,519 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบระบายข้าว</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">รายการระบายข้าว</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i>&nbsp;เพิ่มข้อมูล</button>
+                    <button class="btn btn-primary back" style="display: none;">รายการระบายข้าว</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="divTable">
+                <div class="col-md-12">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dataTable" class="col-md-12" style="margin-top: 20px;"><!-- table shown file detail -->
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center">ลำดับ</th>
+                                <th class="text-center">รายการระบายข้าว</th>
+                                <th class="text-center">วันที่</th>
+                                <th class="text-center">จำนวนข้าวที่ระบาย (ตัน)</th>
+                                <th class="text-center">สถานะ</th>
+                                <th class="text-center">เครื่องมือ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataBody">
+                            <tr class="text-center">
+                                <td colspan="6">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end table shown file detail -->
+            </div>
+
+            <div id="divForm" style="display: none;">
+                <div class="col-md-12">
+                    <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                        <div class="col-xs-12">
+                            <section class="panel">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="fa fa-caret-up"></a>
+                                    </div>
+                                    <h2 class="panel-title">สร้างรายการระบายข้าว</h2>
+                                </header>
+
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label req" for="reserveKeyword">รายการสำรองข้าว</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control input-sm" name="reserveKeyword" id="reserveKeyword" required>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label req" for="keyword">รายการระบายข้าว</label>
+                                        <div class="col-md-6">
+                                            <select class="form-control input-sm" name="keyword" id="keyword" required>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div id="switchForm"></div>
+
+                                    <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-primary save"><i class="fa fa-save"></i> บันทึก</button>&nbsp;
+                                        <button class="btn btn-default cancel"><i class="fa fa-trash"></i> ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="delModal" aria-labelledby="bidderLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : รายการระบายข้าว</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <tbody>
+                                    <tr>
+                                        <td>รายการ</td><td class="text-left"><div id="detailDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันที่</td><td class="text-left"><div id="dateDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ปริมาณที่สำรอง (ตัน)</td><td class="text-left"><div id="targetDel"></div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete reserve data-->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    var listArr = [];
+    var flagRelease = 0;
+
+    $(function () {
+        listsRelease();
+
+        $("button.add").unbind().click(function(){
+            toggleShow("form");
+
+            $("button.save").unbind().click(function(){
+                var isValid = true;
+                $('#form input[required]').each(function() {
+                    if($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                });
+                if(isValid){
+                    var fdata = dataObject(null);
+                    var dataJSON = JSON.stringify({status: fdata["Status"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    insertRelease(dataJSONEN);
+                }
+            });
+        });
+
+        $("button.back, button.cancel").unbind().click(function(){
+            toggleShow("home");
+        });
+    });
+
+    function listsRelease(){
+        var dataSet = [];
+
+        var datas = callAjax("{{_context_path}}/api/release/manage/listsRelease", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function(key, value){
+                listArr[value["id"]] = value;
+
+                dataSet.push(value);
+            });
+        }
+
+        var t = $("#table").DataTable( {
+            "destroy": true,
+            "data": dataSet,
+            "order": [[ 0, 'asc' ]],
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "id",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 1,
+                    "data": "id",
+                    "sClass": "text-center",
+                    "render": function(data, key, full){
+                        var content = full["releaseName"]+' '+full["status"];
+                        return content;
+                    }
+                },
+                {
+                    "targets": 2,
+                    "data": "auctionDate",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 3,
+                    "data": "target",
+                    "sClass": "text-right"
+                },
+                {
+                    "targets": 4,
+                    "data": "active",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 5,
+                    "data": "id",
+                    "sClass": "text-left col-md-1",
+                    "render": function (data) {
+                        var content = '<button class="btn btn-primary edit" data-id="'+data+'"><i class="fa fa-pencil"></i></button>&nbsp;'
+                                + '<button class="btn btn-default delete" data-id="'+data+'"><i class="fa fa-trash"></i></button> ';
+
+                        return content;
+                    }
+                }
+            ]
+        });
+
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();
+
+        $("#table").off("click", "button.edit").on("click", "button.edit", function(){
+            toggleShow("form");
+
+            var id = $(this).attr("data-id");
+            var value = listArr[id];
+
+            $("#reserveKeyword").val(value["reserveKeyword"]);
+            $("#keyword").val(value["releaseCode"]).trigger("change");
+            $("#status").val(value["status"]);
+            $("#auctionDate").val(value["auctionDate"]);
+
+            if(value["releaseCode"] == "AU"){
+                $("#ageStop").val(value["ageStop"]["date"].substr(0, 10));
+                $("#dateStart").val(value["dateStart"]["date"].substr(0, 10));
+                $("#dateEnd").val(value["dateEnd"]["date"].substr(0, 10));
+                $("#lengthDecimal").val(value["lengthDecimal"]);
+                $("#roundFun").val(value["roundFun"]);
+                $("#weightDecimal").val(value["weightDecimal"]);
+            }
+
+            $("button.save").unbind().click(function(){
+                var isValid = true;
+                $('#form input[required]').each(function() {
+                    if($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                });
+                if(isValid){
+                    var fdata = dataObject(id);
+                    var dataJSON = JSON.stringify({status: fdata["Status"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    editRelease(dataJSONEN);
+                }
+            });
+
+        });
+
+        $("#table").off("click", "button.delete").on("click", "button.delete", function(){
+            $("#delModal").modal("show");
+
+            var id = $(this).attr("data-id");
+            var value = listArr[id];
+
+            $("#detailDel").html(value["releaseName"]+' '+value["status"]);
+            $("#dateDel").html(value["auctionDate"]);
+            $("#targetDel").html(value["target"]);
+
+            $("#confirmDelete").unbind().click(function(){
+                var dataStatus = {};
+
+                dataStatus["keyword"] = listArr[id]["keyword"];
+
+                var fdata = {};
+                fdata["Status"] = dataStatus;
+
+                var dataJSON = JSON.stringify({status: fdata["Status"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                deleteRelease(dataJSONEN);
+            });
+
+        });
+    }
+
+    function listsReserve(){
+        var html = '<option value="" selected="selected">เลือกรายการสำรองข้าว</option>';
+        var datas = callAjax("{{_context_path}}/api/release/manage/listsReserve", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function(key, value){
+                html += '<option value="'+value["keyword"]+'">'+value["detail"]+'</option>'
+            });
+
+            $("#reserveKeyword").html(html);
+        }
+    }
+
+    function lkRelease(){
+        if(flagRelease === 0){
+            var html = '<option value="" selected="selected">เลือกรายการระบายข้าว</option>';
+            var datas = callAjax("{{_context_path}}/api/release/manage/lkRelease", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    html += '<option value="'+value["releaseCode"]+'">'+value["releaseName"]+'</option>'
+                });
+
+                $("#keyword").html(html);
+            }
+            flagRelease = 1;
+        }
+    }
+
+    function switchForm(option){
+        var html = '';
+
+        if(option == ""){
+            html = '<div class="form-group text-center">'
+                + '<label class="text-bold">** รายละเอียดการระบายข้าว **</label>'
+            + '</div>';
+
+            $("#switchForm").html(html);
+        }
+
+        else if(option == "AU"){
+            html = '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="status">ประมูลครั้งที่</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="status" name="status" required>'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ประมูล</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="ageStop">วันที่คิดอายุข้าว</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="ageStop" name="ageStop" required>'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req">วันที่คิดราคาย้อนหลัง</label>'
+                + '<div class="col-md-6">'
+                    + '<div class="input-daterange input-group">'
+                        + '<span class="input-group-addon"><i class="fa fa-calendar"></i></span>'
+                        + '<input type="text" class="form-control" id="dateStart" name="dateStart" required>'
+                        + '<span class="input-group-addon">ถึง</span>'
+                        + '<input type="text" class="form-control" id="dateEnd" name="dateEnd" required>'
+                    + '</div>'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="lengthDecimal">Decimal Length</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="lengthDecimal" name="lengthDecimal">'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="roundFun">Round Fun.</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="roundFun" name="roundFun">'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="weightDecimal">Weight Decimal</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="weightDecimal" name="weightDecimal">'
+                + '</div>'
+            + '</div>';
+
+            $("#switchForm").html(html);
+
+            $("#ageStop, #dateStart, #dateEnd").datepicker({
+                format: "yyyy-mm-dd",
+                autoclose: true
+            });
+        }
+        else{
+            html = '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="status">รายละเอียด</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="status" name="status" required>'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ระบายข้าว</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
+                + '</div>'
+            + '</div>';
+
+            $("#switchForm").html(html);
+        }
+    }
+
+    function insertRelease(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/release/manage/insert", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["add"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["add"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function editRelease(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/release/manage/update", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["update"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["update"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function deleteRelease(dataJSONEN) {
+        var datas = callAjax("{{_context_path}}/api/release/manage/delete", "post", dataJSONEN, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            if (datas["delete"] == true) {
+                toggleShow("home");
+            }
+        }
+    }
+
+    function dataObject(id){
+        var dataStatus = {};
+        if(id !== null){
+            dataStatus["id"] = id;
+        }
+
+        $("#form input[type=text], #form select").each(function (i) {
+            var fname = $(this).attr("name");
+            var fvalue = $(this).val();
+
+            dataStatus[fname] = fvalue;
+        });
+        var fdata = {};
+        fdata["Status"] = dataStatus;
+
+        return fdata;
+    }
+
+    function toggleShow(option){
+        if(option == "form"){
+            $("#divTable, button.add").hide();
+            $("#divForm, button.back").show();
+
+            $("#form input, #form select").each(function(){
+                $(this).val("").trigger("change");
+            });
+
+            listsReserve();
+            lkRelease();
+
+            $("#loading").empty();
+
+            $("#keyword").change(function(){
+                switchForm($("#keyword").val());
+            }).trigger("change");
+        }
+        else if(option == "home"){
+            $("#divForm, button.back").hide();
+            $("#divTable, button.add").show();
+
+            listsRelease();
+        }
+    }
+</script>

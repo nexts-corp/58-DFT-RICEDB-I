@@ -1,0 +1,490 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบระบายข้าว</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">กำหนดอัตราส่วนลด</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i> เพิ่มข้อมูล</button>
+                    <button class="btn btn-primary back" style="display: none;">อัตราส่วนลด</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+    
+    <div class="container">
+        <div class="row">
+            <div id="divTable"><!-- table shown -->
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <div class="col-md-6">
+                            <label class="col-md-4 control-label text-right" for="searchType">ชนิดข้าว</label>
+                            <div class="col-md-8">
+                                <select class="form-control input-sm" name="searchType" id="searchType" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-4 control-label text-right" for="searchGrade">เกรด</label>
+                            <div class="col-md-8">
+                                <select class="form-control input-sm" name="searchGrade" id="searchGrade" required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="margin-top: 20px;"><!-- table shown file detail -->
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-1">ลำดับ</th>
+                                <th class="text-center col-md-3">ชนิดข้าว</th>
+                                <th class="text-center col-md-2">เกรด</th>
+                                <th class="text-center col-md-2">ค่าส่วนลดเริ่มต้น</th>
+                                <th class="text-center col-md-2">อัตราส่วนต่างเฉลี่ย</th>
+                                <th class="text-center col-md-2">เครื่องมือ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataBody">
+                            <tr>
+                                <td colspan="6" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end table shown file detail -->
+            </div><!-- end table shown -->
+            
+            <div id="divForm" class="col-md-12" style="display: none;"><!-- form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-up"></a>
+                                </div>
+                                <h2 class="panel-title">ข้อมูลอัตราส่วนลด</h2>
+                            </header>
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="typeId">ชนิดข้าว</label>
+                                    <div class="col-md-6">
+                                        <select id="typeId" name="typeId" class="form-control input-sm" required></select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="gradeId">เกรด</label>
+                                    <div class="col-md-6">
+                                        <select id="gradeId" name="gradeId" class="form-control input-sm" required></select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="discountStart">ค่าส่วนลดเริ่มต้น</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="discountStart" name="discountStart" class="form-control input-sm" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="rateAvg">อัตราส่วนต่างเฉลี่ย</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="rateAvg" name="rateAvg" class="form-control input-sm" required>
+                                    </div>
+                                </div>
+                                
+                                <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+                                <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                                    <li class="">
+                                        <button id="submit" class="btn btn-primary submit">บันทึก</button>
+                                    </li>
+                                    <li class="padding-left">
+                                        <button type="button" class="btn btn-default cancel">ยกเลิก</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div><!-- form -->
+
+            <div id="delModal" aria-labelledby="delLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : อัตราส่วนลด</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <tbody>
+                                    <tr>
+                                        <td>ชนิดข้าว</td><td class="text-left"><div id="typeDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>เกรด</td><td class="text-left"><div id="gradeDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ค่าส่วนลดเริ่มต้น</td><td class="text-left"><div id="discountDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>อัตราส่วนต่างเฉลี่ย</td><td class="text-left"><div id="rateDel"></div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete bidder info form -->
+            
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    var listArr = [];
+    
+    var flagType = 0;
+    var flagGrade = 0;
+
+    $(function () {
+        listsAll();
+
+        $("#searchType, #searchGrade, #typeId, #gradeId").select2();
+
+        // when you click to add bidder info
+        $("button.add").unbind("click").click(function(){
+            toggleShow("form");
+
+            // when you save form
+            $("button.submit").unbind().click(function(){
+                var isValid = true;
+                $('#form input[required], #form select[required]').each(function() {
+                    if($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                });
+                if(isValid){
+                    var fdata = dataObject(null);
+                    var dataJSON = JSON.stringify({discountRate: fdata["DiscountRate"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    insertDiscount(dataJSONEN);
+                }
+            });
+        });
+        
+        $("button.back, button.cancel").unbind().click(function(){
+            toggleShow("home");
+        });
+    });
+
+    function listsAll(){
+        listArr = [];
+        var dataSet = [];
+
+        var searchType = {};
+        var searchGrade = {};
+        var datas = callAjax("{{_context_path}}/api/release/discount/listsAll", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function(key, value){
+                listArr[value["id"]] = value;
+
+                dataSet.push(value);
+
+                searchType[value["type"]] = value["type"];
+                searchGrade[value["grade"]] = value["grade"];
+            });
+
+            $("#searchType, #searchGrade").empty();
+            $("#searchType, #searchGrade").append('<option value="" selected="selected">ทั้งหมด</option>');
+            $.each(searchType, function(key, value){
+                $("#searchType").append('<option value="'+value+'">'+value+'</option>');
+            }); 
+            $.each(searchGrade, function(key, value){
+                $("#searchGrade").append('<option value="'+value+'">'+value+'</option>');
+            }); 
+        }
+
+        var t = $("#table").DataTable({
+            "destroy": true,
+            "data": dataSet,
+            "order": [[ 0, 'asc' ]],
+            "iDisplayLength": 50,
+            "columnDefs": [ 
+                { 
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "typeId",
+                    "sClass": "text-center col-md-1"
+                },
+                { 
+                    "targets": 1,
+                    "data": "type",
+                    "sClass": "text-left col-md-3"
+                },
+                {
+                    "targets": 2,
+                    "data": "grade",
+                    "sClass": "text-center col-md-2"
+                },
+                {
+                    "targets": 3,
+                    "data": "discountStart",
+                    "sClass": "text-right col-md-2"
+                },
+                {
+                    "targets": 4,
+                    "data": "rateAvg",
+                    "sClass": "text-right col-md-2"
+                },
+                {
+                    "targets": 5,
+                    "orderable": false,
+                    "data": "id",
+                    "sClass": "text-center col-md-2",
+                    "render": function (data) {
+                        var content = '<button class="btn btn-primary edit" data-id="'+data+'"><i class="fa fa-pencil"></i></button>&nbsp;'
+                            + '<button class="btn btn-default delete" data-id="'+data+'"><i class="fa fa-trash"></i></button>';
+                        return content;
+                    }                    
+                }
+            ]
+        });
+
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();
+
+        $('#searchType').change(function() {
+            if($('#searchType').val() != ""){
+                t.columns(1).search("^"+$(this).val()+"$", true, false, true).draw();
+            }
+            else{
+                t.columns(1).search($(this).val()).draw();
+            }
+        });
+        
+        $('#searchGrade').change(function() {
+            if($('#searchGrade').val() != ""){
+                t.columns(2).search("^"+$(this).val()+"$", true, false, true).draw();
+            }
+            else{
+                t.columns(2).search($(this).val()).draw();
+            }
+        });
+
+        $("#table").off("click", "button.edit").on("click", "button.edit", function(){
+            toggleShow("form");
+
+            var id = $(this).attr("data-id");
+            var value = listArr[id];
+
+            $("#typeId").val(value["typeId"]).trigger("change");
+            $("#gradeId").val(value["gradeId"]).trigger("change");
+            $("#discountStart").val(value["discountStart"]);
+            $("#rateAvg").val(value["rateAvg"]);
+
+            // when you save the bidder info was modified
+            $("button.submit").unbind().click(function(){
+                var isValid = true;
+                $('#form input[required]').each(function() {
+                    if($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                });
+                if(isValid){
+                    var fdata = dataObject(id);
+                    var dataJSON = JSON.stringify({discountRate: fdata["DiscountRate"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    editDiscount(dataJSONEN);
+                }
+            });
+
+        });
+
+        // when you click to delete bidder info
+        $("#table").off("click", "button.delete").on("click", "button.delete", function(){
+            $('#delModal').modal("show");
+
+            var id = $(this).attr("data-id");
+            var value = listArr[id];
+
+            $("#typeDel").html(value["type"]);
+            $("#gradeDel").html(value["grade"]);
+            $("#discountDel").html(value["discountStart"]);
+            $("#rateDel").html(value["rateAvg"]);
+
+            $("#confirmDelete").unbind().click(function(){
+                var dataDiscount = {};
+
+                dataDiscount["id"] = id;
+
+                var fdata = {};
+                fdata["DiscountRate"] = dataDiscount;
+
+                var dataJSON = JSON.stringify({discountRate: fdata["DiscountRate"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                deleteDiscount(dataJSONEN);
+            });
+
+        });
+    }
+    
+    function lkType(){
+        if(flagType === 0){
+            var html = '<option value="" selected="selected">เลือกชนิดข้าว</option>';
+            var datas = callAjax("{{_context_path}}/api/release/discount/lkType", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    html += '<option value="'+value["id"]+'">'+value["type"]+'</option>'
+                });
+                
+                $("#typeId").html(html);
+            }
+            flagType = 1;
+        }
+    }
+    
+    function lkGrade(){
+        if(flagGrade === 0){
+            var html = '<option value="" selected="selected">เลือกเกรด</option>';
+            var datas = callAjax("{{_context_path}}/api/release/discount/lkGrade", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    html += '<option value="'+value["id"]+'">'+value["grade"]+'</option>'
+                });
+                
+                $("#gradeId").html(html);
+            }
+            flagGrade = 1;
+        }
+    }
+
+    function insertDiscount(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/release/discount/insert", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["add"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["add"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function editDiscount(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/release/discount/update", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["update"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["update"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function deleteDiscount(dataJSONEN) {
+        var datas = callAjax("{{_context_path}}/api/release/discount/delete", "post", dataJSONEN, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            if (datas["delete"] == true) {
+                toggleShow("home");
+            }
+        }
+    }
+
+    function dataObject(id){
+        var dataDiscount = {};
+
+        if(id !== null){
+            dataDiscount["id"] = id;
+        }
+
+        $("#form input[type=text], #form select").each(function (i) {
+            var fname = $(this).attr("name");
+            var fvalue = $(this).val();
+
+            dataDiscount[fname] = fvalue;
+        });
+
+        var fdata = {};
+        fdata["DiscountRate"] = dataDiscount;
+
+        return fdata;
+    }
+
+    function toggleShow(option){
+        if(option == "form"){
+            $("#divTable, button.add").hide();
+            $("#divForm, button.back").show();
+            
+            $("#form input, #form select").each(function(){
+                $(this).val("").trigger("change");
+            });
+
+            $("#loading").empty();
+            
+            lkType();
+            lkGrade();
+        }
+        else if(option == "home"){
+            $("#divForm, button.back").hide();
+            $("#divTable, button.add").show();
+            
+            listsAll();
+        }
+    }
+</script>

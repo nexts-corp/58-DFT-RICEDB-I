@@ -1,0 +1,67 @@
+            <footer id="footer">
+                <div class="footer-copyright none-margin">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <p>© Copyright 2015. All Rights Reserved.</p>
+                            </div>
+                            <div class="col-md-4">
+                                <nav id="sub-menu">
+                                    <ul>
+                                        <li><a href="page-faq.html">FAQ's</a></li>
+                                        <li><a href="sitemap.html">Sitemap</a></li>
+                                        <li><a href="contact-us.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <a href="#" class="scroll-to-top hidden-mobile visible"><i class="fa fa-chevron-up"></i></a>
+        </div>
+
+        <!-- Vendor -->
+        <script src="{{_context_path}}/asset/vendor/jquery.appear/jquery.appear.js"></script>
+        <script src="{{_context_path}}/asset/vendor/jquery.easing/jquery.easing.js"></script>
+        <script src="{{_context_path}}/asset/vendor/jquery-cookie/jquery-cookie.js"></script>
+        <script src="{{_context_path}}/asset/vendor/bootstrap/bootstrap.js"></script>
+        <script src="{{_context_path}}/asset/vendor/owlcarousel/owl.carousel.js"></script>
+        
+        <!-- Theme Base, Components and Settings -->
+        <script src="{{_context_path}}/asset/js/theme.js"></script>
+
+        <!-- Theme Custom -->
+        <script src="{{_context_path}}/asset/js/custom.js"></script>
+
+        <!-- Theme Initialization Files -->
+        <script src="{{_context_path}}/asset/js/theme.init.js"></script>
+        
+        <!-- Specific Page Vendor -->
+        <script src="{{_context_path}}/asset/vendor/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+        
+        <script>
+            $(function(){
+                $("#userInfo").html($.cookie("userinfo"));
+
+                $("a.scroll-to-top").fadeOut();
+                $(window).scroll(function(){
+                    if($(this).scrollTop() > 200){
+                        $("a.scroll-to-top").fadeIn();
+                    }
+                    else{
+                        $("a.scroll-to-top").fadeOut();
+                    }
+                });
+
+                $("a.scroll-to-top").click(function(){
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    return false;
+                });
+            })
+        </script>
+
+    </body>
+</html>
+
+

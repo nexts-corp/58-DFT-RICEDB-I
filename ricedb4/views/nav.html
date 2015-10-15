@@ -1,0 +1,116 @@
+<div class="navbar-collapse nav-main-collapse collapse">
+    <div class="container">
+        <nav class="nav-main mega-menu">
+            <ul class="nav nav-pills nav-main" id="mainMenu">
+                <li>
+                    <a href="{{_context_path}}/api/root/view/index">
+                        หน้าหลัก
+                    </a>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        ผู้ใช้งาน
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{_context_path}}/api/user/view/userManager">จัดการข้อมูลเจ้าหน้าที่</a></li>
+                        <li><a href="{{_context_path}}/api/user/view/userRole">กำหนดสิทธิการใช้งาน</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        คลังสินค้า
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{_context_path}}/api/warehouse/view/warehouseInfo">ข้อมูลคลังสินค้า</a></li>
+                        <li><a href="{{_context_path}}/api/warehouse/view/warehouseImport">นำเข้าข้อมูล</a></li>
+                        <li><a href="{{_context_path}}/api/warehouse/view/viewRicePrice">ข้อมูลราคาข้าว</a></li>
+                        <li><a href="{{_context_path}}/api/warehouse/view/viewRicePriceAvg">ข้อมูลราคาข้าวเฉลี่ย</a></li>
+                        <li><a href="{{_context_path}}/api/warehouse/view/viewInventory">สินค้าคงคลัง</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        สำรองข้าว
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{_context_path}}/api/reserve/view/manageReserve">รายการสำรองข้าว</a></li>
+                        <li><a href="{{_context_path}}/api/reserve/view/exportReserve">สร้างไฟล์ให้ อตก./อคส. ตรวจสอบ</a></li>
+                        <li><a href="{{_context_path}}/api/reserve/view/importReserve">นำไฟล์เข้าจาก อตก./อคส.</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        ระบายข้าว
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a href="{{_context_path}}/api/release/view/createRelease">สร้างรายการระบายข้าว</a></li>-->
+                        <li><a href="{{_context_path}}/api/release/view/manageRelease">รายการระบายข้าว</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/manageDiscount">กำหนดอัตราส่วนลด</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/manageShippingCost">กำหนดอัตราค่าขนส่ง</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/priceDaily">บันทึกราคาข้าว</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/floorPrice">Final Floor Price</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/floorValue">ราคาสินค้ารายกอง</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/floorValueSilo">ราคาสินค้ารายคลัง</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/compareFloorPrice">เปรียบเทียบ Floor Price</a></li>
+                        <li><a href="{{_context_path}}/api/release/view/chooseFloorValue">กำหนด Floor Price</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        ประมูล
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{_context_path}}/api/auction/view/bidderInfo">บันทึกข้อมูลผู้เสนอซื้อ</a></li>
+                        <li><a href="{{_context_path}}/api/auction/view/bidderItem">บันทึกคลังพร้อมผู้เสนอซื้อ</a></li>
+                        <li><a href="{{_context_path}}/api/auction/view/bidderPrice">บันทึกราคาเสนอซื้อ</a></li>
+                        <li><a href="{{_context_path}}/api/auction/view/bidderPayment">ตรวจหลักประกันซอง</a></li>
+                        <li><a href="{{_context_path}}/api/auction/view/bidderAuction">ผลการประมูล</a></li>
+                        <li><a href="{{_context_path}}/api/auction/view/bidderPriceCF">ต่อรองราคา</a></li>
+                        <li><a href="{{_context_path}}/api/auction/view/bidderReturn">คืนหลักประกันซอง</a></li>
+                        <li><a href="{{_context_path}}/api/auction/view/closeAuction">ปิดการประมูล</a></li>
+                    </ul>
+                </li>
+
+                <!--<li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        สำรองเพื่ออื่นๆ
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                </li>-->
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        ติดตาม
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{_context_path}}/api/tracking/view/approve">อนุมัติคลังสินค้าที่ชนะการประมูล</a></li>
+                        <li><a href="{{_context_path}}/api/tracking/view/return">คืนหลักประกันซองที่เหลือ</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">
+                        รายงาน
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{_context_path}}/api/report/view/reportAuction">การประมูล</a></li>
+                        <li><a href="{{_context_path}}/api/report/view/stack">รายกอง</a></li>
+                        <li><a href="{{_context_path}}/api/report/view/warehouse">คลังสินค้า</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

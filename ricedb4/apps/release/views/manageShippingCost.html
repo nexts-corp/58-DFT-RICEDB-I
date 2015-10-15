@@ -1,0 +1,423 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบระบายข้าว</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">กำหนดอัตราค่าขนส่ง</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i> เพิ่มข้อมูล</button>
+                    <button class="btn btn-primary back" style="display: none;">อัตราค่าขนส่ง</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="divTable"><!-- table shown -->
+                <div class="col-md-12">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="margin-top: 20px;"><!-- table shown file detail -->
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-1" style="vertical-align: middle;">ลำดับ</th>
+                                <th class="text-center col-md-5" style="vertical-align: middle;">จังหวัด</th>
+                                <th class="text-center col-md-2" style="vertical-align: middle;">ระยะทาง (กิโลเมตร)</th>
+                                <th class="text-center col-md-1" style="vertical-align: middle;">ค่าขนส่ง (บาท/กิโลเมตร)</th>
+                                <th class="text-center col-md-1" style="vertical-align: middle;">ค่าขนส่ง (บาท/ตัน)</th>
+                                <th class="text-center col-md-2" style="vertical-align: middle;">เครื่องมือ</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataBody">
+                            <tr>
+                                <td colspan="6" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end table shown file detail -->
+            </div>
+
+            <div id="divForm" class="col-md-12" style="display: none;"><!-- form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-up"></a>
+                                </div>
+                                <h2 class="panel-title">ข้อมูลอัตราค่าขนส่ง</h2>
+                            </header>
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="province">จังหวัด</label>
+                                    <div class="col-md-6">
+                                        <select id="province" name="province" class="form-control input-sm" required></select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="distance">ระยะทาง (กิโลเมตร)</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="distance" name="distance" class="form-control input-sm" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="bathPerKM">ค่าขนส่ง (บาท/กิโลเมตร)</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="bathPerKM" name="bathPerKM" class="form-control input-sm" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="bathPerWeight">ค่าขนส่ง (บาท/ตัน)</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="bathPerWeight" name="bathPerWeight" class="form-control input-sm" required>
+                                    </div>
+                                </div>
+
+                                <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+                                <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                                    <li class="">
+                                        <button id="submit" class="btn btn-primary submit">บันทึก</button>
+                                    </li>
+                                    <li class="padding-left">
+                                        <button type="button" class="btn btn-default cancel">ยกเลิก</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div><!-- form -->
+
+            <div id="delModal" aria-labelledby="delLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : อัตราส่วนลด</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <tbody>
+                                    <tr>
+                                        <td class="col-md-4">จังหวัด</td><td class="text-left"><div id="provinceDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-4">ระยะทาง (กิโลเมตร)</td><td class="text-left"><div id="distanceDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-4">ค่าขนส่ง (บาท/กิโลเมตร)</td><td class="text-left"><div id="bathPerKMDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-4">ค่าขนส่ง (บาท/ตัน)</td><td class="text-left"><div id="bathPerWeightDel"></div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete bidder info form -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    var listArr = [];
+    var flagProvince = 0;
+
+    $(function () {
+        listsAll();
+
+        $("#province").select2();
+
+        // when you click to add bidder info
+        $("button.add").unbind("click").click(function(){
+            toggleShow("form");
+
+            // when you save form
+            $("button.submit").unbind().click(function(){
+                var isValid = true;
+                $('#form input[required], #form select[required]').each(function() {
+                    if($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                });
+                if(isValid){
+                    var fdata = dataObject(null);
+                    var dataJSON = JSON.stringify({logisticCost: fdata["LogisticCost"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    insertShipping(dataJSONEN);
+                }
+            });
+        });
+
+        $("button.back, button.cancel").unbind().click(function(){
+            toggleShow("home");
+        });
+    });
+
+    function listsAll(){
+        var dataSet = [];
+
+        var datas = callAjax("{{_context_path}}/api/release/shipping/listsAll", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function(key, value){
+                listArr[value["id"]] = value;
+
+                dataSet.push(value);
+            });
+        }
+
+        var t = $("#table").DataTable({
+            "destroy": true,
+            "data": dataSet,
+            "order": [[ 0, 'asc' ]],
+            "iDisplayLength": 50,
+            "columnDefs": [ 
+                { 
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "id",
+                    "sClass": "text-center col-md-1"
+                },
+                { 
+                    "targets": 1,
+                    "data": "province",
+                    "sClass": "text-left col-md-5"
+                },
+                {
+                    "targets": 2,
+                    "data": "distance",
+                    "sClass": "text-right col-md-2"
+                },
+                {
+                    "targets": 3,
+                    "data": "bathPerKM",
+                    "sClass": "text-right col-md-1"
+                },
+                {
+                    "targets": 4,
+                    "data": "bathPerWeight",
+                    "sClass": "text-right col-md-1"
+                },
+                {
+                    "targets": 5,
+                    "orderable": false,
+                    "data": "id",
+                    "sClass": "text-center col-md-2",
+                    "render": function (data) {
+                        var content = '<button class="btn btn-primary edit" data-id="'+data+'"><i class="fa fa-pencil"></i></button>&nbsp;'
+                                + '<button class="btn btn-default delete" data-id="'+data+'"><i class="fa fa-trash"></i></button>';
+                        return content;
+                    }
+                }
+            ]
+        });
+
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();
+
+        $("#table").off("click", "button.edit").on("click", "button.edit", function(){
+            toggleShow("form");
+
+            var id = $(this).attr("data-id");
+            var value = listArr[id];
+
+            $("#province").val(value["province"]).trigger("change");
+            $("#distance").val(value["distance"]);
+            $("#bathPerKM").val(value["bathPerKM"]);
+            $("#bathPerWeight").val(value["bathPerWeight"]);
+
+            // when you save the bidder info was modified
+            $("button.submit").unbind().click(function(){
+                var isValid = true;
+                $('#form input[required]').each(function() {
+                    if($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                });
+                if(isValid){
+                    var fdata = dataObject(id);
+                    var dataJSON = JSON.stringify({logisticCost: fdata["LogisticCost"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    editShipping(dataJSONEN);
+                }
+            });
+
+        });
+
+        // when you click to delete bidder info
+        $("#table").off("click", "button.delete").on("click", "button.delete", function(){
+            $('#delModal').modal("show");
+
+            var id = $(this).attr("data-id");
+            var value = listArr[id];
+
+            $("#provinceDel").html(value["province"]);
+            $("#distanceDel").html(value["distance"]);
+            $("#bathPerKMDel").html(value["bathPerKM"]);
+            $("#bathPerWeightDel").html(value["bathPerWeight"]);
+
+            $("#confirmDelete").unbind().click(function(){
+                var dataCost = {};
+
+                dataCost["id"] = id;
+
+                var fdata = {};
+                fdata["LogisticCost"] = dataCost;
+
+                var dataJSON = JSON.stringify({logisticCost: fdata["LogisticCost"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                deleteShipping(dataJSONEN);
+            });
+
+        });
+    }
+
+    function lkProvince(){
+        if(flagProvince === 0){
+            var html = '<option value="" selected="selected">เลือกจังหวัด</option>';
+            var datas = callAjax("{{_context_path}}/api/release/shipping/lkProvince", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    html += '<option value="'+value["provinceNameTH"]+'">'+value["provinceNameTH"]+'</option>'
+                });
+
+                $("#province").html(html);
+            }
+            flagProvince = 1;
+        }
+    }
+
+    function insertShipping(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/release/shipping/insert", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["add"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["add"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function editShipping(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/release/shipping/update", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["update"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["update"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function deleteShipping(dataJSONEN) {
+        var datas = callAjax("{{_context_path}}/api/release/shipping/delete", "post", dataJSONEN, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            if (datas["delete"] == true) {
+                toggleShow("home");
+            }
+        }
+    }
+
+    function dataObject(id){
+        var dataCost = {};
+
+        if(id !== null){
+            dataCost["id"] = id;
+        }
+
+        $("#form input[type=text], #form select").each(function (i) {
+            var fname = $(this).attr("name");
+            var fvalue = $(this).val();
+
+            dataCost[fname] = fvalue;
+        });
+
+        var fdata = {};
+        fdata["LogisticCost"] = dataCost;
+
+        return fdata;
+    }
+
+    function toggleShow(option){
+        if(option == "form"){
+            $("#divTable, button.add").hide();
+            $("#divForm, button.back").show();
+
+            $("#form input, #form select").each(function(){
+                $(this).val("").trigger("change");
+            });
+
+            $("#loading").empty();
+
+            lkProvince();
+        }
+        else if(option == "home"){
+            $("#divForm, button.back").hide();
+            $("#divTable, button.add").show();
+
+            listsAll();
+        }
+    }
+</script>

@@ -1,0 +1,498 @@
+{{>header}}
+
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบระบายข้าว</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">กำหนด Floor Price</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button class="btn btn-primary save" disabled><i class="fa fa-plus-circle"></i> บันทึก Floor Price</button>
+                    <button class="btn btn-default undo" disabled><i class="fa fa-trash"></i> ลบการบันทึก</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+    
+    <div class="container">
+        <div class="row">
+            <div id="divTable"><!-- table shown -->
+                <div class="col-md-12">
+                    <div class="col-md-8">
+                        <label class="col-md-4 control-label text-right" for="auction">การประมูลครั้งที่</label>
+                        <div class="col-md-8">
+                            <select class="form-control input-sm" name="auction" id="auction" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end table shown -->
+
+            <div class="col-md-12" style="margin: 20px 0px;">
+                <form id="form" onsubmit="return false;">
+                    <table id="table" class="table table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-6">ชนิดข้าว</th>
+                                <th class="text-center col-md-6">ราคาที่เลือกใช้</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="2" class="text-center"> - </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div class="form-group text-right" style="margin-top: 10px;">
+                    <button class="btn btn-primary calculate" disabled><i class="fa fa-calculator"></i> คำนวณ</button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#summaryTab" data-toggle="tab"><i class="fa fa-star"></i> สรุปคลังสินค้าที่ขายได้</a>
+                    </li>
+                    <li>
+                        <a href="#failFloorTab" data-toggle="tab">คลังสินค้าที่ขายไม่ได้</a>
+                    </li>
+                    <li>
+                        <a href="#detailTab" data-toggle="tab">รายละเอียดการคำนวณ</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="summaryTab" class="tab-pane active">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่ขายได้ : </div>
+                                <div class="col-sm-6 text-bold"><span class="text-tertiary whSell"></span> / <span class="whAll"></span></div>
+                            </div>
+                             <div class="form-group">
+                                <div class="col-sm-3 text-right">จำนวนผู้ที่เสนอซื้อ : </div>
+                                <div class="col-sm-6 text-bold"><span class="text-tertiary bidSellCount"></span>/<span class="text-tertiary bidCount"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3 text-right">น้ำหนักที่ขายได้ (ตัน): </div>
+                                <div class="col-sm-6 text-bold"><span class="text-tertiary weightSell"></span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-3 text-right">มูลค่าที่ขายได้ (บาท): </div>
+                                <div class="col-sm-6 text-bold"><span class="text-tertiary fvSell"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
+                                        <th class="text-center" style="vertical-align: middle;">คลังสินค้าที่ขายได้</th>
+                                        <th class="text-center" style="vertical-align: middle;">น้ำหนักรวมกระสอบ (ตัน)</th>
+                                        <th class="text-center" style="vertical-align: middle;">มูลค่าขั้นต่ำ (บาท)</th>
+                                        <th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อสูงสุด (บาท)</th>
+                                        <th class="text-center" style="vertical-align: middle;">ผลต่าง (บาท)</th>
+                                        <th class="text-center" style="vertical-align: middle;">ผู้ยื่นเสนอซื้อสูงสุด</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="7" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="failFloorTab" class="tab-pane">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่ขายไม่ได้ : </div>
+                                <div class="col-sm-6 text-bold"><span class="text-tertiary whFailSell"></span> / <span class="whAll"></span></div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-3 text-right">น้ำหนักที่ขายไม่ได้ (ตัน): </div>
+                                <div class="col-sm-6 text-bold"><span class="text-tertiary weightFailSell"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px;">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
+                                    <th class="text-center" style="vertical-align: middle;">คลังสินค้าที่ขายไม่ได้</th>
+                                    <th class="text-center" style="vertical-align: middle;">น้ำหนักรวมกระสอบ (ตัน)</th>
+                                    <th class="text-center" style="vertical-align: middle;">มูลค่าขั้นต่ำ (บาท)</th>
+                                    <th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อสูงสุด (บาท)</th>
+                                    <th class="text-center" style="vertical-align: middle;">ผลต่าง (บาท)</th>
+                                    <th class="text-center" style="vertical-align: middle;">ผู้ยื่นเสนอซื้อสูงสุด</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td colspan="7" class="text-center">-</td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="detailTab" class="tab-pane">
+                        <div class="row" style="margin-top: 10px;">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">ลำดับ</th>
+                                        <th class="text-center">คลังสินค้า</th>
+                                        <th class="text-center">หลังที่</th>
+                                        <th class="text-center">กองที่</th>
+                                        <th class="text-center">ชนิดข้าว</th>
+                                        <th class="text-center">น้ำหนักรวมกระสอบ (ตัน)</th>
+                                        <th class="text-center">มูลค่าขั้นต่ำ (บาท)</th>
+                                        <th class="text-center">Floor Value ที่ใช้</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="8" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="saveModal" aria-labelledby="delLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">ยืนยัน  : การบันทึกข้อมูล</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div>
+                                ต้องการเปลี่ยนแปลงการใช้ Floor Value : <span id="auctionHead" class="text-bold"></span>
+                            </div>
+                        </div>
+                        <div id="saveLoading" class="col-md-12 text-center"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary confirm"><i class="fa fa-save"></i> ยืนยัน</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete bidder info form -->
+
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+
+{{>footer}}
+
+<script type="text/javascript">
+    $(function(){
+        listsAuction();
+
+        $("#auction").unbind().change(function(){
+            showRiceType();
+
+            if($("#auction").val() == ""){
+                $("button.save, button.undo, button.calculate").prop("disabled", true);
+            }
+            else{
+                $("button.save, button.undo, button.calculate").prop("disabled", false);
+            }
+        });
+
+        $("button.calculate").unbind().click(function(){
+            var fdata = dataObject();
+
+            var auction = $("#auction").val();
+            var dataJSON = JSON.stringify({auction: auction, riceType: fdata["RiceType"]});
+            var dataJSONEN = encodeURIComponent(dataJSON);
+
+            previewFV(dataJSONEN);
+        });
+
+        $("button.save").unbind().click(function(){
+            $("#saveModal").modal("show");
+            $("#auctionHead").html($("#auction option:selected").text());
+
+            $("button.confirm").unbind().click(function(){
+                var fdata = dataObject();
+
+                var auction = $("#auction").val();
+                var dataJSON = JSON.stringify({auction: auction, riceType: fdata["RiceType"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                saveChooseFV(dataJSONEN);
+            });
+        });
+
+        $("button.undo").unbind().click(function(){
+            $("#saveModal").modal("show");
+            $("#auctionHead").html($("#auction option:selected").text());
+
+            $("button.confirm").unbind().click(function(){
+                var fdata = dataObject();
+
+                var auction = $("#auction").val();
+                var dataJSON = JSON.stringify({auction: auction});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+                clearChooseFV(dataJSONEN);
+            });
+        });
+    });
+
+    function listsAuction(){
+        var datas = callAjax("{{_context_path}}/api/release/chooseFV/listsAuction", "post", {}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            var html = '<option value="">เลือกครั้งการประมูล</option>';
+            $.each(datas["lists"], function (key, value) {
+                html += '<option value="' + value["keyword"] + '">ประมูลครั้งที่ ' + value["status"] + '</option>';
+            });
+            $("#auction").html(html);
+        }
+    }
+
+    function showRiceType(){
+        var datas = callAjax("{{_context_path}}/api/release/chooseFV/listsRiceType", "post", {auction: $("#auction").val()}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            var  html = '';
+            $.each(datas["lists"], function(key, value){
+                html += '<tr>'
+                    + '<td class="text-center">'+value["type"]+'</td>'
+                    + '<td>'
+                        + '<select id="riceType'+value["typeId"]+'" name="riceType'+value["typeId"]+'" data-tid="'+value["typeId"]+'" class="form-control">'
+                            + '<option value="fv2">Floor Value 2</option>'
+                            + '<option value="fv3">Floor Value 3</option>'
+                            + '<option value="fv4">Floor Value 4</option>'
+                        + '</select>'
+                    + '</td>'
+                + '</tr>';
+            });
+
+            $("#table tbody").html(html);
+        }
+    }
+
+    function previewFV(dataJSONEN){
+        var datas = callAjax("{{_context_path}}/api/release/chooseFV/previewFV", "post", dataJSONEN, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            var html1 = '';
+            var html2 = '';
+            var html3 = '';
+
+            var count1 = 0;
+            var count2 = 0;
+            var count3 = 0;
+
+            var tWeight1 = 0;
+            var tFV1 = 0;
+            var tPrice1 = 0;
+            var tDiff1 = 0;
+
+            var tWeight2 = 0;
+            var tFV2 = 0;
+            var tPrice2 = 0;
+            var tDiff2 = 0;
+
+            var whSell = 0;
+            var whFailSell = 0;
+            var whAll = 0;
+            
+            var bidCount = 0;
+            var bidSellCount = 0;
+            
+            var bNameOld=[];
+            $.each(datas["lists"], function(key, val){
+                whAll++;
+                var bchk=true;
+                $.each(bNameOld,function(k,v){
+                      if(v==val["bidderName"])
+                      {
+                          bchk=false;
+                          break;
+                      }
+                });
+                if(bchk){
+                    bNameOld.push(val["bidderName"]);
+                    bidCount++;
+                }
+              
+                if(parseFloat(val["bidderPrice"]) >= parseFloat(val["sFV"])){
+                    var diff = parseFloat(val["bidderPrice"]) - parseFloat(val["sFV"]);
+
+                    html1 += '<tr>'
+                        + '<td class="text-center">'+(++count1)+'</td>'
+                        + '<td>'+val["silo"]+' ['+val["province"]+'] ['+val["associate"]+']</td>'
+                        + '<td class="text-right">'+accounting.formatNumber(val["sOWeightAll"], 6, ",", ".")+'</td>'
+                        + '<td class="text-right">'+accounting.formatNumber(val["sFV"], 2, ",", ".")+'</td>'
+                        + '<td class="text-right text-tertiary text-bold">'+accounting.formatNumber(val["bidderPrice"], 2, ",", ".")+'</td>'
+                        + '<td class="text-right text-bold text-success">'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
+                        + '<td>'+val["bidderName"]+'</td>'
+                    + '</tr>';
+
+                    tWeight1 += parseFloat(val["sOWeightAll"]);
+                    tFV1 += parseFloat(val["sFV"]);
+                    tPrice1 += parseFloat(val["bidderPrice"]);
+                    tDiff1 += parseFloat(diff);
+
+                    whSell++;
+                    
+                    if(bchk){
+                        bidSellCount++;
+                    }
+                    
+                }
+                else{
+                    var diff = parseFloat(val["bidderPrice"]) - parseFloat(val["sFV"]);
+
+                    html2 += '<tr>'
+                        + '<td class="text-center">'+(++count1)+'</td>'
+                        + '<td>'+val["silo"]+' ['+val["province"]+'] ['+val["associate"]+']</td>'
+                        + '<td class="text-right">'+accounting.formatNumber(val["sOWeightAll"], 6, ",", ".")+'</td>'
+                        + '<td class="text-right">'+accounting.formatNumber(val["sFV"], 2, ",", ".")+'</td>'
+                        + '<td class="text-right text-tertiary text-bold">'+accounting.formatNumber(val["bidderPrice"], 2, ",", ".")+'</td>'
+                        + '<td class="text-right text-bold text-danger">'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
+                        + '<td>'+val["bidderName"]+'</td>'
+                    + '</tr>';
+
+                    tWeight2 += parseFloat(val["sOWeightAll"]);
+                    tFV2 += parseFloat(val["sFV"]);
+                    tPrice2 += parseFloat(val["bidderPrice"]);
+                    tDiff2 += parseFloat(diff);
+
+                    whFailSell++;
+                }
+
+                count3++;
+                var sub3 = 0;
+                $.each(val["stackArr"], function(key2, val2){
+                    html3 += '<tr>'
+                        + '<td class="text-center">'+count3+'('+(++sub3)+')</td>'
+                        + '<td>'+val["silo"]+' ['+val["province"]+'] ['+val["associate"]+']</td>'
+                        + '<td class="text-center">'+val2["warehouse"]+'</td>'
+                        + '<td class="text-center">'+val2["stack"]+'</td>'
+                        + '<td>'+val2["typeName"]+'</td>'
+                        + '<td class="text-right">'+accounting.formatNumber(val2["oweightAll"], 6, ",", ".")+'</td>'
+                        + '<td class="text-right">'+accounting.formatNumber(val2["FV"], 2, ",", ".")+'</td>'
+                        + '<td class="text-center">'+val2["useFV"]+'</td>'
+                    + '</tr>';
+                });
+                html3 += '<tr class="bg-tertiary">'
+                    + '<td colspan="5" class="text-right text-bold">รวม</td>'
+                    + '<td class="text-right text-bold">'+accounting.formatNumber(val["sOWeightAll"], 6, ",", ".")+'</td>'
+                    + '<td class="text-right text-bold">'+accounting.formatNumber(val["sFV"], 2, ",", ".")+'</td>'
+                    + '<td></td>'
+                + '</tr>';
+            });
+
+            $(".whSell").html(whSell);
+            $(".whFailSell").html(whFailSell);
+            
+            $(".bidSellCount").html(bidSellCount);
+            $(".bidCount").html(bidCount);
+            
+            $(".whAll").html(whAll);
+            $(".weightSell").html(accounting.formatNumber(tWeight1, 6, ",", "."));
+            $(".weightFailSell").html(accounting.formatNumber(tWeight2, 6, ",", "."));
+            $(".fvSell").html(accounting.formatNumber(tPrice1, 2, ",", "."));
+
+            $("#summaryTab table tbody").html(html1);
+            $("#summaryTab table tfoot").html('<tr>'
+                    + '<td colspan="2" class="text-right text-bold">รวม</td>'
+                    + '<td class="text-right text-bold">'+accounting.formatNumber(tWeight1, 6, ",", ".")+'</td>'
+                    + '<td class="text-right text-bold">'+accounting.formatNumber(tFV1, 2, ",", ".")+'</td>'
+                    + '<td class="text-right text-bold text-tertiary">'+accounting.formatNumber(tPrice1, 2, ",", ".")+'</td>'
+                    + '<td class="text-right text-bold text-success">'+accounting.formatNumber(tDiff1, 2, ",", ".")+'</td>'
+                + '</tr>'
+            );
+
+            $("#failFloorTab table tbody").html(html2);
+            $("#failFloorTab table tfoot").html('<tr>'
+                    + '<td colspan="2" class="text-right text-bold">รวม</td>'
+                    + '<td class="text-right text-bold">'+accounting.formatNumber(tWeight2, 6, ",", ".")+'</td>'
+                    + '<td class="text-right text-bold">'+accounting.formatNumber(tFV2, 2, ",", ".")+'</td>'
+                    + '<td class="text-right text-bold text-tertiary">-</td>'
+                    + '<td class="text-right text-bold text-danger">-</td>'
+                + '</tr>'
+            );
+
+
+            $("#detailTab table tbody").html(html3);
+        }
+    }
+
+    function saveChooseFV(dataJSONEN){
+        var datas = callAjax("{{_context_path}}/api/release/chooseFV/saveFV", "post", dataJSONEN, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            if(datas["save"] == true){
+                $("#saveModal").modal("hide");
+            }
+        }
+    }
+
+    function clearChooseFV(dataJSONEN){
+        var datas = callAjax("{{_context_path}}/api/release/chooseFV/clearFV", "post", dataJSONEN, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            if(datas["save"] == true){
+                $("#saveModal").modal("hide");
+            }
+        }
+    }
+
+    function dataObject(){
+        var dataType = [];
+        $("#form select").each(function(){
+            //var name = $(this).attr("name");
+            var typeId = $(this).attr("data-tid");
+            var val = $(this).val();
+
+            dataType.push({
+                typeId: typeId,
+                value: val
+            });
+
+        });
+
+        var fdata = {};
+        fdata["RiceType"] = dataType;
+
+        return fdata;
+    }
+</script>

@@ -1,0 +1,151 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบสำรองข้าว</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">สร้างไฟล์ให้ อคส./อตก. ตรวจสอบ</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <div class="btn-group btn-group-justified">
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="dataTable" class="col-md-12" style="margin-top: 20px;"><!-- table shown file detail -->
+                <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-md-1">ลำดับ</th>
+                            <th class="text-center col-md-4">รายการ</th>
+                            <th class="text-center col-md-2">วันที่</th>
+                            <th class="text-center col-md-3">ปริมาณที่สำรอง (ตัน)</th>
+                            <th class="text-center col-md-2">เครื่องมือ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- end table shown file detail -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    var listArr = {};
+
+    $(function(){
+        listsReserve();
+    });
+
+    function listsReserve(){
+        var datas = callAjax("{{_context_path}}/api/reserve/export/listsReserve", "post", {}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            var dataSet =  [];
+            $.each(datas["lists"], function(key, value){
+                listArr[value["id"]] = value;
+
+                dataSet.push(value);
+            });
+
+            var t = $("#table").DataTable( {
+                "destroy": true,
+                "data": dataSet,
+                "order": [[ 2, 'asc' ]],
+                "iDisplayLength": 50,
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "searchable": false,
+                        "orderable": false,
+                        "data": "id",
+                        "sClass": "text-center col-md-1"
+                    },
+                    {
+                        "targets": 1,
+                        "data": "id",
+                        "sClass": "text-left col-md-5",
+                        "render": function(data, key, full){
+                            return full["reserveName"]+' - '+full["detail"]
+                        }
+                    },
+                    {
+                        "targets": 2,
+                        "data": "dateCreated",
+                        "sClass": "text-center col-md-2",
+                        "render": function (data) {
+                            return data["date"].substr(0, 10);
+                        }
+                    },
+                    {
+                        "targets": 3,
+                        "data": "target",
+                        "sClass": "text-right col-md-2"
+                    },
+                    {
+                        "targets": 4,
+                        "orderable": false,
+                        "data": "id",
+                        "sClass": "text-center col-md-2",
+                        "render": function (data) {
+                            var content = '<button class="btn btn-success export" data-id="'+data+'"><i class="fa fa-file-excel-o"></i> เอกสาร</button>';
+                            return content;
+                        }
+                    }
+                ]
+            });
+
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
+
+            $("#table").off("click", "button.export").on("click", "button.export", function(){
+                var id = $(this).attr("data-id");
+                var val = listArr[id];
+
+                var dataReserve = {};
+
+                dataReserve["keyword"] = val["keyword"];
+
+                var fdata = {};
+                fdata["ReserveList"] = dataReserve;
+
+                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                exportReserve(dataJSONEN);
+            });
+        }
+
+        function exportReserve(dataJSONEN){
+            var  datas = callAjax("{{_context_path}}/api/reserve/export/export", "post", dataJSONEN, "json");
+
+        }
+    }
+</script>

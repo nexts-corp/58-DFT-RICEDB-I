@@ -1,0 +1,233 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบคลังสินค้า </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">สินค้าคงคลัง</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-ms-12">
+                <div class="col-md-8"></div>
+                <div class="col-md-4">
+                    <div class="btn-group btn-group-justified">
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-ms-12">
+                <div class="tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#project" data-toggle="tab">ปีโครงการ</a>
+                        </li>
+                        <li>
+                            <a href="#province" data-toggle="tab">จังหวัด</a>
+                        </li>
+                        <li>
+                            <a href="#type" data-toggle="tab">ชนิดข้าว</a>
+                        </li>
+                        <li>
+                            <a href="#grade" data-toggle="tab">เกรด</a>
+                        </li>
+                        <li>
+                            <a href="#silo" data-toggle="tab">คลังสินค้า</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="project" class="tab-pane active">                            
+                            <table class="table table-bordered table-striped table-condensed mb-none">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-md-3">ปีโครงการ</th>
+                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
+                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
+                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="text-right">
+                                        <td colspan="4" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>         
+                        <div id="province" class="tab-pane">                            
+                            <table class="table table-bordered table-striped table-condensed mb-none">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-md-3">จังหวัด</th>
+                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
+                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
+                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>         
+                        <div id="type" class="tab-pane">                            
+                            <table class="table table-bordered table-striped table-condensed mb-none">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-md-3">ชนิดข้าว</th>
+                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
+                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
+                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>   
+                        <div id="grade" class="tab-pane">                            
+                            <table class="table table-bordered table-striped table-condensed mb-none">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-md-3">เกรด</th>
+                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
+                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
+                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>  
+                        <div id="silo" class="tab-pane">                            
+                            <table class="table table-bordered table-striped table-condensed mb-none">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center col-md-3">คลังสินค้า</th>
+                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
+                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
+                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="4" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    $(function () {
+        $('a[href="#project"]').click(function(){
+            groupBy("project");
+        }).trigger("click");
+
+        $('a[href="#province"]').click(function(){
+            groupBy("province");
+        });
+
+        $('a[href="#type"]').click(function(){
+            groupBy("type");
+        });
+
+        $('a[href="#grade"]').click(function(){
+            groupBy("grade");
+        });
+
+        $('a[href="#silo"]').click(function(){
+            groupBy("silo");
+        });
+    });
+
+    function groupBy(option){
+        var dataSet = [];
+
+        $("#"+option+" table tbody").html('<tr><td colspan="4" class="text-center">Loading...</td></tr>');
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/warehouse/viewInventory/"+option, "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    dataSet.push(value);
+                });
+            }
+
+            var t = $("#"+option+" table").DataTable( {
+                "destroy": true,
+                "data": dataSet,
+                "order": [[ 1, 'desc' ]],
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "searchable": false,
+                        "orderable": false,
+                        "data": option,
+                        "sClass": "text-left"
+                    },
+                    {
+                        "targets": 1,
+                        "data": "weight",
+                        "sClass": "text-right",
+                        "render": function(data){
+                            var content = accounting.formatNumber(data, 6, ",", ".");
+
+                            return content;
+                        }
+                    },
+                    {
+                        "targets": 2,
+                        "data": "weight",
+                        "sClass": "text-right",
+                        "render": function(data){
+                            var content = accounting.formatNumber(data, 2, ",", ".");
+
+                            return content;
+                        }
+                    },
+                    {
+                        "targets": 3,
+                        "data": "weight",
+                        "sClass": "text-right",
+                        "render": function(data){
+                            var content = accounting.formatNumber(data, 2, ",", ".");
+
+                            return content;
+                        }
+                    }
+                ]
+            });
+        }, 100);
+    }
+
+
+
+</script>

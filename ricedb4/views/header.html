@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        {{>js}}
+
+    </head>
+    <div class="body">
+        <header id="header" style="margin-top: -8px;">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">
+                        <img alt="Porto" width="300" height="70" data-sticky-width="160" data-sticky-height="45" src="{{_context_path}}/images/DFT.png">
+                    </a>
+                </div>
+
+                <nav>
+                    <ul class="nav nav-pills nav-top">
+                        <li>
+                            <span id="userInfo" class="text-dark text-bold"></span>
+                        </li>
+                        <li class="phone">
+                            <a href="#" onclick="logout()"><i class="fa fa-lock"></i> ออกจากระบบ</a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                
+                
+            </div>
+
+            {{>nav}}
+
+        </header>
+
+

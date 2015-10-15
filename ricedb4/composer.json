@@ -1,0 +1,20 @@
+{
+    "name": "bpg/ricedb3",
+    "description": "Description of project ricedb3.",
+    
+    "authors": [
+        {
+            "name": "somchit chanudom",
+            "email": "somchit.c@baanprogram.com"
+        }
+    ],
+    "require": {
+        "doctrine/orm": "v2.4.7",
+        "isoft/mssql-bundle": "dev-master",
+        "mustache/mustache": "v2.5.0",
+        "apache/log4php": "2.3.0",
+        "firebase/php-jwt": "v3.0.0",
+        "bpg/cde": "3.5.5.x-dev",
+        "phpexcel/phpexcel": "v1.7.7"
+    }
+}

@@ -1,0 +1,1051 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบสำรองข้าว</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">รายการสำรองข้าว</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i>&nbsp;เพิ่มข้อมูล</button>
+                    <button class="btn btn-primary back" style="display: none;">รายการสำรองข้าว</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="row">
+            <div id="divTable">
+                <div class="col-md-12">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-4">
+                        <div class="btn-group btn-group-justified">
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                            <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12" style="margin-top: 20px;"><!-- table shown file detail -->
+                    <table id="table1" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-1">ลำดับ</th>
+                                <th class="text-center col-md-4">รายการ</th>
+                                <th class="text-center col-md-2">วันที่บันทึกข้อมูล</th>
+                                <th class="text-center col-md-3">ปริมาณที่สำรอง (ตัน)</th>
+                                <th class="text-center col-md-2">เครื่องมือ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td colspan="5" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end table shown file detail -->
+            </div>
+
+            <div id="divForm" style="display: none">
+                <div class="col-md-12">
+                    <section class="panel form-wizard" id="wizard">
+                        <div class="panel-body">
+                            <div class="wizard-progress wizard-progress-lg">
+                                <div class="steps-progress">
+                                    <div class="progress-indicator"></div>
+                                </div>
+                                <ul class="wizard-steps">
+                                    <li class="active">
+                                        <a href="#wizard-condition" data-toggle="tab"><span>1</span>กำหนดเงื่อนไข</a>
+                                    </li>
+                                    <li>
+                                        <a href="#wizard-select" data-toggle="tab"><span>2</span>คัดเลือกคลังสินค้า</a>
+                                    </li>
+                                    <li>
+                                        <a href="#wizard-review" data-toggle="tab"><span>3</span>ตรวจสอบ<br>และบันทึกข้อมูล</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <form id="form" class="form-horizontal" novalidate="novalidate">
+                                <div class="tab-content">
+
+                                    <div id="wizard-condition" class="tab-pane active">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label req" for="reserveCode">สำรองเพื่อ</label>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" data-entity="list" name="reserveCode" id="reserveCode" required></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label req" for="detail">รายละเอียด</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" data-entity="list" class="form-control" name="detail" id="detail" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label req" for="target">จำนวนเป้าหมาย (ตัน)</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" data-entity="list" class="form-control" name="target" id="target" required>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="wizard-select" class="tab-pane">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">สำรองเพื่อ : </div>
+                                                    <div class="col-sm-6 text-bold reserveDisplay"></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่ต้องการ (ตัน) : </div>
+                                                    <div class="col-sm-6 text-bold targetDisplay"></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่เลือก (ตัน) : </div>
+                                                    <div class="col-sm-6 text-bold selectedDisplay">0</div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่เลือก : </div>
+                                                    <div class="col-sm-6 text-bold countSiloDisplay">0</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <label class="col-sm-4 control-label" for="project">ปีโครงการ</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control lookup" name="project" id="project" data-call="lkProject"></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="col-sm-4 control-label" for="province">จังหวัด</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control lookup" name="province" id="province" data-call="lkProvince"></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="col-sm-4 control-label" for="type">ชนิดข้าว</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control lookup" name="type" id="type" data-call="lkType"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <label class="col-sm-4 control-label" for="grade">เกรด</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control lookup" name="password" id="grade" data-call="lkGrade"></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="col-sm-4 control-label" for="silo">คลังสินค้า</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="silo" id="silo">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <label class="col-sm-4 control-label" for="code">รหัส</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="code" id="code">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12" style="margin-top: 15px;"><!-- table shown file detail -->
+                                            <table id="table2" class="table table-hover table-striped table-condensed mb-none">
+                                                <thead>
+                                                <tr>
+                                                    <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
+                                                    <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
+                                                    <th class="text-center" style="vertical-align: middle;">รหัส</th>
+                                                    <th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>
+                                                    <th class="text-center" style="vertical-align: middle;">ผู้เข้าร่วม</th>
+                                                    <th class="text-center" style="vertical-align: middle;">หลัง</th>
+                                                    <th class="text-center" style="vertical-align: middle;">กอง</th>
+                                                    <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
+                                                    <th class="text-center" style="vertical-align: middle;">ชนิด</th>
+                                                    <th class="text-center" style="vertical-align: middle;">เกรด</th>
+                                                    <th class="text-center" style="vertical-align: middle;">น้ำหนัก (ตัน)</th>
+                                                    <th class="text-center" style="vertical-align: middle;">เครื่องมือ</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="12" class="text-center">-</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div><!-- end table shown file detail -->
+                                    </div>
+
+                                    <div id="wizard-review" class="tab-pane">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">สำรองเพื่อ : </div>
+                                                    <div class="col-sm-6 text-bold reserveDisplay"></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่ต้องการ (ตัน) : </div>
+                                                    <div class="col-sm-6 text-bold targetDisplay"></div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่เลือก (ตัน) : </div>
+                                                    <div class="col-sm-6 text-bold selectedDisplay">0</div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่เลือก : </div>
+                                                    <div class="col-sm-6 text-bold countSiloDisplay">0</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tabs">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active">
+                                                    <a href="#siloSelected" data-toggle="tab">คลังสินค้าที่เลือก</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#projectSelected" data-toggle="tab">สัดส่วนตามปีโครงการ</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#gradeSelected" data-toggle="tab">สัดส่วนตามเกรด</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#provinceSelected" data-toggle="tab">สัดส่วนตามจังหวัด</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#typeSelected" data-toggle="tab">สัดส่วนตามชนิด</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div id="siloSelected" class="tab-pane active">
+                                                    <table id="table3"class="table table-bordered table-striped table-condensed mb-none">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center">ลำดับ</th>
+                                                            <th class="text-center">จังหวัด</th>
+                                                            <th class="text-center">คลังสินค้า</th>
+                                                            <th class="text-center">ผู้เข้าร่วม</th>
+                                                            <th class="text-center">หลัง</th>
+                                                            <th class="text-center">กอง</th>
+                                                            <th class="text-center">ปีโครงการ</th>
+                                                            <th class="text-center">ชนิด</th>
+                                                            <th class="text-center">เกรด</th>
+                                                            <th class="text-center">น้ำหนัก (ตัน)</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td colspan="10" class="text-center">-</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="projectSelected" class="tab-pane">
+                                                    <table class="table table-bordered table-striped table-condensed mb-none">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center col-md-4">ปีโครงการ</th>
+                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
+                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td colspan="3" class="text-center">-</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="gradeSelected" class="tab-pane">
+                                                    <table class="table table-bordered table-striped table-condensed mb-none">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center col-md-4">เกรด</th>
+                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
+                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td colspan="3" class="text-center">-</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="provinceSelected" class="tab-pane">
+                                                    <table class="table table-bordered table-striped table-condensed mb-none">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center col-md-4">จังหวัด</th>
+                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
+                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td colspan="3" class="text-center">-</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="typeSelected" class="tab-pane">
+                                                    <table class="table table-bordered table-striped table-condensed mb-none">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-center col-md-4">ชนิด</th>
+                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
+                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td colspan="3" class="text-center">-</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+                        <div class="panel-footer">
+                            <ul class="pager">
+                                <li class="previous disabled">
+                                    <a><i class="fa fa-angle-left"></i> ย้อนกลับ</a>
+                                </li>
+                                <li class="finish hidden pull-right">
+                                    <a>บันทึก</a>
+                                </li>
+                                <li class="next">
+                                    <a>ถัดไป <i class="fa fa-angle-right"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div id="delModal" aria-labelledby="bidderLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : รายการสำรองข้าว</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <tbody>
+                                    <tr>
+                                        <td>รายการ</td><td class="text-left"><div id="detailDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>วันที่</td><td class="text-left"><div id="dateDel"></div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ปริมาณที่สำรอง (ตัน)</td><td class="text-left"><div id="targetDel"></div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete reserve data-->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<style>
+    #table2 tbody tr{
+        cursor: pointer;
+    }
+
+</style>
+<script src="{{_context_path}}/asset/vendor/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
+<script type="text/javascript">
+
+(function( $ ) {
+
+    'use strict';
+
+    /*
+     Wizard #4
+     */
+    var $w4finish = $('#wizard').find('ul.pager li.finish'),
+            $w4validator = $("#wizard form").validate({
+                highlight: function(element) {
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                success: function(element) {
+                    $(element).closest('.form-group').removeClass('has-error');
+                    $(element).remove();
+                },
+                errorPlacement: function( error, element ) {
+                    element.parent().append( error );
+                }
+            });
+
+    $w4finish.on('click', function(ev) {
+        ev.preventDefault();
+        var validated = $('#wizard form').valid();
+        if (validated) {
+            if(action == "insert"){
+                var fdata = dataObject(null);
+                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"], riceReserve: fdata["RiceReserve"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                insertReserve(dataJSONEN);
+            }
+            else if(action == "edit"){
+                var fdata = dataObject(listReserve[listId]["id"]);
+                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"], riceReserve: fdata["RiceReserve"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                editReserve(dataJSONEN);
+            }
+        }
+    });
+
+    $('#wizard').bootstrapWizard({
+        tabClass: 'wizard-steps',
+        nextSelector: 'ul.pager li.next',
+        previousSelector: 'ul.pager li.previous',
+        firstSelector: null,
+        lastSelector: null,
+        onNext: function( tab, navigation, index, newindex ) {
+            var validated = $('#wizard form').valid();
+            if( !validated ) {
+                $w4validator.focusInvalid();
+                return false;
+            }
+            else{
+                $(".reserveDisplay").html($("#reserveCode option:selected").text()+" - "+$("#detail").val());
+                $(".targetDisplay").html($("#target").val());
+
+                if(index == 1){
+                    $("select.lookup").each(function(){
+                        var id = $(this).attr("id");
+                        var call = $(this).attr("data-call");
+
+                        var result = listsObject(call);
+                        $("#"+id).html(result).select2();
+                    });
+
+                    listsRice();
+
+                    if(action == "edit"){
+                        $.each(listSelected, function(key, val){
+                            console.log(val["riceInfoId"]);
+                            $('input:checkbox[data-rid="'+val["riceInfoId"]+'"]').prop("checked", true).trigger("click");
+                        });
+                    }
+                }
+                else if(index == 2){
+                    if(Object.keys(listSelected).length == 0){
+                        alert("กรุณาเลือกคลัง");
+                        return false;
+                    }
+                    else{
+                        showSelected();
+                    }
+                }
+            }
+        },
+        onTabClick: function( tab, navigation, index, newindex ) {
+            if ( newindex == index + 1 ) {
+                return this.onNext( tab, navigation, index, newindex);
+            } else if ( newindex > index + 1 ) {
+                return false;
+            } else {
+                return true;
+            }
+        },
+        onTabChange: function( tab, navigation, index, newindex ) {
+            var $total = navigation.find('li').size() - 1;
+            $w4finish[ newindex != $total ? 'addClass' : 'removeClass' ]( 'hidden' );
+            $('#wizard').find(this.nextSelector)[ newindex == $total ? 'addClass' : 'removeClass' ]( 'hidden' );
+        },
+        onTabShow: function( tab, navigation, index ) {
+            var $total = navigation.find('li').length - 1;
+            var $current = index;
+            var $percent = Math.floor(( $current / $total ) * 100);
+            $('#wizard').find('.progress-indicator').css({ 'width': $percent + '%' });
+            tab.prevAll().addClass('completed');
+            tab.nextAll().removeClass('completed');
+        }
+    });
+
+}).apply( this, [ jQuery ]);
+
+</script>
+<script type="text/javascript">
+    var sdata = {};
+
+    var listArr = {};
+    var listSelected = {};
+    var flagReserve = 0;
+
+    var listSilo = {};
+    var weightSelected = 0;
+
+    var listReserve = {};
+    var listId = "";
+
+    var action = "";
+
+    $(function(){
+        listsReserve();
+
+        $("button.add").unbind().click(function(){
+            action = "insert";
+
+            toggleShow("form");
+        });
+
+        $("button.back, button.cancel").unbind().click(function(){
+            toggleShow("home");
+        });
+
+    });
+
+    function listsReserve(){
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserve", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var i = 0;
+            if(datas["lists"].length > 0){
+                $.each(datas["lists"], function(key, value){
+                    listReserve[value["id"]] = value;
+
+                    html += '<tr>'
+                        + '<td class="text-center">'+(++i)+'</td>'
+                        + '<td>'+value["reserveName"]+' - '+value["detail"]+'</td>'
+                        + '<td class="text-center">'+value["dateCreated"]["date"].substr(0, 10)+'</td>'
+                        + '<td class="text-right">'+value["target"]+'</td>'
+                        + '<td class="text-center">'
+                            + '<button class="btn btn-primary edit" data-id="'+value["id"]+'"><i class="fa fa-pencil"></i></button>&nbsp;'
+                            + '<button class="btn btn-default delete" data-id="'+value["id"]+'"><i class="fa fa-trash"></i></button> '
+                        + '</td>'
+                    + '</tr>'
+                });
+            }
+            else{
+                html = '<tr><td colspan="5" class="text-center">-</td></tr>'
+            }
+
+            $("#table1 tbody").html(html);
+
+            $("button.edit").unbind("click").click(function(){
+                action = "edit";
+
+                toggleShow("form");
+
+                var id = $(this).attr("data-id");
+
+                listId = id;
+                $("#reserveCode").val(listReserve[id]["reserveCode"]).trigger("change");
+                $("#detail").val(listReserve[id]["detail"]);
+                $("#target").val(listReserve[id]["target"]);
+
+                var dataList = {};
+
+                dataList["keyword"] = listReserve[id]["keyword"];
+
+                var fdata = {};
+                fdata["ReserveList"] = dataList;
+
+                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserveByIndex", "post", dataJSONEN, "json");
+                if (typeof datas !== "undefined" && datas !== null) {
+                    $.each(datas["lists"], function(key, value){
+                        listSelected[value["riceInfoId"]] = value;
+
+
+                    });
+                }
+            });
+
+            $("button.delete").unbind().click(function(){
+                $("#delModal").modal("show");
+
+                var id = $(this).attr("data-id");
+                var value = listReserve[id];
+
+                $("#detailDel").html(value["reserveName"]+' - '+value["detail"]);
+                $("#dateDel").html(value["dateCreated"]["date"].substr(0, 10));
+                $("#targetDel").html(value["target"]);
+
+                $("#confirmDelete").unbind().click(function(){
+                    var dataList = {};
+
+                    dataList["keyword"] = listReserve[id]["keyword"];
+
+                    var fdata = {};
+                    fdata["ReserveList"] = dataList;
+
+                    var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    deleteReserve(dataJSONEN);
+                });
+            });
+        }
+    }
+
+    function lkReserve(){
+        if(flagReserve === 0){
+            var html = '<option value="" selected="selected">เลือกรายการสำรอง</option>';
+            var datas = callAjax("{{_context_path}}/api/reserve/manage/lkReserve", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    html += '<option value="'+value["reserveCode"]+'">'+value["reserveName"]+'</option>'
+                });
+
+                $("#reserveCode").html(html);
+            }
+            flagReserve = 1;
+        }
+    }
+
+    function listsRice(){
+        var t = $('#table2').DataTable( {
+            "destroy": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: "{{_context_path}}/api/reserve/manage/listsRiceCanReserve",
+                type: "post",
+                dataSrc: function(json){
+                    $.each(json["data"], function(key, value){
+                        listArr[value["riceInfoId"]] = value;
+
+                    });
+                    return json["data"];
+                }
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "riceInfoId",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 1,
+                    "data": "provinceNameTH",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 2,
+                    "data": "code",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 3,
+                    "data": "silo",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 4,
+                    "data": "associate",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 5,
+                    "data": "warehouse",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 6,
+                    "data": "stack",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 7,
+                    "data": "project",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 8,
+                    "data": "type",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 9,
+                    "data": "grade",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 10,
+                    "data": "weight",
+                    "sClass": "text-right"
+                },
+                {
+                    "targets": 11,
+                    "data": "riceInfoId",
+                    "sClass": "text-left col-md-1",
+                    "render": function (data) {
+                        var content = '<div class="checkbox-custom checkbox-primary row-selected">'
+                            + '<input type="checkbox" data-rid="'+data+'" onclick="return false")">'
+                            + '<label for="checkboxExample2">เลือก</label>'
+                        + '</div>';
+
+                        return content;
+                    }
+                }
+            ]
+        });
+        t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } );
+
+
+        $("#province").change(function() {
+            t.columns(1).search(this.value).draw();
+        });
+
+        $("#code").keydown(function(event){
+            var keyCode = (event.keyCode ? event.keyCode : event.which);
+            if (keyCode == 13) {
+                t.columns(2).search(this.value).draw();
+            }
+        });
+
+        $("#silo").keydown(function(event){
+            var keyCode = (event.keyCode ? event.keyCode : event.which);
+            if (keyCode == 13) {
+                t.columns(3).search(this.value).draw();
+            }
+        });
+
+        $('#project').change(function() {
+            t.columns(7).search(this.value).draw();
+        });
+
+        $('#type').change(function() {
+            t.columns(8).search(this.value).draw();
+        });
+
+        $('#grade').change(function() {
+            t.columns(9).search(this.value).draw();
+        });
+
+        $("#table2 tbody").on('click', 'tr', function () {
+            var input = $(this).find("input[type=checkbox]");
+            var id = input.attr("data-rid");
+
+            var option;
+            if(input.is(":checked")){
+                input.prop("checked", false);
+                option = "uncheck";
+            }
+            else{
+                input.prop("checked", true);
+                option = "check";
+            }
+
+            rowSelected(id, option);
+        });
+
+    }
+
+    function rowSelected(id, option){
+        if(option == "check"){
+            listSelected[id] = listArr[id];
+
+            if (typeof listSilo[listSelected[id]["silo"]] == 'undefined') {
+                listSilo[listSelected[id]["silo"]] = 1;
+            }
+            else{
+                listSilo[listSelected[id]["silo"]] = listSilo[listSelected[id]["silo"]] + 1;
+            }
+
+            weightSelected += parseFloat(listSelected[id]["weight"]);
+        }
+        else{
+            listSilo[listSelected[id]["silo"]] = listSilo[listSelected[id]["silo"]] - 1;
+            if(listSilo[listSelected[id]["silo"]] == 0){
+                delete listSilo[listSelected[id]["silo"]];
+            }
+            weightSelected -= parseFloat(listSelected[id]["weight"]);
+            delete listSelected[id];
+        }
+
+        $(".selectedDisplay").html(weightSelected);
+        $(".countSiloDisplay").html(Object.keys(listSilo).length);
+    }
+
+    function showSelected(){
+        var projectArr = {};
+        var gradeArr = {};
+        var provinceArr = {};
+        var typeArr = {};
+
+        sortObject(listSelected);
+
+        var i = 0;
+        var html1 = '';
+        $.each(listSelected, function(key, value){
+            html1 +='<tr>'
+                + '<td class="text-center">'+(++i)+'</td>'
+                + '<td>'+value["provinceNameTH"]+'</td>'
+                + '<td>'+value["silo"]+'</td>'
+                + '<td class="text-center">'+value["associate"]+'</td>'
+                + '<td class="text-center">'+value["warehouse"]+'</td>'
+                + '<td class="text-center">'+value["stack"]+'</td>'
+                + '<td class="text-center">'+value["project"]+'</td>'
+                + '<td class="text-center">'+value["type"]+'</td>'
+                + '<td class="text-center">'+value["grade"]+'</td>'
+                + '<td class="text-right">'+value["weight"]+'</td>'
+            + '</tr>';
+
+            //project
+            if (typeof projectArr[value["project"]] == 'undefined') {
+                projectArr[value["project"]] = 0;
+            }
+            projectArr[value["project"]] += parseFloat(value["weight"]);
+
+            //grade
+            if (typeof gradeArr[value["grade"]] == 'undefined') {
+                gradeArr[value["grade"]] = 0;
+            }
+            gradeArr[value["grade"]] += parseFloat(value["weight"]);
+
+            //province
+            if (typeof provinceArr[value["provinceNameTH"]] == 'undefined') {
+                provinceArr[value["provinceNameTH"]] = 0;
+            }
+            provinceArr[value["provinceNameTH"]] += parseFloat(value["weight"]);
+
+            //type
+            if (typeof typeArr[value["type"]] == 'undefined') {
+                typeArr[value["type"]] = 0;
+            }
+            typeArr[value["type"]] += parseFloat(value["weight"]);
+        });
+
+        $("#siloSelected tbody").html(html1);
+
+        var html2 = '';
+        $.each(projectArr, function(key, value){
+            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+
+            html2 += '<tr>'
+                + '<td class="text-center">'+key+'</td>'
+                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+percent+'</td>'
+            + '</tr>';
+        });
+        $("#projectSelected tbody").html(html2);
+
+        var html3 = '';
+        $.each(gradeArr, function(key, value){
+            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+
+            html3 += '<tr>'
+                + '<td class="text-center">'+key+'</td>'
+                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+percent+'</td>'
+            + '</tr>';
+        });
+        $("#gradeSelected tbody").html(html3);
+
+        var html4 = '';
+        $.each(provinceArr, function(key, value){
+            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+
+            html4 += '<tr>'
+                + '<td class="text-center">'+key+'</td>'
+                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+percent+'</td>'
+            + '</tr>';
+        });
+        $("#provinceSelected tbody").html(html4);
+
+        var html5 = '';
+        $.each(typeArr, function(key, value){
+            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+
+            html5 += '<tr>'
+                + '<td class="text-center">'+key+'</td>'
+                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+percent+'</td>'
+            + '</tr>';
+        });
+        $("#typeSelected tbody").html(html5);
+    }
+
+    function insertReserve(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/reserve/manage/insert", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["add"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้'+datas["add"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function editReserve(dataJSONEN){
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/reserve/manage/update", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["update"] == true){
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("home");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้'+datas["update"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function deleteReserve(dataJSONEN) {
+        var datas = callAjax("{{_context_path}}/api/reserve/manage/delete", "post", dataJSONEN, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            if (datas["delete"] == true) {
+                toggleShow("home");
+            }
+        }
+    }
+
+    function dataObject(id){
+        var dataList = {};
+        var dataReserve = [];
+
+        if(id !== null){
+            dataList["keyword"] = listReserve[id]["keyword"];
+        }
+
+        $("#form input[type=text], #form select").each(function (i) {
+            var fattr = $(this).attr("data-entity");
+            var fname = $(this).attr("name");
+            var fvalue = $(this).val();
+
+            if(fattr == "list"){
+                dataList[fname] = fvalue;
+            }
+        });
+
+        $.each(listSelected, function(key, value){
+            dataReserve.push({
+                "riceInfoId":value["riceInfoId"]
+            });
+        });
+
+        var fdata = {};
+        fdata["ReserveList"] = dataList;
+        fdata["RiceReserve"] = dataReserve;
+
+        return fdata;
+    }
+    function toggleShow(option){
+        if(option == "form"){
+            $("#divTable, button.add").hide();
+            $("#divForm, button.back").show();
+
+            $("#form input, #form select").each(function(){
+                $(this).val("").trigger("change");
+            });
+
+            $("#loading").empty();
+
+            listSelected = {};
+            listId = "";
+
+            lkReserve();
+
+            $('#wizard').find("a[href*='wizard-condition']").trigger('click');
+        }
+        else if(option == "home"){
+            $("#divForm, button.back").hide();
+            $("#divTable, button.add").show();
+
+            listsReserve();
+        }
+    }
+
+    function sortObject(obj) {
+        return Object.keys(obj).sort().reduce(function (result, key) {
+            result[key] = obj[key];
+            return result;
+        }, {});
+    }
+
+    function listsObject(dataCall){
+        var html = '<option value="" selected="selected">ทั้งหมด</option>';
+
+        var datas = callAjax("{{_context_path}}/api/reserve/manage/"+dataCall, "post", {}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            $.each(datas["lists"], function(key, value){
+                html += '<option value="'+value["id"]+'">'+value["name"]+'</option>';
+            });
+        }
+
+        return html;
+    }
+</script>

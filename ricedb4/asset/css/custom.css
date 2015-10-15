@@ -1,0 +1,156 @@
+/* Add here all your CSS customizations */
+.m-b-2em{
+    margin-bottom: 2em;
+}
+.m-t-2em{
+    margin-top: 2em;
+}
+.breadcrumb.register{
+    margin-bottom: 0;
+    background-color: transparent;
+    padding-left: 4px;
+}
+
+.header-top.guest {
+    background-color: #0088cc;
+}
+.header-top.guest nav {
+    float: right;
+    width: auto;
+}
+.header-top.guest ul.nav-top {
+    min-height: 5px;
+}
+
+.header-top.guest p, .header-top.guest a, .header-top.guest span {
+    color: #FFF;
+    font-size: 0.9em;
+    padding: 6px 10px;
+}
+
+.col-md-logo{
+    position: absolute;
+}
+.col-md-logo-content{
+    position: relative;
+    float: left;
+    padding-left: 230px;
+}
+
+.panel-body.guest{
+    background: #FFF;
+    border-top: 5px solid #cccccc;
+    border-radius: 5px 0 5px 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 33px 33px 15px;
+}
+.body-sign .panel-sign .panel-body.guest {
+    border-top-color: #0088cc;
+}
+
+.col-md-logo-content{
+    margin-top: 1em;
+}
+
+.col-md-logo-content h1{
+    margin-bottom: 0;
+    font-size: 1.7em;
+}
+
+.col-md-logo-content p{
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+.featured-boxes.guest .featured-box {
+    /*margin-bottom: 30px;*/
+    margin-top: 0px;
+}
+
+.page-top.guest{
+    margin: -30px 0 0 0;
+}
+.sort-source-wrapper .nav.menu-top.guest {
+    margin: -60px 0 5px;
+}
+
+ul.nav-list.primary > li a:before{
+    margin-right: 15px;
+}
+
+.post.guest:first-child {
+    margin-top:0;
+}
+.post.guest {
+    border-bottom: 1px solid #DDD;
+    margin-top: 2em;
+}
+.post.guest:last-child{
+    border-bottom: none;
+}
+
+.dropzone.guest{
+    min-height: 250px;
+}
+
+
+.text-good{
+    color: #04B404;
+}
+
+
+
+
+/*--------------- login -----------------*/
+
+.login-no-pad {
+    height: auto;
+    padding: 0 0 30px;
+}
+
+
+
+.body-sign {
+    display: table;
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 0 15px;
+    width: 100%;
+}
+
+
+
+.body-sign .panel-sign .panel-body {
+    background: #FFF;
+    border-top: 5px solid #cccccc;
+    border-radius: 5px 0 5px 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 33px 33px 15px;
+}
+
+.body-sign .panel-sign .panel-body {
+    border-top-color: #0088cc;
+}
+
+
+span.insert-rice{
+    margin-left: .5em;
+    cursor: pointer;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 0px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}

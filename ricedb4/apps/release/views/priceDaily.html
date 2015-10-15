@@ -1,0 +1,252 @@
+{{>header}}
+<style>
+    .text-price{
+        padding: 0;
+        text-align: center;
+    }
+    .dayWithEvent {
+        background: #48e13b;
+        cursor: pointer;
+    }
+    .day-highlight {
+        cursor: pointer;
+    }
+</style>
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">Auction</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">ราคาข้าว</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr class="tall dashboard">
+
+    <div id="window1" class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post"  id="frm_priceDaily"
+                      name="prices"
+                      action="{{_context_path}}/api/release/priceDaily/save"
+                      isArray="true"
+                      data-size="0">
+                    <div class="col-sm-12" style="margin: 20px;">
+                        <label class="col-sm-2 control-label">วันที่ (yyyy-mm-dd)</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" id="date" name="Date"/>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <!-- <input type="button" id="btn_window" class="btn btn-primary btn-sm" value="ปฏิทิน" /> -->
+                            <a href="javascript: void(0);" id="btn_window" title="ปฏิทิน">
+                                <img src="/../ricedb/images/calendar.png" width="48"/>
+                            </a>
+                        </div>
+                        <div class="col-sm-5 text-right">
+                            <!--                        <input type="button" value="บันทึก" id="btn_save" class="btn btn-primary" />-->
+                            <button id="btn_save" class="btn btn-primary">บันทึกราคา</button>
+                        </div>
+                    </div>
+                    <div id="div_table" class="col-sm-12">
+                        <p class="col-sm-12">
+                            <mark class="text-danger" style="text-decoration: underline;">กรณี</mark>
+                            <mark  class="text-danger">ข้าวชนิดใดมีเพียงราคาเดียว ให้ใช้ราคานั้นเป็นตัวแทนในการกรอกราคาข้าวให้ครบทุกราคา</mark>
+                        </p>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="1%">ลำดับ</th>
+                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="15%">ชนิดข้าว</th>
+                                    <th colspan="4" class="text-center">กรมการค้าภายใน</th>
+                                    <th colspan="4" class="text-center">สมาคมโรงสีข้าวไทย</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="2" class="text-center">ราคาข้าวเก่า</th>
+                                    <th colspan="2" class="text-center">ราคาข้าวใหม่</th>
+                                    <th colspan="2" class="text-center">ราคาข้าวเก่า</th>
+                                    <th colspan="2" class="text-center">ราคาข้าวใหม่</th>
+                                </tr>
+                                <tr>
+                                    <th class="text-center">ราคาต่ำสุด</th>
+                                    <th class="text-center">ราคาสูงสุด</th>
+                                    <th class="text-center">ราคาต่ำสุด</th>
+                                    <th class="text-center">ราคาสูงสุด</th>
+                                    <th class="text-center">ราคาต่ำสุด</th>
+                                    <th class="text-center">ราคาสูงสุด</th>
+                                    <th class="text-center">ราคาต่ำสุด</th>
+                                    <th class="text-center">ราคาสูงสุด</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tb_body">
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div id="div_status" class="col-sm-12" style="display: none;"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="window2" class="col-sm-12" style="display: none;">
+        <div class="col-sm-2">
+            <input type="button" id="btn_back" class="btn btn-primary btn-sm" value="ย้อนกลับ" />
+        </div>
+        <div id="calendar" style="z-index: 100;"></div>
+    </div>
+</div>
+
+{{>footer}}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#date").datepicker({
+            format: 'yyyy-mm-dd',
+            daysOfWeekDisabled: [0, 6],
+            autoClose: true
+        });
+
+        $("#date").on("changeDate", function () {
+            $('#date').datepicker('hide');
+            callRicePriceDaily();
+        }).trigger("change");
+
+        $("#date").datepicker('setDate', new Date());
+
+        $("#btn_window").click(function () {
+            $("#window1").hide();
+            $("#window2").show();
+            loadCalendar();
+        });
+
+        $("#btn_back").click(function () {
+            $("#window2").hide();
+            $("#window1").show();
+        });
+
+        $("#btn_save").click(function () {
+            $("#div_table").hide();
+            $("#div_status").show().html('<div class="text-center">กำลังบันทึกข้อมูล...</div>');
+            sendData("frm_priceDaily", function (data) {
+                var msg = data["save"];
+                if (msg == true) {
+                    $("#div_status").html('<div class="text-center">บันทึกข้อมูลเรียบร้อย</div>');
+                    setTimeout(function () {
+                        callRicePriceDaily();
+                    }, 1000);
+
+                } else {
+                    $("#div_status").html('<div class="text-center">บันทึกข้อมูลไม่เรียบร้อย</div>');
+
+                    setTimeout(function () {
+                    }, 1000);
+                }
+            });
+            // alert(data.datas);
+            return false;
+        });
+    });
+
+    //"http://localhost/ricedb/api/rice/pricedaily/save"
+    function callRicePriceDaily() {
+        $("#div_table").show();
+        $("#div_status").hide();
+        $("#tb_body").html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/release/priceDaily/whereDate", "post", {
+                date: $("#date").val()
+            }, "json");
+            if (typeof datas !== 'undefined' && datas !== null){
+                $("#frm_priceDaily").attr("data-size", datas["lists"].length);
+
+                var html = '';
+                $.each(datas["lists"], function (key, value) {
+                    html += '<tr>'
+                        + '<input type="hidden" row-index="' + key + '"  name="id" value="' + value["id"] + '">'
+                        + '<input type="hidden" row-index="' + key + '"  name="typeId" value="' + value["typeId"] + '">'
+                        + '<input type="hidden" row-index="' + key + '"  name="date" value="' + value["date"] + '">'
+                        + '<td class="text-center">' + (key + 1) + '</td>'
+                        + '<td>' + value["type"] + '</td>'
+                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMin1" class="form-control text-right" value="' + value["oldPriceMin1"] + '" /></td>'
+                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMax1" class="form-control text-right" value="' + value["oldPriceMax1"] + '" /></td>'
+                        + '<td><input type="text" row-index="' + key + '" name="newPriceMin1" class="form-control text-right" value="' + value["newPriceMin1"] + '" /></td>'
+                        + '<td><input type="text" row-index="' + key + '" name="newPriceMax1" class="form-control text-right" value="' + value["newPriceMax1"] + '" /></td>'
+                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMin2" class="form-control text-right" value="' + value["oldPriceMin2"] + '" /></td>'
+                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMax2" class="form-control text-right" value="' + value["oldPriceMax2"] + '" /></td>'
+                        + '<td><input type="text" row-index="' + key + '" name="newPriceMin2" class="form-control text-right" value="' + value["newPriceMin2"] + '" /></td>'
+                        + '<td><input type="text" row-index="' + key + '" name="newPriceMax2" class="form-control text-right" value="' + value["newPriceMax2"] + '" /></td>'
+                    + '</tr>';
+                });
+                $("#tb_body").html(html);
+            }
+        }, 100);
+    }
+
+    function loadCalendar() {
+        $("#calendar").fullCalendar({
+            header: {
+                left: '',
+                center: 'title',
+                right: 'prev,next today'
+            },
+            defaultDate: new Date(),
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events,
+            events: function (start, end, timezone, callback) {
+                var date1 = new Date(start.unix() * 1000).toISOString().slice(0, 10);
+                var date2 = new Date(end.unix() * 1000).toISOString().slice(0, 10);
+
+                var datas = callAjax("{{_context_path}}/api/release/priceDaily/whereMonth", "post", {
+                    date1: date1,
+                    date2: date2
+                }, "json");
+                if (typeof datas !== "undefined" && datas !== null) {
+                    var events = [];
+                    $.each(datas["lists"], function (key, value) {
+                        var date = value["start"]["date"];
+                        events.push({
+                            title: "บันทึกข้อมูลราคาข้าวแล้ว",
+                            start: date.substr(0, 10) // will be parsed
+                        });
+                    });
+                    callback(events);
+                }
+            },
+            eventRender: function (event, element) {
+                var dataToFind = moment(event["start"]["date"]).format('YYYY-MM-DD');
+                $("td[data-date='" + dataToFind + "']").addClass('dayWithEvent');
+            },
+
+            dayClick: function (date, jsEvent, view) {
+                var day = new Date(date.unix() * 1000).toISOString().slice(0, 10);
+                var n = new Date(day).getDay();
+                if (n != 0 && n != 6) {
+                    $("#window2").hide();
+                    $("#window1").show();
+                    $("#date").datepicker('setDate', day);
+                }
+            }
+        });
+
+        $('td.fc-day').mouseover(function () {
+            var strDate = $(this).data('date');
+            var n = new Date(strDate).getDay();
+            //alert(strDate+" "+n)
+            if (n != 0 && n != 6) {
+                $(this).addClass("day-highlight");
+            }
+        });
+    }
+</script>

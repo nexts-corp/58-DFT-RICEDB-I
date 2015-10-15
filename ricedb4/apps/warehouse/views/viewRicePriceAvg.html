@@ -1,0 +1,232 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบคลังสินค้า</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">ราคาข้าวเฉลี่ย</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-ms-12">                
+                <div class="col-md-6">
+                    <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">ระหว่างวันที่</label>
+                            <div class="col-md-9">
+                                <div class="input-daterange input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="date1">
+                                    <span class="input-group-addon">ถึง</span>
+                                    <input type="text" class="form-control" id="date2">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="btn-group btn-group-justified">
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                        <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dataTable" class="col-md-12" style="margin-top: 20px;"><!-- table shown file detail -->
+                <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">ลำดับ</th>
+                            <th class="text-center col-md-2" rowspan="2" style="vertical-align: middle;">ชนิดข้าว</th>
+                            <th class="text-center col-md-3" colspan="3">ราคาข้าวเก่า</th>
+                            <th class="text-center col-md-3" colspan="3">ราคาข้าวเฉลี่ย (เก่า-ใหม่)</th>
+                            <th class="text-center col-md-3" colspan="3">ราคาข้าวใหม่</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">คน.</th>
+                            <th class="text-center">สมาคม</th>
+                            <th class="text-center">ค่าเฉลี่ย</th>
+                            <th class="text-center">คน.</th>
+                            <th class="text-center">สมาคม</th>
+                            <th class="text-center">ค่าเฉลี่ย</th>
+                            <th class="text-center">คน.</th>
+                            <th class="text-center">สมาคม</th>
+                            <th class="text-center">ค่าเฉลี่ย</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataBody">
+                        <tr>
+                            <td colspan="11" class="text-center">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- end table shown file detail -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    $(function () {
+        $("#date1, #date2").datepicker({
+            format: 'yyyy-mm-dd',
+            //daysOfWeekDisabled: [0, 6],
+            autoClose: true
+        });
+        
+        $("#date1, #date2").datepicker('setDate', new Date());
+        
+        $("#date1").on("changeDate", function () {
+            $('#date1').datepicker('hide');
+            $('#date2').datepicker('setStartDate', new Date($(this).val()));
+            showRicePriceAvg();
+        });
+
+        $("#date2").on("changeDate", function () {
+            $('#date2').datepicker('hide');
+            $('#date1').datepicker('setEndDate', new Date($(this).val()));
+            showRicePriceAvg();
+        });
+       
+        showRicePriceAvg();
+    });
+    
+    function showRicePriceAvg(){
+        $("#dataBody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');
+        
+        setTimeout(function(){
+            var dataSet = [];
+            
+            var datas = callAjax("{{_context_path}}/api/warehouse/viewRicePriceAvg/view", "post", {date1: $("#date1").val(), date2: $("#date2").val()}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    dataSet.push(value);
+                });
+            }
+
+            var t = $("#table").DataTable( {
+                "data": dataSet,
+                "order": [[ 0, 'asc' ]],
+                "columnDefs": [ 
+                    { 
+                        "targets": 0,
+                        "searchable": false,
+                        "orderable": false,
+                        "data": "riceTypeId",
+                        "sClass": "text-center col-md-1"
+                    },
+                    { 
+                        "targets": 1,
+                        "data": "riceType",
+                        "sClass": "text-left col-md-3"
+                    },
+                    {
+                        "targets": 2,
+                        "data": "sumOldMean1",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 3,
+                        "data": "sumOldMean2",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 4,
+                        "data": "OldPrice",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 5,
+                        "data": "sumOldNewMean1",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 6,
+                        "data": "sumOldNewMean2",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 7,
+                        "data": "OldNewPrice",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 8,
+                        "data": "sumNewMean1",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 9,
+                        "data": "sumNewMean2",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    },
+                    {
+                        "targets": 10,
+                        "data": "NewPrice",
+                        "sClass": "text-right col-md-1",
+                        "render": function (data) {
+                            if(data == 0) return "-";
+                            else return accounting.formatNumber(data, 0, ",", ".");
+                        }     
+                    }
+                ]
+            });
+
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
+        }, 100);
+    }
+</script>

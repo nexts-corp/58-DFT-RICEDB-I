@@ -1,0 +1,46 @@
+<?php
+
+namespace apps\auction\interfaces;
+
+/**
+ * @name IBidderReturnService
+ * @uri /return
+ * @description ประมูล
+ */
+interface IBidderReturnService {
+
+    /**
+     * @name listsBidder
+     * @uri /listsBidder
+     * @return String[] lists Description
+     * @description รายชื่อผู้ที่มีหลักค้ำประกัน
+     */
+    public function listsBidder();
+    
+    /**
+     * @name listsPayment
+     * @uri /listsPayment
+     * @param integer bidderHistoryId Description
+     * @return String[] lists Description
+     * @description รายชื่อผู้ที่มีหลักค้ำประกัน
+     */
+    public function listsPayment($bidderHistoryId);
+    
+    /**
+     * @name listsWarehouse
+     * @uri /listsWarehouse
+     * @param integer bidderId Description
+     * @return String[] lists Description
+     * @description รายชื่อคลังสินค้าที่ผู้เสนอซื้อเสนอราคา
+     */
+    public function listsWarehouse($bidderId);
+    
+    /**
+     * @name update
+     * @uri /update
+     * @param apps\common\entity\BidderPayment bidderPayment Description
+     * @return boolean update Description
+     * @description เปลี่ยนสถานะหลักค้ำประกัน
+     */
+    public function update($bidderPayment);
+}

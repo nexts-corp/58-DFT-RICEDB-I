@@ -1,0 +1,476 @@
+{{>header}}
+<style>
+    .row-tr,.pointer :hover{
+        cursor: pointer;
+    }
+</style>
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ติดตาม</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">อนุมัติคลัง</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+    <div class="sort-source-wrapper">
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li data-option-value=".websites" class="padding-left">
+                    <button id="showTable" class="btn btn-primary table" style="display: none;">ข้อมูลคลังที่ชนะการประมูล</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-sm-12" style="margin-bottom:20px;">
+            <label class="col-sm-2 control-label text-right">การประมูลครั้งที่</label>
+            <div class="col-sm-7">
+                <select id="auction" class="form-control">
+                    <option value="0">เลือกทั้งหมด</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <input type="button" id="btn_date" class="btn btn-primary" value="เลือก" />
+            </div>
+        </div>
+        <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#waiting" aria-controls="waiting" role="tab" data-toggle="tab">คลังที่ยังไม่ถูกอนุมัติ</a></li>
+                <li role="presentation"><a href="#sale" aria-controls="sale" role="tab" data-toggle="tab">คลังที่อนุมัติขาย</a></li>
+                <li role="presentation"><a href="#condition" aria-controls="condition" role="tab" data-toggle="tab">คลังที่ติดเงื่อนไข</a></li>
+                <li role="presentation"><a href="#reserve" aria-controls="reserve" role="tab" data-toggle="tab">คลังที่สงวนสิทธิ์</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="waiting">
+                    <div class="row">
+                        <div class='col-md-12'>
+
+                            <div class='col-md-3 text-left'>
+                                <h3>จำนวนที่เลือก <span id='countCheckbox'>0</span>/<span id='countAll'>0</span></h3>
+                                <!--                    <h3>จำนวนทั้งหมด </h3>-->
+                            </div>
+                            <div class="col-md-2 text-right">
+                                <select class="form-control" id="selectSale">
+                                    <option value="">เลือก</option>
+                                    <option value="Y">ขาย</option>
+                                    <option value="C">ติดเงื่อนไข</option>
+                                    <option value="R">สงวนสิทธิ์</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input type='text' id='txtRemark' class="form-control" placeholder="หมายเหตุ" />
+                            </div>
+                            <div class="col-md-2 text-left">
+                                <button id='btnSave' class="btn btn-info">บันทึก</button>
+                            </div>
+                            <div class="col-md-2 text-right pointer">
+                                <input type="checkbox" name="all" id="checkall" /> <label for="checkall">เลือกทั้งหมด</label>
+                            </div>
+
+                            <!--                <div class="col-md-12 text-center">
+                                                <div class="col-md-2 text-right">
+                                                    <button id='btnSale' class="btn btn-primary">ขาย</button>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type='text' id='txtRemark' class="form-control" placeholder="หมายเหตุ" />
+                                                </div>
+                                                <div class="col-md-2 text-left">
+                                                    <button id='btnNoSale' class="btn btn-danger">ไม่ขาย</button>
+                                                </div>
+                                            </div>-->
+
+                        </div>
+                        <div id="bidderTable" class="col-md-12" style="margin-top:10px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">ลำดับ</th>
+                                            <th class="text-center">จังหวัด</th>
+                                            <th class="text-center">หน่วยงาน</th>
+                                            <th class="text-center">คลังสินค้า</th>
+                                            <!--                                <th class="text-center">คิวที่</th>-->
+                                            <th class="text-center">ผู้เสนอซื้อ</th>
+                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
+                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
+                                            <th class="text-center">เลือก</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bidderBody">
+                                        <tr>
+                                            <td colspan="9" class="text-center">ไม่มีข้อมูล</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div><!-- col-md-12 -->
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="sale">
+                    <div class="row">
+                        <div id="saleTable" class="col-md-12" style="margin-top:10px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">ลำดับ</th>
+                                            <th class="text-center">จังหวัด</th>
+                                            <th class="text-center">หน่วยงาน</th>
+                                            <th class="text-center">คลังสินค้า</th>
+                                            <!--                                <th class="text-center">คิวที่</th>-->
+                                            <th class="text-center">ผู้เสนอซื้อ</th>
+                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
+                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
+                                            <th class="text-center">หมายเหตุ</th>
+                                            <th class="text-center">ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="saleBody">
+                                        <tr>
+                                            <td colspan="10" class="text-center">ไม่มีข้อมูล</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="condition">
+                    <div class="row">
+                        <div id="conditionTable" class="col-md-12" style="margin-top:10px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">ลำดับ</th>
+                                            <th class="text-center">จังหวัด</th>
+                                            <th class="text-center">หน่วยงาน</th>
+                                            <th class="text-center">คลังสินค้า</th>
+                                            <!--                                <th class="text-center">คิวที่</th>-->
+                                            <th class="text-center">ผู้เสนอซื้อ</th>
+                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
+                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
+                                            <th class="text-center">หมายเหตุ</th>
+                                            <th class="text-center">ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="conditionBody">
+                                        <tr>
+                                            <td colspan="10" class="text-center">ไม่มีข้อมูล</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="reserve">
+                    <div class="row">
+                        <div id="reserveTable" class="col-md-12" style="margin-top:10px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">ลำดับ</th>
+                                            <th class="text-center">จังหวัด</th>
+                                            <th class="text-center">หน่วยงาน</th>
+                                            <th class="text-center">คลังสินค้า</th>
+                                            <!--                                <th class="text-center">คิวที่</th>-->
+                                            <th class="text-center">ผู้เสนอซื้อ</th>
+                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
+                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
+                                            <th class="text-center">หมายเหตุ</th>
+                                            <th class="text-center">ลบ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reserveBody">
+                                        <tr>
+                                            <td colspan="10" class="text-center">ไม่มีข้อมูล</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div><!--  row  -->
+</div><!--  container  -->
+<!--<div class="loading" style="display: none;">
+    <img src="../../../asset/images/ajax-loader.gif" alt=""/>
+</div>-->
+{{>footer}}
+<script type="text/javascript">
+    var datas, datasApprove;
+    listsAuction();
+    $("#btn_date").click(function () {
+        var auccode = $('#auction').val();
+        
+        init(auccode);
+    });
+    function listsAuction() {
+        var datas = callAjax("{{_context_path}}/api/tracking/return/listsAuction", "post", {}, "json");
+        var dataAuction = datas["lists"];
+        if (dataAuction != null) {
+            var html = "";
+            $.each(dataAuction, function (key, value) {
+                html += "<option value='" + value.keyword + "'>ครั้งที่ " + value.status + "</option>";
+                //$("#countAll").text((key + 1));
+            });
+            $("#auction").html(html);
+        }
+    }
+    $("#btnSave").click(function () {
+        var select = $("#selectSale").val();
+        if (select == "") {
+            $.alert({
+                title: 'คำแนะนำ!',
+                content: 'กรุณาเลือกประเภทอนุมัติ!',
+                confirmButton: "ตกลง",
+                theme: 'black',
+                columnClass: 'col-md-4 col-md-offset-4',
+                confirm: function () {
+                    $("#selectSale").focus();
+                }
+            });
+        } else {
+            var remark = $("#txtRemark").val();
+            if (remark == "" && select != "Y") {
+                $.alert({
+                    title: 'คำแนะนำ!',
+                    content: 'กรุณาใส่หมายเหตุ!',
+                    confirmButton: "ตกลง",
+                    theme: 'black',
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    confirm: function () {
+                        $("#txtRemark").focus();
+                    }
+                });
+            } else {
+                if (remark == "" && select == "Y") {
+                    remark = "-";
+                }
+                var data = checkSelect();
+                if (data == "noCheckbox") {
+                    $.alert({
+                        title: 'คำแนะนำ!',
+                        content: 'กรุณาเลือกคลัง!',
+                        confirmButton: "ตกลง",
+                        theme: 'black',
+                        columnClass: 'col-md-4 col-md-offset-4'
+                    });
+                } else {
+                    var cfm = $.confirm({
+                        title: 'ยืนยันการอนุมัติ!',
+                        content: "คุณต้องการที่จะทำต่อ?",
+                        confirmButton: 'ตกลง',
+                        cancelButton: 'ยกเลิก',
+                        confirmButtonClass: 'btn-success',
+                        cancelButtonClass: 'btn-warning',
+                        theme: 'holodark',
+                        columnClass: 'col-md-4 col-md-offset-4',
+                        autoClose: 'cancel|11000',
+                        confirm: function () {
+                            $("#bidderBody").html("<tr><td colspan='9' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
+                            cfm.close();
+                            var auccode = $('#auction').val();
+                            setTimeout(function () {
+                                var msg = sendSale(data, select, remark,auccode);
+                                if (msg.update === true) {
+                                    alert("บันทึกเรียบร้อย");
+                                    init(auccode);
+                                }
+                            }, 1000);
+
+                        }
+                    });
+                }
+            }
+        }
+    });
+
+    function init(auccode) {
+        // alert("xxx");
+        datas = null;
+        datasApprove = null;
+         $("#countAll").text("0");
+        listBidder(auccode);
+        checkbox();
+        $("#txtRemark").val('');
+        function listBidder(auccode) {
+
+            datas = callAjax("{{_context_path}}/api/tracking/approve/listsBidder", "post", {auccode: auccode}, "json");
+            datasApprove = callAjax("{{_context_path}}/api/tracking/approve/listsApprove", "post", {auccode: auccode}, "json");
+            datas = datas["lists"];
+            datasApprove = datasApprove["lists"];
+            if (!$.isEmptyObject(datas)) {
+                var html = "";
+                $.each(datas, function (key, value) {
+                    html += "<tr row-index='" + key + "' class='row-tr'>" +
+                            "<td class='text-center'>" + (key + 1) + "</td>" +
+                            "<td class='text-center'>" + (value.province) + "</td>" +
+                            "<td class='text-center'>" + (value.associate) + "</td>" +
+                            "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
+                            // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
+                            "<td class='text-center'>" + (value.bidderName) + "</td>" +
+                            "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
+                            "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
+                            "<td class='text-center'><input type='checkbox' class='cb-element' name='check' value='" + key + "' /></td>" +
+                            "</tr>";
+                    $("#countAll").text((key + 1));
+                });
+                $("#bidderBody").html(html);
+            } else {
+                var html = "<tr><td colspan=8 class='text-center'>ไม่มีข้อมูล</td></tr>";
+                $("#bidderBody").html(html);
+            }
+            if (datasApprove != null) {
+                var html = [];
+                var c1 = 0, c2 = 0, c3 = 0;
+                $.each(datasApprove, function (key, value) {
+                    if (value.remark == null) {
+                        value.remark = "-";
+                    }
+                    if (value.isSale == "Y") {
+                        c1++;
+
+                        html[0] += "<tr row-index='" + key + "' class='row-tr'>" +
+                                "<td class='text-center'>" + c1 + "</td>" +
+                                "<td class='text-center'>" + (value.province) + "</td>" +
+                                "<td class='text-center'>" + (value.associate) + "</td>" +
+                                "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
+                                // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
+                                "<td class='text-center'>" + (value.bidderName) + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + (value.remark) + "</td>" +
+                                "<td class='text-center'><button class='btn btn-primary delApprove'>ลบ</button></td>" +
+                                "</tr>";
+                    } else if (value.isSale == "C") {
+                        c2++;
+                        html[1] += "<tr row-index='" + key + "' class='row-tr'>" +
+                                "<td class='text-center'>" + c2 + "</td>" +
+                                "<td class='text-center'>" + (value.province) + "</td>" +
+                                "<td class='text-center'>" + (value.associate) + "</td>" +
+                                "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
+                                // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
+                                "<td class='text-center'>" + (value.bidderName) + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + (value.remark) + "</td>" +
+                                "<td class='text-center'><button class='btn btn-primary delApprove'>ลบ</button></td>" +
+                                "</tr>";
+                    } else if (value.isSale == "R") {
+                        c3++;
+                        html[2] += "<tr row-index='" + key + "' class='row-tr'>" +
+                                "<td class='text-center'>" + c3 + "</td>" +
+                                "<td class='text-center'>" + (value.province) + "</td>" +
+                                "<td class='text-center'>" + (value.associate) + "</td>" +
+                                "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
+                                // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
+                                "<td class='text-center'>" + (value.bidderName) + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + (value.remark) + "</td>" +
+                                "<td class='text-center'><button class='btn btn-primary delApprove'>ลบ</button></td>" +
+                                "</tr>";
+                    }
+                });
+                for (var i = 0; i < 3; i++) {
+                    if (typeof html[i] === "undefined") {
+                        html[i] = '<tr><td colspan="10" class="text-center">ไม่มีข้อมูล</td></tr>';
+                    }
+                }
+                $("#saleBody").html(html[0]);
+                $("#conditionBody").html(html[1]);
+                $("#reserveBody").html(html[2]);
+
+                $('.delApprove').click(function () {
+                    var index = $(this).closest('tr').attr('row-index');
+                    var dataJSON = JSON.stringify({dataAuction:datasApprove[index]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+                    
+                    var msg = callAjax("{{_context_path}}/api/tracking/approve/delete", "post", dataJSONEN, "json");
+                    if (msg.delete === true) {
+                        alert("ลบเรียบร้อย");
+                        init(auccode);
+                    }
+                });
+            }
+        }
+        function checkbox() {
+            $("#countCheckbox").text("0");
+            $("#checkall").attr("checked", false);
+            $('#checkall').click(function () {
+                if (this.checked) {
+                    $('.cb-element').each(function () {
+                        this.checked = true;
+                    });
+                } else {
+                    $('.cb-element').each(function () {
+                        this.checked = false;
+                    });
+                }
+            });
+
+            $('input:checkbox').click(function () {
+                var count = 0;
+                $('.cb-element').each(function () {
+                    if (this.checked) {
+                        count++;
+                    }
+                });
+                $("#countCheckbox").text(count);
+            });
+
+            $(".row-tr").click(function () {
+                $(this).find(':checkbox').trigger("click");
+            });
+        }
+    }
+
+    function checkSelect() {
+        var i = 0;
+        var dataApprove = [];
+        $('.cb-element').each(function () {
+            if (this.checked) {
+                dataApprove[i++] = datas[this.value];
+            }
+        });
+        if (dataApprove[0] == null) {
+            return "noCheckbox";
+        } else {
+            return dataApprove;
+        }
+
+    }
+    function sendSale(dataApprove, isSale, remark,auccode) {
+
+        var dataJSON = JSON.stringify({data: dataApprove, isSale: isSale, remark: remark,auccode:auccode});
+        var dataJSONEN = encodeURIComponent(dataJSON);
+        return callAjax("{{_context_path}}/api/tracking/approve/update", "post", dataJSONEN, "json");
+
+    }
+</script>
+
+
+

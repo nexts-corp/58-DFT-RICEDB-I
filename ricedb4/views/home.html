@@ -1,0 +1,462 @@
+{{>header}}
+
+<div role="main" class="main">
+    <div class="home-intro home" id="home-intro">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8">
+                    <p>
+                        ระบบสารสนเทศเพื่อการบริหารจัดการ <b class="blue">การระบายข้าว</b>
+                        <span>กองบริหารการค้าข้าว กรมการค้าต่างประเทศ</span>
+
+                        <span>Information Management System for Rice.</span>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <!--<div class="get-started">
+                        <h6 class="short word-rotator-title">
+                            ปริมาณข้าวคงเหลือ
+                            <strong class="inverted">
+                                <span class="word-rotate active" data-plugin-options='{"delay": 2000, "animDelay": 1000}'>
+                                    <span id="inventory1" class="word-rotate-items" style="width: 69px; top: 0px;">
+                                    </span>
+                                </span>
+                            </strong>
+                            ตัน
+                        </h6>
+                        <h6 class="short word-rotator-title">
+                            คัดกรองตามเกณฑ์มาตรฐาน
+                            <strong class="inverted">
+                                <span class="word-rotate active" data-plugin-options='{"delay": 2000, "animDelay": 1000}'>
+                                    <span id="inventory2" class="word-rotate-items" style="min-width: 69px; top: 0px;">
+                                    </span>
+                                </span>
+                            </strong>
+                            ตัน
+                        </h6>
+                    </div>-->
+                </div>
+
+            </div>
+            <hr class="tall dashboard">
+        </div>
+
+
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h3>สินค้าคงคลัง</h3>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div class="customNavigation">
+                            <a class="btn prev"><i class="fa fa-step-backward"></i></a>
+                            <a class="btn next"><i class="fa fa-step-forward"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="owl" class="owl-carousel manual">
+                        <div class="col-md-12">
+                            <section class="panel panel-featured panel-featured-info">
+                                <div class="panel-body">
+                                    <div id="typeChart" style="width: 90%; height: 400px; margin: 0 auto;"></div>
+                                    <table id="type" class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center col-md-5">ชนิดข้าว</th>
+                                            <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
+                                            <th class="text-center col-md-2">ร้อยละ (%)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-right">
+                                            <td colspan="3" class="text-center">-</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-md-12">
+                            <section class="panel panel-featured panel-featured-info">
+                                <div class="panel-body">
+                                    <div id="projectChart" style="width: 90%; height: 400px; margin: 0 auto;"></div>
+                                    <table id="project" class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center col-md-5">ปีโครงการ</th>
+                                            <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
+                                            <th class="text-center col-md-2">ร้อยละ (%)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-right">
+                                            <td colspan="2" class="text-center">-</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                        <div style="width: 100%;">
+                            <section class="panel panel-featured panel-featured-info">
+                                <div class="panel-body">
+                                    <div id="gradeChart" style="width: 90%; height: 400px; margin: 0 auto;"></div>
+                                    <table id="grade" class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center col-md-5">เกรด</th>
+                                            <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
+                                            <th class="text-center col-md-2">ร้อยละ (%)</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr class="text-right">
+                                            <td colspan="2" class="text-center">-</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- col-md-3 -->
+
+            <div class="col-md-4">
+                <h3>ราคาข้าว</h3>
+                <section class="panel panel-featured panel-featured-info">
+                    <div class="panel-body">
+                        <div id="price" class="owl-carousel manual">
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!--<div class="col-md-4">
+                <h3>ราคาข้าว</h3>
+                <section class="panel panel-featured panel-featured-info">
+                    <div class="panel-body">
+
+                        <span class="word-rotate">
+                            <span class="word-rotate-items  text-bold" id="pType">
+                            </span>
+                        </span>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="text-center">ราคา (บาท/ตัน)</th>
+                                <th class="text-center">ชนิดข้าว</th>
+                                <th class="text-right">ต่ำสุด</th>
+                                <th class="text-right">สูงสุด</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!--<tr>
+                                <td rowspan="2">กรมการค้าภายใน</td>
+                                <td class="text-center">เก่า</td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pOldPriceMin1">
+										</span>
+									</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pOldPriceMax1">
+										</span>
+									</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">ใหม่</td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pNewPriceMin1">
+										</span>
+									</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pNewPriceMax1">
+										</span>
+									</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2">สมาคมโรงสี</td>
+                                <td class="text-center">เก่า</td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pOldPriceMin2">
+										</span>
+									</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pOldPriceMax2">
+										</span>
+									</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">ใหม่</td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pNewPriceMin2">
+										</span>
+									</span>
+                                </td>
+                                <td class="text-right">
+                                    <span class="word-rotate" data-plugin-options='{"delay": 5000, "animDelay": 500}'>
+										<span class="word-rotate-items" id="pNewPriceMax2">
+										</span>
+									</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-right">
+                        <div>ราคา ณ วันที่ <span id="pDate">12/10/2015</span></div>
+                    </div>
+                </section>
+
+            </div>-->
+        </div>
+    </div>
+</div>
+
+{{>footer}}
+
+<script type="text/javascript">
+    var chart1; // globally available
+    $(function(){
+        $(".owl-carousel table.table").each(function(){
+            var id = $(this).attr("id");
+
+            viewInventory(id)
+        });
+
+        ricePrice();
+
+        initCarousel();
+
+
+    });
+
+    function viewInventory(option){
+        var dataSet = [];
+        var total = 0;
+
+        var dataX = [];
+        var dataY = [];
+        $("#"+option+" tbody").html('<tr><td colspan="2" class="text-center">Loading...</td></tr>');
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/home/widget/"+option+"Group", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, value){
+                    dataSet.push(value);
+
+                    total += parseFloat(value["weight"]);
+
+                    dataX.push(value[option]);
+                    dataY.push(parseFloat(value["weight"]));
+                });
+            }
+
+            var t = $("#"+option).DataTable( {
+                "destroy": true,
+                "data": dataSet,
+                "order": [[ 1, 'desc' ]],
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "searchable": false,
+                        "orderable": false,
+                        "data": option,
+                        "sClass": "text-center col-md-5"
+                    },
+                    {
+                        "targets": 1,
+                        "data": "weight",
+                        "sClass": "text-right col-md-5",
+                        "render": function(data){
+                            var content = accounting.formatNumber(data, 6, ",", ".");
+
+                            return content;
+                        }
+                    },
+                    {
+                        "targets": 2,
+                        "data": "weight",
+                        "sClass": "text-center col-md-2",
+                        "render": function(data){
+                            var percent = parseFloat((data / total) * 100).toFixed(2);
+                            var content = percent+'%';
+
+                            return content;
+                        }
+                    }
+                ],
+                "paging": false,
+                "bFilter": false
+            });
+
+            drawGraph(option, dataX, dataY);
+        }, 100);
+
+    }
+
+    function initCarousel(){
+        var owl = $("#owl");
+        owl.owlCarousel({
+            items: 1,
+            //autoplay: 5000,
+            slideSpeed: 1500,
+            autoHeight: true,
+            navigation:true
+        });
+
+        $(".next").click(function(){
+            owl.trigger('next.owl.carousel');
+        });
+        $(".prev").click(function(){
+            owl.trigger('prev.owl.carousel');
+        });
+
+
+        var owl2 = $("#price");
+        owl2.owlCarousel({
+            items: 1,
+            loop: true,
+            autoplay: 7000,
+            slideSpeed: 2000,
+            autoHeight: true,
+            navigation:true
+        });
+    }
+
+    function drawGraph(option, dataX, dataY){
+        var div = option+'Chart';
+
+        var title;
+        if(option == "type") title =  "ปริมาณแยกตามชนิดข้าว";
+        else if(option == "project") title =  "ปริมาณแยกตามปีโครงการ";
+        else if(option == "grade") title =  "ปริมาณแยกตามเกรด";
+
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: div,
+                type: 'line',
+                events: {
+                    load: function(){
+                        setTimeout(function() {
+                            chart.setSize($("#"+div).width(), $("#"+div).height());
+                        }, 1);
+                    }
+                }
+            },
+            title: {
+                text: title
+            },
+            tooltip: {
+                formatter: function() {
+                    return this.x + " : " + accounting.formatNumber(this.y, 2, ",", ".") + " ตัน";
+                }
+            },
+            xAxis: {
+                categories: dataX
+            },
+            yAxis: {
+                title: {
+                    text: 'ปริมาณน้ำหนัก (ตัน)'
+                }
+            },
+            plotOptions: {
+                line: {
+                    dataLabels: {
+                        enabled: false
+                    },
+                    enableMouseTracking: true
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: title,
+                data: dataY
+            }]
+        });
+    }
+
+    function ricePrice(){
+        var price = '';
+        var datas = callAjax("{{_context_path}}/api/home/widget/ricePrice", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function(key, value){
+                price += '<div>'
+                    + '<h4 class="text-dark">'+value["Type"]+'</h4>'
+                    + '<table class="table">'
+                        + '<thead>'
+                            + '<tr>'
+                                + '<th class="text-center">ราคา (บาท/ตัน)</th>'
+                                + '<th class="text-center">ชนิดข้าว</th>'
+                                + '<th class="text-right">ต่ำสุด</th>'
+                                + '<th class="text-right">สูงสุด</th>'
+                            + '</tr>'
+                        + '</thead>'
+                        + '<tbody>'
+                            + '<tr>'
+                                + '<td rowspan="2">กรมการค้าภายใน</td>'
+                                + '<td class="text-center">เก่า</td>'
+                                + '<td class="text-right">'+checkZero(value["OldPriceMin1"])+'</td>'
+                                + '<td class="text-right">'+checkZero(value["OldPriceMax1"])+'</td>'
+                            + '</tr>'
+                           + '<tr>'
+                               + '<td class="text-center">ใหม่</td>'
+                               + '<td class="text-right">'+checkZero(value["NewPriceMin1"])+'</td>'
+                               + '<td class="text-right">'+checkZero(value["NewPriceMax1"])+'</td>'
+                           + '</tr>'
+                           + '<tr>'
+                               + '<td rowspan="2">สมาคมโรงสี</td>'
+                               + '<td class="text-center">เก่า</td>'
+                               + '<td class="text-right">'+checkZero(value["OldPriceMin2"])+'</td>'
+                               + '<td class="text-right">'+checkZero(value["OldPriceMax2"])+'</td>'
+                           + '</tr>'
+                           + '<tr>'
+                               + '<td class="text-center">ใหม่</td>'
+                               + '<td class="text-right">'+checkZero(value["NewPriceMin2"])+'</td>'
+                               + '<td class="text-right">'+checkZero(value["NewPriceMax2"])+'</td>'
+                           + '</tr>'
+                        + '</tbody>'
+                    + '</table>'
+                + '</div>';
+            });
+
+        }
+
+        $("#price").html(price);
+    }
+
+    function checkZero(input){
+        var output = input
+        if(input == 0.0){
+            output = '-';
+        }
+
+        return output;
+    }
+</script>
+
+
+
+
+
