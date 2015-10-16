@@ -1,4 +1,4 @@
 <?php
-    header("Location: /ricedb3/api/root/view/index");
+    header("Location: /ricedb4/api/root/view/index");
     exit();
 ?>

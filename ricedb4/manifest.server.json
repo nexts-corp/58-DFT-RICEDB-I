@@ -1,6 +1,6 @@
 {
-    "context_path":"/ricedb3",
-    "welcome_page":"/ricedb3/api/root/view/index",
+    "context_path":"/ricedb4",
+    "welcome_page":"/ricedb4/api/root/view/index",
     "locale":"th-TH",
     "context": [
         {
@@ -10,7 +10,7 @@
                 {"name": "driver","value": "pdo_sqlsrv"},
                 {"name": "host","value": "202.44.34.86"},
                 {"name": "port","value": "1433"},
-                {"name": "dbname","value": "RiceDB"},
+                {"name": "dbname","value": "RiceDB2"},
                 {"name": "user","value": "riceuser"},
                 {"name": "password","value": "l2ice2015"}
 
@@ -23,8 +23,8 @@
                 {"name": "OAUTH2_CLIENT_ID","value": "123456"},
                 {"name": "OAUTH2_CLIENT_SECRET","value": "123456"},
                 {"name": "OAUTH2_ACCESS_KEY","value": "code"},
-                {"name": "OAUTH2_AUTH_URL","value": "/ricedb3/api/oauth/authen/authorization"},
-                {"name": "OAUTH2_TOKEN_URI","value":"http://localhost/ricedb3/api/oauth/authen/authenticate"}
+                {"name": "OAUTH2_AUTH_URL","value": "/ricedb4/api/oauth/authen/authorization"},
+                {"name": "OAUTH2_TOKEN_URI","value":"http://localhost/ricedb4/api/oauth/authen/authenticate"}
        ]
     }
 }
