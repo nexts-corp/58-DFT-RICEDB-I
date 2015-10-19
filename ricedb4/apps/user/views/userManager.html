@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ผู้ใช้งาน</li>
+                        <li><a href="#">{{#i18n}}user.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}user.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
@@ -25,8 +25,8 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus"></i>&nbsp;{{#i18n}}user.buttonAdd{{/i18n}}</button>
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">{{#i18n}}user.buttonList{{/i18n}}</button>
+                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus-circle"></i> {{#i18n}}user.buttonAdd{{/i18n}}</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list-ul"></i> {{#i18n}}user.buttonList{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -227,7 +227,7 @@
                     <div id="loading" class="col-xs-12" style="text-align: center;"></div>
                     <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
                         <li data-option-value="*" class="">
-                            <button id="submit" class="btn btn-primary submit">{{#i18n}}user.buttonSave{{/i18n}}</button>
+                            <button id="submit" class="btn btn-primary submit"><i class="fa fa-save"></i> {{#i18n}}user.buttonSave{{/i18n}}</button>
                         </li>
                         <li data-option-value=".websites" class="padding-left">
                             <button type="button" class="btn btn-default cancel">{{#i18n}}user.buttonCancel{{/i18n}}</button>
