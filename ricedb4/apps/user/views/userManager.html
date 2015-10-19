@@ -25,8 +25,8 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus"></i>&nbsp;เพิ่มข้อมูล</button>
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">รายชื่อเจ้าหน้าที่</button>
+                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus"></i>&nbsp;{{#i18n}}user.buttonAdd{{/i18n}}</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;">{{#i18n}}user.buttonList{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
                                 <th class="text-center" style="vertical-align: middle;">{{#i18n}}user.action{{/i18n}}</th>
                             </tr>
                         </thead>
-                        <tbody id="userBody">
+                        <tbody>
                             <tr>
                                 <td colspan="7" class="text-center">-</td>
                             </tr>
@@ -66,12 +66,12 @@
                                 <div class="panel-actions">
                                     <a href="#" class="fa fa-caret-up"></a>
                                 </div>
-                                <h2 class="panel-title">ข้อมูลส่วนตัวเจ้าหน้าที่</h2>
+                                <h2 class="panel-title">{{#i18n}}user.panelInfo{{/i18n}}</h2>
                             </header>
 
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="name">ชื่อ</label>
+                                    <label class="col-md-3 control-label req" for="name">{{#i18n}}user.name{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -84,7 +84,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="surname">นามสกุล</label>
+                                    <label class="col-md-3 control-label req" for="surname">{{#i18n}}user.surname{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -96,7 +96,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="roleCode">สิทธิการใช้งาน</label>
+                                    <label class="col-md-3 control-label req" for="roleCode">{{#i18n}}user.permission{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -108,7 +108,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="departmentId">หน่วยงาน</label>
+                                    <label class="col-md-3 control-label req" for="departmentId">{{#i18n}}user.department{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -120,7 +120,7 @@
                                 </div>
 								
 								 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="departmentId">Active</label>
+                                    <label class="col-md-3 control-label req" for="departmentId">{{#i18n}}user.active{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -135,7 +135,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="email">อีเมล์</label>
+                                    <label class="col-md-3 control-label" for="email">{{#i18n}}user.email{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -147,7 +147,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="telephone">เบอร์โทร</label>
+                                    <label class="col-md-3 control-label" for="telephone">{{#i18n}}user.phone{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -159,7 +159,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="address">ที่อยู่</label>
+                                    <label class="col-md-3 control-label" for="address">{{#i18n}}user.address{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -180,12 +180,12 @@
                                 <div class="panel-actions">
                                     <a href="#" class="fa fa-caret-up"></a>
                                 </div>
-                                <h2 class="panel-title">ข้อมูลเข้าระบบ</h2>
+                                <h2 class="panel-title">{{#i18n}}user.panelLogin{{/i18n}}</h2>
                             </header>
 
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="username">ชื่อผู้ใช้งาน</label>
+                                    <label class="col-md-3 control-label req" for="username">{{#i18n}}user.username{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -197,7 +197,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="password">รหัสผ่าน</label>
+                                    <label class="col-md-3 control-label req" for="password">{{#i18n}}user.password{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -209,7 +209,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="passwordCheck">ยืนยันรหัสผ่าน</label>
+                                    <label class="col-md-3 control-label req" for="passwordCheck">{{#i18n}}user.passwordConfirm{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -227,10 +227,10 @@
                     <div id="loading" class="col-xs-12" style="text-align: center;"></div>
                     <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
                         <li data-option-value="*" class="">
-                            <button id="submit" class="btn btn-primary submit">บันทึก</button>
+                            <button id="submit" class="btn btn-primary submit">{{#i18n}}user.buttonSave{{/i18n}}</button>
                         </li>
                         <li data-option-value=".websites" class="padding-left">
-                            <button type="button" class="btn btn-default cancel">ยกเลิก</button>
+                            <button type="button" class="btn btn-default cancel">{{#i18n}}user.buttonCancel{{/i18n}}</button>
                         </li>
                     </ul>
 
@@ -242,42 +242,42 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">แสดงข้อมูล : เจ้าหน้าที่</h4>
+                            <h4 class="modal-title">{{#i18n}}user.modalDetail{{/i18n}}</h4>
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <tbody>
                                     <tr>
-                                        <td>ชื่อ - นามสกุล</td><td class="text-left text-bold"><div id="nameView"></div></td>
+                                        <td>{{#i18n}}user.name{{/i18n}} - {{#i18n}}user.surname{{/i18n}}</td><td class="text-left text-bold"><div id="nameView"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ชื่อผู้ใช้งาน</td><td class="text-left text-bold text-tertiary"><div id="usernameView"></div></td>
+                                        <td>{{#i18n}}user.username{{/i18n}}</td><td class="text-left text-bold text-tertiary"><div id="usernameView"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>สิทธิการใช้งาน</td><td class="text-left"><div id="roleView"></div></td>
+                                        <td>{{#i18n}}user.permission{{/i18n}}</td><td class="text-left"><div id="roleView"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>หน่วยงาน</td><td class="text-left"><div id="departmentView"></div></td>
+                                        <td>{{#i18n}}user.department{{/i18n}}</td><td class="text-left"><div id="departmentView"></div></td>
                                     </tr>
 									 <tr>
-                                        <td>Active</td><td class="text-left"><div id="isActiveView"></div></td>
+                                        <td>{{#i18n}}user.active{{/i18n}}</td><td class="text-left"><div id="isActiveView"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>อีเมล์</td><td class="text-left"><div id="emailView"></div></td>
+                                        <td>{{#i18n}}user.email{{/i18n}}</td><td class="text-left"><div id="emailView"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>เบอร์โทร</td><td class="text-left"><div id="telephoneView"></div></td>
+                                        <td>{{#i18n}}user.phone{{/i18n}}</td><td class="text-left"><div id="telephoneView"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ที่อยู่</td><td class="text-left"><div id="addressView"></div></td>
+                                        <td>{{#i18n}}user.address{{/i18n}}</td><td class="text-left"><div id="addressView"></div></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">ปิด</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">{{#i18n}}user.buttonClose{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
@@ -288,37 +288,34 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : เจ้าหน้าที่</h4>
+                            <h4 class="modal-title">{{#i18n}}user.modalDelete{{/i18n}}</h4>
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <tbody>
                                     <tr>
-                                        <td>ชื่อ - นามสกุล</td><td class="text-left text-bold"><div id="nameDel"></div></td>
+                                        <td>{{#i18n}}user.name{{/i18n}} - {{#i18n}}user.surname{{/i18n}}</td><td class="text-left text-bold"><div id="nameDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ชื่อผู้ใช้งาน</td><td class="text-left text-bold text-tertiary"><div id="usernameDel"></div></td>
+                                        <td>{{#i18n}}user.username{{/i18n}}</td><td class="text-left text-bold text-tertiary"><div id="usernameDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>สิทธิการใช้งาน</td><td class="text-left"><div id="roleDel"></div></td>
+                                        <td>{{#i18n}}user.permission{{/i18n}}</td><td class="text-left"><div id="roleDel"></div></td>
                                     </tr>
 									<tr>
-                                        <td>Active</td><td class="text-left"><div id="isActiveDel"></div></td>
+                                        <td>{{#i18n}}user.active{{/i18n}}</td><td class="text-left"><div id="isActiveDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>หน่วยงาน</td><td class="text-left"><div id="departmentDel"></div></td>
-                                    </tr>
-									<tr>
-                                        <td>Status</td><td class="text-left"><div id="IsActiveDel"></div></td>
+                                        <td>{{#i18n}}user.department{{/i18n}}</td><td class="text-left"><div id="departmentDel"></div></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}user.buttonCancel{{/i18n}}</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">{{#i18n}}user.buttonDelete{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
@@ -374,7 +371,10 @@
     function showAllUser(){
         listArr = [];
         
-        var dataSet = [];    
+        var dataSet = [];
+
+        $("#table tbody").html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
+
         setTimeout(function(){
             var datas = callAjax("{{_context_path}}/api/user/userManager/listsUser", "post", {}, "json");
             if (typeof datas !== "undefined" && datas !== null) {
@@ -400,7 +400,7 @@
                     { 
                         "targets": 1,
                         "data": "id",
-                        "sClass": "text-center",
+                        "sClass": "text-left",
                         "render": function (data, key, full){
                             var content = full["name"]+' '+full["surname"];
 
@@ -410,13 +410,13 @@
                     {
                         "targets": 2,
                         "data": "role",
-                        "sClass": "text-center"
+                        "sClass": "text-left"
                     },
                     {
 
                         "targets": 3,
                         "data": "department",
-                        "sClass": "text-center"
+                        "sClass": "text-left"
                     },
 					
 					{
@@ -534,7 +534,7 @@
                     deleteUser(dataJSONEN);
                 });
             });
-        }, 100);
+        }, 10);
     }
 
     function insertUser(dataJSONEN){
