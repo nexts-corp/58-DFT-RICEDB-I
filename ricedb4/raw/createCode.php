@@ -65,4 +65,17 @@ function string_to_ascii($string){
     $num =  substr(hexdec(crc32($string)), 0, 7);
     return $num;
 }
+
+/*
+ -- UPDATE dft_Rice_Tracking2
+-- SET
+-- 	Warehouse_Code = dt.Warehouse_Code,
+-- 	Stack_Code = dt.Stack_Code
+-- FROM
+-- 	(SELECT ri.Warehouse_Code, ri.Stack_Code, ri.Code, ri.Bag_No FROM dft_Rice_Info ri) dt
+-- WHERE
+-- 	dft_Rice_Tracking2.Code = dt.Code AND
+-- 	dft_Rice_Tracking2.Bag_No = dt.Bag_No AND
+-- 	LK_Status_Keyword='AU7/2558'
+ */
 ?>

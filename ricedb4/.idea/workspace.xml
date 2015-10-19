@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863593ba-7750-4ad6-8a1c-04b49bd87cc3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/raw/createCode.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/raw/createCode.php" afterPath="$PROJECT_DIR$/raw/createCode.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ricedb4.iws" />
@@ -29,44 +29,7 @@
     <favorites_list name="ricedb4" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="WarehouseInfoService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/warehouse/service/WarehouseInfoService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.115385">
-              <caret line="17" column="14" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="14" />
-              <folding>
-                <element signature="e#43#95#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createCode.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/raw/createCode.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24918567">
-              <caret line="9" column="40" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="40" />
-              <folding>
-                <marker date="1444987533337" expanded="true" signature="146:238" placeholder="SELECT * FRO..dft_Rice_Info..." />
-                <marker date="1444987533337" expanded="true" signature="626:650" placeholder="..." />
-                <marker date="1444987533337" expanded="true" signature="651:2008" placeholder="..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1262" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1275" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1293" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1315" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1344" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1391" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1393" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1458" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1216:1465" placeholder="UPDATE dft_R..." />
-                <marker date="1444987533337" expanded="true" signature="1555:1815" placeholder="SELECT Silo_..dft_Rice_Info..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -175,20 +138,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ricedb4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ricedb4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="excel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -244,16 +193,21 @@
       <option name="project" value="LOCAL" />
       <updated>1444964222122</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="create code">
+      <created>1444987551590</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1444987551590</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934132" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -262,6 +216,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -285,13 +240,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="connect to RiceDB2 database" />
-    <option name="LAST_COMMIT_MESSAGE" value="connect to RiceDB2 database" />
+    <MESSAGE value="create code" />
+    <option name="LAST_COMMIT_MESSAGE" value="create code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/service/WarehouseInfoService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#43#95#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/apps/warehouse/service/WarehouseInfoService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -313,7 +279,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -345,7 +310,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.110749185">
           <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -353,7 +317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.8461537">
           <caret line="12" column="51" selection-start-line="12" selection-start-column="51" selection-end-line="12" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -361,7 +324,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47068405">
           <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -369,47 +331,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.038462">
           <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/raw/createCode.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.771987">
+          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
           <folding>
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..dft_LK_Province..." />
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..dft_LK_Project..." />
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..dft_LK_Associate..." />
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..dft_LK_Type..." />
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..dft_LK_Grade..." />
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="UPDATE dft_R..." />
-            <marker date="1444892251965" expanded="true" signature="-1:-1" placeholder="UPDATE dft_R..." />
+            <marker date="1445243348763" expanded="true" signature="-1:-1" placeholder="UPDATE ri SE..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/warehouse/service/WarehouseInfoService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385">
-          <caret line="17" column="14" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.7752443">
+          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
           <folding>
             <element signature="e#43#95#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/raw/createCode.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24918567">
-          <caret line="9" column="40" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="40" />
-          <folding>
-            <marker date="1444987533337" expanded="true" signature="146:238" placeholder="SELECT * FRO..dft_Rice_Info..." />
-            <marker date="1444987533337" expanded="true" signature="626:650" placeholder="..." />
-            <marker date="1444987533337" expanded="true" signature="651:2008" placeholder="..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1262" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1275" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1293" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1315" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1344" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1391" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1393" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1458" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1216:1465" placeholder="UPDATE dft_R..." />
-            <marker date="1444987533337" expanded="true" signature="1555:1815" placeholder="SELECT Silo_..dft_Rice_Info..." />
           </folding>
         </state>
       </provider>
