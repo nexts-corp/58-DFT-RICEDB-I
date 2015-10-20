@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบคลังสินค้า </li>
+                        <li><a href="#">{{#i18n}}warehouse.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}warehouse.menu{{/i18n}} </li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">สินค้าคงคลัง</h1>
+                    <h1 class="none-padding">{{#i18n}}warehouse.inventory.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -37,19 +37,19 @@
                 <div class="tabs">
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#project" data-toggle="tab">ปีโครงการ</a>
+                            <a href="#project" data-toggle="tab">{{#i18n}}warehouse.project{{/i18n}}</a>
                         </li>
                         <li>
-                            <a href="#province" data-toggle="tab">จังหวัด</a>
+                            <a href="#province" data-toggle="tab">{{#i18n}}warehouse.province{{/i18n}}</a>
                         </li>
                         <li>
-                            <a href="#type" data-toggle="tab">ชนิดข้าว</a>
+                            <a href="#type" data-toggle="tab">{{#i18n}}warehouse.type{{/i18n}}</a>
                         </li>
                         <li>
-                            <a href="#grade" data-toggle="tab">เกรด</a>
+                            <a href="#grade" data-toggle="tab">{{#i18n}}warehouse.grade{{/i18n}}</a>
                         </li>
                         <li>
-                            <a href="#silo" data-toggle="tab">คลังสินค้า</a>
+                            <a href="#silo" data-toggle="tab">{{#i18n}}warehouse.silo{{/i18n}}</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -57,10 +57,10 @@
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
                                     <tr>
-                                        <th class="text-center col-md-3">ปีโครงการ</th>
-                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
-                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
-                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.project{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.balance{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.meanPrice{{/i18n}} / {{#i18n}}warehouse.ton{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.value{{/i18n}} ({{#i18n}}warehouse.bath{{/i18n}})</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,10 +74,10 @@
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
                                     <tr>
-                                        <th class="text-center col-md-3">จังหวัด</th>
-                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
-                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
-                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.province{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.balance{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.meanPrice{{/i18n}} / {{#i18n}}warehouse.ton{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.value{{/i18n}} ({{#i18n}}warehouse.bath{{/i18n}})</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -91,10 +91,10 @@
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
                                     <tr>
-                                        <th class="text-center col-md-3">ชนิดข้าว</th>
-                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
-                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
-                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.type{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.balance{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.meanPrice{{/i18n}} / {{#i18n}}warehouse.ton{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.value{{/i18n}} ({{#i18n}}warehouse.bath{{/i18n}})</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,10 +108,10 @@
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
                                     <tr>
-                                        <th class="text-center col-md-3">เกรด</th>
-                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
-                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
-                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.grade{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.balance{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.meanPrice{{/i18n}} / {{#i18n}}warehouse.ton{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.value{{/i18n}} ({{#i18n}}warehouse.bath{{/i18n}})</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -125,10 +125,10 @@
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
                                     <tr>
-                                        <th class="text-center col-md-3">คลังสินค้า</th>
-                                        <th class="text-center col-md-3">จำนวนคงเหลือ (ตัน)</th>
-                                        <th class="text-center col-md-3">ราคาเฉลี่ยต่อตัน</th>
-                                        <th class="text-center col-md-3">มูลค่า ณ ปัจจุบัน</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.silo{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.balance{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.meanPrice{{/i18n}} / {{#i18n}}warehouse.ton{{/i18n}}</th>
+                                        <th class="text-center col-md-3">{{#i18n}}warehouse.value{{/i18n}} ({{#i18n}}warehouse.bath{{/i18n}})</th>
                                     </tr>
                                 </thead>
                                 <tbody>

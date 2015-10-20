@@ -5,7 +5,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" afterPath="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" afterPath="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini" afterPath="$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html" afterPath="$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/views/viewInventory.html" afterPath="$PROJECT_DIR$/apps/warehouse/views/viewInventory.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ricedb4.iws" />
@@ -33,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="lang_en_US.ini" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lang_en_US.ini" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.46875">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -47,27 +47,27 @@
         <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
+              <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3890625">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="40" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="viewRicePrice.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html">
+      <file leaf-file-name="viewInventory.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewInventory.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="73.80769">
-              <caret line="73" column="76" selection-start-line="73" selection-start-column="76" selection-end-line="73" selection-end-column="76" />
+            <state vertical-scroll-proportion="28.692308">
+              <caret line="158" column="28" selection-start-line="158" selection-start-column="28" selection-end-line="158" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -97,8 +97,10 @@
         <option value="$PROJECT_DIR$/apps/warehouse/service/WarehouseInfoService.php" />
         <option value="$PROJECT_DIR$/logs/Log_20151020.log" />
         <option value="$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html" />
-        <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini" />
         <option value="$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html" />
+        <option value="$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html" />
+        <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini" />
+        <option value="$PROJECT_DIR$/apps/warehouse/views/viewInventory.html" />
         <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" />
         <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" />
       </list>
@@ -233,6 +235,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ricedb4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ricedb4" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="apps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="warehouse" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="service" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -434,7 +458,19 @@
       <option name="project" value="LOCAL" />
       <updated>1445330626196</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="viewRicePrice =&gt; use i18n">
+      <created>1445331424378</created>
+      <option name="number" value="00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1445331424378</updated>
+    </task>
+    <task id="LOCAL-00014" summary="viewRicePriceAvg =&gt; use i18n">
+      <created>1445334596765</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1445334596765</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -482,7 +518,9 @@
     <MESSAGE value="RiceInfo, RiceTacking =&gt; add warehouse code and stack code" />
     <MESSAGE value="warehouseInfo =&gt; use stack code to tracking" />
     <MESSAGE value="warehouseImport =&gt; use i18n" />
-    <option name="LAST_COMMIT_MESSAGE" value="warehouseImport =&gt; use i18n" />
+    <MESSAGE value="viewRicePrice =&gt; use i18n" />
+    <MESSAGE value="viewRicePriceAvg =&gt; use i18n" />
+    <option name="LAST_COMMIT_MESSAGE" value="viewRicePriceAvg =&gt; use i18n" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -740,8 +778,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="73.80769">
+        <state vertical-scroll-proportion="-3.1254072">
           <caret line="73" column="76" selection-start-line="73" selection-start-column="76" selection-end-line="73" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/service/ViewRicePriceAvgService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.747557">
+          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
+          <folding>
+            <marker date="1445320454909" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..fn_rice_price_avg..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.115385">
+          <caret line="56" column="60" selection-start-line="56" selection-start-column="60" selection-end-line="56" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewInventory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="28.692308">
+          <caret line="158" column="28" selection-start-line="158" selection-start-column="28" selection-end-line="158" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -749,23 +821,15 @@
     <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
+          <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="42" selection-start-line="46" selection-start-column="42" selection-end-line="46" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3890625">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.46875">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
       </provider>
