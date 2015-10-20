@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบคลังสินค้า</li>
+                        <li><a href="#">{{#i18n}}warehouse.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}warehouse.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">นำเข้าข้อมูล</h1>
+                    <h1 class="none-padding">{{#i18n}}warehouse.import.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -26,35 +26,35 @@
                 <div class="form-group">
                     <form id="form" class="form-horizontal form-bordered" enctype="multipart/form-data" method="post">
                         <div class="col-md-4">
-                            <label class="col-md-3 control-label" for="fileNameDisplay">ไฟล์ :</label>
+                            <label class="col-md-3 text-right control-label" for="fileNameDisplay">{{#i18n}}warehouse.file{{/i18n}} :</label>
                             <div class="col-md-7">
                                 <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
                             </div>
                             <div class="col-md-2">
                                 <div class="fileUpload btn btn-primary">
-                                    <span><i class="fa fa-folder-open"></i> เลือก</span>
+                                    <span><i class="fa fa-folder-open"></i> {{#i18n}}warehouse.buttonChoose{{/i18n}}</span>
                                     <input id="fileUpload" type="file" class="upload" required/>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-3">
-                            <label class="col-md-4 control-label" for="sheet">ชีท :</label>
+                            <label class="col-md-4 text-right control-label" for="sheet">{{#i18n}}warehouse.sheet{{/i18n}} :</label>
                             <div class="col-md-8">
                                 <input type="text" id="sheet" name="sheet" class="form-control" placeholder="ลำดับชีท" required/>
                             </div>
                         </div>
 
                         <div class="col-md-3">
-                            <label class="col-md-4 control-label" for="row">บรรทัด :</label>
+                            <label class="col-md-4 control-label" for="row">{{#i18n}}warehouse.row{{/i18n}} :</label>
                             <div class="col-md-8">
                                 <input type="text" id="row" name="row" class="form-control" placeholder="เริ่มบรรทัดที่" required/>
                             </div>
                         </div>
 
                         <div class="col-md-2 text-right">
-                            <a class="btn btn-success read"><i class="fa fa-eye"></i> อ่าน</a>&nbsp;
-                            <a class="btn btn-default cancel"><i class="fa fa-trash"></i> ยกเลิก</a>
+                            <a class="btn btn-success read"><i class="fa fa-eye"></i> {{#i18n}}warehouse.buttonRead{{/i18n}}</a>&nbsp;
+                            <a class="btn btn-default cancel">{{#i18n}}warehouse.buttonCancel{{/i18n}}</a>
                         </div>
                     </form>
                 </div>
@@ -67,11 +67,11 @@
                     <div class="col-md-12" style="margin-bottom: 40px;">
                         <div class="toggle" data-plugin-toggle>
                             <section class="toggle active">
-                                <label>จัดคอลัมน์ : <span id="fileNameDisplay"></span></label>
+                                <label>{{#i18n}}warehouse.import.panelColumn{{/i18n}} : <span id="fileNameDisplay"></span></label>
                                 <div class="toggle-content">
                                     <div class="form-group">
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="no">ลำดับ</label>
+                                            <label class="col-md-6 control-label" for="no">{{#i18n}}warehouse.no{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="no" id="no" data-col="0" required>
                                                 </select>
@@ -79,7 +79,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="code">รหัส</label>
+                                            <label class="col-md-6 control-label" for="code">{{#i18n}}warehouse.code{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="code" id="code" data-col="1" required>
                                                 </select>
@@ -87,7 +87,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="bagNo">เลขถุง</label>
+                                            <label class="col-md-6 control-label" for="bagNo">{{#i18n}}warehouse.bagNo{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="bagNo" id="bagNo" data-col="2" required>
                                                 </select>
@@ -95,7 +95,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="province">จังหวัด</label>
+                                            <label class="col-md-6 control-label" for="province">{{#i18n}}warehouse.province{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="province" id="province" data-col="3" required>
                                                 </select>
@@ -105,7 +105,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="project">ปีโครงการ</label>
+                                            <label class="col-md-6 control-label" for="project">{{#i18n}}warehouse.project{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="project" id="project" data-col="4" required>
                                                 </select>
@@ -113,7 +113,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="silo">คลังสินค้า</label>
+                                            <label class="col-md-6 control-label" for="silo">{{#i18n}}warehouse.silo{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="silo" id="silo" data-col="5" required>
                                                 </select>
@@ -121,7 +121,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="associate">ผู้เข้าร่วมฯ</label>
+                                            <label class="col-md-6 control-label" for="associate">{{#i18n}}warehouse.associate{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="associate" id="associate" data-col="6" required>
                                                 </select>
@@ -129,7 +129,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="type">ชนิดข้าว</label>
+                                            <label class="col-md-6 control-label" for="type">{{#i18n}}warehouse.type{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="type" id="type" data-col="7" required>
                                                 </select>
@@ -139,7 +139,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="warehouse">หลังที่</label>
+                                            <label class="col-md-6 control-label" for="warehouse">{{#i18n}}warehouse.warehouse{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="warehouse" id="warehouse" data-col="8" required>
                                                 </select>
@@ -147,7 +147,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="stack">กองที่</label>
+                                            <label class="col-md-6 control-label" for="stack">{{#i18n}}warehouse.stack{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="stack" id="stack" data-col="9" required>
                                                 </select>
@@ -155,7 +155,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="weight">ปริมาณ (ตัน)</label>
+                                            <label class="col-md-6 control-label" for="weight">{{#i18n}}warehouse.weight{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}}) :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="weight" id="weight" data-col="10" required>
                                                 </select>
@@ -163,7 +163,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="samplingId">คณะฯ</label>
+                                            <label class="col-md-6 control-label" for="samplingId">{{#i18n}}warehouse.samplingId{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="samplingId" id="samplingId" data-col="11" required>
                                                 </select>
@@ -173,7 +173,7 @@
 
                                     <div class="form-group">
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="grade">เกรด</label>
+                                            <label class="col-md-6 control-label" for="grade">{{#i18n}}warehouse.grade{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="grade" id="grade" data-col="12" required>
                                                 </select>
@@ -181,7 +181,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="discount">อัตราส่วนลด</label>
+                                            <label class="col-md-6 control-label" for="discount">{{#i18n}}warehouse.discount{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="discount" id="discount" data-col="13" required>
                                                 </select>
@@ -189,7 +189,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="status">สถานะ</label>
+                                            <label class="col-md-6 control-label" for="status">{{#i18n}}warehouse.status{{/i18n}} :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="status" id="status" data-col="14" required>
                                                 </select>
@@ -197,7 +197,7 @@
                                         </div>
 
                                         <div class="col-md-3">
-                                            <label class="col-md-6 control-label" for="weightAll">ปริมาณรวมกระสอบ(ตัน)</label>
+                                            <label class="col-md-6 control-label" for="weightAll">{{#i18n}}warehouse.weightAll{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}}) :</label>
                                             <div class="col-md-6">
                                                 <select class="form-control input-sm" name="weightAll" id="weightAll" data-col="15" required>
                                                 </select>
@@ -217,7 +217,7 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1One">
-                                        ข้อมูลตัวอย่าง
+                                        {{#i18n}}warehouse.import.panelSample{{/i18n}}
                                     </a>
                                 </h4>
                             </div>
@@ -227,22 +227,22 @@
                                         <table id="table" class="table table-bordered table-striped table-condensed mb-none">
                                             <thead>
                                             <tr>
-                                                <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                                <th class="text-center" style="vertical-align: middle;">รหัส</th>
-                                                <th class="text-center" style="vertical-align: middle;">เลขถุง</th>
-                                                <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
-                                                <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
-                                                <th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>
-                                                <th class="text-center" style="vertical-align: middle;">ผู้เข้าร่วมฯ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชนิดข้าว</th>
-                                                <th class="text-center" style="vertical-align: middle;">หลังที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">กองที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>
-                                                <th class="text-center" style="vertical-align: middle;">คณะฯ</th>
-                                                <th class="text-center" style="vertical-align: middle;">เกรด</th>
-                                                <th class="text-center" style="vertical-align: middle;">อัตราส่วนลด<br>(ร้อยละ)</th>
-                                                <th class="text-center" style="vertical-align: middle;">สถานะ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ปริมาณรวมกระสอบ(ตัน)</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.no{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.code{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.bagNo{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.province{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.project{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.silo{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.associate{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.type{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.warehouse{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.stack{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.weight{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.samplingId{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.grade{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.discount{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.status{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.weightAll{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
                                             </tr>
                                             <tr>
                                                 <th class="text-center" style="vertical-align: middle;" id="noDiv">-</th>
@@ -279,7 +279,7 @@
                 <div class="col-md-12 text-center" id="saveLoading"></div>
 
                 <div class="col-md-12 text-right" style="margin: 10px;">
-                    <button class="btn btn-primary import"><i class="fa fa-save"></i> บันทึก</button>
+                    <button class="btn btn-primary import"><i class="fa fa-save"></i> {{#i18n}}warehouse.buttonSave{{/i18n}}</button>
                 </div>
             </form>
         </div><!--  row  -->
