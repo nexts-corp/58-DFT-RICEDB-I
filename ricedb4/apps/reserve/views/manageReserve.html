@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบสำรองข้าว</li>
+                        <li><a href="#">{{#i18n}}reserve.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}reserve.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding" id="header1">รายการสำรองข้าว</h1>
+                    <h1 class="none-padding" id="header1">{{#i18n}}reserve.manage.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -24,8 +24,8 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i>&nbsp;เพิ่มข้อมูล</button>
-                    <button class="btn btn-primary back" style="display: none;">รายการสำรองข้าว</button>
+                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i> {{#i18n}}reserve.buttonAdd{{/i18n}}</button>
+                    <button class="btn btn-primary back" style="display: none;"><i class="fa fa-list-ul"></i> {{#i18n}}reserve.buttonList{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -50,11 +50,11 @@
                     <table id="table1" class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
                             <tr>
-                                <th class="text-center col-md-1">ลำดับ</th>
-                                <th class="text-center col-md-4">รายการ</th>
-                                <th class="text-center col-md-2">วันที่บันทึกข้อมูล</th>
-                                <th class="text-center col-md-3">ปริมาณที่สำรอง (ตัน)</th>
-                                <th class="text-center col-md-2">เครื่องมือ</th>
+                                <th class="text-center col-md-1">{{#i18n}}reserve.no{{/i18n}}</th>
+                                <th class="text-center col-md-4">{{#i18n}}reserve.list{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}reserve.dateCreated{{/i18n}}</th>
+                                <th class="text-center col-md-3">{{#i18n}}reserve.rWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                <th class="text-center col-md-2">{{#i18n}}reserve.action{{/i18n}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,13 +76,13 @@
                                 </div>
                                 <ul class="wizard-steps">
                                     <li class="active">
-                                        <a href="#wizard-condition" data-toggle="tab"><span>1</span>กำหนดเงื่อนไข</a>
+                                        <a href="#wizard-condition" data-toggle="tab"><span>1</span>{{#i18n}}reserve.process1{{/i18n}}</a>
                                     </li>
                                     <li>
-                                        <a href="#wizard-select" data-toggle="tab"><span>2</span>คัดเลือกคลังสินค้า</a>
+                                        <a href="#wizard-select" data-toggle="tab"><span>2</span>{{#i18n}}reserve.process2{{/i18n}}</a>
                                     </li>
                                     <li>
-                                        <a href="#wizard-review" data-toggle="tab"><span>3</span>ตรวจสอบ<br>และบันทึกข้อมูล</a>
+                                        <a href="#wizard-review" data-toggle="tab"><span>3</span>{{#i18n}}reserve.process3{{/i18n}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -92,19 +92,19 @@
 
                                     <div id="wizard-condition" class="tab-pane active">
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label req" for="reserveCode">สำรองเพื่อ</label>
+                                            <label class="col-sm-3 control-label req" for="reserveCode">{{#i18n}}reserve.for{{/i18n}} :</label>
                                             <div class="col-sm-6">
                                                 <select class="form-control" data-entity="list" name="reserveCode" id="reserveCode" required></select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label req" for="detail">รายละเอียด</label>
+                                            <label class="col-sm-3 control-label req" for="detail">{{#i18n}}reserve.detail{{/i18n}} :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" data-entity="list" class="form-control" name="detail" id="detail" required></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label req" for="target">จำนวนเป้าหมาย (ตัน)</label>
+                                            <label class="col-sm-3 control-label req" for="target">{{#i18n}}reserve.targetWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</label>
                                             <div class="col-sm-6">
                                                 <input type="text" data-entity="list" class="form-control" name="target" id="target" required>
                                             </div>
@@ -116,22 +116,22 @@
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">สำรองเพื่อ : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.for{{/i18n}} :</div>
                                                     <div class="col-sm-6 text-bold reserveDisplay"></div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่ต้องการ (ตัน) : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.targetWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</div>
                                                     <div class="col-sm-6 text-bold targetDisplay"></div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่เลือก (ตัน) : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.chooseWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</div>
                                                     <div class="col-sm-6 text-bold selectedDisplay">0</div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่เลือก : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.chooseSilo{{/i18n}} :</div>
                                                     <div class="col-sm-6 text-bold countSiloDisplay">0</div>
                                                 </div>
 
@@ -139,21 +139,21 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-4">
-                                                <label class="col-sm-4 control-label" for="project">ปีโครงการ</label>
+                                                <label class="col-sm-4 control-label" for="project">{{#i18n}}reserve.project{{/i18n}}</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control lookup" name="project" id="project" data-call="lkProject"></select>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label class="col-sm-4 control-label" for="province">จังหวัด</label>
+                                                <label class="col-sm-4 control-label" for="province">{{#i18n}}reserve.province{{/i18n}}</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control lookup" name="province" id="province" data-call="lkProvince"></select>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label class="col-sm-4 control-label" for="type">ชนิดข้าว</label>
+                                                <label class="col-sm-4 control-label" for="type">{{#i18n}}reserve.type{{/i18n}}</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control lookup" name="type" id="type" data-call="lkType"></select>
                                                 </div>
@@ -162,21 +162,21 @@
 
                                         <div class="form-group">
                                             <div class="col-md-4">
-                                                <label class="col-sm-4 control-label" for="grade">เกรด</label>
+                                                <label class="col-sm-4 control-label" for="grade">{{#i18n}}reserve.grade{{/i18n}}</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control lookup" name="password" id="grade" data-call="lkGrade"></select>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label class="col-sm-4 control-label" for="silo">คลังสินค้า</label>
+                                                <label class="col-sm-4 control-label" for="silo">{{#i18n}}reserve.silo{{/i18n}}</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="silo" id="silo">
                                                 </div>
                                             </div>
 
                                             <div class="col-md-4">
-                                                <label class="col-sm-4 control-label" for="code">รหัส</label>
+                                                <label class="col-sm-4 control-label" for="code">{{#i18n}}reserve.code{{/i18n}}</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="code" id="code">
                                                 </div>
@@ -187,18 +187,18 @@
                                             <table id="table2" class="table table-hover table-striped table-condensed mb-none">
                                                 <thead>
                                                 <tr>
-                                                    <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                                    <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
-                                                    <th class="text-center" style="vertical-align: middle;">รหัส</th>
-                                                    <th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>
-                                                    <th class="text-center" style="vertical-align: middle;">ผู้เข้าร่วม</th>
-                                                    <th class="text-center" style="vertical-align: middle;">หลัง</th>
-                                                    <th class="text-center" style="vertical-align: middle;">กอง</th>
-                                                    <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
-                                                    <th class="text-center" style="vertical-align: middle;">ชนิด</th>
-                                                    <th class="text-center" style="vertical-align: middle;">เกรด</th>
-                                                    <th class="text-center" style="vertical-align: middle;">น้ำหนัก (ตัน)</th>
-                                                    <th class="text-center" style="vertical-align: middle;">เครื่องมือ</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.no{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.province{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.code{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.silo{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.associate{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.warehouse{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.stack{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.project{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.type{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.grade{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.action{{/i18n}}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -214,22 +214,22 @@
                                         <div class="panel panel-default">
                                             <div class="panel-body">
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">สำรองเพื่อ : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.for{{/i18n}} :</div>
                                                     <div class="col-sm-6 text-bold reserveDisplay"></div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่ต้องการ (ตัน) : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.targetWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</div>
                                                     <div class="col-sm-6 text-bold targetDisplay"></div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">น้ำหนักข้าวที่เลือก (ตัน) : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.chooseWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</div>
                                                     <div class="col-sm-6 text-bold selectedDisplay">0</div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่เลือก : </div>
+                                                    <div class="col-sm-3 text-right">{{#i18n}}reserve.chooseSilo{{/i18n}} :</div>
                                                     <div class="col-sm-6 text-bold countSiloDisplay">0</div>
                                                 </div>
                                             </div>
@@ -258,16 +258,16 @@
                                                     <table id="table3"class="table table-bordered table-striped table-condensed mb-none">
                                                         <thead>
                                                         <tr>
-                                                            <th class="text-center">ลำดับ</th>
-                                                            <th class="text-center">จังหวัด</th>
-                                                            <th class="text-center">คลังสินค้า</th>
-                                                            <th class="text-center">ผู้เข้าร่วม</th>
-                                                            <th class="text-center">หลัง</th>
-                                                            <th class="text-center">กอง</th>
-                                                            <th class="text-center">ปีโครงการ</th>
-                                                            <th class="text-center">ชนิด</th>
-                                                            <th class="text-center">เกรด</th>
-                                                            <th class="text-center">น้ำหนัก (ตัน)</th>
+                                                            <th class="text-center">{{#i18n}}reserve.no{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.province{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.silo{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.associate{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.warehouse{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.stack{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.project{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.type{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.grade{{/i18n}}</th>
+                                                            <th class="text-center">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -281,9 +281,9 @@
                                                     <table class="table table-bordered table-striped table-condensed mb-none">
                                                         <thead>
                                                         <tr>
-                                                            <th class="text-center col-md-4">ปีโครงการ</th>
-                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
-                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.project{{/i18n}}</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.ratio{{/i18n}} ({{#i18n}}reserve.percent{{/i18n}})</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -297,9 +297,9 @@
                                                     <table class="table table-bordered table-striped table-condensed mb-none">
                                                         <thead>
                                                         <tr>
-                                                            <th class="text-center col-md-4">เกรด</th>
-                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
-                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.grade{{/i18n}}</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.ratio{{/i18n}} ({{#i18n}}reserve.percent{{/i18n}})</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -313,9 +313,9 @@
                                                     <table class="table table-bordered table-striped table-condensed mb-none">
                                                         <thead>
                                                         <tr>
-                                                            <th class="text-center col-md-4">จังหวัด</th>
-                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
-                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.province{{/i18n}}</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.ratio{{/i18n}} ({{#i18n}}reserve.percent{{/i18n}})</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -329,9 +329,9 @@
                                                     <table class="table table-bordered table-striped table-condensed mb-none">
                                                         <thead>
                                                         <tr>
-                                                            <th class="text-center col-md-4">ชนิด</th>
-                                                            <th class="text-center col-md-4">ปริมาณน้ำหนัก (ตัน)</th>
-                                                            <th class="text-center col-md-4">สัดส่วน (%)</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.type{{/i18n}}</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                            <th class="text-center col-md-4">{{#i18n}}reserve.ratio{{/i18n}} ({{#i18n}}reserve.percent{{/i18n}})</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -352,13 +352,13 @@
                         <div class="panel-footer">
                             <ul class="pager">
                                 <li class="previous disabled">
-                                    <a><i class="fa fa-angle-left"></i> ย้อนกลับ</a>
+                                    <a><i class="fa fa-angle-left"></i> {{#i18n}}reserve.buttonBack{{/i18n}}</a>
                                 </li>
                                 <li class="finish hidden pull-right">
-                                    <a>บันทึก</a>
+                                    <a><i class="fa fa-save"></i> {{#i18n}}reserve.buttonSave{{/i18n}}</a>
                                 </li>
                                 <li class="next">
-                                    <a>ถัดไป <i class="fa fa-angle-right"></i></a>
+                                    <a>{{#i18n}}reserve.buttonNext{{/i18n}} <i class="fa fa-angle-right"></i></a>
                                 </li>
                             </ul>
                         </div>
