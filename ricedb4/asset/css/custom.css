@@ -154,3 +154,7 @@ span.insert-rice{
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+.table tbody tr.no-border td{
+    border: none;
+}
