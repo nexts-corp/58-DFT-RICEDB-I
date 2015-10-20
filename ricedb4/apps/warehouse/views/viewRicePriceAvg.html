@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบคลังสินค้า</li>
+                        <li><a href="#">{{#i18n}}warehouse.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}warehouse.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">ราคาข้าวเฉลี่ย</h1>
+                    <h1 class="none-padding">{{#i18n}}warehouse.ricePriceAvg.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -26,22 +26,21 @@
                 <div class="col-md-6">
                     <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
                         <div class="form-group">
-                            <label class="col-md-3 control-label">ระหว่างวันที่</label>
+                            <label class="col-md-3 control-label">{{#i18n}}warehouse.startDate{{/i18n}} :</label>
                             <div class="col-md-9">
                                 <div class="input-daterange input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                     <input type="text" class="form-control" id="date1">
-                                    <span class="input-group-addon">ถึง</span>
+                                    <span class="input-group-addon">{{#i18n}}warehouse.toDate{{/i18n}} :</span>
                                     <input type="text" class="form-control" id="date2">
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-md-2"></div>
-                <div class="col-md-4">
+                <div class="col-md-4 col-md-offset-2">
                     <div class="btn-group btn-group-justified">
                         <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
                         <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
@@ -55,22 +54,22 @@
                 <table id="table" class="table table-bordered table-striped table-condensed mb-none">
                     <thead>
                         <tr>
-                            <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">ลำดับ</th>
-                            <th class="text-center col-md-2" rowspan="2" style="vertical-align: middle;">ชนิดข้าว</th>
-                            <th class="text-center col-md-3" colspan="3">ราคาข้าวเก่า</th>
-                            <th class="text-center col-md-3" colspan="3">ราคาข้าวเฉลี่ย (เก่า-ใหม่)</th>
-                            <th class="text-center col-md-3" colspan="3">ราคาข้าวใหม่</th>
+                            <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}warehouse.no{{/i18n}}</th>
+                            <th class="text-center col-md-2" rowspan="2" style="vertical-align: middle;">{{#i18n}}warehouse.type{{/i18n}}</th>
+                            <th class="text-center col-md-3" colspan="3">{{#i18n}}warehouse.oldRicePrice{{/i18n}}</th>
+                            <th class="text-center col-md-3" colspan="3">{{#i18n}}warehouse.meanRicePrice{{/i18n}} ({{#i18n}}warehouse.oldRice{{/i18n}}-{{#i18n}}warehouse.newRice{{/i18n}})</th>
+                            <th class="text-center col-md-3" colspan="3">{{#i18n}}warehouse.newRicePrice{{/i18n}}</th>
                         </tr>
                         <tr>
-                            <th class="text-center">คน.</th>
-                            <th class="text-center">สมาคม</th>
-                            <th class="text-center">ค่าเฉลี่ย</th>
-                            <th class="text-center">คน.</th>
-                            <th class="text-center">สมาคม</th>
-                            <th class="text-center">ค่าเฉลี่ย</th>
-                            <th class="text-center">คน.</th>
-                            <th class="text-center">สมาคม</th>
-                            <th class="text-center">ค่าเฉลี่ย</th>
+                            <th class="text-center">{{#i18n}}warehouse.internalTrade.short{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.riceMills.short{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.mean{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.internalTrade.short{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.riceMills.short{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.mean{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.internalTrade.short{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.riceMills.short{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}warehouse.mean{{/i18n}}</th>
                         </tr>
                     </thead>
                     <tbody id="dataBody">
