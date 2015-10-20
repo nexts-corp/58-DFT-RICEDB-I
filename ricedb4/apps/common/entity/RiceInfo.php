@@ -15,6 +15,12 @@ class RiceInfo extends EntityBase {
      */
     public $id;
 
+    /** @Column(type="string", length=20, name="Warehouse_Code") */
+    public $warehouseCode;
+
+    /** @Column(type="string", length=20, name="Stack_Code") */
+    public $stackCode;
+
     /** @Column(type="string",length=255, name="Code") */
     public $code;
 
@@ -62,6 +68,14 @@ class RiceInfo extends EntityBase {
 
     function getId() {
         return $this->id;
+    }
+
+    function getWarehouseCode() {
+        return $this->warehouseCode;
+    }
+
+    function getStackCode() {
+        return $this->stackCode;
     }
 
     function getCode() {
@@ -126,6 +140,14 @@ class RiceInfo extends EntityBase {
 
     function setId($id) {
         $this->id = $id;
+    }
+
+    function setWarehouseCode($warehouseCode) {
+        $this->warehouseCode = $warehouseCode;
+    }
+
+    function setStackCode($stackCode) {
+        $this->stackCode = $stackCode;
     }
 
     function setCode($code) {
