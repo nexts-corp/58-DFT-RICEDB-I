@@ -190,7 +190,7 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
         $result = [];
 
         $sql = "SELECT"
-                ." ri.id, pv.provinceNameTH, ri.code, ri.silo, ac.associate,"
+                ." ri.id, pv.provinceNameTH, ri.stackCode, ri.code, ri.silo, ac.associate,"
                 ." ri.warehouse, ri.stack, pj.project, tp.type, gd.grade,"
                 ." ri.discountRate, st.status"
             ." FROM ".$this->ent."\\RiceInfo ri"
@@ -219,10 +219,10 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
                 ." st.status"
             ." FROM ".$this->ent."\\RiceTracking rt"
             ." JOIN ".$this->ent."\\Status st WITH st.keyword = rt.statusKeyword"
-            ." WHERE rt.code = :code"
+            ." WHERE rt.stackCode = :code"
             ." ORDER BY rt.dateCreated";
         $param2 = array(
-            "code" => $data[0]["code"]
+            "code" => $data[0]["stackCode"]
         );
         $data2 = $this->datacontext->getObject($sql2, $param2);
         foreach($data2 as $key => $val){

@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบคลังสินค้า</li>
+                        <li><a href="#">{{#i18n}}warehouse.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}warehouse.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">ข้อมูลคลังสินค้า</h1>
+                    <h1 class="none-padding">{{#i18n}}warehouse.info.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col-md-12" style="margin: 10px 0px;"><!-- bidder item form -->
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="project">ปีโครงการ</label>
+                    <label class="col-md-5 control-label text-right" for="project">{{#i18n}}warehouse.project{{/i18n}} :</label>
                     <div class="col-md-7">
                         <select class="form-control input-sm" name="project" id="project" data-call="listsProject">
                         </select>
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="zone">ภาค</label>
+                    <label class="col-md-5 control-label text-right" for="zone">{{#i18n}}warehouse.zone{{/i18n}} :</label>
                     <div class="col-md-7">
                         <select class="form-control input-sm" name="zone" id="zone" data-call="listsZone">
                         </select>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="province">จังหวัด</label>
+                    <label class="col-md-5 control-label text-right" for="province">{{#i18n}}warehouse.province{{/i18n}} :</label>
                     <div class="col-md-7">
                         <select class="form-control input-sm" name="province" id="province" data-call="listsProvince">
                         </select>
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="type">ชนิดข้าว</label>
+                    <label class="col-md-5 control-label text-right" for="type">{{#i18n}}warehouse.type{{/i18n}} :</label>
                     <div class="col-md-7">
                         <select class="form-control input-sm" name="type" id="type" data-call="listsType">
                         </select>
@@ -58,7 +58,7 @@
             </div>
             <div class="col-md-12" style="margin: 10px 0px 20px 0px;"><!-- bidder item form -->
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="grade">เกรด</label>
+                    <label class="col-md-5 control-label text-right" for="grade">{{#i18n}}warehouse.grade{{/i18n}} :</label>
                     <div class="col-md-7">
                         <select class="form-control input-sm" name="grade" id="grade" data-call="listsGrade">
                         </select>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="status">สถานะ</label>
+                    <label class="col-md-5 control-label text-right" for="status">{{#i18n}}warehouse.status{{/i18n}} :</label>
                     <div class="col-md-7">
                         <select class="form-control input-sm" name="status" id="status" data-call="listsStatus">
                         </select>
@@ -74,14 +74,14 @@
                 </div>
 
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="silo">คลังสินค้า</label>
+                    <label class="col-md-5 control-label text-right" for="silo">{{#i18n}}warehouse.silo{{/i18n}} :</label>
                     <div class="col-md-7">
                         <input type="text" class="form-control input-sm" name="silo" id="silo">
                     </div>
                 </div>
 
                 <div class="col-md-3">
-                    <label class="col-md-5 control-label text-right" for="code">รหัส</label>
+                    <label class="col-md-5 control-label text-right" for="code">{{#i18n}}warehouse.code{{/i18n}} :</label>
                     <div class="col-md-7">
                         <input type="text" class="form-control input-sm" name="code" id="code">
                     </div>
@@ -91,20 +91,20 @@
                 <table id="table" class="table table-bordered table-striped table-condensed mb-none">
                     <thead>
                         <tr>
-                            <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                            <th class="text-center" style="vertical-align: middle;">ภาค</th>
-                            <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
-                            <th class="text-center" style="vertical-align: middle;">รหัส</th>
-                            <th class="text-center" style="vertical-align: middle; width: 20%;">คลังสินค้า</th>
-                            <th class="text-center" style="vertical-align: middle;">ผู้เข้าร่วม</th>
-                            <th class="text-center" style="vertical-align: middle;">หลัง</th>
-                            <th class="text-center" style="vertical-align: middle;">กอง</th>
-                            <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
-                            <th class="text-center" style="vertical-align: middle;">ชนิด</th>
-                            <th class="text-center" style="vertical-align: middle;">เกรด</th>
-                            <th class="text-center" style="vertical-align: middle;">อัตราส่วนลด</th>
-                            <th class="text-center" style="vertical-align: middle;">สถานะ</th>
-                            <th class="text-center" style="vertical-align: middle;">ประวัติ</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.no{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.zone{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.province{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.code{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle; width: 20%;">{{#i18n}}warehouse.silo{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.associate{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.warehouse{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.stack{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.project{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.type{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.grade{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.discount{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.status{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.history{{/i18n}}</th>
                         </tr>
                     </thead>
                     <tbody id="bidderBody">
@@ -120,59 +120,62 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">ประวัติข้อมูลย้อนหลัง</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{#i18n}}warehouse.info.modalView{{/i18n}}</h4>
                         </div>
                         <div class="modal-body">
-                            <div class="table-responsive">
-                                <div class="col-md-12">
-                                    <div class="col-md-3 text-right text-bold">รหัส :</div>
-                                    <div class="col-md-8" id="codeDisp"></div>
-                                </div>
+                            <table class="table mb-none">
+                                <tbody>
+                                <tr class="no-border">
+                                    <td class="col-md-3 text-right text-bold">{{#i18n}}warehouse.code{{/i18n}} :</td>
+                                    <td class="col-md-8 text-left"><div id="codeDisp"></div></td>
+                                </tr>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-3 text-right text-bold">คลังสินค้า :</div>
-                                    <div class="col-md-9" id="siloDisp"></div>
-                                </div>
+                                <tr>
+                                    <td class="col-md-3 text-right text-bold">{{#i18n}}warehouse.silo{{/i18n}} :</td>
+                                    <td class="col-md-9 text-left"><div id="siloDisp"></div></td>
+                                </tr>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-3 text-right text-bold">หลังที่ :</div>
-                                    <div class="col-md-9" id="warehouseDisp"></div>
-                                </div>
+                                <tr>
+                                    <td class="col-md-3 text-right text-bold">{{#i18n}}warehouse.warehouse{{/i18n}} :</td>
+                                    <td class="col-md-9 text-left"><div id="warehouseDisp"></div></td>
+                                </tr>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-3 text-right text-bold">กองที่ :</div>
-                                    <div class="col-md-9" id="stackDisp"></div>
-                                </div>
+                                <tr>
+                                    <td class="col-md-3 text-right text-bold">{{#i18n}}warehouse.stack{{/i18n}} :</td>
+                                    <td class="col-md-9 text-left"><div id="stackDisp"></div></td>
+                                </tr>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-3 text-right text-bold">ปีโครงการ :</div>
-                                    <div class="col-md-8" id="projectDisp"></div>
-                                </div>
+                                <tr>
+                                    <td class="col-md-3 text-right text-bold">{{#i18n}}warehouse.project{{/i18n}} :</td>
+                                    <td class="col-md-9 text-left"><div id="projectDisp"></div></td>
+                                </tr>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-3 text-right text-bold">ชนิดข้าว :</div>
-                                    <div class="col-md-8" id="typeDisp"></div>
-                                </div>
+                                <tr>
+                                    <td class="col-md-3 text-right text-bold">{{#i18n}}warehouse.type{{/i18n}} :</td>
+                                    <td class="col-md-9 text-left"><div id="typeDisp"></div></td>
+                                </tr>
 
-                                <div class="col-md-12">
-                                    <div class="col-md-3 text-right text-bold">เกรด :</div>
-                                    <div class="col-md-8" id="gradeDisp"></div>
-                                </div>
+                                <tr>
+                                    <td class="col-md-3 text-right text-bold">{{#i18n}}warehouse.grade{{/i18n}} :</td>
+                                    <td class="col-md-9 text-left"><div id="gradeDisp"></div></td>
+                                </tr>
 
                                 <table id="table2" class="table table-striped table-condensed mb-none">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center col-md-2">ลำดับ</th>
-                                            <th class="text-center col-md-12">ประวัติ</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="text-center col-md-2">{{#i18n}}warehouse.no{{/i18n}}</th>
+                                        <th class="text-center col-md-12">{{#i18n}}warehouse.history{{/i18n}}</th>
+                                    </tr>
                                     </thead>
+
                                     <tbody>
                                     </tbody>
                                 </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" id="confirmChange" class="btn btn-primary" data-dismiss="modal">ปิด</button>
+                            <button type="button" id="confirmChange" class="btn btn-primary" data-dismiss="modal">{{#i18n}}warehouse.buttonClose{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
