@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบระบายข้าว</li>
+                        <li><a href="#">{{#i18n}}release.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}release.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">กำหนดอัตราส่วนลด</h1>
+                    <h1 class="none-padding">{{#i18n}}release.discount.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -24,8 +24,8 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i> เพิ่มข้อมูล</button>
-                    <button class="btn btn-primary back" style="display: none;">อัตราส่วนลด</button>
+                    <button class="btn btn-primary add"><i class="fa fa-plus-circle"></i> {{#i18n}}release.buttonAdd{{/i18n}}</button>
+                    <button class="btn btn-primary back" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}release.buttonDiscount{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -37,14 +37,14 @@
                 <div class="col-md-12">
                     <div class="col-md-8">
                         <div class="col-md-6">
-                            <label class="col-md-4 control-label text-right" for="searchType">ชนิดข้าว</label>
+                            <label class="col-md-4 control-label text-right" for="searchType">{{#i18n}}release.type{{/i18n}}</label>
                             <div class="col-md-8">
                                 <select class="form-control input-sm" name="searchType" id="searchType" required>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <label class="col-md-4 control-label text-right" for="searchGrade">เกรด</label>
+                            <label class="col-md-4 control-label text-right" for="searchGrade">{{#i18n}}release.grade{{/i18n}}</label>
                             <div class="col-md-8">
                                 <select class="form-control input-sm" name="searchGrade" id="searchGrade" required>
                                 </select>
@@ -65,12 +65,12 @@
                     <table id="table" class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
                             <tr>
-                                <th class="text-center col-md-1">ลำดับ</th>
-                                <th class="text-center col-md-3">ชนิดข้าว</th>
-                                <th class="text-center col-md-2">เกรด</th>
-                                <th class="text-center col-md-2">ค่าส่วนลดเริ่มต้น</th>
-                                <th class="text-center col-md-2">อัตราส่วนต่างเฉลี่ย</th>
-                                <th class="text-center col-md-2">เครื่องมือ</th>
+                                <th class="text-center col-md-1">{{#i18n}}release.no{{/i18n}}</th>
+                                <th class="text-center col-md-3">{{#i18n}}release.type{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}release.grade{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}release.initDiscount{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}release.diffDiscount{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}release.action{{/i18n}}</th>
                             </tr>
                         </thead>
                         <tbody id="dataBody">
@@ -90,33 +90,33 @@
                                 <div class="panel-actions">
                                     <a href="#" class="fa fa-caret-up"></a>
                                 </div>
-                                <h2 class="panel-title">ข้อมูลอัตราส่วนลด</h2>
+                                <h2 class="panel-title">{{#i18n}}release.discount.panelForm{{/i18n}}</h2>
                             </header>
 
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="typeId">ชนิดข้าว</label>
+                                    <label class="col-md-3 control-label req" for="typeId">{{#i18n}}release.type{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <select id="typeId" name="typeId" class="form-control input-sm" required></select>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="gradeId">เกรด</label>
+                                    <label class="col-md-3 control-label req" for="gradeId">{{#i18n}}release.grade{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <select id="gradeId" name="gradeId" class="form-control input-sm" required></select>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="discountStart">ค่าส่วนลดเริ่มต้น</label>
+                                    <label class="col-md-3 control-label req" for="discountStart">{{#i18n}}release.initDiscount{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <input type="text" id="discountStart" name="discountStart" class="form-control input-sm" required>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="rateAvg">อัตราส่วนต่างเฉลี่ย</label>
+                                    <label class="col-md-3 control-label req" for="rateAvg">{{#i18n}}release.diffDiscount{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <input type="text" id="rateAvg" name="rateAvg" class="form-control input-sm" required>
                                     </div>
@@ -125,10 +125,10 @@
                                 <div id="loading" class="col-xs-12" style="text-align: center;"></div>
                                 <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
                                     <li class="">
-                                        <button id="submit" class="btn btn-primary submit">บันทึก</button>
+                                        <button id="submit" class="btn btn-primary submit"><i class="fa fa-save"></i> {{#i18n}}release.buttonSave{{/i18n}}</button>
                                     </li>
                                     <li class="padding-left">
-                                        <button type="button" class="btn btn-default cancel">ยกเลิก</button>
+                                        <button type="button" class="btn btn-default cancel">{{#i18n}}release.buttonCancel{{/i18n}}</button>
                                     </li>
                                 </ul>
                             </div>
@@ -142,31 +142,35 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : อัตราส่วนลด</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{#i18n}}release.discount.modalDelete{{/i18n}}</h4>
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                <table class="table mb-none">
                                     <tbody>
-                                    <tr>
-                                        <td>ชนิดข้าว</td><td class="text-left"><div id="typeDel"></div></td>
+                                    <tr class="no-border">
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}release.type{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="typeDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>เกรด</td><td class="text-left"><div id="gradeDel"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}release.grade{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="gradeDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ค่าส่วนลดเริ่มต้น</td><td class="text-left"><div id="discountDel"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}release.initDiscount{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="discountDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>อัตราส่วนต่างเฉลี่ย</td><td class="text-left"><div id="rateDel"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}release.diffDiscount{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="rateDel"></div></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}release.buttonCancel{{/i18n}}</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}release.buttonDelete{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
