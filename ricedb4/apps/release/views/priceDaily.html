@@ -20,18 +20,27 @@
                 <div class="col-md-12">
                     <ul class="breadcrumb">
                         <li><a href="#">{{#i18n}}release.home{{/i18n}}</a></li>
-                        <li class="active">Auction</li>
+                        <li class="active">{{#i18n}}release.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">ราคาข้าว</h1>
+                    <h1 class="none-padding">{{#i18n}}release.price.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
     </section>
     <hr class="tall dashboard">
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button id="btn_back" class="btn btn-primary back" style="display: none;"><i class="fa fa-angle-double-left"></i> {{#i18n}}release.buttonBack{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
 
     <div id="window1" class="container">
         <div class="row">
@@ -42,7 +51,7 @@
                       isArray="true"
                       data-size="0">
                     <div class="col-sm-12" style="margin: 20px;">
-                        <label class="col-sm-2 control-label">วันที่ (yyyy-mm-dd)</label>
+                        <label class="col-sm-2 text-right control-label">{{#i18n}}release.date{{/i18n}} ({{#i18n}}release.dateFormat{{/i18n}}) :</label>
                         <div class="col-sm-4">
                             <input class="form-control" id="date" name="Date"/>
                         </div>
@@ -50,42 +59,42 @@
                         <div class="col-sm-1">
                             <!-- <input type="button" id="btn_window" class="btn btn-primary btn-sm" value="ปฏิทิน" /> -->
                             <a href="javascript: void(0);" id="btn_window" title="ปฏิทิน">
-                                <img src="/../ricedb/images/calendar.png" width="48"/>
+                                <img src="{{_context_path}}/images/calendar.png" width="36"/>
                             </a>
                         </div>
                         <div class="col-sm-5 text-right">
                             <!--                        <input type="button" value="บันทึก" id="btn_save" class="btn btn-primary" />-->
-                            <button id="btn_save" class="btn btn-primary">บันทึกราคา</button>
+                            <button id="btn_save" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}release.buttonSave{{/i18n}}</button>
                         </div>
                     </div>
                     <div id="div_table" class="col-sm-12">
                         <p class="col-sm-12">
-                            <mark class="text-danger" style="text-decoration: underline;">กรณี</mark>
-                            <mark  class="text-danger">ข้าวชนิดใดมีเพียงราคาเดียว ให้ใช้ราคานั้นเป็นตัวแทนในการกรอกราคาข้าวให้ครบทุกราคา</mark>
+                            <mark class="text-danger" style="text-decoration: underline;">{{#i18n}}release.remark{{/i18n}}</mark>
+                            <mark  class="text-danger">{{#i18n}}release.remarkDetail{{/i18n}}</mark>
                         </p>
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="1%">ลำดับ</th>
-                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="15%">ชนิดข้าว</th>
-                                    <th colspan="4" class="text-center">กรมการค้าภายใน</th>
-                                    <th colspan="4" class="text-center">สมาคมโรงสีข้าวไทย</th>
+                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="1%">{{#i18n}}release.no{{/i18n}}</th>
+                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="15%">{{#i18n}}release.type{{/i18n}}</th>
+                                    <th colspan="4" class="text-center">{{#i18n}}release.internalTrade{{/i18n}}</th>
+                                    <th colspan="4" class="text-center">{{#i18n}}release.riceMills{{/i18n}}</th>
                                 </tr>
                                 <tr>
-                                    <th colspan="2" class="text-center">ราคาข้าวเก่า</th>
-                                    <th colspan="2" class="text-center">ราคาข้าวใหม่</th>
-                                    <th colspan="2" class="text-center">ราคาข้าวเก่า</th>
-                                    <th colspan="2" class="text-center">ราคาข้าวใหม่</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}release.oldRicePrice{{/i18n}}</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}release.newRicePrice{{/i18n}}</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}release.oldRicePrice{{/i18n}}</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}release.newRicePrice{{/i18n}}</th>
                                 </tr>
                                 <tr>
-                                    <th class="text-center">ราคาต่ำสุด</th>
-                                    <th class="text-center">ราคาสูงสุด</th>
-                                    <th class="text-center">ราคาต่ำสุด</th>
-                                    <th class="text-center">ราคาสูงสุด</th>
-                                    <th class="text-center">ราคาต่ำสุด</th>
-                                    <th class="text-center">ราคาสูงสุด</th>
-                                    <th class="text-center">ราคาต่ำสุด</th>
-                                    <th class="text-center">ราคาสูงสุด</th>
+                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
                                 </tr>
                             </thead>
                             <tbody id="tb_body">
@@ -101,9 +110,8 @@
     </div>
     <div id="window2" class="col-sm-12" style="display: none;">
         <div class="col-sm-2">
-            <input type="button" id="btn_back" class="btn btn-primary btn-sm" value="ย้อนกลับ" />
-        </div>
-        <div id="calendar" style="z-index: 100;"></div>
+            </div>
+        <div id="calendar" style="width: 50%; margin: 0 auto;"></div>
     </div>
 </div>
 
@@ -126,12 +134,12 @@
 
         $("#btn_window").click(function () {
             $("#window1").hide();
-            $("#window2").show();
+            $("#window2, #btn_back").show();
             loadCalendar();
         });
 
         $("#btn_back").click(function () {
-            $("#window2").hide();
+            $("#window2, #btn_back").hide();
             $("#window1").show();
         });
 
@@ -196,6 +204,7 @@
 
     function loadCalendar() {
         $("#calendar").fullCalendar({
+            aspectRatio: 2,
             header: {
                 left: '',
                 center: 'title',
