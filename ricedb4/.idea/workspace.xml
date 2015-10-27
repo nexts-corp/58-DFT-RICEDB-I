@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863593ba-7750-4ad6-8a1c-04b49bd87cc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/reserve/i18n/lang.ini" afterPath="$PROJECT_DIR$/apps/reserve/i18n/lang.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini" afterPath="$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" afterPath="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" afterPath="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ricedb4.iws" />
@@ -32,30 +32,30 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_th_TH.ini">
+        <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="67" selection-end-column="43" />
+              <caret line="65" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="lang.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang.ini">
+        <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="67" column="43" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
+              <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="lang_en_US.ini" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini">
+        <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.9190476">
-              <caret line="67" column="43" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
+              <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -78,12 +78,12 @@
         <option value="$PROJECT_DIR$/apps/release/i18n/lang_th_TH.ini" />
         <option value="$PROJECT_DIR$/apps/release/views/manageShippingCost.html" />
         <option value="$PROJECT_DIR$/apps/release/views/priceDaily.html" />
-        <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" />
-        <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/release/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/release/i18n/lang.ini" />
         <option value="$PROJECT_DIR$/apps/reserve/i18n/lang.ini" />
         <option value="$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini" />
+        <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" />
+        <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" />
       </list>
     </option>
   </component>
@@ -306,7 +306,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="reserve" />
+              <option name="myItemId" value="release" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -324,7 +324,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="reserve" />
+              <option name="myItemId" value="release" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -550,7 +550,13 @@
       <option name="project" value="LOCAL" />
       <updated>1445928236471</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="encoding">
+      <created>1445928415819</created>
+      <option name="number" value="00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1445928415819</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -618,13 +624,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/user/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -898,27 +897,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3881064">
-          <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.86697966">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.86697966">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/user/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.69170576">
@@ -937,14 +915,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="21" column="39" selection-start-line="0" selection-start-column="0" selection-end-line="40" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75714284">
-          <caret line="40" column="45" selection-start-line="40" selection-start-column="45" selection-end-line="40" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -975,8 +945,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="42" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75714284">
+          <caret line="40" column="45" selection-start-line="40" selection-start-column="45" selection-end-line="40" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_th_TH.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="65" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="66" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9190476">
-          <caret line="67" column="43" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
+          <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
           <folding />
         </state>
       </provider>
