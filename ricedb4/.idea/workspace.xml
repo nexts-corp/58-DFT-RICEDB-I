@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863593ba-7750-4ad6-8a1c-04b49bd87cc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/views/floorValue.html" afterPath="$PROJECT_DIR$/apps/release/views/floorValue.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/views/compareFloorPrice.html" afterPath="$PROJECT_DIR$/apps/release/views/compareFloorPrice.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/i18n/lang.ini" afterPath="$PROJECT_DIR$/apps/release/i18n/lang.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/i18n/lang_en_US.ini" afterPath="$PROJECT_DIR$/apps/release/i18n/lang_en_US.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/i18n/lang_th_TH.ini" afterPath="$PROJECT_DIR$/apps/release/i18n/lang_th_TH.ini" />
@@ -37,18 +37,20 @@
         <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang_th_TH.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="52" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="78" selection-end-column="35" />
+              <caret line="60" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="85" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="floorValue.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/release/views/floorValue.html">
+      <file leaf-file-name="compareFloorPrice.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/release/views/compareFloorPrice.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.346153">
-              <caret line="205" column="218" selection-start-line="205" selection-start-column="218" selection-end-line="205" selection-end-column="218" />
-              <folding />
+            <state vertical-scroll-proportion="21.576923">
+              <caret line="57" column="80" selection-start-line="57" selection-start-column="80" selection-end-line="57" selection-end-column="80" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -57,7 +59,7 @@
         <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang_en_US.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+              <caret line="85" column="51" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -66,8 +68,8 @@
       <file leaf-file-name="lang.ini" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.0751173">
-              <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.8935837">
+              <caret line="85" column="51" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -94,8 +96,10 @@
         <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/release/views/priceDaily.html" />
         <option value="$PROJECT_DIR$/apps/release/views/floorPrice.html" />
-        <option value="$PROJECT_DIR$/apps/release/i18n/lang_th_TH.ini" />
         <option value="$PROJECT_DIR$/apps/release/views/floorValue.html" />
+        <option value="$PROJECT_DIR$/apps/release/views/floorValueSilo.html" />
+        <option value="$PROJECT_DIR$/apps/release/i18n/lang_th_TH.ini" />
+        <option value="$PROJECT_DIR$/apps/release/views/compareFloorPrice.html" />
         <option value="$PROJECT_DIR$/apps/release/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/release/i18n/lang.ini" />
       </list>
@@ -629,7 +633,19 @@
       <option name="project" value="LOCAL" />
       <updated>1445937256067</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="floorValue =&gt; use i18n">
+      <created>1445938848101</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1445938848101</updated>
+    </task>
+    <task id="LOCAL-00034" summary="floorValueSilo =&gt; use i18n">
+      <created>1445941404436</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1445941404436</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -691,27 +707,15 @@
     <MESSAGE value="encoding" />
     <MESSAGE value="priceDaily =&gt; use i18n" />
     <MESSAGE value="floorPrice =&gt; use i18n" />
-    <option name="LAST_COMMIT_MESSAGE" value="floorPrice =&gt; use i18n" />
+    <MESSAGE value="floorValue =&gt; use i18n" />
+    <MESSAGE value="floorValueSilo =&gt; use i18n" />
+    <option name="LAST_COMMIT_MESSAGE" value="floorValueSilo =&gt; use i18n" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/user/i18n/lang.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/user/i18n/lang_th_TH.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/user/views/userManager.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1044,15 +1048,60 @@
     <entry file="file://$PROJECT_DIR$/apps/release/views/floorValue.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-16.346153">
-          <caret line="205" column="218" selection-start-line="205" selection-start-column="218" selection-end-line="205" selection-end-column="218" />
+          <caret line="109" column="127" selection-start-line="109" selection-start-column="36" selection-end-line="109" selection-end-column="127" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/release/views/floorValueSilo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="61.46154">
+          <caret line="182" column="48" selection-start-line="182" selection-start-column="48" selection-end-line="182" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#5;n#tr#0;n#thead#0;n#table#0;n#div#0;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#5;n#tr#0;n#thead#0;n#table#0;n#div#1;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#5;n#tr#0;n#thead#0;n#table#0;n#div#2;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#0;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#1;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#2;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#3;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#4;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#5;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#6;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#th#7;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#form#0;n#div#0;n#section#0;n#div#2;n#fieldset#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/release/views/compareFloorPrice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="21.576923">
+          <caret line="57" column="80" selection-start-line="57" selection-start-column="80" selection-end-line="57" selection-end-column="80" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang_th_TH.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="78" selection-end-column="35" />
+          <caret line="60" column="41" selection-start-line="0" selection-start-column="0" selection-end-line="85" selection-end-column="51" />
           <folding />
         </state>
       </provider>
@@ -1060,15 +1109,15 @@
     <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+          <caret line="85" column="51" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/release/i18n/lang.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.0751173">
-          <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.8935837">
+          <caret line="85" column="51" selection-start-line="85" selection-start-column="51" selection-end-line="85" selection-end-column="51" />
           <folding />
         </state>
       </provider>
