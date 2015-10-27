@@ -13,14 +13,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Auction</li>
+                        <li><a href="#">{{#i18n}}release.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}release.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">ราคา Floor Value</h1>
+                    <h1 class="none-padding">{{#i18n}}release.fv.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -28,16 +28,16 @@
     <hr class="tall dashboard">
     <div class="container">
         <div class="col-sm-12"  style="margin: 10px;">
-            <div class="col-sm-4">
-                <label class="col-sm-5 control-label">การประมูลครั้งที่</label>
-                <div class="col-sm-7">
+            <div class="col-sm-6">
+                <label class="col-sm-3 control-label text-right">{{#i18n}}release.auctionNo{{/i18n}} :</label>
+                <div class="col-sm-9">
                     <select id="auction" class="form-control">
                         <option value="0">เลือกทั้งหมด</option>
                     </select>
                 </div>
             </div>
             <div class="col-sm-2">
-                <input type="button" id="btn_date" class="btn btn-primary" value="เลือก" />
+                <button id="btn_date" class="btn btn-primary"><i class="fa fa-eye"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
             </div>
         </div>
         <div style="clear: both;"></div>
@@ -45,7 +45,7 @@
 
             <div class="col-sm-12" style="margin-top: 20px;">
                 <div class="col-sm-6">
-                    <label class="col-sm-4 control-label">ปีโครงการ</label>
+                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.project{{/i18n}} :</label>
                     <div class="col-sm-8">
                         <select id="select_project" class="form-control">
                             <option value="0">เลือกทั้งหมด</option>
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label class="col-sm-4 control-label">จังหวัด</label>
+                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.province{{/i18n}} :</label>
                     <div class="col-sm-8">
                         <select id="select_province" class="form-control">
                             <option value="0">เลือกทั้งหมด</option>
@@ -63,7 +63,7 @@
             </div>
             <div class="col-sm-12" style="margin: 20px 0px;">
                 <div class="col-sm-6">
-                    <label class="col-sm-4 control-label">ชนิดข้าว</label>
+                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.type{{/i18n}} :</label>
                     <div class="col-sm-8">
                         <select id="select_type" class="form-control">
                             <option value="0">เลือกทั้งหมด</option>
@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <label class="col-sm-4 control-label">เกรดข้าว</label>
+                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.grade{{/i18n}} :</label>
                     <div class="col-sm-8">
                         <select id="select_grade" class="form-control">
                             <option value="0">เลือกทั้งหมด</option>
@@ -89,25 +89,25 @@
                             <li class="active">
                                 <a href="#fv2" data-toggle="tab" class="text-center" aria-expanded="true">
                                     <span class="badge hidden-xs">1</span>
-                                    ราคาข้าวใหม่ Floor Value 2
+                                    {{#i18n}}release.newRicePrice{{/i18n}} ({{#i18n}}release.fv2{{/i18n}})
                                 </a>
                             </li>
                             <li class="">
                                 <a href="#fv3" data-toggle="tab" class="text-center" aria-expanded="false">
                                     <span class="badge hidden-xs">2</span>
-                                    ราคาข้าวเก่า-ใหม่ Floor Value 3
+                                    {{#i18n}}release.meanRicePrice{{/i18n}} ({{#i18n}}release.fv3{{/i18n}})
                                 </a>
                             </li>
                             <li class="">
                                 <a href="#fv4" data-toggle="tab" class="text-center" aria-expanded="false">
                                     <span class="badge hidden-xs">3</span>
-                                    ราคาข้าวเก่า Floor Value 4
+                                    {{#i18n}}release.oldRicePrice{{/i18n}} ({{#i18n}}release.fv4{{/i18n}})
                                 </a>
                             </li>
                             <li class="">
                                 <a href="#fv234" data-toggle="tab" class="text-center" aria-expanded="false">
                                     <span class="badge hidden-xs">4</span>
-                                    ราคาข้าว FV 2,3,4
+                                    {{#i18n}}release.fv2{{/i18n}}, {{#i18n}}release.fv3{{/i18n}}, {{#i18n}}release.fv4{{/i18n}}
                                 </a>
                             </li>
                         </ul>
@@ -117,20 +117,19 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                                <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
-                                                <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
-                                                <th class="text-center" style="vertical-align: middle;">รอบ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชื่อคลังสินค้ากลาง/ไซโล</th>
-<!--                                                <th class="text-center" style="vertical-align: middle;">ที่ตั้งโกดัง</th>-->
-                                                <th class="text-center" style="vertical-align: middle;">เข้าร่วมฯ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชนิดข้าว</th>
-                                                <th class="text-center" style="vertical-align: middle;">หลังที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">กองที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">เกรด</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">น้ำหนักรวมเนื้อข้าว<br>กระสอบ(ตัน)</th>
-                                                <th class="text-center" style="vertical-align: middle;">Floor Price 2</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">มูลค่าขั้นต่ำ (บาท)<br>(Floor Value 2)</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tb_body2">
@@ -142,20 +141,19 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                                <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
-                                                <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
-                                                <th class="text-center" style="vertical-align: middle;">รอบ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชื่อคลังสินค้ากลาง/ไซโล</th>
-<!--                                                <th class="text-center" style="vertical-align: middle;">ที่ตั้งโกดัง</th>-->
-                                                <th class="text-center" style="vertical-align: middle;">เข้าร่วมฯ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชนิดข้าว</th>
-                                                <th class="text-center" style="vertical-align: middle;">หลังที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">กองที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">เกรด</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">น้ำหนักรวมเนื้อข้าว<br>กระสอบ(ตัน)</th>
-                                                <th class="text-center" style="vertical-align: middle;">Floor Price 3</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">มูลค่าขั้นต่ำ (บาท)<br>(Floor Value 3)</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp3{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv3{{/i18n}})</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tb_body3">
@@ -167,20 +165,19 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                                <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
-                                                <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
-                                                <th class="text-center" style="vertical-align: middle;">รอบ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชื่อคลังสินค้ากลาง/ไซโล</th>
-<!--                                                <th class="text-center" style="vertical-align: middle;">ที่ตั้งโกดัง</th>-->
-                                                <th class="text-center" style="vertical-align: middle;">เข้าร่วมฯ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชนิดข้าว</th>
-                                                <th class="text-center" style="vertical-align: middle;">หลังที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">กองที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">เกรด</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">น้ำหนักรวมเนื้อข้าว<br>กระสอบ(ตัน)</th>
-                                                <th class="text-center" style="vertical-align: middle;">Floor Price 4</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">มูลค่าขั้นต่ำ (บาท)<br>(Floor Value 4)</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp4{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv4{{/i18n}})</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tb_body4">
@@ -192,24 +189,23 @@
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                                <th class="text-center" style="vertical-align: middle;">จังหวัด</th>
-                                                <th class="text-center" style="vertical-align: middle;">ปีโครงการ</th>
-                                                <th class="text-center" style="vertical-align: middle;">รอบ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชื่อคลังสินค้ากลาง/ไซโล</th>
-<!--                                                <th class="text-center" style="vertical-align: middle;">ที่ตั้งโกดัง</th>-->
-                                                <th class="text-center" style="vertical-align: middle;">เข้าร่วมฯ</th>
-                                                <th class="text-center" style="vertical-align: middle;">ชนิดข้าว</th>
-                                                <th class="text-center" style="vertical-align: middle;">หลังที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">กองที่</th>
-                                                <th class="text-center" style="vertical-align: middle;">เกรด</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">น้ำหนักรวมเนื้อข้าว<br>กระสอบ(ตัน)</th>
-                                                <th class="text-center" style="vertical-align: middle;">Floor Price 2</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">มูลค่าขั้นต่ำ (บาท)<br>(Floor Value 2)</th>
-                                                <th class="text-center" style="vertical-align: middle;">Floor Price 3</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">มูลค่าขั้นต่ำ (บาท)<br>(Floor Value 3)</th>
-                                                <th class="text-center" style="vertical-align: middle;">Floor Price 4</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">มูลค่าขั้นต่ำ (บาท)<br>(Floor Value 4)</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp3{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv3{{/i18n}})</th>
+                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp4{{/i18n}}</th>
+                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv4{{/i18n}})</th>
                                             </tr>
                                         </thead>
                                         <tbody id="tb_body234">
