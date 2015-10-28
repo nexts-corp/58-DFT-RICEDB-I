@@ -78,10 +78,10 @@
             <div class="tabs">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#summaryTab" data-toggle="tab"><i class="fa fa-star"></i> {{#i18n}}release.total.siloSell{{/i18n}}</a>
+                        <a href="#summaryTab" data-toggle="tab"><i class="fa fa-star"></i> {{#i18n}}release.total.siloPass{{/i18n}}</a>
                     </li>
                     <li>
-                        <a href="#failFloorTab" data-toggle="tab">{{#i18n}}release.total.siloNoSell{{/i18n}}</a>
+                        <a href="#failFloorTab" data-toggle="tab">{{#i18n}}release.total.siloFail{{/i18n}}</a>
                     </li>
                     <li>
                         <a href="#detailTab" data-toggle="tab">{{#i18n}}release.total.howto{{/i18n}}</a>
@@ -91,7 +91,7 @@
                     <div id="summaryTab" class="tab-pane active">
                         <div class="row">
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">{{#i18n}}release.total.countSiloSell{{/i18n}} :</div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.countSiloPass{{/i18n}} :</div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary whSell"></span> / <span class="whAll"></span></div>
                             </div>
                              <div class="form-group">
@@ -99,12 +99,12 @@
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary bidSellCount"></span>/<span class="text-tertiary bidCount"></span></div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">{{#i18n}}release.total.weightSell{{/i18n}} ({{#i18n}}release.ton{{/i18n}}):</div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.weightPass{{/i18n}} ({{#i18n}}release.ton{{/i18n}}):</div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary weightSell"></span></div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">{{#i18n}}release.total.priceSell{{/i18n}} ({{#i18n}}release.bath{{/i18n}}): </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.pricePass{{/i18n}} ({{#i18n}}release.bath{{/i18n}}): </div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary fvSell"></span></div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloSell{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloPass{{/i18n}}</th>
                                         <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
                                         <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
                                         <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuctionPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
@@ -136,12 +136,12 @@
                     <div id="failFloorTab" class="tab-pane">
                         <div class="row">
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">{{#i18n}}release.total.countSiloNoSell{{/i18n}} : </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.countSiloFail{{/i18n}} : </div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary whFailSell"></span> / <span class="whAll"></span></div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">{{#i18n}}release.total.weightNoSell{{/i18n}} ({{#i18n}}release.ton{{/i18n}}): </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.weightFail{{/i18n}} ({{#i18n}}release.ton{{/i18n}}): </div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary weightFailSell"></span></div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                 <thead>
                                 <tr>
                                     <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloNoSell{{/i18n}}</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloFail{{/i18n}}</th>
                                     <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
                                     <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
                                     <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuctionPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
