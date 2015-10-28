@@ -6,14 +6,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบระบายข้าว</li>
+                        <li><a href="#">{{#i18n}}release.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}release.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">กำหนด Floor Price</h1>
+                    <h1 class="none-padding">{{#i18n}}release.choose.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -25,8 +25,8 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button class="btn btn-primary save" disabled><i class="fa fa-plus-circle"></i> บันทึก Floor Price</button>
-                    <button class="btn btn-default undo" disabled><i class="fa fa-trash"></i> ลบการบันทึก</button>
+                    <button class="btn btn-primary save" disabled><i class="fa fa-save"></i> {{#i18n}}release.buttonChooseFP{{/i18n}}</button>
+                    <button class="btn btn-default undo" disabled><i class="fa fa-trash"></i> {{#i18n}}release.buttonDeleteFP{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -37,7 +37,7 @@
             <div id="divTable"><!-- table shown -->
                 <div class="col-md-12">
                     <div class="col-md-8">
-                        <label class="col-md-4 control-label text-right" for="auction">การประมูลครั้งที่</label>
+                        <label class="col-md-4 control-label text-right" for="auction">{{#i18n}}release.auctionNo{{/i18n}}</label>
                         <div class="col-md-8">
                             <select class="form-control input-sm" name="auction" id="auction" required>
                             </select>
@@ -59,52 +59,52 @@
                     <table id="table" class="table table-striped table-condensed mb-none">
                         <thead>
                             <tr>
-                                <th class="text-center col-md-6">ชนิดข้าว</th>
-                                <th class="text-center col-md-6">ราคาที่เลือกใช้</th>
+                                <th class="text-center col-md-6">{{#i18n}}release.type{{/i18n}}</th>
+                                <th class="text-center col-md-6">{{#i18n}}release.price{{/i18n}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="2" class="text-center"> - </td>
+                                <td colspan="2" class="text-center">-</td>
                             </tr>
                         </tbody>
                     </table>
                 </form>
                 <div class="form-group text-right" style="margin-top: 10px;">
-                    <button class="btn btn-primary calculate" disabled><i class="fa fa-calculator"></i> คำนวณ</button>
+                    <button class="btn btn-primary calculate" disabled><i class="fa fa-calculator"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
                 </div>
             </div>
 
             <div class="tabs">
                 <ul class="nav nav-tabs">
                     <li class="active">
-                        <a href="#summaryTab" data-toggle="tab"><i class="fa fa-star"></i> สรุปคลังสินค้าที่ขายได้</a>
+                        <a href="#summaryTab" data-toggle="tab"><i class="fa fa-star"></i> {{#i18n}}release.total.siloSell{{/i18n}}</a>
                     </li>
                     <li>
-                        <a href="#failFloorTab" data-toggle="tab">คลังสินค้าที่ขายไม่ได้</a>
+                        <a href="#failFloorTab" data-toggle="tab">{{#i18n}}release.total.siloNoSell{{/i18n}}</a>
                     </li>
                     <li>
-                        <a href="#detailTab" data-toggle="tab">รายละเอียดการคำนวณ</a>
+                        <a href="#detailTab" data-toggle="tab">{{#i18n}}release.total.howto{{/i18n}}</a>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div id="summaryTab" class="tab-pane active">
                         <div class="row">
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่ขายได้ : </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.countSiloSell{{/i18n}} :</div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary whSell"></span> / <span class="whAll"></span></div>
                             </div>
                              <div class="form-group">
-                                <div class="col-sm-3 text-right">จำนวนผู้ที่เสนอซื้อ : </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.countBidder{{/i18n}} :</div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary bidSellCount"></span>/<span class="text-tertiary bidCount"></span></div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">น้ำหนักที่ขายได้ (ตัน): </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.weightSell{{/i18n}} ({{#i18n}}release.ton{{/i18n}}):</div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary weightSell"></span></div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">มูลค่าที่ขายได้ (บาท): </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.priceSell{{/i18n}} ({{#i18n}}release.bath{{/i18n}}): </div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary fvSell"></span></div>
                             </div>
                         </div>
@@ -113,13 +113,13 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                        <th class="text-center" style="vertical-align: middle;">คลังสินค้าที่ขายได้</th>
-                                        <th class="text-center" style="vertical-align: middle;">น้ำหนักรวมกระสอบ (ตัน)</th>
-                                        <th class="text-center" style="vertical-align: middle;">มูลค่าขั้นต่ำ (บาท)</th>
-                                        <th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อสูงสุด (บาท)</th>
-                                        <th class="text-center" style="vertical-align: middle;">ผลต่าง (บาท)</th>
-                                        <th class="text-center" style="vertical-align: middle;">ผู้ยื่นเสนอซื้อสูงสุด</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloSell{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuctionPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.diffPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuction{{/i18n}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -136,12 +136,12 @@
                     <div id="failFloorTab" class="tab-pane">
                         <div class="row">
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">จำนวนคลังสินค้าที่ขายไม่ได้ : </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.countSiloNoSell{{/i18n}} : </div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary whFailSell"></span> / <span class="whAll"></span></div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-3 text-right">น้ำหนักที่ขายไม่ได้ (ตัน): </div>
+                                <div class="col-sm-3 text-right">{{#i18n}}release.total.weightNoSell{{/i18n}} ({{#i18n}}release.ton{{/i18n}}): </div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary weightFailSell"></span></div>
                             </div>
                         </div>
@@ -150,13 +150,13 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                    <th class="text-center" style="vertical-align: middle;">คลังสินค้าที่ขายไม่ได้</th>
-                                    <th class="text-center" style="vertical-align: middle;">น้ำหนักรวมกระสอบ (ตัน)</th>
-                                    <th class="text-center" style="vertical-align: middle;">มูลค่าขั้นต่ำ (บาท)</th>
-                                    <th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อสูงสุด (บาท)</th>
-                                    <th class="text-center" style="vertical-align: middle;">ผลต่าง (บาท)</th>
-                                    <th class="text-center" style="vertical-align: middle;">ผู้ยื่นเสนอซื้อสูงสุด</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloNoSell{{/i18n}}</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuctionPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.diffPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuction{{/i18n}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -175,14 +175,14 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th class="text-center">ลำดับ</th>
-                                        <th class="text-center">คลังสินค้า</th>
-                                        <th class="text-center">หลังที่</th>
-                                        <th class="text-center">กองที่</th>
-                                        <th class="text-center">ชนิดข้าว</th>
-                                        <th class="text-center">น้ำหนักรวมกระสอบ (ตัน)</th>
-                                        <th class="text-center">มูลค่าขั้นต่ำ (บาท)</th>
-                                        <th class="text-center">Floor Value ที่ใช้</th>
+                                        <th class="text-center">{{#i18n}}release.no{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}release.silo{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}release.stack{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}release.type{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                        <th class="text-center">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                        <th class="text-center">{{#i18n}}release.useFV{{/i18n}}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -201,17 +201,17 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">ยืนยัน  : การบันทึกข้อมูล</h4>
+                            <h4 class="modal-title" id="myModalLabel">{{#i18n}}release.choose.modalForm{{/i18n}}</h4>
                         </div>
                         <div class="modal-body">
                             <div>
-                                ต้องการเปลี่ยนแปลงการใช้ Floor Value : <span id="auctionHead" class="text-bold"></span>
+                                {{#i18n}}release.choose.confirm{{/i18n}} : <span id="auctionHead" class="text-bold"></span>
                             </div>
                         </div>
                         <div id="saveLoading" class="col-md-12 text-center"></div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary confirm"><i class="fa fa-save"></i> ยืนยัน</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                            <button type="button" class="btn btn-primary confirm"><i class="fa fa-save"></i> {{#i18n}}release.buttonSave{{/i18n}}</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}release.buttonCancel{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
