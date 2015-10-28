@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบประมูล</li>
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">ข้อมูลผู้เสนอซื้อ</h1>
+                    <h1 class="none-padding">{{#i18n}}auction.info.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -24,8 +24,8 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus"></i>&nbsp;เพิ่มข้อมูล</button>
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">รายชื่อผู้เสนอซื้อ</button>
+                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus-circle"></i> {{#i18n}}auction.buttonAdd{{/i18n}}</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.buttonInfoList{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
                     <div class="panel-body panel-body-nopadding">
                         <div class="col-md-12" style="margin: 20px 0px 20px 0px;">
                             <div class="col-xs-4">
-                                <label class="col-md-4 control-label" for="searchQueue">คิวที่</label>
+                                <label class="col-md-4 control-label text-right" for="searchQueue">{{#i18n}}auction.queue{{/i18n}} :</label>
                                 <div class="col-md-8">
                                     <select class="form-control input-sm" name="searchQueue" id="searchQueue" required>
                                     </select>
@@ -52,21 +52,21 @@
                     <table id="table" class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
                             <tr>
-                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">ลำดับ</th>
-                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">คิวที่</th>
-                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">เวลาที่ยื่น</th>
-                                <th class="text-center col-md-2" rowspan="2" style="vertical-align: middle;">ผู้เสนอซื้อ</th>
-                                <th class="text-center col-md-4" colspan="5">ตรวจสอบคุณสมบัติ</th>
-                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">ยื่นซองเสนอซื้อ</th>
-                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">แก้ไข / ลบ</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.no{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.queue{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.time{{/i18n}}</th>
+                                <th class="text-center col-md-2" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.bidder{{/i18n}}</th>
+                                <th class="text-center col-md-4" colspan="5">{{#i18n}}auction.property{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.checkIn{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.action{{/i18n}}</th>
                                 <!--<th class="text-center">ลบ</th>-->
                             </tr>
                             <tr>
-                                <th class="text-center" style="vertical-align: middle;">เอกสารเสนอซื้อ</th>
-                                <th class="text-center" style="vertical-align: middle;">ตรวจสอบ ไม่เป็น ผู้ละทิ้งงาน</th>
-                                <th class="text-center" style="vertical-align: middle;">ตรวจสอบไม่เป็นผู้ละทิ้ง<br>การเสนอซื้อ/สัญญาซื้อขาย</th>
-                                <th class="text-center" style="vertical-align: middle;">กรมการค้าภายใน</th>
-                                <th class="text-center" style="vertical-align: middle;">กรมพัฒนาธุรกิจการค้า</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyDoc{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyWork{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyOffer{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyInternal{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyBusiness{{/i18n}}</th>
                             </tr>
                         </thead>
                         <tbody id="bidderBody">
@@ -86,12 +86,12 @@
                                 <div class="panel-actions">
                                     <a href="#" class="fa fa-caret-up"></a>
                                 </div>
-                                <h2 class="panel-title">ข้อมูลผู้เสนอซื้อ</h2>
+                                <h2 class="panel-title">{{#i18n}}auction.info.panelForm{{/i18n}}</h2>
                             </header>
 
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="queue">คิวที่</label>
+                                    <label class="col-md-3 control-label req" for="queue">{{#i18n}}auction.queue{{/i18n}} :</label>
                                     <div class="col-md-2">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -101,19 +101,19 @@
                                         </div>
                                     </div>
 
-                                    <label class="col-md-2 control-label req" for="dateRegister">เวลาที่ยื่น (08:30 หรือ 08.30)</label>
+                                    <label class="col-md-2 control-label req" for="dateRegister">{{#i18n}}auction.time{{/i18n}} :</label>
                                     <div class="col-md-2">
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-clock-o"></i>
                                             </span>
-                                            <input type="text"  data-entity="history" class="form-control input-sm" name="dateRegister" id="dateRegister" required>
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="dateRegister" id="dateRegister" required>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="taxId">เลขผู้เสียภาษี</label>
+                                    <label class="col-md-3 control-label req" for="taxId">{{#i18n}}auction.taxId{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -126,7 +126,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="bidderName">ชื่อผู้เสนอซื้อ</label>
+                                    <label class="col-md-3 control-label req" for="bidderName">{{#i18n}}auction.bidderName{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -138,7 +138,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="agentName">ชื่อผู้ยื่น</label>
+                                    <label class="col-md-3 control-label req" for="agentName">{{#i18n}}auction.agentName{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -150,7 +150,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="agentName">ชื่อผู้ยื่นซอง</label>
+                                    <label class="col-md-3 control-label" for="agentName">{{#i18n}}auction.agentName2{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -162,7 +162,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="mobile">เบอร์โทรศัพท์ (มือถือ)</label>
+                                    <label class="col-md-3 control-label req" for="mobile">{{#i18n}}auction.mobile{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -174,7 +174,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="fax">เบอร์โทรสาร (Fax)</label>
+                                    <label class="col-md-3 control-label" for="fax">{{#i18n}}auction.fax{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -186,7 +186,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="email">อีเมล์</label>
+                                    <label class="col-md-3 control-label" for="email">{{#i18n}}auction.email{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -198,30 +198,30 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="typeBiz">ประเภท</label>
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.bidderType{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" data-entity="info" name="typeBiz" id="typeBiz1" value="1" checked>
-                                                นิติบุคคล
+                                                {{#i18n}}auction.corporation{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" data-entity="info" name="typeBiz" id="typeBiz2" value="2">
-                                                รัฐวิสาหกิจ
+                                                {{#i18n}}auction.enterprise{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" data-entity="info" name="typeBiz" id="typeBiz3" value="3">
-                                                สหกรณ์
+                                                {{#i18n}}auction.cooperative{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input type="radio" data-entity="info" name="typeBiz" id="typeBiz4" value="4">
-                                                บุคคลธรรมดา
+                                                {{#i18n}}auction.personal{{/i18n}}
                                             </label>
                                         </div>
                                     </div>
@@ -237,28 +237,28 @@
                                 <div class="panel-actions">
                                     <a href="#" class="fa fa-caret-up"></a>
                                 </div>
-                                <h2 class="panel-title">ตรวจสอบคุณสมบัติ</h2>
+                                <h2 class="panel-title">{{#i18n}}auction.property{{/i18n}}</h2>
                             </header>
 
                             <div class="panel-body">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="property">เอกสารการเสนอซื้อ</label>
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.propertyDoc{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl"  type="radio" data-entity="history" name="property1" id="property1_1" value="Y" checked>
-                                                <i class="fa fa-check text-success"></i> ครบ
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property1" id="property1_2" value="N">
-                                                <i class="fa fa-times text-danger"></i> ไม่ครบ
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                        <label id="remarkLabel1" class="col-md-3 control-label" for="remark1">หมายเหตุ</label>
+                                        <label id="remarkLabel1" class="col-md-3 control-label" for="remark1">{{#i18n}}auction.remark{{/i18n}} :</label>
                                         <div class="col-md-6">
                                             <input type="text" data-entity="history" class="form-control input-sm" name="remark1" id="remark1">
                                         </div>
@@ -266,23 +266,23 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="property2">ตรวจสอบไม่เป็นผู้ละทิ้งงาน<br>ของกรมบัญชีกลาง</label>
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.propertyWorkFull{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property2" id="property2_1" value="Y" checked>
-                                                <i class="fa fa-check text-success"></i> ผ่าน
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property2" id="property2_2" value="N">
-                                                <i class="fa fa-times text-danger"></i> ไม่ผ่าน
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                        <label id="remarkLabel2" class="col-md-3 control-label" for="remark2">หมายเหตุ</label>
+                                        <label id="remarkLabel2" class="col-md-3 control-label" for="remark2">{{#i18n}}auction.remark{{/i18n}} :</label>
                                         <div class="col-md-6">
                                             <input type="text" data-entity="history" class="form-control input-sm" name="remark2" id="remark2">
                                         </div>
@@ -290,23 +290,23 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="property3">ตรวจสอบผู้ละทิ้งการเสนอซื้อและหรือ<br>ละทิ้งสัญญาซื้อ-ขายข้าวทางราชการ</label>
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.propertyOfferFull{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property3" id="property3_1" value="Y" checked>
-                                                <i class="fa fa-check text-success"></i> ผ่าน
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property3" id="property3_2" value="N">
-                                                <i class="fa fa-times text-danger"></i> ไม่ผ่าน
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                        <label id="remarkLabel3" class="col-md-3 control-label" for="remark3">หมายเหตุ</label>
+                                        <label id="remarkLabel3" class="col-md-3 control-label" for="remark3">{{#i18n}}auction.remark{{/i18n}} :</label>
                                         <div class="col-md-6">
                                             <input type="text" data-entity="history" class="form-control input-sm" name="remark3" id="remark3">
                                         </div>
@@ -314,23 +314,23 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="property4">ตรวจสอบหนังสืออนุญาตให้ประกอบการค้า<br>ข้าวของกรมการค้าภายใน ณ ปัจจุบัน</label>
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.propertyInternalFull{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property4" id="property4_1" value="Y" checked>
-                                                <i class="fa fa-check text-success"></i> ผ่าน
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property4" id="property4_2" value="N">
-                                                <i class="fa fa-times text-danger"></i> ไม่ผ่าน
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                        <label id="remarkLabel4" class="col-md-3 control-label" for="remark4">หมายเหตุ</label>
+                                        <label id="remarkLabel4" class="col-md-3 control-label" for="remark4">{{#i18n}}auction.remark{{/i18n}} :</label>
                                         <div class="col-md-6">
                                             <input type="text" data-entity="history" class="form-control input-sm" name="remark4" id="remark4">
                                         </div>
@@ -338,23 +338,23 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label" for="property5">ตรวจสอบบัญชีรายชื่อผู้ถือหุ้น<br>ที่ได้รับรองจากกรมพัฒนาธุรกิจการค้า</label>
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.propertyBusinessFull{{/i18n}} :</label>
                                     <div class="col-md-6">
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property5" id="property5_1" value="Y" checked>
-                                                <i class="fa fa-check text-success"></i> ผ่าน
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
                                                 <input class="remarkControl" type="radio" data-entity="history" name="property5" id="property5_2" value="N">
-                                                <i class="fa fa-times text-danger"></i> ไม่ผ่าน
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                        <label id="remarkLabel5" class="col-md-3 control-label" for="remark5">หมายเหตุ</label>
+                                        <label id="remarkLabel5" class="col-md-3 control-label" for="remark5">{{#i18n}}auction.remark{{/i18n}} :</label>
                                         <div class="col-md-6">
                                             <input type="text" data-entity="history" class="form-control input-sm" name="remark5" id="remark5">
                                         </div>
@@ -368,10 +368,10 @@
                     <div id="loading" class="col-xs-12" style="text-align: center;"></div>
                     <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
                         <li data-option-value="*" class="">
-                            <button id="submit" class="btn btn-primary submit">บันทึก</button>
+                            <button id="submit" class="btn btn-primary submit"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
                         </li>
-                        <li data-option-value=".websites" class="padding-left">
-                            <button type="button" class="btn btn-default cancel">ยกเลิก</button>
+                        <li>
+                            <button type="button" class="btn btn-default cancel">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
                         </li>
                     </ul>
 
@@ -383,31 +383,35 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : ผู้เสนอซื้อ</h4>
+                            <h4 class="modal-title">{{#i18n}}auction.info.modalDelete{{/i18n}}</h4>
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                <table class="table mb-none">
                                     <tbody>
-                                    <tr>
-                                        <td>คิวที่</td><td class="text-left"><div id="queueDel"></div></td>
+                                    <tr class="no-border">
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.queue{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="queueDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>เลขผู้เสียภาษี</td><td class="text-left"><div id="taxIdDel"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.taxId{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="taxIdDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ชื่อผู้เสนอซื้อ</td><td class="text-left"><div id="bidderNameDel"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bidderName{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="bidderNameDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ชื่อผู้ยื่น</td><td class="text-left"><div id="agentNameDel"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.agentName{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="agentNameDel"></div></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}auction.buttonDelete{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
@@ -418,31 +422,35 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">ข้อมูล : การยืนซองเสนอซื้อ</h4>
+                            <h4 class="modal-title">{{#i18n}}auction.info.modalCheckIn{{/i18n}}</h4>
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                <table class="table mb-none">
                                     <tbody>
-                                    <tr>
-                                        <td>คิวที่</td><td class="text-left"><div id="queueChange"></div></td>
+                                    <tr class="no-border">
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.queue{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="queueChange"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>เลขผู้เสียภาษี</td><td class="text-left"><div id="taxIdChange"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.taxId{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="taxIdChange"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ชื่อผู้เสนอซื้อ</td><td class="text-left"><div id="bidderNameChange"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bidderName{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="bidderNameChange"></div></td>
                                     </tr>
                                     <tr>
-                                        <td>ยื่นซองเสนอซื้อ</td><td class="text-left"><div id="statusChange"></div></td>
+                                        <td class="col-md-3 text-right text-bold">{{#i18n}}auction.checkIn{{/i18n}} :</td>
+                                        <td class="col-md-9 text-left"><div id="statusChange"></div></td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                            <button type="button" id="confirmChange" class="btn btn-primary" data-dismiss="modal">ยืนยัน</button>
+                            <button type="button" id="confirmChange" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
@@ -459,9 +467,11 @@
         // show bidder info list
         showAllBidder();
         
-        
-        
         $("#searchQueue").select2();
+
+        $("#dateRegister").mask("00:00", {
+            placeholder: "__:__"
+        });
                 
         $.validator.addMethod("time", function (value, element) {
             return this.optional(element) || /^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$/i.test(value);
