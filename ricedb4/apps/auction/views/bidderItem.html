@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบประมูล</li>
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">บันทึกคลังพร้อมผู้เสนอซื้อ</h1>
+                    <h1 class="none-padding">{{#i18n}}auction.item.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -24,8 +24,8 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li data-option-value=".websites" class="padding-left">
-                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus"></i>&nbsp;เพิ่มข้อมูล</button>
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">รายชื่อผู้เสนอซื้อ</button>
+                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus-circle"></i>&nbsp;{{#i18n}}auction.buttonAdd{{/i18n}}</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.buttonInfoList{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
                     <div class="panel-body panel-body-nopadding">
                         <div class="col-md-12" style="margin: 20px 0px 20px 0px;">
                             <div class="col-xs-4">
-                                <label class="col-md-4 control-label" for="searchQueue">คิวที่</label>
+                                <label class="col-md-4 control-label text-right" for="searchQueue">{{#i18n}}auction.queue{{/i18n}} :</label>
                                 <div class="col-md-8">
                                     <select class="form-control input-sm" name="searchQueue" id="searchQueue" required>
                                     </select>
@@ -52,10 +52,10 @@
                     <table id="table" class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
                             <tr>
-                                <th class="text-center col-md-2">คิวที่</th>
-                                <th class="text-center col-md-6">ผู้เสนอซื้อ</th>
-                                <th class="text-center col-md-2">จำนวนคลัง</th>
-                                <th class="text-center col-md-2">รายละเอียด</th>
+                                <th class="text-center col-md-2">{{#i18n}}auction.queue{{/i18n}}</th>
+                                <th class="text-center col-md-6">{{#i18n}}auction.bidderName{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}auction.countSilo{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}auction.action{{/i18n}}</th>
                             </tr>
                         </thead>
                         <tbody id="bidderBody">
@@ -72,7 +72,7 @@
                     <div class="col-xs-12">
                         <section class="panel">
                             <div class="form-group" >
-                                <label class="col-md-3 control-label req" for="bidderHistoryId">ชื่อผู้เสนอซื้อ</label>
+                                <label class="col-md-3 control-label req" for="bidderHistoryId">{{#i18n}}auction.bidderName{{/i18n}}</label>
                                 <div class="col-md-6">
                                     <select class="form-control input-sm" name="bidderHistoryId" id="bidderHistoryId" required>
                                     </select>
@@ -83,12 +83,12 @@
                                 <div class="panel-actions">
                                     <a href="#" class="fa fa-caret-down"></a>
                                 </div>
-                                <h2 class="panel-title">บันทึกคลังพร้อมผู้เสนอซื้อ : <span class="itemListHead" style="display: inline-block;"></span></h2>
+                                <h2 class="panel-title">{{#i18n}}auction.item.title{{/i18n}} : <span class="itemListHead" style="display: inline-block;"></span></h2>
                             </header>
 
                             <div class="panel-body"><!-- add item -->
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="provinceId">จังหวัด</label>
+                                    <label class="col-md-3 control-label req" for="provinceId">{{#i18n}}auction.province{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <select class="form-control input-sm" name="provinceId" id="provinceId" required>
                                             <option value="">เลือกจังหวัด</option>
@@ -97,59 +97,39 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label req" for="silo">คลังสินค้า</label>
+                                    <label class="col-md-3 control-label req" for="silo">{{#i18n}}auction.silo{{/i18n}}</label>
                                     <div class="col-md-6">
                                         <select class="form-control input-sm" name="silo" id="silo" required>
-                                            <option value="">เลือกคลัง/คลังสินค้า/ไซโล</option>
+                                            <option value="">เลือกคลังสินค้า</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div id="dataSilo">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-condensed mb-none">
-                                            <thead>
+
+                                <div class="table-responsive">
+                                    <table id="dataSilo" class="table table-striped mb-none">
+                                        <thead>
                                             <tr>
-                                                <th colspan="2" class="text-center">ข้อมูลคลัง</th>
+                                                <th colspan="2" class="text-center">{{#i18n}}auction.siloDetail{{/i18n}}</th>
                                             </tr>
-                                            </thead>
-                                            <tbody id="dataSiloBody">
+                                        </thead>
+                                        <tbody>
                                             <tr>
                                                 <td colspan="2" class="text-center">-</td>
                                             </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
 
                                 <div id="loading" class="col-xs-12" style="text-align: center; margin: 20px;"></div>
+
                                 <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
                                     <li data-option-value="*" class="">
-                                        <button id="submit" class="btn btn-primary submit">บันทึก</button>
+                                        <button id="submit" class="btn btn-primary submit"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
                                     </li>
-                                    <li data-option-value=".websites" class="padding-left">
-                                        <button type="button" class="btn btn-default cancel">ยกเลิก</button>
+                                    <li>
+                                        <button type="button" class="btn btn-default cancel">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
                                     </li>
                                 </ul>
-
-                                <div id="dataSiloDetail" style="display: none;">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped table-condensed mb-none">
-                                            <thead>
-                                            <tr>
-                                                <th class="text-center">กองที่</th>
-                                                <th class="text-center">ชนิดข้าว</th>
-                                                <th class="text-center">ปีโครงการ</th>
-                                                <th class="text-center">น้ำหนักรวมกระสอบ (ตัน)</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody id="dataSiloBody">
-                                            <tr>
-                                                <td colspan="4" class="text-center">-</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
                             </div><!-- end add item -->
 
                             <header class="panel-heading">
@@ -157,8 +137,10 @@
                                     <a href="#" class="fa fa-caret-down"></a>
                                 </div>
                                 <h2 class="panel-title">
-                                    ข้อมูลการบันทึกคลังของผู้เสนอซื้อ : <span class="itemListHead" style="display: inline-block;"></span>
-                                    <button class="btn btn-primary refresh" formnovalidate style="margin-left: 20px;"><span class="fa fa-refresh" style="display: inline-block;"></span></button>
+                                    {{#i18n}}auction.item.panelItem{{/i18n}} : <span class="itemListHead" style="display: inline-block;"></span>
+                                    <button class="btn btn-primary refresh" style="margin-left: 20px;" formnovalidate>
+                                        <span class="fa fa-refresh" style="display: inline-block;"></span>
+                                    </button>
                                 </h2>                                
                             </header>
 
@@ -167,21 +149,21 @@
                                     <table id="listTable" class="table table-bordered table-striped table-condensed mb-none">
                                         <thead>
                                         <tr>
-                                            <th class="text-center col-md-2">ลำดับ</th>
-                                            <th class="text-center col-md-4">คลังสินค้า</th>
-                                            <th class="text-center col-md-3 text-dark">น้ำหนักรวมกระสอบ (ตัน)</th>
-                                            <th class="text-center col-md-2">มูลค่าขั้นต่ำ (บาท)</th>
-                                            <th class="text-center col-md-1">ลบ</th>
+                                            <th class="text-center col-md-2">{{#i18n}}auction.no{{/i18n}}</th>
+                                            <th class="text-center col-md-4">{{#i18n}}auction.silo{{/i18n}}</th>
+                                            <th class="text-center col-md-3 text-dark">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}})</th>
+                                            <th class="text-center col-md-2">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                            <th class="text-center col-md-1">{{#i18n}}auction.action{{/i18n}}</th>
                                         </tr>
                                         </thead>
-                                        <tbody class="itemListBody">
+                                        <tbody>
                                         <tr>
                                             <td colspan="5" class="text-center">-</td>
                                         </tr>
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="2" class="text-center text-bold">รวมทั้งหมด</td>
+                                                <td colspan="2" class="text-center text-bold">{{#i18n}}auction.total{{/i18n}}</td>
                                                 <td class="text-bold text-tertiary text-right"></td>
                                                 <td class="text-bold text-right"></td>
                                                 <td></td>
@@ -196,31 +178,35 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">ลบข้อมูล : บันทึกคลัง</h4>
+                                            <h4 class="modal-title">{{#i18n}}auction.item.modalDelete{{/i18n}}</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="table-responsive">
-                                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                                <table class="table mb-none">
                                                     <tbody>
-                                                    <tr>
-                                                        <td>ชื่อผู้เสนอซื้อ</td><td class="text-left"><div id="bidderNameDel"></div></td>
+                                                    <tr class="no-border">
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderName{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="bidderNameDel"></div></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>คลังสินค้า</td><td class="text-left"><div id="siloDel"></div></td>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="siloDel"></div></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>น้ำหนักรวมกระสอบ (ตัน)</td><td class="text-left"><div id="weightAllDel"></div></td>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}}) :</td>
+                                                        <td class="col-md-8 text-left"><div id="weightAllDel"></div></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>มูลค่าขั้นต่ำ (บาท)</td><td class="text-left"><div id="rfvDel"></div></td>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                        <td class="col-md-8 text-left"><div id="rfvDel"></div></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-                                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">ยืนยันการลบ</button>
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}auction.buttonDelete{{/i18n}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +257,7 @@
         // when you change the silo
         $("#silo").change(function () {
             if ($("#silo").val() == "") {
-                $("#dataSiloBody").html('<td colspan="5" class="text-center">-</td>');
+                $("#dataSilo tbody").html('<td colspan="5" class="text-center">-</td>');
             }
             else {
                 var dataItem = {};
@@ -292,28 +278,33 @@
                 var datas = callAjax("{{_context_path}}/api/auction/bidderItem/getSiloData", "post", dataJSONEN, "json");
                 if (typeof datas !== 'undefined' && datas !== null) {
                     var value = datas["lists"];
-
                     html += '<tr>'
-                        + '<td class="text-center">ผู้เสนอซื้อ</td><td>' + $("#bidderHistoryId option:selected").text() + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                        + '<td class="text-center">จังหวัด</td><td>' + value["province"] + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                        + '<td class="text-center">คลังสินค้า</td><td>' + value["silo"] + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                        + '<td class="text-center">ผู้เข้าร่วม</td><td>' + value["associate"] + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                        + '<td class="text-center">น้ำหนักรวมกระสอบ (ตัน)</td><td class="text-bold text-tertiary">' + accounting.formatNumber(value["weightAll"], 6, ",", ".") + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                        + '<td class="text-center">มูลค่าขั้นต่ำ (บาท)</td><td class="text-bold">' + accounting.formatNumber(value["rfv"], 2, ",", ".") + '</td>'
-                    + '</tr>';
+                            + '<td class="col-md-4 text-right text-bold">ผู้เสนอซื้อ :</td>'
+                            + '<td class="col-md-8 text-left">' + $("#bidderHistoryId option:selected").text() + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">จังหวัด :</td>'
+                            + '<td class="col-md-8 text-left">' + value["province"] + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">คลังสินค้า</td>'
+                            + '<td class="col-md-8 text-left">' + value["silo"] + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">ผู้เข้าร่วม</td>'
+                            + '<td class="col-md-8 text-left">' + value["associate"] + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">น้ำหนักรวมกระสอบ (ตัน) :</td>'
+                            + '<td class="col-md-8 text-left text-bold text-tertiary">' + accounting.formatNumber(value["weightAll"], 6, ",", ".") + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">มูลค่าขั้นต่ำ (บาท)</td>'
+                            + '<td class="col-md-8 text-left text-bold">' + accounting.formatNumber(value["rfv"], 2, ",", ".") + '</td>'
+                        + '</tr>';
                 }
 
-                $("#dataSiloBody").html(html);
+                $("#dataSilo tbody").html(html);
             }
         });
 
@@ -401,7 +392,7 @@
                     "data": "bidderHistoryId",
                     "sClass": "text-center col-md-2",
                     "render": function (data) {
-                        var content = '<button class="btn btn-primary view" data-bhid="' + data+'"><i class="fa fa-list"></i></button>';
+                        var content = '<button class="btn btn-primary view" title="ดูข้อมูล" data-bhid="' + data+'"><i class="fa fa-list"></i></button>';
                         return content;
                     }   
                 }
@@ -446,7 +437,7 @@
         var dataSet = [];
         var sumWeight = 0;
         var sumRfv = 0;
-        $(".itemListBody").html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
+        $("#listTable tbody").html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
         $("#listTable").find("tfoot td").eq(1).html("-");
         $("#listTable").find("tfoot td").eq(2).html("-");
         setTimeout(function(){
@@ -505,7 +496,7 @@
                         "data": "id",
                         "sClass": "text-center col-md-1",
                         "render": function (data) {
-                            var content = '<button class="btn btn-default delete" data-itemid="' + data + '"><i class="fa fa-trash"></i></button>';
+                            var content = '<button class="btn btn-default delete" title="ลบ" data-itemid="' + data + '"><i class="fa fa-trash"></i></button>';
                             return content;
                         }   
                     }
@@ -653,8 +644,8 @@
             $("#form select").each(function () {
                 $(this).val("").trigger("change");
             });
-            $("#dataSiloBody").html('<tr><td class="text-center">-</td></tr>');
-            $("#itemListBody").html('<tr><td colspan="5" class="text-center">-</td></tr>');
+            $("#dataSilo tbody").html('<tr><td class="text-center">-</td></tr>');
+            $("#listTable tbody").html('<tr><td colspan="5" class="text-center">-</td></tr>');
             $("#loading").empty();
         }
         else if (option == "formRefresh") {
@@ -666,7 +657,7 @@
             $("#form select[name=provinceId], #form select[name=silo]").each(function () {
                 $(this).val("").trigger("change");
             });
-            $("#dataSiloBody").html('<tr><td class="text-center">-</td></tr>');
+            $("#dataSilo tbody").html('<tr><td class="text-center">-</td></tr>');
             $("#loading").empty();
         }
         else if (option == "list") {
