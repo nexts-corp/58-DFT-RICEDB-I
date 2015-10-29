@@ -33,8 +33,8 @@ class EntityBase {
      */
     function prePersist() {
         $this->dateCreated = new \DateTime("now");
-         $this->createBy = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CURRENT_USER->name;
-         $this->updateBy = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CURRENT_USER->name;
+        $this->createBy = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CURRENT_USER->name;
+        $this->updateBy = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CURRENT_USER->name;
     }
 
     /**
