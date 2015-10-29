@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863593ba-7750-4ad6-8a1c-04b49bd87cc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/common/entity/EntityBase.php" afterPath="$PROJECT_DIR$/apps/common/entity/EntityBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/views/bidderItem.html" afterPath="$PROJECT_DIR$/apps/auction/views/bidderItem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/views/bidderPayment.html" afterPath="$PROJECT_DIR$/apps/auction/views/bidderPayment.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/views/bidderPrice.html" afterPath="$PROJECT_DIR$/apps/auction/views/bidderPrice.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/views/bidderPriceCF.html" afterPath="$PROJECT_DIR$/apps/auction/views/bidderPriceCF.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/i18n/lang.ini" afterPath="$PROJECT_DIR$/apps/auction/i18n/lang.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini" afterPath="$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" afterPath="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" />
@@ -36,29 +33,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="24" selection-start-line="0" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.8403756">
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bidderPayment.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/auction/views/bidderPayment.html">
+      <file leaf-file-name="bidderPriceCF.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/auction/views/bidderPriceCF.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.538462">
-              <caret line="284" column="30" selection-start-line="284" selection-start-column="30" selection-end-line="284" selection-end-column="30" />
+            <state vertical-scroll-proportion="-6.309091">
+              <caret line="187" column="34" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
               <folding>
-                <element signature="n#style#0;n#button#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-                <marker date="1446107331746" expanded="true" signature="31304:31322" placeholder="..." />
-                <marker date="1446107331746" expanded="true" signature="31474:31492" placeholder="..." />
-                <marker date="1446107331746" expanded="true" signature="32253:32271" placeholder="..." />
-                <marker date="1446107331746" expanded="true" signature="36969:36980" placeholder="..." />
-                <marker date="1446107331746" expanded="true" signature="38549:38564" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="15409:15432" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="15520:15543" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="15656:15679" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="15782:15805" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="16443:16466" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="16545:16568" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="16647:16670" placeholder="..." />
+                <marker date="1446110929379" expanded="true" signature="16773:16796" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -68,17 +66,17 @@
         <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lang.ini" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lang.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9467919">
-              <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -118,12 +116,14 @@
         <option value="$PROJECT_DIR$/apps/auction/views/bidderInfo.html" />
         <option value="$PROJECT_DIR$/apps/auction/views/bidderItem.html" />
         <option value="$PROJECT_DIR$/apps/auction/views/bidderPrice.html" />
-        <option value="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" />
         <option value="$PROJECT_DIR$/apps/common/entity/EntityBase.php" />
         <option value="$PROJECT_DIR$/apps/auction/service/BidderInfoService.php" />
         <option value="$PROJECT_DIR$/apps/auction/views/bidderPayment.html" />
+        <option value="$PROJECT_DIR$/apps/auction/views/bidderAuction.html" />
+        <option value="$PROJECT_DIR$/apps/auction/views/bidderPriceCF.html" />
         <option value="$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/auction/i18n/lang.ini" />
+        <option value="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" />
       </list>
     </option>
   </component>
@@ -644,7 +644,19 @@
       <option name="project" value="LOCAL" />
       <updated>1446092611747</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="bidderItem, bidderPrice, bidderPayment =&gt; use i18n">
+      <created>1446107484633</created>
+      <option name="number" value="00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1446107484633</updated>
+    </task>
+    <task id="LOCAL-00043" summary="bidderAuction =&gt; use i18n">
+      <created>1446107883760</created>
+      <option name="number" value="00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1446107883760</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -685,8 +697,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="userManager =&gt; css completed" />
-    <MESSAGE value="warehouseInfo =&gt; use i18n" />
     <MESSAGE value="RiceInfo, RiceTacking =&gt; add warehouse code and stack code" />
     <MESSAGE value="warehouseInfo =&gt; use stack code to tracking" />
     <MESSAGE value="warehouseImport =&gt; use i18n" />
@@ -710,34 +720,15 @@
     <MESSAGE value="bidderInfo =&gt; use i18n" />
     <MESSAGE value="bidderItem =&gt; use i18n" />
     <MESSAGE value="bidderItem, bidderPrice =&gt; use i18n" />
-    <option name="LAST_COMMIT_MESSAGE" value="bidderItem, bidderPrice =&gt; use i18n" />
+    <MESSAGE value="bidderItem, bidderPrice, bidderPayment =&gt; use i18n" />
+    <MESSAGE value="bidderAuction =&gt; use i18n" />
+    <option name="LAST_COMMIT_MESSAGE" value="bidderAuction =&gt; use i18n" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-173.92308">
-          <caret line="266" column="48" selection-start-line="266" selection-start-column="48" selection-end-line="266" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.1254072">
-          <caret line="73" column="76" selection-start-line="73" selection-start-column="76" selection-end-line="73" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/service/ViewRicePriceAvgService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.747557">
-          <caret line="29" column="8" selection-start-line="29" selection-start-column="8" selection-end-line="29" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.115385">
@@ -1076,19 +1067,104 @@
           <folding>
             <element signature="n#style#0;n#button#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <marker date="1446107331746" expanded="true" signature="31304:31322" placeholder="..." />
-            <marker date="1446107331746" expanded="true" signature="31474:31492" placeholder="..." />
-            <marker date="1446107331746" expanded="true" signature="32253:32271" placeholder="..." />
-            <marker date="1446107331746" expanded="true" signature="36969:36980" placeholder="..." />
-            <marker date="1446107331746" expanded="true" signature="38549:38564" placeholder="..." />
+            <marker date="1446107331746" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107331746" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107331746" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107331746" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107331746" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini">
+    <entry file="file://$PROJECT_DIR$/apps/auction/views/bidderAuction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.329527">
+          <caret line="114" column="31" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
+          <folding>
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1446107815226" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/auction/service/BidderAuctionService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.44371942">
+          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/auction/views/bidderPriceCF.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.309091">
+          <caret line="187" column="34" selection-start-line="187" selection-start-column="34" selection-end-line="187" selection-end-column="34" />
+          <folding>
+            <marker date="1446110929379" expanded="true" signature="15409:15432" placeholder="..." />
+            <marker date="1446110929379" expanded="true" signature="15520:15543" placeholder="..." />
+            <marker date="1446110929379" expanded="true" signature="15656:15679" placeholder="..." />
+            <marker date="1446110929379" expanded="true" signature="15782:15805" placeholder="..." />
+            <marker date="1446110929379" expanded="true" signature="16443:16466" placeholder="..." />
+            <marker date="1446110929379" expanded="true" signature="16545:16568" placeholder="..." />
+            <marker date="1446110929379" expanded="true" signature="16647:16670" placeholder="..." />
+            <marker date="1446110929379" expanded="true" signature="16773:16796" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="24" selection-start-line="0" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1096,15 +1172,15 @@
     <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang.ini">
+    <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9467919">
-          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.8403756">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding />
         </state>
       </provider>
