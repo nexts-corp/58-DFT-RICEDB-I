@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบประมูล</li>
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding" id="header1">ผลการประมูล</h1>
+                    <h1 class="none-padding" id="header1">{{#i18n}}auction.result.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">หน้าหลักผลการประมูล</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.result.buttonHome{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -37,9 +37,9 @@
                     <table class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
                             <tr>
-                                <th class="text-center" style="vertical-align: middle;">ลำดับ</th>
-                                <th class="text-center" style="vertical-align: middle;">ผลการประมูล</th>
-                                <th class="text-center" style="vertical-align: middle;">แสดงผล</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.no{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.result{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.show{{/i18n}}</th>
                             </tr>
                         </thead>
                         <tbody>
