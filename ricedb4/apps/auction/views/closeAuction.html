@@ -5,14 +5,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบประมูล</li>
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding" id="header1">ปิดการประมูล</h1>
+                    <h1 class="none-padding" id="header1">{{#i18n}}auction.close.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
         </div>
         <div class="row">
             <div class="col-sm-12 text-center">
-                <button class="btn btn-primary btn-lg" id="btnClose">ปิดการประมูลครั้งที่ {{#auction}}{{status}}{{/auction}}</button>
+                <button class="btn btn-primary btn-lg" id="btnClose">{{#i18n}}auction.close{{/i18n}} {{#auction}}{{status}}{{/auction}}</button>
             </div>
         </div>
     </div><!--  container  -->
