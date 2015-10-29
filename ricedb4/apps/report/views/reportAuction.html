@@ -5,35 +5,26 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ระบบรายงาน</li>
+                        <li><a href="#">{{#i18n}}report.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}report.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding" id="header1">การประมูล</h1>
+                    <h1 class="none-padding" id="header1">{{#i18n}}report.auction.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
     </section>
 
     <hr class="tall dashboard">
-    <div class="sort-source-wrapper">
-        <div class="container">
-            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
-                <li class="active">
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">ผลการประมูล</button>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <div class="container"><!-- table shown bidder information list -->
         <div class="row">
             <div class="col-md-12" style="text-align: center; margin: 15px;">
                 <div class="form-group">
-                    <label class="col-md-3 control-label req" for="bidderHistoryId">ครั้งที่</label>
+                    <label class="col-md-3 control-label text-right req" for="auCode">{{#i18n}}report.auctionNo{{/i18n}} :</label>
                     <div class="col-md-6">
                         <select class="form-control input-sm" name="auCode" id="auCode" required>
                         </select>
@@ -46,9 +37,9 @@
                     <table class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
                         <tr>
-                            <th class="text-center">ลำดับ</th>
-                            <th class="text-center">รายงาน</th>
-                            <th class="text-center">Export</th>
+                            <th class="text-center">{{#i18n}}report.no{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}report.doc{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}report.export{{/i18n}}</th>
                         </tr>
                         </thead>
                         <tbody id="bidderBody">

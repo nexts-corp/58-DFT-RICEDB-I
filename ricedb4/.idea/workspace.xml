@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863593ba-7750-4ad6-8a1c-04b49bd87cc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/views/bidderReturn.html" afterPath="$PROJECT_DIR$/apps/auction/views/bidderReturn.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/i18n/lang.ini" afterPath="$PROJECT_DIR$/apps/auction/i18n/lang.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini" afterPath="$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" afterPath="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/report/i18n/lang_en_US.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/report/i18n/lang.ini" afterPath="$PROJECT_DIR$/apps/report/i18n/lang.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/report/i18n/lang_th_TH.ini" afterPath="$PROJECT_DIR$/apps/report/i18n/lang_th_TH.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/report/views/reportAuction.html" afterPath="$PROJECT_DIR$/apps/report/views/reportAuction.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ricedb4.iws" />
@@ -34,51 +34,43 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini">
+        <entry file="file://$PROJECT_DIR$/apps/report/i18n/lang_th_TH.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bidderReturn.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/auction/views/bidderReturn.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="4.818182">
-              <caret line="380" column="61" selection-start-line="380" selection-start-column="61" selection-end-line="380" selection-end-column="61" />
+              <caret line="7" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="lang_en_US.ini" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini">
+        <entry file="file://$PROJECT_DIR$/apps/report/i18n/lang_en_US.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="lang.ini" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang.ini">
+        <entry file="file://$PROJECT_DIR$/apps/report/i18n/lang.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9467919">
-              <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.18622848">
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BidderReturnService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/auction/service/BidderReturnService.php">
+      <file leaf-file-name="reportAuction.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/report/views/reportAuction.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="60.115383">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="27.461538">
+              <caret line="9" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+              <folding>
+                <marker date="1446115607171" expanded="true" signature="3424:3461" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,10 +114,15 @@
         <option value="$PROJECT_DIR$/apps/auction/views/bidderPayment.html" />
         <option value="$PROJECT_DIR$/apps/auction/views/bidderAuction.html" />
         <option value="$PROJECT_DIR$/apps/auction/views/bidderPriceCF.html" />
-        <option value="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" />
         <option value="$PROJECT_DIR$/apps/auction/views/bidderReturn.html" />
+        <option value="$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini" />
+        <option value="$PROJECT_DIR$/apps/auction/views/closeAuction.html" />
         <option value="$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/auction/i18n/lang.ini" />
+        <option value="$PROJECT_DIR$/apps/report/i18n/lang_th_TH.ini" />
+        <option value="$PROJECT_DIR$/apps/report/views/reportAuction.html" />
+        <option value="$PROJECT_DIR$/apps/report/i18n/lang_en_US.ini" />
+        <option value="$PROJECT_DIR$/apps/report/i18n/lang.ini" />
       </list>
     </option>
   </component>
@@ -294,7 +291,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="auction" />
+              <option name="myItemId" value="report" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -312,7 +309,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="auction" />
+              <option name="myItemId" value="report" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -334,29 +331,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="auction" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ricedb4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ricedb4" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="apps" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="auction" />
+              <option name="myItemId" value="report" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -686,7 +661,19 @@
       <option name="project" value="LOCAL" />
       <updated>1446110991013</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="bidderReturn =&gt; use i18n">
+      <created>1446113186421</created>
+      <option name="number" value="00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1446113186421</updated>
+    </task>
+    <task id="LOCAL-00046" summary="closeAuction =&gt; use i18n">
+      <created>1446113498370</created>
+      <option name="number" value="00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1446113498370</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -727,8 +714,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="warehouseInfo =&gt; use stack code to tracking" />
-    <MESSAGE value="warehouseImport =&gt; use i18n" />
     <MESSAGE value="viewRicePrice =&gt; use i18n" />
     <MESSAGE value="viewRicePriceAvg =&gt; use i18n" />
     <MESSAGE value="viewInventory =&gt; use i18n" />
@@ -752,48 +737,15 @@
     <MESSAGE value="bidderItem, bidderPrice, bidderPayment =&gt; use i18n" />
     <MESSAGE value="bidderAuction =&gt; use i18n" />
     <MESSAGE value="bidderPriceCF =&gt; use i18n" />
-    <option name="LAST_COMMIT_MESSAGE" value="bidderPriceCF =&gt; use i18n" />
+    <MESSAGE value="bidderReturn =&gt; use i18n" />
+    <MESSAGE value="closeAuction =&gt; use i18n" />
+    <option name="LAST_COMMIT_MESSAGE" value="closeAuction =&gt; use i18n" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/manifest.server.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49918434">
-          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/reserve/views/manageReserve.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5546493">
-          <caret line="378" column="43" selection-start-line="378" selection-start-column="43" selection-end-line="378" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/reserve/views/exportReserve.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24959217">
-          <caret line="33" column="18" selection-start-line="33" selection-start-column="18" selection-end-line="33" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/reserve/views/importReserve.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.406199">
-          <caret line="281" column="60" selection-start-line="281" selection-start-column="60" selection-end-line="281" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/user/views/userManager.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19412725">
-          <caret line="328" column="48" selection-start-line="328" selection-start-column="48" selection-end-line="328" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/apps/release/service/CompareFloorPriceService.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3327895">
@@ -1187,8 +1139,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/auction/views/bidderReturn.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.818182">
-          <caret line="380" column="61" selection-start-line="380" selection-start-column="61" selection-end-line="380" selection-end-column="61" />
+        <state vertical-scroll-proportion="5.892123">
+          <caret line="412" column="33" selection-start-line="412" selection-start-column="33" selection-end-line="412" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1196,7 +1148,7 @@
     <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_th_TH.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="27" selection-start-line="0" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <caret line="85" column="42" selection-start-line="0" selection-start-column="0" selection-end-line="112" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -1204,15 +1156,57 @@
     <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+          <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/auction/i18n/lang.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9467919">
-          <caret line="111" column="0" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/auction/views/closeAuction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.8858075">
+          <caret line="77" column="31" selection-start-line="77" selection-start-column="31" selection-end-line="77" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/report/i18n/lang_th_TH.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/report/i18n/lang_en_US.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/report/views/reportAuction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="27.461538">
+          <caret line="9" column="25" selection-start-line="0" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
+          <folding>
+            <marker date="1446115607171" expanded="true" signature="3424:3461" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/report/i18n/lang.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18622848">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
           <folding />
         </state>
       </provider>
