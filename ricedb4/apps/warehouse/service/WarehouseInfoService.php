@@ -19,95 +19,119 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
     }
     
     public function listsAllRice($columns, $draw, $start, $length){
-        $condArr1 = [];
-        $condArr2 = [];
+        $condArr = [];
 
         //search zone
         if($columns[1]["search"]["value"] != ""){
             $val = $columns[1]["search"]["value"];
-            $condArr1[] = "LK_Zone_Id = '".$val."'";
-            $condArr2[] = "zn.id = '".$val."'";
+            $condArr[] = "zoneId = '".$val."'";
         }
 
         //search province
         if($columns[2]["search"]["value"] != ""){
             $val = $columns[2]["search"]["value"];
-            $condArr1[] = "LK_Province_Id = '".$val."'";
-            $condArr2[] = "pv.id = '".$val."'";
+            $condArr[] = "provinceId = '".$val."'";
         }
 
         //search code
         if($columns[3]["search"]["value"] != ""){
             $val = $columns[3]["search"]["value"];
-            $condArr1[] = "Code LIKE '%".$val."%'";
-            $condArr2[] = "ri.code LIKE '%".$val."%'";
+            $condArr[] = "code LIKE '%".$val."%'";
         }
 
         //search silo
         if($columns[4]["search"]["value"] != ""){
             $val = $columns[4]["search"]["value"];
-            $condArr1[] = "Silo LIKE '%".$val."%'";
-            $condArr2[] = "ri.silo LIKE '%".$val."%'";
+            $condArr[] = "silo LIKE '%".$val."%'";
         }
 
         //search project
         if($columns[8]["search"]["value"] != ""){
             $val = $columns[8]["search"]["value"];
-            $condArr1[] = "LK_Project_Id = '".$val."'";
-            $condArr2[] = "pj.id = '".$val."'";
+            $condArr[] = "projectId = '".$val."'";
         }
 
         //search type
         if($columns[9]["search"]["value"] != ""){
             $val = $columns[9]["search"]["value"];
-            $condArr1[] = "LK_Type_Id = '".$val."'";
-            $condArr2[] = "tp.id = '".$val."'";
+            $condArr[] = "typeId = '".$val."'";
         }
 
         //search grade
         if($columns[10]["search"]["value"] != ""){
             $val = $columns[10]["search"]["value"];
-            $condArr1[] = "LK_Grade_Id = '".$val."'";
-            $condArr2[] = "gd.id = '".$val."'";
+            $condArr[] = "gradeId = '".$val."'";
         }
 
         //search status
         if($columns[12]["search"]["value"] != ""){
             $val = $columns[12]["search"]["value"];
-            $condArr1[] = "LK_Status_Keyword = '".$val."'";
-            $condArr2[] = "st.keyword = '".$val."'";
+            $condArr[] = "statusKeyword = '".$val."'";
         }
 
-        $condition1 = '';
-        $condition2 = '';
-        if(count($condArr1) > 0){
-            $condition1 = "WHERE ".implode(" AND ", $condArr1);
-            $condition2 = "WHERE ".implode(" AND ", $condArr2);
+        $condition = '';
+        if(count($condArr) > 0){
+            $condition = "WHERE ".implode(" AND ", $condArr);
         }
-        $sqlC = "SELECT"
+        /*$sqlC = "SELECT"
                 ." COUNT(*) AS rows"
             ." FROM dft_Rice_Info ri"
             ." JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
             ." JOIN dft_LK_Zone zn ON zn.Id = pv.LK_Zone_Id"
-            ." ".$condition1;
+            ." ".$condition1;*/
+        $sqlC = "SELECT count(data.id) AS rows FROM"
+                ." (SELECT"
+                    ." ri.Id AS id, pv.LK_Zone_Id AS zoneId, ri.LK_Province_Id AS provinceId, ri.Code AS code,"
+                    ." ri.LK_Project_Id AS projectId, ri.LK_Type_Id AS typeId, ri.LK_Grade_Id AS gradeId,"
+                    ." (CASE"
+                        ." WHEN rt.LK_Status_Keyword is not null THEN rt.LK_Status_Keyword"
+                        ." ELSE ri.LK_Status_Keyword"
+                    ." END) AS statusKeyword"
+                ." FROM dft_Rice_Info ri"
+                ." LEFT JOIN dft_Rice_Tracking rt ON rt.Stack_Code = ri.Stack_Code"
+                ." INNER JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
+                ." INNER JOIN dft_LK_Zone zn ON zn.Id = pv.LK_Zone_Id"
+                ." WHERE rt.Id is null OR rt.Id ="
+                    ." (SELECT MAX(Id)"
+                    ." FROM   dft_Rice_Tracking"
+                    ." WHERE  Stack_Code = ri.Stack_Code)"
+                ." ) data"
+                ." LEFT JOIN dft_LK_Status st ON st.Keyword = data.statusKeyword"
+                ." ".$condition;
 
         $count = $this->datacontext->pdoQuery($sqlC);
 
         $sql = "SELECT"
-                ." ri.id, pv.zoneId, zn.zoneNameTH, ri.provinceId, pv.provinceNameTH, ri.code, ri.silo, ac.associate,"
-                ." ri.warehouse, ri.stack, ri.projectId, pj.project, ri.typeId, tp.type, ri.gradeId, gd.grade,"
-                ." ri.discountRate, ri.statusKeyword, st.status"
-            ." FROM ".$this->ent."\\RiceInfo ri"
-            ." JOIN ".$this->ent."\\Province pv WITH pv.id = ri.provinceId"
-            ." JOIN ".$this->ent."\\Zone zn WITH zn.id = pv.zoneId"
-            ." JOIN ".$this->ent."\\Associate ac WITH ac.id = ri.associateId"
-            ." JOIN ".$this->ent."\\Project pj WITH pj.id = ri.projectId"
-            ." JOIN ".$this->ent."\\Type tp WITH tp.id = ri.typeId"
-            ." JOIN ".$this->ent."\\Grade gd WITH gd.id = ri.gradeId"
-            ." LEFT JOIN ".$this->ent."\\Status st WITH st.keyword = ri.statusKeyword"
-            ." ".$condition2;
+                ." data.*, st.Status AS status FROM"
+                ." (SELECT"
+                    ." ri.Id AS id, pv.LK_Zone_Id AS zoneId, zn.Zone_Name_TH AS zoneNameTH, ri.LK_Province_Id AS provinceId,"
+                    ." pv.Province_Name_TH AS provinceNameTH, ri.Code AS code, ri.Silo AS silo, ac.Associate AS associate,"
+                    ." ri.Warehouse AS warehouse, ri.Stack AS stack, ri.LK_Project_Id AS projectId, pj.Project AS project,"
+                    ." ri.LK_Type_Id AS typeId, tp.Type AS type, ri.LK_Grade_Id AS gradeId, gd.Grade AS grade,"
+                    ." ri.Discount_Rate AS discountRate,"
+                    ." (CASE"
+                        ." WHEN rt.LK_Status_Keyword is not null THEN rt.LK_Status_Keyword"
+                        ." ELSE ri.LK_Status_Keyword"
+                    ." END) AS statusKeyword"
+                ." FROM dft_Rice_Info ri"
+                ." LEFT JOIN dft_Rice_Tracking rt ON rt.Stack_Code = ri.Stack_Code"
+                ." INNER JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
+                ." INNER JOIN dft_LK_Zone zn ON zn.Id = pv.LK_Zone_Id"
+                ." INNER JOIN dft_LK_Associate ac ON ac.Id = ri.LK_Associate_Id"
+                ." INNER JOIN dft_LK_Project pj ON pj.Id = ri.LK_Project_Id"
+                ." INNER JOIN dft_LK_Type tp ON tp.Id = ri.LK_Type_Id"
+                ." INNER JOIN dft_LK_Grade gd ON gd.Id = ri.LK_Grade_Id"
+                ." WHERE rt.Id is null OR rt.Id ="
+                    ." (SELECT MAX(Id)"
+                    ." FROM   dft_Rice_Tracking"
+                    ." WHERE  Stack_Code = ri.Stack_Code)"
+                ." ) data"
 
-        $data = $this->datacontext->getObject($sql, array(), $length, $start);
+                ." LEFT JOIN dft_LK_Status st ON st.Keyword = data.statusKeyword"
+                ." ".$condition." ORDER BY data.Id OFFSET ".$start." ROWS FETCH NEXT ".$length." ROWS ONLY";
+
+        //return $sql;
+        $data = $this->datacontext->pdoQuery($sql);
 
         $this->getResponse()->add("recordsTotal", $count[0]["rows"]);
         $this->getResponse()->add("recordsFiltered", $count[0]["rows"]);
@@ -227,7 +251,7 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
         $data2 = $this->datacontext->getObject($sql2, $param2);
         foreach($data2 as $key => $val){
             array_push($status, array(
-                "status" => $data2[0]["status"]
+                "status" => $val["status"]
             ));
         }
 
