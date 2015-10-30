@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863593ba-7750-4ad6-8a1c-04b49bd87cc3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/warehouse/views/js/warehouseImport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html" afterPath="$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/warehouse/views/js/viewRicePrice.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/apps/warehouse/views/js/viewRicePriceAvg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html" afterPath="$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html" afterPath="$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ricedb4.iws" />
@@ -31,41 +33,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="viewInventory.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewInventory.html">
+      <file leaf-file-name="viewRicePriceAvg.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="36.153847">
-              <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
+            <state vertical-scroll-proportion="-18.115385">
+              <caret line="91" column="71" selection-start-line="91" selection-start-column="71" selection-end-line="91" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="warehouseImport.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html">
+      <file leaf-file-name="viewRicePriceAvg.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/js/viewRicePriceAvg.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.461538">
-              <caret line="294" column="70" selection-start-line="294" selection-start-column="70" selection-end-line="294" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="warehouseInfo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/warehouseInfo.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.461538">
-              <caret line="198" column="82" selection-start-line="194" selection-start-column="0" selection-end-line="198" selection-end-column="82" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="warehouseImport.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/apps/warehouse/views/js/warehouseImport.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19318181">
-              <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.4237013">
+              <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -91,9 +73,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/logs/Log_20151026.log" />
-        <option value="$PROJECT_DIR$/apps/release/views/manageShippingCost.html" />
-        <option value="$PROJECT_DIR$/apps/reserve/i18n/lang.ini" />
         <option value="$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang.ini" />
         <option value="$PROJECT_DIR$/apps/warehouse/i18n/lang_en_US.ini" />
@@ -141,6 +120,10 @@
         <option value="$PROJECT_DIR$/apps/warehouse/views/js/warehouseInfo.js" />
         <option value="$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html" />
         <option value="$PROJECT_DIR$/apps/warehouse/views/js/warehouseImport.js" />
+        <option value="$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html" />
+        <option value="$PROJECT_DIR$/apps/warehouse/views/js/viewRicePrice.js" />
+        <option value="$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html" />
+        <option value="$PROJECT_DIR$/apps/warehouse/views/js/viewRicePriceAvg.js" />
       </list>
     </option>
   </component>
@@ -455,12 +438,6 @@
       <option name="number" value="Default" />
       <updated>1444892691448</updated>
     </task>
-    <task id="LOCAL-00004" summary="userManager =&gt; use i18n">
-      <created>1445245497247</created>
-      <option name="number" value="00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1445245497247</updated>
-    </task>
     <task id="LOCAL-00005" summary="userManager =&gt; use i18n">
       <created>1445322805795</created>
       <option name="number" value="00005" />
@@ -749,14 +726,20 @@
       <option name="project" value="LOCAL" />
       <updated>1446191644096</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="warehouseImport was completed">
+      <created>1446192545159</created>
+      <option name="number" value="00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1446192545159</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24960254" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28298888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32608697" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -812,7 +795,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="manageRelease =&gt; use i18n" />
     <MESSAGE value="manageDiscount =&gt; use i18n" />
     <MESSAGE value="manageShippingCost =&gt; use i18n" />
     <MESSAGE value="encoding" />
@@ -837,41 +819,14 @@
     <MESSAGE value="เพิ่ม Follow Menu" />
     <MESSAGE value="warehouseInfo completed" />
     <MESSAGE value="userManager &amp; warehouseInfo was completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="userManager &amp; warehouseInfo was completed" />
+    <MESSAGE value="warehouseImport was completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="warehouseImport was completed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/apps/user/i18n/lang.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.69170576">
-          <caret line="26" column="40" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="67" column="43" selection-start-line="67" selection-start-column="43" selection-end-line="67" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7339593">
-          <caret line="63" column="42" selection-start-line="63" selection-start-column="42" selection-end-line="63" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/release/views/compareFloorPrice.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4420881">
-          <caret line="114" column="32" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/excel/phpexcel/Documentation/API/js/jquery.tools.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -1203,34 +1158,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewInventory.html">
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/js/warehouseImport.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="36.153847">
-          <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.19318181">
+          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/warehouse/views/warehouseInfo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.461538">
+        <state vertical-scroll-proportion="0.76949155">
           <caret line="198" column="82" selection-start-line="194" selection-start-column="0" selection-end-line="198" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewInventory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5932204">
+          <caret line="148" column="4" selection-start-line="148" selection-start-column="4" selection-end-line="148" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.461538">
-          <caret line="294" column="70" selection-start-line="294" selection-start-column="70" selection-end-line="294" selection-end-column="70" />
+        <state vertical-scroll-proportion="0.6898305">
+          <caret line="290" column="0" selection-start-line="290" selection-start-column="0" selection-end-line="294" selection-end-column="84" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/js/warehouseImport.js">
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/js/viewRicePrice.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19318181">
-          <caret line="7" column="34" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePrice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.153847">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="93" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/viewRicePriceAvg.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.115385">
+          <caret line="91" column="71" selection-start-line="91" selection-start-column="71" selection-end-line="91" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/warehouse/views/js/viewRicePriceAvg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4237013">
+          <caret line="31" column="61" selection-start-line="31" selection-start-column="61" selection-end-line="31" selection-end-column="61" />
           <folding />
         </state>
       </provider>
