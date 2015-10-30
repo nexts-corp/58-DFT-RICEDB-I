@@ -10,14 +10,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ติดตาม</li>
+                        <li><a href="#">{{#i18n}}tracking.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}tracking.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">คืนหลักค้ำประกัน</h1>
+                    <h1 class="none-padding">{{#i18n}}tracking.return.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li data-option-value=".websites" class="padding-left">
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">รายชื่อผู้เสนอซื้อ</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}tracking.buttonInfoList{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -41,10 +41,10 @@
                 <div id="bidderTable" class="col-md-12" style="margin-top: 10px;">
                     <section class="panel form-wizard" id="w1"><!-- search -->
                         <div class="panel-body panel-body-nopadding">
-                            <div class="col-md-12">
+                            <div class="col-md-12" style="margin: 20px 0px 20px 0px;">
                                 <div class="col-sm-8" >
                                     <div class="col-sm-8">
-                                        <label class="col-sm-5 control-label">การประมูลครั้งที่</label>
+                                        <label class="col-sm-5 control-label text-right">{{#i18n}}tracking.auctionNo{{/i18n}} :</label>
                                         <div class="col-sm-7">
                                             <select id="auction" class="form-control">
                                                 <option value="0">เลือกทั้งหมด</option>
@@ -52,11 +52,11 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input type="button" id="btn_date" class="btn btn-primary" value="เลือก" />
+                                        <button id="btn_date" class="btn btn-primary">{{#i18n}}tracking.buttonShow{{/i18n}}</button>
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label class="col-md-4 control-label" for="searchQueue">คิวที่</label>
+                                    <label class="col-md-4 control-label text-right" for="searchQueue">{{#i18n}}tracking.queue{{/i18n}} :</label>
                                     <div class="col-md-8">
                                         <select class="form-control input-sm" name="searchQueue" id="searchQueue" required>
                                         </select>
@@ -66,13 +66,13 @@
                         </div>
                     </section><!-- end search -->
 
-                    <div class="table-responsive col-md-12">
+                    <div class="table-responsive col-md-12" style="margin-top: 20px;">
                         <table id="table" class="table table-bordered table-striped table-condensed mb-none">
                             <thead>
                                 <tr>
-                                    <th class="text-center col-md-2">คิวที่</th>
-                                    <th class="text-left col-md-7">ผู้เสนอซื้อ</th>
-                                    <th class="text-center col-md-3">คืนหลักค้ำประกัน</th>
+                                    <th class="text-center col-md-2">{{#i18n}}tracking.queue{{/i18n}}</th>
+                                    <th class="text-center col-md-7">{{#i18n}}tracking.bidder{{/i18n}}</th>
+                                    <th class="text-center col-md-3">{{#i18n}}tracking.action{{/i18n}}</th>
                                 </tr>
                             </thead>
                             <tbody id="bidderBody">
@@ -88,18 +88,18 @@
                         <div class="col-md-12 table-responsive">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h2 class="panel-title">รายละเอียดผู้เสนอซื้อ</h2>
+                                    <h2 class="panel-title">{{#i18n}}tracking.return.panelInfo{{/i18n}}</h2>
                                     <div style="float: right; margin-top: -25px;">
-                                        <button class="btn btn-primary checkList"><i class="fa fa-print"></i> ใบคืนหลักค้ำประกัน</button>
+                                        <button class="btn btn-primary checkList"><i class="fa fa-print"></i> {{#i18n}}tracking.buttonReturn{{/i18n}}</button>
                                     </div>
                                 </div>
                                 <div class="panel-body">
                                     <table class="table table-bordered table-striped table-condensed mb-none">
                                         <thead>
                                             <tr>
-                                                <th class="text-center col-md-2">คิวที่</th>
-                                                <th class="text-center col-md-8">ผู้เสนอซื้อ</th>
-                                                <th class="text-center col-md-2">เบอร์ติดต่อ</th>
+                                                <th class="text-center col-md-2">{{#i18n}}tracking.queue{{/i18n}}</th>
+                                                <th class="text-center col-md-8">{{#i18n}}tracking.bidder{{/i18n}}</th>
+                                                <th class="text-center col-md-2">{{#i18n}}tracking.mobile{{/i18n}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="bdBody">
@@ -117,26 +117,25 @@
                                     <div class="panel-actions">
                                         <a href="#" class="fa fa-caret-up"></a>
                                     </div>
-                                    <h2 class="panel-title">คลังที่ชนะการประมูล</h2>
+                                    <h2 class="panel-title">{{#i18n}}tracking.return.panelWinner{{/i18n}}</h2>
                                 </div>
                                 <div class="panel-body">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">ลำดับ</th>
-                                                <th class="text-center">จังหวัด</th>
-                                                <th class="text-center">หน่วยงาน</th>
-                                                <th class="text-center">คลังสินค้า</th>
-                                                <!--                                                <th class="text-center">น้ำหนักรวมกระสอบ (ตัน)</th>-->
-                                                <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
-                                                <th class="text-center">จำนวนหลักค้ำประกัน 2%</th>
-                                                <th class="text-center">สถานะ</th>
-                                                <th class="text-center">คำนวณ</th>
+                                                <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.valuePayment{{/i18n}} (2%)</th>
+                                                <th class="text-center">{{#i18n}}tracking.status{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.calculate{{/i18n}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="whBody">
                                             <tr>
-                                                <td colspan="8" class="text-center">กำลังโหลดข้อมูล</td>
+                                                <td colspan="8" class="text-center">-</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -149,38 +148,38 @@
                                     <div class="panel-actions">
                                         <a href="#" class="fa fa-caret-up"></a>
                                     </div>
-                                    <h2 class="panel-title">ข้อมูลหลักค้ำประกันที่ยังเก็บไว้ <span class='countAll'>0</span> ฉบับ</h2>
+                                    <h2 class="panel-title">{{#i18n}}tracking.return.panelHold{{/i18n}} <span class='countAll'>0</span> {{#i18n}}tracking.paymentUnit{{/i18n}}</h2>
                                 </div>
                                 <div class="panel-body">
                                     <div class="col-md-12">
                                         <div class='col-md-6'>
-                                            <p>จำนวนที่เลือก <span id='countCheckbox'>0</span>/<span class='countAll'>0</span></p>
+                                            <p>{{#i18n}}tracking.countChoose{{/i18n}} <span id='countCheckbox'>0</span>/<span class='countAll'>0</span></p>
                                         </div>
                                         <div class="col-md-6 text-right pointer">
-                                            <input type="checkbox" name="all" id="checkall" /> <label for="checkall">เลือกทั้งหมด</label>
+                                            <input type="checkbox" name="all" id="checkall" /> <label for="checkall">{{#i18n}}tracking.chooseAll{{/i18n}}</label>
                                         </div>
                                     </div>
                                     <table id="pTable" class="table table-bordered table-hover">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">ลำดับ</th>
-                                                <th class="text-center">ประเภท</th>
-                                                <th class="text-center">ธนาคาร</th>
-                                                <th class="text-center">วันที่</th>
-                                                <th class="text-center">เลขที่</th>
-                                                <th class="text-center">จำนวน (บาท)</th>
-                                                <th class="text-center">หมายเหตุ</th>
-                                                <th class="text-center">คืน</th>
+                                                <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.typePayment{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bank{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bankDate{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bankNo{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bankAmount{{/i18n}} ({{#i18n}}tracking.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="paymentBody">
                                             <tr>
-                                                <td colspan="8" class="text-center">Loading...</td>
+                                                <td colspan="8" class="text-center">-</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="col-md-12 text-center">
-                                        <button id="btnSave" class="btn btn-primary">บันทึก</button>
+                                        <button id="btnSave" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}tracking.buttonSave{{/i18n}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -191,39 +190,31 @@
                                     <div class="panel-actions">
                                         <a href="#" class="fa fa-caret-up"></a>
                                     </div>
-                                    <h2 class="panel-title">ข้อมูลหลักค้ำประกันที่คืนแล้ว จำนวน <span id='countReturn'>0</span> ฉบับ</h2>
+                                    <h2 class="panel-title">{{#i18n}}tracking.return.panelReturn{{/i18n}} <span id='countReturn'>0</span> {{#i18n}}tracking.paymentUnit{{/i18n}}</h2>
                                 </div>
                                 <div class="panel-body">
-                                    <!--                                    <div class="col-md-12">
-                                                                            <div class='col-md-6'>
-                                                                                <p></p>
-                                                                            </div>
-                                                                        </div>-->
                                     <table  class="table table-bordered table-striped table-condensed mb-none">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">ลำดับ</th>
-                                                <th class="text-center">ประเภท</th>
-                                                <th class="text-center">ธนาคาร</th>
-                                                <th class="text-center">วันที่</th>
-                                                <th class="text-center">เลขที่</th>
-                                                <th class="text-center">จำนวน (บาท)</th>
-                                                <th class="text-center">วันที่คืน</th>
-                                                <th class="text-center">คืน</th>
+                                                <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.typePayment{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bank{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bankDate{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bankNo{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.bankAmount{{/i18n}} ({{#i18n}}tracking.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="returnBody">
                                             <tr>
-                                                <td colspan="8" class="text-center">Loading...</td>
+                                                <td colspan="8" class="text-center">-</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
 
                     <div class="col-md-2">
@@ -231,17 +222,17 @@
                             <nav id="affix-nav" class="sidebar">
                                 <div class="nav sidenav" data-spy="affix" data-offset-top="0" style="font-size: 130%; min-width: 220px; border: 2px solid #aaa; padding: 9px;">                                    
 
-                                    <div class="text-danger">คืนได้ไม่เกิน</div>
-                                    <div class="text-danger text-right text-bold"><span id="txtReturn">0</span> บาท</div><br>
+                                    <div class="text-danger">{{#i18n}}tracking.canReturn{{/i18n}}</div>
+                                    <div class="text-danger text-right text-bold"><span id="txtReturn">0</span> {{#i18n}}tracking.bath{{/i18n}}</div><br>
 
-                                    <div class="text-info">คลังที่เลือก</div>
-                                    <div class="text-info text-right text-bold"><span id="txtWarehouse">0</span> บาท</div><br>
+                                    <div class="text-info">{{#i18n}}tracking.siloValueChoose{{/i18n}}</div>
+                                    <div class="text-info text-right text-bold"><span id="txtWarehouse">0</span> {{#i18n}}tracking.bath{{/i18n}}</div><br>
                                     <hr>
-                                    <div class="text-success">หลักประกันที่เลือก</div>
-                                    <div class="text-success text-right text-bold"><span id="txtSelect">0</span> บาท</div><br>
+                                    <div class="text-success">{{#i18n}}tracking.paymentChoose{{/i18n}}</div>
+                                    <div class="text-success text-right text-bold"><span id="txtSelect">0</span> {{#i18n}}tracking.bath{{/i18n}}</div><br>
 
-                                    <div class="text-warning">หลักประกันคงเหลือ</div>
-                                    <div class="text-warning text-right text-bold"><span id="txtBalance">0</span> บาท</div>
+                                    <div class="text-warning">{{#i18n}}tracking.paymentHold{{/i18n}}</div>
+                                    <div class="text-warning text-right text-bold"><span id="txtBalance">0</span> {{#i18n}}tracking.bath{{/i18n}}</div>
 
                                 </div>
                             </nav>
@@ -386,7 +377,7 @@
                     "data": "bidderHistoryId",
                     "sClass": "text-center col-md-2",
                     "render": function (data) {
-                        var content = '<button class="btn btn-primary return" data-hid="' + data + '"><i class="fa fa-pencil">คืน</i></button>';
+                        var content = '<button class="btn btn-primary return" data-hid="' + data + '"><i class="fa fa-pencil"></i> คืน</button>';
                         return content;
                     }
                 }
