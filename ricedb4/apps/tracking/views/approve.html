@@ -10,54 +10,51 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">หน้าหลัก</a></li>
-                        <li class="active">ติดตาม</li>
+                        <li><a href="#">{{#i18n}}tracking.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}tracking.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">อนุมัติคลัง</h1>
+                    <h1 class="none-padding">{{#i18n}}tracking.approve.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
     </section>
 
     <hr class="tall dashboard">
-    <div class="sort-source-wrapper">
-        <div class="container">
-            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
-                <li data-option-value=".websites" class="padding-left">
-                    <button id="showTable" class="btn btn-primary table" style="display: none;">ข้อมูลคลังที่ชนะการประมูล</button>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <div class="container">
         <div class="col-sm-12" style="margin-bottom:20px;">
-            <label class="col-sm-2 control-label text-right">การประมูลครั้งที่</label>
+            <label class="col-sm-2 control-label text-right">{{#i18n}}tracking.auctionNo{{/i18n}}</label>
             <div class="col-sm-7">
                 <select id="auction" class="form-control">
                     <option value="0">เลือกทั้งหมด</option>
                 </select>
             </div>
             <div class="col-sm-3">
-                <input type="button" id="btn_date" class="btn btn-primary" value="เลือก" />
+                <button id="btn_date" class="btn btn-primary"><i class="fa fa-list"></i> {{#i18n}}tracking.buttonShow{{/i18n}}</button>
             </div>
         </div>
-        <div>
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#waiting" aria-controls="waiting" role="tab" data-toggle="tab">คลังที่ยังไม่ถูกอนุมัติ</a></li>
-                <li role="presentation"><a href="#sale" aria-controls="sale" role="tab" data-toggle="tab">คลังที่อนุมัติขาย</a></li>
-                <li role="presentation"><a href="#condition" aria-controls="condition" role="tab" data-toggle="tab">คลังที่ติดเงื่อนไข</a></li>
-                <li role="presentation"><a href="#reserve" aria-controls="reserve" role="tab" data-toggle="tab">คลังที่สงวนสิทธิ์</a></li>
-            </ul>
 
-            <!-- Tab panes -->
+        <div class="tabs">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#waiting" data-toggle="tab">{{#i18n}}tracking.siloWaiting{{/i18n}}</a>
+                </li>
+                <li>
+                    <a href="#sale" data-toggle="tab">{{#i18n}}tracking.siloSell{{/i18n}}</a>
+                </li>
+                <li>
+                    <a href="#condition" data-toggle="tab">{{#i18n}}tracking.siloCondition{{/i18n}}</a>
+                </li>
+                <li>
+                    <a href="#reserve" data-toggle="tab">{{#i18n}}tracking.siloProblem{{/i18n}}</a>
+                </li>
+            </ul>
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active" id="waiting">
+                <div id="waiting" class="tab-pane active">
                     <div class="row">
                         <div class='col-md-12'>
 
@@ -77,132 +74,115 @@
                                 <input type='text' id='txtRemark' class="form-control" placeholder="หมายเหตุ" />
                             </div>
                             <div class="col-md-2 text-left">
-                                <button id='btnSave' class="btn btn-info">บันทึก</button>
+                                <button id='btnSave' class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}tracking.buttonSave{{/i18n}}</button>
                             </div>
                             <div class="col-md-2 text-right pointer">
-                                <input type="checkbox" name="all" id="checkall" /> <label for="checkall">เลือกทั้งหมด</label>
+                                <input type="checkbox" name="all" id="checkall" /> <label for="checkall">{{#i18n}}tracking.chooseAll{{/i18n}}</label>
                             </div>
-
-                            <!--                <div class="col-md-12 text-center">
-                                                <div class="col-md-2 text-right">
-                                                    <button id='btnSale' class="btn btn-primary">ขาย</button>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <input type='text' id='txtRemark' class="form-control" placeholder="หมายเหตุ" />
-                                                </div>
-                                                <div class="col-md-2 text-left">
-                                                    <button id='btnNoSale' class="btn btn-danger">ไม่ขาย</button>
-                                                </div>
-                                            </div>-->
-
                         </div>
                         <div id="bidderTable" class="col-md-12" style="margin-top:10px">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">ลำดับ</th>
-                                            <th class="text-center">จังหวัด</th>
-                                            <th class="text-center">หน่วยงาน</th>
-                                            <th class="text-center">คลังสินค้า</th>
-                                            <!--                                <th class="text-center">คิวที่</th>-->
-                                            <th class="text-center">ผู้เสนอซื้อ</th>
-                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
-                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
-                                            <th class="text-center">เลือก</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.choose{{/i18n}}</th>
+                                    </tr>
                                     </thead>
                                     <tbody id="bidderBody">
-                                        <tr>
-                                            <td colspan="9" class="text-center">ไม่มีข้อมูล</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="8" class="text-center">-</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div><!-- col-md-12 -->
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="sale">
+                <div id="sale" class="tab-pane">
                     <div class="row">
                         <div id="saleTable" class="col-md-12" style="margin-top:10px">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">ลำดับ</th>
-                                            <th class="text-center">จังหวัด</th>
-                                            <th class="text-center">หน่วยงาน</th>
-                                            <th class="text-center">คลังสินค้า</th>
-                                            <!--                                <th class="text-center">คิวที่</th>-->
-                                            <th class="text-center">ผู้เสนอซื้อ</th>
-                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
-                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
-                                            <th class="text-center">หมายเหตุ</th>
-                                            <th class="text-center">ลบ</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                    </tr>
                                     </thead>
                                     <tbody id="saleBody">
-                                        <tr>
-                                            <td colspan="10" class="text-center">ไม่มีข้อมูล</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="9" class="text-center">-</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="condition">
+                <div id="condition" class="tab-pane">
                     <div class="row">
                         <div id="conditionTable" class="col-md-12" style="margin-top:10px">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">ลำดับ</th>
-                                            <th class="text-center">จังหวัด</th>
-                                            <th class="text-center">หน่วยงาน</th>
-                                            <th class="text-center">คลังสินค้า</th>
-                                            <!--                                <th class="text-center">คิวที่</th>-->
-                                            <th class="text-center">ผู้เสนอซื้อ</th>
-                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
-                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
-                                            <th class="text-center">หมายเหตุ</th>
-                                            <th class="text-center">ลบ</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                    </tr>
                                     </thead>
                                     <tbody id="conditionBody">
-                                        <tr>
-                                            <td colspan="10" class="text-center">ไม่มีข้อมูล</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="9" class="text-center">-</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div role="tabpanel" class="tab-pane" id="reserve">
+                <div id="reserve" class="tab-pane">
                     <div class="row">
                         <div id="reserveTable" class="col-md-12" style="margin-top:10px">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <thead>
-                                        <tr>
-                                            <th class="text-center">ลำดับ</th>
-                                            <th class="text-center">จังหวัด</th>
-                                            <th class="text-center">หน่วยงาน</th>
-                                            <th class="text-center">คลังสินค้า</th>
-                                            <!--                                <th class="text-center">คิวที่</th>-->
-                                            <th class="text-center">ผู้เสนอซื้อ</th>
-                                            <th class="text-center">มูลค่าขั้นต่ำ</th>
-                                            <th class="text-center">มูลค่าเสนอซื้อสุดท้าย</th>
-                                            <th class="text-center">หมายเหตุ</th>
-                                            <th class="text-center">ลบ</th>
-                                        </tr>
+                                    <tr>
+                                        <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                    </tr>
                                     </thead>
                                     <tbody id="reserveBody">
-                                        <tr>
-                                            <td colspan="10" class="text-center">ไม่มีข้อมูล</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="9" class="text-center">-</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -210,9 +190,7 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div><!--  row  -->
 </div><!--  container  -->
 <!--<div class="loading" style="display: none;">
@@ -363,7 +341,7 @@
                                 "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
                                 "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
                                 "<td class='text-center'>" + (value.remark) + "</td>" +
-                                "<td class='text-center'><button class='btn btn-primary delApprove'>ลบ</button></td>" +
+                                "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
                                 "</tr>";
                     } else if (value.isSale == "C") {
                         c2++;
@@ -377,7 +355,7 @@
                                 "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
                                 "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
                                 "<td class='text-center'>" + (value.remark) + "</td>" +
-                                "<td class='text-center'><button class='btn btn-primary delApprove'>ลบ</button></td>" +
+                                "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
                                 "</tr>";
                     } else if (value.isSale == "R") {
                         c3++;
@@ -391,7 +369,7 @@
                                 "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
                                 "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
                                 "<td class='text-center'>" + (value.remark) + "</td>" +
-                                "<td class='text-center'><button class='btn btn-primary delApprove'>ลบ</button></td>" +
+                                "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
                                 "</tr>";
                     }
                 });
