@@ -64,12 +64,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="text-right">
+                                    <tr>
                                         <td colspan="4" class="text-center">-</td>
                                     </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-center text-bold">{{#i18n}}warehouse.total{{/i18n}}</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                    </tr>
+                                </tfoot>
                             </table>
-                        </div>         
+                        </div>
+
                         <div id="province" class="tab-pane">                            
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
@@ -85,8 +94,17 @@
                                         <td colspan="4" class="text-center">-</td>
                                     </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-center text-bold">{{#i18n}}warehouse.total{{/i18n}}</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                    </tr>
+                                </tfoot>
                             </table>
-                        </div>         
+                        </div>
+
                         <div id="type" class="tab-pane">                            
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
@@ -102,8 +120,17 @@
                                         <td colspan="4" class="text-center">-</td>
                                     </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-center text-bold">{{#i18n}}warehouse.total{{/i18n}}</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                    </tr>
+                                </tfoot>
                             </table>
-                        </div>   
+                        </div>
+
                         <div id="grade" class="tab-pane">                            
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
@@ -119,8 +146,17 @@
                                         <td colspan="4" class="text-center">-</td>
                                     </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-center text-bold">{{#i18n}}warehouse.total{{/i18n}}</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                    </tr>
+                                </tfoot>
                             </table>
-                        </div>  
+                        </div>
+
                         <div id="silo" class="tab-pane">                            
                             <table class="table table-bordered table-striped table-condensed mb-none">
                                 <thead>
@@ -136,98 +172,28 @@
                                         <td colspan="4" class="text-center">-</td>
                                     </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td class="text-center text-bold">{{#i18n}}warehouse.total{{/i18n}}</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                        <td class="text-right text-bold">-</td>
+                                    </tr>
+                                </tfoot>
                             </table>
-                        </div>   
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div><!--  row  -->
     </div><!--  container  -->
 </div><!-- main -->
+
 {{>footer}}
+
 <script type="text/javascript">
-    $(function () {
-        $('a[href="#project"]').click(function(){
-            groupBy("project");
-        }).trigger("click");
-
-        $('a[href="#province"]').click(function(){
-            groupBy("province");
-        });
-
-        $('a[href="#type"]').click(function(){
-            groupBy("type");
-        });
-
-        $('a[href="#grade"]').click(function(){
-            groupBy("grade");
-        });
-
-        $('a[href="#silo"]').click(function(){
-            groupBy("silo");
-        });
-    });
-
-    function groupBy(option){
-        var dataSet = [];
-
-        $("#"+option+" table tbody").html('<tr><td colspan="4" class="text-center">Loading...</td></tr>');
-
-        setTimeout(function(){
-            var datas = callAjax("{{_context_path}}/api/warehouse/viewInventory/"+option, "post", {}, "json");
-            if (typeof datas !== "undefined" && datas !== null) {
-                $.each(datas["lists"], function(key, value){
-                    dataSet.push(value);
-                });
-            }
-
-            var t = $("#"+option+" table").DataTable( {
-                "destroy": true,
-                "data": dataSet,
-                "order": [[ 1, 'desc' ]],
-                "columnDefs": [
-                    {
-                        "targets": 0,
-                        "searchable": false,
-                        "orderable": false,
-                        "data": option,
-                        "sClass": "text-left"
-                    },
-                    {
-                        "targets": 1,
-                        "data": "weight",
-                        "sClass": "text-right",
-                        "render": function(data){
-                            var content = accounting.formatNumber(data, 6, ",", ".");
-
-                            return content;
-                        }
-                    },
-                    {
-                        "targets": 2,
-                        "data": "weight",
-                        "sClass": "text-right",
-                        "render": function(data){
-                            var content = accounting.formatNumber(data, 2, ",", ".");
-
-                            return content;
-                        }
-                    },
-                    {
-                        "targets": 3,
-                        "data": "weight",
-                        "sClass": "text-right",
-                        "render": function(data){
-                            var content = accounting.formatNumber(data, 2, ",", ".");
-
-                            return content;
-                        }
-                    }
-                ]
-            });
-        }, 100);
-    }
-
-
-
+    var js_context_path = "{{_context_path}}";
 </script>
+
+<script src="{{_context_path}}/apps/warehouse/views/js/viewInventory.js"></script>
