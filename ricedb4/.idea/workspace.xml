@@ -42,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="false">
+      <file leaf-file-name="lang_th_TH.ini" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_th_TH.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="65" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.862013">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -56,17 +56,17 @@
         <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="65" column="46" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lang.ini" pinned="false" current-in-tab="true">
+      <file leaf-file-name="lang.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77922076">
-              <caret line="65" column="46" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -140,9 +140,9 @@
         <option value="$PROJECT_DIR$/apps/release/views/manageShippingCost.html" />
         <option value="$PROJECT_DIR$/apps/release/views/compareFloorPrice.html" />
         <option value="$PROJECT_DIR$/apps/release/views/chooseFloorValue.html" />
-        <option value="$PROJECT_DIR$/apps/reserve/i18n/lang_th_TH.ini" />
-        <option value="$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini" />
         <option value="$PROJECT_DIR$/apps/reserve/i18n/lang.ini" />
+        <option value="$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini" />
+        <option value="$PROJECT_DIR$/apps/reserve/i18n/lang_th_TH.ini" />
       </list>
     </option>
   </component>
@@ -503,12 +503,6 @@
       <option name="number" value="Default" />
       <updated>1444892691448</updated>
     </task>
-    <task id="LOCAL-00009" summary="RiceInfo, RiceTacking =&gt; add warehouse code and stack code">
-      <created>1445327015491</created>
-      <option name="number" value="00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1445327015491</updated>
-    </task>
     <task id="LOCAL-00010" summary="warehouseInfo =&gt; use stack code to tracking">
       <created>1445327645726</created>
       <option name="number" value="00010" />
@@ -797,14 +791,20 @@
       <option name="project" value="LOCAL" />
       <updated>1446452438728</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="add word button">
+      <created>1446452595915</created>
+      <option name="number" value="00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1446452595916</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28298888" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2662957" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32763976" sideWeight="0.50317967" order="12" side_tool="true" content_ui="tabs" />
@@ -1254,10 +1254,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_th_TH.ini">
+    <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="65" selection-end-column="46" />
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1265,15 +1265,15 @@
     <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_en_US.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="65" column="46" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang.ini">
+    <entry file="file://$PROJECT_DIR$/apps/reserve/i18n/lang_th_TH.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77922076">
-          <caret line="65" column="46" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.862013">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
           <folding />
         </state>
       </provider>
