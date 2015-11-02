@@ -73,62 +73,14 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
         if(count($condArr) > 0){
             $condition = "WHERE ".implode(" AND ", $condArr);
         }
-        /*$sqlC = "SELECT"
-                ." COUNT(*) AS rows"
-            ." FROM dft_Rice_Info ri"
-            ." JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
-            ." JOIN dft_LK_Zone zn ON zn.Id = pv.LK_Zone_Id"
-            ." ".$condition1;*/
-        $sqlC = "SELECT count(data.id) AS rows FROM"
-                ." (SELECT"
-                    ." ri.Id AS id, pv.LK_Zone_Id AS zoneId, ri.LK_Province_Id AS provinceId, ri.Code AS code,"
-                    ." ri.LK_Project_Id AS projectId, ri.LK_Type_Id AS typeId, ri.LK_Grade_Id AS gradeId,"
-                    ." (CASE"
-                        ." WHEN rt.LK_Status_Keyword is not null THEN rt.LK_Status_Keyword"
-                        ." ELSE ri.LK_Status_Keyword"
-                    ." END) AS statusKeyword"
-                ." FROM dft_Rice_Info ri"
-                ." LEFT JOIN dft_Rice_Tracking rt ON rt.Stack_Code = ri.Stack_Code"
-                ." INNER JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
-                ." INNER JOIN dft_LK_Zone zn ON zn.Id = pv.LK_Zone_Id"
-                ." WHERE rt.Id is null OR rt.Id ="
-                    ." (SELECT MAX(Id)"
-                    ." FROM   dft_Rice_Tracking"
-                    ." WHERE  Stack_Code = ri.Stack_Code)"
-                ." ) data"
-                ." LEFT JOIN dft_LK_Status st ON st.Keyword = data.statusKeyword"
+
+        $sqlC = "SELECT COUNT(*) AS rows FROM fn_rice_tracking()"
                 ." ".$condition;
 
         $count = $this->datacontext->pdoQuery($sqlC);
 
-        $sql = "SELECT"
-                ." data.*, st.Status AS status FROM"
-                ." (SELECT"
-                    ." ri.Id AS id, pv.LK_Zone_Id AS zoneId, zn.Zone_Name_TH AS zoneNameTH, ri.LK_Province_Id AS provinceId,"
-                    ." pv.Province_Name_TH AS provinceNameTH, ri.Code AS code, ri.Silo AS silo, ac.Associate AS associate,"
-                    ." ri.Warehouse AS warehouse, ri.Stack AS stack, ri.LK_Project_Id AS projectId, pj.Project AS project,"
-                    ." ri.LK_Type_Id AS typeId, tp.Type AS type, ri.LK_Grade_Id AS gradeId, gd.Grade AS grade,"
-                    ." ri.Discount_Rate AS discountRate,"
-                    ." (CASE"
-                        ." WHEN rt.LK_Status_Keyword is not null THEN rt.LK_Status_Keyword"
-                        ." ELSE ri.LK_Status_Keyword"
-                    ." END) AS statusKeyword"
-                ." FROM dft_Rice_Info ri"
-                ." LEFT JOIN dft_Rice_Tracking rt ON rt.Stack_Code = ri.Stack_Code"
-                ." INNER JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
-                ." INNER JOIN dft_LK_Zone zn ON zn.Id = pv.LK_Zone_Id"
-                ." INNER JOIN dft_LK_Associate ac ON ac.Id = ri.LK_Associate_Id"
-                ." INNER JOIN dft_LK_Project pj ON pj.Id = ri.LK_Project_Id"
-                ." INNER JOIN dft_LK_Type tp ON tp.Id = ri.LK_Type_Id"
-                ." INNER JOIN dft_LK_Grade gd ON gd.Id = ri.LK_Grade_Id"
-                ." WHERE rt.Id is null OR rt.Id ="
-                    ." (SELECT MAX(Id)"
-                    ." FROM   dft_Rice_Tracking"
-                    ." WHERE  Stack_Code = ri.Stack_Code)"
-                ." ) data"
-
-                ." LEFT JOIN dft_LK_Status st ON st.Keyword = data.statusKeyword"
-                ." ".$condition." ORDER BY data.Id OFFSET ".$start." ROWS FETCH NEXT ".$length." ROWS ONLY";
+        $sql = "SELECT * FROM fn_rice_tracking()"
+                ." ".$condition." ORDER BY id OFFSET ".$start." ROWS FETCH NEXT ".$length." ROWS ONLY";
 
         //return $sql;
         $data = $this->datacontext->pdoQuery($sql);

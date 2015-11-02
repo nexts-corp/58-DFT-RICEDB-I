@@ -19,65 +19,41 @@ class ViewInventoryService extends CServiceBase implements IViewInventoryService
     }
     
     public function project() {
-        $sql = "SELECT"
-            ." pj.project, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." JOIN ".$this->ent."\\Project pj WITH pj.id=ri.projectId"
-        ." GROUP BY pj.project"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT project, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY project";
 
-        $data = $this->datacontext->getObject($sql);
+        $data = $this->datacontext->pdoQuery($sql);
         
         return $data;
     }
 
     public function province() {
-        $sql = "SELECT"
-            ." pv.provinceNameTH AS province, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." JOIN ".$this->ent."\\Province pv WITH pv.id=ri.provinceId"
-        ." GROUP BY pv.provinceNameTH"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT provinceNameTH AS province, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY provinceNameTH";
 
-        $data = $this->datacontext->getObject($sql);
+        $data = $this->datacontext->pdoQuery($sql);
 
         return $data;
     }
 
     public function type() {
-        $sql = "SELECT"
-            ." tp.type, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." JOIN ".$this->ent."\\Type tp WITH tp.id=ri.typeId"
-        ." GROUP BY tp.type"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT type, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY type";
 
-        $data = $this->datacontext->getObject($sql);
+        $data = $this->datacontext->pdoQuery($sql);
 
         return $data;
     }
 
     public function grade() {
-        $sql = "SELECT"
-            ." gd.grade, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." JOIN ".$this->ent."\\grade gd WITH gd.id=ri.gradeId"
-        ." GROUP BY gd.grade"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT grade, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY grade";
 
-        $data = $this->datacontext->getObject($sql);
+        $data = $this->datacontext->pdoQuery($sql);
 
         return $data;
     }
 
     public function silo() {
-        $sql = "SELECT"
-            ." ri.silo, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." GROUP BY ri.silo"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT silo, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY silo";
 
-        $data = $this->datacontext->getObject($sql);
+        $data = $this->datacontext->pdoQuery($sql);
 
         return $data;
     }
