@@ -360,6 +360,19 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.file{{/i18n}} :</label>
+                                    <div class="col-md-7">
+                                        <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="fileUpload btn btn-primary">
+                                            <span><i class="fa fa-folder-open"></i> {{#i18n}}auction.buttonChoose{{/i18n}}</span>
+                                            <input id="fileUpload" type="file" class="upload" required/>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </section>
@@ -500,6 +513,10 @@
         /*$("#mobile").mask("000-000-0000", {
             placeholder: "000-000-0000"
         });*/
+
+        $("#fileUpload").change(function(){
+            $("#fileName").val($(this).val());
+        });
 
         // when you click to show table
         $("button.table").click(function(){
