@@ -51,6 +51,9 @@
                         <li>
                             <a href="#silo" data-toggle="tab">{{#i18n}}warehouse.silo{{/i18n}}</a>
                         </li>
+                        <li>
+                            <a href="#search" data-toggle="tab">{{#i18n}}warehouse.search{{/i18n}}</a>
+                        </li>
                     </ul>
                     <div class="tab-content">
                         <div id="project" class="tab-pane active">                            
@@ -183,7 +186,94 @@
                             </table>
                         </div>
 
-                    </div>
+                        <div id="search" class="tab-pane">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sProject">{{#i18n}}warehouse.project{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <select class="form-control lookup" name="sProject" id="sProject" data-call="lkProject"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sProvince">{{#i18n}}warehouse.province{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <select class="form-control lookup" name="sProvince" id="sProvince" data-call="lkProvince"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sType">{{#i18n}}warehouse.type{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <select class="form-control lookup" name="sType" id="sType" data-call="lkType"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sGrade">{{#i18n}}warehouse.grade{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <select class="form-control lookup" name="sGrade" id="sGrade" data-call="lkGrade"></select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sSilo">{{#i18n}}warehouse.silo{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" name="sSilo" id="sSilo">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sWarehouse">{{#i18n}}warehouse.warehouse{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" name="sWarehouse" id="sWarehouse">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sStack">{{#i18n}}warehouse.stack{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" name="sStack" id="sStack">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="col-md-5 control-label" for="sCode">{{#i18n}}warehouse.code{{/i18n}} :</label>
+                                        <div class="col-md-7">
+                                            <input type="text" class="form-control" name="sCode" id="sCode">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" style="margin-top: 15px;"><!-- table shown file detail -->
+                                    <table id="table" class="table table-hover table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.no{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.province{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.code{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.silo{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.associate{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.warehouse{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.stack{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.project{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.type{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.grade{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.weight{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="11" class="text-center">-</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div><!--  row  -->
