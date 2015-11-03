@@ -1,16 +1,29 @@
 var idArr = [];
 var fdata = {};
 
+var load = 0;
+
 $(function(){
-    $(".row select").each(function(){
+    $("#infoTable select").each(function(){
         var id = $(this).attr("id");
         var call = $(this).attr("data-call");
+        var mapping = $(this).attr("data-map");
+
 
         var result = listsObject(call);
-        $("#"+id).html(result).select2();
+        $("#" + id).html(result).select2();
+
+        if(typeof mapping !== "undefined"){
+            $("#"+mapping).html(result);
+        }
 
         idArr.push("#"+id);
         fdata[id] = $(this).val();
+    });
+
+    $("#associateId").html(listsObject("listsAssociate"));
+    $("#form select").each(function(){
+        $(this).select2();
     });
 
     $(idArr.join(",")).change(function(){
@@ -19,6 +32,36 @@ $(function(){
     });
 
     listsAllRice();
+
+    $("button.table").click(function(){
+        toggleShow("list");
+    });
+
+    // when you click to add bidder info
+    $("button.add").click(function(){
+        toggleShow("form");
+
+        // when you save form
+        $("button.submit").unbind().click(function(){
+            var isValid = true;
+            $('#form input[required], #form select[required]').each(function() {
+                if($(this).val() == "" && !$(this).prop("disabled"))
+                    isValid = false;
+            });
+            if(isValid){
+                var fdata = dataObject(null);
+                var dataJSON = JSON.stringify({user: fdata["User"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                insertWarehouse(dataJSONEN);
+            }
+        });
+    });
+
+    // when you click to cancel
+    $("button.cancel").click(function(){
+        toggleShow("list");
+    });
 
 });
 
@@ -108,51 +151,56 @@ function listsAllRice(){
 
                     return content;
                 }
+            },
+            {
+                "targets": 14,
+                "data": "id",
+                "sClass": "text-center col-md-1",
+                "render": function (data) {
+                    var content = '<button class="btn btn-primary edit" data-id="'+data+'" title="แก้ไข"><i class="fa fa-pencil"></i></button>&nbsp;'
+                            + '<button class="btn btn-default delete" data-id="'+data+'" title="ลบ"><i class="fa fa-trash"></i></button>';
+
+                    return content;
+                }
             }
         ]
     });
-    /*t.on( 'order.dt search.dt', function () {
-        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-            cell.innerHTML = i+1;
-        } );
-    } );*/
 
-
-    $("#zone").change(function() {
+    $("#sZone").change(function() {
         t.columns(1).search(this.value).draw();
     });
 
-    $("#province").change(function() {
+    $("#sProvince").change(function() {
         t.columns(2).search(this.value).draw();
     });
 
-    $("#code").keydown(function(event){
+    $("#sCode").keydown(function(event){
         var keyCode = (event.keyCode ? event.keyCode : event.which);
         if (keyCode == 13) {
             t.columns(3).search(this.value).draw();
         }
     });
 
-    $("#silo").keydown(function(event){
+    $("#sSilo").keydown(function(event){
         var keyCode = (event.keyCode ? event.keyCode : event.which);
         if (keyCode == 13) {
             t.columns(4).search(this.value).draw();
         }
     });
 
-    $('#project').change(function() {
+    $('#sProject').change(function() {
         t.columns(8).search(this.value).draw();
     });
 
-    $('#type').change(function() {
+    $('#sType').change(function() {
         t.columns(9).search(this.value).draw();
     });
 
-    $('#grade').change(function() {
+    $('#sGrade').change(function() {
         t.columns(10).search(this.value).draw();
     });
 
-    $('#status').change(function() {
+    $('#sStatus').change(function() {
         t.columns(12).search(this.value).draw();
     } );
 
@@ -161,6 +209,26 @@ function listsAllRice(){
 
         var id = $(this).attr("data-id");
         riceInfo(id);
+    });
+
+    $("#table").off("click", "button.edit").on("click", "button.edit", function(){
+        toggleShow("form");
+    });
+
+    $("#table").off("click", "button.delete").on("click", "button.delete", function(){
+        $("#deleteModal").modal("show");
+
+        var id = $(this).attr("data-id");
+        var value = select(id);
+
+        $("#codeDel").html(value["code"]);
+        $("#siloDel").html(value["silo"]+' ['+value["provinceNameTH"]+'] ['+value["associate"]+']');
+        $("#warehouseDel").html(value["warehouse"]);
+        $("#stackDel").html(value["stack"]);
+        $("#projectDel").html(value["project"]);
+        $("#typeDel").html(value["type"]);
+        $("#gradeDel").html(value["grade"]);
+        $("#weightDel").html(value["weight"]);
     });
 }
 
@@ -189,6 +257,7 @@ function riceInfo(id){
         $("#projectDisp").html(value["project"]);
         $("#typeDisp").html(value["type"]);
         $("#gradeDisp").html(value["grade"]);
+        $("#weightDisp").html(value["weight"]);
 
         var html = '';
         if(value["statusArr"].length > 0){
@@ -205,5 +274,31 @@ function riceInfo(id){
         }
 
         $("#table2 tbody").html(html);
+    }
+}
+
+function select(id){
+    var datas = callAjax(js_context_path+"/api/warehouse/warehouseInfo/select", "post", {id: id}, "json");
+    if(typeof datas !== "undefined" && datas !== null) {
+        return datas["lists"];
+    }
+}
+
+function toggleShow(option){
+    if(option == "form"){
+        $("#infoForm, #showTable").show();
+        $("#infoTable, #addToTable").hide();
+
+        $("#form input, #form select, #form textarea").each(function(){
+            $(this).val("");
+        });
+
+        $("#loading, #searching").empty();
+    }
+
+    else if(option == "list"){
+        $("#infoTable, #addToTable").show();
+        $("#infoForm, #showTable").hide();
+        listsAllRice();
     }
 }

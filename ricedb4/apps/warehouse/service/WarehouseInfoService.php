@@ -162,12 +162,22 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
         return $data;
     }
 
+    public function listsAssociate(){
+        $sql = "SELECT"
+                ." ac.id,"
+                ." ac.associate AS name"
+            ." FROM ".$this->ent."\\Associate ac";
+        $data = $this->datacontext->getObject($sql);
+
+        return $data;
+    }
+
     public function riceInfo($id){
         $result = [];
 
         $sql = "SELECT"
                 ." ri.id, pv.provinceNameTH, ri.stackCode, ri.code, ri.silo, ac.associate,"
-                ." ri.warehouse, ri.stack, pj.project, tp.type, gd.grade,"
+                ." ri.warehouse, ri.stack, pj.project, tp.type, gd.grade, ri.weight,"
                 ." ri.discountRate, st.status"
             ." FROM ".$this->ent."\\RiceInfo ri"
             ." JOIN ".$this->ent."\\Province pv WITH pv.id = ri.provinceId"
@@ -213,5 +223,39 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
         $result["statusArr"] = $status;
 
         return $result;
+    }
+
+    public function select($id){
+        $sql = "SELECT"
+                ." ri.id, pv.provinceNameTH, ri.stackCode, ri.code, ri.silo, ac.associate,"
+                ." ri.warehouse, ri.stack, pj.project, tp.type, gd.grade, ri.weight,"
+                ." ri.discountRate, st.status"
+            ." FROM ".$this->ent."\\RiceInfo ri"
+            ." JOIN ".$this->ent."\\Province pv WITH pv.id = ri.provinceId"
+            ." JOIN ".$this->ent."\\Associate ac WITH ac.id = ri.associateId"
+            ." JOIN ".$this->ent."\\Project pj WITH pj.id = ri.projectId"
+            ." JOIN ".$this->ent."\\Type tp WITH tp.id = ri.typeId"
+            ." JOIN ".$this->ent."\\Grade gd WITH gd.id = ri.gradeId"
+            ." LEFT JOIN ".$this->ent."\\Status st WITH st.keyword = ri.statusKeyword"
+            ." WHERE ri.id = :id";
+        $param = array(
+            "id" => $id
+        );
+
+        $data = $this->datacontext->getObject($sql, $param);
+
+        return $data[0];
+    }
+
+    public function insert($riceInfo){
+
+    }
+
+    public function update($riceInfo){
+
+    }
+
+    public function delete($riceInfo){
+
     }
 }

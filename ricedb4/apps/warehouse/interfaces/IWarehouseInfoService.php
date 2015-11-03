@@ -77,6 +77,14 @@ interface IWarehouseInfoService {
     public function listsStatus();
 
     /**
+     * @name listsAssociate
+     * @uri /listsAssociate
+     * @return String[] lists Description
+     * @description ผู้เสนอราคาสูงสุดต่อคลัง
+     */
+    public function listsAssociate();
+
+    /**
      * @name riceInfo
      * @uri /riceInfo
      * @param integer id Description
@@ -84,4 +92,40 @@ interface IWarehouseInfoService {
      * @description ผู้เสนอราคาสูงสุดต่อคลัง
      */
     public function riceInfo($id);
+
+    /**
+     * @name select
+     * @uri /select
+     * @param integer id Description
+     * @return String[] lists Description
+     * @description ผู้เสนอราคาสูงสุดต่อคลัง
+     */
+    public function select($id);
+
+    /**
+     * @name insert
+     * @uri /insert
+     * @param apps\common\entity\RiceInfo riceInfo Description
+     * @return boolean add Description
+     * @description เพิ่มข้อมูลผู้เสนอราคารายใหม่
+     */
+    public function insert($riceInfo);
+
+    /**
+     * @name update
+     * @uri /update
+     * @param apps\common\entity\RiceInfo riceInfo Description
+     * @return boolean update Description
+     * @description เพิ่มข้อมูลผู้เสนอราคารายใหม่
+     */
+    public function update($riceInfo);
+
+    /**
+     * @name delete
+     * @uri /delete
+     * @param integer id Description
+     * @return boolean delete Description
+     * @description เพิ่มข้อมูลผู้เสนอราคารายใหม่
+     */
+    public function delete($id);
 }
