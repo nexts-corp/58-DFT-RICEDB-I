@@ -7,7 +7,7 @@ namespace apps\tracking\interfaces;
  * @uri /approve
  * @description ประมูล
  */
-interface IApproveService {
+interface IApproveAuctionService {
 
     /**
      * @name listsBidder

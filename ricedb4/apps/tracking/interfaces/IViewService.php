@@ -10,11 +10,11 @@ namespace apps\tracking\interfaces;
 interface IViewService {
 
     /**
-     * @name approve
-     * @uri /approve
+     * @name approveAuction
+     * @uri /approveAuction
      * @description  อนุมัติคลังสินค้า
      */
-    public function approve();
+    public function approveAuction();
 
     /**
      * @name return

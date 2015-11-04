@@ -30,23 +30,33 @@
     <hr class="tall dashboard">
 
     <div class="container">
-        <div class="col-sm-12"  style="margin: 10px;">
-            <div class="col-sm-6">
-                <label class="col-sm-5 control-label">ปี/เดือน ที่คิดอายุข้าว</label>
+        <div class="col-md-12"  style="margin: 10px;">
+            <div class="col-md-4">
+                <label class="col-sm-6 control-label text-right">{{#i18n}}release.auctionNo{{/i18n}} :</label>
+                <div class="col-sm-6">
+                    <select class="form-control datepicker ui-datepicker-calendar" id="auction"></select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label class="col-sm-6 control-label text-right">ปี/เดือน ที่คิดอายุข้าว :</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control datepicker ui-datepicker-calendar" id="stopDate" />
                 </div>
             </div>
-            <div class="col-sm-6">
-                <label class="col-sm-5 control-label">วันที่คิดราคา Floor Price</label>
-                <div class="col-sm-5">
+            <div class="col-md-3">
+                <label class="col-sm-6 control-label text-right">วันที่คิดราคา :</label>
+                <div class="col-sm-6">
                     <input type="text" class="form-control datepicker ui-datepicker-calendar" id="dateFP" />
                 </div>
-                <div class="col-sm-2">
-                    <button id="btn_date" class="btn btn-primary"><i class="fa fa-eye"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
-                </div>
+
+            </div>
+
+            <div class="col-md-2 text-right">
+                <button id="btn_date" class="btn btn-primary"><i class="fa fa-eye"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
             </div>
         </div>
+
         <div style="clear: both;"></div>
         <fieldset class="col-sm-12" style="border: 1px solid #cccccc; margin-top: 20px;">
 
@@ -226,18 +236,26 @@
             format: "yyyy-mm",
             startView: "months",
             minViewMode: "months"
-        }).datepicker("setDate", new Date());
+        }).datepicker();
 
         $("#dateFP").datepicker({
             format: "yyyy-mm-dd",
             daysOfWeekDisabled: [0, 6],
             autoclose: true
-        }).datepicker("setDate", new Date());
+        }).datepicker();
 
         $("#btn_date").click(function () {
             getData();
             writebody(0);
         });
+
+        $("#auction").html(listAuction()).change(function(){
+            var age = $('option:selected', this).attr("data-age");
+            var start = $('option:selected', this).attr("data-start");
+
+            $("#stopDate").val(age.substr(0, 7));
+            $("#dateFP").val(start.substr(0, 10));
+        }).select2();
 
         function getData() {
             $("#tb_body2").html('<tr><td colspan="9" class="text-center">Loading...</td></tr>');
@@ -413,6 +431,24 @@
                 }
             });
             //  }
+        }
+
+        function listAuction(){
+            var html = '';
+            var datas = callAjax("{{_context_path}}/api/release/floorPrice/listsAuction", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function(key, val){
+                    var age = "";
+                    if(val["ageStop"] != null) age = val["ageStop"]["date"];
+
+                    var start = "";
+                    if(val["dateStart"] != null) start = val["dateStart"]["date"];
+
+                    html += '<option value="'+val["keyword"]+'" data-age="'+age+'" data-start="'+start+'">'+val["status"]+'</option>';
+                });
+            }
+
+            return html;
         }
     });
 

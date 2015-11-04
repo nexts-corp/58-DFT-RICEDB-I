@@ -4,9 +4,9 @@ namespace apps\tracking\service;
 
 use th\co\bpg\cde\core\CServiceBase;
 use th\co\bpg\cde\data\CDataContext;
-use apps\tracking\interfaces\IApproveService;
+use apps\tracking\interfaces\IApproveAuctionService;
 
-class ApproveService extends CServiceBase implements IApproveService {
+class ApproveAuctionService extends CServiceBase implements IApproveAuctionService {
 
     public $datacontext;
     public $logger;

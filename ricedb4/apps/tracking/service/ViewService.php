@@ -11,8 +11,8 @@ class ViewService extends CServiceBase implements IViewService {
 
   
 
-    public function approve() {
-        $view = new CJView("approve", CJViewType::HTML_VIEW_ENGINE);
+    public function approveAuction() {
+        $view = new CJView("approveAuction", CJViewType::HTML_VIEW_ENGINE);
         return $view;
     }
 
