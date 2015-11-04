@@ -54,6 +54,9 @@ class Status extends EntityBase {
     /** @Column(type="string",length=50,name="LK_Release_Code") */
     public $releaseCode;
 
+    /** @Column(type="string",length=255,name="Buyer") */
+    public $buyer;
+
     function getActive(){
         return $this->active;
     }
@@ -108,6 +111,10 @@ class Status extends EntityBase {
 
     function getReleaseCode(){
         return $this->releaseCode;
+    }
+
+    function getBuyer(){
+        return $this->buyer;
     }
 
     function setActive($active){
@@ -165,5 +172,9 @@ class Status extends EntityBase {
 
     function setReleaseCode($releaseCode){
         $this->releaseCode = $releaseCode;
+    }
+
+    function setBuyer($buyer){
+        $this->buyer = $buyer;
     }
 }

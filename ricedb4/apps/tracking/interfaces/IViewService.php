@@ -17,6 +17,13 @@ interface IViewService {
     public function approveAuction();
 
     /**
+     * @name approveSell
+     * @uri /approveSell
+     * @description  อนุมัติคลังสินค้า
+     */
+    public function approveSell();
+
+    /**
      * @name return
      * @uri /return
      * @description  คืนหลักค้ำประกันที่เหลือ

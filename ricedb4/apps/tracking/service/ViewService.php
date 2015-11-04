@@ -9,10 +9,13 @@ use apps\tracking\interfaces\IViewService;
 
 class ViewService extends CServiceBase implements IViewService {
 
-  
-
     public function approveAuction() {
         $view = new CJView("approveAuction", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
+    public function approveSell() {
+        $view = new CJView("approveSell", CJViewType::HTML_VIEW_ENGINE);
         return $view;
     }
 

@@ -412,14 +412,21 @@
         }
         else{
             html = '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="status">รายละเอียด</label>'
+                + '<label class="col-md-3 control-label req" for="status">ผู้เสนอซื้อ :</label>'
+                + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="buyer" name="buyer" required>'
+                + '</div>'
+            + '</div>'
+
+            + '<div class="form-group">'
+                + '<label class="col-md-3 control-label req" for="status">รายละเอียด :</label>'
                 + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="status" name="status" required>'
                 + '</div>'
             + '</div>'
 
             + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ระบายข้าว</label>'
+                + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ระบายข้าว :</label>'
                 + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
                 + '</div>'

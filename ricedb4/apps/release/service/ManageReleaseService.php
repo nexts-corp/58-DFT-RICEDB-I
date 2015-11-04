@@ -20,8 +20,8 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
 
     public function listsReserve(){
         $sql = "SELECT rl.reserveCode, rs.reserveName+' - '+rl.detail as detail, rl.keyword"
-        ." FROM ".$this->ent."\\ReserveList rl"
-        ." JOIN ".$this->ent."\\Reserve rs WITH rs.reserveCode = rl.reserveCode"
+            ." FROM ".$this->ent."\\ReserveList rl"
+            ." JOIN ".$this->ent."\\Reserve rs WITH rs.reserveCode = rl.reserveCode"
         ." ORDER BY rl.id ASC";
 
         $data = $this->datacontext->getObject($sql);
