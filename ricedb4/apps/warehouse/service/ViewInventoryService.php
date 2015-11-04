@@ -60,47 +60,53 @@ class ViewInventoryService extends CServiceBase implements IViewInventoryService
     public function all($columns, $draw, $start, $length){
         $condArr = [];
 
-        //search zone
-        /*if($columns[1]["search"]["value"] != ""){
-            $val = $columns[1]["search"]["value"];
-            $condArr[] = "zoneId = '".$val."'";
-        }
-
         //search province
-        if($columns[2]["search"]["value"] != ""){
-            $val = $columns[2]["search"]["value"];
+        if($columns[1]["search"]["value"] != ""){
+            $val = $columns[1]["search"]["value"];
             $condArr[] = "provinceId = '".$val."'";
         }
 
         //search code
-        if($columns[3]["search"]["value"] != ""){
-            $val = $columns[3]["search"]["value"];
+        if($columns[2]["search"]["value"] != ""){
+            $val = $columns[2]["search"]["value"];
             $condArr[] = "code LIKE '%".$val."%'";
         }
 
         //search silo
-        if($columns[4]["search"]["value"] != ""){
-            $val = $columns[4]["search"]["value"];
+        if($columns[3]["search"]["value"] != ""){
+            $val = $columns[3]["search"]["value"];
             $condArr[] = "silo LIKE '%".$val."%'";
         }
 
+        //search warehouse
+        if($columns[5]["search"]["value"] != ""){
+            $val = $columns[5]["search"]["value"];
+            $condArr[] = "warehouse LIKE '%".$val."%'";
+        }
+
+        //search stack
+        if($columns[6]["search"]["value"] != ""){
+            $val = $columns[6]["search"]["value"];
+            $condArr[] = "stack LIKE '%".$val."%'";
+        }
+
         //search project
-        if($columns[8]["search"]["value"] != ""){
-            $val = $columns[8]["search"]["value"];
+        if($columns[7]["search"]["value"] != ""){
+            $val = $columns[7]["search"]["value"];
             $condArr[] = "projectId = '".$val."'";
         }
 
         //search type
-        if($columns[9]["search"]["value"] != ""){
-            $val = $columns[9]["search"]["value"];
+        if($columns[8]["search"]["value"] != ""){
+            $val = $columns[8]["search"]["value"];
             $condArr[] = "typeId = '".$val."'";
         }
 
         //search grade
-        if($columns[10]["search"]["value"] != ""){
-            $val = $columns[10]["search"]["value"];
+        if($columns[9]["search"]["value"] != ""){
+            $val = $columns[9]["search"]["value"];
             $condArr[] = "gradeId = '".$val."'";
-        }*/
+        }
 
         $condition = '';
         if(count($condArr) > 0){

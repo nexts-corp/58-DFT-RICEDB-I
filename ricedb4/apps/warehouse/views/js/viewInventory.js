@@ -174,42 +174,59 @@ function allInventory(){
                     return content;
                 }
             }
-        ]
-    });
-
-    /*$("#sZone").change(function() {
-        t.columns(1).search(this.value).draw();
+        ],
+        "rowCallback": function (row, data, iDisplayIndex) {
+            var info = this.fnPagingInfo();
+            var page = info.iPage;
+            var length = info.iLength;
+            var index = (page * length + (iDisplayIndex +1));
+            $('td', row).eq(0).html(index);
+        }
     });
 
     $("#sProvince").change(function() {
-        t.columns(2).search(this.value).draw();
+        t.columns(1).search(this.value).draw();
     });
 
     $("#sCode").keydown(function(event){
         var keyCode = (event.keyCode ? event.keyCode : event.which);
         if (keyCode == 13) {
-            t.columns(3).search(this.value).draw();
+            t.columns(2).search(this.value).draw();
         }
     });
 
     $("#sSilo").keydown(function(event){
         var keyCode = (event.keyCode ? event.keyCode : event.which);
         if (keyCode == 13) {
-            t.columns(4).search(this.value).draw();
+            t.columns(3).search(this.value).draw();
+        }
+    });
+
+    $("#sWarehouse").keydown(function(event){
+        var keyCode = (event.keyCode ? event.keyCode : event.which);
+        if (keyCode == 13) {
+            t.columns(5).search(this.value).draw();
+        }
+    });
+
+    $("#sStack").keydown(function(event){
+        var keyCode = (event.keyCode ? event.keyCode : event.which);
+        if (keyCode == 13) {
+            t.columns(6).search(this.value).draw();
         }
     });
 
     $('#sProject').change(function() {
-        t.columns(8).search(this.value).draw();
+        t.columns(7).search(this.value).draw();
     });
 
     $('#sType').change(function() {
-        t.columns(9).search(this.value).draw();
+        t.columns(8).search(this.value).draw();
     });
 
     $('#sGrade').change(function() {
-        t.columns(10).search(this.value).draw();
-    });*/
+        t.columns(9).search(this.value).draw();
+    });
 
 }
 
