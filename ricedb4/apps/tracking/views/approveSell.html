@@ -89,15 +89,13 @@
                                         <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.price{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.choose{{/i18n}}</th>
                                     </tr>
                                     </thead>
                                     <tbody id="bidderBody">
                                     <tr>
-                                        <td colspan="8" class="text-center">-</td>
+                                        <td colspan="6" class="text-center">-</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -116,16 +114,13 @@
                                         <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.price{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.choose{{/i18n}}</th>
                                     </tr>
                                     </thead>
                                     <tbody id="saleBody">
                                     <tr>
-                                        <td colspan="9" class="text-center">-</td>
+                                        <td colspan="6" class="text-center">-</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -144,16 +139,13 @@
                                         <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.price{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.choose{{/i18n}}</th>
                                     </tr>
                                     </thead>
                                     <tbody id="conditionBody">
                                     <tr>
-                                        <td colspan="9" class="text-center">-</td>
+                                        <td colspan="6" class="text-center">-</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -206,12 +198,12 @@
         init(auccode);
     });
     function listsAuction() {
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsAuction", "post", {}, "json");
+        var datas = callAjax("{{_context_path}}/api/tracking/approveSell/listsRelease", "post", {}, "json");
         var dataAuction = datas["lists"];
         if (dataAuction != null) {
             var html = "";
             $.each(dataAuction, function (key, value) {
-                html += "<option value='" + value.keyword + "'>ครั้งที่ " + value.status + "</option>";
+                html += "<option value='" + value.keyword + "'>" + value.status + "</option>";
                 //$("#countAll").text((key + 1));
             });
             $("#auction").html(html);

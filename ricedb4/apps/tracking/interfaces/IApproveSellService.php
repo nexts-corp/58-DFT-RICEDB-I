@@ -3,11 +3,19 @@
 namespace apps\tracking\interfaces;
 
 /**
- * @name IApproveAuctionService
- * @uri /approve
- * @description ประมูล
+ * @name IApproveSellService
+ * @uri /approveSell
+ * @description จำหน่ายรูปแบบอื่นๆ
  */
-interface IApproveAuctionService {
+interface IApproveSellService {
+
+    /**
+     * @name listsRelease
+     * @uri /listsRelease
+     * @return String[] lists Description
+     * @description การประมูล
+     */
+    public function listsRelease();
 
     /**
      * @name listsBidder
