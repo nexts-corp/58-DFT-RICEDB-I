@@ -285,9 +285,9 @@ function viewReserve(){
                     var count = 0;
                     $.each(datas["lists"], function(key, val){
                         reserve += '<tr>'
-                                + '<td class="text-center">'+(++count)+'</td>'
-                                + '<td class="text-left">'+val["reserveName"]+' - '+val["detail"]+'</td>'
-                                + '<td class="text-right">'+val["target"]+'</td>'
+                                + '<td class="text-center col-md-1">'+(++count)+'</td>'
+                                + '<td class="text-left col-md-7">'+val["reserveName"]+' - '+val["detail"]+'</td>'
+                                + '<td class="text-right col-md-4">'+accounting.formatNumber(val["target"], 2, ",", ".")+'</td>'
                             + '</tr>';
                     });
 
