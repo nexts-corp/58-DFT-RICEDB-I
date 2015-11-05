@@ -39,4 +39,20 @@ interface IWidgetService {
      * @description ราคาข้าวที่อัพเดทล่าสุด
      */
     public function ricePrice();
-} 
+
+    /**
+     * @name auctionLatest
+     * @uri /auctionLatest
+     * @return String[] lists Description
+     * @description ผลการประมูลครั้งล่าสุด
+     */
+    public function auctionLatest();
+
+    /**
+     * @name viewReserve
+     * @uri /viewReserve
+     * @return String[] lists Description
+     * @description ปริมาณข้าวที่สำรองไว้
+     */
+    public function viewReserve();
+}

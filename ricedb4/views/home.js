@@ -9,7 +9,9 @@ $(function(){
 
     initCarousel();
 
+    auctionLatest();
 
+    viewReserve();
 });
 
 function viewInventory(option){
@@ -215,4 +217,45 @@ function checkZero(input){
     }
 
     return output;
+}
+
+function auctionLatest(){
+    var auction = '';
+    var datas = callAjax(js_context_path+"/api/home/widget/auctionLatest", "post", {}, "json");
+    if (typeof datas !== "undefined" && datas !== null) {
+
+    }
+
+    $("#auction").html(auction);
+}
+
+function viewReserve(){
+    var reserve = '<div>'
+            + '<table class="table">'
+                + '<thead>'
+                    + '<tr>'
+                        + '<th class="text-center">ลำดับ</th>'
+                        + '<th class="text-center">รายละเอียด</th>'
+                        + '<th class="text-right">ปริมาณ (ตัน)</th>'
+                    + '</tr>'
+                + '</thead>'
+                + '<tbody>';
+
+    var datas = callAjax(js_context_path+"/api/home/widget/viewReserve", "post", {}, "json");
+    if (typeof datas !== "undefined" && datas !== null) {
+        var count = 0;
+        $.each(datas["lists"], function(key, val){
+            reserve += '<tr>'
+                    + '<td class="text-center">'+(++count)+'</td>'
+                    + '<td class="text-left">'+val["reserveName"]+' - '+val["detail"]+'</td>'
+                    + '<td class="text-right">'+val["target"]+'</td>'
+                + '</tr>';
+        });
+    }
+
+                reserve += '</tbody>'
+            + '</table>'
+        + '</div>';
+
+    $("#reserve").html(reserve);
 }
