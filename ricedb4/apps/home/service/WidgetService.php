@@ -86,7 +86,7 @@ class WidgetService extends CServiceBase implements IWidgetService{
         $dataSt = $this->datacontext->getObject($sqlSt, array(), 1); //get STATUS is Active
 
         $sqlSm = "SELECT"
-                ." sum(weightAll) AS sumWeight, sum(bidderPrice) AS sumPrice"
+                ." sum(oweightAll) AS sumWeight, sum(bidderPrice) AS sumPrice"
             ." FROM fn_auction_info(:auction)"
             ." WHERE isSale = 'Y'";
         $paramSm = array(
@@ -95,12 +95,12 @@ class WidgetService extends CServiceBase implements IWidgetService{
         $dataSm = $this->datacontext->pdoQuery($sqlSm, $paramSm);
 
         $sql = "SELECT"
-                ." st.typeName, sum(st.weightAll) AS weight"
+                ." st.typeName, sum(st.oweightAll) AS weight"
             ." FROM fn_auction_info(:auction) fn"
-            ." JOIN dft_auction_stack st ON st.wareHouseCode = fn.wareHouseCode AND st.associateId = fn.associateId"
+            ." JOIN dft_auction_stack st ON st.wareHouseCode = fn.wareHouseCode AND st.associateId = fn.associateId AND st.auctionNo = fn.auctionNo"
             ." WHERE isSale = 'Y'"
             ." GROUP BY st.typeName";
-        return $sql;
+
         $param = array(
             "auction" => $dataSt[0]["keyword"]
         );

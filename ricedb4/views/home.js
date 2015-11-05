@@ -220,42 +220,83 @@ function checkZero(input){
 }
 
 function auctionLatest(){
-    var auction = '';
     var datas = callAjax(js_context_path+"/api/home/widget/auctionLatest", "post", {}, "json");
     if (typeof datas !== "undefined" && datas !== null) {
+        var data = datas["lists"];
+        var auction = '<div>'
+                + '<div class="row text-center">'
+                    + '<h4 class="text-dark">ประมูลครั้งที่ '+data["status"]+'</h4>'
+                + '</div>'
+                + '<div class="row">'
+                    + '<div class="col-md-3 text-right text-bold">วันที่ :</div>'
+                    + '<div class="col-md-9 text-left">'+data["auctionDate"]+'</div>'
+                + '</div>'
+                + '<div class="row">'
+                    + '<div class="col-md-3 text-right text-bold">น้ำหนัก :</div>'
+                    + '<div class="col-md-9 text-left">'+accounting.formatNumber(data["sumWeight"], 6, ",", ".")+' ตัน</div>'
+                + '</div>'
+                + '<div class="row">'
+                    + '<div class="col-md-3 text-right text-bold">มูลค่า :</div>'
+                    + '<div class="col-md-9 text-left">'+accounting.formatNumber(data["sumPrice"], 2, ",", ".")+' บาท</div>'
+                + '</div>'
+                + '<table class="table">'
+                    + '<thead>'
+                        + '<tr>'
+                            + '<th class="text-center">ลำดับ</th>'
+                            + '<th class="text-center">ชนิด</th>'
+                            + '<th class="text-right">ปริมาณ (ตัน)</th>'
+                        + '</tr>'
+                    + '</thead>'
+                    + '<tbody>';
 
+                    var count = 0;
+                    $.each(data["riceGroup"], function(key, val){
+                        auction += '<tr>'
+                                + '<td class="text-center">'+(++count)+'</td>'
+                                + '<td class="text-left">'+val["typeName"]+'</td>'
+                                + '<td class="text-right">'+accounting.formatNumber(val["weight"], 6, ",", ".")+'</td>'
+                            + '</tr>';
+                    });
+
+                    auction += '</tbody>'
+                + '</table>'
+            + '</div>';
     }
 
     $("#auction").html(auction);
 }
 
 function viewReserve(){
-    var reserve = '<div>'
-            + '<table class="table">'
-                + '<thead>'
-                    + '<tr>'
-                        + '<th class="text-center">ลำดับ</th>'
-                        + '<th class="text-center">รายละเอียด</th>'
-                        + '<th class="text-right">ปริมาณ (ตัน)</th>'
-                    + '</tr>'
-                + '</thead>'
-                + '<tbody>';
+
 
     var datas = callAjax(js_context_path+"/api/home/widget/viewReserve", "post", {}, "json");
     if (typeof datas !== "undefined" && datas !== null) {
-        var count = 0;
-        $.each(datas["lists"], function(key, val){
-            reserve += '<tr>'
-                    + '<td class="text-center">'+(++count)+'</td>'
-                    + '<td class="text-left">'+val["reserveName"]+' - '+val["detail"]+'</td>'
-                    + '<td class="text-right">'+val["target"]+'</td>'
-                + '</tr>';
-        });
+        var reserve = '<div>'
+                + '<table class="table">'
+                    + '<thead>'
+                        + '<tr>'
+                            + '<th class="text-center">ลำดับ</th>'
+                            + '<th class="text-center">รายละเอียด</th>'
+                            + '<th class="text-right">ปริมาณ (ตัน)</th>'
+                        + '</tr>'
+                    + '</thead>'
+                    + '<tbody>';
+
+                    var count = 0;
+                    $.each(datas["lists"], function(key, val){
+                        reserve += '<tr>'
+                                + '<td class="text-center">'+(++count)+'</td>'
+                                + '<td class="text-left">'+val["reserveName"]+' - '+val["detail"]+'</td>'
+                                + '<td class="text-right">'+val["target"]+'</td>'
+                            + '</tr>';
+                    });
+
+                    reserve += '</tbody>'
+                + '</table>'
+            + '</div>';
+
+        $("#reserve").html(reserve);
     }
 
-                reserve += '</tbody>'
-            + '</table>'
-        + '</div>';
 
-    $("#reserve").html(reserve);
 }
