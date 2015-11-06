@@ -24,6 +24,8 @@ class FollowService extends CServiceBase implements IFollowService {
             "keyword" => $auccode
         );
         $get = $this->datacontext->getObject($sql, $param);
+
+        return $get;
         if (empty($get)) {
             $group = new \apps\common\model\GroupFollow();
             $group->associateId = $associateId;
