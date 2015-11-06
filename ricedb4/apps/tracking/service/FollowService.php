@@ -68,7 +68,8 @@ class FollowService extends CServiceBase implements IFollowService {
     }
 
     public function export($auccode, $associateId) {
-        if (empty($this->getFollow($auccode, $associateId))) {
+        $follow = $this->getFollow($auccode, $associateId);
+        if (isset($follow)) {
             //return false;
         } else {
             //return true;
