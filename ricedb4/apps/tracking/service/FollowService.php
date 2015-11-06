@@ -25,7 +25,6 @@ class FollowService extends CServiceBase implements IFollowService {
         );
         $get = $this->datacontext->getObject($sql, $param);
 
-        return $get;
         if (empty($get)) {
             $group = new \apps\common\model\GroupFollow();
             $group->associateId = $associateId;
@@ -69,7 +68,7 @@ class FollowService extends CServiceBase implements IFollowService {
     }
 
     public function export($auccode, $associateId) {
-        if (empty($this->getFollow($auccode, $associateId))) {
+        if ($this->getFollow($auccode, $associateId)) {
             return false;
         } else {
             return true;
