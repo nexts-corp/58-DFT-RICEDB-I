@@ -15,8 +15,11 @@ class RiceReserve extends EntityBase {
      */
     public $id;
 
-    /** @Column(type="integer",length=11, name="Rice_Info_Id") */
-    public $riceInfoId;
+    /** @Column(type="string", length=20, name="Warehouse_Code") */
+    public $warehouseCode;
+
+    /** @Column(type="string", length=20, name="Stack_Code") */
+    public $stackCode;
 
     /** @Column(type="string",length=255, name="Code") */
     public $code;
@@ -67,8 +70,12 @@ class RiceReserve extends EntityBase {
         return $this->id;
     }
 
-    function getRiceInfoId() {
-        return $this->riceInfoId;
+    function getWarehouseCode(){
+        return $this->warehouseCode;
+    }
+
+    function getStackCode(){
+        return $this->stackCode;
     }
 
     function getCode() {
@@ -135,8 +142,12 @@ class RiceReserve extends EntityBase {
         $this->id = $id;
     }
 
-    function setRiceInfoId($riceInfoId) {
-        $this->riceInfoId = $riceInfoId;
+    function setWarehouseCode($warehouseCode){
+        $this->warehouseCode = $warehouseCode;
+    }
+
+    function setStackCode($stackCode){
+        $this->stackCode = $stackCode;
     }
 
     function setCode($code) {

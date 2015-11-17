@@ -129,22 +129,26 @@
                 var id = $(this).attr("data-id");
                 var val = listArr[id];
 
-                var dataReserve = {};
+                var reserveList = val["keyword"];
 
-                dataReserve["keyword"] = val["keyword"];
-
-                var fdata = {};
-                fdata["ReserveList"] = dataReserve;
-
-                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
-                var dataJSONEN = encodeURIComponent(dataJSON);
-
-                exportReserve(dataJSONEN);
+                exportReserve(reserveList);
             });
         }
 
-        function exportReserve(dataJSONEN){
-            var  datas = callAjax("{{_context_path}}/api/reserve/export/export", "post", dataJSONEN, "json");
+        function exportReserve(input){
+            //var  datas = callAjax("{{_context_path}}/api/reserve/export/export", "post", dataJSONEN, "json");
+            //window.open("{{_context_path}}/api/reserve/export/export/?options="+dataJSONEN);
+            /*$.ajax({
+                type: "POST",
+                url: "{{_context_path}}/api/reserve/export/export",
+                data: dataJSONEN,
+                dataType: "json",
+                success: function(data){
+                    var win = window.open();
+                    win.document.write(data);
+                }
+            })*/
+            window.open( "{{_context_path}}/api/reserve/export/export" + "?reserveList=" + input);
 
         }
     }

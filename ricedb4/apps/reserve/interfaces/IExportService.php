@@ -19,7 +19,7 @@ interface IExportService {
     /**
      * @name export
      * @uri /export
-     * @param apps\commom\entity\ReserveList reserveList Description
+     * @param String reserveList Description
      * @return file export Description
      * @description รายการสำรองข้าว
      */
