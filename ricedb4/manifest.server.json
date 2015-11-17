@@ -7,7 +7,7 @@
             "contextName": "default",
             "contextType": "data",
             "propertys": [
-                {"name": "driver","value": "pdo_sqlsrv"},
+                {"name": "driver","value": "pdo_dblib"},
                 {"name": "host","value": "202.44.34.86"},
                 {"name": "port","value": "1433"},
                 {"name": "dbname","value": "RiceDB2"},

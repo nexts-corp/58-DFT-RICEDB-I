@@ -15,6 +15,14 @@ interface IViewService {
      */
     public function manageReserve();
 
+
+    /**
+     * @name manageReserve2
+     * @uri /manageReserve2
+     * @description  รายการสำรองข้าว
+     */
+    public function manageReserve2();
+
     /**
      * @name exportReserve
      * @uri /exportReserve
