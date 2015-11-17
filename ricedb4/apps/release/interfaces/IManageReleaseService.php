@@ -1,4 +1,5 @@
 <?php
+
 namespace apps\release\interfaces;
 
 /**
@@ -33,6 +34,15 @@ interface IManageReleaseService {
     public function listsRelease();
 
     /**
+     * @name getReservName
+     * @uri /getReservName
+     * @param string keyword
+     * @return String[] lists Description
+     * @description รายการสำรองข้าว
+     */
+    public function getReservName($keyword);
+
+    /**
      * @name insert
      * @uri /insert
      * @param apps\common\entity\Status status Description
@@ -58,4 +68,4 @@ interface IManageReleaseService {
      * @description เพิ่มข้อมูลรายการระบายข้าว
      */
     public function delete($status);
-} 
+}

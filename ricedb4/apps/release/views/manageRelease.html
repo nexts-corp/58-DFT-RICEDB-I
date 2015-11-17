@@ -120,18 +120,18 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <tbody>
-                                    <tr class="no-border">
-                                        <td class="col-md-3 text-right text-bold">{{#i18n}}release.list{{/i18n}} :</td>
-                                        <td class="col-md-9 text-left"><div id="detailDel"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-3 text-right text-bold">{{#i18n}}release.date{{/i18n}} :</td>
-                                        <td class="col-md-9 text-left"><div id="dateDel"></div></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-md-3 text-right text-bold">{{#i18n}}release.rWeight{{/i18n}} ({{#i18n}}release.ton{{/i18n}}) :</td>
-                                        <td class="col-md-9 text-left"><div id="targetDel"></div></td>
-                                    </tr>
+                                        <tr class="no-border">
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}release.list{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="detailDel"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}release.date{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="dateDel"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}release.rWeight{{/i18n}} ({{#i18n}}release.ton{{/i18n}}) :</td>
+                                            <td class="col-md-9 text-left"><div id="targetDel"></div></td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -154,16 +154,16 @@
     $(function () {
         listsRelease();
 
-        $("button.add").unbind().click(function(){
+        $("button.add").unbind().click(function () {
             toggleShow("form");
 
-            $("button.save").unbind().click(function(){
+            $("button.save").unbind().click(function () {
                 var isValid = true;
-                $('#form input[required]').each(function() {
-                    if($(this).val() == "" && !$(this).prop("disabled"))
+                $('#form input[required]').each(function () {
+                    if ($(this).val() == "" && !$(this).prop("disabled"))
                         isValid = false;
                 });
-                if(isValid){
+                if (isValid) {
                     var fdata = dataObject(null);
                     var dataJSON = JSON.stringify({status: fdata["Status"]});
                     var dataJSONEN = encodeURIComponent(dataJSON);
@@ -173,27 +173,27 @@
             });
         });
 
-        $("button.back, button.cancel").unbind().click(function(){
+        $("button.back, button.cancel").unbind().click(function () {
             toggleShow("home");
         });
     });
 
-    function listsRelease(){
+    function listsRelease() {
         var dataSet = [];
 
         var datas = callAjax("{{_context_path}}/api/release/manage/listsRelease", "post", {}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
-            $.each(datas["lists"], function(key, value){
+            $.each(datas["lists"], function (key, value) {
                 listArr[value["id"]] = value;
 
                 dataSet.push(value);
             });
         }
 
-        var t = $("#table").DataTable( {
+        var t = $("#table").DataTable({
             "destroy": true,
             "data": dataSet,
-            "order": [[ 0, 'asc' ]],
+            "order": [[0, 'asc']],
             "columnDefs": [
                 {
                     "targets": 0,
@@ -206,8 +206,8 @@
                     "targets": 1,
                     "data": "id",
                     "sClass": "text-center",
-                    "render": function(data, key, full){
-                        var content = full["releaseName"]+' '+full["status"];
+                    "render": function (data, key, full) {
+                        var content = full["releaseName"] + ' ' + full["status"];
                         return content;
                     }
                 },
@@ -231,8 +231,8 @@
                     "data": "id",
                     "sClass": "text-left col-md-1",
                     "render": function (data) {
-                        var content = '<button class="btn btn-primary edit" data-id="'+data+'"><i class="fa fa-pencil"></i></button>&nbsp;'
-                                + '<button class="btn btn-default delete" data-id="'+data+'"><i class="fa fa-trash"></i></button> ';
+                        var content = '<button class="btn btn-primary edit" data-id="' + data + '"><i class="fa fa-pencil"></i></button>&nbsp;'
+                                + '<button class="btn btn-default delete" data-id="' + data + '"><i class="fa fa-trash"></i></button> ';
 
                         return content;
                     }
@@ -240,24 +240,25 @@
             ]
         });
 
-        t.on( 'order.dt search.dt', function () {
-            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                cell.innerHTML = i+1;
-            } );
-        } ).draw();
+        t.on('order.dt search.dt', function () {
+            t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
 
-        $("#table").off("click", "button.edit").on("click", "button.edit", function(){
+        $("#table").off("click", "button.edit").on("click", "button.edit", function () {
             toggleShow("form");
 
             var id = $(this).attr("data-id");
             var value = listArr[id];
+            var reservKey = callAjax("{{_context_path}}/api/release/manage/getReservName", "post", {keyword: value["reserveKeyword"]}, "json")["lists"];
 
-            $("#reserveKeyword").val(value["reserveKeyword"]);
+            $("#reserveKeyword").append("<option value='" + value["reserveKeyword"] + "' selected>" + reservKey.detail + "</option>");
             $("#keyword").val(value["releaseCode"]).trigger("change");
             $("#status").val(value["status"]);
             $("#auctionDate").val(value["auctionDate"]);
-
-            if(value["releaseCode"] == "AU"){
+            $("#buyer").val(value["buyer"]);
+            if (value["releaseCode"] == "AU") {
                 $("#ageStop").val(value["ageStop"]["date"].substr(0, 10));
                 $("#dateStart").val(value["dateStart"]["date"].substr(0, 10));
                 $("#dateEnd").val(value["dateEnd"]["date"].substr(0, 10));
@@ -266,13 +267,13 @@
                 $("#weightDecimal").val(value["weightDecimal"]);
             }
 
-            $("button.save").unbind().click(function(){
+            $("button.save").unbind().click(function () {
                 var isValid = true;
-                $('#form input[required]').each(function() {
-                    if($(this).val() == "" && !$(this).prop("disabled"))
+                $('#form input[required]').each(function () {
+                    if ($(this).val() == "" && !$(this).prop("disabled"))
                         isValid = false;
                 });
-                if(isValid){
+                if (isValid) {
                     var fdata = dataObject(id);
                     var dataJSON = JSON.stringify({status: fdata["Status"]});
                     var dataJSONEN = encodeURIComponent(dataJSON);
@@ -283,17 +284,17 @@
 
         });
 
-        $("#table").off("click", "button.delete").on("click", "button.delete", function(){
+        $("#table").off("click", "button.delete").on("click", "button.delete", function () {
             $("#delModal").modal("show");
 
             var id = $(this).attr("data-id");
             var value = listArr[id];
 
-            $("#detailDel").html(value["releaseName"]+' '+value["status"]);
+            $("#detailDel").html(value["releaseName"] + ' ' + value["status"]);
             $("#dateDel").html(value["auctionDate"]);
             $("#targetDel").html(value["target"]);
 
-            $("#confirmDelete").unbind().click(function(){
+            $("#confirmDelete").unbind().click(function () {
                 var dataStatus = {};
 
                 dataStatus["keyword"] = listArr[id]["keyword"];
@@ -310,25 +311,25 @@
         });
     }
 
-    function listsReserve(){
+    function listsReserve() {
         var html = '<option value="" selected="selected">เลือกรายการสำรองข้าว</option>';
         var datas = callAjax("{{_context_path}}/api/release/manage/listsReserve", "post", {}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
-            $.each(datas["lists"], function(key, value){
-                html += '<option value="'+value["keyword"]+'">'+value["detail"]+'</option>'
+            $.each(datas["lists"], function (key, value) {
+                html += '<option value="' + value["keyword"] + '">' + value["detail"] + '</option>'
             });
 
             $("#reserveKeyword").html(html);
         }
     }
 
-    function lkRelease(){
-        if(flagRelease === 0){
+    function lkRelease() {
+        if (flagRelease === 0) {
             var html = '<option value="" selected="selected">เลือกรายการระบายข้าว</option>';
             var datas = callAjax("{{_context_path}}/api/release/manage/lkRelease", "post", {}, "json");
             if (typeof datas !== "undefined" && datas !== null) {
-                $.each(datas["lists"], function(key, value){
-                    html += '<option value="'+value["releaseCode"]+'">'+value["releaseName"]+'</option>'
+                $.each(datas["lists"], function (key, value) {
+                    html += '<option value="' + value["releaseCode"] + '">' + value["releaseName"] + '</option>'
                 });
 
                 $("#keyword").html(html);
@@ -337,71 +338,71 @@
         }
     }
 
-    function switchForm(option){
+    function switchForm(option) {
         var html = '';
 
-        if(option == ""){
+        if (option == "") {
             html = '<div class="form-group text-center">'
-                + '<label class="text-bold">** รายละเอียดการระบายข้าว **</label>'
-            + '</div>';
+                    + '<label class="text-bold">** รายละเอียดการระบายข้าว **</label>'
+                    + '</div>';
 
             $("#switchForm").html(html);
         }
 
-        else if(option == "AU"){
+        else if (option == "AU") {
             html = '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="status">ประมูลครั้งที่</label>'
-                + '<div class="col-md-6">'
+                    + '<label class="col-md-3 control-label req" for="status">ประมูลครั้งที่</label>'
+                    + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="status" name="status" required>'
-                + '</div>'
-            + '</div>'
-
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ประมูล</label>'
-                + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
-                + '</div>'
-            + '</div>'
-
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="ageStop">วันที่คิดอายุข้าว</label>'
-                + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="ageStop" name="ageStop" required>'
-                + '</div>'
-            + '</div>'
-
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req">วันที่คิดราคาย้อนหลัง</label>'
-                + '<div class="col-md-6">'
-                    + '<div class="input-daterange input-group">'
-                        + '<span class="input-group-addon"><i class="fa fa-calendar"></i></span>'
-                        + '<input type="text" class="form-control" id="dateStart" name="dateStart" required>'
-                        + '<span class="input-group-addon">ถึง</span>'
-                        + '<input type="text" class="form-control" id="dateEnd" name="dateEnd" required>'
                     + '</div>'
-                + '</div>'
-            + '</div>'
+                    + '</div>'
 
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="lengthDecimal">Decimal Length</label>'
-                + '<div class="col-md-6">'
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ประมูล</label>'
+                    + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
+                    + '</div>'
+                    + '</div>'
+
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req" for="ageStop">วันที่คิดอายุข้าว</label>'
+                    + '<div class="col-md-6">'
+                    + '<input type="text" class="form-control" id="ageStop" name="ageStop" required>'
+                    + '</div>'
+                    + '</div>'
+
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req">วันที่คิดราคาย้อนหลัง</label>'
+                    + '<div class="col-md-6">'
+                    + '<div class="input-daterange input-group">'
+                    + '<span class="input-group-addon"><i class="fa fa-calendar"></i></span>'
+                    + '<input type="text" class="form-control" id="dateStart" name="dateStart" required>'
+                    + '<span class="input-group-addon">ถึง</span>'
+                    + '<input type="text" class="form-control" id="dateEnd" name="dateEnd" required>'
+                    + '</div>'
+                    + '</div>'
+                    + '</div>'
+
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req" for="lengthDecimal">Decimal Length</label>'
+                    + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="lengthDecimal" name="lengthDecimal">'
-                + '</div>'
-            + '</div>'
+                    + '</div>'
+                    + '</div>'
 
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="roundFun">Round Fun.</label>'
-                + '<div class="col-md-6">'
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req" for="roundFun">Round Fun.</label>'
+                    + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="roundFun" name="roundFun">'
-                + '</div>'
-            + '</div>'
+                    + '</div>'
+                    + '</div>'
 
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="weightDecimal">Weight Decimal</label>'
-                + '<div class="col-md-6">'
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req" for="weightDecimal">Weight Decimal</label>'
+                    + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="weightDecimal" name="weightDecimal">'
-                + '</div>'
-            + '</div>';
+                    + '</div>'
+                    + '</div>';
 
             $("#switchForm").html(html);
 
@@ -410,65 +411,65 @@
                 autoclose: true
             });
         }
-        else{
+        else {
             html = '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="status">ผู้เสนอซื้อ :</label>'
-                + '<div class="col-md-6">'
+                    + '<label class="col-md-3 control-label req" for="buyer">ผู้เสนอซื้อ :</label>'
+                    + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="buyer" name="buyer" required>'
-                + '</div>'
-            + '</div>'
+                    + '</div>'
+                    + '</div>'
 
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="status">รายละเอียด :</label>'
-                + '<div class="col-md-6">'
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req" for="status">รายละเอียด :</label>'
+                    + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="status" name="status" required>'
-                + '</div>'
-            + '</div>'
+                    + '</div>'
+                    + '</div>'
 
-            + '<div class="form-group">'
-                + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ระบายข้าว :</label>'
-                + '<div class="col-md-6">'
+                    + '<div class="form-group">'
+                    + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ระบายข้าว :</label>'
+                    + '<div class="col-md-6">'
                     + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
-                + '</div>'
-            + '</div>';
+                    + '</div>'
+                    + '</div>';
 
             $("#switchForm").html(html);
         }
     }
 
-    function insertRelease(dataJSONEN){
+    function insertRelease(dataJSONEN) {
         $("#loading").html("กำลังบันทึกข้อมูล...");
 
-        setTimeout(function(){
+        setTimeout(function () {
             var datas = callAjax("{{_context_path}}/api/release/manage/insert", "post", dataJSONEN, "json");
             if (typeof datas !== "undefined" && datas !== null) {
-                if(datas["add"] == true){
+                if (datas["add"] == true) {
                     $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
-                    setTimeout(function(){
+                    setTimeout(function () {
                         toggleShow("home");
                     }, 500);
                 }
-                else{
-                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["add"]+'</span>');
+                else {
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>' + datas["add"] + '</span>');
                 }
             }
         }, 100);
     }
 
-    function editRelease(dataJSONEN){
+    function editRelease(dataJSONEN) {
         $("#loading").html("กำลังบันทึกข้อมูล...");
 
-        setTimeout(function(){
+        setTimeout(function () {
             var datas = callAjax("{{_context_path}}/api/release/manage/update", "post", dataJSONEN, "json");
             if (typeof datas !== "undefined" && datas !== null) {
-                if(datas["update"] == true){
+                if (datas["update"] == true) {
                     $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
-                    setTimeout(function(){
+                    setTimeout(function () {
                         toggleShow("home");
                     }, 500);
                 }
-                else{
-                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["update"]+'</span>');
+                else {
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>' + datas["update"] + '</span>');
                 }
             }
         }, 100);
@@ -483,9 +484,9 @@
         }
     }
 
-    function dataObject(id){
+    function dataObject(id) {
         var dataStatus = {};
-        if(id !== null){
+        if (id !== null) {
             dataStatus["id"] = id;
         }
 
@@ -501,12 +502,12 @@
         return fdata;
     }
 
-    function toggleShow(option){
-        if(option == "form"){
+    function toggleShow(option) {
+        if (option == "form") {
             $("#divTable, button.add").hide();
             $("#divForm, button.back").show();
 
-            $("#form input, #form select").each(function(){
+            $("#form input, #form select").each(function () {
                 $(this).val("").trigger("change");
             });
 
@@ -515,11 +516,11 @@
 
             $("#loading").empty();
 
-            $("#keyword").change(function(){
+            $("#keyword").change(function () {
                 switchForm($("#keyword").val());
             }).trigger("change");
         }
-        else if(option == "home"){
+        else if (option == "home") {
             $("#divForm, button.back").hide();
             $("#divTable, button.add").show();
 
