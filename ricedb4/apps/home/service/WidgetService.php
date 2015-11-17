@@ -17,40 +17,25 @@ class WidgetService extends CServiceBase implements IWidgetService{
     }
     
     public function projectGroup() {
-        $sql = "SELECT"
-            ." pj.project, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." JOIN ".$this->ent."\\Project pj WITH pj.id=ri.projectId"
-        ." GROUP BY pj.project"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT project, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY project ORDER BY sum(tWeight) DESC";
 
-        $data = $this->datacontext->getObject($sql);
-        
+        $data = $this->datacontext->pdoQuery($sql);
+
         return $data;
     }
 
     public function typeGroup() {
-        $sql = "SELECT"
-            ." tp.type, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." JOIN ".$this->ent."\\Type tp WITH tp.id=ri.typeId"
-        ." GROUP BY tp.type"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT type, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY type ORDER BY sum(tWeight) DESC";
 
-        $data = $this->datacontext->getObject($sql);
+        $data = $this->datacontext->pdoQuery($sql);
 
         return $data;
     }
 
     public function gradeGroup() {
-        $sql = "SELECT"
-            ." gd.grade, sum(ri.tWeight) AS weight"
-        ." FROM ".$this->ent."\\RiceInfo ri"
-        ." JOIN ".$this->ent."\\grade gd WITH gd.id=ri.gradeId"
-        ." GROUP BY gd.grade"
-        ." ORDER BY weight DESC";
+        $sql = "SELECT grade, sum(tWeight) AS weight FROM fn_rice_tracking() WHERE status IS NULL GROUP BY grade ORDER BY sum(tWeight) DESC";
 
-        $data = $this->datacontext->getObject($sql);
+        $data = $this->datacontext->pdoQuery($sql);
 
         return $data;
     }
