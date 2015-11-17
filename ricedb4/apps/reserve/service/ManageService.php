@@ -91,79 +91,57 @@ class ManageService extends CServiceBase implements IManageService {
     }
 
     public function listsRiceCanReserve($columns, $draw, $start, $length){
-        $condArr1 = [];
-        $condArr2 = [];
+        $condArr = [];
 
         //search province
         if($columns[1]["search"]["value"] != ""){
             $val = $columns[1]["search"]["value"];
-            $condArr1[] = "LK_Province_Id = '".$val."'";
-            $condArr2[] = "pv.id = '".$val."'";
+            $condArr[] = "provinceId = '".$val."'";
         }
 
         //search code
         if($columns[2]["search"]["value"] != ""){
             $val = $columns[2]["search"]["value"];
-            $condArr1[] = "Code LIKE '%".$val."%'";
-            $condArr2[] = "ri.code LIKE '%".$val."%'";
+            $condArr[] = "code LIKE '%".$val."%'";
         }
 
         //search silo
         if($columns[3]["search"]["value"] != ""){
             $val = $columns[3]["search"]["value"];
-            $condArr1[] = "Silo LIKE '%".$val."%'";
-            $condArr2[] = "ri.silo LIKE '%".$val."%'";
+            $condArr[] = "silo LIKE '%".$val."%'";
         }
 
         //search project
         if($columns[7]["search"]["value"] != ""){
             $val = $columns[7]["search"]["value"];
-            $condArr1[] = "LK_Project_Id = '".$val."'";
-            $condArr2[] = "pj.id = '".$val."'";
+            $condArr[] = "projectId = '".$val."'";
         }
 
         //search type
         if($columns[8]["search"]["value"] != ""){
             $val = $columns[8]["search"]["value"];
-            $condArr1[] = "LK_Type_Id = '".$val."'";
-            $condArr2[] = "tp.id = '".$val."'";
+            $condArr[] = "typeId = '".$val."'";
         }
 
         //search grade
         if($columns[9]["search"]["value"] != ""){
             $val = $columns[9]["search"]["value"];
-            $condArr1[] = "LK_Grade_Id = '".$val."'";
-            $condArr2[] = "gd.id = '".$val."'";
+            $condArr[] = "gradeId = '".$val."'";
         }
 
-        $condition1 = '';
-        $condition2 = '';
-        if(count($condArr1) > 0){
-            $condition1 = "WHERE ".implode(" AND ", $condArr1);
-            $condition2 = "WHERE ".implode(" AND ", $condArr2);
+        $condition = '';
+        if(count($condArr) > 0){
+            $condition = "AND ".implode(" AND ", $condArr);
         }
-        $sqlC = "SELECT"
-            ." COUNT(*) AS rows"
-            ." FROM dft_Rice_Info ri"
-            ." JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
-            ." JOIN dft_LK_Zone zn ON zn.Id = pv.LK_Zone_Id"
-            ." ".$condition1;
+        $sqlC = "SELECT COUNT(*) AS rows FROM fn_rice_tracking() WHERE status IS NULL AND tWeight != 0"
+            ." ".$condition;
 
         $count = $this->datacontext->pdoQuery($sqlC);
 
-        $sql = "SELECT"
-            ." ri.id AS riceInfoId, ri.provinceId, pv.provinceNameTH, ri.code, ri.silo, ac.associate,"
-            ." ri.warehouse, ri.stack, ri.projectId, pj.project, ri.typeId, tp.type, ri.gradeId, gd.grade,"
-            ." ri.discountRate, ri.weight"
-            ." FROM ".$this->ent."\\RiceInfo ri"
-            ." JOIN ".$this->ent."\\Province pv WITH pv.id = ri.provinceId"
-            ." JOIN ".$this->ent."\\Associate ac WITH ac.id = ri.associateId"
-            ." JOIN ".$this->ent."\\Project pj WITH pj.id = ri.projectId"
-            ." JOIN ".$this->ent."\\Type tp WITH tp.id = ri.typeId"
-            ." JOIN ".$this->ent."\\Grade gd WITH gd.id = ri.gradeId"
-            ." ".$condition2;
+        $sql = "SELECT * FROM fn_rice_tracking() WHERE status IS NULL AND tWeight != 0"
+            ." ".$condition." ORDER BY id OFFSET ".$start." ROWS FETCH NEXT ".$length." ROWS ONLY";
 
-        $data = $this->datacontext->getObject($sql, array(), $length, $start);
+        $data = $this->datacontext->pdoQuery($sql);
 
         $this->getResponse()->add("recordsTotal", $count[0]["rows"]);
         $this->getResponse()->add("recordsFiltered", $count[0]["rows"]);
@@ -182,7 +160,7 @@ class ManageService extends CServiceBase implements IManageService {
 
         $conditionArr = array();
         foreach($riceReserve as $key => $val){
-            $conditionArr[$key] = "ri.id='".$val->riceInfoId."'";
+            $conditionArr[$key] = "ri.stackCode='".$val->stackCode."'";
         }
         $condition = implode(" OR ", $conditionArr);
 
@@ -194,7 +172,8 @@ class ManageService extends CServiceBase implements IManageService {
         $data = $this->datacontext->getObject($sql);
         foreach($data as $key => $val){
             $rice = new \apps\common\entity\RiceReserve();
-            $rice->riceInfoId = $val->id;
+            $rice->warehouseCode = $val->warehouseCode;
+            $rice->stackCode = $val->stackCode;
             $rice->reserveKeyword = $reserveList->keyword;
 
             $check = $this->datacontext->getObject($rice);
@@ -209,11 +188,11 @@ class ManageService extends CServiceBase implements IManageService {
                 $rice->typeId = $val->typeId;
                 $rice->warehouse = $val->warehouse;
                 $rice->stack = $val->stack;
+                $rice->tWeight = $val->tWeight;
                 $rice->weight = $val->weight;
                 $rice->samplingId = $val->samplingId;
                 $rice->gradeId = $val->gradeId;
                 $rice->discountRate = $val->discountRate;
-
 
                 if(!($this->datacontext->saveObject($rice))){
                     $return = $this->datacontext->getLastMessage();

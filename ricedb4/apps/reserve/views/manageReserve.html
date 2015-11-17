@@ -392,16 +392,16 @@
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <tbody>
                                     <tr>
-                                        <td class="col-md-3 text-right text-bold">{{#i18n}}reserve.list{{/i18n}} :</td>
-                                        <td class="col-md-9 text-left"><div id="detailDel"></div></td>
+                                        <td class="col-md-4 text-right text-bold">{{#i18n}}reserve.list{{/i18n}} :</td>
+                                        <td class="col-md-8 text-left"><div id="detailDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-3 text-right text-bold">{{#i18n}}reserve.dateCreated{{/i18n}}</td>
-                                        <td class="col-md-9 text-left"><div id="dateDel"></div></td>
+                                        <td class="col-md-4 text-right text-bold">{{#i18n}}reserve.dateCreated{{/i18n}} :</td>
+                                        <td class="col-md-8 text-left"><div id="dateDel"></div></td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-3 text-right text-bold">{{#i18n}}reserve.rWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</td>
-                                        <td class="col-md-9 text-left"><div id="targetDel"></div></td>
+                                        <td class="col-md-4 text-right text-bold">{{#i18n}}reserve.rWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</td>
+                                        <td class="col-md-8 text-left"><div id="targetDel"></div></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -498,8 +498,10 @@
 
                     if(action == "edit"){
                         $.each(listSelected, function(key, val){
-                            console.log(val["riceInfoId"]);
-                            $('input:checkbox[data-rid="'+val["riceInfoId"]+'"]').prop("checked", true).trigger("click");
+                            listArr[val["stackCode"]] = val;
+                            $('input:checkbox[data-rid="'+val["stackCode"]+'"]').prop("checked", true);
+                            rowSelected(val["stackCode"], "check");
+
                         });
                     }
                 }
@@ -623,9 +625,7 @@
                 var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserveByIndex", "post", dataJSONEN, "json");
                 if (typeof datas !== "undefined" && datas !== null) {
                     $.each(datas["lists"], function(key, value){
-                        listSelected[value["riceInfoId"]] = value;
-
-
+                        listSelected[value["stackCode"]] = value;
                     });
                 }
             });
@@ -682,7 +682,7 @@
                 type: "post",
                 dataSrc: function(json){
                     $.each(json["data"], function(key, value){
-                        listArr[value["riceInfoId"]] = value;
+                        listArr[value["stackCode"]] = value;
 
                     });
                     return json["data"];
@@ -693,7 +693,7 @@
                     "targets": 0,
                     "searchable": false,
                     "orderable": false,
-                    "data": "riceInfoId",
+                    "data": "stackCode",
                     "sClass": "text-center"
                 },
                 {
@@ -743,12 +743,17 @@
                 },
                 {
                     "targets": 10,
-                    "data": "weight",
-                    "sClass": "text-right"
+                    "data": "tWeight",
+                    "sClass": "text-right",
+                    "render": function(data){
+                        var content = accounting.formatNumber(data, 2, ",", ".");
+
+                        return content;
+                    }
                 },
                 {
                     "targets": 11,
-                    "data": "riceInfoId",
+                    "data": "stackCode",
                     "sClass": "text-left col-md-1",
                     "render": function (data) {
                         var content = '<div class="checkbox-custom checkbox-primary row-selected">'
@@ -820,6 +825,7 @@
     function rowSelected(id, option){
         if(option == "check"){
             listSelected[id] = listArr[id];
+            console.log(listArr[id]);
 
             if (typeof listSilo[listSelected[id]["silo"]] == 'undefined') {
                 listSilo[listSelected[id]["silo"]] = 1;
@@ -828,18 +834,18 @@
                 listSilo[listSelected[id]["silo"]] = listSilo[listSelected[id]["silo"]] + 1;
             }
 
-            weightSelected += parseFloat(listSelected[id]["weight"]);
+            weightSelected += parseFloat(listSelected[id]["tWeight"]);
         }
         else{
             listSilo[listSelected[id]["silo"]] = listSilo[listSelected[id]["silo"]] - 1;
             if(listSilo[listSelected[id]["silo"]] == 0){
                 delete listSilo[listSelected[id]["silo"]];
             }
-            weightSelected -= parseFloat(listSelected[id]["weight"]);
+            weightSelected -= parseFloat(listSelected[id]["tWeight"]);
             delete listSelected[id];
         }
 
-        $(".selectedDisplay").html(weightSelected);
+        $(".selectedDisplay").html(parseFloat(weightSelected).toFixed(2));
         $(".countSiloDisplay").html(Object.keys(listSilo).length);
     }
 
@@ -864,32 +870,32 @@
                 + '<td class="text-center">'+value["project"]+'</td>'
                 + '<td class="text-center">'+value["type"]+'</td>'
                 + '<td class="text-center">'+value["grade"]+'</td>'
-                + '<td class="text-right">'+value["weight"]+'</td>'
+                + '<td class="text-right">'+parseFloat(value["tWeight"]).toFixed(2)+'</td>'
             + '</tr>';
 
             //project
             if (typeof projectArr[value["project"]] == 'undefined') {
                 projectArr[value["project"]] = 0;
             }
-            projectArr[value["project"]] += parseFloat(value["weight"]);
+            projectArr[value["project"]] += parseFloat(value["tWeight"]);
 
             //grade
             if (typeof gradeArr[value["grade"]] == 'undefined') {
                 gradeArr[value["grade"]] = 0;
             }
-            gradeArr[value["grade"]] += parseFloat(value["weight"]);
+            gradeArr[value["grade"]] += parseFloat(value["tWeight"]);
 
             //province
             if (typeof provinceArr[value["provinceNameTH"]] == 'undefined') {
                 provinceArr[value["provinceNameTH"]] = 0;
             }
-            provinceArr[value["provinceNameTH"]] += parseFloat(value["weight"]);
+            provinceArr[value["provinceNameTH"]] += parseFloat(value["tWeight"]);
 
             //type
             if (typeof typeArr[value["type"]] == 'undefined') {
                 typeArr[value["type"]] = 0;
             }
-            typeArr[value["type"]] += parseFloat(value["weight"]);
+            typeArr[value["type"]] += parseFloat(value["tWeight"]);
         });
 
         $("#siloSelected tbody").html(html1);
@@ -900,7 +906,7 @@
 
             html2 += '<tr>'
                 + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
                 + '<td class="text-right">'+percent+'</td>'
             + '</tr>';
         });
@@ -912,7 +918,7 @@
 
             html3 += '<tr>'
                 + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
                 + '<td class="text-right">'+percent+'</td>'
             + '</tr>';
         });
@@ -924,7 +930,7 @@
 
             html4 += '<tr>'
                 + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
                 + '<td class="text-right">'+percent+'</td>'
             + '</tr>';
         });
@@ -936,7 +942,7 @@
 
             html5 += '<tr>'
                 + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+value+'</td>'
+                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
                 + '<td class="text-right">'+percent+'</td>'
             + '</tr>';
         });
@@ -1010,7 +1016,7 @@
 
         $.each(listSelected, function(key, value){
             dataReserve.push({
-                "riceInfoId":value["riceInfoId"]
+                "stackCode":value["stackCode"]
             });
         });
 
