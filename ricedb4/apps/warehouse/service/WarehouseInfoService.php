@@ -2,7 +2,6 @@
 
 namespace apps\warehouse\service;
 
-
 use apps\warehouse\interfaces\IWarehouseInfoService;
 use th\co\bpg\cde\core\CServiceBase;
 use th\co\bpg\cde\data\CDataContext;
@@ -227,8 +226,8 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
 
     public function select($id){
         $sql = "SELECT"
-                ." ri.id, pv.provinceNameTH, ri.stackCode, ri.code, ri.silo, ac.associate,"
-                ." ri.warehouse, ri.stack, pj.project, tp.type, gd.grade, ri.weight,"
+                ." ri.id, ri.provinceId, pv.provinceNameTH, ri.stackCode, ri.code, ri.silo, ri.associateId, ac.associate,"
+                ." ri.warehouse, ri.stack, ri.projectId, pj.project, ri.typeId, tp.type, ri.gradeId, gd.grade, ri.weight,"
                 ." ri.discountRate, st.status"
             ." FROM ".$this->ent."\\RiceInfo ri"
             ." JOIN ".$this->ent."\\Province pv WITH pv.id = ri.provinceId"
@@ -248,14 +247,35 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
     }
 
     public function insert($riceInfo){
+        $return = true;
 
+        //$info = new \apps\common\entity\RiceInfo();
+        if (!$this->datacontext->saveObject($riceInfo)) {
+            $return = $this->datacontext->getLastMessage();
+        }
+
+        return $return;
     }
 
     public function update($riceInfo){
+        $return = true;
 
+        if (!$this->datacontext->updateObject($riceInfo)) {
+            $return = $this->datacontext->getLastMessage();
+        }
+
+        return $return;
     }
 
     public function delete($riceInfo){
+        $return = true;
 
+        $info = new \apps\common\entity\RiceInfo();
+        $info->id = $riceInfo->id;
+        $dataInfo = $this->datacontext->getObject($info);
+        if(!$this->datacontext->removeObject($dataInfo)){
+            $return = $this->datacontext->getLastMessage();
+        }
+        return $return;
     }
 }

@@ -123,9 +123,9 @@ interface IWarehouseInfoService {
     /**
      * @name delete
      * @uri /delete
-     * @param integer id Description
+     * @param apps\common\entity\RiceInfo riceInfo Description
      * @return boolean delete Description
      * @description เพิ่มข้อมูลผู้เสนอราคารายใหม่
      */
-    public function delete($id);
+    public function delete($riceInfo);
 }

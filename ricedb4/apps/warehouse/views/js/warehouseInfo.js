@@ -11,10 +11,13 @@ $(function(){
 
 
         var result = listsObject(call);
-        $("#" + id).html(result).select2();
+        var html1 = '<option value="" selected="selected">ทั้งหมด</option>'+result;
+        var html2 = '<option value="" selected="selected"></option>'+result;
+
+        $("#" + id).html(html1).select2();
 
         if(typeof mapping !== "undefined"){
-            $("#"+mapping).html(result);
+            $("#"+mapping).html(html2);
         }
 
         idArr.push("#"+id);
@@ -50,7 +53,7 @@ $(function(){
             });
             if(isValid){
                 var fdata = dataObject(null);
-                var dataJSON = JSON.stringify({user: fdata["User"]});
+                var dataJSON = JSON.stringify({riceInfo: fdata["RiceInfo"]});
                 var dataJSONEN = encodeURIComponent(dataJSON);
 
                 insertWarehouse(dataJSONEN);
@@ -213,6 +216,38 @@ function listsAllRice(){
 
     $("#table").off("click", "button.edit").on("click", "button.edit", function(){
         toggleShow("form");
+
+        var id = $(this).attr("data-id");
+        var value = select(id);
+
+        $("#form input").each(function() {
+            var fname = $(this).attr("name");
+
+            $("#"+fname).val(value[fname]);
+        });
+
+        $("#form select").each(function() {
+            var fname = $(this).attr("name");
+            console.log(value[fname]);
+
+            $("#"+fname).select2("val", value[fname]);
+        });
+
+        // when you save form
+        $("button.submit").unbind().click(function(){
+            var isValid = true;
+            $('#form input[required], #form select[required]').each(function() {
+                if($(this).val() == "" && !$(this).prop("disabled"))
+                    isValid = false;
+            });
+            if(isValid){
+                var fdata = dataObject(id);
+                var dataJSON = JSON.stringify({riceInfo: fdata["RiceInfo"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                editWarehouse(dataJSONEN);
+            }
+        });
     });
 
     $("#table").off("click", "button.delete").on("click", "button.delete", function(){
@@ -229,11 +264,24 @@ function listsAllRice(){
         $("#typeDel").html(value["type"]);
         $("#gradeDel").html(value["grade"]);
         $("#weightDel").html(value["weight"]);
+
+        $("#confirmDelete").unbind().click(function(){
+            var dataInfo = {};
+            dataInfo["id"] = id;
+
+            var fdata = {};
+            fdata["RiceInfo"] = dataInfo;
+
+            var dataJSON = JSON.stringify({riceInfo: fdata["RiceInfo"]});
+            var dataJSONEN = encodeURIComponent(dataJSON);
+
+            deleteWarehouse(dataJSONEN);
+        });
     });
 }
 
 function listsObject(dataCall){
-    var html = '<option value="" selected="selected">ทั้งหมด</option>';
+    var html = '';
 
     var datas = callAjax(js_context_path+"/api/warehouse/warehouseInfo/"+dataCall, "post", {}, "json");
     if(typeof datas !== "undefined" && datas !== null){
@@ -284,13 +332,83 @@ function select(id){
     }
 }
 
+function insertWarehouse(dataJSONEN){
+    $("#loading").html("กำลังบันทึกข้อมูล...");
+
+    setTimeout(function(){
+        var datas = callAjax(js_context_path+"/api/warehouse/warehouseInfo/insert", "post", dataJSONEN, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            if(datas["add"] == true){
+                $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                setTimeout(function(){
+                    toggleShow("list");
+                }, 500);
+            }
+            else{
+                $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["add"]+'</span>');
+            }
+        }
+    }, 100);
+}
+
+function editWarehouse(dataJSONEN){
+    $("#loading").html("กำลังบันทึกข้อมูล...");
+
+    setTimeout(function(){
+        var datas = callAjax(js_context_path+"/api/warehouse/warehouseInfo/update", "post", dataJSONEN, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            if(datas["update"] == true){
+                $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                setTimeout(function(){
+                    toggleShow("list");
+                }, 500);
+            }
+            else{
+                $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["add"]+'</span>');
+            }
+        }
+    }, 100);
+}
+
+function deleteWarehouse(dataJSONEN) {
+    var datas = callAjax(js_context_path+"/api/warehouse/warehouseInfo/delete", "post", dataJSONEN, "json");
+    if (typeof datas !== "undefined" && datas !== null) {
+        if (datas["delete"] == true) {
+            toggleShow("list");
+        }
+    }
+}
+
+function dataObject(uid){
+    var dataInfo = {};
+
+    //edit
+    if(uid !== null){
+        dataInfo["id"] = uid;
+
+    }
+    $("#form input, #form select").each(function (i) {
+        var fname = $(this).attr("name");
+        var fvalue = $(this).val();
+
+        dataInfo[fname] = fvalue;
+    });
+    var fdata = {};
+    fdata["RiceInfo"] = dataInfo;
+
+    return fdata;
+}
+
 function toggleShow(option){
     if(option == "form"){
         $("#infoForm, #showTable").show();
         $("#infoTable, #addToTable").hide();
 
-        $("#form input, #form select, #form textarea").each(function(){
+        $("#form input").each(function(){
             $(this).val("");
+        });
+        $("#form select").each(function(){
+            $(this).select2("val", "");
         });
 
         $("#loading, #searching").empty();
