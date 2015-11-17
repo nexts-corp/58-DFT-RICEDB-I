@@ -57,7 +57,7 @@ class ExportService extends CServiceBase implements IExportService {
 
         $objWorkSheet -> setTitle($title);
 
-        $objWorkSheet->mergeCells('A1:O1')->setCellValueByColumnAndRow(0, $row, "รายการ".$list[0]["reserveName"]."\r\n".$list[0]["detail"])
+        $objWorkSheet->mergeCells('A1:Q1')->setCellValueByColumnAndRow(0, $row, "รายการ".$list[0]["reserveName"]."\r\n".$list[0]["detail"])
             ->getStyleByColumnAndRow(0, $row)->getAlignment()->applyFromArray($center);
 
 
@@ -65,7 +65,7 @@ class ExportService extends CServiceBase implements IExportService {
         $objWorkSheet->setCellValueByColumnAndRow(0, $row, "Code: ".$reserveList)->getProtection()->setFormatCells(true);
 
         $columnT = ["รหัสประจำตัว", "รหัส", "เลขถุง", "จังหวัด", "ปีโครงการ", "รอบ", "คลังสินค้า", "ที่อยู่", "ผู้เข้าร่วมฯ", "ชนิด",
-                   "หลัง", "กอง", "น้ำหนัก (ตัน)", "เกรด", "อัตราส่วนลด (%)", "ปริมาณรวมกระสอบ(ตัน)"];
+                   "หลัง", "กอง", "น้ำหนัก (ตัน)", "คณะฯ", "เกรด", "อัตราส่วนลด (%)", "ปริมาณรวมกระสอบ(ตัน)"];
 
         $row =  4;
         foreach($columnT as $col => $val){
@@ -75,7 +75,7 @@ class ExportService extends CServiceBase implements IExportService {
 
         $sql = "SELECT"
                 ." rs.stackCode, rs.code, rs.bagNo, pv.provinceNameTH, pj.project, rs.silo, ac.associate, tp.type,"
-                ." rs.warehouse, rs.stack, rs.weight, gd.grade, rs.discountRate"
+                ." rs.warehouse, rs.stack, rs.weight, rs.samplingId, gd.grade, rs.discountRate"
             ." FROM ".$this->ent."\\RiceReserve rs"
             ." JOIN ".$this->ent."\\Province pv WITH pv.id = rs.provinceId"
             ." JOIN ".$this->ent."\\Project pj WITH pj.id = rs.projectId"
@@ -104,15 +104,16 @@ class ExportService extends CServiceBase implements IExportService {
             $objWorkSheet->setCellValueExplicitByColumnAndRow(10, $row, $val["warehouse"]);
             $objWorkSheet->setCellValueExplicitByColumnAndRow(11, $row, $val["stack"]);
             $objWorkSheet->setCellValueExplicitByColumnAndRow(12, $row, $val["weight"], \PHPExcel_Cell_DataType::TYPE_NUMERIC);
-            $objWorkSheet->setCellValueExplicitByColumnAndRow(13, $row, $val["grade"]);
-            $objWorkSheet->setCellValueExplicitByColumnAndRow(14, $row, $val["discountRate"]);
+            $objWorkSheet->setCellValueExplicitByColumnAndRow(13, $row, $val["samplingId"]);
+            $objWorkSheet->setCellValueExplicitByColumnAndRow(14, $row, $val["grade"]);
+            $objWorkSheet->setCellValueExplicitByColumnAndRow(15, $row, $val["discountRate"]);
 
             $row++;
         }
 
         $objWorkSheet->getProtection()->setPassword('123456');
         $objWorkSheet->getProtection()->setSheet(true);
-        $objWorkSheet->getStyle('B4:O'.$row)->getProtection()->setLocked(
+        $objWorkSheet->getStyle('B4:Q'.$row)->getProtection()->setLocked(
             \PHPExcel_Style_Protection::PROTECTION_UNPROTECTED
         );
 
