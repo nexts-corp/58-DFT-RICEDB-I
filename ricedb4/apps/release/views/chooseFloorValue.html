@@ -344,10 +344,10 @@
                 whAll++;
                 var bchk=true;
                 $.each(bNameOld,function(k,v){
-                      if(v==val["bidderName"])
-                      {
+                      if(v==val["bidderName"]){
                           bchk=false;
-                          break
+                          //break;
+                          return false;
                       }
                 });
                 if(bchk){
