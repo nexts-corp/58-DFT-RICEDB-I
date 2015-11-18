@@ -62,6 +62,7 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
 
         $status->releaseCode = $status->keyword;
 
+        //auction
         if ($status->keyword == "AU") {
             $status->keyword = $status->keyword . $status->status;
 
@@ -78,14 +79,51 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
                 if (!($this->datacontext->saveObject($status))) {
                     $return = $this->datacontext->getLastMessage();
                 }
-            } else {
+            }
+            else {
                 $return = "ข้อมูลนี้มีอยู่แล้ว";
             }
-        } else {
+        }
+        //release
+        else {
             $status->keyword = $status->keyword . date("YmdHis");
 
             if (!($this->datacontext->saveObject($status))) {
                 $return = $this->datacontext->getLastMessage();
+            }
+        }
+
+        if($return === true){
+            //แทนค่าใน rice tracking ด้วย release keyword ใหม่
+            $rl = new \apps\common\entity\RiceTracking();
+            $rl->reserveKeyword = $status->reserveKeyword;
+            $data = $this->datacontext->getObject($rl);
+            foreach($data as $key => $val){
+                $data[$key]->statusKeyword = $status->keyword;
+                if (!($this->datacontext->updateObject($data[$key]))) {
+                    $return = $this->datacontext->getLastMessage();
+                }
+            }
+
+            //ใส่ข้อมูลในตาราง release price กรณีที่ไม่ใช่การประมูล
+            if ($status->releaseCode != "AU") {
+                $sql = "SELECT "
+                        ." rt.warehouseCode"
+                    ." FROM ".$this->ent."\\RiceTracking rt"
+                    ." WHERE rt.statusKeyword = :keyword"
+                    ." GROUP BY rt.warehouseCode";
+                $param = array(
+                    "keyword" => $status->keyword
+                );
+                $data = $this->datacontext->getObject($sql, $param);
+                foreach($data as $key => $val){
+                    $rp = new \apps\common\entity\ReleasePrice();
+                    $rp->statusKeyword = $status->keyword;
+                    $rp->warehouseCode = $val["warehouseCode"];
+                    if (!($this->datacontext->saveObject($rp))) {
+                        $return = $this->datacontext->getLastMessage();
+                    }
+                }
             }
         }
 
@@ -99,6 +137,9 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
         $check->id = $status->id;
         $data = $this->datacontext->getObject($check);
 
+        $oldCode = $data[0]->releaseCode;
+        $oldRelease = $data[0]->keyword;
+
         if ($data[0]->releaseCode != $status->keyword) {
             if ($status->keyword == "AU") {
                 $data[0]->keyword = $status->keyword . $status->status;
@@ -111,14 +152,19 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
                 if (count($data) != 0) {
                     return "ข้อมูลนี้มีอยู่แล้ว";
                 }
-            } else {
+            }
+            else {
                 if ($data[0]->releaseCode == "AU") {
                     $data[0]->keyword = $status->keyword . date("YmdHis");
-                } else {
+                }
+                else {
                     $data[0]->keyword = $status->keyword . str_replace($data[0]->releaseCode, "", $data[0]->keyword);
                 }
             }
         }
+
+        $newCode = $status->keyword;
+        $newRelease = $data[0]->keyword;
 
         $data[0]->status = $status->status;
         $data[0]->reserveKeyword = $status->reserveKeyword;
@@ -145,6 +191,51 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
             $return = $this->datacontext->getLastMessage();
         }
 
+        if($return === true) {
+            //แทนค่าใน rice tracking ด้วย release keyword ใหม่
+            $rl = new \apps\common\entity\RiceTracking();
+            $rl->statusKeyword = $oldRelease;
+            $data = $this->datacontext->getObject($rl);
+            foreach($data as $key => $val){
+                $data[$key]->statusKeyword = $newRelease;
+                if (!($this->datacontext->updateObject($data[$key]))) {
+                    $return = $this->datacontext->getLastMessage();
+                }
+            }
+
+            //ลบข้อมูลที่อยู่ใน release price
+            if ($oldCode != 'AU') {
+                $rp = new \apps\common\entity\ReleasePrice();
+                $rp->statusKeyword = $oldRelease;
+                $data = $this->datacontext->getObject($rp);
+                foreach($data as $key => $val){
+                    if (!($this->datacontext->removeObject($data[$key]))) {
+                        $return = $this->datacontext->getLastMessage();
+                    }
+                }
+            }
+
+            //ใส่ข้อมูลในตาราง release price กรณีที่ไม่ใช่การประมูล
+            if ($newCode != "AU") {
+                $sql = "SELECT "
+                        ." rt.warehouseCode"
+                    ." FROM ".$this->ent."\\RiceTracking rt"
+                    ." WHERE rt.statusKeyword = :keyword"
+                    ." GROUP BY rt.warehouseCode";
+                $param = array(
+                    "keyword" => $newRelease
+                );
+                $data = $this->datacontext->getObject($sql, $param);
+                foreach($data as $key => $val){
+                    $rp = new \apps\common\entity\ReleasePrice();
+                    $rp->statusKeyword = $newRelease;
+                    $rp->warehouseCode = $val["warehouseCode"];
+                    if (!($this->datacontext->saveObject($rp))) {
+                        $return = $this->datacontext->getLastMessage();
+                    }
+                }
+            }
+        }
         return $return;
     }
 
@@ -154,10 +245,36 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
         $list = new \apps\common\entity\Status();
         $list->keyword = $status->keyword;
         $dataList = $this->datacontext->getObject($list);
+
+        $releaseCode = $dataList[0]->releaseCode;
+
         if (!$this->datacontext->removeObject($dataList)) {
             $return = $this->datacontext->getLastMessage();
         }
 
+        //update rice tracking
+        $rl = new \apps\common\entity\RiceTracking();
+        $rl->statusKeyword = $status->keyword;
+        $data = $this->datacontext->getObject($rl);
+        foreach($data as $key => $val){
+            $data[$key]->statusKeyword = '';
+            if (!($this->datacontext->updateObject($data[$key]))){
+                $return = $this->datacontext->getLastMessage();
+            }
+        }
+
+        //ลบข้อมูลในตาราง release price กรณีที่ไม่ใช่การประมูล
+        if($releaseCode != "AU"){
+            $rp = new \apps\common\entity\ReleasePrice();
+            $rp->statusKeyword = $status->keyword;
+            $data = $this->datacontext->getObject($rp);
+            foreach($data as $key => $val){
+                if (!($this->datacontext->removeObject($data[$key]))) {
+                    $return = $this->datacontext->getLastMessage();
+                }
+            }
+
+        }
         return $return;
     }
 
