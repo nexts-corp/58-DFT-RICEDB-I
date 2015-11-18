@@ -18,41 +18,33 @@ interface IApproveSellService {
     public function listsRelease();
 
     /**
-     * @name listsBidder
-     * @uri /listsBidder
-     *  @param string auccode
+     * @name listsSell
+     * @uri /listsSell
+     * @param string releaseKeyword
      * @return String[] lists Description
-     * @description รายชื่อผู้เสนอซื้อพร้อมคลังที่ชนะการประมูล
+     * @description รายชื่อคลังที่เสนอขายทั้งหมด
      */
-    public function listsBidder($auccode);
-
-    /**
-     * @name listsApprove
-     * @uri /listsApprove
-     * @param string auccode
-     * @return String[] lists Description
-     * @description รายชื่อคลังที่มีการอนุมัติแล้ว
-     */
-    public function listsApprove($auccode);
+    public function listsSell($releaseKeyword);
 
     /**
      * @name update
      * @uri /update
-     * @param apps\common\model\DataAuction data Description
+     * @param apps\common\entity\ReleasePrice data Description
      * @param string isSale Description
      * @param string remark Description
-     * @param string auccode
+     * @param string statusKeyword Description
      * @return string update Description
      * @description บันทึกการขาย
      */
-    public function update($data, $isSale, $remark,$auccode);
+    public function update($data, $isSale, $remark, $statusKeyword);
 
     /**
      * @name delete
      * @uri /delete
-     * @param apps\common\model\DataAuction dataAuction
+     * @param apps\common\entity\ReleasePrice releasePrice
      * @return string delete
      * @description บันทึกการขาย
      */
-    public function delete($dataAuction);
+    public function delete($releasePrice);
+
 }

@@ -20,12 +20,11 @@ class ApproveSellService extends CServiceBase implements IApproveSellService {
 
     public function listsRelease() {
         $sql = "SELECT"
-            ." st.id, st.status + ' - '+rs.detail as status, st.keyword, st.ageStop, st.dateStart,  st.dateEnd,"
-            ." st.active, st.auctionDate, st.lengthDecimal, st.roundFun, st.weightDecimal,"
-            ." st.reserveKeyword, st.releaseCode, rl.releaseName, rs.target"
+                ." st.id, st.status + ' - '+rs.detail as status, st.keyword"
             ." FROM ".$this->ent."\\Status st"
             ." JOIN ".$this->ent."\\Release rl WITH st.releaseCode = rl.releaseCode"
             ." JOIN ".$this->ent."\\ReserveList rs WITH st.reserveKeyword = rs.keyword"
+            ." WHERE rl.releaseCode != 'AU'"
             ." ORDER BY st.id ASC";
 
         $data = $this->datacontext->getObject($sql);
@@ -33,92 +32,79 @@ class ApproveSellService extends CServiceBase implements IApproveSellService {
         return $data;
     }
 
-    function getStatus() {
-        $sqStatus = "select s from " . $this->ent . "\\Status s "
-                . "where s.active = :active";
-        $paramS = array(
-            "active" => "T"
+    public function listsSell($releaseKeyword){
+        $sql = "SELECT"
+                ." rp.Id as id, rp.LK_Status_Keyword as statusKeyword, rp.Warehouse_Code as warehouseCode,"
+                ." pv.Province_Name_TH as province, ac.Associate as associate, rt.Silo as silo,"
+                ." rp.Release_Price as releasePrice, rp.Is_Sale as isSale, rp.Remark as remark"
+            ." FROM dft_Release_Price rp"
+            ." JOIN dft_Rice_Tracking rt ON  rt.Id = ("
+                 ." SELECT  TOP 1 tk.Id"
+                 ." FROM dft_Rice_Tracking tk"
+                 ." WHERE tk.Warehouse_Code = rp.Warehouse_Code"
+            ." )"
+            ." JOIN dft_LK_Province pv ON pv.Id = rt.LK_Province_Id"
+            ." JOIN dft_LK_Associate ac ON ac.Id = rt.LK_Associate_Id"
+            ." WHERE rp.LK_Status_Keyword = :keyword";
+        $param = array(
+            "keyword" => $releaseKeyword
         );
-        $dataStatus = $this->datacontext->getObject($sqStatus, $paramS); //get STATUS is Active
-        return $dataStatus[0];
+
+        $data = $this->datacontext->pdoQuery($sql, $param);
+
+        return $data;
     }
 
-    public function listsBidder($auccode) {
-//        $sql = "select bidderNo,bidderAuctionNo,bidderQueue,bidderRound,bidderName,"
-//                . " bidderPrice,bidderFirstPrice,bidderLastPrice,RFV2,"
-//                . " wareHouseCode,oweightAll,"
-//                . " provinceId,province,associateId,associate"
-//                . " from dbo.fn_auction_info('" . $auccode . "')"
-//              . " where bidderWinner= 'Y' and (isSale is null or isSale = '') "
-//                . " order by province,associateId,wareHouseCode";
-        $sql = "select a.auctionNo,a.bidderNo,a.bidderAuctionNo,a.bidderQueue,a.bidderRound,a.bidderName, "
-                . " a.bidderPrice,a.bidderFirstPrice,a.bidderLastPrice,a.RFV2, "
-                . " a.wareHouseCode,a.oweightAll, "
-                . " a.provinceId,a.province,a.associateId,a.associate,a.isSale,c.remark,c.Id as bidderPriceId "
-                . " from dbo.fn_auction_info('" . $auccode . "') a "
-                . " inner join dft_Bidder_Item b "
-                . " on b.bidder_history_id = a.bidderAuctionNo and b.silo = a.wareHouseCode and b.associateId = a.associateId "
-                . " inner join dft_Bidder_Price_Silo c "
-                . " on c.bidder_item_id = b.Id "
-                . " where a.bidderWinner= 'Y' and a.isSale = 'N' "
-                . " order by a.province,a.associateId,a.wareHouseCode";
-        return $this->datacontext->pdoQuery($sql);
-    }
-
-    public function listsApprove($auccode) {
-        $sql = "select a.auctionNo,a.bidderNo,a.bidderAuctionNo,a.bidderQueue,a.bidderRound,a.bidderName,"
-                . " a.bidderPrice,a.bidderFirstPrice,a.bidderLastPrice,a.RFV2,"
-                . " a.wareHouseCode,a.oweightAll,"
-                . " a.provinceId,a.province,a.associateId,a.associate,a.isSale,c.remark,c.Id as bidderPriceId"
-                . " from dbo.fn_auction_info('" . $auccode . "') a"
-                . " inner join dft_Bidder_Item b"
-                . " on b.bidder_history_id = a.bidderAuctionNo and b.silo = a.wareHouseCode and b.associateId = a.associateId"
-                . " inner join dft_Bidder_Price_Silo c"
-                . " on c.bidder_item_id = b.Id"
-                . " where a.bidderWinner= 'Y' and isSale != 'N' "
-                . " order by a.province,a.associateId,a.wareHouseCode";
-        return $this->datacontext->pdoQuery($sql);
-    }
-
-    public function update($data, $isSale, $remark, $auccode) {
+    public function update($data, $isSale, $remark, $statusKeyword) {
         $return = true;
         foreach ($data as $key => $value) {
-            $bps = new \apps\common\entity\BidderPriceSilo();
-            $bps->id = $value->bidderPriceId;
+            $bps = new \apps\common\entity\ReleasePrice();
+            $bps->id = $value->id;
 
             $result = $this->datacontext->getObject($bps)[0];
+
             $result->isSale = $isSale;
             if ($remark != "-") {
                 $result->remark = $remark;
             }
+
+            if($isSale == "Y"){
+                $result->releasePrice = str_replace(",", "", $value->releasePrice);
+            }
+            else{
+                $result->releasePrice = 0;
+            }
+
             if ($this->datacontext->updateObject($result)) {
                 $tracking = new \apps\common\entity\RiceTracking();
-                $tracking->statusKeyword = $auccode;
-                $tracking->silo = $value->wareHouseCode;
+                $tracking->statusKeyword = $statusKeyword;
+                $tracking->warehouseCode = $value->warehouseCode;
                 $dataTracking = $this->datacontext->getObject($tracking);
                 foreach ($dataTracking as $index => $valueData) {
                     $dataTracking[$index]->isSale = $isSale;
                     $dataTracking[$index]->remarkSale = $remark;
                 }
                 $this->datacontext->updateObject($dataTracking);
-            } else {
-                $return = false;
+            }
+            else {
+                $return = $this->datacontext->getLastMessage();
             }
         }
         return $return;
     }
 
-    public function delete($dataAuction) {
+    public function delete($releasePrice){
         $return = true;
-        $price = new \apps\common\entity\BidderPriceSilo();
-        $price->id = $dataAuction->bidderPriceId;
+        $price = new \apps\common\entity\ReleasePrice();
+        $price->id = $releasePrice->id;
         $price = $this->datacontext->getObject($price)[0];
         $price->isSale = 'N';
         $price->remark = NULL;
+        $price->releasePrice = NULL;
         if ($this->datacontext->updateObject($price)) {
             $tracking = new \apps\common\entity\RiceTracking();
-            $tracking->statusKeyword = $dataAuction->auctionNo;
-            $tracking->silo = $dataAuction->wareHouseCode;
+            $tracking->statusKeyword = $price->statusKeyword;
+            $tracking->warehouseCode = $price->warehouseCode;
             $dataTracking = $this->datacontext->getObject($tracking);
             foreach ($dataTracking as $index => $valueData) {
                 $dataTracking[$index]->isSale = "N";

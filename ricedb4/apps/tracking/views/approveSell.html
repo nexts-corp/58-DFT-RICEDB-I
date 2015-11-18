@@ -29,12 +29,10 @@
         <div class="col-sm-12" style="margin-bottom:20px;">
             <label class="col-sm-2 control-label text-right">{{#i18n}}tracking.release{{/i18n}} :</label>
             <div class="col-sm-7">
-                <select id="auction" class="form-control">
-                    <option value="0">เลือกทั้งหมด</option>
-                </select>
+                <select id="releaseKeyword" class="form-control"></select>
             </div>
             <div class="col-sm-3">
-                <button id="btn_date" class="btn btn-primary"><i class="fa fa-list"></i> {{#i18n}}tracking.buttonShow{{/i18n}}</button>
+                <button id="show" class="btn btn-primary"><i class="fa fa-list"></i> {{#i18n}}tracking.buttonShow{{/i18n}}</button>
             </div>
         </div>
 
@@ -93,7 +91,7 @@
                                         <th class="text-center">{{#i18n}}tracking.choose{{/i18n}}</th>
                                     </tr>
                                     </thead>
-                                    <tbody id="bidderBody">
+                                    <tbody id="allBody">
                                     <tr>
                                         <td colspan="6" class="text-center">-</td>
                                     </tr>
@@ -139,13 +137,12 @@
                                         <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.price{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.choose{{/i18n}}</th>
                                     </tr>
                                     </thead>
                                     <tbody id="conditionBody">
                                     <tr>
-                                        <td colspan="6" class="text-center">-</td>
+                                        <td colspan="5" class="text-center">-</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -164,16 +161,12 @@
                                         <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
                                         <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
-                                        <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}tracking.choose{{/i18n}}</th>
                                     </tr>
                                     </thead>
                                     <tbody id="reserveBody">
                                     <tr>
-                                        <td colspan="9" class="text-center">-</td>
+                                        <td colspan="5" class="text-center">-</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -190,232 +183,288 @@
 </div>-->
 {{>footer}}
 <script type="text/javascript">
-    var datas, datasApprove;
-    listsAuction();
-    $("#btn_date").click(function () {
-        var auccode = $('#auction').val();
-        
-        init(auccode);
-    });
-    function listsAuction() {
-        var datas = callAjax("{{_context_path}}/api/tracking/approveSell/listsRelease", "post", {}, "json");
-        var dataAuction = datas["lists"];
-        if (dataAuction != null) {
-            var html = "";
-            $.each(dataAuction, function (key, value) {
-                html += "<option value='" + value.keyword + "'>" + value.status + "</option>";
-                //$("#countAll").text((key + 1));
-            });
-            $("#auction").html(html);
-        }
-    }
-    $("#btnSave").click(function () {
-        var select = $("#selectSale").val();
-        if (select == "") {
-            $.alert({
-                title: 'คำแนะนำ!',
-                content: 'กรุณาเลือกประเภทอนุมัติ!',
-                confirmButton: "ตกลง",
-                theme: 'black',
-                columnClass: 'col-md-4 col-md-offset-4',
-                confirm: function () {
-                    $("#selectSale").focus();
-                }
-            });
-        } else {
-            var remark = $("#txtRemark").val();
-            if (remark == "" && select != "Y") {
+    var listsArr = {};
+    var kwd = '';
+    $(function(){
+        listsRelease();
+        $("#show").click(function () {
+            kwd = $('#releaseKeyword').val();
+            init();
+        });
+
+        $("#btnSave").click(function () {
+            var select = $("#selectSale").val();
+            if (select == "") {
                 $.alert({
                     title: 'คำแนะนำ!',
-                    content: 'กรุณาใส่หมายเหตุ!',
+                    content: 'กรุณาเลือกประเภทอนุมัติ!',
                     confirmButton: "ตกลง",
                     theme: 'black',
                     columnClass: 'col-md-4 col-md-offset-4',
                     confirm: function () {
-                        $("#txtRemark").focus();
+                        $("#selectSale").focus();
                     }
                 });
             } else {
-                if (remark == "" && select == "Y") {
-                    remark = "-";
-                }
-                var data = checkSelect();
-                if (data == "noCheckbox") {
+                var remark = $("#txtRemark").val();
+                if (remark == "" && select != "Y") {
                     $.alert({
                         title: 'คำแนะนำ!',
-                        content: 'กรุณาเลือกคลัง!',
+                        content: 'กรุณาใส่หมายเหตุ!',
                         confirmButton: "ตกลง",
                         theme: 'black',
-                        columnClass: 'col-md-4 col-md-offset-4'
-                    });
-                } else {
-                    var cfm = $.confirm({
-                        title: 'ยืนยันการอนุมัติ!',
-                        content: "คุณต้องการที่จะทำต่อ?",
-                        confirmButton: 'ตกลง',
-                        cancelButton: 'ยกเลิก',
-                        confirmButtonClass: 'btn-success',
-                        cancelButtonClass: 'btn-warning',
-                        theme: 'holodark',
                         columnClass: 'col-md-4 col-md-offset-4',
-                        autoClose: 'cancel|11000',
                         confirm: function () {
-                            $("#bidderBody").html("<tr><td colspan='9' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
-                            cfm.close();
-                            var auccode = $('#auction').val();
-                            setTimeout(function () {
-                                var msg = sendSale(data, select, remark,auccode);
-                                if (msg.update === true) {
-                                    alert("บันทึกเรียบร้อย");
-                                    init(auccode);
-                                }
-                            }, 1000);
-
+                            $("#txtRemark").focus();
                         }
                     });
+                } else {
+                    if (remark == "" && select == "Y") {
+                        remark = "-";
+                    }
+                    var data = checkSelect();
+                    if (data == "noCheckbox") {
+                        $.alert({
+                            title: 'คำแนะนำ!',
+                            content: 'กรุณาเลือกคลัง!',
+                            confirmButton: "ตกลง",
+                            theme: 'black',
+                            columnClass: 'col-md-4 col-md-offset-4'
+                        });
+                    } else {
+                        var cfm = $.confirm({
+                            title: 'ยืนยันการอนุมัติ!',
+                            content: "คุณต้องการที่จะทำต่อ?",
+                            confirmButton: 'ตกลง',
+                            cancelButton: 'ยกเลิก',
+                            confirmButtonClass: 'btn-success',
+                            cancelButtonClass: 'btn-warning',
+                            theme: 'holodark',
+                            columnClass: 'col-md-4 col-md-offset-4',
+                            autoClose: 'cancel|11000',
+                            confirm: function () {
+                                $("#saleBody").html("<tr><td colspan='6' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
+                                cfm.close();
+                                setTimeout(function () {
+                                    var msg = sendSale(data, select, remark);
+                                    if (msg.update === true) {
+                                        alert("บันทึกเรียบร้อย");
+                                        init();
+                                    }
+                                }, 1000);
+
+                            }
+                        });
+                    }
                 }
             }
-        }
+        });
     });
 
-    function init(auccode) {
-        // alert("xxx");
-        datas = null;
-        datasApprove = null;
-         $("#countAll").text("0");
-        listBidder(auccode);
-        checkbox();
-        $("#txtRemark").val('');
-        function listBidder(auccode) {
-
-            datas = callAjax("{{_context_path}}/api/tracking/approve/listsBidder", "post", {auccode: auccode}, "json");
-            datasApprove = callAjax("{{_context_path}}/api/tracking/approve/listsApprove", "post", {auccode: auccode}, "json");
-            datas = datas["lists"];
-            datasApprove = datasApprove["lists"];
-            if (!$.isEmptyObject(datas)) {
-                var html = "";
-                $.each(datas, function (key, value) {
-                    html += "<tr row-index='" + key + "' class='row-tr'>" +
-                            "<td class='text-center'>" + (key + 1) + "</td>" +
-                            "<td class='text-center'>" + (value.province) + "</td>" +
-                            "<td class='text-center'>" + (value.associate) + "</td>" +
-                            "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
-                            // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
-                            "<td class='text-center'>" + (value.bidderName) + "</td>" +
-                            "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
-                            "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
-                            "<td class='text-center'><input type='checkbox' class='cb-element' name='check' value='" + key + "' /></td>" +
-                            "</tr>";
-                    $("#countAll").text((key + 1));
-                });
-                $("#bidderBody").html(html);
-            } else {
-                var html = "<tr><td colspan=8 class='text-center'>ไม่มีข้อมูล</td></tr>";
-                $("#bidderBody").html(html);
-            }
-            if (datasApprove != null) {
-                var html = [];
-                var c1 = 0, c2 = 0, c3 = 0;
-                $.each(datasApprove, function (key, value) {
-                    if (value.remark == null) {
-                        value.remark = "-";
-                    }
-                    if (value.isSale == "Y") {
-                        c1++;
-
-                        html[0] += "<tr row-index='" + key + "' class='row-tr'>" +
-                                "<td class='text-center'>" + c1 + "</td>" +
-                                "<td class='text-center'>" + (value.province) + "</td>" +
-                                "<td class='text-center'>" + (value.associate) + "</td>" +
-                                "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
-                                // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
-                                "<td class='text-center'>" + (value.bidderName) + "</td>" +
-                                "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
-                                "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
-                                "<td class='text-center'>" + (value.remark) + "</td>" +
-                                "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
-                                "</tr>";
-                    } else if (value.isSale == "C") {
-                        c2++;
-                        html[1] += "<tr row-index='" + key + "' class='row-tr'>" +
-                                "<td class='text-center'>" + c2 + "</td>" +
-                                "<td class='text-center'>" + (value.province) + "</td>" +
-                                "<td class='text-center'>" + (value.associate) + "</td>" +
-                                "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
-                                // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
-                                "<td class='text-center'>" + (value.bidderName) + "</td>" +
-                                "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
-                                "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
-                                "<td class='text-center'>" + (value.remark) + "</td>" +
-                                "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
-                                "</tr>";
-                    } else if (value.isSale == "R") {
-                        c3++;
-                        html[2] += "<tr row-index='" + key + "' class='row-tr'>" +
-                                "<td class='text-center'>" + c3 + "</td>" +
-                                "<td class='text-center'>" + (value.province) + "</td>" +
-                                "<td class='text-center'>" + (value.associate) + "</td>" +
-                                "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
-                                // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
-                                "<td class='text-center'>" + (value.bidderName) + "</td>" +
-                                "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
-                                "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
-                                "<td class='text-center'>" + (value.remark) + "</td>" +
-                                "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
-                                "</tr>";
-                    }
-                });
-                for (var i = 0; i < 3; i++) {
-                    if (typeof html[i] === "undefined") {
-                        html[i] = '<tr><td colspan="10" class="text-center">ไม่มีข้อมูล</td></tr>';
-                    }
-                }
-                $("#saleBody").html(html[0]);
-                $("#conditionBody").html(html[1]);
-                $("#reserveBody").html(html[2]);
-
-                $('.delApprove').click(function () {
-                    var index = $(this).closest('tr').attr('row-index');
-                    var dataJSON = JSON.stringify({dataAuction:datasApprove[index]});
-                    var dataJSONEN = encodeURIComponent(dataJSON);
-                    
-                    var msg = callAjax("{{_context_path}}/api/tracking/approve/delete", "post", dataJSONEN, "json");
-                    if (msg.delete === true) {
-                        alert("ลบเรียบร้อย");
-                        init(auccode);
-                    }
-                });
-            }
+    function listsRelease() {
+        var datas = callAjax("{{_context_path}}/api/tracking/approveSell/listsRelease", "post", {}, "json");
+        var dataAuction = datas["lists"];
+        if (dataAuction != null) {
+            var html = '<option value="">เลือกรายการระบายข้าว</option>';
+            $.each(dataAuction, function (key, value) {
+                html += "<option value='" + value.keyword + "'>" + value.status + "</option>";
+                //$("#countAll").text((key + 1));
+            });
+            $("#releaseKeyword").html(html);
         }
-        function checkbox() {
-            $("#countCheckbox").text("0");
-            $("#checkall").attr("checked", false);
-            $('#checkall').click(function () {
-                if (this.checked) {
-                    $('.cb-element').each(function () {
-                        this.checked = true;
+    }
+
+    function init(){
+        var datas = callAjax("{{_context_path}}/api/tracking/approveSell/listsSell", "post", {releaseKeyword: kwd}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            var html1 = '', html2 = '', html3 = '', html4 = '';
+
+            var count1 = 0, count2 = 0, count3 = 0, count4 = 0;
+            $.each(datas["lists"], function (key, value) {
+                listsArr[value.id] = value;
+
+                if(value["isSale"] == null || value["isSale"] == "" || value["isSale"] == "N") {
+                    html1 += '<tr row-index="'+value.id+'" class="row-tr">'
+                            + '<td class="text-center">'+(++count1)+'</td>'
+                            + '<td class="text-center">'+(value.province)+'</td>'
+                            + '<td class="text-center">'+(value.associate)+'</td>'
+                            + '<td class="text-center">'+(value.silo)+'</td>'
+                            + '<td class="text-center">'
+                                + '<input type="text" class="text-right cb-input" id="input-'+value.id+'" name="input-'+value.id+'" value="'+accounting.formatNumber(value.releasePrice, 2, ",", ".")+'">'
+                            + '</td>'
+                            + '<td class="text-center"><input type="checkbox" class="cb-element" name="check" value="'+value.id+'" /></td>'
+                        + '</tr>';
+                }
+                else if(value["isSale"] == "Y") {
+                    html2 += '<tr row-index="'+value.id+'" class="row-tr">'
+                            + '<td class="text-center">'+(++count2)+'</td>'
+                            + '<td class="text-center">'+(value.province)+'</td>'
+                            + '<td class="text-center">'+(value.associate)+'</td>'
+                            + '<td class="text-center">'+(value.silo)+'</td>'
+                            + '<td class="text-center">'+accounting.formatNumber(value.releasePrice, 2, ",", ".")+'</td>'
+                            + '<td class="text-center"><button class="btn btn-default delApprove"><i class="fa fa-trash"></i></button></td>'
+                        + '</tr>';
+                }
+
+                else if(value["isSale"] == "C") {
+                    html3 += '<tr row-index="'+value.id+'" class="row-tr">'
+                            + '<td class="text-center">'+(++count3)+'</td>'
+                            + '<td class="text-center">'+(value.province)+'</td>'
+                            + '<td class="text-center">'+(value.associate)+'</td>'
+                            + '<td class="text-center">'+(value.silo)+'</td>'
+                            + '<td class="text-center"><button class="btn btn-default delApprove"><i class="fa fa-trash"></i></button></td>'
+                        + '</tr>';
+                }
+
+                else if(value["isSale"] == "R") {
+                    html4 += '<tr row-index="'+value.id+'" class="row-tr">'
+                            + '<td class="text-center">'+(++count4)+'</td>'
+                            + '<td class="text-center">'+(value.province)+'</td>'
+                            + '<td class="text-center">'+(value.associate)+'</td>'
+                            + '<td class="text-center">'+(value.silo)+'</td>'
+                            + '<td class="text-center"><button class="btn btn-default delApprove"><i class="fa fa-trash"></i></button></td>'
+                        + '</tr>';
+                }
+
+                $("#countAll").text(++key);
+            });
+        }
+        if (html1 == "") html1 = "<tr><td colspan=6 class='text-center'>ไม่มีข้อมูล</td></tr>";
+        if (html2 == "") html2 = "<tr><td colspan=6 class='text-center'>ไม่มีข้อมูล</td></tr>";
+        if (html3 == "") html3 = "<tr><td colspan=5 class='text-center'>ไม่มีข้อมูล</td></tr>";
+        if (html4 == "") html4 = "<tr><td colspan=5 class='text-center'>ไม่มีข้อมูล</td></tr>";
+
+        $("#allBody").html(html1);
+        $("#saleBody").html(html2);
+        $("#conditionBody").html(html3);
+        $("#reserveBody").html(html4);
+
+        checkbox();
+
+        $("#selectSale").change(function(){
+            var val = $(this).val();
+            if(val == "Y"){
+                $(".cb-input").prop("disabled", false);
+            }
+            else{
+                $(".cb-input").prop("disabled", true);
+            }
+        }).trigger("change");
+
+        $("#btnSave").unbind().click(function () {
+            var select = $("#selectSale").val();
+            if (select == "") {
+                $.alert({
+                    title: 'คำแนะนำ!',
+                    content: 'กรุณาเลือกประเภทอนุมัติ!',
+                    confirmButton: "ตกลง",
+                    theme: 'black',
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    confirm: function () {
+                        $("#selectSale").focus();
+                    }
+                });
+            } else {
+                var remark = $("#txtRemark").val();
+                if (remark == "" && select != "Y") {
+                    $.alert({
+                        title: 'คำแนะนำ!',
+                        content: 'กรุณาใส่หมายเหตุ!',
+                        confirmButton: "ตกลง",
+                        theme: 'black',
+                        columnClass: 'col-md-4 col-md-offset-4',
+                        confirm: function () {
+                            $("#txtRemark").focus();
+                        }
                     });
                 } else {
-                    $('.cb-element').each(function () {
-                        this.checked = false;
-                    });
+                    if (remark == "" && select == "Y") {
+                        remark = "-";
+                    }
+                    var data = checkSelect();
+                    if (data == "noCheckbox") {
+                        $.alert({
+                            title: 'คำแนะนำ!',
+                            content: 'กรุณาเลือกคลัง!',
+                            confirmButton: "ตกลง",
+                            theme: 'black',
+                            columnClass: 'col-md-4 col-md-offset-4'
+                        });
+                    } else {
+                        var cfm = $.confirm({
+                            title: 'ยืนยันการอนุมัติ!',
+                            content: "คุณต้องการที่จะทำต่อ?",
+                            confirmButton: 'ตกลง',
+                            cancelButton: 'ยกเลิก',
+                            confirmButtonClass: 'btn-success',
+                            cancelButtonClass: 'btn-warning',
+                            theme: 'holodark',
+                            columnClass: 'col-md-4 col-md-offset-4',
+                            autoClose: 'cancel|11000',
+                            confirm: function () {
+                                $("#bidderBody").html("<tr><td colspan='9' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
+                                cfm.close();
+                                var auccode = $('#auction').val();
+                                setTimeout(function () {
+                                    var msg = sendSale(data, select, remark,auccode);
+                                    if (msg.update === true) {
+                                        alert("บันทึกเรียบร้อย");
+                                        init();
+                                    }
+                                }, 1000);
+
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        $('.delApprove').click(function () {
+            var index = $(this).closest('tr').attr('row-index');
+
+            var dataInfo = {};
+            dataInfo["id"] = index;
+
+            var dataJSON = JSON.stringify({releasePrice: dataInfo});
+            var dataJSONEN = encodeURIComponent(dataJSON);
+
+            var msg = callAjax("{{_context_path}}/api/tracking/approveSell/delete", "post", dataJSONEN, "json");
+            if (msg["delete"] === true) {
+                alert("ลบเรียบร้อย");
+                init();
+            }
+        });
+    }
+
+    function checkbox() {
+        $("#countCheckbox").text("0");
+        $("#checkall").attr("checked", false);
+        $('#checkall').click(function () {
+            if (this.checked) {
+                $('.cb-element').each(function () {
+                    this.checked = true;
+                });
+            } else {
+                $('.cb-element').each(function () {
+                    this.checked = false;
+                });
+            }
+        });
+
+        $('input:checkbox').click(function () {
+            var count = 0;
+            $('.cb-element').each(function () {
+                if (this.checked) {
+                    count++;
                 }
             });
+            $("#countCheckbox").text(count);
+        });
 
-            $('input:checkbox').click(function () {
-                var count = 0;
-                $('.cb-element').each(function () {
-                    if (this.checked) {
-                        count++;
-                    }
-                });
-                $("#countCheckbox").text(count);
-            });
-
-            $(".row-tr").click(function () {
-                $(this).find(':checkbox').trigger("click");
-            });
-        }
+        $(".row-tr").click(function () {
+            $(this).find(':checkbox').trigger("click");
+        });
     }
 
     function checkSelect() {
@@ -423,7 +472,11 @@
         var dataApprove = [];
         $('.cb-element').each(function () {
             if (this.checked) {
-                dataApprove[i++] = datas[this.value];
+                dataApprove[i++] = {
+                    id: this.value,
+                    warehouseCode: listsArr[this.value]["warehouseCode"],
+                    releasePrice: $("#input-"+this.value).val()
+                }
             }
         });
         if (dataApprove[0] == null) {
@@ -433,13 +486,15 @@
         }
 
     }
-    function sendSale(dataApprove, isSale, remark,auccode) {
 
-        var dataJSON = JSON.stringify({data: dataApprove, isSale: isSale, remark: remark,auccode:auccode});
+    function sendSale(dataApprove, isSale, remark) {
+
+        var dataJSON = JSON.stringify({data: dataApprove, isSale: isSale, remark: remark, statusKeyword: kwd});
         var dataJSONEN = encodeURIComponent(dataJSON);
-        return callAjax("{{_context_path}}/api/tracking/approve/update", "post", dataJSONEN, "json");
+        return callAjax("{{_context_path}}/api/tracking/approveSell/update", "post", dataJSONEN, "json");
 
     }
+
 </script>
 
 
