@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>th.go.dft.rice.report.model.RPT01_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT01_02_00_model</class>
+    <class>th.go.dft.rice.report.model.RPT01_02_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT01_04_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_03_00_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_03_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_03_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_03_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_04_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_05_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_06_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_06_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_06_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_06_04_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_07_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_07_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_07_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_08_00_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_08_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_09_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_04_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_04_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_05_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_06_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_07_00_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_07_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_07_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_07_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_08_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_09_00_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_09_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_09_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_09_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_09_04_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_09_05_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_11_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_12_00_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_12_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_12_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_13_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_14_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_14_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_XX_model</class>
+    <class>th.go.dft.rice.report.model.RPT04_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_08_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_08_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT03_14_03_model</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://202.44.34.86:1433;databaseName=RiceDB"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.user" value="riceuser"/>
+      <property name="javax.persistence.jdbc.password" value="l2ice2015"/>
+      <property name="eclipselink.jdbc.native-sql" value="true"/>
+      <property name="eclipselink.cache.shared.default" value="false"/>
+    </properties>
+  </persistence-unit>
+</persistence>

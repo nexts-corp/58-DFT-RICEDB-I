@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT01-01" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
+	<property name="ireport.zoom" value="1.3310000000001518"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="16"/>
+	<style name="FBold" fill="Solid" hAlign="Left" vAlign="Top" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H"/>
+	<style name="Rpt" fontName="TH SarabunPSK" fontSize="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
+	<style name="Default" isDefault="true" fontName="TH SarabunPSK" fontSize="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="PUBLISHER" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["พงศ์ปณต ทัศนียาชุมพาลี"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="No" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["2/2558"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATE_REPORT" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["6 มีนาคม 2558"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STATUS" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["ผ่านเกณฑ์มูลค่าขั้นต่ำ และเสนอซื้อสูงสุดในแต่ละคลัง"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DOC_TYPE" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["เอกสาร1"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NAME_COLUMN1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["คลังสินค้า"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="printBy" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 1]]>
+	</queryString>
+	<field name="id_lvl1" class="java.lang.String"/>
+	<field name="name_lvl1" class="java.lang.String"/>
+	<field name="id_lvl2" class="java.lang.String"/>
+	<field name="name_lvl2" class="java.lang.String"/>
+	<field name="col1" class="java.lang.Double"/>
+	<field name="col2" class="java.lang.Double"/>
+	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<variable name="COUNT_G1" class="java.lang.Integer" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{id_lvl1}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SUM_ROW" class="java.lang.Double" resetType="None">
+		<variableExpression><![CDATA[($F{col1}!= null && $F{col2}!=null)? $F{col1}+$F{col2}:(
+    ($F{col1}==null)? $F{col2}:( ($F{col2}==null)? $F{col1}:null)
+)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="SUM_COL1" class="java.lang.Double" resetType="Group" resetGroup="G_lvl1" calculation="Sum">
+		<variableExpression><![CDATA[$F{col1}]]></variableExpression>
+	</variable>
+	<variable name="SUM_COL2" class="java.lang.Double" resetType="Group" resetGroup="G_lvl1" calculation="Sum">
+		<variableExpression><![CDATA[$F{col2}]]></variableExpression>
+	</variable>
+	<variable name="SUM_COL3" class="java.lang.Double" resetType="Group" resetGroup="G_lvl1" calculation="Sum">
+		<variableExpression><![CDATA[$V{SUM_ROW}]]></variableExpression>
+	</variable>
+	<variable name="SUM_ALL_COL1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{col1}]]></variableExpression>
+	</variable>
+	<variable name="SUM_ALL_COL2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{col2}]]></variableExpression>
+	</variable>
+	<variable name="SUM_ALL_COL3" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{SUM_ROW}]]></variableExpression>
+	</variable>
+	<group name="G_lvl1">
+		<groupExpression><![CDATA[$F{id_lvl1}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement x="0" y="0" width="235" height="20" uuid="bc87ce41-0a88-45a0-869e-11becec22d10"/>
+					<box leftPadding="5">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textFieldExpression><![CDATA[++$V{COUNT_G1}+"."+$F{name_lvl1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="235" y="0" width="100" height="20" uuid="4bbd41e5-56da-470b-beb9-bb1c06f5c0fa"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="335" y="0" width="100" height="20" uuid="1f6bf33b-cc4a-49e4-9ee5-b1ff8111bcc9"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="435" y="0" width="120" height="20" uuid="56839109-703c-4d99-989b-c081b666e6e5"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement style="FBold" x="0" y="0" width="235" height="20" uuid="55e61147-1fb2-41f0-9697-4177fd054cb3"/>
+					<box>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["รวม"+$F{name_lvl1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="##,##0.00">
+					<reportElement style="FBold" x="335" y="0" width="100" height="20" uuid="be9418e6-858a-4fe2-b7bc-c7fd3f39c05a"/>
+					<box rightPadding="5">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_COL2}]]></textFieldExpression>
+				</textField>
+				<textField pattern="##,##0.00">
+					<reportElement style="FBold" x="435" y="0" width="120" height="20" uuid="88d7c8d8-eefd-4ace-a533-812e1022eec8"/>
+					<box rightPadding="5">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_COL3}]]></textFieldExpression>
+				</textField>
+				<textField pattern="##,##0.00">
+					<reportElement style="FBold" x="235" y="0" width="100" height="20" uuid="bf00a3c9-b45d-4b1e-a7e2-1c5fbe43b270"/>
+					<box rightPadding="5">
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.75"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.75"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_COL1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="95" splitType="Stretch">
+			<textField evaluationTime="Auto">
+				<reportElement style="FBold" x="0" y="54" width="555" height="20" uuid="8e70d827-f685-495b-ba78-019ceafe9eee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["สรุปปริมาณข้าวที่จะระบายในการประมูล ครั้งที่ "+$P{No}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="74" width="555" height="21" uuid="de541980-f70e-417e-99bb-fa13ffc62da1"/>
+				<box rightPadding="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[หน่วย :ตัน]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="335" y="0" width="100" height="20" uuid="504d2e34-0d24-47d8-befe-d770fe1bbc21"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[อ.ต.ก.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="435" y="0" width="120" height="20" uuid="1563ecd9-9c26-411e-80f8-205f414c6ca4"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[ปริมาณรวม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="235" height="20" uuid="b2d5beb9-522f-49fe-9734-ee213c994d69"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ชนิดข้าว]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="0" width="100" height="20" uuid="1213f972-5f4b-4d1f-a50d-62678e9150e1"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[อคส.]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="235" height="20" uuid="6d08db87-1820-4d58-a7ed-0fb6bfbf87aa"/>
+				<box leftPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{name_lvl2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##,##0.00" isBlankWhenNull="false">
+				<reportElement x="235" y="0" width="100" height="20" uuid="aea76344-9ca3-44aa-b371-6911aec47cda"/>
+				<box rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{col1}==null)? "-":$F{col1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##,##0.00" isBlankWhenNull="false">
+				<reportElement x="335" y="0" width="100" height="20" uuid="3f2e6ca6-f567-47ab-a7bc-9fb30ae873f8"/>
+				<box rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{col2}==null)? "-":$F{col2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##,##0.00" isBlankWhenNull="false">
+				<reportElement x="435" y="0" width="120" height="20" uuid="c9b97563-9df0-4a83-8ad4-3bed01c6d2db"/>
+				<box rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($V{SUM_ROW}==null)? "-":$V{SUM_ROW}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement style="Rpt" x="435" y="20" width="120" height="12" uuid="b083821c-c77d-4824-b83f-c8871e1a675f"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[RPT01-05]]></text>
+			</staticText>
+			<textField evaluationTime="Auto">
+				<reportElement x="335" y="0" width="220" height="20" uuid="dc482a12-648b-47cd-bebc-02e84adbb43b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["หน้า " + $V{CURRENT_PAGE}+" จาก " +$V{PAGE_NUMBER}+" หน้า"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="335" height="20" uuid="43e058c9-1dc8-48c1-b375-09ae33100c69"/>
+				<textFieldExpression><![CDATA[Calendar.getInstance().getTime()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Default" x="0" y="20" width="435" height="21" uuid="e20f2c3b-4177-450b-b259-970bd771eecb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["พิมพ์โดย : " + $P{printBy}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20">
+			<textField>
+				<reportElement style="FBold" x="0" y="0" width="235" height="20" uuid="a3211b79-d03a-4c38-8b34-0f1a6f2b6a09"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["รวมข้าว ทั้ง  "+$V{COUNT_G1}+"  ชนิด"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="##,##0.00">
+				<reportElement style="FBold" x="235" y="0" width="100" height="20" uuid="549876c5-9498-48fa-a9fb-269393ab6210"/>
+				<box rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_ALL_COL1}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="##,##0.00">
+				<reportElement style="FBold" x="335" y="0" width="100" height="20" uuid="a3a912eb-01ff-414d-8720-df3f145ead36"/>
+				<box rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_ALL_COL2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="##,##0.00">
+				<reportElement style="FBold" x="435" y="0" width="120" height="20" uuid="57c0995e-7256-4c37-8b07-17db2defae40"/>
+				<box rightPadding="5">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_ALL_COL3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
