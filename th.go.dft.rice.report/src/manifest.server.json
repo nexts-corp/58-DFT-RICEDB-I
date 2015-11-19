@@ -1,0 +1,19 @@
+{
+    "server":[
+        {
+            "contextName": "/api/*",
+            "contextType": "http",
+            "propertys": [
+                {"name": "port","value": "9999"},
+                {"name": "queue","value": "100"}
+            ]
+        }
+    ],
+    "aaa":{
+        "authenForm":"/inv/login.html",
+        "authenAPI":"/inv/api/inv/authen/signin",
+        "logoutAPI":"/inv/api/inv/authen/signout",
+        "welcomePage":"/inv/index.html",
+        "sessionTimeOut":30000
+    }
+}

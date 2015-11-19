@@ -1,0 +1,25 @@
+{
+    "id": "rice",
+    "version": "1.0",
+    "packages":"th.go.dft.rice.report.*",
+    "i18n":"th/go/dft/rice/report/resources/i18n",
+    "widget":"th.go.dft.report.report.*",
+    "title": "test plugin",
+    "authors": "somchit",
+    "owners": "BAAN PROGRAM CO.,LTD.",
+    "description": "test plugin for test",
+    "mainUrl": "/inv/page/index",
+    "iconUrl": "/inv/images/icon.png",
+    "sitemapUrl": "/inv/page/sitemap",
+    "aboutUrl": "test.html",
+    "copyright": "test",
+    "masterdb":{
+        "mysqlbin":"/usr/local/mysql/bin/",
+        "host":"localhost",
+        "port":"3306",
+        "database":"insalemg",
+        "user":"root",
+        "password":"dd1234"
+    }
+    
+}
