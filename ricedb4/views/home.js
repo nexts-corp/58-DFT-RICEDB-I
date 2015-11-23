@@ -229,11 +229,10 @@ function auctionLatest(){
         var data = datas["lists"];
         var auction = '<div>'
                 + '<div class="row text-center">'
-                    + '<h4 class="text-dark">ประมูลครั้งที่ '+data["status"]+'</h4>'
-                + '</div>'
-                + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">วันที่ :</div>'
-                    + '<div class="col-md-9 text-left">'+data["auctionDate"]+'</div>'
+                    + '<h4 class="text-dark">'
+                        + 'ประมูลครั้งที่ '+data["status"]
+                        +'<div class="text-sm">วันที่ '+data["auctionDate"]+'</div>'
+                    + '</h4>'
                 + '</div>'
                 + '<div class="row">'
                     + '<div class="col-md-3 text-right text-bold">น้ำหนัก :</div>'

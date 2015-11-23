@@ -35,6 +35,9 @@ $(function () {
 function groupBy(option){
     var dataSet = [];
 
+    var totalWeight = 0;
+    var totalPercent = 0;
+
     $("#"+option+" table tbody").html('<tr><td colspan="4" class="text-center">Loading...</td></tr>');
     $("#"+option+" table tfoot").find("td").eq(1).html("-");
     $("#"+option+" table tfoot").find("td").eq(2).html("-");
@@ -42,8 +45,8 @@ function groupBy(option){
 
     setTimeout(function(){
         var datas = callAjax(js_context_path+"/api/warehouse/viewInventory/"+option, "post", {}, "json");
+
         if (typeof datas !== "undefined" && datas !== null) {
-            var totalWeight = 0;
             $.each(datas["lists"], function(key, value){
                 dataSet.push(value);
 
@@ -51,8 +54,7 @@ function groupBy(option){
             });
 
             $("#"+option+" table tfoot").find("td").eq(1).html(accounting.formatNumber(totalWeight, 6, ",", "."));
-            $("#"+option+" table tfoot").find("td").eq(2).html(accounting.formatNumber(totalWeight, 2, ",", "."));
-            $("#"+option+" table tfoot").find("td").eq(3).html(accounting.formatNumber(totalWeight, 2, ",", "."));
+            $("#"+option+" table tfoot").find("td").eq(2).html(accounting.formatNumber(100, 2, ",", ".")+"%");
         }
 
         var t = $("#"+option+" table").DataTable( {
@@ -82,17 +84,8 @@ function groupBy(option){
                     "data": "weight",
                     "sClass": "text-right",
                     "render": function(data){
-                        var content = accounting.formatNumber(data, 2, ",", ".");
-
-                        return content;
-                    }
-                },
-                {
-                    "targets": 3,
-                    "data": "weight",
-                    "sClass": "text-right",
-                    "render": function(data){
-                        var content = accounting.formatNumber(data, 2, ",", ".");
+                        var percent = parseFloat((data / totalWeight) * 100).toFixed(2);
+                        var content = percent+'%';
 
                         return content;
                     }
