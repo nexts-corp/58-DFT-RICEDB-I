@@ -202,6 +202,7 @@ function ricePrice(){
                             + '</tr>'
                         + '</tbody>'
                     + '</table>'
+                    + '<div class="text-right text-sm">ข้อมูล ณ วันที่ '+thaiDate(value["Date"].substr(8, 2), value["Date"].substr(5, 2), value["Date"].substr(0, 4))+'</div>'
                 + '</div>';
         });
 
@@ -211,9 +212,12 @@ function ricePrice(){
 }
 
 function checkZero(input){
-    var output = input
+    var output = '';
     if(input == 0.0){
         output = '-';
+    }
+    else{
+        output = accounting.formatNumber(input, 2, ",", ".");
     }
 
     return output;

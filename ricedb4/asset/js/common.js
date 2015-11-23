@@ -163,3 +163,15 @@ function logout(){
     $.removeCookie("userinfo", { path: '/' });
     window.location.href = '/ricedb3/api/root/view/index';
 }
+
+function thaiDate(day, month, year){
+    var monthArr = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+    var dayT = parseInt(day);
+    var monthT = monthArr[parseInt(month) - 1];
+    var yearT = parseInt(year) + 543;
+
+    var dateT = dayT+" "+monthT+" "+yearT;
+
+    return dateT;
+}
