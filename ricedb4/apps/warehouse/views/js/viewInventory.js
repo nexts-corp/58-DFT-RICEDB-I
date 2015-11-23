@@ -38,10 +38,9 @@ function groupBy(option){
     var totalWeight = 0;
     var totalPercent = 0;
 
-    $("#"+option+" table tbody").html('<tr><td colspan="4" class="text-center">Loading...</td></tr>');
+    $("#"+option+" table tbody").html('<tr><td colspan="3" class="text-center">Loading...</td></tr>');
     $("#"+option+" table tfoot").find("td").eq(1).html("-");
     $("#"+option+" table tfoot").find("td").eq(2).html("-");
-    $("#"+option+" table tfoot").find("td").eq(3).html("-");
 
     setTimeout(function(){
         var datas = callAjax(js_context_path+"/api/warehouse/viewInventory/"+option, "post", {}, "json");

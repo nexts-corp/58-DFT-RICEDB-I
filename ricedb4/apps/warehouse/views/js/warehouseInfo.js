@@ -150,7 +150,7 @@ function listsAllRice(){
                 "data": "id",
                 "sClass": "text-center",
                 "render": function (data) {
-                    var content = '<button class="btn btn-primary history" data-id="'+data+'" title="ดูประวัติ"><i class="fa fa-list"></i></button>&nbsp;';
+                    var content = '<button class="btn btn-primary history" data-id="'+data+'" title="ดูประวัติ"><i class="fa fa-search"></i></button>&nbsp;';
 
                     return content;
                 }
