@@ -53,7 +53,7 @@
             </div>
 
             <div class="col-md-2 text-right">
-                <button id="btn_date" class="btn btn-primary"><i class="fa fa-eye"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
+                <button id="btn_date" class="btn btn-primary"><i class="fa fa-search"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
             </div>
         </div>
 
@@ -147,8 +147,10 @@
                                                 <th class="text-center" style="vertical-align:middle;" width="10%">{{#i18n}}release.fp2{{/i18n}}</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_body2">
-
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="11" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -177,8 +179,10 @@
                                                 <th class="text-center" style="vertical-align:middle;" width="10%">{{#i18n}}release.fp3{{/i18n}}</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_body3">
-
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="11" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -207,8 +211,10 @@
                                                 <th class="text-center" style="vertical-align:middle;" width="10%">{{#i18n}}release.fp4{{/i18n}}</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_body4">
-
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="11" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -224,14 +230,14 @@
 {{>footer}}
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var dataPublic;
-        var dataFilter;
-        var projectGroup;
-        var provinceGroup;
-        var typeGroup;
-        var gradeGroup;
+    var dataPublic;
+    var dataFilter;
+    var projectGroup;
+    var provinceGroup;
+    var typeGroup;
+    var gradeGroup;
 
+    $(function () {
         $("#stopDate").datepicker({
             format: "yyyy-mm",
             startView: "months",
@@ -245,8 +251,7 @@
         }).datepicker();
 
         $("#btn_date").click(function () {
-            getData();
-            writebody(0);
+            getData(0);
         });
 
         $("#auction").html(listAuction()).change(function(){
@@ -257,33 +262,48 @@
             $("#dateFP").val(start.substr(0, 10));
         }).select2();
 
-        function getData() {
-            $("#tb_body2").html('<tr><td colspan="9" class="text-center">Loading...</td></tr>');
-            $("#tb_body3").html('<tr><td colspan="9" class="text-center">Loading...</td></tr>');
-            $("#tb_body4").html('<tr><td colspan="9" class="text-center">Loading...</td></tr>');
+        $("#select_project").change(function () {
+            getData(1);
+        });
+        $("#select_province").change(function () {
+            getData(2);
+        });
+        $("#select_type").change(function () {
+            getData(3);
+        });
+        $("#select_grade").change(function () {
+            getData(4);
+        });
+    });
 
-            var stopDate = $("#stopDate").val()+"-01";
-            var dateFP = $("#dateFP").val();
-            var typeId = $("#select_type").val();
-            var gradeId = $("#select_grade").val();
-            var projectId = $("#select_project").val();
-            var provinceId = $("#select_province").val();
-            var d = new Date(dateFP);
-            var count = 0;
-            var day = new Array();
-            //var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    function getData(input) {
+        $("#fp2 table tbody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');
+        $("#fp3 table tbody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');
+        $("#fp4 table tbody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');
+
+        var stopDate = $("#stopDate").val()+"-01";
+        var dateFP = $("#dateFP").val();
+        var typeId = $("#select_type").val();
+        var gradeId = $("#select_grade").val();
+        var projectId = $("#select_project").val();
+        var provinceId = $("#select_province").val();
+        var d = new Date(dateFP);
+        var count = 0;
+        var day = new Array();
+        //var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+        if (d.getDay() != 6 && d.getDay() != 0) {
+            day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+            count++;
+        }
+        while (count != 7) {
+            d = yesterday(d);
             if (d.getDay() != 6 && d.getDay() != 0) {
                 day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
                 count++;
             }
-            while (count != 7) {
-                d = yesterday(d);
-                if (d.getDay() != 6 && d.getDay() != 0) {
-                    day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
-                    count++;
-                }
-            }
+        }
 
+        setTimeout(function() {
             var datas = callAjax("{{_context_path}}/api/release/floorPrice/getFloorPrice", "post", {
                 stopDate: stopDate,
                 startDate: day[6],
@@ -299,157 +319,146 @@
                 provinceGroup = datas["province"];
                 typeGroup = datas["type"];
                 gradeGroup = datas["grade"];
+
+                writebody(input);
             }
-        }
+        }, 0);
+    }
 
-        function yesterday(d) {
-            d = new Date(d.setDate(d.getDate() - 1));
-            return d;
-        }
+    function yesterday(d) {
+        d = new Date(d.setDate(d.getDate() - 1));
+        return d;
+    }
 
-        $("#select_project").click(function () {
-            getData();
-            writebody(1);
+    function writebody(type) {
+        var html2 = '';
+        var html3 = '';
+        var html4 = '';
+        $.each(dataPublic, function (key, datas) {
+            html2 += '<tr>'
+                    + '<td class="text-center">' + (key + 1) + '</td>'
+                    + '<td>' + datas.riceType + '</td>'
+                    + '<td>' + datas.Project + '</td>'
+                    + '<td class="text-center">' + datas.Grade + '</td>'
+                    + '<td>' + datas.Province + '</td>'
+                    + '<td>' + datas.stockYear + ' ปี ' + datas.stockMonth + ' เดือน</td>'
+                    + '<td class="text-right">' + checkZero(datas.NewPrice) + '</td>'
+                    + '<td class="text-right">' + accounting.formatMoney(datas.discount, {symbol: '%', format: '%v %s'}) + '</td>'
+                    + '<td class="text-right">' + checkZero(datas.DFP2) + '</td>'
+                    + '<td class="text-right">' + datas.LogisticCost + '</td>'
+                    + '<td class="text-right">' + checkZero(datas.FP2) + '</td>'
+                + '</tr>';
+
+            html3 += '<tr>'
+                    + '<td class="text-center">' + (key + 1) + '</td>'
+                    + '<td>' + datas.riceType + '</td>'
+                    + '<td>' + datas.Project + '</td>'
+                    + '<td class="text-center">' + datas.Grade + '</td>'
+                    + '<td>' + datas.Province + '</td>'
+                    + '<td>' + datas.stockYear + ' ปี ' + datas.stockMonth + ' เดือน</td>'
+                    + '<td class="text-right">' + checkZero(datas.OldNewPrice) + '</td>'
+                    + '<td class="text-right">' + accounting.formatMoney(datas.discount, {symbol: '%', format: '%v %s'}) + '</td>'
+                    + '<td class="text-right">' + checkZero(datas.DFP3) + '</td>'
+                    + '<td class="text-right">' + datas.LogisticCost + '</td>'
+                    + '<td class="text-right">' + checkZero(datas.FP3) + '</td>'
+                + '</tr>';
+
+            html4 += '<tr>'
+                    + '<td class="text-center">' + (key + 1) + '</td>'
+                    + '<td>' + datas.riceType + '</td>'
+                    + '<td>' + datas.Project + '</td>'
+                    + '<td class="text-center">' + datas.Grade + '</td>'
+                    + '<td>' + datas.Province + '</td>'
+                    + '<td>' + datas.stockYear + ' ปี ' + datas.stockMonth + ' เดือน</td>'
+                    + '<td class="text-right">' + checkZero(datas.OldPrice) + '</td>'
+                    + '<td class="text-right">' + accounting.formatMoney(datas.discount, {symbol: '%', format: '%v %s'}) + '</td>'
+                    + '<td class="text-right">' + checkZero(datas.DFP4) + '</td>'
+                    + '<td class="text-right">' + datas.LogisticCost + '</td>'
+                    + '<td class="text-right">' + checkZero(datas.FP4) + '</td>'
+                + '</tr>';
         });
-        $("#select_province").click(function () {
-            getData();
-            writebody(2);
-        });
-        $("#select_type").click(function () {
-            getData();
-            writebody(3);
-        });
-        $("#select_grade").click(function () {
-            getData();
-            writebody(4);
-        });
-        
-        function genrateGroup(){
-            
-        }
-        
-        function writebody(type) {
-            /*$("#tb_body2").empty();
-            $("#tb_body3").empty();
-            $("#tb_body4").empty();*/
-            var html2 = '';
-            var html3 = '';
-            var html4 = '';
-            $.each(dataPublic, function (key, datas) {
-                html2 += "<tr>" +
-                        "<td class='text-center'>" + (key + 1) + "</td>" +
-                        "<td>" + datas.riceType + "</td>" +
-                        "<td>" + datas.Project + "</td>" +
-                        "<td>" + datas.Grade + "</td>" +
-                        "<td>" + datas.Province + "</td>" +
-                        "<td>" + datas.stockYear + " ปี " + datas.stockMonth + " เดือน</td>" +
-                        "<td>" + accounting.formatNumber(datas.NewPrice, 2, ",", ".") + "</td>" +
-                        "<td>" + accounting.formatMoney(datas.discount, {symbol: "%", format: "%v %s"}) + "</td>" +
-                        "<td>" + accounting.formatNumber(datas.DFP2, 2, ",", ".") + "</td>" +
-                        "<td>" + datas.LogisticCost + "</td>" +
-                        "<td>" + accounting.formatNumber(datas.FP2, 2, ",", ".") + "</td>" +
-                        "</tr>";
-
-                html3 += "<tr>" +
-                        "<td class='text-center'>" + (key + 1) + "</td>" +
-                        "<td>" + datas.riceType + "</td>" +
-                        "<td>" + datas.Project + "</td>" +
-                        "<td>" + datas.Grade + "</td>" +
-                        "<td>" + datas.Province + "</td>" +
-                        "<td>" + datas.stockYear + " ปี " + datas.stockMonth + " เดือน</td>" +
-                        "<td>" + accounting.formatNumber(datas.OldNewPrice, 2, ",", ".") + "</td>" +
-                        "<td>" + accounting.formatMoney(datas.discount, {symbol: "%", format: "%v %s"}) + "</td>" +
-                        "<td>" + accounting.formatNumber(datas.DFP3, 2, ",", ".") + "</td>" +
-                        "<td>" + datas.LogisticCost + "</td>" +
-                        "<td>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                        "</tr>";
-
-                html4 += "<tr>" +
-                        "<td class='text-center'>" + (key + 1) + "</td>" +
-                        "<td>" + datas.riceType + "</td>" +
-                        "<td>" + datas.Project + "</td>" +
-                        "<td>" + datas.Grade + "</td>" +
-                        "<td>" + datas.Province + "</td>" +
-                        "<td>" + datas.stockYear + " ปี " + datas.stockMonth + " เดือน</td>" +
-                        "<td>" + accounting.formatNumber(datas.OldPrice, 2, ",", ".") + "</td>" +
-                        "<td>" + accounting.formatMoney(datas.discount, {symbol: "%", format: "%v %s"}) + "</td>" +
-                        "<td>" + accounting.formatNumber(datas.DFP4, 2, ",", ".") + "</td>" +
-                        "<td>" + datas.LogisticCost + "</td>" +
-                        "<td>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                        "</tr>";
-            });
-            $("#tb_body2").html(html2);
-            $("#tb_body3").html(html3);
-            $("#tb_body4").html(html4);
+        $("#fp2 table tbody").html(html2);
+        $("#fp3 table tbody").html(html3);
+        $("#fp4 table tbody").html(html4);
 
 
-            //  if(type!=1){
-            var pj = $("#select_project").val();
-            $("#select_project").empty();
-            $("#select_project").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(projectGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_project").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_project").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-            //    $("#select_project").attr("selected")
-            //  }
-
-            //  if(type!=2){
-            pj = $("#select_province").val();
-            $("#select_province").empty();
-            $("#select_province").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(provinceGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_province").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_province").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-            //  }
-            pj = $("#select_type").val();
-            $("#select_type").empty();
-            $("#select_type").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(typeGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_type").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_type").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-
-            pj = $("#select_grade").val();
-            $("#select_grade").empty();
-            $("#select_grade").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(gradeGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_grade").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_grade").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-            //  }
-        }
-
-        function listAuction(){
-            var html = '';
-            var datas = callAjax("{{_context_path}}/api/release/floorPrice/listsAuction", "post", {}, "json");
-            if (typeof datas !== "undefined" && datas !== null) {
-                $.each(datas["lists"], function(key, val){
-                    var age = "";
-                    if(val["ageStop"] != null) age = val["ageStop"]["date"];
-
-                    var start = "";
-                    if(val["dateStart"] != null) start = val["dateStart"]["date"];
-
-                    html += '<option value="'+val["keyword"]+'" data-age="'+age+'" data-start="'+start+'">'+val["status"]+'</option>';
-                });
+        //  if(type!=1){
+        var pj = $("#select_project").val();
+        $("#select_project").empty();
+        $("#select_project").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(projectGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_project").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_project").append("<option value='" + key + "'>" + value + "</option>");
             }
+        });
+        //    $("#select_project").attr("selected")
+        //  }
 
-            return html;
+        //  if(type!=2){
+        pj = $("#select_province").val();
+        $("#select_province").empty();
+        $("#select_province").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(provinceGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_province").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_province").append("<option value='" + key + "'>" + value + "</option>");
+            }
+        });
+        //  }
+        pj = $("#select_type").val();
+        $("#select_type").empty();
+        $("#select_type").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(typeGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_type").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_type").append("<option value='" + key + "'>" + value + "</option>");
+            }
+        });
+
+        pj = $("#select_grade").val();
+        $("#select_grade").empty();
+        $("#select_grade").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(gradeGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_grade").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_grade").append("<option value='" + key + "'>" + value + "</option>");
+            }
+        });
+        //  }
+    }
+
+    function listAuction(){
+        var html = '<option value="" data-age="" data-start="">เลือก</option>';
+        var datas = callAjax("{{_context_path}}/api/release/floorPrice/listsAuction", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function(key, val){
+                var age = "";
+                if(val["ageStop"] != null) age = val["ageStop"]["date"];
+
+                var start = "";
+                if(val["dateStart"] != null) start = val["dateStart"]["date"];
+
+                html += '<option value="'+val["keyword"]+'" data-age="'+age+'" data-start="'+start+'">'+val["status"]+'</option>';
+            });
         }
-    });
+
+        return html;
+    }
+    function checkZero(input){
+        var output = '';
+        if(input <= 0.0){
+            output = '-';
+        }
+        else{
+            output = accounting.formatNumber(input, 2, ",", ".");
+        }
+
+        return output;
+    }
 
 </script>
