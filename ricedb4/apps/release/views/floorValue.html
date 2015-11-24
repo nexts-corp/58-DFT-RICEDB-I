@@ -24,225 +24,228 @@
                 </div>
             </div>
         </div>
+
     </section>
     <hr class="tall dashboard">
+
     <div class="container">
-        <div class="col-sm-12"  style="margin: 10px;">
-            <div class="col-sm-6">
-                <label class="col-sm-4 control-label text-right">{{#i18n}}release.auctionNo{{/i18n}} :</label>
-                <div class="col-sm-8">
-                    <select id="auction" class="form-control">
-                        <option value="0">เลือกทั้งหมด</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <button id="btn_date" class="btn btn-primary"><i class="fa fa-search"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
-            </div>
-        </div>
-        <div style="clear: both;"></div>
-        <fieldset class="col-sm-12" style="border: 1px solid #cccccc; margin-top: 20px;">
-
-            <div class="col-sm-12" style="margin-top: 20px;">
+        <div class="row">
+            <div class="col-sm-12"  style="margin: 10px;">
                 <div class="col-sm-6">
-                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.project{{/i18n}} :</label>
+                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.auctionNo{{/i18n}} :</label>
                     <div class="col-sm-8">
-                        <select id="select_project" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
+                        <select id="auction" class="form-control">
+                            <option value=""></option>
                         </select>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.province{{/i18n}} :</label>
-                    <div class="col-sm-8">
-                        <select id="select_province" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
-                        </select>
-                    </div>
+                <div class="col-sm-2">
+                    <button id="btn_date" class="btn btn-primary"><i class="fa fa-search"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
                 </div>
             </div>
-            <div class="col-sm-12" style="margin: 20px 0px;">
-                <div class="col-sm-6">
-                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.type{{/i18n}} :</label>
-                    <div class="col-sm-8">
-                        <select id="select_type" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
-                        </select>
+
+            <div style="clear: both;"></div>
+
+            <div class="col-md-12" style="border: 1px solid #cccccc; margin-top: 20px;">
+                <div class="col-md-12" style="margin-top: 20px;">
+                    <div class="col-sm-6">
+                        <label class="col-sm-4 control-label text-right">{{#i18n}}release.project{{/i18n}} :</label>
+                        <div class="col-sm-8">
+                            <select id="select_project" class="form-control">
+                                <option value="0">เลือกทั้งหมด</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4 control-label text-right">{{#i18n}}release.province{{/i18n}} :</label>
+                        <div class="col-sm-8">
+                            <select id="select_province" class="form-control">
+                                <option value="0">เลือกทั้งหมด</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <label class="col-sm-4 control-label text-right">{{#i18n}}release.grade{{/i18n}} :</label>
-                    <div class="col-sm-8">
-                        <select id="select_grade" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
-                        </select>
+
+                <div class="col-md-12" style="margin: 20px 0px;">
+                    <div class="col-sm-6">
+                        <label class="col-sm-4 control-label text-right">{{#i18n}}release.type{{/i18n}} :</label>
+                        <div class="col-sm-8">
+                            <select id="select_type" class="form-control">
+                                <option value="0">เลือกทั้งหมด</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="col-sm-4 control-label text-right">{{#i18n}}release.grade{{/i18n}} :</label>
+                        <div class="col-sm-8">
+                            <select id="select_grade" class="form-control">
+                                <option value="0">เลือกทั้งหมด</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-
-            </div>
-
-            <div class="row">
-                <section class="panel form-wizard" id="w2">
+                <div class="col-ms-12">
                     <div class="tabs">
-                        <ul class="nav nav-tabs nav-justify">
+                        <ul class="nav nav-tabs">
                             <li class="active">
-                                <a href="#fv2" data-toggle="tab" class="text-center" aria-expanded="true">
+                                <a href="#fv2" data-toggle="tab">
                                     <span class="badge hidden-xs">1</span>
                                     {{#i18n}}release.newRicePrice{{/i18n}} ({{#i18n}}release.fv2{{/i18n}})
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="#fv3" data-toggle="tab" class="text-center" aria-expanded="false">
+                            <li>
+                                <a href="#fv3" data-toggle="tab">
                                     <span class="badge hidden-xs">2</span>
-                                    {{#i18n}}release.meanRicePrice{{/i18n}} ({{#i18n}}release.fv3{{/i18n}})
+                                    {{#i18n}}release.newRicePrice{{/i18n}} ({{#i18n}}release.fv3{{/i18n}})
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="#fv4" data-toggle="tab" class="text-center" aria-expanded="false">
+                            <li>
+                                <a href="#fv4" data-toggle="tab">
                                     <span class="badge hidden-xs">3</span>
-                                    {{#i18n}}release.oldRicePrice{{/i18n}} ({{#i18n}}release.fv4{{/i18n}})
+                                    {{#i18n}}release.newRicePrice{{/i18n}} ({{#i18n}}release.fv4{{/i18n}})
                                 </a>
                             </li>
-                            <li class="">
-                                <a href="#fv234" data-toggle="tab" class="text-center" aria-expanded="false">
+                            <li>
+                                <a href="#fv234" data-toggle="tab">
                                     <span class="badge hidden-xs">4</span>
                                     {{#i18n}}release.fv2{{/i18n}}, {{#i18n}}release.fv3{{/i18n}}, {{#i18n}}release.fv4{{/i18n}}
                                 </a>
                             </li>
                         </ul>
-                        <form class="form-horizontal" novalidate="novalidate">
-                            <div class="tab-content">
-                                <div id="fv2" class="tab-pane active">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tb_body2">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="fv3" class="tab-pane">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp3{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv3{{/i18n}})</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tb_body3">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="fv4" class="tab-pane">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp4{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv4{{/i18n}})</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tb_body4">
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="fv234" class="tab-pane">
-                                    <table class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp3{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv3{{/i18n}})</th>
-                                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp4{{/i18n}}</th>
-                                                <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv4{{/i18n}})</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tb_body234">
-                                        </tbody>
-                                    </table>
-                                </div>
+                        <div class="tab-content">
+                            <div id="fv2" class="tab-pane active table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="13" class="text-center">-</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        </form>
+
+                            <div id="fv3" class="tab-pane table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="13" class="text-center">-</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="fv4" class="tab-pane table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="13" class="text-center">-</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div id="fv234" class="tab-pane table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.warehouse{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.stack{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.grade{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp2{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp3{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv3{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.fp4{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv4{{/i18n}})</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="17" class="text-center">-</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
-                </section>
-            </div>
-        </fieldset>
+                </div>
+            </fieldset>
+        </div>
     </div>
 </div>
 
 {{>footer}}
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var dataPublic;
-        var dataFilter;
-        var projectGroup;
-        var provinceGroup;
-        var typeGroup;
-        var gradeGroup;
-        $.ajax({
-            url: "{{_context_path}}/api/release/floorValue/listsAuction",
-            type: "post",
-            async: false,
-            success: function (data) {
-                var html = '<option value="">เลือก</option>';
-                $.each(data["lists"], function (key, val) {
-                    html += '<option value="' + val.keyword + '">' + val.status + '</option>';
-                });
-                $("#auction").html(html);
-            }
-        });
+    var dataPublic;
+    var dataFilter;
+    var projectGroup;
+    var provinceGroup;
+    var typeGroup;
+    var gradeGroup;
+
+    $(function () {
+        listsAuction();
 
         $("#dateFP").datepicker({
             format: "yyyy-mm-dd",
@@ -251,391 +254,280 @@
         }).datepicker("setDate", new Date());
 
         $("#btn_date").click(function () {
-            getData();
-            writebody(0);
+            getData(0);
         });
 
-        function getAuction() {
+        $("#select_project").click(function () {
+            getData(1);
+        });
+        $("#select_province").click(function () {
+            getData(2);
+        });
+        $("#select_type").click(function () {
+            getData(3);
+        });
+        $("#select_grade").click(function () {
+            getData(4);
+        });
+    });
 
+    function listsAuction() {
+        var datas = callAjax("{{_context_path}}/api/release/floorValue/listsAuction", "post", {}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            var html = '<option value="">เลือก</option>';
+            $.each(datas["lists"], function (key, val) {
+                html += '<option value="' + val.keyword + '">' + val.status + '</option>';
+            });
+            $("#auction").html(html).select2();
         }
-        function getData() {
-            $("#tb_body2").html('<tr><td colspan="12" class="text-center">Loading...</td></tr>');
-            $("#tb_body3").html('<tr><td colspan="12" class="text-center">Loading...</td></tr>');
-            $("#tb_body4").html('<tr><td colspan="12" class="text-center">Loading...</td></tr>');
-            $("#tb_body234").html('<tr><td colspan="16" class="text-center">Loading...</td></tr>');
-            var stopDate = $("#stopDate").val() + "-01";
-            var dateFP = $("#dateFP").val();
-            var typeId = $("#select_type").val();
-            var gradeId = $("#select_grade").val();
-            var projectId = $("#select_project").val();
-            var provinceId = $("#select_province").val();
-            var auction = $("#auction").val();
-            var d = new Date(dateFP);
-            var count = 0;
-            var day = new Array();
-            //var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    }
+    function getData(input) {
+        $("#fv2 table tbody").html('<tr><td colspan="13" class="text-center">Loading...</td></tr>');
+        $("#fv3 table tbody").html('<tr><td colspan="13" class="text-center">Loading...</td></tr>');
+        $("#fv4 table tbody").html('<tr><td colspan="13" class="text-center">Loading...</td></tr>');
+        $("#fv234 table tbody").html('<tr><td colspan="17" class="text-center">Loading...</td></tr>');
+
+        var stopDate = $("#stopDate").val() + "-01";
+        var dateFP = $("#dateFP").val();
+        var typeId = $("#select_type").val();
+        var gradeId = $("#select_grade").val();
+        var projectId = $("#select_project").val();
+        var provinceId = $("#select_province").val();
+        var auction = $("#auction").val();
+        var d = new Date(dateFP);
+        var count = 0;
+        var day = new Array();
+        //var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+        if (d.getDay() != 6 && d.getDay() != 0) {
+            day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+            count++;
+        }
+        while (count != 7) {
+            d = yesterday(d);
             if (d.getDay() != 6 && d.getDay() != 0) {
                 day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
                 count++;
             }
-            while (count != 7) {
-                d = yesterday(d);
-                if (d.getDay() != 6 && d.getDay() != 0) {
-                    day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
-                    count++;
-                }
+        }
+
+        setTimeout(function() {
+            var datas = callAjax("{{_context_path}}/api/release/floorValue/getFloorValue", "post", {
+                auction: auction,
+                projectId: projectId,
+                provinceId: provinceId,
+                typeId: typeId,
+                gradeId: gradeId
+            }, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                dataPublic = datas["lists"];
+                projectGroup = datas["project"];
+                provinceGroup = datas["province"];
+                typeGroup = datas["type"];
+                gradeGroup = datas["grade"];
+
+                writebody(input);
+            }
+        }, 0);
+    }
+
+    function yesterday(d) {
+        d = new Date(d.setDate(d.getDate() - 1));
+        return d;
+    }
+
+    function writebody(type) {
+        var html2 = '';
+        var html3 = '';
+        var html4 = '';
+        var html234 = "";
+        var tempSilo = "";
+        var tempKey = 1;
+        var tempKeySub = 0;
+        var tempWeight = 0;
+        var tempFP2 = 0;
+        var tempFP3 = 0;
+        var tempFP4 = 0;
+        var tempFV2 = 0;
+        var tempFV3 = 0;
+        var tempFV4 = 0;
+        var i = 0;
+
+        $.each(dataPublic, function (key, datas) {
+            if (tempSilo != datas.Silo && tempSilo != "") {
+                html2 += '<tr>'
+                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
+                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP2, 11, ",", ".") + '">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV2, 11, ",", ".") + '">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                        + '</tr>';
+
+                html3 += '<tr>'
+                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
+                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP3, 11, ",", ".") + '">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV3, 11, ",", ".") + '">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                        + '</tr>';
+
+                html4 += '<tr>'
+                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
+                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP4, 11, ",", ".") + '">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV4, 11, ",", ".") + '">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                        + '</tr>';
+
+                html234 += '<tr>'
+                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
+                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP2, 11, ",", ".") + '">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV2, 11, ",", ".") + '">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP3, 11, ",", ".") + '">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV3, 11, ",", ".") + '">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP4, 11, ",", ".") + '">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV4, 11, ",", ".") + '">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                        + '</tr>';
+
+                tempWeight = 0;
+                tempFP2 = 0;
+                tempFV2 = 0;
+                tempFP3 = 0;
+                tempFV3 = 0;
+                tempFP4 = 0;
+                tempFV4 = 0;
+                tempKey++;
+                tempKeySub = 0;
+
             }
 
-            $.ajax({
-                url: "{{_context_path}}/api/release/floorValue/getFloorValue",
-                type: "post",
-                async: false,
-                data: {auction: auction, projectId: projectId, provinceId: provinceId, typeId: typeId, gradeId: gradeId},
-                success: function (data) {
-                    dataPublic = data["lists"];
-                    projectGroup = data["project"];
-                    provinceGroup = data["province"];
-                    typeGroup = data["type"];
-                    gradeGroup = data["grade"];
-                    // dataFilter=dataPublic;
+            html2 += '<tr>'
+                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
+                    + '<td>' + datas.Province + '</td>'
+                    + '<td>' + datas.Project + '</td>'
+                    + '<td>' + datas.Round + '</td>'
+                    + '<td>' + datas.Silo + '</td>'
+                    + '<td>' + datas.Associate + '</td>'
+                    + '<td>' + datas.riceType + '</td>'
+                    + '<td>' + datas.Warehouse + '</td>'
+                    + '<td>' + datas.Stack + '</td>'
+                    + '<td>' + datas.Grade + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FP2, 2, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FV2, 2, ",", ".") + '</td>'
+                + '</tr>';
 
-                }
-            });
-        }
+            html3 += '<tr>'
+                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
+                    + '<td>' + datas.Province + '</td>'
+                    + '<td>' + datas.Project + '</td>'
+                    + '<td>' + datas.Round + '</td>'
+                    + '<td>' + datas.Silo + '</td>'
+                    + '<td>' + datas.Associate + '</td>'
+                    + '<td>' + datas.riceType + '</td>'
+                    + '<td>' + datas.Warehouse + '</td>'
+                    + '<td>' + datas.Stack + '</td>'
+                    + '<td>' + datas.Grade + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FP3, 2, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FV3, 2, ",", ".") + '</td>'
+                + '</tr>';
 
-        function yesterday(d) {
-            d = new Date(d.setDate(d.getDate() - 1));
-            return d;
-        }
+            html4 += '<tr>'
+                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
+                    + '<td>' + datas.Province + '</td>'
+                    + '<td>' + datas.Project + '</td>'
+                    + '<td>' + datas.Round + '</td>'
+                    + '<td>' + datas.Silo + '</td>'
+                    + '<td>' + datas.Associate + '</td>'
+                    + '<td>' + datas.riceType + '</td>'
+                    + '<td>' + datas.Warehouse + '</td>'
+                    + '<td>' + datas.Stack + '</td>'
+                    + '<td>' + datas.Grade + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FP4, 2, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FV4, 2, ",", ".") + '</td>'
+                + '</tr>';
 
-        $("#select_project").click(function () {
-            getData();
-            writebody(1);
+            html234 += '<tr>'
+                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
+                    + '<td>' + datas.Province + '</td>'
+                    + '<td>' + datas.Project + '</td>'
+                    + '<td>' + datas.Round + '</td>'
+                    + '<td>' + datas.Silo + '</td>'
+                    + '<td>' + datas.Associate + '</td>'
+                    + '<td>' + datas.riceType + '</td>'
+                    + '<td>' + datas.Warehouse + '</td>'
+                    + '<td>' + datas.Stack + '</td>'
+                    + '<td>' + datas.Grade + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FP2, 2, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FV2, 2, ",", ".") + '</td>'
+
+                    + '<td>' + accounting.formatNumber(datas.FP3, 2, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FV3, 2, ",", ".") + '</td>'
+
+                    + '<td>' + accounting.formatNumber(datas.FP4, 2, ",", ".") + '</td>'
+                    + '<td>' + accounting.formatNumber(datas.FV4, 2, ",", ".") + '</td>'
+                + '</tr>';
+
+            tempSilo = datas.Silo;
+            tempWeight = tempWeight + parseFloat(datas.Weight_All);
+            tempFP2 = tempFP2 + parseFloat(datas.FP2);
+            tempFV2 = tempFV2 + parseFloat(datas.FV2);
+            tempFP3 = tempFP3 + parseFloat(datas.FP3);
+            tempFV3 = tempFV3 + parseFloat(datas.FV3);
+            tempFP4 = tempFP4 + parseFloat(datas.FP4);
+            tempFV4 = tempFV4 + parseFloat(datas.FV4);
+            tempKeySub++;
+
         });
-        $("#select_province").click(function () {
-            getData();
-            writebody(2);
+        $("#fv2 table tbody").html(html2);
+        $("#fv3 table tbody").html(html3);
+        $("#fv4 table tbody").html(html4);
+        $("#fv234 table tbody").html(html234);
+
+        //  if(type!=1){
+        var pj = $("#select_project").val();
+        $("#select_project").empty();
+        $("#select_project").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(projectGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_project").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_project").append("<option value='" + key + "'>" + value + "</option>");
+            }
         });
-        $("#select_type").click(function () {
-            getData();
-            writebody(3);
+
+        pj = $("#select_province").val();
+        $("#select_province").empty();
+        $("#select_province").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(provinceGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_province").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_province").append("<option value='" + key + "'>" + value + "</option>");
+            }
         });
-        $("#select_grade").click(function () {
-            getData();
-            writebody(4);
+        //  }
+        pj = $("#select_type").val();
+        $("#select_type").empty();
+        $("#select_type").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(typeGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_type").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_type").append("<option value='" + key + "'>" + value + "</option>");
+            }
         });
 
-        function genrateGroup() {
-
-        }
-
-        function writebody(type) {
-            /*$("#tb_body2").empty();
-             $("#tb_body3").empty();
-             $("#tb_body4").empty();*/
-            var html2 = '';
-            var html3 = '';
-            var html4 = '';
-            var html234 = "";
-            var tempSilo = "";
-            var tempKey = 1;
-            var tempKeySub = 0;
-            var tempWeight = 0;
-            var tempFP2 = 0;
-            var tempFP3 = 0;
-            var tempFP4 = 0;
-            var tempFV2 = 0;
-            var tempFV3 = 0;
-            var tempFV4 = 0;
-            var i = 0;
-            $.each(dataPublic, function (key, datas) {
-
-                if (tempSilo != datas.Silo && tempSilo != "") {
-                    html2 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP2, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV2, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html3 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP3, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV3, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html4 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP4, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html234 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP2, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV2, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP3, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV3, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP4, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    tempWeight = 0;
-                    tempFP2 = 0;
-                    tempFV2 = 0;
-                    tempFP3 = 0;
-                    tempFV3 = 0;
-                    tempFP4 = 0;
-                    tempFV4 = 0;
-                    tempKey++;
-                    tempKeySub = 0;
-                    html2 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP2, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html3 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html4 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                     html234 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP2, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-
-                } else if (tempSilo == datas.Silo || tempSilo == "") {
-                    html2 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP2, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html3 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html4 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html234 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP2, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-
-                }
-
-                tempSilo = datas.Silo;
-                tempWeight = tempWeight + parseFloat(datas.Weight_All);
-                tempFP2 = tempFP2 + parseFloat(datas.FP2);
-                tempFV2 = tempFV2 + parseFloat(datas.FV2);
-                tempFP3 = tempFP3 + parseFloat(datas.FP3);
-                tempFV3 = tempFV3 + parseFloat(datas.FV3);
-                tempFP4 = tempFP4 + parseFloat(datas.FP4);
-                tempFV4 = tempFV4 + parseFloat(datas.FV4);
-                tempKeySub++;
-
-            });
-            $("#tb_body2").html(html2);
-            $("#tb_body3").html(html3);
-            $("#tb_body4").html(html4);
-            $("#tb_body234").html(html234);
-
-            //  if(type!=1){
-            var pj = $("#select_project").val();
-            $("#select_project").empty();
-            $("#select_project").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(projectGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_project").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_project").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-            //    $("#select_project").attr("selected")
-            //  }
-
-            //  if(type!=2){
-            pj = $("#select_province").val();
-            $("#select_province").empty();
-            $("#select_province").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(provinceGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_province").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_province").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-            //  }
-            pj = $("#select_type").val();
-            $("#select_type").empty();
-            $("#select_type").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(typeGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_type").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_type").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-
-            pj = $("#select_grade").val();
-            $("#select_grade").empty();
-            $("#select_grade").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(gradeGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_grade").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_grade").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
-            //  }
-        }
-    });
-
-//"/ricedb/api/rice/pricedaily/save"
+        pj = $("#select_grade").val();
+        $("#select_grade").empty();
+        $("#select_grade").append("<option value='0'>เลือกทั้งหมด</option>");
+        $.each(gradeGroup, function (key, value) {
+            if (pj == key) {
+                $("#select_grade").append("<option value='" + key + "' selected>" + value + "</option>");
+            } else {
+                $("#select_grade").append("<option value='" + key + "'>" + value + "</option>");
+            }
+        });
+    }
 
 </script>
