@@ -243,7 +243,7 @@
         }).datepicker();
 
         $("#btn_date").click(function () {
-            getData(0);
+            getData();
         });
 
         $("#auction").html(listAuction()).change(function(){
@@ -255,7 +255,7 @@
         }).select2();
     });
 
-    function getData(input) {
+    function getData() {
         $("#fp2 table tbody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');
         $("#fp3 table tbody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');
         $("#fp4 table tbody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');

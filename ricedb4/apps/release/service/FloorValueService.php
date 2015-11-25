@@ -27,61 +27,18 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
         return $data;
     }
 
-    public function getFloorValue($auction,$projectId,$provinceId,$typeId,$gradeId) {
-        //return $auction;
+    public function getFloorValue($auction) {
         $sql = "EXEC sp_floor_value_stack :auction, :projectId, :provinceId, :typeId, :gradeId";
         $param = array(
             "auction" => $auction,
-            "projectId" => $projectId,
-            "provinceId" => $provinceId,
-            "typeId" => $typeId,
-            "gradeId" => $gradeId
+            "projectId" => 0,
+            "provinceId" => 0,
+            "typeId" => 0,
+            "gradeId" => 0
         );
 
         $result = $this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\FloorValue");
 
-        $provk=array();
-        //$provs=array();
-
-        $typek=array();
-        // $types=array();
-
-        $gradek=array();
-        // $grades=array();
-
-        $prj=array();
-
-        for($i=0;$i<count($result);$i++){
-            $pid=$result[$i]->LK_Province_Id;
-            if(!array_key_exists($pid, $provk)) {
-                $provk[$pid]=$result[$i]->Province;
-                //  $provs[]=$result[$i];
-            }
-
-            $tid=$result[$i]->LK_Type_Id;
-            if(!array_key_exists($tid, $typek)) {
-                $typek[$tid]=$result[$i]->riceType;
-                // $types[]=$result[$i];
-            }
-
-
-            $gid=$result[$i]->LK_Grade_Id;
-            if(!array_key_exists($gid, $gradek)) {
-                $gradek[$gid]=$result[$i]->Grade;
-                //$grades[]=$result[$i];
-            }
-
-            $pjid=$result[$i]->LK_Project_Id;
-            if(!array_key_exists($pjid, $prj)) {
-                $prj[$pjid]=$result[$i]->Project;
-                //$grades[]=$result[$i];
-            }
-        }
-
-        $this->getResponse()->add("project", $prj);
-        $this->getResponse()->add("province",$provk);
-        $this->getResponse()->add("type",$typek);
-        $this->getResponse()->add("grade",$gradek);
         return $result;
     }
     

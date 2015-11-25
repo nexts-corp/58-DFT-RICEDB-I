@@ -51,17 +51,13 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4 control-label text-right">{{#i18n}}release.project{{/i18n}} :</label>
                         <div class="col-sm-8">
-                            <select id="select_project" class="form-control">
-                                <option value="0">เลือกทั้งหมด</option>
-                            </select>
+                            <select id="searchProject" class="form-control"></select>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label class="col-sm-4 control-label text-right">{{#i18n}}release.province{{/i18n}} :</label>
                         <div class="col-sm-8">
-                            <select id="select_province" class="form-control">
-                                <option value="0">เลือกทั้งหมด</option>
-                            </select>
+                            <select id="searchProvince" class="form-control"></select>
                         </div>
                     </div>
                 </div>
@@ -70,17 +66,13 @@
                     <div class="col-sm-6">
                         <label class="col-sm-4 control-label text-right">{{#i18n}}release.type{{/i18n}} :</label>
                         <div class="col-sm-8">
-                            <select id="select_type" class="form-control">
-                                <option value="0">เลือกทั้งหมด</option>
-                            </select>
+                            <select id="searchType" class="form-control"></select>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <label class="col-sm-4 control-label text-right">{{#i18n}}release.grade{{/i18n}} :</label>
                         <div class="col-sm-8">
-                            <select id="select_grade" class="form-control">
-                                <option value="0">เลือกทั้งหมด</option>
-                            </select>
+                            <select id="searchGrade" class="form-control"></select>
                         </div>
                     </div>
                 </div>
@@ -140,7 +132,6 @@
                                     </tbody>
                                 </table>
                             </div>
-
                             <div id="fv3" class="tab-pane table-responsive">
                                 <table class="table table-bordered table-striped table-condensed mb-none">
                                     <thead>
@@ -229,7 +220,7 @@
                         </div>
                     </div>
                 </div>
-            </fieldset>
+            </div>
         </div>
     </div>
 </div>
@@ -244,6 +235,8 @@
     var typeGroup;
     var gradeGroup;
 
+    var listArr;
+
     $(function () {
         listsAuction();
 
@@ -254,20 +247,7 @@
         }).datepicker("setDate", new Date());
 
         $("#btn_date").click(function () {
-            getData(0);
-        });
-
-        $("#select_project").click(function () {
-            getData(1);
-        });
-        $("#select_province").click(function () {
-            getData(2);
-        });
-        $("#select_type").click(function () {
-            getData(3);
-        });
-        $("#select_grade").click(function () {
-            getData(4);
+            getData();
         });
     });
 
@@ -281,7 +261,7 @@
             $("#auction").html(html).select2();
         }
     }
-    function getData(input) {
+    function getData() {
         $("#fv2 table tbody").html('<tr><td colspan="13" class="text-center">Loading...</td></tr>');
         $("#fv3 table tbody").html('<tr><td colspan="13" class="text-center">Loading...</td></tr>');
         $("#fv4 table tbody").html('<tr><td colspan="13" class="text-center">Loading...</td></tr>');
@@ -310,22 +290,44 @@
             }
         }
 
+        dataPublic = [];
+        projectGroup = {};
+        provinceGroup = {};
+        typeGroup = {};
+        gradeGroup = {};
+
+        listArr = {};
         setTimeout(function() {
             var datas = callAjax("{{_context_path}}/api/release/floorValue/getFloorValue", "post", {
-                auction: auction,
-                projectId: projectId,
-                provinceId: provinceId,
-                typeId: typeId,
-                gradeId: gradeId
+                auction: auction
             }, "json");
             if (typeof datas !== "undefined" && datas !== null) {
-                dataPublic = datas["lists"];
-                projectGroup = datas["project"];
-                provinceGroup = datas["province"];
-                typeGroup = datas["type"];
-                gradeGroup = datas["grade"];
+                var lastSilo = null;
+                var lastAsso = null;
+                var tempKey = 1;
+                var tempKeySub = 0;
+                $.each(datas["lists"], function(key, value){
+                    var silo = value["Silo"];
+                    var asso = value["Associate"];
+                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                        tempKey++;
+                        tempKeySub = 0;
+                    }
+                    lastSilo = silo;
+                    lastAsso = asso;
 
-                writebody(input);
+                    var id = tempKey+'.'+(++tempKeySub);
+                    value["Id"] = id;
+
+                    listArr[value["Id"]] = value;
+
+                    dataPublic.push(value);
+                    projectGroup[value["Project"]] = value["Project"];
+                    provinceGroup[value["Province"]] = value["Province"];
+                    typeGroup[value["riceType"]] = value["riceType"];
+                    gradeGroup[value["Grade"]] = value["Grade"];
+                });
+                writebody();
             }
         }, 0);
     }
@@ -335,199 +337,673 @@
         return d;
     }
 
-    function writebody(type) {
-        var html2 = '';
-        var html3 = '';
-        var html4 = '';
-        var html234 = "";
-        var tempSilo = "";
-        var tempKey = 1;
-        var tempKeySub = 0;
-        var tempWeight = 0;
-        var tempFP2 = 0;
-        var tempFP3 = 0;
-        var tempFP4 = 0;
-        var tempFV2 = 0;
-        var tempFV3 = 0;
-        var tempFV4 = 0;
-        var i = 0;
-
-        $.each(dataPublic, function (key, datas) {
-            if (tempSilo != datas.Silo && tempSilo != "") {
-                html2 += '<tr>'
-                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
-                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP2, 11, ",", ".") + '">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV2, 11, ",", ".") + '">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
-                    + '</tr>';
-
-                html3 += '<tr>'
-                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
-                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP3, 11, ",", ".") + '">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV3, 11, ",", ".") + '">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
-                    + '</tr>';
-
-                html4 += '<tr>'
-                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
-                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP4, 11, ",", ".") + '">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV4, 11, ",", ".") + '">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
-                    + '</tr>';
-
-                html234 += '<tr>'
-                        + '<td class="text-bold text-center" colspan="10">รวม</td>'
-                        + '<td class="text-bold">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP2, 11, ",", ".") + '">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV2, 11, ",", ".") + '">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP3, 11, ",", ".") + '">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV3, 11, ",", ".") + '">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFP4, 11, ",", ".") + '">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
-                        + '<td class="text-bold" title="' + accounting.formatNumber(tempFV4, 11, ",", ".") + '">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
-                    + '</tr>';
-
-                tempWeight = 0;
-                tempFP2 = 0;
-                tempFV2 = 0;
-                tempFP3 = 0;
-                tempFV3 = 0;
-                tempFP4 = 0;
-                tempFV4 = 0;
-                tempKey++;
-                tempKeySub = 0;
-
-            }
-
-            html2 += '<tr>'
-                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
-                    + '<td>' + datas.Province + '</td>'
-                    + '<td>' + datas.Project + '</td>'
-                    + '<td>' + datas.Round + '</td>'
-                    + '<td>' + datas.Silo + '</td>'
-                    + '<td>' + datas.Associate + '</td>'
-                    + '<td>' + datas.riceType + '</td>'
-                    + '<td>' + datas.Warehouse + '</td>'
-                    + '<td>' + datas.Stack + '</td>'
-                    + '<td>' + datas.Grade + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FP2, 2, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FV2, 2, ",", ".") + '</td>'
-                + '</tr>';
-
-            html3 += '<tr>'
-                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
-                    + '<td>' + datas.Province + '</td>'
-                    + '<td>' + datas.Project + '</td>'
-                    + '<td>' + datas.Round + '</td>'
-                    + '<td>' + datas.Silo + '</td>'
-                    + '<td>' + datas.Associate + '</td>'
-                    + '<td>' + datas.riceType + '</td>'
-                    + '<td>' + datas.Warehouse + '</td>'
-                    + '<td>' + datas.Stack + '</td>'
-                    + '<td>' + datas.Grade + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FP3, 2, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FV3, 2, ",", ".") + '</td>'
-                + '</tr>';
-
-            html4 += '<tr>'
-                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
-                    + '<td>' + datas.Province + '</td>'
-                    + '<td>' + datas.Project + '</td>'
-                    + '<td>' + datas.Round + '</td>'
-                    + '<td>' + datas.Silo + '</td>'
-                    + '<td>' + datas.Associate + '</td>'
-                    + '<td>' + datas.riceType + '</td>'
-                    + '<td>' + datas.Warehouse + '</td>'
-                    + '<td>' + datas.Stack + '</td>'
-                    + '<td>' + datas.Grade + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FP4, 2, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FV4, 2, ",", ".") + '</td>'
-                + '</tr>';
-
-            html234 += '<tr>'
-                    + '<td class="text-center">' + tempKey + '.' + (tempKeySub + 1) + '</td>'
-                    + '<td>' + datas.Province + '</td>'
-                    + '<td>' + datas.Project + '</td>'
-                    + '<td>' + datas.Round + '</td>'
-                    + '<td>' + datas.Silo + '</td>'
-                    + '<td>' + datas.Associate + '</td>'
-                    + '<td>' + datas.riceType + '</td>'
-                    + '<td>' + datas.Warehouse + '</td>'
-                    + '<td>' + datas.Stack + '</td>'
-                    + '<td>' + datas.Grade + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FP2, 2, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FV2, 2, ",", ".") + '</td>'
-
-                    + '<td>' + accounting.formatNumber(datas.FP3, 2, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FV3, 2, ",", ".") + '</td>'
-
-                    + '<td>' + accounting.formatNumber(datas.FP4, 2, ",", ".") + '</td>'
-                    + '<td>' + accounting.formatNumber(datas.FV4, 2, ",", ".") + '</td>'
-                + '</tr>';
-
-            tempSilo = datas.Silo;
-            tempWeight = tempWeight + parseFloat(datas.Weight_All);
-            tempFP2 = tempFP2 + parseFloat(datas.FP2);
-            tempFV2 = tempFV2 + parseFloat(datas.FV2);
-            tempFP3 = tempFP3 + parseFloat(datas.FP3);
-            tempFV3 = tempFV3 + parseFloat(datas.FV3);
-            tempFP4 = tempFP4 + parseFloat(datas.FP4);
-            tempFV4 = tempFV4 + parseFloat(datas.FV4);
-            tempKeySub++;
-
-        });
-        $("#fv2 table tbody").html(html2);
-        $("#fv3 table tbody").html(html3);
-        $("#fv4 table tbody").html(html4);
-        $("#fv234 table tbody").html(html234);
-
-        //  if(type!=1){
-        var pj = $("#select_project").val();
-        $("#select_project").empty();
-        $("#select_project").append("<option value='0'>เลือกทั้งหมด</option>");
-        $.each(projectGroup, function (key, value) {
-            if (pj == key) {
-                $("#select_project").append("<option value='" + key + "' selected>" + value + "</option>");
-            } else {
-                $("#select_project").append("<option value='" + key + "'>" + value + "</option>");
-            }
+    function writebody() {
+        $("#searchProject").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(projectGroup, function(key, value){
+            $("#searchProject").append('<option value="'+value+'">'+value+'</option>');
         });
 
-        pj = $("#select_province").val();
-        $("#select_province").empty();
-        $("#select_province").append("<option value='0'>เลือกทั้งหมด</option>");
-        $.each(provinceGroup, function (key, value) {
-            if (pj == key) {
-                $("#select_province").append("<option value='" + key + "' selected>" + value + "</option>");
-            } else {
-                $("#select_province").append("<option value='" + key + "'>" + value + "</option>");
-            }
-        });
-        //  }
-        pj = $("#select_type").val();
-        $("#select_type").empty();
-        $("#select_type").append("<option value='0'>เลือกทั้งหมด</option>");
-        $.each(typeGroup, function (key, value) {
-            if (pj == key) {
-                $("#select_type").append("<option value='" + key + "' selected>" + value + "</option>");
-            } else {
-                $("#select_type").append("<option value='" + key + "'>" + value + "</option>");
-            }
+        $("#searchProvince").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(provinceGroup, function(key, value){
+            $("#searchProvince").append('<option value="'+value+'">'+value+'</option>');
         });
 
-        pj = $("#select_grade").val();
-        $("#select_grade").empty();
-        $("#select_grade").append("<option value='0'>เลือกทั้งหมด</option>");
-        $.each(gradeGroup, function (key, value) {
-            if (pj == key) {
-                $("#select_grade").append("<option value='" + key + "' selected>" + value + "</option>");
-            } else {
-                $("#select_grade").append("<option value='" + key + "'>" + value + "</option>");
-            }
+        $("#searchType").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(typeGroup, function(key, value){
+            $("#searchType").append('<option value="'+value+'">'+value+'</option>');
         });
+
+        $("#searchGrade").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(gradeGroup, function(key, value){
+            $("#searchGrade").append('<option value="'+value+'">'+value+'</option>');
+        });
+
+        $("#searchProject, #searchProvince, #searchType, #searchGrade").select2();
+
+        var t2 = $("#fv2 table").DataTable( {
+            "destroy": true,
+            "bSort": false,
+            "paging": false,
+            "data": dataPublic,
+            "iDisplayLength": 50,
+            "drawCallback": function ( oSettings ) {
+                var api = this.api();
+                var rows = api.rows({page:'current'}).nodes();
+                var lastSilo = null;
+                var lastAsso = null;
+
+                var count = 0;
+                var tempWeight = 0;
+                var tempFP2 = 0;
+                var tempFV2 = 0;
+                api.column(0, {page:'current'}).data().each(function(group, i){
+                    var silo = listArr[group]["Silo"];
+                    var asso = listArr[group]["Associate"];
+
+                    count++;
+                    console.log(count+' '+Object.keys(listArr).length);
+
+                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                        $(rows).eq(i).before('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                                + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP2 = 0;
+                        tempFV2 = 0;
+                    }
+                    else if (count == Object.keys(listArr).length) {
+                        $(rows).eq(i).after('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                                + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP2 = 0;
+                        tempFV2 = 0;
+                    }
+
+
+                    lastSilo = silo;
+                    lastAsso = asso;
+
+                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempFP2 += parseFloat(listArr[group]["FP2"]);
+                    tempFV2 += parseFloat(listArr[group]["FV2"]);
+                });
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Id",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province"
+                },
+                {
+                    "targets": 2,
+                    "data": "Project"
+                },
+                {
+                    "targets": 3,
+                    "data": "Round",
+                    "sClass": "text-center",
+                    "render": function(data){
+                        return checkZero(data);
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 5,
+                    "data": "Associate",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 6,
+                    "data": "riceType"
+                },
+                {
+                    "targets": 7,
+                    "data": "Warehouse",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 8,
+                    "data": "Stack",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 9,
+                    "data": "Grade",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 10,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 11,
+                    "data": "FP2",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 12,
+                    "data": "FV2",
+                    "sClass": "text-right col-md-1 text-bold",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                }
+            ]
+        });
+
+        var t3 = $("#fv3 table").DataTable( {
+            "destroy": true,
+            "bSort": false,
+            "paging": false,
+            "data": dataPublic,
+            "iDisplayLength": 50,
+            "drawCallback": function ( oSettings ) {
+                var api = this.api();
+                var rows = api.rows({page:'current'}).nodes();
+                var lastSilo = null;
+                var lastAsso = null;
+
+                var count = 0;
+                var tempWeight = 0;
+                var tempFP3 = 0;
+                var tempFV3 = 0;
+                api.column(0, {page:'current'}).data().each(function(group, i){
+                    var silo = listArr[group]["Silo"];
+                    var asso = listArr[group]["Associate"];
+
+                    count++;
+                    console.log(count+' '+Object.keys(listArr).length);
+
+                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                        $(rows).eq(i).before('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                            + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP3 = 0;
+                        tempFV3 = 0;
+                    }
+                    else if (count == Object.keys(listArr).length) {
+                        $(rows).eq(i).after('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                                + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP3 = 0;
+                        tempFV3 = 0;
+                    }
+
+
+                    lastSilo = silo;
+                    lastAsso = asso;
+
+                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempFP3 += parseFloat(listArr[group]["FP3"]);
+                    tempFV3 += parseFloat(listArr[group]["FV3"]);
+                });
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Id",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province"
+                },
+                {
+                    "targets": 2,
+                    "data": "Project"
+                },
+                {
+                    "targets": 3,
+                    "data": "Round",
+                    "sClass": "text-center",
+                    "render": function(data){
+                        return checkZero(data);
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 5,
+                    "data": "Associate",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 6,
+                    "data": "riceType"
+                },
+                {
+                    "targets": 7,
+                    "data": "Warehouse",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 8,
+                    "data": "Stack",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 9,
+                    "data": "Grade",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 10,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 11,
+                    "data": "FP3",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 12,
+                    "data": "FV3",
+                    "sClass": "text-right col-md-1 text-bold",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                }
+            ]
+        });
+
+        var t4 = $("#fv4 table").DataTable( {
+            "destroy": true,
+            "bSort": false,
+            "paging": false,
+            "data": dataPublic,
+            "iDisplayLength": 50,
+            "drawCallback": function ( oSettings ) {
+                var api = this.api();
+                var rows = api.rows({page:'current'}).nodes();
+                var lastSilo = null;
+                var lastAsso = null;
+
+                var count = 0;
+                var tempWeight = 0;
+                var tempFP4 = 0;
+                var tempFV4 = 0;
+                api.column(0, {page:'current'}).data().each(function(group, i){
+                    var silo = listArr[group]["Silo"];
+                    var asso = listArr[group]["Associate"];
+
+                    count++;
+                    console.log(count+' '+Object.keys(listArr).length);
+
+                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                        $(rows).eq(i).before('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                                + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP4 = 0;
+                        tempFV4 = 0;
+                    }
+                    else if (count == Object.keys(listArr).length) {
+                        $(rows).eq(i).after('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                            + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP4 = 0;
+                        tempFV4 = 0;
+                    }
+
+
+                    lastSilo = silo;
+                    lastAsso = asso;
+
+                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempFP4 += parseFloat(listArr[group]["FP4"]);
+                    tempFV4 += parseFloat(listArr[group]["FV4"]);
+                });
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Id",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province"
+                },
+                {
+                    "targets": 2,
+                    "data": "Project"
+                },
+                {
+                    "targets": 3,
+                    "data": "Round",
+                    "sClass": "text-center",
+                    "render": function(data){
+                        return checkZero(data);
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 5,
+                    "data": "Associate",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 6,
+                    "data": "riceType"
+                },
+                {
+                    "targets": 7,
+                    "data": "Warehouse",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 8,
+                    "data": "Stack",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 9,
+                    "data": "Grade",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 10,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 11,
+                    "data": "FP4",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 12,
+                    "data": "FV4",
+                    "sClass": "text-right col-md-1 text-bold",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                }
+            ]
+        });
+
+        var t234 = $("#fv234 table").DataTable( {
+            "destroy": true,
+            "bSort": false,
+            "paging": false,
+            "data": dataPublic,
+            "iDisplayLength": 50,
+            "drawCallback": function ( oSettings ) {
+                var api = this.api();
+                var rows = api.rows({page:'current'}).nodes();
+                var lastSilo = null;
+                var lastAsso = null;
+
+                var count = 0;
+                var tempWeight = 0;
+                var tempFP2 = 0;
+                var tempFV2 = 0;
+                var tempFP3 = 0;
+                var tempFV3 = 0;
+                var tempFP4 = 0;
+                var tempFV4 = 0;
+                api.column(0, {page:'current'}).data().each(function(group, i){
+                    var silo = listArr[group]["Silo"];
+                    var asso = listArr[group]["Associate"];
+
+                    count++;
+                    console.log(count+' '+Object.keys(listArr).length);
+
+                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                        $(rows).eq(i).before('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                            + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP2 = 0;
+                        tempFV2 = 0;
+                        tempFP3 = 0;
+                        tempFV3 = 0;
+                        tempFP4 = 0;
+                        tempFV4 = 0;
+
+                    }
+                    else if (count == Object.keys(listArr).length) {
+                        $(rows).eq(i).after('<tr>'
+                                + '<td class="text-bold text-center">รวม</td>'
+                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                            + '</tr>'
+                        );
+                        tempWeight = 0;
+                        tempFP2 = 0;
+                        tempFV2 = 0;
+                        tempFP3 = 0;
+                        tempFV3 = 0;
+                        tempFP4 = 0;
+                        tempFV4 = 0;
+                    }
+
+
+                    lastSilo = silo;
+                    lastAsso = asso;
+
+                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempFP2 += parseFloat(listArr[group]["FP2"]);
+                    tempFV2 += parseFloat(listArr[group]["FV2"]);
+                    tempFP3 += parseFloat(listArr[group]["FP3"]);
+                    tempFV3 += parseFloat(listArr[group]["FV3"]);
+                    tempFP4 += parseFloat(listArr[group]["FP4"]);
+                    tempFV4 += parseFloat(listArr[group]["FV4"]);
+                });
+            },
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Id",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province"
+                },
+                {
+                    "targets": 2,
+                    "data": "Project"
+                },
+                {
+                    "targets": 3,
+                    "data": "Round",
+                    "sClass": "text-center",
+                    "render": function(data){
+                        return checkZero(data);
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 5,
+                    "data": "Associate",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 6,
+                    "data": "riceType"
+                },
+                {
+                    "targets": 7,
+                    "data": "Warehouse",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 8,
+                    "data": "Stack",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 9,
+                    "data": "Grade",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 10,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 11,
+                    "data": "FP2",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 12,
+                    "data": "FV2",
+                    "sClass": "text-right col-md-1 text-bold",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 13,
+                    "data": "FP3",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 14,
+                    "data": "FV3",
+                    "sClass": "text-right col-md-1 text-bold",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 15,
+                    "data": "FP4",
+                    "sClass": "text-right col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 16,
+                    "data": "FV4",
+                    "sClass": "text-right col-md-1 text-bold",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                }
+            ]
+        });
+
+        $("#searchProject").change(function() {
+            t2.columns(2).search(this.value).draw();
+            t3.columns(2).search(this.value).draw();
+            t4.columns(2).search(this.value).draw();
+        });
+
+        $("#searchProvince").change(function() {
+            t2.columns(1).search(this.value).draw();
+            t3.columns(1).search(this.value).draw();
+            t4.columns(1).search(this.value).draw();
+        });
+
+        $("#searchType").change(function() {
+            t2.columns(6).search(this.value).draw();
+            t3.columns(6).search(this.value).draw();
+            t4.columns(6).search(this.value).draw();
+        });
+
+        $("#searchGrade").change(function() {
+            t2.columns(9).search(this.value).draw();
+            t3.columns(9).search(this.value).draw();
+            t4.columns(9).search(this.value).draw();
+        });
+    }
+
+    function checkZero(input){
+        var output = '';
+        if(input == 0){
+            output = '-';
+        }
+        else{
+            output = input
+        }
+
+        return output;
     }
 
 </script>
