@@ -21,12 +21,8 @@ interface IFloorPriceService {
      * @param Date stopDate Description
      * @param Date startDate Description
      * @param Date endDate Description
-     * @param String projectId Description
-     * @param String provinceId Description
-     * @param String typeId Description
-     * @param String gradeId Description
      * @return FloorPrice[] lists Description
      * @description hello
      */
-    public function getFloorPrice($stopDate,$startDate,$endDate,$projectId,$provinceId,$typeId,$gradeId);
+    public function getFloorPrice($stopDate,$startDate,$endDate);
 } 

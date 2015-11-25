@@ -27,21 +27,21 @@ class FloorPriceService extends CServiceBase implements IFloorPriceService {
         return $data;
     }
 
-    public function getFloorPrice($stopDate,$startDate,$endDate,$projectId,$provinceId,$typeId,$gradeId) {
+    public function getFloorPrice($stopDate,$startDate,$endDate) {
         $sql = "EXEC sp_floor_price :stopDate, :startDate, :endDate, :projectId, :provinceId, :typeId, :gradeId";
         $param = array(
             "stopDate" => $stopDate,
             "startDate" => $startDate,
             "endDate" => $endDate,
-            "projectId" => $projectId,
-            "provinceId" => $provinceId,
-            "typeId" => $typeId,
-            "gradeId" => $gradeId
+            "projectId" => 0,
+            "provinceId" => 0,
+            "typeId" => 0,
+            "gradeId" => 0
         );
 
         $result = $this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\FloorValue2");
 
-        $provk=array();
+        /*$provk=array();
         //$provs=array();
 
         $typek=array();
@@ -77,12 +77,12 @@ class FloorPriceService extends CServiceBase implements IFloorPriceService {
                 $prj[$pjid]=$result[$i]->Project;
                 //$grades[]=$result[$i];
             }
-        }
+        }*/
 
-        $this->getResponse()->add("project", $prj);
-        $this->getResponse()->add("province",$provk);
-        $this->getResponse()->add("type",$typek);
-        $this->getResponse()->add("grade",$gradek);
+        //$this->getResponse()->add("project", $prj);
+        //$this->getResponse()->add("province",$provk);
+        //$this->getResponse()->add("type",$typek);
+        //$this->getResponse()->add("grade",$gradek);
         return $result;
     }
 
