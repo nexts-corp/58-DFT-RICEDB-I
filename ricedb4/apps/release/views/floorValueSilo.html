@@ -47,17 +47,13 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4 control-label text-right">{{#i18n}}release.project{{/i18n}} :</label>
                     <div class="col-sm-8">
-                        <select id="select_project" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
-                        </select>
+                        <select id="searchProject" class="form-control"></select>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4 control-label text-right">{{#i18n}}release.province{{/i18n}} :</label>
                     <div class="col-sm-8">
-                        <select id="select_province" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
-                        </select>
+                        <select id="searchProvince" class="form-control"></select>
                     </div>
                 </div>
             </div>
@@ -65,21 +61,15 @@
                 <div class="col-sm-6">
                     <label class="col-sm-4 control-label text-right">{{#i18n}}release.type{{/i18n}} :</label>
                     <div class="col-sm-8">
-                        <select id="select_type" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
-                        </select>
+                        <select id="searchType" class="form-control"></select>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <label class="col-sm-4 control-label text-right">{{#i18n}}release.grade{{/i18n}} :</label>
                     <div class="col-sm-8">
-                        <select id="select_grade" class="form-control">
-                            <option value="0">เลือกทั้งหมด</option>
-                        </select>
+                        <select id="searchGrade" class="form-control"></select>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="row">
@@ -195,25 +185,27 @@
 {{>footer}}
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        var dataPublic;
-        var dataFilter;
-        var projectGroup;
-        var provinceGroup;
-        var typeGroup;
-        var gradeGroup;
-        $.ajax({
-            url: "{{_context_path}}/api/release/floorValue/listsAuction",
-            type: "post",
-            async: false,
-            success: function (data) {
-                var html = '<option value="">เลือกครั้งการประมูล</option>';
-                $.each(data["lists"], function (key, val) {
-                    html += '<option value="' + val.keyword + '">ประมูลครั้งที่ ' + val.status + '</option>';
-                });
-                $("#auction").html(html);
-            }
-        });
+    var dataPublic;
+    var dataFilter;
+    var projectGroup;
+    var provinceGroup;
+    var typeGroup;
+    var gradeGroup;
+
+    $(function () {
+        listsAuction();
+    });
+    function listsAuction() {
+        var datas = callAjax("{{_context_path}}/api/release/floorValue/listsAuction", "post", {}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            var html = '<option value="">เลือก</option>';
+            $.each(datas["lists"], function (key, val) {
+                html += '<option value="' + val.keyword + '">' + val.status + '</option>';
+            });
+            $("#auction").html(html).select2();
+        }
+    }
+
 
         $("#dateFP").datepicker({
             format: "yyyy-mm-dd",

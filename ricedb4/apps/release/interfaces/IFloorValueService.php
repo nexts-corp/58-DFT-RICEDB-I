@@ -28,12 +28,8 @@ interface IFloorValueService {
      * @name getFloorValueSilo
      * @uri /getFloorValueSilo
      * @param String auction Description
-     * @param String projectId Description
-     * @param String provinceId Description
-     * @param String typeId Description
-     * @param String gradeId Description
      * @return FloorValue[] lists Description
      * @description hello
      */
-    public function getFloorValueSilo($auction,$projectId,$provinceId,$typeId,$gradeId);
+    public function getFloorValueSilo($auction);
 } 

@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="863593ba-7750-4ad6-8a1c-04b49bd87cc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/service/FloorPriceService.php" afterPath="$PROJECT_DIR$/apps/release/service/FloorPriceService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/service/FloorValueService.php" afterPath="$PROJECT_DIR$/apps/release/service/FloorValueService.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/interfaces/IFloorValueService.php" afterPath="$PROJECT_DIR$/apps/release/interfaces/IFloorValueService.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/views/floorPrice.html" afterPath="$PROJECT_DIR$/apps/release/views/floorPrice.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/views/floorValue.html" afterPath="$PROJECT_DIR$/apps/release/views/floorValue.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/release/views/floorValueSilo.html" afterPath="$PROJECT_DIR$/apps/release/views/floorValueSilo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ricedb4.iws" />
@@ -34,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="floorValue.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="floorValue.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/release/views/floorValue.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.8041775">
-              <caret line="992" column="24" selection-start-line="992" selection-start-column="24" selection-end-line="992" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="262" column="5" selection-start-line="253" selection-start-column="4" selection-end-line="262" selection-end-column="5" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -109,28 +107,28 @@
       <file leaf-file-name="IFloorValueService.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/release/interfaces/IFloorValueService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.0">
-              <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FloorValueService.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="floorValueSilo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/apps/release/views/floorValueSilo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FloorValueService.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apps/release/service/FloorValueService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.230769">
-              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FloorPriceService.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/apps/release/service/FloorPriceService.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.153847">
-              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.1409922">
+              <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -139,7 +137,7 @@
       <file leaf-file-name="floorPrice.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/release/views/floorPrice.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.461538">
+            <state vertical-scroll-proportion="0.0">
               <caret line="614" column="11" selection-start-line="592" selection-start-column="8" selection-end-line="614" selection-end-column="11" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -173,7 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/apps/home/interfaces/IWidgetService.php" />
         <option value="$PROJECT_DIR$/views/home.html" />
         <option value="$PROJECT_DIR$/apps/tracking/interfaces/IApproveAuctionService.php" />
         <option value="$PROJECT_DIR$/apps/tracking/i18n/lang_th_TH.ini" />
@@ -220,10 +217,11 @@
         <option value="$PROJECT_DIR$/apps/warehouse/views/warehouseImport.html" />
         <option value="$PROJECT_DIR$/apps/release/interfaces/IFloorPriceService.php" />
         <option value="$PROJECT_DIR$/apps/release/views/floorPrice.html" />
-        <option value="$PROJECT_DIR$/apps/release/interfaces/IFloorValueService.php" />
         <option value="$PROJECT_DIR$/apps/release/service/FloorPriceService.php" />
-        <option value="$PROJECT_DIR$/apps/release/service/FloorValueService.php" />
         <option value="$PROJECT_DIR$/apps/release/views/floorValue.html" />
+        <option value="$PROJECT_DIR$/apps/release/service/FloorValueService.php" />
+        <option value="$PROJECT_DIR$/apps/release/interfaces/IFloorValueService.php" />
+        <option value="$PROJECT_DIR$/apps/release/views/floorValueSilo.html" />
       </list>
     </option>
   </component>
@@ -315,6 +313,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -563,8 +563,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -922,7 +920,6 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25437203" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32713178" sideWeight="0.50317967" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32142857" sideWeight="0.49682036" order="10" side_tool="false" content_ui="tabs" />
@@ -930,6 +927,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -976,7 +974,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="เพิ่ม Follow Menu" />
     <MESSAGE value="warehouseInfo completed" />
     <MESSAGE value="userManager &amp; warehouseInfo was completed" />
     <MESSAGE value="warehouseImport was completed" />
@@ -1001,7 +998,8 @@
     <MESSAGE value="ราคาข้าว" />
     <MESSAGE value="floorValue" />
     <MESSAGE value="floorPrice =&gt; dataTable" />
-    <option name="LAST_COMMIT_MESSAGE" value="floorPrice =&gt; dataTable" />
+    <MESSAGE value="floorValue =&gt; dataTable" />
+    <option name="LAST_COMMIT_MESSAGE" value="floorValue =&gt; dataTable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1264,7 +1262,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.115385">
           <caret line="47" column="54" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1279,7 +1276,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2692308">
           <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="64" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1294,7 +1290,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.2692308">
           <caret line="93" column="0" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1302,7 +1297,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.384615">
           <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1310,7 +1304,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-28.127274">
           <caret line="766" column="11" selection-start-line="759" selection-start-column="8" selection-end-line="766" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1318,23 +1311,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41396105">
           <caret line="177" column="7" selection-start-line="177" selection-start-column="7" selection-end-line="177" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/release/views/floorValueSilo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.964407">
-          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/apps/release/interfaces/IFloorValueService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.0">
-          <caret line="20" column="40" selection-start-line="20" selection-start-column="40" selection-end-line="20" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1346,28 +1322,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/apps/release/service/FloorValueService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.230769">
-          <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/asset/js/common.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.719156">
           <caret line="171" column="30" selection-start-line="171" selection-start-column="30" selection-end-line="171" selection-end-column="30" />
-          <folding>
-            <marker date="1448254594606" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1448254594606" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/release/interfaces/IFloorValueService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="25" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/release/views/floorPrice.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.461538">
+        <state vertical-scroll-proportion="0.0">
           <caret line="614" column="11" selection-start-line="592" selection-start-column="8" selection-end-line="614" selection-end-column="11" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1379,8 +1351,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apps/release/views/floorValue.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.8041775">
-          <caret line="992" column="24" selection-start-line="992" selection-start-column="24" selection-end-line="992" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="262" column="5" selection-start-line="253" selection-start-column="4" selection-end-line="262" selection-end-column="5" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -1444,6 +1416,22 @@
             <element signature="n#style#0;n#th#15;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#th#16;n#tr#0;n#thead#0;n#table#0;n#div#3;n#div#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/release/views/floorValueSilo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/apps/release/service/FloorValueService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1409922">
+          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
