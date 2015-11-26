@@ -85,6 +85,9 @@ class BidderHistory extends EntityBase {
     /** @Column(type="string",length=255, name="Remark_Factory3") */
     public $remarkFactory3;
 
+    /** @Column(type="string", name="Attachment") */
+    public $attachment;
+
     function getId() {
         return $this->id;
     }
@@ -185,6 +188,10 @@ class BidderHistory extends EntityBase {
         return $this->remarkFactory3;
     }
 
+    function getAttachment(){
+        return $this->attachment;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
@@ -283,5 +290,9 @@ class BidderHistory extends EntityBase {
 
     function setRemarkFactory3($remarkFactory3){
         $this->remarkFactory3 = $remarkFactory3;
+    }
+
+    function setAttachment($attachment){
+        $this->attachment = $attachment;
     }
 }
