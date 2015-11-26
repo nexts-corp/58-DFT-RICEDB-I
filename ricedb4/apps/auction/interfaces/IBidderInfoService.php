@@ -10,6 +10,16 @@ namespace apps\auction\interfaces;
 interface IBidderInfoService {
 
     /**
+     * @name listsBidderType
+     * @uri /listsBidderType
+     * @return String[] lists Description
+     * @description ประเภทผู้เสนอซื้อ
+     * @authen true
+     * @resource 1111
+     */
+    public function listsBidderType();
+
+    /**
      * @name listsRegister
      * @uri /listsRegister
      * @return String[] lists Description

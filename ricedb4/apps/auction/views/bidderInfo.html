@@ -199,31 +199,81 @@
 
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">{{#i18n}}auction.bidderType{{/i18n}} :</label>
-                                    <div class="col-md-6">
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" data-entity="info" name="typeBiz" id="typeBiz1" value="1" checked>
-                                                {{#i18n}}auction.corporation{{/i18n}}
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" data-entity="info" name="typeBiz" id="typeBiz2" value="2">
-                                                {{#i18n}}auction.enterprise{{/i18n}}
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" data-entity="info" name="typeBiz" id="typeBiz3" value="3">
-                                                {{#i18n}}auction.cooperative{{/i18n}}
-                                            </label>
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                                <input type="radio" data-entity="info" name="typeBiz" id="typeBiz4" value="4">
-                                                {{#i18n}}auction.personal{{/i18n}}
-                                            </label>
-                                        </div>
+                                    <div class="col-md-6" id="listsBidderType"></div>
+                                    <div class="col-md-6 col-md-offset-3" id="showOptional">
+                                        <!--<div class="col-md-12" style="border: 1px solid #cccccc; padding-bottom: 20px;">
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>
+                                                <div class="col-md-6">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_1" value="Y" checked>
+                                                            <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_2" value="N">
+                                                            <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                                    <label id="remarkFactoryLabel1" class="col-md-5 control-label" for="remarkFactory1">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory1" id="remarkFactory1">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>
+                                                <div class="col-md-6">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_1" value="Y" checked>
+                                                            <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_2" value="N">
+                                                            <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                                    <label id="remarkFactoryLabel2" class="col-md-5 control-label" for="remarkFactory2">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory2" id="remarkFactory2">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>
+                                                <div class="col-md-6">
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_1" value="Y" checked>
+                                                            <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_2" value="N">
+                                                            <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                                    <label id="remarkFactoryLabel3" class="col-md-5 control-label" for="remarkFactory3">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory3" id="remarkFactory3">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -475,6 +525,7 @@
 {{>footer}}
 <script type="text/javascript">
     var listArr = [];
+    var callBidderType = 0;
 
     $(function(){
         // show bidder info list
@@ -570,6 +621,125 @@
             }
         });
     });
+
+    function listsBidderType(){
+        if(callBidderType == 0){
+            var datas = callAjax("{{_context_path}}/api/auction/bidderInfo/listsBidderType", "post", {}, "json");
+            if(typeof datas !== "undefined" && datas !== null){
+                var html = '';
+                $.each(datas["lists"], function(key, value){
+                    html += '<div class="radio">'
+                            + '<label>'
+                                + '<input type="radio" data-entity="info" name="typeBiz" id="typeBiz'+value["id"]+'" value="'+value["id"]+'" data-option="'+value["optional"]+'">'
+                                + value["typeBiz"]
+                            + '</label>'
+                        + '</div>';
+                });
+
+                $("#listsBidderType").html(html);
+
+                $("input[name=typeBiz]").click(function(){
+                    var option = $(this).attr("data-option");
+                    console.log(option);
+
+
+                    var htmlSub = '';
+                    if(option == 1){
+                        htmlSub = '<div class="col-md-12" style="border: 1px solid #cccccc; padding-bottom: 20px;">'
+                                + '<div class="form-group">'
+                                    + '<label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>'
+                                    + '<div class="col-md-6">'
+                                        + '<div class="radio">'
+                                            + '<label>'
+                                                + '<input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_1" value="Y" checked>'
+                                                + '<i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}'
+                                            + '</label>'
+                                        + '</div>'
+                                        + '<div class="radio">'
+                                            + '<label>'
+                                                + '<input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_2" value="N">'
+                                                + '<i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}'
+                                            + '</label>'
+                                        + '</div>'
+                                    + '</div>'
+                                    + '<div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">'
+                                        + '<label id="remarkFactoryLabel1" class="col-md-5 control-label" for="remarkFactory1">{{#i18n}}auction.remark{{/i18n}} :</label>'
+                                        + '<div class="col-md-6">'
+                                            + '<input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory1" id="remarkFactory1">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+
+                                + '<div class="form-group">'
+                                    + '<label class="col-md-5 control-label">แผนที่ตั้งโรงงานอุตสาหกรรม :</label>'
+                                    + '<div class="col-md-6">'
+                                        + '<div class="radio">'
+                                            + '<label>'
+                                                + '<input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_1" value="Y" checked>'
+                                                + '<i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}'
+                                            + '</label>'
+                                        + '</div>'
+                                        + '<div class="radio">'
+                                            + '<label>'
+                                                + '<input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_2" value="N">'
+                                                + '<i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}'
+                                            + '</label>'
+                                        + '</div>'
+                                    + '</div>'
+                                    + '<div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">'
+                                        + '<label id="remarkFactoryLabel2" class="col-md-5 control-label" for="remarkFactory2">{{#i18n}}auction.remark{{/i18n}} :</label>'
+                                        + '<div class="col-md-6">'
+                                            + '<input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory2" id="remarkFactory2">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+
+                                + '<div class="form-group">'
+                                    + '<label class="col-md-5 control-label">หนังสือรับรองการนำข้าวไปใช้ในอุตสาหกรรม :</label>'
+                                    + '<div class="col-md-6">'
+                                        + '<div class="radio">'
+                                            + '<label>'
+                                                + '<input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_1" value="Y" checked>'
+                                                + '<i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}'
+                                            + '</label>'
+                                        + '</div>'
+                                        + '<div class="radio">'
+                                            + '<label>'
+                                                + '<input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_2" value="N">'
+                                                + '<i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}'
+                                            + '</label>'
+                                        + '</div>'
+                                    + '</div>'
+                                    + '<div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">'
+                                        + '<label id="remarkFactoryLabel3" class="col-md-5 control-label" for="remarkFactory3">{{#i18n}}auction.remark{{/i18n}} :</label>'
+                                        + '<div class="col-md-6">'
+                                            + '<input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory3" id="remarkFactory3">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>';
+                    }
+
+                    $("#showOptional").html(htmlSub);
+
+                    // when you select remark factory control
+                    $("input.remarkFactoryControl").click(function(){
+                        var remarkId = $(this).attr("name").replace("propertyFactory", "");
+                        if($(this).val() == "Y"){
+                            $("#remarkFactoryLabel"+remarkId).removeClass("req");
+                            $("#remarkFactory"+remarkId).prop("required", false).val("");
+                        }
+                        else{
+                            $("#remarkFactoryLabel"+remarkId).addClass("req");
+                            $("#remarkFactory"+remarkId).prop("required", true).val("");
+                        }
+                    });
+                });
+
+                callBidderType = 1;
+            }
+        }
+    }
 
     function searchBidder(dataJSONEN){
         $("#searching").html("ค้นหาข้อมูล...");
@@ -781,7 +951,16 @@
             $("#mobile").val(value["mobile"]);
             $("#fax").val(value["fax"]);
             $("#email").val(value["email"]);
-            $("input[name=typeBiz][value=" + getTag(value["typeBiz"], "1") + "]").prop('checked', true);
+            $("input[name=typeBiz][value=" + getTag(value["typeBiz"], "1") + "]").prop('checked', true).trigger("click");
+            if($("input[name=typeBiz][type='radio']:checked").attr("data-option") == 1){
+                $("input[name=propertyFactory1][value=" + getTag(value["propertyFactory1"], "N") + "]").prop('checked', true).trigger("click");
+                $("input[name=propertyFactory2][value=" + getTag(value["propertyFactory2"], "N") + "]").prop('checked', true).trigger("click");
+                $("input[name=propertyFactory3][value=" + getTag(value["propertyFactory3"], "N") + "]").prop('checked', true).trigger("click");
+
+                $("#remarkFactory1").val(value["remarkFactory1"]);
+                $("#remarkFactory2").val(value["remarkFactory2"]);
+                $("#remarkFactory3").val(value["remarkFactory3"]);
+            }
 
             $("input[name=property1][value=" + getTag(value["property1"], "N") + "]").prop('checked', true).trigger("click");
             $("input[name=property2][value=" + getTag(value["property2"], "N") + "]").prop('checked', true).trigger("click");
@@ -985,6 +1164,8 @@
 
     function toggleShow(option){
         if(option == "form"){
+            listsBidderType();
+
             $("#bidderForm, #showTable").show();
             $("#bidderTable, #addToTable").hide();
 

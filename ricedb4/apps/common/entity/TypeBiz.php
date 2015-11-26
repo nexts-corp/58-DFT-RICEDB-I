@@ -16,12 +16,19 @@ class TypeBiz extends EntityBase {
     /** @Column(type="string",length=50, name="Type_Biz") */
     public $typeBiz;
 
+    /** @Column(type="integer",length=1, name="Optional") */
+    public $optional;
+
     function getId() {
         return $this->id;
     }
 
     function getTypeBiz() {
         return $this->typeBiz;
+    }
+
+    function getOptional(){
+        return $this->optional;
     }
 
     function setId($id) {
@@ -32,4 +39,7 @@ class TypeBiz extends EntityBase {
         $this->typeBiz = $typeBiz;
     }
 
+    function setOptional($optional){
+        $this->optional = $optional;
+    }
 }

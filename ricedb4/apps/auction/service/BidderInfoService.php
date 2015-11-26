@@ -35,13 +35,25 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         return $data[0];
     }
 
+    public function listsBidderType(){
+        $sql = "SELECT"
+                ." tp.id, tp.typeBiz, tp.optional"
+            ." FROM ".$this->ent."\\TypeBiz tp";
+
+        $data = $this->datacontext->getObject($sql);
+
+        return $data;
+    }
+
     public function listsRegister(){
         //get bidder in now auction
         $sql = "SELECT"
                 ." bi.id as bidderInfoId, bi.taxId, bi.bidderName, bi.fax, bi.email, bi.typeBiz,"
                 ." bh.id as bidderHistoryId, bh.statusKeyword, bh.queue, bh.dateRegister,"
                 ." bh.agentName, bh.agentName2, bh.mobile, bh.property1, bh.remark1, bh.property2, bh.remark2,"
-                ." bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5, bh.checkIn"
+                ." bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5, bh.checkIn,"
+                ." bh.propertyFactory1, bh.remarkFactory1, bh.propertyFactory2, bh.remarkFactory2,"
+                ." bh.propertyFactory3, bh.remarkFactory3"
             ." FROM ".$this->ent."\\BidderHistory bh"
             ." JOIN ".$this->ent."\\BidderInfo bi WITH bh.bidderId = bi.id"
             ." WHERE bh.statusKeyword = :statusKeyword "
@@ -209,6 +221,13 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         $dataHistory[0]->remark4 = $bidderHistory->remark4;
         $dataHistory[0]->property5 = $bidderHistory->property5;
         $dataHistory[0]->remark5 = $bidderHistory->remark5;
+
+        $dataHistory[0]->propertyFactory1 = $bidderHistory->propertyFactory1;
+        $dataHistory[0]->remarkFactory1 = $bidderHistory->remarkFactory1;
+        $dataHistory[0]->propertyFactory2 = $bidderHistory->propertyFactory2;
+        $dataHistory[0]->remarkFactory2 = $bidderHistory->remarkFactory2;
+        $dataHistory[0]->propertyFactory3 = $bidderHistory->propertyFactory3;
+        $dataHistory[0]->remarkFactory3 = $bidderHistory->remarkFactory3;
 
         //update bidder history data
         if (!$this->datacontext->updateObject($dataHistory[0])) {

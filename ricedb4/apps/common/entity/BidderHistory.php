@@ -67,6 +67,24 @@ class BidderHistory extends EntityBase {
     /** @Column(type="string",length=1, name="Check_In") */
     public $checkIn;
 
+    /** @Column(type="string",length=1, name="Property_Factory1") */
+    public $propertyFactory1;
+
+    /** @Column(type="string",length=255, name="Remark_Factory1") */
+    public $remarkFactory1;
+
+    /** @Column(type="string",length=1, name="Property_Factory2") */
+    public $propertyFactory2;
+
+    /** @Column(type="string",length=255, name="Remark_Factory2") */
+    public $remarkFactory2;
+
+    /** @Column(type="string",length=1, name="Property_Factory3") */
+    public $propertyFactory3;
+
+    /** @Column(type="string",length=255, name="Remark_Factory3") */
+    public $remarkFactory3;
+
     function getId() {
         return $this->id;
     }
@@ -143,6 +161,30 @@ class BidderHistory extends EntityBase {
         return $this->checkIn;
     }
 
+    function getPropertyFactory1(){
+        return $this->propertyFactory1;
+    }
+
+    function getRemarkFactory1(){
+        return $this->remarkFactory1;
+    }
+
+    function getPropertyFactory2(){
+        return $this->propertyFactory2;
+    }
+
+    function getRemarkFactory2(){
+        return $this->remarkFactory2;
+    }
+
+    function getPropertyFactory3(){
+        return $this->propertyFactory3;
+    }
+
+    function getRemarkFactory3(){
+        return $this->remarkFactory3;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
@@ -217,5 +259,29 @@ class BidderHistory extends EntityBase {
 
     function setCheckIn($checkIn){
         $this->checkIn = $checkIn;
+    }
+
+    function setPropertyFactory1($propertyFactory1){
+        $this->propertyFactory1 = $propertyFactory1;
+    }
+
+    function setRemarkFactory1($remarkFactory1){
+        $this->remarkFactory1 = $remarkFactory1;
+    }
+
+    function setPropertyFactory2($propertyFactory2){
+        $this->propertyFactory2 = $propertyFactory2;
+    }
+
+    function setRemarkFactory2($remarkFactory2){
+        $this->remarkFactory2 = $remarkFactory2;
+    }
+
+    function setPropertyFactory3($propertyFactory3){
+        $this->propertyFactory3 = $propertyFactory3;
+    }
+
+    function setRemarkFactory3($remarkFactory3){
+        $this->remarkFactory3 = $remarkFactory3;
     }
 }
