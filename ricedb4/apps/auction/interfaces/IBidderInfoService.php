@@ -54,26 +54,29 @@ interface IBidderInfoService {
     /**
      * @name insert
      * @uri /insert
-     * @param apps\common\entity\BidderInfo bidderInfo Description
-     * @param apps\common\entity\BidderHistory bidderHistory Description
+     * @param String[] bidderInfo Description
+     * @param String[] bidderHistory Description
+     * @param file file Description
      * @return boolean add Description
      * @description เพิ่มข้อมูลผู้เสนอราคารายใหม่
      * @authen true
      * @resource 1100
      */
-    public function insert($bidderInfo, $bidderHistory);
+    public function insert($bidderInfo, $bidderHistory, $file);
 
     /**
      * @name update
      * @uri /update
-     * @param apps\common\entity\BidderInfo bidderInfo Description
-     * @param apps\common\entity\BidderHistory bidderHistory Description
+     * @param String[] bidderInfo Description
+     * @param String[] bidderHistory Description
+     * @param file file Description
+     * @param String fileUpload Description
      * @return boolean update Description
      * @description อัพเดทข้อมูลผู้เสนอราคา
      * @authen true
      * @resource 1100
      **/
-    public function update($bidderInfo, $bidderHistory);
+    public function update($bidderInfo, $bidderHistory, $file, $fileUpload);
 
     /**
      * @name delete

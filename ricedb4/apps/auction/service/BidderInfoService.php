@@ -10,6 +10,8 @@ use apps\common\entity\BidderInfo;
 use apps\common\entity\BidderHistory;
 use apps\common\entity\Status;
 
+use th\co\bpg\cde\collection\impl\CJSONDecodeImpl;
+
 class BidderInfoService extends CServiceBase implements IBidderInfoService {
 
     public $datacontext;
@@ -53,7 +55,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
                 ." bh.agentName, bh.agentName2, bh.mobile, bh.property1, bh.remark1, bh.property2, bh.remark2,"
                 ." bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5, bh.checkIn,"
                 ." bh.propertyFactory1, bh.remarkFactory1, bh.propertyFactory2, bh.remarkFactory2,"
-                ." bh.propertyFactory3, bh.remarkFactory3"
+                ." bh.propertyFactory3, bh.remarkFactory3, bh.attachment, bi.typeOptional"
             ." FROM ".$this->ent."\\BidderHistory bh"
             ." JOIN ".$this->ent."\\BidderInfo bi WITH bh.bidderId = bi.id"
             ." WHERE bh.statusKeyword = :statusKeyword "
@@ -109,8 +111,14 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         return $data;
     }
 
-    public function insert($bidderInfo, $bidderHistory){
+    public function insert($bidderInfo, $bidderHistory, $file){
         $return = true;
+
+        $json = new CJSONDecodeImpl();
+        $bidderInfo = $json->decode(new BidderInfo(),json_decode($bidderInfo));
+        $bidderHistory = $json->decode(new BidderHistory(),json_decode($bidderHistory));
+
+        //return $bidderHistory->queue;
 
         $info = new BidderInfo();
         $info->taxId = $bidderInfo->taxId;
@@ -140,15 +148,6 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         $info2->taxId = $bidderInfo->taxId;
         $dataInfo2 = $this->datacontext->getObject($info2);
 
-        /*$history = new BidderHistory();
-        $history->queue = $bidderHistory->queue;
-        $history->statusKeyword = $this->getStatus()->keyword;
-        $dataHistory = $this->datacontext->getObject($history);
-
-        $history->queue = $bidderHistory->queue;
-        $history->statusKeyword = $this->getStatus()->keyword;
-        $dataHistory = $this->datacontext->getObject($history);*/
-
         $sql = "SELECT"
             ." bh"
         ." FROM ".$this->ent."\\BidderHistory bh"
@@ -177,12 +176,43 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
             $return = "คิว/เลขผู้เสียภาษีนี้ได้ถูกบันทึกไปแล้ว";
         }
 
+
+        if($file != ''){
+            $time = date("YmdHis");
+            $target_dir = "apps\\auction\\views\\attachment\\";
+
+            $update = new BidderHistory();
+            $update->statusKeyword = $bidderHistory->statusKeyword;
+            $update->queue = $bidderHistory->queue;
+            $data = $this->datacontext->getObject($update);
+
+            if($file != "undefined") {
+                $target_file = $target_dir . "RS" . $time . "-" . $file["name"];
+                $fileN = "RS" . $time . "-" . $file["name"];
+
+                if (move_uploaded_file($file["tmp_name"], $target_file)) {
+
+                    $data[0]->attachment = $fileN;
+
+                    if (!$this->datacontext->updateObject($data[0])) {
+                        $return = $this->datacontext->getLastMessage();
+                    }
+
+                    $fileReturn = $fileN;
+                }
+            }
+        }
         return $return;
     }
 
-    public function update($bidderInfo, $bidderHistory){
+    public function update($bidderInfo, $bidderHistory, $file, $fileUpload){
         $return = true;
 
+        $json = new CJSONDecodeImpl();
+        $bidderInfo = $json->decode(new BidderInfo(),json_decode($bidderInfo));
+        $bidderHistory = $json->decode(new BidderHistory(),json_decode($bidderHistory));
+
+        //return $bidderHistory->queue;
         $info = new BidderInfo();
         $info->id = $bidderInfo->id;
         $dataInfo = $this->datacontext->getObject($info);
@@ -200,7 +230,6 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
 
         $history = new BidderHistory();
         $history->id = $bidderHistory->id;
-        $history->statusKeyword = $bidderHistory->statusKeyword;
 
         $dataHistory = $this->datacontext->getObject($history);
         $dataHistory[0]->queue = $bidderHistory->queue;
@@ -233,6 +262,48 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         if (!$this->datacontext->updateObject($dataHistory[0])) {
             $return .= $this->datacontext->getLastMessage();
         }
+
+        $hasFile = $dataHistory[0]->attachment;
+        if($fileUpload == "1"){
+            $time = date("YmdHis");
+            $target_dir = "apps\\auction\\views\\attachment\\";
+
+            $update = new BidderHistory();
+            $update->id = $bidderHistory->id;
+            $data = $this->datacontext->getObject($update);
+
+            if ($hasFile != "") {
+                if (file_exists($target_dir . $hasFile)) {
+                    //return $data[0];
+                    unlink($target_dir . $hasFile);
+                    $fileReturn = '';
+
+                    $data[0]->attachment = '';
+
+                    if (!$this->datacontext->updateObject($data[0])) {
+                        $return = $this->datacontext->getLastMessage();
+                    }
+                }
+            }
+
+            if($file !== "undefined") {
+                $target_file = $target_dir . "RS" . $time . "-" . $file["name"];
+                $fileN = "RS" . $time . "-" . $file["name"];
+
+                if (move_uploaded_file($file["tmp_name"], $target_file)) {
+
+
+                    $data[0]->attachment = $fileN;
+
+                    if (!$this->datacontext->updateObject($data[0])) {
+                        $return = $this->datacontext->getLastMessage();
+                    }
+
+                    $fileReturn = $fileN;
+                }
+            }
+        }
+
         return $return;
     }
 
@@ -243,6 +314,9 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         $history->id = $bidderHistory->id;
         $dataHistory = $this->datacontext->getObject($history);
 
+        //return $dataHistory;
+        $hasFile = $dataHistory[0]->attachment;
+
         //delete bidder history
         if (!$this->datacontext->removeObject($dataHistory[0])) {
             $return = $this->datacontext->getLastMessage();
@@ -252,6 +326,14 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         $historyCk->bidderId = $bidderInfo->id;
         $dataHistoryCk = $this->datacontext->getObject($historyCk);
 
+        if ($hasFile != "") {
+            $target_dir = "apps\\auction\\views\\attachment\\";
+
+            if (file_exists($target_dir . $hasFile)) {
+                //return $data[0];
+                unlink($target_dir . $hasFile);
+            }
+        }
         //check if count row's bidder history is 0
         if(count($dataHistoryCk) == 0){
             $info = new BidderInfo();
@@ -280,9 +362,6 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         }
         return $return;
     }
-    
-
-
 }
 
 ?>

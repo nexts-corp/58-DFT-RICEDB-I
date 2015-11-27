@@ -201,79 +201,6 @@
                                     <label class="col-md-3 control-label">{{#i18n}}auction.bidderType{{/i18n}} :</label>
                                     <div class="col-md-6" id="listsBidderType"></div>
                                     <div class="col-md-6 col-md-offset-3" id="showOptional">
-                                        <!--<div class="col-md-12" style="border: 1px solid #cccccc; padding-bottom: 20px;">
-                                            <div class="form-group">
-                                                <label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>
-                                                <div class="col-md-6">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_1" value="Y" checked>
-                                                            <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_2" value="N">
-                                                            <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                                    <label id="remarkFactoryLabel1" class="col-md-5 control-label" for="remarkFactory1">{{#i18n}}auction.remark{{/i18n}} :</label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory1" id="remarkFactory1">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>
-                                                <div class="col-md-6">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_1" value="Y" checked>
-                                                            <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_2" value="N">
-                                                            <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                                    <label id="remarkFactoryLabel2" class="col-md-5 control-label" for="remarkFactory2">{{#i18n}}auction.remark{{/i18n}} :</label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory2" id="remarkFactory2">
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>
-                                                <div class="col-md-6">
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_1" value="Y" checked>
-                                                            <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio">
-                                                        <label>
-                                                            <input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_2" value="N">
-                                                            <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
-                                                    <label id="remarkFactoryLabel3" class="col-md-5 control-label" for="remarkFactory3">{{#i18n}}auction.remark{{/i18n}} :</label>
-                                                    <div class="col-md-6">
-                                                        <input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory3" id="remarkFactory3">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>-->
                                     </div>
                                 </div>
                             </div>
@@ -413,7 +340,8 @@
 
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">{{#i18n}}auction.file{{/i18n}} :</label>
-                                    <div class="col-md-7">
+                                    <div id="fileGroup" class="col-md-8"></div>
+                                    <!--<div class="col-md-7">
                                         <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
                                     </div>
                                     <div class="col-md-2">
@@ -421,7 +349,7 @@
                                             <span><i class="fa fa-folder-open"></i> {{#i18n}}auction.buttonChoose{{/i18n}}</span>
                                             <input id="fileUpload" type="file" class="upload" />
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
 
@@ -584,6 +512,13 @@
         $("button.add").click(function(){
             toggleShow("form");
 
+            $("#fileGroup").html('<div id="fileNew"></div><div id="fileBak"></div>');
+            $("#fileNew").html(
+                    '<input type="file" id="attachment" name="attachment"> '
+                    + '<a href="javascript: void(0);" onclick="$(\'#attachment\').val(\'\');">[Reset]</a>'
+            ).show();
+            $("#fileBak").hide();
+
             // when you save form
             $("button.submit").unbind().click(function(){
                 var isValid = true;
@@ -599,11 +534,23 @@
                     }
                 });
                 if(isValid){
-                    var fdata = dataObject(null);
+                    /*var fdata = dataObject(null);
                     var dataJSON = JSON.stringify({bidderInfo: fdata["BidderInfo"], bidderHistory: fdata["BidderHistory"]});
                     var dataJSONEN = encodeURIComponent(dataJSON);
 
-                    insertBidder(dataJSONEN);
+                    insertBidder(dataJSONEN);*/
+
+                    var fdata = dataObject(null);
+
+                    var formData = new FormData();
+
+                    formData.append('bidderInfo', JSON.stringify(fdata["BidderInfo"]));
+                    formData.append('bidderHistory', JSON.stringify(fdata["BidderHistory"]));
+
+                    if($('#attachment').length) formData.append('file', $('#attachment')[0].files[0]);
+                    else formData.append('file', '');
+
+                    insertBidder(formData)
                 }
             });
         });
@@ -645,7 +592,14 @@
 
                     var htmlSub = '';
                     if(option == 1){
-                        htmlSub = '<div class="col-md-12" style="border: 1px solid #cccccc; padding-bottom: 20px;">'
+                        htmlSub ='<div class="col-md-12" style="border: 1px solid #cccccc; padding-top: 20px; padding-bottom: 20px;">'
+                                + '<div class="form-group">'
+                                    + '<label class="col-md-5 control-label req">ประเภทอุตสาหกรรม :</label>'
+                                    + '<div class="col-md-6">'
+                                        + '<input type="text" data-entity="info" class="form-control input-sm req" name="typeOptional" id="typeOptional">'
+                                    + '</div>'
+                                + '</div>'
+
                                 + '<div class="form-group">'
                                     + '<label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>'
                                     + '<div class="col-md-6">'
@@ -960,6 +914,8 @@
                 $("#remarkFactory1").val(value["remarkFactory1"]);
                 $("#remarkFactory2").val(value["remarkFactory2"]);
                 $("#remarkFactory3").val(value["remarkFactory3"]);
+
+                $("#typeOptional").val(value["typeOptional"]);
             }
 
             $("input[name=property1][value=" + getTag(value["property1"], "N") + "]").prop('checked', true).trigger("click");
@@ -973,6 +929,43 @@
             $("#remark3").val(value["remark3"]);
             $("#remark4").val(value["remark4"]);
             $("#remark5").val(value["remark5"]);
+
+            $("#fileGroup").html('<div id="fileNew"></div><div id="fileBak"></div>');
+
+            var fileUpload = 0;
+            if(getTag(value["attachment"], "") != ""){
+                $("#fileNew").hide();
+                $("#fileBak").html(
+                        '<i class="fa fa-file-o"></i>'
+                        + '<a href="javascript: void(0);" style="color:blue !important;" onclick="downloadFile(\''+value["attachment"]+'\');"> '+fileNameCut(value["attachment"])+'</a> &nbsp;&nbsp;'
+                        + '<a href="javascript: void(0);" style="color:blue !important;" title="ลบ" class="ic-edit" id="deleteFile"><i class="fa fa-trash"></i></a>'
+                );
+
+                $("#deleteFile").click(function(){
+                    $("#fileNew").html(
+                            '<input type="file" id="attachment" name="attachment"> '
+                            + '<a href="javascript: void(0);" id="fileOld" style="color: blue !important;">[ไฟล์เดิม]</a>&nbsp;&nbsp;'
+                            + '<a href="javascript: void(0);" onclick="$(\'#attachment\').val(\'\');">[Reset]</a>'
+                    ).show();
+                    $("#fileBak").hide();
+                    fileUpload = 1;
+
+                    $("#fileOld").click(function(){
+                        $("#fileNew").hide();
+                        $("#fileBak").show();
+                        fileUpload = 0;
+                    });
+                });
+            }
+            else{
+                $("#fileNew").html(
+                        '<input type="file" id="attachment" name="attachment"> '
+                        + '<a href="javascript: void(0);" onclick="$(\'#attachment\').val(\'\');">[Reset]</a>'
+                ).show();
+                $("#fileBak").hide();
+
+                fileUpload = 1;
+            }
 
             // when you save the bidder info was modified
             $("button.submit").unbind().click(function(){
@@ -989,11 +982,24 @@
                     }
                 });
                 if(isValid){
-                    var fdata = dataObject(historyId);
+                    /*var fdata = dataObject(historyId);
                     var dataJSON = JSON.stringify({bidderInfo: fdata["BidderInfo"], bidderHistory: fdata["BidderHistory"]});
                     var dataJSONEN = encodeURIComponent(dataJSON);
 
-                    editBidder(dataJSONEN);
+                    editBidder(dataJSONEN);*/
+                    var fdata = dataObject(historyId);
+
+                    var formData = new FormData();
+
+                    formData.append('fileUpload', fileUpload);
+                    formData.append('bidderInfo', JSON.stringify(fdata["BidderInfo"]));
+                    formData.append('bidderHistory', JSON.stringify(fdata["BidderHistory"]));
+
+                    if($('#attachment').length) formData.append('file', $('#attachment')[0].files[0]);
+                    else formData.append('file', '');
+
+
+                    editBidder(formData)
                 }
             });
 
@@ -1083,7 +1089,7 @@
         $("#loading").html("กำลังบันทึกข้อมูล...");
 
         setTimeout(function(){
-            var datas = callAjax("{{_context_path}}/api/auction/bidderInfo/insert", "post", dataJSONEN, "json");
+            var datas = callAjaxFile("{{_context_path}}/api/auction/bidderInfo/insert", "post", dataJSONEN, "json");
             if (typeof datas !== "undefined" && datas !== null) {
                 if(datas["add"] == true){
                     $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
@@ -1102,7 +1108,7 @@
         $("#loading").html("กำลังบันทึกข้อมูล...");
 
         setTimeout(function(){
-            var datas = callAjax("{{_context_path}}/api/auction/bidderInfo/update", "post", dataJSONEN, "json");
+            var datas = callAjaxFile("{{_context_path}}/api/auction/bidderInfo/update", "post", dataJSONEN, "json");
             if (typeof datas !== "undefined" && datas !== null) {
                 if(datas["update"] == true){
                     $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
@@ -1200,6 +1206,14 @@
         else output = '<i class="fa fa-times text-danger"></i>';
 
         return output;
+    }
+
+    function downloadFile(input){
+        window.open("{{_context_path}}/apps/auction/views/attachment/"+input, '_blank');
+    }
+
+    function fileNameCut(input){
+        return input.substring(17);
     }
 </script>
 
