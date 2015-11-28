@@ -23,7 +23,7 @@ try {
         . '": ' . $e->getMessage());
 }
 
-$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
+$link = new PDO("sqlsrv:server=10.3.1.173 ; Database=RiceDB", "riceuser", "l2ice2015");
 
 // province
 $provArr = array();

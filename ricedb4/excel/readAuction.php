@@ -4,8 +4,8 @@ set_time_limit(0);
 
 require("phpexcel/Classes/PHPExcel/IOFactory.php");
 
-//$inputFileName = '6_2558_v2.xlsx';
-$auction = "AU6/2558";
+$inputFileName = '8_2558.xls';
+$auction = "AU8/2558";
 
 //  Read your Excel workbook
 try {
@@ -24,7 +24,7 @@ try {
         . '": ' . $e->getMessage());
 }
 
-$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
+$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
 
 // province
 $provArr = array();
@@ -77,14 +77,14 @@ $highestColumn = $sheet->getHighestColumn();
 //print '<table border="1">';
 
 $count = 0;
-for ($row = 4; $row <= $highestRow; $row++) {
+for ($row = 5; $row <= $highestRow; $row++) {
     //  Read a row of data into an array
 
-    $rowData = $sheet->rangeToArray('A' . $row . ':' . 'S' . $row);
+    $rowData = $sheet->rangeToArray('A' . $row . ':' . 'O' . $row);
 
     //if(str_replace(" ", "", $rowData[0][9]) != '"' || str_replace(" ", "", $rowData[0][9]) == '')
     //print $rowData[0][1]."<br>";
-    if(strlen($rowData[0][3]) != 0){
+    if(strlen($rowData[0][1]) != 0){
         /*print '<tr>';
         print '<td>'.(++$count).'</td>';*/
         $val = array();
@@ -94,17 +94,20 @@ for ($row = 4; $row <= $highestRow; $row++) {
         $bag = $rowData[0][2]; //เลขถุง
         $prov = $rowData[0][3]; //จังหวัด
         $proj = $rowData[0][4]; //ปีโครงการ
-        $round = $rowData[0][5]; //รอบการผลิต
-        $silo = $rowData[0][6]; //คลังสินค้า
-        $addr = $rowData[0][7]; //ที่อยู่
-        $asso = $rowData[0][8]; //ผู้เข้าร่วม
-        $type = $rowData[0][9]; //ชนิดข้าว
-        $warehouse = $rowData[0][10]; //หลังที่
-        $stack = $rowData[0][11]; //กองที่
-        $weight = $rowData[0][12]; //น้ำหนักไม่รวมกระสอบ
-        $weightAll = $rowData[0][13]; //น้ำหนักรวมกระสอบ
-        $samp = $rowData[0][14]; //คณะที่เก็บตัวอย่าง
-        $grade = $rowData[0][15]; //เกรดข้าว
+        //$round = $rowData[0][5]; //รอบการผลิต
+        $round = '';
+        $silo = $rowData[0][5]; //คลังสินค้า
+        $asso = $rowData[0][6]; //ผู้เข้าร่วม
+        $type = $rowData[0][7]; //ชนิดข้าว
+        $warehouse = $rowData[0][8]; //หลังที่
+        $stack = $rowData[0][9]; //กองที่
+        $weight = $rowData[0][10]; //น้ำหนักไม่รวมกระสอบ
+        $weightAll = $rowData[0][11]; //น้ำหนักรวมกระสอบ
+        $samp = $rowData[0][12]; //คณะที่เก็บตัวอย่าง
+        $grade = $rowData[0][13]; //เกรดข้าว
+
+        $addr = $rowData[0][14]; //ที่อยู่
+
         //$disc = $rowData[0][16]; //อัตราส่วนลด
         $disc = '';
         
@@ -143,6 +146,8 @@ for ($row = 4; $row <= $highestRow; $row++) {
             $disc = $disc.'%';
         }
 
+        $weightAll = str_replace(",","", $weightAll);
+
         $val = array(
             "no" => $no,
             "code" => $code,
@@ -173,12 +178,12 @@ for ($row = 4; $row <= $highestRow; $row++) {
 }
 //print '</table>';
 
-updateAddr($auction);
+//updateAddr($auction);
 
 $link = null;
 
 function insertData($val){
-    $link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
+    $link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
 
     /*$sqlCk = "SELECT count(*) AS Num FROM dft_Rice_Info_Original"
         ."WHERE Code='".$val["code"]."'";
@@ -186,8 +191,8 @@ function insertData($val){
     $dataCk = $resCk -> fetch(PDO::FETCH_ASSOC);
 */
     //if($dataCk["Num"] == 0){
-        $sqlIns = "INSERT INTO dft_Rice_Tracking(Code, Bag_No, LK_Province_Id, LK_Project_Id, Round, Silo, Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight, Sampling_Id, LK_Grade_Id, Discount_Rate, Weight_All, LK_Status_Keyword)"
-            ." VALUES('".$val["code"]."', '".$val["bagNo"]."', '".$val["province"]."', '".$val["project"]."', '".$val["round"]."', '".$val["silo"]."', '".$val["address"]."', '".$val["associate"]."', '".$val["type"]."', '".$val["warehouse"]."', '".$val["stack"]."', '".$val["weight"]."', '".$val["sampling"]."', '".$val["grade"]."', '".$val["discount"]."', '".$val["weightAll"]."', '".$val["auction"]."')";
+        $sqlIns = "INSERT INTO dft_Rice_Tracking(Code, Bag_No, LK_Province_Id, LK_Project_Id, Round, Silo, Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight, Sampling_Id, LK_Grade_Id, Discount_Rate, Weight_All, LK_Status_Keyword, TWeight)"
+            ." VALUES('".$val["code"]."', '".$val["bagNo"]."', '".$val["province"]."', '".$val["project"]."', '".$val["round"]."', '".$val["silo"]."', '".$val["address"]."', '".$val["associate"]."', '".$val["type"]."', '".$val["warehouse"]."', '".$val["stack"]."', '".$val["weight"]."', '".$val["sampling"]."', '".$val["grade"]."', '".$val["discount"]."', '".$val["weightAll"]."', '".$val["auction"]."', '".$val["weightAll"]."')";
         //print $sqlIns."<br>";
         if($resIns = $link -> query($sqlIns)){
             print $sqlIns."<br>";
@@ -197,7 +202,7 @@ function insertData($val){
 }
 
 function updateAddr($auction){
-    $link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
+    $link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
 
     $sqlUp = "UPDATE dft_Rice_Tracking SET Address = grouped.Address
                 FROM (Select Silo, Address FROM

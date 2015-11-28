@@ -587,8 +587,6 @@
 
                 $("input[name=typeBiz]").click(function(){
                     var option = $(this).attr("data-option");
-                    console.log(option);
-
 
                     var htmlSub = '';
                     if(option == 1){
@@ -686,6 +684,11 @@
                         else{
                             $("#remarkFactoryLabel"+remarkId).addClass("req");
                             $("#remarkFactory"+remarkId).prop("required", true).val("");
+
+                            if(!$("input[name=property1][value=N]").is(":checked")){
+                                $("input[name=property1][value=N]").prop('checked', true).trigger("click");
+                                $("#remark1").val("เอกสารไม่ครบถ้วน");
+                            }
                         }
                     });
                 });
