@@ -57,6 +57,12 @@ class Status extends EntityBase {
     /** @Column(type="string",length=255,name="Buyer") */
     public $buyer;
 
+    /** @Column(type="string",length=50,name="AuctionDateFirst") */
+    public $auctionDateFirst;
+
+    /** @Column(type="string",length=50,name="AuctionDateLast") */
+    public $auctionDateLast;
+
     function getActive(){
         return $this->active;
     }
@@ -115,6 +121,14 @@ class Status extends EntityBase {
 
     function getBuyer(){
         return $this->buyer;
+    }
+
+    function getAuctionDateFirst(){
+        return $this->auctionDateFirst;
+    }
+
+    function getAuctionDateLast(){
+        return $this->auctionDateLast;
     }
 
     function setActive($active){
@@ -176,5 +190,13 @@ class Status extends EntityBase {
 
     function setBuyer($buyer){
         $this->buyer = $buyer;
+    }
+
+    function setAuctionDateFirst($auctionDateFirst){
+        $this->auctionDateFirst = $auctionDateFirst;
+    }
+
+    function setAuctionDateLast($auctionDateLast){
+        $this->auctionDateLast = $auctionDateLast;
     }
 }

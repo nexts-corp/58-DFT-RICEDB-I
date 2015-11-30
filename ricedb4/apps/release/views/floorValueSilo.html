@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="col-sm-2">
-                <button id="btn_date" class="btn btn-primary"><i class="fa fa-eye"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
+                <button id="btn_date" class="btn btn-primary"><i class="fa fa-search"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
             </div>
         </div>
         <div style="clear: both;"></div>
@@ -115,8 +115,10 @@
                                                 <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv2{{/i18n}})</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_body2">
-
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -132,8 +134,10 @@
                                                 <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv3{{/i18n}})</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_body3">
-
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -149,8 +153,10 @@
                                                 <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv4{{/i18n}})</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_body4">
-
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="6" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -168,8 +174,10 @@
                                                 <th class="text-center" style="vertical-align: middle; text-align: center;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})<br>({{#i18n}}release.fv4{{/i18n}})</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="tb_body234">
-
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="8" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -194,18 +202,6 @@
 
     $(function () {
         listsAuction();
-    });
-    function listsAuction() {
-        var datas = callAjax("{{_context_path}}/api/release/floorValue/listsAuction", "post", {}, "json");
-        if(typeof datas !== "undefined" && datas !== null){
-            var html = '<option value="">เลือก</option>';
-            $.each(datas["lists"], function (key, val) {
-                html += '<option value="' + val.keyword + '">' + val.status + '</option>';
-            });
-            $("#auction").html(html).select2();
-        }
-    }
-
 
         $("#dateFP").datepicker({
             format: "yyyy-mm-dd",
@@ -215,376 +211,322 @@
 
         $("#btn_date").click(function () {
             getData();
-            writebody(0);
         });
+    });
 
-        function getAuction() {
-
+    function listsAuction() {
+        var datas = callAjax("{{_context_path}}/api/release/floorValue/listsAuction", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var html = '<option value="">เลือก</option>';
+            $.each(datas["lists"], function (key, val) {
+                html += '<option value="' + val.keyword + '">' + val.status + '</option>';
+            });
+            $("#auction").html(html).select2();
         }
-        function getData() {
-            $("#tb_body2").html('<tr><td colspan="12" class="text-center">Loading...</td></tr>');
-            $("#tb_body3").html('<tr><td colspan="12" class="text-center">Loading...</td></tr>');
-            $("#tb_body4").html('<tr><td colspan="12" class="text-center">Loading...</td></tr>');
-            $("#tb_body234").html('<tr><td colspan="16" class="text-center">Loading...</td></tr>');
-            var stopDate = $("#stopDate").val() + "-01";
-            var dateFP = $("#dateFP").val();
-            var typeId = $("#select_type").val();
-            var gradeId = $("#select_grade").val();
-            var projectId = $("#select_project").val();
-            var provinceId = $("#select_province").val();
-            var auction = $("#auction").val();
-            var d = new Date(dateFP);
-            var count = 0;
-            var day = new Array();
-            //var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+    }
+
+    function getData() {
+        $("#fv2 table tbody").html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
+        $("#fv3 table tbody").html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
+        $("#fv4 table tbody").html('<tr><td colspan="6" class="text-center">Loading...</td></tr>');
+        $("#fv234 table tbody").html('<tr><td colspan="8" class="text-center">Loading...</td></tr>');
+
+        var stopDate = $("#stopDate").val() + "-01";
+        var dateFP = $("#dateFP").val();
+        var typeId = $("#select_type").val();
+        var gradeId = $("#select_grade").val();
+        var projectId = $("#select_project").val();
+        var provinceId = $("#select_province").val();
+        var auction = $("#auction").val();
+        var d = new Date(dateFP);
+        var count = 0;
+        var day = new Array();
+        //var today = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+        if (d.getDay() != 6 && d.getDay() != 0) {
+            day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+            count++;
+        }
+        while (count != 7) {
+            d = yesterday(d);
             if (d.getDay() != 6 && d.getDay() != 0) {
                 day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
                 count++;
             }
-            while (count != 7) {
-                d = yesterday(d);
-                if (d.getDay() != 6 && d.getDay() != 0) {
-                    day.push(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
-                    count++;
-                }
+        }
+
+        dataPublic = [];
+        projectGroup = {};
+        provinceGroup = {};
+        typeGroup = {};
+        gradeGroup = {};
+
+        setTimeout(function () {
+            var datas = callAjax("{{_context_path}}/api/release/floorValue/getFloorValueSilo", "post", {
+                auction: auction
+            }, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function (key, value) {
+                    dataPublic.push(value);
+
+                    projectGroup[value["Project"]] = value["Project"];
+                    provinceGroup[value["Province"]] = value["Province"];
+                    typeGroup[value["riceType"]] = value["riceType"];
+                    gradeGroup[value["Grade"]] = value["Grade"];
+                });
+
+                writebody();
             }
 
-            $.ajax({
-                url: "{{_context_path}}/api/release/floorValue/getFloorValueSilo",
-                type: "post",
-                async: false,
-                data: {auction: auction, projectId: projectId, provinceId: provinceId, typeId: typeId, gradeId: gradeId},
-                success: function (data) {
-                    dataPublic = data["lists"];
-                    projectGroup = data["project"];
-                    provinceGroup = data["province"];
-                    typeGroup = data["type"];
-                    gradeGroup = data["grade"];
-                    // dataFilter=dataPublic;
+        }, 0);
+    }
 
-                }
-            });
-        }
+    function yesterday(d) {
+        d = new Date(d.setDate(d.getDate() - 1));
+        return d;
+    }
 
-        function yesterday(d) {
-            d = new Date(d.setDate(d.getDate() - 1));
-            return d;
-        }
-
-        $("#select_project").click(function () {
-            getData();
-            writebody(1);
-        });
-        $("#select_province").click(function () {
-            getData();
-            writebody(2);
-        });
-        $("#select_type").click(function () {
-            getData();
-            writebody(3);
-        });
-        $("#select_grade").click(function () {
-            getData();
-            writebody(4);
+    function writebody() {
+        $("#searchProject").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(projectGroup, function (key, value) {
+            $("#searchProject").append('<option value="' + value + '">' + value + '</option>');
         });
 
-        function genrateGroup() {
+        $("#searchProvince").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(provinceGroup, function (key, value) {
+            $("#searchProvince").append('<option value="' + value + '">' + value + '</option>');
+        });
 
-        }
+        $("#searchType").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(typeGroup, function (key, value) {
+            $("#searchType").append('<option value="' + value + '">' + value + '</option>');
+        });
 
-        function writebody(type) {
-            /*$("#tb_body2").empty();
-             $("#tb_body3").empty();
-             $("#tb_body4").empty();*/
-            var html2 = '';
-            var html3 = '';
-            var html4 = '';
-            var html234 = "";
-            var tempSilo = "";
-            var tempKey = 1;
-            var tempKeySub = 0;
-            var tempWeight = 0;
-            var tempFP2 = 0;
-            var tempFP3 = 0;
-            var tempFP4 = 0;
-            var tempFV2 = 0;
-            var tempFV3 = 0;
-            var tempFV4 = 0;
-            var i = 0;
-            $.each(dataPublic, function (key, datas) {
+        $("#searchGrade").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+        $.each(gradeGroup, function (key, value) {
+            $("#searchGrade").append('<option value="' + value + '">' + value + '</option>');
+        });
 
-                if (tempSilo != datas.Silo && tempSilo != "") {
-                    /*html2 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP2, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV2, 2, ",", ".") + "</td>" +
-                            "</tr>";*/
-                    html3 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP3, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV3, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html4 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP4, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html234 += "<tr>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-//                            "<td></td>" +
-                            "<td class='text-bold text-center' colspan='10'>รวม</td>" +
-                            "<td class='text-bold'>" + accounting.formatNumber(tempWeight, 6, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP2, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV2, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV2, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP3, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV3, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV3, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFP4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFP4, 2, ",", ".") + "</td>" +
-                            "<td class='text-bold' title='" + accounting.formatNumber(tempFV4, 11, ",", ".") + "'>" + accounting.formatNumber(tempFV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    tempWeight = 0;
-                    tempFP2 = 0;
-                    tempFV2 = 0;
-                    tempFP3 = 0;
-                    tempFV3 = 0;
-                    tempFP4 = 0;
-                    tempFV4 = 0;
-                    tempKey++;
-                    tempKeySub = 0;
-                    html2 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html3 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html4 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                     html234 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP2, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
+        $("#searchProject, #searchProvince, #searchType, #searchGrade").select2();
 
-                } else if (tempSilo == datas.Silo || tempSilo == "") {
-                    html2 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html3 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html4 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-                    html234 += "<tr>" +
-                            "<td class='text-center'>" + tempKey + "." + (tempKeySub + 1) + "</td>" +
-                            "<td>" + datas.Province + "</td>" +
-                            "<td>" + datas.Project + "</td>" +
-                            "<td>" + datas.Round + "</td>" +
-                            "<td>" + datas.Silo + "</td>" +
-                            //"<td>" + datas.Address + "</td>" +
-                            "<td>" + datas.Associate + "</td>" +
-                            "<td>" + datas.riceType + "</td>" +
-                            "<td>" + datas.Warehouse + "</td>" +
-                            "<td>" + datas.Stack + "</td>" +
-                            "<td>" + datas.Grade + "</td>" +
-                            "<td>" + accounting.formatNumber(datas.Weight_All, 6, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FP2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP2, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV2, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV2, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP3, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV3, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV3, 2, ",", ".") + "</td>" +
-                            
-                            "<td title='" + accounting.formatNumber(datas.FP4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FP4, 2, ",", ".") + "</td>" +
-                            "<td title='" + accounting.formatNumber(datas.FV4, 11, ",", ".") + "'>" + accounting.formatNumber(datas.FV4, 2, ",", ".") + "</td>" +
-                            "</tr>";
-
+        var t2 = $("#fv2 table").DataTable({
+            "destroy": true,
+            "data": dataPublic,
+            "order": [[1, 'asc'], [2, 'asc']],
+            "iDisplayLength": 50,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Silo",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province",
+                    "sClass": "col-md-2"
+                },
+                {
+                    "targets": 2,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 3,
+                    "data": "Associate",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 4,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-2",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 5,
+                    "data": "FV2",
+                    "sClass": "text-right text-bold col-md-2",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
                 }
-
-                tempSilo = datas.Silo;
-                tempWeight = tempWeight + parseFloat(datas.Weight_All);
-                tempFP2 = tempFP2 + parseFloat(datas.FP2);
-                tempFV2 = tempFV2 + parseFloat(datas.FV2);
-                tempFP3 = tempFP3 + parseFloat(datas.FP3);
-                tempFV3 = tempFV3 + parseFloat(datas.FV3);
-                tempFP4 = tempFP4 + parseFloat(datas.FP4);
-                tempFV4 = tempFV4 + parseFloat(datas.FV4);
-                tempKeySub++;
-
+            ]
+        });
+        t2.on('order.dt search.dt', function () {
+            t2.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
             });
-            $("#tb_body2").html(html2);
-            $("#tb_body3").html(html3);
-            $("#tb_body4").html(html4);
-            $("#tb_body234").html(html234);
+        }).draw();
 
-            //  if(type!=1){
-            var pj = $("#select_project").val();
-            $("#select_project").empty();
-            $("#select_project").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(projectGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_project").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_project").append("<option value='" + key + "'>" + value + "</option>");
+        var t3 = $("#fv3 table").DataTable({
+            "destroy": true,
+            "data": dataPublic,
+            "order": [[1, 'asc'], [2, 'asc']],
+            "iDisplayLength": 50,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Silo",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province",
+                    "sClass": "col-md-2"
+                },
+                {
+                    "targets": 2,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 3,
+                    "data": "Associate",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 4,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-2",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 5,
+                    "data": "FV3",
+                    "sClass": "text-right text-bold col-md-2",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
                 }
+            ]
+        });
+        t3.on('order.dt search.dt', function () {
+            t3.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
             });
-            //    $("#select_project").attr("selected")
-            //  }
+        }).draw();
 
-            //  if(type!=2){
-            pj = $("#select_province").val();
-            $("#select_province").empty();
-            $("#select_province").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(provinceGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_province").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_province").append("<option value='" + key + "'>" + value + "</option>");
+        var t4 = $("#fv4 table").DataTable({
+            "destroy": true,
+            "data": dataPublic,
+            "order": [[1, 'asc'], [2, 'asc']],
+            "iDisplayLength": 50,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Silo",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province",
+                    "sClass": "col-md-2"
+                },
+                {
+                    "targets": 2,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 3,
+                    "data": "Associate",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 4,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-2",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 5,
+                    "data": "FV4",
+                    "sClass": "text-right text-bold col-md-2",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
                 }
+            ]
+        });
+        t4.on('order.dt search.dt', function () {
+            t4.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
             });
-            //  }
-            pj = $("#select_type").val();
-            $("#select_type").empty();
-            $("#select_type").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(typeGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_type").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_type").append("<option value='" + key + "'>" + value + "</option>");
-                }
-            });
+        }).draw();
 
-            pj = $("#select_grade").val();
-            $("#select_grade").empty();
-            $("#select_grade").append("<option value='0'>เลือกทั้งหมด</option>");
-            $.each(gradeGroup, function (key, value) {
-                if (pj == key) {
-                    $("#select_grade").append("<option value='" + key + "' selected>" + value + "</option>");
-                } else {
-                    $("#select_grade").append("<option value='" + key + "'>" + value + "</option>");
+        var t234 = $("#fv234 table").DataTable({
+            "destroy": true,
+            "data": dataPublic,
+            "order": [[1, 'asc'], [2, 'asc']],
+            "iDisplayLength": 50,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "Silo",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 1,
+                    "data": "Province",
+                    "sClass": "col-md-1"
+                },
+                {
+                    "targets": 2,
+                    "data": "Silo"
+                },
+                {
+                    "targets": 3,
+                    "data": "Associate",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 4,
+                    "data": "Weight_All",
+                    "sClass": "text-right col-md-2",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 6, ",", ".");
+                    }
+                },
+                {
+                    "targets": 5,
+                    "data": "FV2",
+                    "sClass": "text-right text-bold col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 6,
+                    "data": "FV3",
+                    "sClass": "text-right text-bold col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 7,
+                    "data": "FV4",
+                    "sClass": "text-right text-bold col-md-1",
+                    "render": function(data){
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
                 }
+            ]
+        });
+        t234.on('order.dt search.dt', function () {
+            t234.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
             });
-            //  }
-        }
-    });
-
-//"/ricedb/api/rice/pricedaily/save"
+        }).draw();
+    }
 
 </script>
