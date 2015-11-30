@@ -9,6 +9,7 @@ use apps\common\entity\RiceFollow;
 class FollowService extends CServiceBase implements IFollowService {
 
     public $datacontext;
+    public $ent = "apps\\common\\entity";
 
     public function __construct() {
         $this->datacontext = new \th\co\bpg\cde\data\CDataContext();
@@ -65,6 +66,19 @@ class FollowService extends CServiceBase implements IFollowService {
             }
             return $get;
         }
+    }
+
+    public function listsAuction() {
+        $sql = "select s from ".$this->ent."\\Status s "
+            . " where s.keyword like 'AU%' "
+            . " order by s.id desc";
+        return $this->datacontext->getObject($sql);
+    }
+
+    public function listsAssociate() {
+        $sql = "select a from ".$this->ent."\\Associate a "
+            . " order by a.id desc";
+        return $this->datacontext->getObject($sql);
     }
 
     public function export($auccode, $associateId) {

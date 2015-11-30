@@ -300,6 +300,8 @@
     var globalPrice = 0;
     var globalGrt = 0;
     var globalAmount = 0;
+
+    var listsPayment = '';
     $(function () {
         showBidderPayment();
 
@@ -681,6 +683,15 @@
         }
     }
     function listsPayment(bidderHistoryId, countGrt) {
+        /*if(listsPayment == ""){
+            var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/listsTypePayment", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function (key, value) {
+                    listsPayment += "<option value='" + value["id"] + "'>" + value["payment"] + "</option>";
+                });
+            }
+        }*/
+
         var html = "";
         for (var i = 0; i < countGrt; i++) {
             html += '<div class="col-md-12" style="margin:5px;">' +
@@ -690,9 +701,7 @@
                     '</div>' +
                     '<div class="col-md-2">' +
                     '<select class="form-control listsPayment" name="paymentId" row-index=' + i + '>' +
-                    '<option value="1">สัญญาค้ำประกัน</option>' +
-                    '<option value="2">ตั๋วแลกเงิน</option>' +
-                    '<option value="3">เช็ค</option>' +
+                    listsPayment +
                     '</select>' +
                     '</div>' +
                     '<div class="col-md-3">' +

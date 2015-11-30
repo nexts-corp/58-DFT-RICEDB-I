@@ -37,6 +37,12 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         return $this->datacontext->getObject($bank);
     }
 
+    public function listsTypePayment() {
+        $pay = new \apps\common\entity\Payment();
+
+        return $this->datacontext->getObject($pay);
+    }
+
     public function listsPayment() {
         $sql = "SELECT"
                 ." bt.bidderHistoryId, bh.queue, bi.bidderName,"

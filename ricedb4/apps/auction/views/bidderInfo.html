@@ -65,7 +65,8 @@
                                 <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyDoc{{/i18n}}</th>
                                 <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyWork{{/i18n}}</th>
                                 <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyOffer{{/i18n}}</th>
-                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyInternal{{/i18n}}</th>
+                                <!--<th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyInternal{{/i18n}}</th>-->
+                                <th class="text-center" style="vertical-align: middle;">ร.ง.4</th>
                                 <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyBusiness{{/i18n}}</th>
                             </tr>
                         </thead>
@@ -291,7 +292,8 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">{{#i18n}}auction.propertyInternalFull{{/i18n}} :</label>
+                                    <!--<label class="col-md-3 control-label">{{#i18n}}auction.propertyInternalFull{{/i18n}} :</label>-->
+                                    <label class="col-md-3 control-label">ใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>
                                     <div class="col-md-6">
                                         <div class="radio">
                                             <label>
@@ -688,6 +690,16 @@
                             if(!$("input[name=property1][value=N]").is(":checked")){
                                 $("input[name=property1][value=N]").prop('checked', true).trigger("click");
                                 $("#remark1").val("เอกสารไม่ครบถ้วน");
+                            }
+                        }
+
+                        if(remarkId == "1"){
+                            if($(this).val() == "Y"){
+                                $("input[name=property4][value=Y]").prop('checked', true).trigger("click");
+                            }
+                            else{
+                                $("input[name=property4][value=N]").prop('checked', true).trigger("click");
+                                $("#remark4").val("เอกสารไม่ครบถ้วน");
                             }
                         }
                     });

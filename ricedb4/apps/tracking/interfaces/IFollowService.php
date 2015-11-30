@@ -8,6 +8,22 @@ namespace apps\tracking\interfaces;
  * @description FollowService
  */
 interface IFollowService {
+    /**
+     * @name listsAuction
+     * @uri /listsAuction
+     * @return String[] lists Description
+     * @description การประมูล
+     */
+    public function listsAuction();
+
+    /**
+     * @name listsAssociate
+     * @uri /listsAssociate
+     * @return String[] lists Description
+     * @description ผู้เข้าร่วม
+     */
+    public function listsAssociate();
+
 
     /**
      * @name export

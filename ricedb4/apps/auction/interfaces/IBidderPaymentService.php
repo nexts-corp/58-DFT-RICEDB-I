@@ -9,6 +9,16 @@ namespace apps\auction\interfaces;
  */
 interface IBidderPaymentService {
     /**
+     * @name listsTypePayment
+     * @uri /listsTypePayment
+     * @return String[] lists Description
+     * @description ชนิดของหลักประกัน
+     * @authen true
+     * @resource 1001
+     */
+    public function listsTypePayment();
+
+    /**
      * @name listsPayment
      * @uri /listsPayment
      * @return String[] lists Description
