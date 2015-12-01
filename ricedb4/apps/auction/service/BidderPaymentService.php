@@ -168,15 +168,45 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         );
         return $this->datacontext->getObject($sql, $param);
     }
-    
+
+
+
+    function array_not_unique( $a = array() )
+    {
+        return array_diff_key( $a , array_unique( $a ) );
+    }
+
+
     public function saveBidderPayment($bidderPayment) {
         $return = true;
-        foreach ($bidderPayment as $key => $value) {
+        $final = array();
 
+        foreach ($bidderPayment as $key => $value) {
             if ($bidderPayment[$key]->paymentNo != "" && $bidderPayment[$key]->amount != "" && $bidderPayment[$key]->paymentDate) {
                 $bidderPayment[$key]->paymentDate = new \DateTime(date($bidderPayment[$key]->paymentDate));
-                $bidderPayment[$key]->isReturn = "N";
-                if ($this->datacontext->saveObject($bidderPayment[$key])) {
+
+                if ( ! in_array($bidderPayment[$key], $final)) {
+                    $final[] = $bidderPayment[$key];
+
+                    $check = new \apps\common\entity\BidderPayment();
+                    $check->paymentId = $bidderPayment[$key]->paymentId;
+                    $check->bankId = $bidderPayment[$key]->bankId;
+                    $check->paymentNo = $bidderPayment[$key]->paymentNo;
+                    $check->paymentDate = $bidderPayment[$key]->paymentDate;
+
+                    $data = $this->datacontext->getObject($check);
+
+                    if (count($data) > 0) {
+                        return "ข้อมูลเลขที่ ".$bidderPayment[$key]->paymentNo." ถูกบันทึกไปแล้ว";
+                    }
+                }
+            }
+        }
+
+        foreach ($final as $key => $value) {
+            if ($final[$key]->paymentNo != "" && $final[$key]->amount != "" && $final[$key]->paymentDate) {
+                $final[$key]->isReturn = "N";
+                if ($this->datacontext->saveObject($final[$key])) {
                     $return = true;
                 } else {
                     $return = $this->datacontext->getLastMessage();

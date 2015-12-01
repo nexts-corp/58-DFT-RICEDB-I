@@ -81,8 +81,18 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
+    public function bidderMaxPriceMore2() {
+        $view = new CJView("monitor/bidderMaxPriceMore2", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
     public function bidderWinner() {
         $view = new CJView("monitor/bidderWinner", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
+    public function bidderWinner2() {
+        $view = new CJView("monitor/bidderWinner2", CJViewType::HTML_VIEW_ENGINE);
         return $view;
     }
 

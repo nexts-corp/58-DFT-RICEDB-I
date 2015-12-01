@@ -301,7 +301,7 @@
     var globalGrt = 0;
     var globalAmount = 0;
 
-    var listsPayment = '';
+    var listsP = '';
     $(function () {
         showBidderPayment();
 
@@ -355,7 +355,7 @@
                 $("#divAddGrt").show();
                 $('#form_grt').html(listsPayment(bidderHistoryId, countGrt));
                 $('.paymentDate').datepicker({
-                    format: "dd-mm-yyyy",
+                    format: "yyyy-mm-dd",
                     autoclose: true
                 });
                 $('.amount').numeric({
@@ -395,7 +395,7 @@
                     $("#txtCountGrt").val("1");
                     $("#divAddGrt").hide();
                 } else {
-                    alert("บันทึกไม่สำเร็จ");
+                    alert("บันทึกไม่สำเร็จ\r\n"+msg.save);
                     showBidderGrt();
                 }
             });
@@ -683,14 +683,14 @@
         }
     }
     function listsPayment(bidderHistoryId, countGrt) {
-        /*if(listsPayment == ""){
+        if(listsP == ""){
             var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/listsTypePayment", "post", {}, "json");
             if (typeof datas !== "undefined" && datas !== null) {
                 $.each(datas["lists"], function (key, value) {
-                    listsPayment += "<option value='" + value["id"] + "'>" + value["payment"] + "</option>";
+                    listsP += "<option value='" + value["id"] + "'>" + value["payment"] + "</option>";
                 });
             }
-        }*/
+        }
 
         var html = "";
         for (var i = 0; i < countGrt; i++) {
@@ -701,7 +701,7 @@
                     '</div>' +
                     '<div class="col-md-2">' +
                     '<select class="form-control listsPayment" name="paymentId" row-index=' + i + '>' +
-                    listsPayment +
+                    listsP +
                     '</select>' +
                     '</div>' +
                     '<div class="col-md-3">' +

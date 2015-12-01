@@ -111,6 +111,14 @@ interface IViewService {
      * @authen true 
      */
     public function bidderMaxPriceMore();
+
+    /**
+     * @name bidderMaxPriceMore2
+     * @uri /monitor/bidderMaxPriceMore2
+     * @description  [ก่อนต่อรองราคา] ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และมูลค่าเสนอซื้อเท่ากัน
+     * @authen true
+     */
+    public function bidderMaxPriceMore2();
     
      /**
      * @name bidderWinner
@@ -119,6 +127,14 @@ interface IViewService {
      * @authen true 
      */
     public function bidderWinner();
+
+    /**
+     * @name bidderWinner2
+     * @uri /monitor/bidderWinner2
+     * @description  [หลังต่อรองราคา] ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และเสนอมูลค่าสูงสุด
+     * @authen true
+     */
+    public function bidderWinner2();
     
      /**
      * @name bidderMonitor
