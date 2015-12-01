@@ -113,7 +113,6 @@
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
@@ -139,7 +138,6 @@
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
@@ -166,7 +164,6 @@
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
@@ -193,7 +190,6 @@
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.province{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.project{{/i18n}}</th>
-                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.round{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.silo{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.associate{{/i18n}}</th>
                                             <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.type{{/i18n}}</th>
@@ -307,8 +303,8 @@
                 var tempKey = 1;
                 var tempKeySub = 0;
                 $.each(datas["lists"], function(key, value){
-                    var silo = value["Silo"];
-                    var asso = value["Associate"];
+                    var silo = value["wareHouseCode"];
+                    var asso = value["associate"];
                     if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
                         tempKey++;
                         tempKeySub = 0;
@@ -322,10 +318,10 @@
                     listArr[value["Id"]] = value;
 
                     dataPublic.push(value);
-                    projectGroup[value["Project"]] = value["Project"];
-                    provinceGroup[value["Province"]] = value["Province"];
-                    typeGroup[value["riceType"]] = value["riceType"];
-                    gradeGroup[value["Grade"]] = value["Grade"];
+                    projectGroup[value["project"]] = value["project"];
+                    provinceGroup[value["province"]] = value["province"];
+                    typeGroup[value["typeName"]] = value["typeName"];
+                    gradeGroup[value["grade"]] = value["grade"];
                 });
                 writebody();
             }
@@ -377,8 +373,8 @@
                 var tempFP2 = 0;
                 var tempFV2 = 0;
                 api.column(0, {page:'current'}).data().each(function(group, i){
-                    var silo = listArr[group]["Silo"];
-                    var asso = listArr[group]["Associate"];
+                    var silo = listArr[group]["wareHouseCode"];
+                    var asso = listArr[group]["associate"];
 
                     count++;
                     console.log(count+' '+Object.keys(listArr).length);
@@ -386,7 +382,7 @@
                     if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
@@ -399,7 +395,7 @@
                     else if (count == Object.keys(listArr).length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
@@ -414,7 +410,7 @@
                     lastSilo = silo;
                     lastAsso = asso;
 
-                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempWeight += parseFloat(listArr[group]["WeightAll"]);
                     tempFP2 += parseFloat(listArr[group]["FP2"]);
                     tempFV2 += parseFloat(listArr[group]["FV2"]);
                 });
@@ -429,58 +425,50 @@
                 },
                 {
                     "targets": 1,
-                    "data": "Province"
+                    "data": "province"
                 },
                 {
                     "targets": 2,
-                    "data": "Project"
+                    "data": "project"
                 },
                 {
                     "targets": 3,
-                    "data": "Round",
-                    "sClass": "text-center",
-                    "render": function(data){
-                        return checkZero(data);
-                    }
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 4,
-                    "data": "Silo"
-                },
-                {
-                    "targets": 5,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 6,
-                    "data": "riceType"
+                    "targets": 5,
+                    "data": "typeName"
                 },
                 {
-                    "targets": 7,
+                    "targets": 6,
                     "data": "Warehouse",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 8,
+                    "targets": 7,
                     "data": "Stack",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 9,
-                    "data": "Grade",
+                    "targets": 8,
+                    "data": "grade",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 10,
-                    "data": "Weight_All",
+                    "targets": 9,
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
                 {
-                    "targets": 11,
+                    "targets": 10,
                     "data": "FP2",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
@@ -488,7 +476,7 @@
                     }
                 },
                 {
-                    "targets": 12,
+                    "targets": 11,
                     "data": "FV2",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function(data){
@@ -515,8 +503,8 @@
                 var tempFP3 = 0;
                 var tempFV3 = 0;
                 api.column(0, {page:'current'}).data().each(function(group, i){
-                    var silo = listArr[group]["Silo"];
-                    var asso = listArr[group]["Associate"];
+                    var silo = listArr[group]["wareHouseCode"];
+                    var asso = listArr[group]["associate"];
 
                     count++;
                     console.log(count+' '+Object.keys(listArr).length);
@@ -524,7 +512,7 @@
                     if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
@@ -537,7 +525,7 @@
                     else if (count == Object.keys(listArr).length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
@@ -552,7 +540,7 @@
                     lastSilo = silo;
                     lastAsso = asso;
 
-                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempWeight += parseFloat(listArr[group]["WeightAll"]);
                     tempFP3 += parseFloat(listArr[group]["FP3"]);
                     tempFV3 += parseFloat(listArr[group]["FV3"]);
                 });
@@ -567,58 +555,50 @@
                 },
                 {
                     "targets": 1,
-                    "data": "Province"
+                    "data": "province"
                 },
                 {
                     "targets": 2,
-                    "data": "Project"
+                    "data": "project"
                 },
                 {
                     "targets": 3,
-                    "data": "Round",
-                    "sClass": "text-center",
-                    "render": function(data){
-                        return checkZero(data);
-                    }
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 4,
-                    "data": "Silo"
-                },
-                {
-                    "targets": 5,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 6,
-                    "data": "riceType"
+                    "targets": 5,
+                    "data": "typeName"
                 },
                 {
-                    "targets": 7,
+                    "targets": 6,
                     "data": "Warehouse",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 8,
+                    "targets": 7,
                     "data": "Stack",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 9,
-                    "data": "Grade",
+                    "targets": 8,
+                    "data": "grade",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 10,
-                    "data": "Weight_All",
+                    "targets": 9,
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
                 {
-                    "targets": 11,
+                    "targets": 10,
                     "data": "FP3",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
@@ -626,7 +606,7 @@
                     }
                 },
                 {
-                    "targets": 12,
+                    "targets": 11,
                     "data": "FV3",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function(data){
@@ -653,8 +633,8 @@
                 var tempFP4 = 0;
                 var tempFV4 = 0;
                 api.column(0, {page:'current'}).data().each(function(group, i){
-                    var silo = listArr[group]["Silo"];
-                    var asso = listArr[group]["Associate"];
+                    var silo = listArr[group]["wareHouseCode"];
+                    var asso = listArr[group]["associate"];
 
                     count++;
                     console.log(count+' '+Object.keys(listArr).length);
@@ -662,7 +642,7 @@
                     if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
@@ -675,7 +655,7 @@
                     else if (count == Object.keys(listArr).length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
@@ -690,7 +670,7 @@
                     lastSilo = silo;
                     lastAsso = asso;
 
-                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempWeight += parseFloat(listArr[group]["WeightAll"]);
                     tempFP4 += parseFloat(listArr[group]["FP4"]);
                     tempFV4 += parseFloat(listArr[group]["FV4"]);
                 });
@@ -705,58 +685,50 @@
                 },
                 {
                     "targets": 1,
-                    "data": "Province"
+                    "data": "province"
                 },
                 {
                     "targets": 2,
-                    "data": "Project"
+                    "data": "project"
                 },
                 {
                     "targets": 3,
-                    "data": "Round",
-                    "sClass": "text-center",
-                    "render": function(data){
-                        return checkZero(data);
-                    }
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 4,
-                    "data": "Silo"
-                },
-                {
-                    "targets": 5,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 6,
-                    "data": "riceType"
+                    "targets": 5,
+                    "data": "typeName"
                 },
                 {
-                    "targets": 7,
+                    "targets": 6,
                     "data": "Warehouse",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 8,
+                    "targets": 7,
                     "data": "Stack",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 9,
-                    "data": "Grade",
+                    "targets": 8,
+                    "data": "grade",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 10,
-                    "data": "Weight_All",
+                    "targets": 9,
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
                 {
-                    "targets": 11,
+                    "targets": 10,
                     "data": "FP4",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
@@ -764,7 +736,7 @@
                     }
                 },
                 {
-                    "targets": 12,
+                    "targets": 11,
                     "data": "FV4",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function(data){
@@ -795,8 +767,8 @@
                 var tempFP4 = 0;
                 var tempFV4 = 0;
                 api.column(0, {page:'current'}).data().each(function(group, i){
-                    var silo = listArr[group]["Silo"];
-                    var asso = listArr[group]["Associate"];
+                    var silo = listArr[group]["wareHouseCode"];
+                    var asso = listArr[group]["associate"];
 
                     count++;
                     console.log(count+' '+Object.keys(listArr).length);
@@ -804,7 +776,7 @@
                     if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
@@ -826,7 +798,7 @@
                     else if (count == Object.keys(listArr).length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="9">'+lastSilo+' ['+lastAsso+']</td>'
+                                + '<td class="text-bold text-center" colspan="8">'+lastSilo+' ['+lastAsso+']</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
                                 + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
@@ -849,7 +821,7 @@
                     lastSilo = silo;
                     lastAsso = asso;
 
-                    tempWeight += parseFloat(listArr[group]["Weight_All"]);
+                    tempWeight += parseFloat(listArr[group]["WeightAll"]);
                     tempFP2 += parseFloat(listArr[group]["FP2"]);
                     tempFV2 += parseFloat(listArr[group]["FV2"]);
                     tempFP3 += parseFloat(listArr[group]["FP3"]);
@@ -868,58 +840,50 @@
                 },
                 {
                     "targets": 1,
-                    "data": "Province"
+                    "data": "province"
                 },
                 {
                     "targets": 2,
-                    "data": "Project"
+                    "data": "project"
                 },
                 {
                     "targets": 3,
-                    "data": "Round",
-                    "sClass": "text-center",
-                    "render": function(data){
-                        return checkZero(data);
-                    }
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 4,
-                    "data": "Silo"
-                },
-                {
-                    "targets": 5,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 6,
-                    "data": "riceType"
+                    "targets": 5,
+                    "data": "typeName"
                 },
                 {
-                    "targets": 7,
+                    "targets": 6,
                     "data": "Warehouse",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 8,
+                    "targets": 7,
                     "data": "Stack",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 9,
-                    "data": "Grade",
+                    "targets": 8,
+                    "data": "grade",
                     "sClass": "text-center"
                 },
                 {
-                    "targets": 10,
-                    "data": "Weight_All",
+                    "targets": 9,
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
                 {
-                    "targets": 11,
+                    "targets": 10,
                     "data": "FP2",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
@@ -927,7 +891,7 @@
                     }
                 },
                 {
-                    "targets": 12,
+                    "targets": 11,
                     "data": "FV2",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function(data){
@@ -935,7 +899,7 @@
                     }
                 },
                 {
-                    "targets": 13,
+                    "targets": 12,
                     "data": "FP3",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
@@ -943,7 +907,7 @@
                     }
                 },
                 {
-                    "targets": 14,
+                    "targets": 13,
                     "data": "FV3",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function(data){
@@ -951,7 +915,7 @@
                     }
                 },
                 {
-                    "targets": 15,
+                    "targets": 14,
                     "data": "FP4",
                     "sClass": "text-right col-md-1",
                     "render": function(data){
@@ -959,7 +923,7 @@
                     }
                 },
                 {
-                    "targets": 16,
+                    "targets": 15,
                     "data": "FV4",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function(data){

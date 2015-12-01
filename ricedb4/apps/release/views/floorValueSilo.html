@@ -268,10 +268,10 @@
                 $.each(datas["lists"], function (key, value) {
                     dataPublic.push(value);
 
-                    projectGroup[value["Project"]] = value["Project"];
-                    provinceGroup[value["Province"]] = value["Province"];
-                    typeGroup[value["riceType"]] = value["riceType"];
-                    gradeGroup[value["Grade"]] = value["Grade"];
+                    projectGroup[value["project"]] = value["project"];
+                    provinceGroup[value["province"]] = value["province"];
+                    typeGroup[value["typeName"]] = value["typeName"];
+                    gradeGroup[value["grade"]] = value["grade"];
                 });
 
                 writebody();
@@ -318,26 +318,26 @@
                     "targets": 0,
                     "searchable": false,
                     "orderable": false,
-                    "data": "Silo",
+                    "data": "wareHouseCode",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 1,
-                    "data": "Province",
+                    "data": "province",
                     "sClass": "col-md-2"
                 },
                 {
                     "targets": 2,
-                    "data": "Silo"
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 3,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 4,
-                    "data": "Weight_All",
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-2",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
@@ -369,26 +369,26 @@
                     "targets": 0,
                     "searchable": false,
                     "orderable": false,
-                    "data": "Silo",
+                    "data": "wareHouseCode",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 1,
-                    "data": "Province",
+                    "data": "province",
                     "sClass": "col-md-2"
                 },
                 {
                     "targets": 2,
-                    "data": "Silo"
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 3,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 4,
-                    "data": "Weight_All",
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-2",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
@@ -420,26 +420,26 @@
                     "targets": 0,
                     "searchable": false,
                     "orderable": false,
-                    "data": "Silo",
+                    "data": "wareHouseCode",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 1,
-                    "data": "Province",
+                    "data": "province",
                     "sClass": "col-md-2"
                 },
                 {
                     "targets": 2,
-                    "data": "Silo"
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 3,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 4,
-                    "data": "Weight_All",
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-2",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
@@ -471,26 +471,26 @@
                     "targets": 0,
                     "searchable": false,
                     "orderable": false,
-                    "data": "Silo",
+                    "data": "wareHouseCode",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 1,
-                    "data": "Province",
+                    "data": "province",
                     "sClass": "col-md-1"
                 },
                 {
                     "targets": 2,
-                    "data": "Silo"
+                    "data": "wareHouseCode"
                 },
                 {
                     "targets": 3,
-                    "data": "Associate",
+                    "data": "associate",
                     "sClass": "text-center col-md-1"
                 },
                 {
                     "targets": 4,
-                    "data": "Weight_All",
+                    "data": "WeightAll",
                     "sClass": "text-right col-md-2",
                     "render": function(data){
                         return accounting.formatNumber(data, 6, ",", ".");
