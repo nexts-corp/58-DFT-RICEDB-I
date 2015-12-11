@@ -101,6 +101,8 @@ for ($row = 2; $row <= $highestRow; $row++) {
         $samp = $rowData[0][11]; //คณะที่เก็บตัวอย่าง
         $grade = $rowData[0][12]; //เกรดข้าว
         $disc = $rowData[0][13];
+        $gradeOptional = $rowData[0][14];
+        $canSelect = $rowData[0][15];
         $status = $rowData[0][16];
         $weightAll = $rowData[0][17];
 
@@ -119,6 +121,8 @@ for ($row = 2; $row <= $highestRow; $row++) {
             "sampling" => $samp,
             "grade" => $grade,
             "discount" => $disc,
+            "gradeOptional" => $gradeOptional,
+            "canSelect" => $canSelect,
             "status" => $status,
             "weightAll" => $weightAll,
         );
@@ -141,8 +145,8 @@ $link = null;
 function insertData($val){
     $link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
 
-        $sqlIns = "INSERT INTO dft_Rice_Original_New(No, Code, Bag_No, Province, Project, Silo, Associate, Type, Warehouse, Stack, Weight, Sampling_Id, Grade, Discount_Rate, Weight_All, Status)"
-            ." VALUES('".$val["no"]."', '".$val["code"]."', '".$val["bagNo"]."', '".$val["province"]."', '".$val["project"]."', '".$val["silo"]."', '".$val["associate"]."', '".$val["type"]."', '".$val["warehouse"]."', '".$val["stack"]."', '".$val["weight"]."', '".$val["sampling"]."', '".$val["grade"]."', '".$val["discount"]."', '".$val["weightAll"]."', '".$val["status"]."');";
+        $sqlIns = "INSERT INTO dft_Rice_Original(No, Code, Bag_No, Province, Project, Silo, Associate, Type, Warehouse, Stack, Weight, Sampling_Id, Grade, Discount_Rate, Weight_All, Status, Grade_Optional, Is_Grade_Selected)"
+            ." VALUES('".$val["no"]."', '".$val["code"]."', '".$val["bagNo"]."', '".$val["province"]."', '".$val["project"]."', '".$val["silo"]."', '".$val["associate"]."', '".$val["type"]."', '".$val["warehouse"]."', '".$val["stack"]."', '".$val["weight"]."', '".$val["sampling"]."', '".$val["grade"]."', '".$val["discount"]."', '".$val["weightAll"]."', '".$val["status"]."', '".$val["gradeOptional"]."', '".$val["canSelect"]."');";
         print $sqlIns."<br>";
         /*if($resIns = $link -> query($sqlIns)){
             print $sqlIns."<br>";

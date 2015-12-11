@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 $link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
-/*
+
 //insert silo code
 $sql = "SELECT"
         ." pv.Code AS pCode, ri.LK_Province_Id, ac.Code AS aCode, ri.LK_Associate_Id, ri.Silo"
@@ -15,7 +15,7 @@ $res = $link->query($sql);
 
 print $sql;
 $gArr = [];
-$html = '<table border="1" style="border: 1px solid black;">';
+print '<table border="1" style="border: 1px solid black;">';
 while($data = $res->fetch(PDO::FETCH_ASSOC)){
     $conv = "R".$data["pCode"].$data["aCode"].string_to_ascii(str_replace(" ", "", $data["Silo"]));
 
@@ -24,7 +24,7 @@ while($data = $res->fetch(PDO::FETCH_ASSOC)){
         $isHave = "Yes";
     }
     //if($isHave == "Yes") {
-    $html .= '<tr>'
+    print '<tr>'
         . '<td>' . $data["pCode"] . '</td>'
         . '<td>' . $data["aCode"] . '</td>'
         . '<td>' . $data["Silo"] . '</td>'
@@ -41,10 +41,10 @@ while($data = $res->fetch(PDO::FETCH_ASSOC)){
         print $sqlUp . "<br>";
     }
 }
-$html .= '</table>';
-*/
-//end insert silo code
+print '</table>';
 
+//end insert silo code
+/*
 //insert identity code
 $sql2 = "UPDATE ri SET ri.Stack_Code = ri.New_Code
 FROM(
@@ -60,7 +60,7 @@ FROM(
 
 
 $link = null;
-
+*/
 function string_to_ascii($string){
     $num =  substr(hexdec(crc32($string)), 0, 7);
     return $num;
