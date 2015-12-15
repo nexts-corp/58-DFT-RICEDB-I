@@ -36,4 +36,11 @@ interface IViewService {
      * @description  ติดตามปริมาณที่รับมอบแล้ว
      */
     public function follow();
+    
+    /**
+     * @name forfeit
+     * @uri /forfeit
+     * @description  ริบหลักค้ำประกัน
+     */
+    public function forfeit();
 }
