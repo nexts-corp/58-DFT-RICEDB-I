@@ -54,74 +54,86 @@
                                     </div>
                                     <div class="col-sm-4 text-left">
                                         <button class="btn btn-primary" id="btn_show"><i class="fa fa-search"></i> แสดงข้อมูล</button>&nbsp;&nbsp;
-                                        <button class="btn btn-success" id="btn_excel2"><i class="fa fa-file-excel-o"></i> เอกสาร</button>
+                                        <button class="btn btn-success" id="btn_excel"><i class="fa fa-file-excel-o"></i> เอกสาร</button>
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped table-condensed mb-none">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">ลำดับ</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">ผู้เสนอราคา</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">ชนิดข้าว</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">ปีโครงการ</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">คลังสินค้า</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">จังหวัด</th>
-                                                        <th class="text-center" style="vertical-align: middle;" colspan="5">ปริมาณ (ตัน)</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">เลขที่สัญญา</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">ลงวันที่</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">ครบกำหนดสัญญา</th>
-                                                        <th class="text-center" style="vertical-align: middle;" rowspan="2">หมายเหตุ</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="text-center" style="vertical-align: middle;">ตามอนุมัติ</th>
-                                                        <th class="text-center" style="vertical-align: middle;">ทำสัญญาแล้ว</th>
-                                                        <th class="text-center" style="vertical-align: middle;">รับมอบแล้ว</th>
-                                                        <th class="text-center" style="vertical-align: middle;">คงเหลือ</th>
-                                                        <th class="text-center" style="vertical-align: middle;">สูญหาย</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody  id="tableExport">
-                                                    <tr>
-                                                        <td colspan="16" class="text-center" style="vertical-align: middle;">-</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-condensed mb-none">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">ลำดับ</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">ผู้เสนอราคา</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">ชนิดข้าว</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">ปีโครงการ</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">คลังสินค้า</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">จังหวัด</th>
+                                                    <th class="text-center" style="vertical-align: middle;" colspan="5">ปริมาณ (ตัน)</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">เลขที่สัญญา</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">ลงวันที่</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">ครบกำหนดสัญญา</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">หมายเหตุ</th>
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center" style="vertical-align: middle;">ตามอนุมัติ</th>
+                                                    <th class="text-center" style="vertical-align: middle;">ทำสัญญาแล้ว</th>
+                                                    <th class="text-center" style="vertical-align: middle;">รับมอบแล้ว</th>
+                                                    <th class="text-center" style="vertical-align: middle;">คงเหลือ</th>
+                                                    <th class="text-center" style="vertical-align: middle;">สูญหาย</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tableExport">
+                                                <tr>
+                                                    <td colspan="16" class="text-center" style="vertical-align: middle;">-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+
                             <div id="import" class="tab-pane table-responsive">
                                 <div class="row">
                                     <div class="form-group">
-                                        <form id="form" class="form-horizontal form-bordered" enctype="multipart/form-data" method="post">
+                                        <form id="form" class="form-horizontal form-bordered" onsubmit="return(false)">
                                             <div class="col-md-4">
                                                 <label class="col-md-3 control-label" for="fileName">ไฟล์ :</label>
                                                 <div class="col-md-7">
-                                                    <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled">
+                                                    <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <div class="fileUpload btn btn-default">
+                                                    <div class="fileUpload btn btn-primary">
                                                         <span><i class="fa fa-folder-open"></i> เลือก</span>
-                                                        <input id="fileUpload" type="file" class="upload" required="">
+                                                        <input id="fileUpload" type="file" class="upload" required/>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4">
-                                                <label class="col-md-4 control-label" for="row">บรรทัด :</label>
+                                            <div class="col-md-3">
+                                                <label class="col-md-4 control-label" for="sheet">ชีท :</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" id="row" name="row" class="form-control" placeholder="เริ่มบรรทัดที่" value="5" required="">
+                                                    <input type="text" id="sheet" name="sheet" class="form-control" placeholder="ลำดับชีท" value="1" required/>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-4 text-right">
-                                                <a class="btn btn-primary read"><i class="fa fa-table"></i> แสดงตัวอย่าง</a>
-                                                <a class="btn btn-default cancel"><i class="fa fa-times-circle"></i> ยกเลิกไฟล์</a>
+                                            <div class="col-md-3">
+                                                <label class="col-md-4 control-label" for="row">บรรทัด :</label>
+                                                <div class="col-md-8">
+                                                    <input type="text" id="row" name="row" class="form-control" placeholder="เริ่มบรรทัดที่" value="5" required/>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2 text-right">
+                                                <a class="btn btn-success read"><i class="fa fa-eye"></i> อ่าน</a>&nbsp;
+                                                <a class="btn btn-default cancel"><i class="fa fa-trash"></i> ยกเลิก</a>
                                             </div>
                                         </form>
                                     </div>
+
+                                    <div class="col-md-12 text-center" id="readLoading"></div>
                                 </div>
+
                                 <div class="row" style="margin-top: 10px"><!-- table shown file detail -->
                                     <div class="panel-group" id="accordion">
                                         <div class="panel panel-default">
@@ -135,7 +147,7 @@
                                             <div id="collapse1One" class="accordion-body collapse in">
                                                 <div class="panel-body">
                                                     <div class="table-responsive">
-                                                        <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                                                        <table class="table table-bordered table-striped table-condensed mb-none">
                                                             <thead>
                                                                 <tr>
                                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ลำดับ</th>
@@ -159,7 +171,7 @@
                                                                     <th class="text-center" style="vertical-align: middle;">สูญหาย</th>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
+                                                            <tbody id="tableImport">
                                                                 <tr>
                                                                     <td colspan="16" class="text-center" style="vertical-align: middle;">-</td>
                                                                 </tr>
@@ -167,10 +179,13 @@
                                                         </table>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row" style="margin-top: 20px">
-                                                <div class="text-center">
-                                                    <a class="btn btn-primary read"><i class="fa fa-download"></i> นำเข้าระบบ</a>
+
+                                                <div class="col-md-12 text-center" id="saveLoading"></div>
+
+                                                <div class="col-md-12" style="margin-top: 20px">
+                                                    <div class="text-center">
+                                                        <a class="btn btn-primary import"><i class="fa fa-download"></i> นำเข้าระบบ</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,45 +208,138 @@
         $("#btn_excel").click(function () {
             var auccode = $('#auction').val();
             var associateId = $('#associateId').val();
-            var msg = callAjax("{{_context_path}}/api/tracking/follow/export", "post", {auccode: auccode, associateId: associateId}, "json");
 
-            if (msg["export"] == true) {
-                alert("สมมุติว่าได้ไฟล์ Excel");
-            } else {
-                alert("ERROR!");
-            }
+            window.open( "{{_context_path}}/api/tracking/follow/export" + "?auccode=" + auccode+"&associateId="+associateId);
         });
         $("#btn_show").click(function () {
-            var auccode = $('#auction').val();
-            var associateId = $('#associateId').val();
-            var msg = callAjax("{{_context_path}}/api/tracking/follow/get", "post", {auccode: auccode, associateId: associateId}, "json");
+            $('#tableExport').html("<tr><td colspan='16'  class='text-center' style='vertical-align: middle;'>Loading...</td></tr>");
 
-            if (msg["get"] != false) {
-                var table = "";
-                $.each(msg["get"], function (k, v) {
-                    table += '<tr>' +
-                            '<td>' + v["followCode"] + '</td>' +
-                            '<td>' + v["statusKeyword"] + '</td>' +
-                            '<td>' + v["associate"] + '</td>' +
-                            '<td>' + v["province"] + '</td>' +
-                            '<td>' + v["project"] + '</td>' +
-                            '<td>' + v["type"] + '</td>' +
-                            '<td>' + v["silo"] + '</td>' +
-                            '<td>' + accounting.formatNumber(v["weightApprove"], 6, ",", ".") + '</td>' +
-                            '<td>' + accounting.formatNumber(v["weightContract"], 6, ",", ".") + '</td>' +
-                            '<td>' + accounting.formatNumber(v["weightReceived"], 6, ",", ".") + '</td>' +
-                            '<td>' + accounting.formatNumber(v["weightBalance"], 6, ",", ".") + '</td>' +
-                            '<td>' + accounting.formatNumber(v["weightLost"], 6, ",", ".") + '</td>' +
-                            '<td>' + (!v["contractNo"] ? "-" : v["contractNo"]) + '</td>' +
-                            '<td>' + (!v["followDate"] ? "-" : v["followDate"]) + '</td>' +
-                            '<td>' + (!v["dueDate"] ? "-" : v["dueDate"]) + '</td>' +
-                            '<td>' + (!v["remark"] ? "-" : v["remark"]) + '</td>' +
-                            '</tr>';
-                });
+            setTimeout(function() {
+                var auccode = $('#auction').val();
+                var associateId = $('#associateId').val();
+                var msg = callAjax("{{_context_path}}/api/tracking/follow/get", "post", {
+                    auccode: auccode,
+                    associateId: associateId
+                }, "json");
+                if (typeof msg !== "undefined" && msg !== null) {
+                    var table = "";
 
-                $('#tableExport').html(table);
-            } else if (msg["get"] == "null") {
-                $('#tableExport').html("<tr><td colspan='16'  class='text-center' style='vertical-align: middle;'>-</td></tr>");
+                    if(msg["get"].length > 0){
+                        $.each(msg["get"], function (k, v) {
+                            table += '<tr>'
+                                    + '<td class="text-center">' + (k + 1) + '</td>'
+                                    + '<td>' + v["bidderName"] + '</td>'
+                                    + '<td>' + v["type"] + '</td>'
+                                    + '<td>' + v["project"] + '</td>'
+                                    + '<td>' + v["silo"] + '</td>'
+                                    + '<td>' + v["province"] + '</td>'
+                                    + '<td class="text-right">' + checkZero(v["weightApprove"]) + '</td>'
+                                    + '<td class="text-right">' + checkZero(v["weightContract"]) + '</td>'
+                                    + '<td class="text-right">' + checkZero(v["weightReceived"]) + '</td>'
+                                    + '<td class="text-right">' + checkZero(v["weightBalance"]) + '</td>'
+                                    + '<td class="text-right">' + checkZero(v["weightLost"]) + '</td>'
+                                    + '<td class="text-center">' + (!v["contractNo"] ? "-" : v["contractNo"]) + '</td>'
+                                    + '<td class="text-center">' + (!v["followDate"] ? "-" : v["followDate"]) + '</td>'
+                                    + '<td class="text-center">' + (!v["dueDate"] ? "-" : v["dueDate"]) + '</td>'
+                                    + '<td>' + (!v["remark"] ? "-" : v["remark"]) + '</td>'
+                                + '</tr>';
+                        });
+                    }
+                    else{
+                        table = "<tr><td colspan='16'  class='text-center' style='vertical-align: middle;'>ไม่มีข้อมูล</td></tr>";
+                    }
+
+
+                    $('#tableExport').html(table);
+                } else if (msg["get"] == "null") {
+                    $('#tableExport').html("<tr><td colspan='16'  class='text-center' style='vertical-align: middle;'>-</td></tr>");
+                }
+            }, 0);
+        });
+
+        $("#fileUpload").change(function(){
+            $("#fileName").val($(this).val());
+        });
+
+        $("a.read").unbind().click(function(){
+            var isValid = true;
+            $('#form input[required]').each(function() {
+                if($(this).val() == "" && !$(this).prop("disabled")){
+                    isValid = false;
+                    $(this).focus();
+                }
+            });
+
+            if(isValid){
+                $("#readLoading").html('Loading...');
+
+                var formData = new FormData();
+                formData.append('file', $('#fileUpload')[0].files[0]);
+                formData.append('sheet', $("#sheet").val());
+                formData.append('row', $("#row").val());
+
+                var datas = callAjaxFile("{{_context_path}}/api/tracking/follow/view", "post", formData, "json");
+                if(typeof datas !== "undefined" && datas !== null){
+                    $("#readLoading").html('');
+                    $("#fileNameDisplay").html($("#fileUpload").val());
+
+                    var html = '';
+                    $.each(datas["lists"], function(key, value){
+                        html += '<tr>'
+                                + '<td class="text-center">'+value[0]+'</td>'
+                                + '<td>'+value[1]+'</td>'
+                                + '<td>'+value[2]+'</td>'
+                                + '<td>'+value[3]+'</td>'
+                                + '<td>'+value[4]+'</td>'
+                                + '<td>'+value[5]+'</td>'
+                                + '<td class="text-right">'+value[6]+'</td>'
+                                + '<td class="text-right">'+value[7]+'</td>'
+                                + '<td class="text-right">'+value[8]+'</td>'
+                                + '<td class="text-right">'+value[9]+'</td>'
+                                + '<td class="text-right">'+value[10]+'</td>'
+                                + '<td class="text-center">'+value[11]+'</td>'
+                                + '<td class="text-center">'+value[12]+'</td>'
+                                + '<td class="text-center">'+value[13]+'</td>'
+                                + '<td>'+value[14]+'</td>'
+                            + '</tr>';
+                    });
+                    $("#tableImport").html(html);
+                }
+            }
+        });
+
+        $("a.import").unbind().click(function(){
+            var isValid = true;
+            $('#form input[required]').each(function() {
+                if($(this).val() == "" && !$(this).prop("disabled")){
+                    isValid = false;
+                    $(this).focus();
+                }
+            });
+
+            if(isValid){
+                $("#saveLoading").html('Loading...');
+
+                var formData = new FormData();
+                formData.append('file', $('#fileUpload')[0].files[0]);
+                formData.append('sheet', $("#sheet").val());
+                formData.append('row', $("#row").val());
+
+                var datas = callAjaxFile("{{_context_path}}/api/tracking/follow/import", "post", formData, "json");
+                if(typeof datas !== "undefined" && datas !== null){
+                    if(datas["import"] == true){
+                        $("#saveLoading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                        setTimeout(function(){
+                            $("#fileNameDisplay").html('');
+                            $("#tableImport").html('<tr><td colspan="15" class="text-center">-</td></tr>');
+
+                            $("#readLoading, #saveLoading").html('');
+                        }, 500);
+                    }
+                    else{
+                        $("#saveLoading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["save"]+'</span>');
+                    }
+                }
             }
         });
     });
@@ -258,6 +366,15 @@
             });
             $("#associateId").html(html);
         }
+    }
+
+    function checkZero(input){
+        var output = "-";
+        if(input != null){
+            output = accounting.formatNumber(input, 6, ",", ".");
+        }
+
+        return output;
     }
 </script>
 

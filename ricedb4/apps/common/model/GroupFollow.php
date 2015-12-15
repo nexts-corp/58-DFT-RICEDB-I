@@ -12,6 +12,10 @@ class GroupFollow {
      * @Id 
      * @Column(type="string",length=50, name="statusKeyword") */
     public $statusKeyword;
+    /**
+     * @Column(type="string",length=255, name="statusName")
+     */
+    public $statusName;
 
     /**
      * @Id  
@@ -97,6 +101,10 @@ class GroupFollow {
         return $this->statusKeyword;
     }
 
+    function getStatusName() {
+        return $this->statusName;
+    }
+
     function getWeightApprove() {
         return $this->weightApprove;
     }
@@ -147,6 +155,10 @@ class GroupFollow {
 
     function setStatusKeyword($statusKeyword) {
         $this->statusKeyword = $statusKeyword;
+    }
+
+    function setStatusName($statusName) {
+        $this->statusName = $statusName;
     }
 
     function setWeightApprove($weightApprove) {

@@ -161,7 +161,7 @@ function getTag(param, defaultValue) {
 function logout(){
     $.removeCookie("token", { path: '/' });
     $.removeCookie("userinfo", { path: '/' });
-    window.location.href = '/ricedb3/api/root/view/index';
+    window.location.href = '/ricedb4/api/root/view/index';
 }
 
 function thaiDate(day, month, year){

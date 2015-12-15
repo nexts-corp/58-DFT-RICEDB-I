@@ -14,6 +14,9 @@ class RiceFollow extends EntityBase {
      */
     public $followCode;
 
+    /** @Column(type="string",length=20,name="Lot_Code") */
+    public $lotCode;
+
     /**
      * @Id
      * @Column(type="string",length=255, name="LK_Status_Keyword") 

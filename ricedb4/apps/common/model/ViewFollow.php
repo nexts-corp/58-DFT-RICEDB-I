@@ -10,19 +10,29 @@ class ViewFollow {
 
     /**
      * @Id
+     * @Column(type="integer",name="id")
+     */
+    public $id;
+
+    /**
      * @Column(type="string",length=50,name="followCode")
      */
     public $followCode;
 
     /**
-     * @Column(type="string",length=20, name="lotCode") 
+     * @Column(type="string",length=20, name="lotCode")
      */
     public $lotCode;
 
     /**
-     * @Column(type="string",length=255, name="statusKeyword") 
+     * @Column(type="string",length=255, name="statusKeyword")
      */
     public $statusKeyword;
+
+    /**
+     * @Column(type="string",length=255, name="statusName")
+     */
+    public $statusName;
 
     /** @Column(type="integer",length=11, name="bidderNo") */
     public $bidderNo;
@@ -97,6 +107,10 @@ class ViewFollow {
 
     function getStatusKeyword() {
         return $this->statusKeyword;
+    }
+
+    function getStatusName() {
+        return $this->statusName;
     }
 
     function getBidderId() {
@@ -189,6 +203,10 @@ class ViewFollow {
 
     function setStatusKeyword($statusKeyword) {
         $this->statusKeyword = $statusKeyword;
+    }
+
+    function setStatusName($statusName) {
+        $this->statusName = $statusName;
     }
 
     function setBidderId($bidderId) {

@@ -30,7 +30,7 @@ interface IFollowService {
      * @uri /export
      * @param string auccode
      * @param string associateId
-     * @return string export
+     * @return file export Description
      * @description  export excel
      */
     public function export($auccode,$associateId);
@@ -45,5 +45,25 @@ interface IFollowService {
      */
     public function get($auccode,$associateId);
 
+    /**
+     * @name view
+     * @uri /view
+     * @return String[] lists Description
+     * @param file file Description
+     * @param integer sheet Description
+     * @param integer row Description
+     * @description view excel
+     */
+    public function view($file, $sheet, $row);
 
+    /**
+     * @name import
+     * @uri /import
+     * @param file file Description
+     * @param integer sheet Description
+     * @param integer row Description
+     * @return boolean import Description
+     * @description ผู้เสนอราคาสูงสุดต่อคลัง
+     */
+    public function import($file, $sheet, $row);
 }
