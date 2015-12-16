@@ -10,7 +10,7 @@
                 {"name": "driver","value": "pdo_sqlsrv"},
                 {"name": "host","value": "202.44.34.86"},
                 {"name": "port","value": "1443"},
-                {"name": "dbname","value": "RiceDBTest"},
+                {"name": "dbname","value": "RiceDBTest2"},
                 {"name": "user","value": "riceuser"},
                 {"name": "password","value": "l2ice2015"}
 
