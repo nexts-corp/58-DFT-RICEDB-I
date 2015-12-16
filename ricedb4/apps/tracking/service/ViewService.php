@@ -29,4 +29,9 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
+    public function forfeit() {
+        $view = new CJView("forfeit", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
 }
