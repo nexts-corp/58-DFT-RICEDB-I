@@ -23,7 +23,7 @@
                 {"name": "OAUTH2_CLIENT_ID","value": "123456"},
                 {"name": "OAUTH2_CLIENT_SECRET","value": "123456"},
                 {"name": "OAUTH2_ACCESS_KEY","value": "code"},
-                {"name": "OAUTH2_AUTH_URL","value": "/ricedb4/api/oauth/authen/authorization"},
+                {"name": "OAUTH2_AUTH_URL","value": "http://202.44.34.67/ricedb4/api/oauth/authen/authorization"},
                 {"name": "OAUTH2_TOKEN_URI","value":"http://202.44.34.67/ricedb4/api/oauth/authen/authenticate"}
        ]
     }
