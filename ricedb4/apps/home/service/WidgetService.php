@@ -73,32 +73,34 @@ class WidgetService extends CServiceBase implements IWidgetService{
 
         $dataSt = $this->datacontext->getObject($sqlSt, $paramSt, 1); //get STATUS is Active
 
-        $sqlSm = "SELECT"
-                ." sum(oweightAll) AS sumWeight, sum(bidderPrice) AS sumPrice"
-            ." FROM fn_auction_info(:auction)"
-            ." WHERE isSale = 'Y'";
-        $paramSm = array(
-            "auction" => $dataSt[0]["keyword"]
-        );
-        $dataSm = $this->datacontext->pdoQuery($sqlSm, $paramSm);
+        if(count($dataSt) > 0) {
+            $sqlSm = "SELECT"
+                . " sum(oweightAll) AS sumWeight, sum(bidderPrice) AS sumPrice"
+                . " FROM fn_auction_info(:auction)"
+                . " WHERE isSale = 'Y'";
+            $paramSm = array(
+                "auction" => $dataSt[0]["keyword"]
+            );
+            $dataSm = $this->datacontext->pdoQuery($sqlSm, $paramSm);
 
-        $sql = "SELECT"
-                ." st.typeName, sum(st.oweightAll) AS weight"
-            ." FROM fn_auction_info(:auction) fn"
-            ." JOIN dft_auction_stack st ON st.wareHouseCode = fn.wareHouseCode AND st.associateId = fn.associateId AND st.auctionNo = fn.auctionNo"
-            ." WHERE isSale = 'Y'"
-            ." GROUP BY st.typeName";
+            $sql = "SELECT"
+                . " st.typeName, sum(st.oweightAll) AS weight"
+                . " FROM fn_auction_info(:auction) fn"
+                . " JOIN dft_auction_stack st ON st.wareHouseCode = fn.wareHouseCode AND st.associateId = fn.associateId AND st.auctionNo = fn.auctionNo"
+                . " WHERE isSale = 'Y'"
+                . " GROUP BY st.typeName";
 
-        $param = array(
-            "auction" => $dataSt[0]["keyword"]
-        );
-        $data = $this->datacontext->pdoQuery($sql, $param);
+            $param = array(
+                "auction" => $dataSt[0]["keyword"]
+            );
+            $data = $this->datacontext->pdoQuery($sql, $param);
 
-        $result["status"] = $dataSt[0]["status"];
-        $result["auctionDate"] = $dataSt[0]["auctionDate"];
-        $result["sumWeight"] = $dataSm[0]["sumWeight"];
-        $result["sumPrice"] = $dataSm[0]["sumPrice"];
-        $result["riceGroup"] = $data;
+            $result["status"] = $dataSt[0]["status"];
+            $result["auctionDate"] = $dataSt[0]["auctionDate"];
+            $result["sumWeight"] = $dataSm[0]["sumWeight"];
+            $result["sumPrice"] = $dataSm[0]["sumPrice"];
+            $result["riceGroup"] = $data;
+        }
 
         return $result;
     }

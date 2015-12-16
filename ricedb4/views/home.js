@@ -227,51 +227,53 @@ function auctionLatest(){
     var datas = callAjax(js_context_path+"/api/home/widget/auctionLatest", "post", {}, "json");
     if (typeof datas !== "undefined" && datas !== null) {
         var data = datas["lists"];
-        var auction = '<div>'
-                + '<div class="row text-center">'
-                    + '<h4 class="text-dark">'
-                        + 'ประมูลครั้งที่ '+data["status"]
-                        +'<div class="text-sm">วันที่ '+data["auctionDate"]+'</div>'
-                    + '</h4>'
-                + '</div>'
-                + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">น้ำหนัก :</div>'
-                    + '<div class="col-md-9 text-left">'+accounting.formatNumber(data["sumWeight"], 6, ",", ".")+' ตัน</div>'
-                + '</div>'
-                + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">มูลค่า :</div>'
-                    + '<div class="col-md-9 text-left">'+accounting.formatNumber(data["sumPrice"], 2, ",", ".")+' บาท</div>'
-                + '</div>'
-                + '<table class="table">'
-                    + '<thead>'
-                        + '<tr>'
-                            + '<th class="text-center">ลำดับ</th>'
-                            + '<th class="text-center">ชนิด</th>'
-                            + '<th class="text-right">ปริมาณ (ตัน)</th>'
-                        + '</tr>'
-                    + '</thead>'
-                    + '<tbody>';
 
-                    var count = 0;
-                    $.each(data["riceGroup"], function(key, val){
-                        auction += '<tr>'
-                                + '<td class="text-center">'+(++count)+'</td>'
-                                + '<td class="text-left">'+val["typeName"]+'</td>'
-                                + '<td class="text-right">'+accounting.formatNumber(val["weight"], 6, ",", ".")+'</td>'
-                            + '</tr>';
-                    });
+        if (data.length > 0) {
+            var auction = '<div>'
+                    + '<div class="row text-center">'
+                        + '<h4 class="text-dark">'
+                            + 'ประมูลครั้งที่ ' + data["status"]
+                            + '<div class="text-sm">วันที่ ' + data["auctionDate"] + '</div>'
+                        + '</h4>'
+                    + '</div>'
+                    + '<div class="row">'
+                        + '<div class="col-md-3 text-right text-bold">น้ำหนัก :</div>'
+                        + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["sumWeight"], 6, ",", ".") + ' ตัน</div>'
+                    + '</div>'
+                    + '<div class="row">'
+                        + '<div class="col-md-3 text-right text-bold">มูลค่า :</div>'
+                        + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["sumPrice"], 2, ",", ".") + ' บาท</div>'
+                    + '</div>'
+                    + '<table class="table">'
+                        + '<thead>'
+                            + '<tr>'
+                                + '<th class="text-center">ลำดับ</th>'
+                                + '<th class="text-center">ชนิด</th>'
+                                + '<th class="text-right">ปริมาณ (ตัน)</th>'
+                            + '</tr>'
+                        + '</thead>'
+                        + '<tbody>';
 
-                    auction += '</tbody>'
-                + '</table>'
-            + '</div>';
+                        var count = 0;
+                        $.each(data["riceGroup"], function (key, val) {
+                            auction += '<tr>'
+                                    + '<td class="text-center">' + (++count) + '</td>'
+                                    + '<td class="text-left">' + val["typeName"] + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(val["weight"], 6, ",", ".") + '</td>'
+                                + '</tr>';
+                            });
+
+                        auction += '</tbody>'
+                    + '</table>'
+                + '</div>';
+
+        }
     }
 
     $("#auction").html(auction);
 }
 
 function viewReserve(){
-
-
     var datas = callAjax(js_context_path+"/api/home/widget/viewReserve", "post", {}, "json");
     if (typeof datas !== "undefined" && datas !== null) {
         var reserve = '<div>'
