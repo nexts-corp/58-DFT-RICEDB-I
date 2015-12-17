@@ -161,6 +161,8 @@ class ImportService extends CServiceBase implements IImportService{
                 $disc = $sheet->getCellByColumnAndRow($column["discount"], $row)->getFormattedValue();
                 $weightAll = $sheet->getCellByColumnAndRow($column["weightAll"], $row)->getFormattedValue();
 
+                $tWeight = $weightAll;
+
                 if($stackCode != ""){
                     //หาชื่อจังหวัด
                     $prov = $provArr[str_replace(" ", "", $prov)];
@@ -192,7 +194,7 @@ class ImportService extends CServiceBase implements IImportService{
                     //หาเกรดข้าว
                     $grade = $gradeArr[str_replace(" ", "", $grade)];
 
-                    $command[] = "('".substr($stackCode, 0, 12)."', '".$stackCode."', '".$code."', '".$bag."', '".$prov."', '".$proj."', '".$round."', '".$silo."', '".$addr."', '".$asso."', '".$type."', '".$warehouse."', '".$stack."', '".$weight."', '".$samp."', '".$grade."', '".$disc."', '".$reserveKeyword."', '".$weightAll."')";
+                    $command[] = "('".substr($stackCode, 0, 12)."', '".$stackCode."', '".$code."', '".$bag."', '".$prov."', '".$proj."', '".$round."', '".$silo."', '".$addr."', '".$asso."', '".$type."', '".$warehouse."', '".$stack."', '".$weight."', '".$samp."', '".$grade."', '".$disc."', '".$reserveKeyword."', '".$weightAll."', '".$tWeight."')";
 
                     $count++;
                     $this->logger->info("Row : ".$count);
@@ -200,7 +202,7 @@ class ImportService extends CServiceBase implements IImportService{
 
                 if($count == 10 || $row == $highestRow){
                     if(count($command) > 0){
-                        $insert = "INSERT INTO dft_Rice_Tracking(Warehouse_Code, Stack_Code, Code, Bag_No, LK_Province_Id, LK_Project_Id, Round, Silo, Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight, Sampling_Id, LK_Grade_Id, Discount_Rate, Reserve_List_Keyword, Weight_All) VALUES ".implode(",", $command);
+                        $insert = "INSERT INTO dft_Rice_Tracking(Warehouse_Code, Stack_Code, Code, Bag_No, LK_Province_Id, LK_Project_Id, Round, Silo, Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight, Sampling_Id, LK_Grade_Id, Discount_Rate, Reserve_List_Keyword, Weight_All, TWeight) VALUES ".implode(",", $command);
                         $sql = "EXEC sp_batch_insert :cmd";
                         $param = array(
                             "cmd" =>  $insert

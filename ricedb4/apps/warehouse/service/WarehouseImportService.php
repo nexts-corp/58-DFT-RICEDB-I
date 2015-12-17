@@ -34,23 +34,32 @@ class WarehouseImportService extends CServiceBase implements IWarehouseImportSer
             ." ORDER BY ri.Silo ASC";
         $data = $this->datacontext->pdoQuery($sql);
 
+        $count = 0;
         $wCommand = [];
         foreach($data as $key => $value) {
             $conv = "R" . $value["pCode"] . $value["aCode"] . $this->string_to_ascii(str_replace(" ", "", $value["Silo"]));
 
             $wCommand[] = "UPDATE dft_Rice_Info SET Warehouse_Code='".$conv."' WHERE Silo='".$value["Silo"]."' AND LK_Associate_Id='".$value["LK_Associate_Id"]."' AND LK_Province_Id='".$value["LK_Province_Id"]."'";
-        }
-        if(count($wCommand) > 0){
-            $sql = "EXEC sp_batch_exce :cmd";
 
-            $param = array(
-                "cmd" =>  implode(";", $wCommand)
-            );
+            $count++;
+            if($count == 10 || $key == count($data) - 1) {
+                if (count($wCommand) > 0) {
+                    $sql = "EXEC sp_batch_exce :cmd";
 
-            if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
-                return $this->datacontext->getLastMessage();
+                    $param = array(
+                        "cmd" => implode(";", $wCommand)
+                    );
+
+                    if (!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")) {
+                        return $this->datacontext->getLastMessage();
+                    }
+
+                    $wCommand = [];
+                    $count = 0;
+                }
             }
         }
+
 
         $wTmp = '';
         $cTmp = 0;
@@ -59,6 +68,8 @@ class WarehouseImportService extends CServiceBase implements IWarehouseImportSer
         $data = $this->datacontext->pdoQuery($sql);
         $sCommand = [];
         $start = 0;
+
+        $count = 0;
 
         foreach($data as $key => $value) {
             if($wTmp != $value["Warehouse_Code"]){
@@ -75,28 +86,37 @@ class WarehouseImportService extends CServiceBase implements IWarehouseImportSer
             $start++;
             $stackCode = $value["Warehouse_Code"] . str_pad($start, 4, "0", STR_PAD_LEFT);
             $sCommand[] = "UPDATE dft_Rice_Info SET Stack_Code='".$stackCode."' WHERE Id='".$value["Id"]."'";
+            $count++;
 
             if(($wTmp != $value["Warehouse_Code"] || $key == count($data) - 1) && $wTmp != ''){
                 if($key == count($data) - 1) $cTmp++;
                 $sCommand[] = "UPDATE dft_Warehouse_Code SET Running = '" . $cTmp . "' WHERE Warehouse_Code = '" . $wTmp . "'";
+                $count++;
             }
 
             $wTmp = $value["Warehouse_Code"];
             $cTmp = $start;
-        }
 
-        if(count($sCommand) > 0){
-            $sql = "EXEC sp_batch_exce :cmd";
+            if($count > 10 || $key == count($data) - 1) {
+                if(count($sCommand) > 0){
+                    $sql = "EXEC sp_batch_exce :cmd";
 
-            $param = array(
-                "cmd" =>  implode(";", $sCommand)
-            );
+                    $param = array(
+                        "cmd" =>  implode(";", $sCommand)
+                    );
 
-            if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
-                return $this->datacontext->getLastMessage();
+                    if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
+                        return $this->datacontext->getLastMessage();
+                    }
+
+
+                    $sCommand = [];
+                    $count = 0;
+                }
             }
-
         }
+
+
 
         return $return;
     }

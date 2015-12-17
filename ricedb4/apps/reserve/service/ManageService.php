@@ -172,13 +172,16 @@ class ManageService extends CServiceBase implements IManageService {
         $data = $this->datacontext->getObject($sql);
         foreach($data as $key => $val){
             $rice = new \apps\common\entity\RiceReserve();
-            $rice->warehouseCode = $val->warehouseCode;
+            /*$rice->warehouseCode = $val->warehouseCode;
             $rice->stackCode = $val->stackCode;
             $rice->reserveKeyword = $reserveList->keyword;
 
             $check = $this->datacontext->getObject($rice);
 
-            if(count($check) == 0){
+            if(count($check) == 0){*/
+                $rice->warehouseCode = $val->warehouseCode;
+                $rice->stackCode = $val->stackCode;
+                $rice->reserveKeyword = $reserveList->keyword;
                 $rice->code = $val->code;
                 $rice->bagNo = $val->bagNo;
                 $rice->provinceId = $val->provinceId;
@@ -197,7 +200,7 @@ class ManageService extends CServiceBase implements IManageService {
                 if(!($this->datacontext->saveObject($rice))){
                     $return = $this->datacontext->getLastMessage();
                 }
-            }
+            //}
         }
         return $return;
     }
