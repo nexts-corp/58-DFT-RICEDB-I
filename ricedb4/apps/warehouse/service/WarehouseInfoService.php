@@ -16,6 +16,72 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
         $this->logger = \Logger::getLogger("root");
         $this->datacontext = new CDataContext(NULL);
     }
+
+    function string_to_ascii($string){
+        $num =  substr(hexdec(crc32($string)), 0, 7);
+        return $num;
+    }
+
+    function createCode($id){
+        $return = true;
+        //warehouse code
+        $sql = "SELECT"
+            ." pv.Code AS pCode, ri.LK_Province_Id, ac.Code AS aCode, ri.LK_Associate_Id, ri.Silo"
+            ." FROM dft_Rice_Info ri"
+            ." INNER JOIN dft_LK_Province pv ON pv.Id = ri.LK_Province_Id"
+            ." INNER JOIN dft_LK_Associate ac ON ac.Id = ri.LK_Associate_Id"
+            ." WHERE ri.Id='".$id."'"
+            ." GROUP BY pv.Code, ri.LK_Province_Id, ac.Code, ri.LK_Associate_Id, ri.Silo"
+            ." ORDER BY ri.Silo ASC";
+        $data = $this->datacontext->pdoQuery($sql);
+        $value = $data[0];
+
+        $conv = "R" . $value["pCode"] . $value["aCode"] . $this->string_to_ascii(str_replace(" ", "", $value["Silo"]));
+
+        $update = "UPDATE dft_Rice_Info SET Warehouse_Code='".$conv."' WHERE Silo='".$value["Silo"]."' AND LK_Associate_Id='".$value["LK_Associate_Id"]."' AND LK_Province_Id='".$value["LK_Province_Id"]."'";
+        $sql = "EXEC sp_batch_exce :cmd";
+
+        $param = array(
+            "cmd" =>  $update
+        );
+
+        if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
+            return $this->datacontext->getLastMessage();
+        }
+
+        //stack code
+        $sqlTop = "SELECT Running FROM dft_Warehouse_Code WHERE Warehouse_Code = :wCode";
+        $paramTop = array(
+            "wCode" => $conv
+        );
+
+        $dataTop = $this->datacontext->pdoQuery($sqlTop, $paramTop)[0];
+
+
+        $start = $dataTop["Running"] + 1;
+
+        $stackCode = $conv . str_pad($start, 4, "0", STR_PAD_LEFT);
+
+        $wCommand = [];
+
+        $wCommand[] = "UPDATE dft_Rice_Info SET Stack_Code='".$stackCode."' WHERE Id='".$id."'";
+
+        $wCommand[] = "UPDATE dft_Warehouse_Code SET Running = Running + 1 WHERE Warehouse_Code = '" . $conv. "'";
+
+        if(count($wCommand) > 0){
+            $sql = "EXEC sp_batch_exce :cmd";
+
+            $param = array(
+                "cmd" =>  implode(";", $wCommand)
+            );
+
+            if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
+                return $this->datacontext->getLastMessage();
+            }
+        }
+
+        return $return;
+    }
     
     public function listsAllRice($columns, $draw, $start, $length){
         $condArr = [];
@@ -253,8 +319,12 @@ class WarehouseInfoService extends CServiceBase implements IWarehouseInfoService
         if (!$this->datacontext->saveObject($riceInfo)) {
             $return = $this->datacontext->getLastMessage();
         }
-
-        return $return;
+        if($return == true){
+            return $this->createCode($riceInfo->id);
+        }
+        else {
+            return $return;
+        }
     }
 
     public function update($riceInfo){

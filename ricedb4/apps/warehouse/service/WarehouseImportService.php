@@ -1,7 +1,5 @@
 <?php
-
 namespace apps\warehouse\service;
-
 
 use apps\warehouse\interfaces\IWarehouseImportService;
 use th\co\bpg\cde\core\CServiceBase;
@@ -24,6 +22,7 @@ class WarehouseImportService extends CServiceBase implements IWarehouseImportSer
     }
 
     function createCode(){
+        $return = true;
         //warehouse code
         $sql = "SELECT"
                 ." pv.Code AS pCode, ri.LK_Province_Id, ac.Code AS aCode, ri.LK_Associate_Id, ri.Silo"
@@ -35,70 +34,71 @@ class WarehouseImportService extends CServiceBase implements IWarehouseImportSer
             ." ORDER BY ri.Silo ASC";
         $data = $this->datacontext->pdoQuery($sql);
 
+        $wCommand = [];
         foreach($data as $key => $value) {
-            $conv = "R" . $value["pCode"] . $value["aCode"] . $this->string_to_ascii(str_replace(" ", "", $data["Silo"]));
+            $conv = "R" . $value["pCode"] . $value["aCode"] . $this->string_to_ascii(str_replace(" ", "", $value["Silo"]));
 
-            $sqlUp = "UPDATE dft_Rice_Info SET Warehouse_Code = :code WHERE Silo = :silo AND LK_Associate_Id = :associate AND LK_Province_Id = :province";
-            $paramUp = array(
-                "code" => $conv,
-                "silo" => $data["Silo"],
-                "associate" => $data["LK_Associate_Id"],
-                "province" => $data["LK_Province_Id"]
+            $wCommand[] = "UPDATE dft_Rice_Info SET Warehouse_Code='".$conv."' WHERE Silo='".$value["Silo"]."' AND LK_Associate_Id='".$value["LK_Associate_Id"]."' AND LK_Province_Id='".$value["LK_Province_Id"]."'";
+        }
+        if(count($wCommand) > 0){
+            $sql = "EXEC sp_batch_exce :cmd";
+
+            $param = array(
+                "cmd" =>  implode(";", $wCommand)
             );
-            if (!$this->datacontext->pdoQuery($sqlUp, $paramUp)) {
-                return false;
+
+            if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
+                return $this->datacontext->getLastMessage();
             }
         }
 
+        $wTmp = '';
+        $cTmp = 0;
         //stack code
-        $sql = "SELECT * FROM"
-            ."("
-                ."SELECT"
-                    ."Warehouse_Code,"
-                    ."COUNT(*) AS cAll,"
-                    ."SUM("
-                        ."CASE"
-                            ."WHEN Stack_Code IS NULL THEN 1"
-                            ."ELSE 0"
-                        ."END"
-                    .") AS cNull"
-                ."FROM dft_Rice_Info"
-                ."GROUP BY Warehouse_Code"
-            .") data"
-            ."WHERE cNull > 0";
+        $sql = "SELECT * FROM dft_Rice_Info WHERE Stack_Code IS NULL ORDER BY Warehouse_Code, Id ASC";
         $data = $this->datacontext->pdoQuery($sql);
-        foreach($data as $key => $value){
-            if($value["cAll"] != $value["cNull"]){
-                //select top 1
-                $sqlTop = "SELECT TOP 1 Stack_Code FROM dft_Rice_Info WHERE Warehouse_Code = :wCode ORDER BY Stack_Code DESC";
+        $sCommand = [];
+        $start = 0;
+
+        foreach($data as $key => $value) {
+            if($wTmp != $value["Warehouse_Code"]){
+                $sqlTop = "SELECT Running FROM dft_Warehouse_Code WHERE Warehouse_Code = :wCode";
                 $paramTop = array(
                     "wCode" => $value["Warehouse_Code"]
                 );
-                $dataTop = $this->datacontext->pdoQuery($sqlTop, $paramTop);
+                $dataTop = $this->datacontext->pdoQuery($sqlTop, $paramTop)[0];
 
-                $start = (int) substr($dataTop["Stack_Code"], 12, 4);
-            }
-            else{
-                $start = 0;
+                $start = $dataTop["Running"];
+
             }
 
-            $sqlFetch = "SELECT Id FROM dft_Rice_Info WHERE Warehouse_Code = :wCode AND Stack_Code IS NULL";
-            $paramFetch = array(
-                "wCode" => $value["Warehouse_Code"]
-            );
-            $dataFetch = $this->datacontext->pdoQuery($sqlFetch, $paramFetch);
-            foreach($dataFetch as $key2 => $value2){
-                $stackCode = $value["Warehouse_Code"].str_pad(++$start, 4, "0", STR_PAD_LEFT);
-                $sqlUp = "UPDATE dft_Rice_Info SET Stack_Code = :stackCode WHERE Id = :id";
-                $paramUp = array(
-                    "stackCode" => $stackCode,
-                    "id" => $value2["Id"]
-                );
-                if(!$this->datacontext->pdoQuery($sqlUp, $paramUp)){
-                    return $this->datacontext->getLastMessage();
-                }
+            $start++;
+            $stackCode = $value["Warehouse_Code"] . str_pad($start, 4, "0", STR_PAD_LEFT);
+            $sCommand[] = "UPDATE dft_Rice_Info SET Stack_Code='".$stackCode."' WHERE Id='".$value["Id"]."'";
+
+            if(($wTmp != $value["Warehouse_Code"] || $key == count($data) - 1) && $wTmp != ''){
+                if($key == count($data) - 1) $cTmp++;
+                $sCommand[] = "UPDATE dft_Warehouse_Code SET Running = '" . $cTmp . "' WHERE Warehouse_Code = '" . $wTmp . "'";
             }
+
+            $wTmp = $value["Warehouse_Code"];
+            $cTmp = $start;
         }
+
+        if(count($sCommand) > 0){
+            $sql = "EXEC sp_batch_exce :cmd";
+
+            $param = array(
+                "cmd" =>  implode(";", $sCommand)
+            );
+
+            if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
+                return $this->datacontext->getLastMessage();
+            }
+
+        }
+
+        return $return;
     }
 
     public function view($file, $sheet, $row){
@@ -172,6 +172,7 @@ class WarehouseImportService extends CServiceBase implements IWarehouseImportSer
 
             $count = 0;
             $command = [];
+
             for ($row = $rowStart; $row <= $highestRow; $row++) {
                 $no = $sheet->getCellByColumnAndRow($column["no"], $row)->getFormattedValue();
                 $code = $sheet->getCellByColumnAndRow($column["code"], $row)->getFormattedValue();
@@ -201,12 +202,13 @@ class WarehouseImportService extends CServiceBase implements IWarehouseImportSer
                     if(count($command) > 0){
                         $insert = "INSERT INTO dft_Rice_Original(No, Code, Bag_No, Province, Project, Silo, Associate, Type, Warehouse, Stack, Weight, Sampling_Id, Grade, Discount_Rate, Status, Weight_All) VALUES ".implode(",", $command);
                         $sql = "EXEC sp_batch_insert :cmd";
+
                         $param = array(
                             "cmd" =>  $insert
                         );
 
                         if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
-                            return false;
+                            return $this->datacontext->getLastMessage();
                         }
                         $command = [];
                         $count = 0;
