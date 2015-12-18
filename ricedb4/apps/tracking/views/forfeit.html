@@ -89,9 +89,9 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h2 class="panel-title">{{#i18n}}tracking.return.panelInfo{{/i18n}}</h2>
-                                    <div style="float: right; margin-top: -25px;">
-                                        <button class="btn btn-primary checkList"><i class="fa fa-print"></i> {{#i18n}}tracking.buttonReturn{{/i18n}}</button>
-                                    </div>
+                                    <!--                                    <div style="float: right; margin-top: -25px;">
+                                                                            <button class="btn btn-primary checkList"><i class="fa fa-print"></i> {{#i18n}}tracking.buttonReturn{{/i18n}}</button>
+                                                                        </div>-->
                                 </div>
                                 <div class="panel-body">
                                     <table class="table table-bordered table-striped table-condensed mb-none">
@@ -105,37 +105,6 @@
                                         <tbody id="bdBody">
                                             <tr>
                                                 <td colspan="3" class="text-center">-</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 table-responsive">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <div class="panel-actions">
-                                        <a href="#" class="fa fa-caret-up"></a>
-                                    </div>
-                                    <h2 class="panel-title">{{#i18n}}tracking.return.panelWinner{{/i18n}}</h2>
-                                </div>
-                                <div class="panel-body">
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.valuePayment{{/i18n}} (2%)</th>
-                                                <th class="text-center">{{#i18n}}tracking.status{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.contract{{/i18n}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="whBody">
-                                            <tr>
-                                                <td colspan="8" class="text-center">-</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -169,7 +138,7 @@
                                                 <th class="text-center">{{#i18n}}tracking.bankNo{{/i18n}}</th>
                                                 <th class="text-center">{{#i18n}}tracking.bankAmount{{/i18n}} ({{#i18n}}tracking.bath{{/i18n}})</th>
                                                 <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.status{{/i18n}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="paymentBody">
@@ -178,67 +147,13 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <div class="col-md-12 text-center">
-                                        <button id="btnSave" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}tracking.buttonSave{{/i18n}}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 table-responsive">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <div class="panel-actions">
-                                        <a href="#" class="fa fa-caret-up"></a>
-                                    </div>
-                                    <h2 class="panel-title">{{#i18n}}tracking.return.panelReturn{{/i18n}} <span id='countReturn'>0</span> {{#i18n}}tracking.paymentUnit{{/i18n}}</h2>
-                                </div>
-                                <div class="panel-body">
-                                    <table  class="table table-bordered table-striped table-condensed mb-none">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.typePayment{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.bank{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.bankDate{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.bankNo{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.bankAmount{{/i18n}} ({{#i18n}}tracking.bath{{/i18n}})</th>
-                                                <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="returnBody">
-                                            <tr>
-                                                <td colspan="8" class="text-center">-</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <!--                                    <div class="col-md-12 text-center">
+                                                                            <button id="btnSave" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}tracking.buttonSave{{/i18n}}</button>
+                                                                        </div>-->
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-2">
-                        <div class="col-md-12">
-                            <nav id="affix-nav" class="sidebar">
-                                <div class="nav sidenav" data-spy="affix" data-offset-top="0" style="font-size: 130%; min-width: 220px; border: 2px solid #aaa; padding: 9px;">                                    
-
-                                    <div class="text-danger">{{#i18n}}tracking.canReturn{{/i18n}}</div>
-                                    <div class="text-danger text-right text-bold"><span id="txtReturn">0</span> {{#i18n}}tracking.bath{{/i18n}}</div><br>
-
-                                    <div class="text-info">{{#i18n}}tracking.siloValueChoose{{/i18n}}</div>
-                                    <div class="text-info text-right text-bold"><span id="txtWarehouse">0</span> {{#i18n}}tracking.bath{{/i18n}}</div><br>
-                                    <hr>
-                                    <div class="text-success">{{#i18n}}tracking.paymentChoose{{/i18n}}</div>
-                                    <div class="text-success text-right text-bold"><span id="txtSelect">0</span> {{#i18n}}tracking.bath{{/i18n}}</div><br>
-
-                                    <div class="text-warning">{{#i18n}}tracking.paymentHold{{/i18n}}</div>
-                                    <div class="text-warning text-right text-bold"><span id="txtBalance">0</span> {{#i18n}}tracking.bath{{/i18n}}</div>
-
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
-
                 </div><!-- col-md-12 -->
             </div><!-- col-md-9 -->
         </div><!--  row  -->
@@ -248,14 +163,14 @@
 <script type="text/javascript">
     var listArr = [];
 
-    var sumNeedGrt = 0;
-    var sumPassGrt = 0;
+//    var sumNeedGrt = 0;
+//    var sumPassGrt = 0;
     var sumPayment = 0;
-    var sumWareHouse = 0;
+//    var sumWareHouse = 0;
     var countCheck = 0;
     var dataPayment;
-    var sumReturn = 0;
-    var sumReturned = 0;
+//    var sumReturn = 0;
+//    var sumReturned = 0;
     $(function () {
         listsAuction();
         $("#btn_date").click(function () {
@@ -269,63 +184,10 @@
             toggleShow("list");
         });
 
-        $("#btnSave").click(function () {
-            var data = checkSelect();
-            if (data == "noCheckbox") {
-                $.alert({
-                    title: 'คำแนะนำ!',
-                    content: 'ไม่ได้เลือกหลักค้ำประกัน!',
-                    confirmButton: "ตกลง",
-                    theme: 'black',
-                    columnClass: 'col-md-4 col-md-offset-4'
-                });
-            } else {
-                var cfm = $.confirm({
-                    title: 'ยืนยันการอนุมัติ!',
-                    content: "คุณต้องการที่จะทำต่อ?",
-                    confirmButton: 'ตกลง',
-                    cancelButton: 'ยกเลิก',
-                    confirmButtonClass: 'btn-success',
-                    cancelButtonClass: 'btn-warning',
-                    theme: 'holodark',
-                    columnClass: 'col-md-4 col-md-offset-4',
-                    autoClose: 'cancel|11000',
-                    confirm: function () {
-                        $("#bidderBody").html("<tr><td colspan='3' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
-                        cfm.close();
-                        setTimeout(function () {
-                            var jData = {};
-                            jData["bidderPayment"] = checkSelect();
-                            var dataJSON = JSON.stringify(jData);
-                            var dataJSONEN = encodeURIComponent(dataJSON);
-                            var msg = callAjax("{{_context_path}}/api/tracking/return/update", "post", dataJSONEN, "json");
-                            if (msg.update === true) {
-                                alert("บันทึกเรียบร้อย");
-                                var auccode = $('#auction').val();
-                                listBidder(auccode);
-                                $(".checkList").focus();
-                                listPayment(data[0]["bidderHistoryId"]);
-                                $('.checkboxWH').each(function (k, v) {
-                                    $(this).prop("checked", false);
-                                });
-                                sumWareHouse = 0;
-                                $("#txtWarehouse").text(accounting.formatNumber(sumWareHouse, 2, ",", "."));
-                                //swap();
-                                //listPayment();
-                            } else {
-                                alert("ERROR!!");
-                            }
-                        }, 1000);
-
-                    }
-                });
-
-            }
-        });
     });
 
     function listsAuction() {
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsAuction", "post", {}, "json");
+        var datas = callAjax("{{_context_path}}/api/tracking/forfeit/listsAuction", "post", {}, "json");
         var dataAuction = datas["lists"];
         if (dataAuction != null) {
             var html = "";
@@ -339,7 +201,7 @@
     function listBidder(auccode) {
         var dataSet = [];
         var searchQueue = {};
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsBidder", "post", {auccode: auccode}, "json");
+        var datas = callAjax("{{_context_path}}/api/tracking/forfeit/listsBidder", "post", {auccode: auccode}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             $.each(datas["lists"], function (key, value) {
                 listArr[value["bidderHistoryId"]] = value;
@@ -377,7 +239,7 @@
                     "data": "bidderHistoryId",
                     "sClass": "text-center col-md-2",
                     "render": function (data) {
-                        var content = '<button class="btn btn-primary return" data-hid="' + data + '"><i class="fa fa-pencil"></i> คืน</button>';
+                        var content = '<button class="btn btn-primary return" data-hid="' + data + '"><i class="fa fa-pencil"></i> ริบ</button>';
                         return content;
                     }
                 }
@@ -398,7 +260,7 @@
 
             var historyId = $(this).attr("data-hid");
             bindBidder(historyId);
-            listWarehouse(historyId);
+            // listWarehouse(historyId);
             listPayment(historyId);
         });
     }
@@ -415,124 +277,35 @@
 
         $("#bdBody").html(html);
 
-        $("button.checkList").unbind().click(function () {
-            var dataHistory = {};
-            var auccode = $('#auction').val();
-            dataHistory["queue"] = value["queue"];
-            dataHistory["auccode"] = auccode;
-            var fdata = {};
-            fdata["report"] = dataHistory;
-            var dataJSON = JSON.stringify({report: fdata["report"]});
-            var dataJSONEN = encodeURIComponent(dataJSON);
-
-            var datas = callAjax("{{_context_path}}/api/report/report/trackingPayment", "post", dataJSONEN, "json");
-            if (typeof datas !== 'undefined' && datas !== null) {
-                var win = window.open(datas["export"], '_blank');
-                win.focus();
-            }
-        });
-    }
-
-    function listWarehouse(hId) {
-        var auccode = $('#auction').val();
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsWarehouse", "post", {bidderId: listArr[hId]["bidderId"], auccode: auccode}, "json");
-        if (typeof datas !== "undefined" && datas !== null) {
-            var html = "";
-            var sumBidderPrice = 0;
-            var sumWeight = 0;
-            var sumGuarantee = 0;
-            var sumPassWeight = 0;
-            sumPassGrt = 0;
-            sumWareHouse = 0;
-            var sumPassPrice = 0;
-            $.each(datas["lists"], function (key, value) {
-                if (value.isSale == 'S' || value.isSale == 'C' || value.isSale == 'R') {
-                    html += '<tr>'
-                            + '<td class="text-center">' + (key + 1) + '</td>'
-                            + '<td class="text-center">' + value["province"] + '</td>'
-                            + '<td class="text-center">' + value["associate"] + '</td>'
-                            + '<td class="text-center">' + value["wareHouseCode"] + '</td>'
-//                            + '<td class="text-center ">' + accounting.formatNumber(value["oweightAll"], 6, ",", ".") + '</td>'
-                            + '<td class="text-center">' + accounting.formatNumber(value["bidderLastPrice"], 2, ",", ".") + '</td>'
-                            + '<td class="text-center text-tertiary">' + accounting.formatNumber(value["guarantee"], 2, ",", ".") + '</td>'
-                            + "<td class='text-center text-success'>คืนได้</td>"
-                            + '<td class="text-center text-bold">'
-                            + '<input class="checkboxWH" type="checkbox" value="' + value["guarantee"] + '">'
-                            + '</td>'
-                            + '</tr>';
-                    sumPassWeight += parseFloat(value.oweightAll);
-                    sumPassPrice += parseFloat(value.bidderLastPrice);
-                    sumPassGrt += parseFloat(value.guarantee);
-                } else {
-                    html += '<tr>'
-                            + '<td class="text-center">' + (key + 1) + '</td>'
-                            + '<td class="text-center">' + value["province"] + '</td>'
-                            + '<td class="text-center">' + value["associate"] + '</td>'
-                            + '<td class="text-center">' + value["wareHouseCode"] + '</td>'
-                            // + '<td class="text-center text-tertiary">' + accounting.formatNumber(value["oweightAll"], 6, ",", ".") + '</td>'
-                            + '<td class="text-center">' + accounting.formatNumber(value["bidderLastPrice"], 2, ",", ".") + '</td>'
-                            + '<td class="text-center text-danger">' + accounting.formatNumber(value["guarantee"], 2, ",", ".") + '</td>'
-                            + "<td class='text-center text-danger'>ยังคืนไม่ได้</td>"
-                            + '<td></td>'
-                            + '</tr>';
-                }
-
-                sumBidderPrice += parseFloat(value.bidderLastPrice);
-                sumWeight += parseFloat(value.oweightAll);
-                sumGuarantee += parseFloat(value.guarantee);
-            });
-            sumNeedGrt = parseFloat(sumGuarantee) - parseFloat(sumPassGrt);
-            html += "<tr>" +
-                    "<td colspan='4' class='text-center'>รวมจำนวนหลักค้ำประกัน</td>" +
-                    //   "<td class='text-center text-bold'>" + accounting.formatNumber(sumWeight, 6, ",", ".") + "</td>" +
-                    "<td class='text-center text-bold'>" + accounting.formatNumber(sumBidderPrice, 2, ",", ".") + "</td>" +
-                    "<td class='text-center text-bold text-tertiary'>" + accounting.formatNumber(sumGuarantee, 2, ",", ".") + "</td>" +
-                    "<td class='text-center'></td>" +
-                    "</tr>" +
-                    "<tr>" +
-                    "<td colspan='4' class='text-center'>รวมจำนวนหลักค้ำประกันที่สามารถคืนได้</td>" +
-                    //  "<td class='text-center text-success text-bold'>" + accounting.formatNumber(sumPassWeight, 6, ",", ".") + "</td>" +
-                    "<td class='text-center text-success text-bold'>" + accounting.formatNumber(sumPassPrice, 2, ",", ".") + "</td>" +
-                    "<td class='text-center text-success text-bold'>" + accounting.formatNumber(sumPassGrt, 2, ",", ".") + "</td>" +
-                    "<td class='text-center'></td>" +
-                    "</tr>" +
-                    "<tr>" +
-                    "<td colspan='4' class='text-center'>รวมจำนวนหลักค้ำประกันที่ไม่สามารถคืนได้</td>" +
-                    //   "<td class='text-center text-danger text-bold'>" + accounting.formatNumber((sumWeight - sumPassWeight), 6, ",", ".") + "</td>" +
-                    "<td class='text-center text-danger text-bold'>" + accounting.formatNumber((sumBidderPrice - sumPassPrice), 2, ",", ".") + "</td>" +
-                    "<td class='text-center text-danger text-bold'>" + accounting.formatNumber(sumNeedGrt, 2, ",", ".") + "</td>" +
-                    "<td class='text-center'></td>" +
-                    "</tr>";
-            $("#whBody").html(html);
-
-            $('.checkboxWH').click(function () {
-                if (this.checked) {
-                    sumWareHouse += parseFloat(this.value);
-                } else {
-                    sumWareHouse -= parseFloat(this.value);
-                }
-
-                if (parseInt(sumWareHouse) > parseInt(sumPayment - sumNeedGrt)) {
-                    alert("จำนวนหลักค้ำประกันไม่พอ");
-                    sumWareHouse -= parseFloat(this.value);
-                    $(this).prop("checked", false);
-                }
-                $("#txtWarehouse").text(accounting.formatNumber(sumWareHouse, 2, ",", "."));
-            });
-        }
+//        $("button.checkList").unbind().click(function () {
+//            var dataHistory = {};
+//            var auccode = $('#auction').val();
+//            dataHistory["queue"] = value["queue"];
+//            dataHistory["auccode"] = auccode;
+//            var fdata = {};
+//            fdata["report"] = dataHistory;
+//            var dataJSON = JSON.stringify({report: fdata["report"]});
+//            var dataJSONEN = encodeURIComponent(dataJSON);
+//
+//            var datas = callAjax("{{_context_path}}/api/report/report/trackingPayment", "post", dataJSONEN, "json");
+//            if (typeof datas !== 'undefined' && datas !== null) {
+//                var win = window.open(datas["export"], '_blank');
+//                win.focus();
+//            }
+//        });
     }
 
     function listPayment(hId) {
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsPayment", "post", {bidderHistoryId: hId}, "json");
+        var datas = callAjax("{{_context_path}}/api/tracking/forfeit/listsPayment", "post", {bidderHistoryId: hId}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             var paymentHTML = "";
-            var returnHTML = "";
+            // var returnHTML = "";
             var countPayment = 1;
             var countReturn = 1;
 
             sumPayment = 0;
-            sumReturned = 0;
-            sumReturn = 0;
+//            sumReturned = 0;
+//            sumReturn = 0;
             countCheck = 0;
             dataPayment = datas["lists"];
             $.each(datas["lists"], function (key, value) {
@@ -552,26 +325,32 @@
                             + '<td class="text-center text-bold">'
                             + '<label class="switch switch-green">'
                             + '<input class="switch-input" type="checkbox" onclick="return false" value="' + value.amount + '">'
-                            + '<span class="switch-label" data-on="คืน" data-off="ไม่คืน"></span>'
+                            + '<span class="switch-label" data-on="ริบ" data-off="ไม่ริบ"></span>'
                             + '<span class="switch-handle"></span>'
                             + '</label>'
                             + '</td>'
                             + '</tr>';
                     sumPayment += parseFloat(value.amount);
-                } else {
-                    returnHTML += '<tr row-index="' + key + '" class="row-tr">'
-                            + '<td class="text-center">' + countReturn++ + '</td>'
+                } else if (value.isReturn == "F") {
+                    countCheck++;
+                    paymentHTML += '<tr row-index="' + key + '" class="row-tr">'
+                            + '<td class="text-center">' + countPayment++ + '</td>'
                             + '<td class="text-center">' + (value.payment) + '</td>'
                             + '<td class="text-center">' + (value.bankTH) + '</td>'
                             + '<td class="text-center">' + (value.paymentDate["date"].substr(0, 10)) + '</td>'
                             + '<td class="text-center">' + (value.paymentNo) + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value.amount, 2, ",", ".") + '</td>'
-                            + "<td class='text-center'>" + (value.dateReturn["date"].substr(0, 10)) + "</td>" +
+                            + "<td class='text-center'></td>" +
                             +'<td class="text-center">' + (value.remark) + '</td>'
-                            + "<td class='text-center'>คืนแล้ว</td>" +
-                            +'</tr>';
-                    sumReturned += parseFloat(value.amount);
-
+                            + '<td class="text-center text-bold">'
+                            + '<label class="switch switch-green">'
+                            + '<input class="switch-input" type="checkbox" checked="checked" onclick="return false" value="' + value.amount + '">'
+                            + '<span class="switch-label" data-on="ริบ" data-off="ไม่ริบ"></span>'
+                            + '<span class="switch-handle"></span>'
+                            + '</label>'
+                            + '</td>'
+                            + '</tr>';
+                    sumPayment += parseFloat(value.amount);
                 }
 
 
@@ -581,125 +360,97 @@
                     + '<td class="text-center text-bold">' + accounting.formatNumber(sumPayment, 2, ",", ".") + '</td>'
                     + '<td colspan="2"></td>'
                     + '</tr>';
-            returnHTML += '<tr>'
-                    + '<td colspan="5" class="text-center">รวมจำนวนหลักค้ำประกันที่คืนแล้ว</td>'
-                    + '<td class="text-center text-bold">' + accounting.formatNumber(sumReturned, 2, ",", ".") + '</td>'
-                    + '<td colspan="2"></td>'
-                    + '</tr>';
 
             $("#paymentBody").html(paymentHTML);
-            $("#returnBody").html(returnHTML);
             $("#countReturn").text(--countReturn);
             $(".countAll").text(--countPayment);
             $("#countCheckbox").html(countCheck);
-            $("#txtReturn").text(accounting.formatNumber(sumPayment - sumNeedGrt, 2, ",", "."));
-            $("#txtSelect").text(accounting.formatNumber(0, 2, ",", "."));
 
-            $("#txtBalance").text(accounting.formatNumber(sumPayment, 2, ",", "."));
             $("input.switch-input").click(function (event) {
                 event.stopPropagation();
             });
+            var d = new Date();
+            var month = d.getMonth() + 1;
+            var day = d.getDate();
+            var date = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
 
             $(".row-tr").unbind().click(function (event) {
+                var row = $(this).attr("row-index");
+                var dataSend = [];
+                var data = {};
+                //console.log(dataPayment[row]);
                 var input = $(this).find("td label input.switch-input");
-
-                if (!input.is(":checked"))
-                    input.prop("checked", true);
-                else
-                    input.prop("checked", false);
-
-                if (input.is(":checked")) {
+                data["id"] = dataPayment[row]["id"];
+                data["dateReturn"] = date;
+                if (!input.is(":checked")) {
                     countCheck++;
-                    sumReturn += parseFloat(input.val());
-
+                    input.prop("checked", true);
+                    dataPayment[row]["isReturn"] = "F";
+                    data["isReturn"] = "F";
                 } else {
-                    countCheck--;
-                    sumReturn -= parseFloat(input.val());
-                }
-                if ((parseInt(sumReturn) > parseInt(sumWareHouse)) && (parseInt(sumReturn) <= parseInt(sumPayment - sumNeedGrt))) {
-                    alert("จำนวนที่เลือกเกินหลักค้ำประกันของคลังที่เลือกไว้");
-
-                } else if ((parseInt(sumReturn) > parseInt(sumWareHouse)) && (parseInt(sumReturn) > parseInt(sumPayment - sumNeedGrt))) {
-                    alert("จำนวนหลักค้ำประกันไม่พอ!");
-
-                    countCheck--;
-                    sumReturn -= parseFloat(input.val());
-
                     input.prop("checked", false);
-                    $("#checkall").prop("checked", false);
+                    countCheck--;
+                    dataPayment[row]["isReturn"] = "N";
+                    data["isReturn"] = "N";
                 }
-
-
                 $("#countCheckbox").html(countCheck);
-                $("#txtSelect").text(accounting.formatNumber(sumReturn, 2, ",", "."));
-                $("#txtBalance").text(accounting.formatNumber(sumPayment - sumReturn, 2, ",", "."));
-
+                dataSend.push(data);
+                update(dataSend);
             });
 
             //    $("#checkall").prop("checked", false);
             $("#checkall").unbind().click(function () {
+                var row = 0;
+                var dataSend = [];
                 if ($("#checkall").is(":checked")) {
                     $(".switch-input").each(function () {
+                        var data = {};
+                        row = $(this).closest("tr").attr("row-index");
+                        // console.log(row);
                         if (!this.checked) {
                             $(this).prop("checked", true);
                             countCheck++;
-                            sumReturn += parseFloat(this.value);
-                        }
-//                        if ((parseInt(sumReturn) > parseInt(sumWareHouse)) && (parseInt(sumReturn) <= parseInt(sumPayment - sumNeedGrt))) {
-//                            alert("จำนวนที่เลือกเกินหลักค้ำประกันของคลังที่เลือกไว้");
-//                        } else 
-                        if ((parseInt(sumReturn) > parseInt(sumWareHouse)) && (parseInt(sumReturn) > parseInt(sumPayment - sumNeedGrt))) {
-                            alert("จำนวนหลักค้ำประกันไม่พอ");
-                            countCheck--;
-                            sumReturn -= parseFloat(this.value);
-                            $(this).prop("checked", false);
-                            $("#checkall").prop("checked", false);
-                            return false;
+                            dataPayment[row]["isReturn"] = "F";
+                            data["id"] = dataPayment[row]["id"];
+                            data["isReturn"] = "F";
+                            data["dateReturn"] = date;
+                            dataSend.push(data);
                         }
                     });
                 } else {
                     $(".switch-input").each(function () {
+                        var data = {};
+                        row = $(this).closest("tr").attr("row-index");
+                        // console.log(row);
                         if (this.checked) {
                             $(this).prop("checked", false);
                             countCheck--;
-                            sumReturn -= parseFloat(this.value);
+                            dataPayment[row]["isReturn"] = "N";
+                            data["id"] = dataPayment[row]["id"];
+                            data["isReturn"] = "N";
+                            data["dateReturn"] = date;
+                            dataSend.push(data);
                         }
                     });
                 }
                 $("#countCheckbox").html(countCheck);
-                $("#txtSelect").text(accounting.formatNumber(sumReturn, 2, ",", "."));
-                $("#txtBalance").text(accounting.formatNumber(sumPayment - sumReturn, 2, ",", "."));
+                update(dataSend);
             });
 
         }
     }
 
-    function checkSelect() {
-        var i = 0;
-        var dataApprove = [];
-        var d = new Date();
-        var month = d.getMonth() + 1;
-        var day = d.getDate();
-        var date = d.getFullYear() + '-' + (month < 10 ? '0' : '') + month + '-' + (day < 10 ? '0' : '') + day;
-        $('input.switch-input').each(function () {
-            if ($(this).is(":checked")) {
-                dataPayment[$(this).closest("tr").attr("row-index")]["isReturn"] = "Y";
-                dataPayment[$(this).closest("tr").attr("row-index")]["dateReturn"] = date;
-                dataApprove[i++] = dataPayment[$(this).closest("tr").attr("row-index")];
-
-            }
-//            else {
-//                dataPayment[$(this).closest("tr").attr("row-index")]["isReturn"] = "N";
-//            }
-//            dataApprove[i++] = dataPayment[$(this).closest("tr").attr("row-index")];
-        });
-
-        if (dataApprove[0] == null) {
-            return "noCheckbox";
+    function update(dataSend) {
+        var data = {};
+        data["bidderPayment"] = dataSend;
+        var dataJSON = JSON.stringify(data);
+        var dataJSONEN = encodeURIComponent(dataJSON);
+        var msg = callAjax("{{_context_path}}/api/tracking/forfeit/update", "post", dataJSONEN, "json");
+        if (msg.update == true) {
+            alert("บันทึกสำเร็จ");
         } else {
-            return dataApprove;
+            alert("บันทึกไม่สำเร็จ");
         }
-
     }
 
     function toggleShow(option) {

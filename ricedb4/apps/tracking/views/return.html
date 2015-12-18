@@ -203,7 +203,8 @@
                                                 <th class="text-center">{{#i18n}}tracking.bankNo{{/i18n}}</th>
                                                 <th class="text-center">{{#i18n}}tracking.bankAmount{{/i18n}} ({{#i18n}}tracking.bath{{/i18n}})</th>
                                                 <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.return.dateReturn{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}tracking.status{{/i18n}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="returnBody">
@@ -566,10 +567,10 @@
                             + '<td class="text-center">' + (value.paymentDate["date"].substr(0, 10)) + '</td>'
                             + '<td class="text-center">' + (value.paymentNo) + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value.amount, 2, ",", ".") + '</td>'
-                            + "<td class='text-center'>" + (value.dateReturn["date"].substr(0, 10)) + "</td>" +
-                            +'<td class="text-center">' + (value.remark) + '</td>'
-                            + "<td class='text-center'>คืนแล้ว</td>" +
-                            +'</tr>';
+                            + '<td class="text-center">' + (value.remark) + '</td>'
+                            + "<td class='text-center'>" + (value.dateReturn["date"].substr(0, 10)) + "</td>"
+                            + "<td class='text-center'>" + (value.isReturn == "Y" ? "คืนแล้ว" : "ถูกริบ") + "</td>"
+                            + '</tr>';
                     sumReturned += parseFloat(value.amount);
 
                 }
@@ -584,7 +585,7 @@
             returnHTML += '<tr>'
                     + '<td colspan="5" class="text-center">รวมจำนวนหลักค้ำประกันที่คืนแล้ว</td>'
                     + '<td class="text-center text-bold">' + accounting.formatNumber(sumReturned, 2, ",", ".") + '</td>'
-                    + '<td colspan="2"></td>'
+                    + '<td colspan="3"></td>'
                     + '</tr>';
 
             $("#paymentBody").html(paymentHTML);
