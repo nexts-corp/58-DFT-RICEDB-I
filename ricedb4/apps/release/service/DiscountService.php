@@ -50,8 +50,9 @@ class DiscountService extends CServiceBase implements IDiscountService {
         $discount = new \apps\common\entity\DiscountRate();
         $discount->typeId = $discountRate->typeId;
         $discount->gradeId = $discountRate->gradeId;
-
         $data = $this->datacontext->getObject($discount);
+
+        return $data;
         if(count($data) == 0){
             if(!$this->datacontext->saveObject($discountRate)){
                 $return = $this->datacontext->getLastMessage();
