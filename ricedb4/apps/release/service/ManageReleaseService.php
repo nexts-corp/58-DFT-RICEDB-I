@@ -163,7 +163,7 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
             }
         }
 
-        return $status->keyword;;
+        return $status->id;
         $newCode = $status->keyword;
         $newRelease = $data[0]->keyword;
 
