@@ -45,7 +45,6 @@ class DiscountService extends CServiceBase implements IDiscountService {
     }
 
     public function insert($discountRate) {
-        return $discountRate;
         $return = true;
 
         $discount = new \apps\common\entity\DiscountRate();
