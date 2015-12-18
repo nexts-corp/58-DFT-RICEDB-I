@@ -52,7 +52,6 @@ class DiscountService extends CServiceBase implements IDiscountService {
         $discount->gradeId = $discountRate->gradeId;
         $data = $this->datacontext->getObject($discount);
 
-        return $data;
         if(count($data) == 0){
             if(!$this->datacontext->saveObject($discountRate)){
                 $return = $this->datacontext->getLastMessage();
