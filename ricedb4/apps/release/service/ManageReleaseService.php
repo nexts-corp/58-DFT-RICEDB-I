@@ -163,6 +163,7 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
             }
         }
 
+        return $status->keyword;;
         $newCode = $status->keyword;
         $newRelease = $data[0]->keyword;
 
@@ -172,7 +173,6 @@ class ManageReleaseService extends CServiceBase implements IManageReleaseService
         $data[0]->auctionDate = $status->auctionDate;
         $data[0]->releaseCode = $status->keyword;
 
-        return $status->releaseCode;
         if ($status->releaseCode == "AU") {
             $data[0]->ageStop = new \DateTime($status->ageStop);
             $data[0]->dateStart = new \DateTime($status->dateStart);
