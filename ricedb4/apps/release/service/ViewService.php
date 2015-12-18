@@ -48,11 +48,6 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
-    public function priceDaily() {
-        $view = new CJView("priceDaily", CJViewType::HTML_VIEW_ENGINE);
-        return $view;
-    }
-
     public function compareFloorPrice() {
         $view = new CJView("compareFloorPrice", CJViewType::HTML_VIEW_ENGINE);
         return $view;

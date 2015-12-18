@@ -63,13 +63,6 @@ interface IViewService {
      * @description  floorValue
      */ 
     public function floorValueSilo();
-    
-     /**
-     * @name priceDaily
-     * @uri /priceDaily
-     * @description  priceDaily
-     */ 
-    public function priceDaily();
 
     /**
      * @name compareFloorPrice

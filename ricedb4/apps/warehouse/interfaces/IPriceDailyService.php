@@ -1,5 +1,5 @@
 <?php
-namespace apps\release\interfaces;
+namespace apps\warehouse\interfaces;
 
 /**
  * @name PriceDailyService

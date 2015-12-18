@@ -1,10 +1,10 @@
 <?php
 
-namespace apps\release\service;
+namespace apps\warehouse\service;
 
 use th\co\bpg\cde\core\CServiceBase;
 use th\co\bpg\cde\data\CDataContext;
-use apps\release\interfaces\IPriceDailyService;
+use apps\warehouse\interfaces\IPriceDailyService;
 
 class PriceDailyService extends CServiceBase implements IPriceDailyService {
 

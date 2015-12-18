@@ -21,7 +21,14 @@ interface IViewService {
      * @description ข้อมูลคลังสินค้า
      */ 
     public function warehouseImport();
-    
+
+    /**
+     * @name priceDaily
+     * @uri /priceDaily
+     * @description  priceDaily
+     */
+    public function priceDaily();
+
     /**
      * @name viewRicePrice
      * @uri /viewRicePrice

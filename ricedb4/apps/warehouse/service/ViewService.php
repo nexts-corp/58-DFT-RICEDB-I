@@ -18,7 +18,12 @@ class ViewService extends CServiceBase implements IViewService {
         $view = new CJView("warehouseImport", CJViewType::HTML_VIEW_ENGINE);
         return $view;
     }
-    
+
+    public function priceDaily() {
+        $view = new CJView("priceDaily", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
     public function viewRicePrice() {
         $view = new CJView("viewRicePrice", CJViewType::HTML_VIEW_ENGINE);
         return $view;

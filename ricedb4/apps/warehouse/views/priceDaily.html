@@ -19,14 +19,14 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">{{#i18n}}release.home{{/i18n}}</a></li>
-                        <li class="active">{{#i18n}}release.menu{{/i18n}}</li>
+                        <li><a href="#">{{#i18n}}warehouse.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}warehouse.menu{{/i18n}}</li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">{{#i18n}}release.price.title{{/i18n}}</h1>
+                    <h1 class="none-padding">{{#i18n}}warehouse.price.title{{/i18n}}</h1>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
-                    <button id="btn_back" class="btn btn-primary back" style="display: none;"><i class="fa fa-angle-double-left"></i> {{#i18n}}release.buttonBack{{/i18n}}</button>
+                    <button id="btn_back" class="btn btn-primary back" style="display: none;"><i class="fa fa-angle-double-left"></i> {{#i18n}}warehouse.buttonBack{{/i18n}}</button>
                 </li>
             </ul>
         </div>
@@ -47,11 +47,11 @@
             <div class="col-md-12">
                 <form method="post"  id="frm_priceDaily"
                       name="prices"
-                      action="{{_context_path}}/api/release/priceDaily/save"
+                      action="{{_context_path}}/api/warehouse/priceDaily/save"
                       isArray="true"
                       data-size="0">
                     <div class="col-sm-12" style="margin: 20px;">
-                        <label class="col-sm-2 text-right control-label">{{#i18n}}release.date{{/i18n}} ({{#i18n}}release.dateFormat{{/i18n}}) :</label>
+                        <label class="col-sm-2 text-right control-label">{{#i18n}}warehouse.date{{/i18n}} ({{#i18n}}warehouse.dateFormat{{/i18n}}) :</label>
                         <div class="col-sm-4">
                             <input class="form-control" id="date" name="Date"/>
                         </div>
@@ -64,37 +64,37 @@
                         </div>
                         <div class="col-sm-5 text-right">
                             <!--                        <input type="button" value="บันทึก" id="btn_save" class="btn btn-primary" />-->
-                            <button id="btn_save" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}release.buttonSave{{/i18n}}</button>
+                            <button id="btn_save" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}warehouse.buttonSave{{/i18n}}</button>
                         </div>
                     </div>
                     <div id="div_table" class="col-sm-12">
                         <p class="col-sm-12">
-                            <mark class="text-danger" style="text-decoration: underline;">{{#i18n}}release.remark{{/i18n}}</mark>
-                            <mark  class="text-danger">{{#i18n}}release.remarkDetail{{/i18n}}</mark>
+                            <mark class="text-danger" style="text-decoration: underline;">{{#i18n}}warehouse.remark{{/i18n}}</mark>
+                            <mark  class="text-danger">{{#i18n}}warehouse.remarkDetail{{/i18n}}</mark>
                         </p>
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="1%">{{#i18n}}release.no{{/i18n}}</th>
-                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="15%">{{#i18n}}release.type{{/i18n}}</th>
-                                    <th colspan="4" class="text-center">{{#i18n}}release.internalTrade{{/i18n}}</th>
-                                    <th colspan="4" class="text-center">{{#i18n}}release.riceMills{{/i18n}}</th>
+                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="1%">{{#i18n}}warehouse.no{{/i18n}}</th>
+                                    <th rowspan="3" class="text-center" style="vertical-align: middle;" width="15%">{{#i18n}}warehouse.type{{/i18n}}</th>
+                                    <th colspan="4" class="text-center">{{#i18n}}warehouse.internalTrade{{/i18n}}</th>
+                                    <th colspan="4" class="text-center">{{#i18n}}warehouse.riceMills{{/i18n}}</th>
                                 </tr>
                                 <tr>
-                                    <th colspan="2" class="text-center">{{#i18n}}release.oldRicePrice{{/i18n}}</th>
-                                    <th colspan="2" class="text-center">{{#i18n}}release.newRicePrice{{/i18n}}</th>
-                                    <th colspan="2" class="text-center">{{#i18n}}release.oldRicePrice{{/i18n}}</th>
-                                    <th colspan="2" class="text-center">{{#i18n}}release.newRicePrice{{/i18n}}</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}warehouse.oldRicePrice{{/i18n}}</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}warehouse.newRicePrice{{/i18n}}</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}warehouse.oldRicePrice{{/i18n}}</th>
+                                    <th colspan="2" class="text-center">{{#i18n}}warehouse.newRicePrice{{/i18n}}</th>
                                 </tr>
                                 <tr>
-                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
-                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
-                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
-                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
-                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
-                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
-                                    <th class="text-center">{{#i18n}}release.min{{/i18n}}</th>
-                                    <th class="text-center">{{#i18n}}release.max{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.max{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.max{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.max{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.min{{/i18n}}</th>
+                                    <th class="text-center">{{#i18n}}warehouse.max{{/i18n}}</th>
                                 </tr>
                             </thead>
                             <tbody id="tb_body">
@@ -173,7 +173,7 @@
         $("#tb_body").html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
 
         setTimeout(function(){
-            var datas = callAjax("{{_context_path}}/api/release/priceDaily/whereDate", "post", {
+            var datas = callAjax("{{_context_path}}/api/warehouse/priceDaily/whereDate", "post", {
                 date: $("#date").val()
             }, "json");
             if (typeof datas !== 'undefined' && datas !== null){
@@ -217,7 +217,7 @@
                 var date1 = new Date(start.unix() * 1000).toISOString().slice(0, 10);
                 var date2 = new Date(end.unix() * 1000).toISOString().slice(0, 10);
 
-                var datas = callAjax("{{_context_path}}/api/release/priceDaily/whereMonth", "post", {
+                var datas = callAjax("{{_context_path}}/api/warehouse/priceDaily/whereMonth", "post", {
                     date1: date1,
                     date2: date2
                 }, "json");
