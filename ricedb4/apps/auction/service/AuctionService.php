@@ -72,7 +72,7 @@ class AuctionService extends CServiceBase implements IAuctionService {
             } //flag ให้ เป็น N ทั้งคู่สำหรับคลังที่ไม่มีผู้เสนอราคา
             if ($this->datacontext->updateObject($dataNoBid)) { // อัพเดทลง RiceTracking
                 $status = $this->getStatus();
-                $status->active = 'F';
+                $status->active = 'T';
                 if ($this->datacontext->updateObject($status)) {
                     return true;
                 } else {
