@@ -112,7 +112,6 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
     }
 
     public function insert($bidderInfo, $bidderHistory, $file){
-        return "OK";
         $return = true;
 
         $json = new CJSONDecodeImpl();
