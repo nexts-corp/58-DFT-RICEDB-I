@@ -105,7 +105,14 @@ class ViewService extends CServiceBase implements IViewService {
         $view = new CJView("closeAuction", CJViewType::HTML_VIEW_ENGINE);
         $status = "select st from apps\\common\\entity\\Status st "
                 . "where st.active = 'Y' or st.active = 'T' ";
-        $view->auction = $this->datacontext->getObject($status)[0];
+        $data = $this->datacontext->getObject($status);
+        if(count($data) > 0){
+            $view->auction = $data[0];
+        }
+        else{
+            $view->auction = "";
+        }
+
         return $view;
     }
 

@@ -33,7 +33,7 @@ class AuctionService extends CServiceBase implements IAuctionService {
     }
 
     public function check() {
-        if($this->getStatus()==NULL){
+        if($this->getStatus() != 'Y'){
             return "close";
         }else{
             return "open";
@@ -72,7 +72,7 @@ class AuctionService extends CServiceBase implements IAuctionService {
             } //flag ให้ เป็น N ทั้งคู่สำหรับคลังที่ไม่มีผู้เสนอราคา
             if ($this->datacontext->updateObject($dataNoBid)) { // อัพเดทลง RiceTracking
                 $status = $this->getStatus();
-                $status->active = 'T';
+                $status->active = 'Y';
                 if ($this->datacontext->updateObject($status)) {
                     return true;
                 } else {
