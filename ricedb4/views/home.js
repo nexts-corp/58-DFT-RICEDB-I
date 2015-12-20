@@ -228,7 +228,8 @@ function auctionLatest(){
     if (typeof datas !== "undefined" && datas !== null) {
         var data = datas["lists"];
 
-        if (data.length > 0) {
+        //console.log(data["status"]);
+        if (typeof data["status"] !== "undefined") {
             var auction = '<div>'
                     + '<div class="row text-center">'
                         + '<h4 class="text-dark">'
