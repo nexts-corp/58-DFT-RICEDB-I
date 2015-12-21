@@ -76,19 +76,21 @@ class FollowService extends CServiceBase implements IFollowService
         }
 
         foreach ($get as $key => $value) {
-            if($value->followDate->format("Y-m-d") != "1900-01-01" && $value->followDate->format("Y-m-d") != "1970-01-01") {
+            if($value->followDate == null){
+                $get[$key]->followDate = "";
+            }
+            elseif($value->followDate->format("Y-m-d") != "1900-01-01" && $value->followDate->format("Y-m-d") != "1970-01-01") {
                 $date = $value->followDate->format("Y-m-d");
                 $get[$key]->followDate = substr($date, 8, 2)."-".substr($date, 5, 2)."-".((int)substr($date, 0, 4) + 543);
             }
-            else
-                $get[$key]->followDate = "";
 
-            if($value->dueDate->format("Y-m-d") != "1900-01-01" && $value->dueDate->format("Y-m-d") != "1970-01-01"){
+            if($value->dueDate == null){
+                $get[$key]->dueDate = "";
+            }
+            elseif($value->dueDate->format("Y-m-d") != "1900-01-01" && $value->dueDate->format("Y-m-d") != "1970-01-01"){
                 $date = $value->dueDate->format("Y-m-d");
                 $get[$key]->dueDate = substr($date, 8, 2)."-".substr($date, 5, 2)."-".((int)substr($date, 0, 4) + 543);
             }
-            else
-                $get[$key]->dueDate = "";
 
             if ($value->lotCode != $get[0]->lotCode) {
                 unset($get[$key]);
