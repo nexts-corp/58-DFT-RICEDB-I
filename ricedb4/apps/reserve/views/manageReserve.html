@@ -53,13 +53,14 @@
                                 <th class="text-center col-md-1">{{#i18n}}reserve.no{{/i18n}}</th>
                                 <th class="text-center col-md-4">{{#i18n}}reserve.list{{/i18n}}</th>
                                 <th class="text-center col-md-2">{{#i18n}}reserve.dateCreated{{/i18n}}</th>
-                                <th class="text-center col-md-3">{{#i18n}}reserve.rWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                <th class="text-center col-md-2">{{#i18n}}reserve.rWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                <th class="text-center col-md-1">{{#i18n}}reserve.detail{{/i18n}}</th>
                                 <th class="text-center col-md-2">{{#i18n}}reserve.action{{/i18n}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="text-center">
-                                <td colspan="5" class="text-center">-</td>
+                                <td colspan="6" class="text-center">-</td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,7 +88,7 @@
                                 </ul>
                             </div>
 
-                            <form id="form" class="form-horizontal" novalidate="novalidate">
+                            <form id="form" class="form-horizontal" novalidate="novalidate" onsubmit="return(false)">
                                 <div class="tab-content">
 
                                     <div id="wizard-condition" class="tab-pane active">
@@ -109,7 +110,6 @@
                                                 <input type="text" data-entity="list" class="form-control" name="target" id="target" required>
                                             </div>
                                         </div>
-
                                     </div>
 
                                     <div id="wizard-select" class="tab-pane">
@@ -135,8 +135,42 @@
                                                     <div class="col-sm-6 text-bold countSiloDisplay">0</div>
                                                 </div>
 
+                                                <div class="col-md-12" style="margin-bottom: 40px;">
+                                                    <div class="toggle" data-plugin-toggle>
+                                                        <section class="toggle active">
+                                                            <label>คลังสินค้าที่ถูกเลือก</label>
+                                                            <div class="toggle-content">
+                                                                <table  id="showSelected" class="table table-bordered table-hover table-striped table-condensed mb-none">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.no{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.province{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.code{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.silo{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.associate{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.warehouse{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.stack{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.project{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.type{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.grade{{/i18n}}</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.choose{{/i18n}}</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td colspan="12" class="text-center">-</td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </section>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
+
                                         <div class="form-group">
                                             <div class="col-md-3">
                                                 <label class="col-md-5 control-label" for="project">{{#i18n}}reserve.project{{/i18n}} :</label>
@@ -212,7 +246,7 @@
                                                     <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.type{{/i18n}}</th>
                                                     <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.grade{{/i18n}}</th>
                                                     <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
-                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.action{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.choose{{/i18n}}</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -269,7 +303,7 @@
                                             </ul>
                                             <div class="tab-content">
                                                 <div id="siloSelected" class="tab-pane active">
-                                                    <table id="table3"class="table table-bordered table-striped table-condensed mb-none">
+                                                    <table id="table3" class="table table-bordered table-striped table-condensed mb-none">
                                                         <thead>
                                                         <tr>
                                                             <th class="text-center">{{#i18n}}reserve.no{{/i18n}}</th>
@@ -380,6 +414,57 @@
                 </div>
             </div>
 
+            <div id="detailModal" aria-labelledby="bidderLabel" class="modal fade modal-wide" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">{{#i18n}}reserve.detail{{/i18n}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <div class="col-md-2 text-right text-bold">{{#i18n}}reserve.list{{/i18n}} :</div>
+                                <div id="detailShow" class="col-md-8 text-left"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right text-bold">{{#i18n}}reserve.dateCreated{{/i18n}} :</div>
+                                <div id="dateShow" class="col-md-8 text-left"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-2 text-right text-bold">{{#i18n}}reserve.rWeight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</div>
+                                <div id="targetShow" class="col-md-8 text-left"></div>
+                            </div>
+
+                            <table id="showDetail" style="margin-top: 15px;" class="table table-bordered table-hover table-striped table-condensed mb-none">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.province{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.code{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.silo{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.associate{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.warehouse{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.stack{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.project{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.type{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.grade{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="12" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">{{#i18n}}reserve.buttonClose{{/i18n}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete reserve data-->
+
             <div id="delModal" aria-labelledby="bidderLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -389,9 +474,9 @@
                         </div>
                         <div class="modal-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                <table class="table table-striped table-condensed mb-none">
                                     <tbody>
-                                    <tr>
+                                    <tr class="no-border">
                                         <td class="col-md-4 text-right text-bold">{{#i18n}}reserve.list{{/i18n}} :</td>
                                         <td class="col-md-8 text-left"><div id="detailDel"></div></td>
                                     </tr>
@@ -409,7 +494,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}reserve.buttonCancel{{/i18n}}</button>
-                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">{{#i18n}}reserve.buttonDelete{{/i18n}}</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}reserve.buttonDelete{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
@@ -422,18 +507,15 @@
     #table2 tbody tr{
         cursor: pointer;
     }
-
+    .modal-wide .modal-dialog {
+        width: 80% !important; /* or whatever you wish */
+    }
 </style>
 <script src="{{_context_path}}/asset/vendor/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>
 <script type="text/javascript">
 
 (function( $ ) {
-
     'use strict';
-
-    /*
-     Wizard #4
-     */
     var $w4finish = $('#wizard').find('ul.pager li.finish'),
             $w4validator = $("#wizard form").validate({
                 highlight: function(element) {
@@ -460,7 +542,7 @@
                 insertReserve(dataJSONEN);
             }
             else if(action == "edit"){
-                var fdata = dataObject(listReserve[listId]["id"]);
+                var fdata = dataObject(listArr[selectedId]["id"]);
                 var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"], riceReserve: fdata["RiceReserve"]});
                 var dataJSONEN = encodeURIComponent(dataJSON);
 
@@ -481,38 +563,27 @@
                 $w4validator.focusInvalid();
                 return false;
             }
-            else{
-                $(".reserveDisplay").html($("#reserveCode option:selected").text()+" - "+$("#detail").val());
-                $(".targetDisplay").html($("#target").val());
+            $(".reserveDisplay").html($("#reserveCode option:selected").text()+" - "+$("#detail").val());
+            $(".targetDisplay").html($("#target").val());
 
-                if(index == 1){
-                    $("select.lookup").each(function(){
-                        var id = $(this).attr("id");
-                        var call = $(this).attr("data-call");
+            if(index == 1){
+                $("select.lookup").each(function(){
+                    var id = $(this).attr("id");
+                    var call = $(this).attr("data-call");
 
-                        var result = listsObject(call);
-                        $("#"+id).html(result).select2();
-                    });
+                    var result = listsObject(call);
+                    $("#"+id).html(result).select2();
+                });
 
-                    listsRice();
-
-                    if(action == "edit"){
-                        $.each(listSelected, function(key, val){
-                            listArr[val["stackCode"]] = val;
-                            $('input:checkbox[data-rid="'+val["stackCode"]+'"]').prop("checked", true);
-                            rowSelected(val["stackCode"], "check");
-
-                        });
-                    }
+                listsRice();
+            }
+            else if(index == 2) {
+                if (Object.keys(selectedArr).length == 0) {
+                    alert("กรุณาเลือกคลัง");
+                    return false;
                 }
-                else if(index == 2){
-                    if(Object.keys(listSelected).length == 0){
-                        alert("กรุณาเลือกคลัง");
-                        return false;
-                    }
-                    else{
-                        showSelected();
-                    }
+                else {
+                    summarySelected();
                 }
             }
         },
@@ -544,118 +615,29 @@
 
 </script>
 <script type="text/javascript">
-    var sdata = {};
-
-    var listArr = {};
-    var listSelected = {};
+    var action;
+    var selectedId;
     var flagReserve = 0;
 
-    var listSilo = {};
-    var weightSelected = 0;
+    var listArr = {};
+    var listRice = {};
 
-    var listReserve = {};
-    var listId = "";
-
-    var action = "";
+    var selectedArr = {};
+    var selectedSilo = {};
+    var selectedWeight = 0;
 
     $(function(){
         listsReserve();
 
         $("button.add").unbind().click(function(){
             action = "insert";
-
             toggleShow("form");
         });
 
         $("button.back, button.cancel").unbind().click(function(){
             toggleShow("home");
         });
-
     });
-
-    function listsReserve(){
-        var html = '';
-        var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserve", "post", {}, "json");
-        if (typeof datas !== "undefined" && datas !== null) {
-            var i = 0;
-            if(datas["lists"].length > 0){
-                $.each(datas["lists"], function(key, value){
-                    listReserve[value["id"]] = value;
-
-                    html += '<tr>'
-                        + '<td class="text-center">'+(++i)+'</td>'
-                        + '<td>'+value["reserveName"]+' - '+value["detail"]+'</td>'
-                        + '<td class="text-center">'+value["dateCreated"]["date"].substr(0, 10)+'</td>'
-                        + '<td class="text-right">'+value["target"]+'</td>'
-                        + '<td class="text-center">'
-                            + '<button class="btn btn-primary edit" data-id="'+value["id"]+'"><i class="fa fa-pencil"></i></button>&nbsp;'
-                            + '<button class="btn btn-default delete" data-id="'+value["id"]+'"><i class="fa fa-trash"></i></button> '
-                        + '</td>'
-                    + '</tr>'
-                });
-            }
-            else{
-                html = '<tr><td colspan="5" class="text-center">-</td></tr>'
-            }
-
-            $("#table1 tbody").html(html);
-
-            $("button.edit").unbind("click").click(function(){
-                action = "edit";
-
-                toggleShow("form");
-
-                var id = $(this).attr("data-id");
-
-                listId = id;
-                $("#reserveCode").val(listReserve[id]["reserveCode"]).trigger("change");
-                $("#detail").val(listReserve[id]["detail"]);
-                $("#target").val(listReserve[id]["target"]);
-
-                var dataList = {};
-
-                dataList["keyword"] = listReserve[id]["keyword"];
-
-                var fdata = {};
-                fdata["ReserveList"] = dataList;
-
-                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
-                var dataJSONEN = encodeURIComponent(dataJSON);
-
-                var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserveByIndex", "post", dataJSONEN, "json");
-                if (typeof datas !== "undefined" && datas !== null) {
-                    $.each(datas["lists"], function(key, value){
-                        listSelected[value["stackCode"]] = value;
-                    });
-                }
-            });
-
-            $("button.delete").unbind().click(function(){
-                $("#delModal").modal("show");
-
-                var id = $(this).attr("data-id");
-                var value = listReserve[id];
-
-                $("#detailDel").html(value["reserveName"]+' - '+value["detail"]);
-                $("#dateDel").html(value["dateCreated"]["date"].substr(0, 10));
-                $("#targetDel").html(value["target"]);
-
-                $("#confirmDelete").unbind().click(function(){
-                    var dataList = {};
-
-                    dataList["keyword"] = listReserve[id]["keyword"];
-
-                    var fdata = {};
-                    fdata["ReserveList"] = dataList;
-
-                    var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
-                    var dataJSONEN = encodeURIComponent(dataJSON);
-
-                    deleteReserve(dataJSONEN);
-                });
-            });
-        }
-    }
 
     function lkReserve(){
         if(flagReserve === 0){
@@ -672,6 +654,194 @@
         }
     }
 
+    function listsReserve(){
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserve", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var i = 0;
+            if(datas["lists"].length > 0){
+                $.each(datas["lists"], function(key, value){
+                    listArr[value["id"]] = value;
+
+                    html += '<tr>'
+                            + '<td class="text-center">'+(++i)+'</td>'
+                            + '<td>'+value["reserveName"]+' - '+value["detail"]+'</td>'
+                            + '<td class="text-center">'+value["dateCreated"]["date"].substr(0, 10)+'</td>'
+                            + '<td class="text-right">'+value["target"]+'</td>'
+                            + '<td class="text-center">'
+                                + '<button class="btn btn-primary list" data-id="'+value["id"]+'"><i class="fa fa-list"></i></button>&nbsp;'
+                            + '</td>'
+                            + '<td class="text-center">'
+                                + '<button class="btn btn-primary edit" data-id="'+value["id"]+'"><i class="fa fa-pencil"></i></button>&nbsp;'
+                                + '<button class="btn btn-default delete" data-id="'+value["id"]+'"><i class="fa fa-trash"></i></button> '
+                            + '</td>'
+                        + '</tr>'
+                });
+            }
+            else{
+                html = '<tr><td colspan="5" class="text-center">-</td></tr>'
+            }
+
+            $("#table1 tbody").html(html);
+
+            $("button.list").unbind().click(function(){
+                $("#detailModal").modal("show");
+
+                var id = $(this).attr("data-id");
+                var value = listArr[id];
+
+                $("#detailShow").html(value["reserveName"]+' - '+value["detail"]);
+                $("#dateShow").html(value["dateCreated"]["date"].substr(0, 10));
+                $("#targetShow").html(value["target"]);
+
+                var dataList = {};
+
+                dataList["keyword"] = value["keyword"];
+
+                var fdata = {};
+                fdata["ReserveList"] = dataList;
+
+                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                setTimeout(function() {
+                    var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserveByIndex", "post", dataJSONEN, "json");
+                    if (typeof datas !== "undefined" && datas !== null) {
+                        var html = '';
+                        var i = 0;
+                        var sum = 0;
+                        $.each(datas["lists"], function (key, value) {
+                            sum += parseFloat(value["tWeight"]);
+                            html += '<tr>'
+                                    + '<td class="text-center">' + (++i) + '</td>'
+                                    + '<td>' + value["provinceNameTH"] + '</td>'
+                                    + '<td>' + value["code"] + '</td>'
+                                    + '<td>' + value["silo"] + '</td>'
+                                    + '<td class="text-center">' + value["associate"] + '</td>'
+                                    + '<td class="text-center">' + value["warehouse"] + '</td>'
+                                    + '<td class="text-center">' + value["stack"] + '</td>'
+                                    + '<td class="text-center">' + value["project"] + '</td>'
+                                    + '<td class="text-center">' + value["type"] + '</td>'
+                                    + '<td class="text-center">' + value["grade"] + '</td>'
+                                    + '<td class="text-right">' + parseFloat(value["tWeight"]).toFixed(2) + '</td>'
+                                + '</tr>';
+
+                            if (key == datas["lists"].length - 1) {
+                                html += '<tr>'
+                                        + '<td colspan="10" class="text-center text-bold">รวม</td>'
+                                        + '<td class="text-right text-bold">' + parseFloat(sum).toFixed(2) + '</td>'
+                                    + '</tr>';
+                            }
+                        });
+                        $("#showDetail tbody").html(html);
+                    }
+                }, 0);
+            });
+
+            $("button.edit").unbind().click(function(){
+                action = "edit";
+
+                toggleShow("form");
+
+                var id = $(this).attr("data-id");
+                selectedId = id;
+                $("#reserveCode").val(listArr[id]["reserveCode"]).trigger("change");
+                $("#detail").val(listArr[id]["detail"]);
+                $("#target").val(listArr[id]["target"]);
+
+                var dataList = {};
+
+                dataList["keyword"] = listArr[id]["keyword"];
+
+                var fdata = {};
+                fdata["ReserveList"] = dataList;
+
+                var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                var datas = callAjax("{{_context_path}}/api/reserve/manage/listsReserveByIndex", "post", dataJSONEN, "json");
+                if (typeof datas !== "undefined" && datas !== null) {
+                    var html = '';
+                    var i = 0;
+                    $.each(datas["lists"], function(key, value){
+                        selectedArr[value["stackCode"]] = value;
+
+                        if (typeof selectedSilo[value["silo"]] == 'undefined') {
+                            selectedSilo[value["silo"]] = 1;
+                        }
+                        else{
+                            selectedSilo[value["silo"]] += 1;
+                        }
+
+                        selectedWeight += parseFloat(value["tWeight"]);
+
+                        html +='<tr>'
+                                + '<td class="text-center">'+(++i)+'</td>'
+                                + '<td>'+value["provinceNameTH"]+'</td>'
+                                + '<td>'+value["code"]+'</td>'
+                                + '<td>'+value["silo"]+'</td>'
+                                + '<td class="text-center">'+value["associate"]+'</td>'
+                                + '<td class="text-center">'+value["warehouse"]+'</td>'
+                                + '<td class="text-center">'+value["stack"]+'</td>'
+                                + '<td class="text-center">'+value["project"]+'</td>'
+                                + '<td class="text-center">'+value["type"]+'</td>'
+                                + '<td class="text-center">'+value["grade"]+'</td>'
+                                + '<td class="text-right">'+parseFloat(value["tWeight"]).toFixed(2)+'</td>'
+                                + '<td class="text-center">'
+                                + '<button class="btn btn-default trash" data-rid="'+value["stackCode"]+'"><i class="fa fa-trash"></i></button>'
+                                +'</td>'
+                            + '</tr>';
+                    });
+
+                    $(".selectedDisplay").html(parseFloat(selectedWeight).toFixed(2));
+                    $(".countSiloDisplay").html(Object.keys(selectedSilo).length);
+
+                    $("#showSelected tbody").html(html);
+
+                    removeSelected();
+                }
+            });
+
+            $("button.delete").unbind().click(function(){
+                $("#delModal").modal("show");
+
+                var id = $(this).attr("data-id");
+                var value = listArr[id];
+
+                $("#detailDel").html(value["reserveName"]+' - '+value["detail"]);
+                $("#dateDel").html(value["dateCreated"]["date"].substr(0, 10));
+                $("#targetDel").html(value["target"]);
+
+                $("#confirmDelete").unbind().click(function(){
+                    var dataList = {};
+
+                    dataList["keyword"] = listArr[id]["keyword"];
+
+                    var fdata = {};
+                    fdata["ReserveList"] = dataList;
+
+                    var dataJSON = JSON.stringify({reserveList: fdata["ReserveList"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    deleteReserve(dataJSONEN);
+                });
+            });
+        }
+    }
+
+    function listsObject(dataCall){
+        var html = '<option value="" selected="selected">ทั้งหมด</option>';
+
+        var datas = callAjax("{{_context_path}}/api/reserve/manage/"+dataCall, "post", {}, "json");
+        if(typeof datas !== "undefined" && datas !== null){
+            $.each(datas["lists"], function(key, value){
+                html += '<option value="'+value["id"]+'">'+value["name"]+'</option>';
+            });
+        }
+
+        return html;
+    }
+
     function listsRice(){
         var t = $('#table2').DataTable( {
             "destroy": true,
@@ -680,12 +850,15 @@
             "ajax": {
                 url: "{{_context_path}}/api/reserve/manage/listsRiceCanReserve",
                 type: "post",
-                dataSrc: function(json){
-                    $.each(json["data"], function(key, value){
-                        listArr[value["stackCode"]] = value;
-
+                dataSrc: function(datas){
+                    var dataSet = [];
+                    $.each(datas["data"], function(key, value){
+                        if(typeof selectedArr[value["stackCode"]] === "undefined" ) {
+                            listRice[value["stackCode"]] = value;
+                            dataSet.push(value);
+                        }
                     });
-                    return json["data"];
+                    return dataSet;
                 }
             },
             "columnDefs": [
@@ -693,7 +866,7 @@
                     "targets": 0,
                     "searchable": false,
                     "orderable": false,
-                    "data": "stackCode",
+                    "data": "id",
                     "sClass": "text-center"
                 },
                 {
@@ -754,12 +927,9 @@
                 {
                     "targets": 11,
                     "data": "stackCode",
-                    "sClass": "text-left col-md-1",
+                    "sClass": "text-center",
                     "render": function (data) {
-                        var content = '<div class="checkbox-custom checkbox-primary row-selected">'
-                            + '<input type="checkbox" data-rid="'+data+'" onclick="return false")">'
-                            + '<label for="checkboxExample2">เลือก</label>'
-                        + '</div>';
+                        var content = '<input type="checkbox" class="cb-element" data-rid="'+data+'" onclick="return false">';
 
                         return content;
                     }
@@ -804,74 +974,115 @@
         });
 
         $("#table2 tbody").on('click', 'tr', function () {
-            var input = $(this).find("input[type=checkbox]");
+            var tr = $(this);
+            var input = tr.find("input[type=checkbox]");
             var id = input.attr("data-rid");
 
-            var option;
-            if(input.is(":checked")){
-                input.prop("checked", false);
-                option = "uncheck";
-            }
-            else{
-                input.prop("checked", true);
-                option = "check";
-            }
-
-            rowSelected(id, option);
+            input.prop("checked", true);
+            setTimeout(function() {
+                tr.hide();
+                rowSelected(id, "check");
+            }, 500);
         });
-
     }
 
     function rowSelected(id, option){
         if(option == "check"){
-            listSelected[id] = listArr[id];
-            console.log(listArr[id]);
+            selectedArr[id] = listRice[id];
 
-            if (typeof listSilo[listSelected[id]["silo"]] == 'undefined') {
-                listSilo[listSelected[id]["silo"]] = 1;
+            if (typeof selectedSilo[selectedArr[id]["silo"]] == 'undefined') {
+                selectedSilo[selectedArr[id]["silo"]] = 1;
             }
             else{
-                listSilo[listSelected[id]["silo"]] = listSilo[listSelected[id]["silo"]] + 1;
+                selectedSilo[selectedArr[id]["silo"]] += 1;
             }
 
-            weightSelected += parseFloat(listSelected[id]["tWeight"]);
+            selectedWeight += parseFloat(selectedArr[id]["tWeight"]);
+
+            addSelected();
         }
         else{
-            listSilo[listSelected[id]["silo"]] = listSilo[listSelected[id]["silo"]] - 1;
-            if(listSilo[listSelected[id]["silo"]] == 0){
-                delete listSilo[listSelected[id]["silo"]];
+            selectedSilo[selectedArr[id]["silo"]] = selectedSilo[selectedArr[id]["silo"]] - 1;
+            if(selectedSilo[selectedArr[id]["silo"]] == 0){
+                delete selectedSilo[selectedArr[id]["silo"]];
             }
-            weightSelected -= parseFloat(listSelected[id]["tWeight"]);
-            delete listSelected[id];
+            selectedWeight -= parseFloat(selectedArr[id]["tWeight"]);
+            delete selectedArr[id];
         }
 
-        $(".selectedDisplay").html(parseFloat(weightSelected).toFixed(2));
-        $(".countSiloDisplay").html(Object.keys(listSilo).length);
+        $(".selectedDisplay").html(parseFloat(selectedWeight).toFixed(2));
+        $(".countSiloDisplay").html(Object.keys(selectedSilo).length);
     }
 
-    function showSelected(){
+    function addSelected(){
+        sortObject(selectedArr);
+
+        var html = '';
+        var i = 0;
+        $.each(selectedArr, function(key, value){
+            html +='<tr>'
+                    + '<td class="text-center">'+(++i)+'</td>'
+                    + '<td>'+value["provinceNameTH"]+'</td>'
+                    + '<td>'+value["code"]+'</td>'
+                    + '<td>'+value["silo"]+'</td>'
+                    + '<td class="text-center">'+value["associate"]+'</td>'
+                    + '<td class="text-center">'+value["warehouse"]+'</td>'
+                    + '<td class="text-center">'+value["stack"]+'</td>'
+                    + '<td class="text-center">'+value["project"]+'</td>'
+                    + '<td class="text-center">'+value["type"]+'</td>'
+                    + '<td class="text-center">'+value["grade"]+'</td>'
+                    + '<td class="text-right">'+parseFloat(value["tWeight"]).toFixed(2)+'</td>'
+                    + '<td class="text-center">'
+                        + '<button class="btn btn-default trash" data-rid="'+value["stackCode"]+'"><i class="fa fa-trash"></i></button>'
+                    +'</td>'
+                + '</tr>';
+        });
+
+        if(Object.keys(selectedArr).length == 0){
+            html = '<tr><td colspan="12" class="text-center">-</td></tr>';
+        }
+
+        $("#showSelected tbody").html(html);
+
+        removeSelected();
+
+    }
+
+    function removeSelected(){
+        $("button.trash").unbind().click(function(){
+            var tr = $(this);
+            var id = tr.attr("data-rid");
+
+            setTimeout(function() {
+                tr.closest("tr").remove();
+                rowSelected(id, "uncheck");
+
+                listsRice();
+            }, 100);
+        });
+    }
+
+    function summarySelected(){
         var projectArr = {};
         var gradeArr = {};
         var provinceArr = {};
         var typeArr = {};
 
-        sortObject(listSelected);
-
         var i = 0;
         var html1 = '';
-        $.each(listSelected, function(key, value){
+        $.each(selectedArr, function(key, value){
             html1 +='<tr>'
-                + '<td class="text-center">'+(++i)+'</td>'
-                + '<td>'+value["provinceNameTH"]+'</td>'
-                + '<td>'+value["silo"]+'</td>'
-                + '<td class="text-center">'+value["associate"]+'</td>'
-                + '<td class="text-center">'+value["warehouse"]+'</td>'
-                + '<td class="text-center">'+value["stack"]+'</td>'
-                + '<td class="text-center">'+value["project"]+'</td>'
-                + '<td class="text-center">'+value["type"]+'</td>'
-                + '<td class="text-center">'+value["grade"]+'</td>'
-                + '<td class="text-right">'+parseFloat(value["tWeight"]).toFixed(2)+'</td>'
-            + '</tr>';
+                    + '<td class="text-center">'+(++i)+'</td>'
+                    + '<td>'+value["provinceNameTH"]+'</td>'
+                    + '<td>'+value["silo"]+'</td>'
+                    + '<td class="text-center">'+value["associate"]+'</td>'
+                    + '<td class="text-center">'+value["warehouse"]+'</td>'
+                    + '<td class="text-center">'+value["stack"]+'</td>'
+                    + '<td class="text-center">'+value["project"]+'</td>'
+                    + '<td class="text-center">'+value["type"]+'</td>'
+                    + '<td class="text-center">'+value["grade"]+'</td>'
+                    + '<td class="text-right">'+parseFloat(value["tWeight"]).toFixed(2)+'</td>'
+                + '</tr>';
 
             //project
             if (typeof projectArr[value["project"]] == 'undefined') {
@@ -902,49 +1113,49 @@
 
         var html2 = '';
         $.each(projectArr, function(key, value){
-            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+            var percent = parseFloat(value * 100 / selectedWeight).toFixed(2);
 
             html2 += '<tr>'
-                + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
-                + '<td class="text-right">'+percent+'</td>'
-            + '</tr>';
+                    + '<td class="text-center">'+key+'</td>'
+                    + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
+                    + '<td class="text-right">'+percent+'</td>'
+                    + '</tr>';
         });
         $("#projectSelected tbody").html(html2);
 
         var html3 = '';
         $.each(gradeArr, function(key, value){
-            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+            var percent = parseFloat(value * 100 / selectedWeight).toFixed(2);
 
             html3 += '<tr>'
-                + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
-                + '<td class="text-right">'+percent+'</td>'
-            + '</tr>';
+                    + '<td class="text-center">'+key+'</td>'
+                    + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
+                    + '<td class="text-right">'+percent+'</td>'
+                    + '</tr>';
         });
         $("#gradeSelected tbody").html(html3);
 
         var html4 = '';
         $.each(provinceArr, function(key, value){
-            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+            var percent = parseFloat(value * 100 / selectedWeight).toFixed(2);
 
             html4 += '<tr>'
-                + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
-                + '<td class="text-right">'+percent+'</td>'
-            + '</tr>';
+                    + '<td class="text-center">'+key+'</td>'
+                    + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
+                    + '<td class="text-right">'+percent+'</td>'
+                    + '</tr>';
         });
         $("#provinceSelected tbody").html(html4);
 
         var html5 = '';
         $.each(typeArr, function(key, value){
-            var percent = parseFloat(value * 100 / weightSelected).toFixed(2);
+            var percent = parseFloat(value * 100 / selectedWeight).toFixed(2);
 
             html5 += '<tr>'
-                + '<td class="text-center">'+key+'</td>'
-                + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
-                + '<td class="text-right">'+percent+'</td>'
-            + '</tr>';
+                    + '<td class="text-center">'+key+'</td>'
+                    + '<td class="text-right">'+parseFloat(value).toFixed(2)+'</td>'
+                    + '<td class="text-right">'+percent+'</td>'
+                    + '</tr>';
         });
         $("#typeSelected tbody").html(html5);
     }
@@ -1001,7 +1212,7 @@
         var dataReserve = [];
 
         if(id !== null){
-            dataList["keyword"] = listReserve[id]["keyword"];
+            dataList["keyword"] = listArr[id]["keyword"];
         }
 
         $("#form input[type=text], #form select").each(function (i) {
@@ -1014,7 +1225,7 @@
             }
         });
 
-        $.each(listSelected, function(key, value){
+        $.each(selectedArr, function(key, value){
             dataReserve.push({
                 "stackCode":value["stackCode"]
             });
@@ -1026,25 +1237,33 @@
 
         return fdata;
     }
+
     function toggleShow(option){
         if(option == "form"){
             $("#divTable, button.add").hide();
             $("#divForm, button.back").show();
 
             $("#form input, #form select").each(function(){
-                $(this).val("").trigger("change");
+                $(this).val("");
             });
 
             $("#loading").empty();
 
-            listSelected = {};
-            listId = "";
-
             lkReserve();
 
             $('#wizard').find("a[href*='wizard-condition']").trigger('click');
+
+            listRice = {};
+
+            selectedArr = {};
+            selectedSilo = {};
+            selectedWeight = 0;
         }
         else if(option == "home"){
+            $("#form input, #form select").each(function(){
+                $(this).val("");
+            });
+
             $("#divForm, button.back").hide();
             $("#divTable, button.add").show();
 
@@ -1057,18 +1276,5 @@
             result[key] = obj[key];
             return result;
         }, {});
-    }
-
-    function listsObject(dataCall){
-        var html = '<option value="" selected="selected">ทั้งหมด</option>';
-
-        var datas = callAjax("{{_context_path}}/api/reserve/manage/"+dataCall, "post", {}, "json");
-        if(typeof datas !== "undefined" && datas !== null){
-            $.each(datas["lists"], function(key, value){
-                html += '<option value="'+value["id"]+'">'+value["name"]+'</option>';
-            });
-        }
-
-        return html;
     }
 </script>

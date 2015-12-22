@@ -51,6 +51,9 @@ class RiceReserve extends EntityBase {
     /** @Column(type="string",length=255, name="Weight") */
     public $weight;
 
+    /** @Column(type="string",length=255, name="TWeight") */
+    public $tWeight;
+
     /** @Column(type="string",length=100, name="Sampling_Id") */
     public $samplingId;
 

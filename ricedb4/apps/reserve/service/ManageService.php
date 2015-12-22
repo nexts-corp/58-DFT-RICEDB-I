@@ -79,8 +79,14 @@ class ManageService extends CServiceBase implements IManageService {
 
     public function listsReserveByIndex($reserveList){
         $sql = "SELECT "
-            ." rr"
+            ." rr.id, rr.warehouseCode, rr.stackCode, pv.provinceNameTH, rr.code, rr.silo,"
+            ." ac.associate, rr.warehouse, rr.stack, pj.project, tp.type, gd.grade, rr.tWeight"
         ." FROM ".$this->ent."\\RiceReserve rr"
+        ." JOIN ".$this->ent."\\Province pv WITH pv.id = rr.provinceId"
+        ." JOIN ".$this->ent."\\Associate ac WITH ac.id = rr.associateId"
+        ." JOIN ".$this->ent."\\Project pj WITH pj.id = rr.projectId"
+        ." JOIN ".$this->ent."\\Type tp WITH tp.id = rr.typeId"
+        ." JOIN ".$this->ent."\\Grade gd WITH gd.id = rr.gradeId"
         ." WHERE rr.reserveKeyword = :keyword";
         $param = array(
             "keyword" => $reserveList->keyword
@@ -232,7 +238,7 @@ class ManageService extends CServiceBase implements IManageService {
         // insert new data
         $conditionArr = array();
         foreach($riceReserve as $key => $val){
-            $conditionArr[$key] = "ri.id='".$val->riceInfoId."'";
+            $conditionArr[$key] = "ri.stackCode='".$val->stackCode."'";
         }
         $condition = implode(" OR ", $conditionArr);
 
@@ -244,12 +250,14 @@ class ManageService extends CServiceBase implements IManageService {
         $data = $this->datacontext->getObject($sql);
         foreach($data as $key => $val){
             $rice = new \apps\common\entity\RiceReserve();
-            $rice->riceInfoId = $val->id;
+            $rice->stackCode = $val->stackCode;
             $rice->reserveKeyword = $dataList[0]->keyword;
 
             $check = $this->datacontext->getObject($rice);
 
             if(count($check) == 0){
+                $rice->warehouseCode = $val->warehouseCode;
+                $rice->stackCode = $val->stackCode;
                 $rice->code = $val->code;
                 $rice->bagNo = $val->bagNo;
                 $rice->provinceId = $val->provinceId;
@@ -260,6 +268,7 @@ class ManageService extends CServiceBase implements IManageService {
                 $rice->warehouse = $val->warehouse;
                 $rice->stack = $val->stack;
                 $rice->weight = $val->weight;
+                $rice->tWeight = $val->tWeight;
                 $rice->samplingId = $val->samplingId;
                 $rice->gradeId = $val->gradeId;
                 $rice->discountRate = $val->discountRate;
