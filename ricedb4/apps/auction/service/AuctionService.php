@@ -33,7 +33,7 @@ class AuctionService extends CServiceBase implements IAuctionService {
     }
 
     public function check() {
-        if($this->getStatus() != 'Y'){
+        if($this->getStatus() == null){
             return "close";
         }else{
             return "open";
