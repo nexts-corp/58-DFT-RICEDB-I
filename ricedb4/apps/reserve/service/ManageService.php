@@ -176,37 +176,53 @@ class ManageService extends CServiceBase implements IManageService {
         ." WHERE (".$condition.")";
 
         $data = $this->datacontext->getObject($sql);
+        $count = 0;
+        $command = [];
         foreach($data as $key => $val){
-            $rice = new \apps\common\entity\RiceReserve();
-            /*$rice->warehouseCode = $val->warehouseCode;
-            $rice->stackCode = $val->stackCode;
-            $rice->reserveKeyword = $reserveList->keyword;
+            $warehouseCode = $val->warehouseCode;
+            $stackCode = $val->stackCode;
+            $reserveKeyword = $reserveList->keyword;
+            $code = $val->code;
+            $bagNo = $val->bagNo;
+            $provinceId = $val->provinceId;
+            $projectId = $val->projectId;
+            $silo = $val->silo;
+            $associateId = $val->associateId;
+            $typeId = $val->typeId;
+            $warehouse = $val->warehouse;
+            $stack = $val->stack;
+            $tWeight = $val->tWeight;
+            $weight = $val->weight;
+            $samplingId = $val->samplingId;
+            $gradeId = $val->gradeId;
+            $discountRate = $val->discountRate;
 
-            $check = $this->datacontext->getObject($rice);
+            $command[] = "('".$warehouseCode."', '".$stackCode."', '".$reserveKeyword."', '".$code."',"
+                ."'".$bagNo."', '".$provinceId."', '".$projectId."', '".$silo."', '".$associateId."',"
+                ."'".$typeId."', '".$warehouse."', '".$stack."', '".$tWeight."', '".$weight."', '".$samplingId."',"
+                ."'".$gradeId."', '".$discountRate."')";
+            $count++;
 
-            if(count($check) == 0){*/
-                $rice->warehouseCode = $val->warehouseCode;
-                $rice->stackCode = $val->stackCode;
-                $rice->reserveKeyword = $reserveList->keyword;
-                $rice->code = $val->code;
-                $rice->bagNo = $val->bagNo;
-                $rice->provinceId = $val->provinceId;
-                $rice->projectId = $val->projectId;
-                $rice->silo = $val->silo;
-                $rice->associateId = $val->associateId;
-                $rice->typeId = $val->typeId;
-                $rice->warehouse = $val->warehouse;
-                $rice->stack = $val->stack;
-                $rice->tWeight = $val->tWeight;
-                $rice->weight = $val->weight;
-                $rice->samplingId = $val->samplingId;
-                $rice->gradeId = $val->gradeId;
-                $rice->discountRate = $val->discountRate;
+            if($count == 10 || $key == count($data) - 1){
+                if(count($command) > 0){
+                    $insert = "INSERT INTO dft_Rice_Reserve(Warehouse_Code, Stack_Code, Reserve_List_Keyword,
+                        Code, Bag_No, LK_Province_Id, LK_Project_Id, Silo, LK_Associate_Id, LK_Type_Id,
+                        Warehouse, Stack, TWeight, Weight, Sampling_Id, LK_Grade_Id, Discount_Rate)
+                        VALUES ".implode(",", $command);
 
-                if(!($this->datacontext->saveObject($rice))){
-                    $return = $this->datacontext->getLastMessage();
+                    $sql = "EXEC sp_batch_insert :cmd";
+
+                    $param = array(
+                        "cmd" =>  $insert
+                    );
+
+                    if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
+                        return $this->datacontext->getLastMessage();
+                    }
+                    $command = [];
+                    $count = 0;
                 }
-            //}
+            }
         }
         return $return;
     }
@@ -248,34 +264,51 @@ class ManageService extends CServiceBase implements IManageService {
             ." WHERE (".$condition.")";
 
         $data = $this->datacontext->getObject($sql);
+        $count = 0;
+        $command = [];
         foreach($data as $key => $val){
-            $rice = new \apps\common\entity\RiceReserve();
-            $rice->stackCode = $val->stackCode;
-            $rice->reserveKeyword = $dataList[0]->keyword;
+            $warehouseCode = $val->warehouseCode;
+            $stackCode = $val->stackCode;
+            $reserveKeyword = $reserveList->keyword;
+            $code = $val->code;
+            $bagNo = $val->bagNo;
+            $provinceId = $val->provinceId;
+            $projectId = $val->projectId;
+            $silo = $val->silo;
+            $associateId = $val->associateId;
+            $typeId = $val->typeId;
+            $warehouse = $val->warehouse;
+            $stack = $val->stack;
+            $tWeight = $val->tWeight;
+            $weight = $val->weight;
+            $samplingId = $val->samplingId;
+            $gradeId = $val->gradeId;
+            $discountRate = $val->discountRate;
 
-            $check = $this->datacontext->getObject($rice);
+            $command[] = "('".$warehouseCode."', '".$stackCode."', '".$reserveKeyword."', '".$code."',"
+                ."'".$bagNo."', '".$provinceId."', '".$projectId."', '".$silo."', '".$associateId."',"
+                ."'".$typeId."', '".$warehouse."', '".$stack."', '".$tWeight."', '".$weight."', '".$samplingId."',"
+                ."'".$gradeId."', '".$discountRate."')";
+            $count++;
 
-            if(count($check) == 0){
-                $rice->warehouseCode = $val->warehouseCode;
-                $rice->stackCode = $val->stackCode;
-                $rice->code = $val->code;
-                $rice->bagNo = $val->bagNo;
-                $rice->provinceId = $val->provinceId;
-                $rice->projectId = $val->projectId;
-                $rice->silo = $val->silo;
-                $rice->associateId = $val->associateId;
-                $rice->typeId = $val->typeId;
-                $rice->warehouse = $val->warehouse;
-                $rice->stack = $val->stack;
-                $rice->weight = $val->weight;
-                $rice->tWeight = $val->tWeight;
-                $rice->samplingId = $val->samplingId;
-                $rice->gradeId = $val->gradeId;
-                $rice->discountRate = $val->discountRate;
+            if($count == 10 || $key == count($data) - 1){
+                if(count($command) > 0){
+                    $insert = "INSERT INTO dft_Rice_Reserve(Warehouse_Code, Stack_Code, Reserve_List_Keyword,
+                        Code, Bag_No, LK_Province_Id, LK_Project_Id, Silo, LK_Associate_Id, LK_Type_Id,
+                        Warehouse, Stack, TWeight, Weight, Sampling_Id, LK_Grade_Id, Discount_Rate)
+                        VALUES ".implode(",", $command);
 
+                    $sql = "EXEC sp_batch_insert :cmd";
 
-                if(!($this->datacontext->saveObject($rice))){
-                    $return = $this->datacontext->getLastMessage();
+                    $param = array(
+                        "cmd" =>  $insert
+                    );
+
+                    if(!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")){
+                        return $this->datacontext->getLastMessage();
+                    }
+                    $command = [];
+                    $count = 0;
                 }
             }
         }
