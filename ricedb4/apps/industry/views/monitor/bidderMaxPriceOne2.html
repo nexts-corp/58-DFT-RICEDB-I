@@ -1,0 +1,133 @@
+{{>monitor/headerMonitor}}
+<div role="main" class="main">
+
+    <div class="col-md-logo-content m-t-2em" style="padding:0 3em;  width: 100%; margin-top: 5px;">
+        <h1 class="word-rotator-title center">
+            <img src="{{_context_path}}/images/logo-only.png" alt="" width="64"/>
+            ผู้เสนอซื้อที่เสนอราคาสูงสุดในแต่ละคลัง <br> ครั้งที่ <span id="auction"></span>
+        </h1>
+        
+        <p class="featured lead center">
+            <span style="float: right;">จำนวน: <span id="countAll" class="flash"></span> คลัง</span>
+            
+        </p>
+    </div>
+    
+    <div class="main-container">
+        <div class="page-content page-thin" style="width: 100%; height: 100%; ">
+            <div class="panel-content widget-maybe-head widget-stock stock2" style="" >
+                <div class="tab_right">
+                    <div class="tab-content" style="height: 100%; background-color: #FE9A2E; box-shadow: none; border: none;">
+
+                        <div class="" style="width: 100%; padding: 5px 0 10px 0;">
+                            <div class="form-group">
+                                <h4 class="col-md-4 center" style="color: #FFFFFF !important;">คลังสินค้า</h4>
+                                <h4 class="col-md-4 center" style="color: #FFFFFF !important;">ผู้เสนอซื้อ</h4>
+                                <h4 class="col-md-2" style="color: #FFFFFF !important; text-align: right !important;">ปริมาณ (ตัน)</h4>
+                                <h4 class="col-md-2" style="color: #FFFFFF !important; text-align: right !important; ">มูลค่าเสนอซื้อ (บาท)</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-content widget-maybe-foot widget-stock stock2 slide_div" >
+                <div class="tab_right">
+                    <div class="tab-content" style=" background-color: transparent; box-shadow: none; border: none;">
+                        <div style="width: 100%;padding: 0" id="monitorBody">
+                        </div><!--      Vmr     -->
+                    </div>
+                </div>
+            </div>
+
+            <div id='social'>
+                <span class="span_speed collapse">1x</span>
+                <a class='skype down-speed' title='slow' href='javascript: void(0);'>
+                    <i class="fa fa-angle-double-left"></i>
+                </a>
+
+                <a class='gplus up-speed' title='up' href='javascript: void(0);'>
+                    <i class="fa fa-angle-double-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+
+        showProperty();
+        autoScroller('monitorBody',1,30);
+
+        $( "#social a" ).each(function() {
+            var tipt = $(this).attr('title');
+            $(this).attr('title','');
+            $(this).append('<span>');
+            $(this).children('span').text(tipt);
+            var spanWidth = $(this).children('span').width() + 20;
+            var spanMarg = 0 - spanWidth/2;
+            $(this).children('span').css('width',spanWidth);
+            $(this).children('span').css('margin-left',spanMarg);
+            $(this).hover (
+                function() {
+                    $(this).children('span').fadeIn();
+                    //$('#social a').css('opacity','.1');
+                    $(this).css('opacity','1');
+                }, function() {
+                    $(this).children('span').fadeOut();
+                    $('#social a').css('opacity','.1');
+                }
+            );
+        });     
+    });
+    
+    function showProperty(){
+           setTimeout(showProperty, 120000);
+        var html = '<div class="col-md-12">'
+            + '<div class="table-responsive">'
+                + '<table class="table">'
+                    + '<tbody>';
+        var countAll = 0;
+        var auction = '';
+        var datas = callAjax("{{_context_path}}/api/industry/bidderMonitor/maxPriceOne", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            auction = datas["auction"]["status"];
+            $.each(datas["lists"], function(province, value){
+                html += '<tr>'
+                    + '<td class="text-left bg-green" colspan="4" style="margin: 40px 0px 20px 0px !important;"><h3>'+province+'<h3></td>'
+                + '</tr>';
+                $.each(value, function(key2, value2){
+                    countAll++;
+                    
+                    html += '<tr>'
+                        + '<td class="col-md-4 bg-sky" style="padding-left: 20px;">'
+                            + '<h3>'+countAll+'. '+value2["wareHouseCode"]+' ['+value2["associate"]+']</h3>'
+                        + '</td>'
+                        + '<td class="col-md-4 bg-blue">'
+                            + '<h3>'+value2["bidderName"]+'</h3>'
+                        + '</td>'
+                        + '<td class="col-md-2 text-right bg-blue">'
+                            + '<h3>'+accounting.formatNumber(value2["weightAll"], 2, ",", ".")+'</h3>'
+                        + '</td>'
+                        + '<td class="col-md-2 text-right bg-blue">'
+                            + '<h3>'+accounting.formatNumber(value2["bidderPrice"], 2, ",", ".")+'</h3>'
+                        + '</td>'
+                    + '</tr>';
+                });
+                html += '<tr><td></td></tr>';
+            });
+            
+            html += '</tbody>'
+                    + '</table>'
+                + '</div>'
+            + '</div>';            
+        }
+
+        $("#auction").html(auction);
+        $("#monitorBody").html(html);
+        $("#countAll").html(countAll);   
+    }
+</script>
+
+</body>
+</html>
