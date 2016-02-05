@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="2_1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="11"/>
+	<style name="FBold" fill="Solid" hAlign="Left" vAlign="Top" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H"/>
+	<style name="Rpt" fontName="TH SarabunPSK" fontSize="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
+	<style name="Default" isDefault="true" fontName="TH SarabunPSK" fontSize="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
+	<parameter name="DATE_START" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["1/10/58"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATE_END" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["31/10/58"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PUBLISHER" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["พงศ์ปณต ทัศนียาชุมพาลี"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATE_CURRENT" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Date()]]></defaultValueExpression>
+	</parameter>
+	<parameter name="HEAD_REPORT" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["ราคา Floor Price ของ ข้าวขาว 5%"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="printBy" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="province" class="java.lang.String"/>
+	<field name="grade" class="java.lang.String"/>
+	<field name="fp2y1" class="java.lang.Double"/>
+	<field name="fp2y2" class="java.lang.Double"/>
+	<field name="fp2y3" class="java.lang.Double"/>
+	<field name="fp2y4" class="java.lang.Double"/>
+	<field name="fp2y5" class="java.lang.Double"/>
+	<field name="fp3y1" class="java.lang.Double"/>
+	<field name="fp3y2" class="java.lang.Double"/>
+	<field name="fp3y3" class="java.lang.Double"/>
+	<field name="fp3y4" class="java.lang.Double"/>
+	<field name="fp3y5" class="java.lang.Double"/>
+	<field name="fp4y1" class="java.lang.Double"/>
+	<field name="fp4y2" class="java.lang.Double"/>
+	<field name="fp4y3" class="java.lang.Double"/>
+	<field name="fp4y4" class="java.lang.Double"/>
+	<field name="fp4y5" class="java.lang.Double"/>
+	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement style="FBold" x="0" y="31" width="802" height="20" uuid="ea43acfd-9b81-4c1c-a49b-13fd316d15e3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{HEAD_REPORT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="68" splitType="Prevent">
+			<staticText>
+				<reportElement style="FBold" x="0" y="0" width="100" height="68" uuid="1d2c6e89-64da-4abc-9dba-08eb4e3cc2da"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[จังหวัด]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="100" y="0" width="70" height="68" uuid="696d8bc9-1084-4ec6-9165-52a28a7db1aa"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[เกรด]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="170" y="0" width="210" height="20" uuid="9df197fb-4e0d-4b5e-99b3-37776d577d3c"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FP2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="380" y="0" width="210" height="20" uuid="790482b5-1213-462e-aeb9-ef1857452f40"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FP3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="590" y="0" width="212" height="20" uuid="97d959c8-c2c0-4dfc-ad6c-b8c2bd88e793"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FP4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="170" y="20" width="42" height="48" uuid="4f903d5b-7220-4c51-a8ea-694bcadfd967"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2556/57]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="212" y="20" width="42" height="48" uuid="f6be182a-0a1b-4b62-8d27-a22cef39f5f8"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2555/56 (2)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="254" y="20" width="42" height="48" uuid="2af0332d-b664-4aa8-bdd5-c10a8e74b716"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2555/56 (1)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="296" y="20" width="42" height="48" uuid="f5a3e48b-8d8e-43e5-899b-1db78c877cf8"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[นาปี 2554/55]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="338" y="20" width="42" height="48" uuid="12451d46-49ab-43d2-b0f5-f3208c64eaad"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[นาปรัง 2555]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="506" y="20" width="42" height="48" uuid="e67356cc-127c-4da9-806c-79b1e2aab8dc"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[นาปี 2554/55]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="548" y="20" width="42" height="48" uuid="e5d4e470-8644-497b-b250-9af7fd05a6d3"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[นาปรัง 2555]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="422" y="20" width="42" height="48" uuid="cf65f6bd-06bf-4602-a118-6a8337cfa87f"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2555/56 (2)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="380" y="20" width="42" height="48" uuid="7e2f989f-b4bd-4b14-8152-bc2c8a138042"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2556/57]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="464" y="20" width="42" height="48" uuid="dd5f9bcd-a6c9-47f6-b362-4d64911e1b85"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2555/56 (1)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="674" y="20" width="42" height="48" uuid="3b6a84c1-da37-4d84-83e7-d77ed3596243"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2555/56 (1)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="716" y="20" width="42" height="48" uuid="aaf00fb7-90c7-4cf7-ae6b-3998fd5858e4"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[นาปี 2554/55]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="632" y="20" width="42" height="48" uuid="076c43c4-9b59-4b95-8f4e-04d7ddab4178"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2555/56 (2)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="758" y="20" width="44" height="48" uuid="aab4921b-eab5-4b94-a461-20c6e38af53d"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[นาปรัง 2555]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="FBold" x="590" y="20" width="42" height="48" uuid="b0cc5f98-5a44-42ff-9606-c7da7e80660f"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[ปี 2556/57]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Prevent">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="20" uuid="b2097bfc-b81e-4af7-978f-818b4f95b4c7"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{province}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="100" y="0" width="70" height="20" uuid="347a0ea3-1065-4d1a-969b-4b2a05679616"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{grade}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="170" y="0" width="42" height="20" uuid="34e30332-80f3-4017-b522-77f53be07e4d"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp2y1}!=null)?$F{fp2y1}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="212" y="0" width="42" height="20" uuid="3807cd6b-a4c7-4d6c-944a-01022c8a4b5d"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp2y2}!=null)?$F{fp2y2}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="254" y="0" width="42" height="20" uuid="32496f10-1ed9-4e31-9b7c-bdb6e16074d5"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp2y3}!=null)?$F{fp2y3}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="296" y="0" width="42" height="20" uuid="6ac821b0-c6c1-4bf2-bc9c-ed075bb914a8"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp2y4}!=null)?$F{fp2y4}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="338" y="0" width="42" height="20" uuid="fd84ae1d-b77c-4f85-912f-05d4123558db"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp2y5}!=null)?$F{fp2y5}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="380" y="0" width="42" height="20" uuid="d9844e34-e201-4c75-b4c2-7b82ab4959a7"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp3y1}!=null)?$F{fp3y1}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="422" y="0" width="42" height="20" uuid="3c159b00-e59c-46a9-a245-07f55a4d5bde"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp3y2}!=null)?$F{fp3y2}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="464" y="0" width="42" height="20" uuid="e346d094-fb49-4e87-9938-843dc10cce2e"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp3y3}!=null)?$F{fp3y3}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="506" y="0" width="42" height="20" uuid="2d3ea596-685e-4e99-9f81-a5444527f2ed"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp3y4}!=null)?$F{fp3y4}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="548" y="0" width="42" height="20" uuid="b915b9d3-f492-47b8-90b5-a05a58920b9e"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp3y5}!=null)?$F{fp3y5}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="590" y="0" width="42" height="20" uuid="7b98af92-e829-4373-86de-00764b682fed"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp4y1}!=null)?$F{fp4y1}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="632" y="0" width="42" height="20" uuid="52bfdbce-f588-40b8-acb5-dca100f50a89"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp4y2}!=null)?$F{fp4y2}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="674" y="0" width="42" height="20" uuid="3c870e90-a933-4acd-adcb-0ce29e43e750"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp4y3}!=null)?$F{fp4y3}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="716" y="0" width="42" height="20" uuid="52ea8619-d3d8-4a33-af83-d7a1a1827b58"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp4y4}!=null)?$F{fp4y4}:"-"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="758" y="0" width="44" height="20" uuid="578c6213-01ce-4910-aacf-9ddc4fe628bd"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{fp4y5}!=null)?$F{fp4y5}:"-"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement style="Rpt" x="0" y="20" width="802" height="12" uuid="b083821c-c77d-4824-b83f-c8871e1a675f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<text><![CDATA[RPT : 01-01]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="Default" x="0" y="0" width="674" height="20" uuid="7ad1e87b-215f-4c0b-823b-f01e03410bb5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["พิมพ์โดย : " + $P{printBy}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto">
+				<reportElement x="674" y="0" width="128" height="20" uuid="dc482a12-648b-47cd-bebc-02e84adbb43b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า " + $V{CURRENT_PAGE}+" / " +$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

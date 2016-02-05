@@ -16,6 +16,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT 1]]>
 	</queryString>
@@ -143,14 +146,13 @@
 	</title>
 	<pageHeader>
 		<band height="104" splitType="Stretch">
-			<staticText>
-				<reportElement style="Bold" x="0" y="23" width="555" height="20" uuid="47eec812-75fb-442a-931b-5aa9ce7f1955"/>
-				<box leftPadding="0"/>
-				<textElement textAlignment="Center">
+			<textField>
+				<reportElement style="Bold" x="0" y="23" width="555" height="20" uuid="0146fd89-9511-488f-99f9-0fec76734e53"/>
+				<textElement textAlignment="Center" markup="none">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[การจำหน่ายข้าวสารในสต๊อกของรัฐ]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
+			</textField>
 			<textField evaluationTime="Auto" pattern="dd/MM/yy">
 				<reportElement style="Bold" x="0" y="63" width="555" height="20" uuid="8e70d827-f685-495b-ba78-019ceafe9eee"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">

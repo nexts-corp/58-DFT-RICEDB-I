@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT03-04" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
 	<property name="ireport.zoom" value="1.331000000000145"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="64"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
 	</style>
@@ -16,6 +16,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT 1]]>
 	</queryString>
@@ -139,20 +142,19 @@
 	</title>
 	<pageHeader>
 		<band height="120" splitType="Stretch">
-			<staticText>
-				<reportElement style="Bold" x="0" y="38" width="555" height="20" uuid="47eec812-75fb-442a-931b-5aa9ce7f1955"/>
-				<box leftPadding="0"/>
-				<textElement textAlignment="Center">
+			<textField>
+				<reportElement style="Bold" x="0" y="38" width="555" height="20" uuid="647b7204-eb7e-4419-9653-2389a9b447c1"/>
+				<textElement textAlignment="Center" markup="none">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<text><![CDATA[การจำหน่ายข้าวสารในสต๊อกของรัฐ]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
+			</textField>
 			<textField evaluationTime="Auto" pattern="dd/MM/yy">
 				<reportElement style="Bold" x="0" y="78" width="555" height="20" uuid="8e70d827-f685-495b-ba78-019ceafe9eee"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["รายงานคลังที่ผู้เสนอซื้อ ผ่านเกณฑ์มูลค่าขั้นต่ำ และเสนอซื้อสูงสุดเท่ากันในแต่ละคลัง"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["รายงานคลังที่มีผู้เสนอซื้อสูงสุดเท่ากันในแต่ละคลัง"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Auto">
 				<reportElement style="Bold" x="0" y="58" width="555" height="20" uuid="95b04ea2-bd98-4cc5-9a78-cb88d2d99182"/>

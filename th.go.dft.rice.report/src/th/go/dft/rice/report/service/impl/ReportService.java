@@ -126,7 +126,8 @@ public class ReportService extends CServiceBase implements IReportService {
                 bparam.setAuctionCode(datas.get(0).getAuctionCode());
                 bparam.setAuctionDate(datas.get(0).getAuctionDate());
                 bparam.setREPORT_MAX_COUNT(datas.size());
-                 bparam.setPrintBy(printBy);
+                bparam.setPrintBy(printBy);
+                bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
 
             } else {
                 bparam.setAuctionNo(auctionCode);
@@ -135,6 +136,7 @@ public class ReportService extends CServiceBase implements IReportService {
                 datas = new ArrayList<>();
                 bparam.setREPORT_MAX_COUNT(0);
                 bparam.setPrintBy(printBy);
+                bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
                 //BaseModel bm=new BaseModel();
                 //datas.add(bm);
             }

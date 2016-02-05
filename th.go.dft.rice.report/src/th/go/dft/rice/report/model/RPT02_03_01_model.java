@@ -41,7 +41,15 @@ public class RPT02_03_01_model  extends BaseReport  {
     private int passBidder;
     @Column
     private int failBidder;
-
+    
+    
+    @Column
+    private String propertyFactory1;
+    @Column
+    private String propertyFactory2;
+    @Column
+    private String propertyFactory3;
+    
    
 
   
@@ -157,6 +165,32 @@ public class RPT02_03_01_model  extends BaseReport  {
     public void setBidderRegister(String bidderRegister) {
         this.bidderRegister = bidderRegister;
     }
+
+    public String getPropertyFactory1() {
+        return propertyFactory1;
+    }
+
+    public void setPropertyFactory1(String propertyFactory1) {
+        this.propertyFactory1 = propertyFactory1;
+    }
+
+    public String getPropertyFactory2() {
+        return propertyFactory2;
+    }
+
+    public void setPropertyFactory2(String propertyFactory2) {
+        this.propertyFactory2 = propertyFactory2;
+    }
+
+    public String getPropertyFactory3() {
+        return propertyFactory3;
+    }
+
+    public void setPropertyFactory3(String propertyFactory3) {
+        this.propertyFactory3 = propertyFactory3;
+    }
+    
+    
     
     
 }

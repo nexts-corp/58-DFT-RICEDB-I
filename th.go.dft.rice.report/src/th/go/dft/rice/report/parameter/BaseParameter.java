@@ -18,6 +18,8 @@ public class BaseParameter {
     private int REPORT_MAX_COUNT;
     private String printBy;
     private Locale REPORT_LOCALE;
+    
+    private String auctionName;
 
     public String getAuctionNo() {
         return auctionNo;
@@ -65,6 +67,14 @@ public class BaseParameter {
 
     public void setREPORT_LOCALE(Locale REPORT_LOCALE) {
         this.REPORT_LOCALE = REPORT_LOCALE;
+    }
+
+    public String getAuctionName() {
+        return auctionName;
+    }
+
+    public void setAuctionName(String auctionName) {
+        this.auctionName = auctionName;
     }
     
     

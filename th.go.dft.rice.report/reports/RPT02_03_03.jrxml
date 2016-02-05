@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02_03_03" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
 	<property name="ireport.zoom" value="1.1269722013523664"/>
-	<property name="ireport.x" value="111"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="FBold" fill="Solid" hAlign="Left" vAlign="Top" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H"/>
 	<style name="Rpt" fontName="TH SarabunPSK" fontSize="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
@@ -30,6 +30,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT 1]]>
 	</queryString>
@@ -55,18 +58,25 @@
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
 	</variable>
+	<variable name="date1" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{auctionDate}.split("-")[0].length()==2?
+    ($P{auctionDate}.split("-")[0]
+    +$P{auctionDate}.split("-")[1].substring(2)
+    )
+:(
+$P{auctionDate}.split("-")[0]
++" "
+    +(($P{auctionDate}.split("-")[1]).split(" ")[2])
+)]]></variableExpression>
+	</variable>
+	<variable name="date2" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{auctionDate}.split("-")[1]]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
 		<band height="71" splitType="Stretch">
-			<staticText>
-				<reportElement style="FBold" x="0" y="0" width="802" height="20" uuid="47eec812-75fb-442a-931b-5aa9ce7f1955"/>
-				<textElement textAlignment="Center">
-					<font size="16"/>
-				</textElement>
-				<text><![CDATA[การจำหน่ายข้าวสารในสต๊อกของรัฐ]]></text>
-			</staticText>
 			<textField evaluationTime="Auto" pattern="dd/MM/yy">
 				<reportElement style="FBold" x="0" y="40" width="802" height="20" uuid="8e70d827-f685-495b-ba78-019ceafe9eee"/>
 				<textElement textAlignment="Center">
@@ -80,6 +90,13 @@
 					<font size="16"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ครั้งที่ "+$P{auctionCode}+" วันที่ "+$P{auctionDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="FBold" x="0" y="0" width="801" height="20" uuid="47f10705-abeb-4028-b448-e7786bcbb3a2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -174,7 +191,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ผู้มายื่นซองตรวจ\nคุณสมบัติเบื้องต้น \n("+$F{auctionDate}.substring(0,2)+$F{auctionDate}.substring(5)+")"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ผู้มายื่นซองตรวจ\nคุณสมบัติเบื้องต้น \n("+$V{date1}+")"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Default" stretchType="RelativeToBandHeight" mode="Transparent" x="445" y="0" width="165" height="60" uuid="5a630b09-5271-41c6-ad2d-9c5cd17f02b8"/>
@@ -187,7 +204,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ผู้มายื่นซอง\nเสนอซื้อ\n("+$F{auctionDate}.substring(3)+")"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ผู้มายื่นซอง\nเสนอซื้อ\n("+$V{date2}+")"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

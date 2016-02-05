@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02-07-03" language="groovy" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a1da91c-587f-47a5-bc73-0820913508b1">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="874"/>
+	<property name="ireport.x" value="457"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
@@ -16,6 +16,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[EXEC sp_rpt_02_07_01 'AU5/2558']]>
 	</queryString>
@@ -148,7 +151,7 @@
 			<textField>
 				<reportElement style="Heading" x="0" y="0" width="1150" height="24" uuid="dae490be-92d6-4a23-aa99-d23c02940d0a"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA["การจำหน่ายข้าวสารในสต๊อกของรัฐ (อคส) ครั้งที่ "+$P{auctionCode}+" ("+$P{auctionDate}+")"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{auctionName}+" (อคส) ครั้งที่ "+$P{auctionCode}+" ("+$P{auctionDate}+")"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
