@@ -22,7 +22,7 @@ class AutoUpdate extends CServiceBase implements IAutoUpdate {
                 . " FROM " . $this->ent . "\\Status st"
                 . " WHERE st.active = :active";
         $param = array(
-            "active" => "Y"
+            "active" => "YA"
         );
         $data = $this->datacontext->getObject($sql, $param); //get STATUS is Active
 

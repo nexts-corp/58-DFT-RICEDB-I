@@ -25,7 +25,7 @@ class BidderService extends CServiceBase implements IBidderService {
         $sqStatus = "select s from " . $this->ent . "\\Status s "
                 . "where s.active = :active";
         $paramS = array(
-            "active" => "Y"
+            "active" => "YA"
         );
         $dataStatus = $this->datacontext->getObject($sqStatus, $paramS); //get STATUS is Active
         return $dataStatus[0];

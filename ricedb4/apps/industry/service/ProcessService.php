@@ -23,7 +23,7 @@ class ProcessService extends CServiceBase implements IProcessService{
             ." FROM " . $this->ent . "\\Status s "
             ." WHERE s.active = :active";
         $paramS = array(
-            "active" => "Y"
+            "active" => "YA"
         );
         $dataStatus = $this->datacontext->getObject($sqStatus, $paramS); //get STATUS is Active
         return $dataStatus[0];
