@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT03-12-02" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a1da91c-587f-47a5-bc73-0820913508b1">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="0.75"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="86"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
 		<paragraph leftIndent="5"/>
@@ -16,6 +16,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[exec sp_RPT03_12_02 'AU4/2558']]>
 	</queryString>
@@ -65,6 +68,13 @@
 				<box rightPadding="0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["วันที่ "+$P{auctionDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Bold" x="0" y="8" width="802" height="20" uuid="e2e7a6e8-6075-4bd3-9de8-65863d38c4f2"/>
+				<textElement textAlignment="Center" markup="none">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -180,8 +190,7 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[($F{bidderPassFV}=="N") ? "**"+$F{wareHouseCode} : $F{wareHouseCode}
-]]></textFieldExpression>
+				<textFieldExpression><![CDATA[($F{bidderPassFV}=="N") ? "**"+$F{wareHouseCode} : $F{wareHouseCode}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.000000">
 				<reportElement stretchType="RelativeToBandHeight" x="447" y="0" width="93" height="20" uuid="3d3ec4ed-b9f7-4b1e-ad5d-10079f745462"/>

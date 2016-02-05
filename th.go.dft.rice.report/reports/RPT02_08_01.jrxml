@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02_08_01" language="groovy" pageWidth="595" pageHeight="842" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="20" bottomMargin="42" uuid="7a1da91c-587f-47a5-bc73-0820913508b1">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="722"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
 		<paragraph leftIndent="5"/>
@@ -18,6 +18,9 @@
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[EXEC sp_rpt_02_08_01 'AU5/2558',1]]>
 	</queryString>
@@ -80,7 +83,24 @@
 		<variableExpression><![CDATA[($F{groupId}=="G3")?1:0]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
-	<group name="g1" isReprintHeaderOnEachPage="true">
+	<variable name="date2" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{auctionDate}.split("-")[1]]]></variableExpression>
+	</variable>
+	<variable name="date1" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{auctionDate}.split("-")[0].length()==2?
+    ($P{auctionDate}.split("-")[0]
+    +$P{auctionDate}.split("-")[1].substring(2)
+    )
+:(
+$P{auctionDate}.split("-")[0]
++" "
+    +(($P{auctionDate}.split("-")[1]).split(" ")[2])
+)]]></variableExpression>
+	</variable>
+	<variable name="date3" class="java.lang.String" resetType="None">
+		<variableExpression><![CDATA[$P{auctionDate}.split("-")[1].substring(2)]]></variableExpression>
+	</variable>
+	<group name="g1" isReprintHeaderOnEachPage="true" minHeightToStartNewPage="250">
 		<groupExpression><![CDATA[$F{groupId}]]></groupExpression>
 		<groupHeader>
 			<band height="81">
@@ -453,24 +473,12 @@
 	<pageHeader>
 		<band height="153">
 			<staticText>
-				<reportElement style="Bold" x="0" y="34" width="511" height="29" uuid="0940e087-a6a2-4ea2-8aa0-195ce05c66d7"/>
-				<box leftPadding="0"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="18" isBold="true"/>
-				</textElement>
-				<text><![CDATA[การจำหน่ายข้าวสารในสต๊อกของรัฐ]]></text>
-			</staticText>
-			<staticText>
 				<reportElement style="Heading" x="128" y="1" width="256" height="33" uuid="6984a39c-443d-4e94-b132-aea8dc79adfa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24"/>
 				</textElement>
 				<text><![CDATA[ใบคืนหลักประกันซอง]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="63" width="511" height="40" uuid="6182039b-3e81-4361-811e-4001249cf0a4"/>
-				<textFieldExpression><![CDATA["          ตามประกาศคณะทำงานดำเนินการระบายข้าว เรื่อง การจำหน่ายข้าวสารในสต็อกของรัฐ ครั้งที่ "+$F{auctionCode}+" ประกาศ ณ วันที่ "+$F{auctionDate}.substring(3)]]></textFieldExpression>
-			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="125" width="511" height="27" uuid="acf707da-386e-4ea0-888e-e8a7896900e1"/>
 				<box>
@@ -481,16 +489,27 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bidderName}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="0" y="103" width="511" height="22" uuid="fb411f21-ddbb-4702-8a36-25cff1b4a27d"/>
-				<textFieldExpression><![CDATA["          คณะทำงานเปิดซองเสนอราคาซื้อข้าวสารในสต็อกของรัฐ แบบเปิดประมูลเป็นการทั่วไป ได้รับหลักประกันซองจาก"]]></textFieldExpression>
-			</textField>
 			<textField>
 				<reportElement x="384" y="0" width="127" height="34" uuid="31c30257-1e74-4d20-acf3-5e6cc4544a95"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["คิวที่ "+$F{bidderQueue}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="103" width="511" height="22" uuid="1e28e430-9dca-4357-89c3-99b787ee1b19"/>
+				<textFieldExpression><![CDATA["          คณะทำงานเปิดซองเสนอราคาซื้อ"+$P{auctionName}+" ได้รับหลักประกันซองจาก"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="63" width="511" height="40" uuid="c847b4d3-5e09-4642-9da2-1dbbf6b28b43"/>
+				<textFieldExpression><![CDATA["          ตามประกาศคณะทำงานดำเนินการระบายข้าว เรื่อง "+$P{auctionName}+" ครั้งที่ "+$F{auctionCode}+" ประกาศ ณ วันที่ "+$V{date2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Bold" x="0" y="34" width="511" height="30" uuid="75852e30-7d53-47c9-91a3-5790742c948f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -733,9 +752,9 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="122" splitType="Stretch">
+		<band height="85" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="10" y="96" width="203" height="20" uuid="7a11ba29-86b9-4817-927a-e0cfbf088402"/>
+				<reportElement x="10" y="64" width="203" height="20" uuid="7a11ba29-86b9-4817-927a-e0cfbf088402"/>
 				<box>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
 				</box>
@@ -745,7 +764,7 @@
 				<textFieldExpression><![CDATA["(  "+$P{printBy}+"  )"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="10" y="75" width="218" height="20" uuid="a97b7e79-0d7a-45da-9f03-50dc8b22e484"/>
+				<reportElement x="10" y="43" width="218" height="20" uuid="a97b7e79-0d7a-45da-9f03-50dc8b22e484"/>
 				<box>
 					<pen lineWidth="0.5" lineColor="#666666"/>
 					<topPen lineWidth="0.0" lineColor="#666666"/>
@@ -759,7 +778,7 @@
 				<textFieldExpression><![CDATA["ลงซื่อ.............................................................คณะทำงานฯ"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="265" y="96" width="186" height="20" uuid="5e9e7700-a203-44b3-9adf-54bc4f01d72f"/>
+				<reportElement x="265" y="64" width="186" height="20" uuid="5e9e7700-a203-44b3-9adf-54bc4f01d72f"/>
 				<box>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
 				</box>
@@ -777,10 +796,10 @@
 					<font isUnderline="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["ไว้เรียบร้อยแล้ว เมื่อวันที่ "
-+(new SimpleDateFormat("dd MMMM yyyy",$P{REPORT_LOCALE}).format(new Date()))]]></textFieldExpression>
++$V{date2}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="262" y="76" width="249" height="20" uuid="959fa958-f77f-4fad-a5e2-ef74fc892ee8"/>
+				<reportElement x="262" y="44" width="249" height="20" uuid="959fa958-f77f-4fad-a5e2-ef74fc892ee8"/>
 				<box>
 					<pen lineWidth="0.5" lineColor="#666666"/>
 					<topPen lineWidth="0.0" lineColor="#666666"/>

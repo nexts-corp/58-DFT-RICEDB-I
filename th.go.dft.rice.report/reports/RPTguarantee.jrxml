@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT03-12-00" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
+	<property name="ireport.zoom" value="1.1269722013523664"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1"/>
+	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
+		<pen lineWidth="0.0"/>
+	</style>
+	<style name="Bold" style="Default" isBold="true" pdfFontName="THSarabun Bold.ttf"/>
+	<style name="Heading" style="Bold" fontSize="16"/>
+	<style name="Line" fill="Solid">
+		<pen lineWidth="0.5"/>
+	</style>
+	<style name="Rpt" fontName="TH SarabunPSK" fontSize="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
+	<subDataset name="guarantee" uuid="1b8b9e83-a9d1-4eca-b56a-7ed0d7a2f433">
+		<field name="field1" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="auctionNo" class="java.lang.String"/>
+	<parameter name="auctionCode" class="java.lang.String"/>
+	<parameter name="auctionDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 1]]>
+	</queryString>
+	<field name="auctionNo" class="java.lang.String"/>
+	<field name="auctionCode" class="java.lang.String"/>
+	<field name="auctionDate" class="java.lang.String"/>
+	<field name="wareHouseId" class="java.lang.Integer"/>
+	<field name="wareHouseCode" class="java.lang.String"/>
+	<field name="provinceId" class="java.lang.Integer"/>
+	<field name="province" class="java.lang.String"/>
+	<field name="associateId" class="java.lang.String"/>
+	<field name="associate" class="java.lang.String"/>
+	<field name="bidderNo" class="java.lang.Integer"/>
+	<field name="bidderName" class="java.lang.String"/>
+	<field name="weightAll" class="java.lang.Double"/>
+	<field name="bidderPrice" class="java.lang.Double"/>
+	<field name="bidderFirstPrice" class="java.lang.Double"/>
+	<field name="bidderLastPrice" class="java.lang.Double"/>
+	<field name="FV2" class="java.lang.Double"/>
+	<field name="FV3" class="java.lang.Double"/>
+	<field name="FV4" class="java.lang.Double"/>
+	<field name="RFV2" class="java.lang.Double"/>
+	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<variable name="SUM_AMOUNT" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{weightAll}]]></variableExpression>
+	</variable>
+	<variable name="SUM_VALUE" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{bidderPrice}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement style="Bold" x="0" y="0" width="555" height="20" uuid="47eec812-75fb-442a-931b-5aa9ce7f1955"/>
+				<box leftPadding="0"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ใบรับหลักประกันซอง]]></text>
+			</staticText>
+			<textField evaluationTime="Auto">
+				<reportElement style="Bold" x="0" y="20" width="555" height="20" uuid="95b04ea2-bd98-4cc5-9a78-cb88d2d99182"/>
+				<box leftPadding="15"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ตามประกาศคณะทำงานดำเนินการระบายข้าว เรื่อง การจำหน่ายข้าวสารในสต็อกของรัฐ"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto">
+				<reportElement style="Bold" x="0" y="40" width="555" height="20" uuid="461b4731-589b-4b12-80b8-fe97db679a5d"/>
+				<box leftPadding="15"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ครั้งที่ "+$P{auctionCode}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Auto">
+				<reportElement style="Bold" x="0" y="60" width="555" height="20" uuid="f38fc9a6-b119-432f-a8d1-239125f99b04"/>
+				<box leftPadding="15"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ประกาศ ณ วันที่ "+$P{auctionDate}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="50">
+			<staticText>
+				<reportElement style="Bold" x="0" y="0" width="30" height="40" uuid="4dac9b6b-9093-4fec-8348-9e87a5ae35bc"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ลำดับ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="30" y="0" width="180" height="40" uuid="f0d3674e-9476-4931-bb43-ae9c1298c53c"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[คลังสินค้า]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="210" y="0" width="120" height="40" uuid="d2f612b9-2401-493b-950d-ceb5310c9bbd"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[มูลค่าขั้นต่ำ (บาท)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="330" y="0" width="120" height="40" uuid="778ddfb6-7081-4050-a057-f96f1d3c4e56"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[มูลค่าเสนอซื้อ (บาท)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="450" y="0" width="105" height="40" uuid="d153587d-d868-4d91-93b8-b2c04b192508"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[เงินค้ำประกัน (บาท)]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50"/>
+		<band height="50"/>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement style="Rpt" x="0" y="20" width="555" height="18" uuid="b083821c-c77d-4824-b83f-c8871e1a675f"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[RPTguarantee]]></text>
+			</staticText>
+			<textField evaluationTime="Auto">
+				<reportElement x="352" y="0" width="203" height="20" uuid="dc482a12-648b-47cd-bebc-02e84adbb43b"/>
+				<textElement textAlignment="Right">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["หน้า " + $V{CURRENT_PAGE}+" จาก " +$V{PAGE_NUMBER}+" หน้า"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="0" y="0" width="352" height="20" uuid="43e058c9-1dc8-48c1-b375-09ae33100c69"/>
+				<textElement>
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20"/>
+	</summary>
+</jasperReport>

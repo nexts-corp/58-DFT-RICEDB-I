@@ -15,6 +15,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[exec sp_rpt_03_14_02 'AU5/2558']]>
 	</queryString>
@@ -53,7 +56,7 @@
 				<reportElement style="Heading" x="0" y="28" width="555" height="20" uuid="0c3c7f6e-2114-4550-83aa-33a7f3e46c3a"/>
 				<box rightPadding="0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["สรุปผลการประมูลการจำหน่ายข้าวสารในสต๊อกของรัฐครั้งที่ "+$P{auctionCode}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["สรุปผลการประมูล"+$P{auctionName}+" ครั้งที่ "+$P{auctionCode}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Heading" x="0" y="48" width="555" height="20" uuid="035901d1-59a6-4f38-8861-4560030b90bf"/>

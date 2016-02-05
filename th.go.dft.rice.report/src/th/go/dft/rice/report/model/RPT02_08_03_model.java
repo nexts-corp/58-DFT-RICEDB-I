@@ -37,6 +37,13 @@ public class RPT02_08_03_model extends BaseModel implements Serializable {
 
     @Column
     private int bidderQueue;
+    
+    @Column
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date guaranteeReturnDate;
+    
+    @Column
+    private String updateBy;
 
     public String getIsGuaranteeReturn() {
         return isGuaranteeReturn;
@@ -93,5 +100,27 @@ public class RPT02_08_03_model extends BaseModel implements Serializable {
     public void setBidderQueue(int bidderQueue) {
         this.bidderQueue = bidderQueue;
     }
+
+    public Date getGuaranteeReturnDate() {
+        return guaranteeReturnDate;
+    }
+
+    public void setGuaranteeReturnDate(Date guaranteeReturnDate) {
+        this.guaranteeReturnDate = guaranteeReturnDate;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+  
+
+    
+    
+    
 
 }

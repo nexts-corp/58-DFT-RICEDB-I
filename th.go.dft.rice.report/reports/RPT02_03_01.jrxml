@@ -30,6 +30,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT 1]]>
 	</queryString>
@@ -61,13 +64,6 @@
 	</title>
 	<pageHeader>
 		<band height="143" splitType="Stretch">
-			<staticText>
-				<reportElement style="FBold" x="0" y="38" width="802" height="20" uuid="47eec812-75fb-442a-931b-5aa9ce7f1955"/>
-				<textElement textAlignment="Center">
-					<font size="16"/>
-				</textElement>
-				<text><![CDATA[การจำหน่ายข้าวสารในสต๊อกของรัฐ]]></text>
-			</staticText>
 			<textField evaluationTime="Auto" pattern="dd/MM/yy">
 				<reportElement style="FBold" x="0" y="78" width="802" height="20" uuid="8e70d827-f685-495b-ba78-019ceafe9eee"/>
 				<textElement textAlignment="Center">
@@ -94,6 +90,13 @@
 				<reportElement x="417" y="118" width="385" height="20" uuid="bd6801c5-2ba7-4c39-8f19-40500340e40a"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["บริษัทที่ไม่ผ่านคุณสมบัติเบื้องต้น "+$F{failBidder}+" บริษัท"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="FBold" x="0" y="38" width="801" height="20" uuid="d771cf18-d81a-4313-b234-8178d27cee5d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -181,8 +184,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[กรมการค้า
-ภายใน]]></text>
+				<text><![CDATA[ร.ง. ๔]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="51" y="0" width="49" height="58" uuid="38ec1e9f-f874-4a3c-9c86-9c95b665cce1"/>

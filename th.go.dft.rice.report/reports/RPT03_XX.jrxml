@@ -30,6 +30,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[exec sp_rpt_03_xx 'AU5/2558']]>
 	</queryString>
@@ -70,13 +73,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA["รายงานสรุป"]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement style="FBold" x="0" y="13" width="555" height="20" uuid="b27f7029-84ec-4528-a288-a315a30c874c"/>
-				<textElement textAlignment="Center">
+			<textField>
+				<reportElement style="FBold" x="0" y="13" width="555" height="20" uuid="b71fd7a1-194c-4a90-8d12-db4b4e7f3360"/>
+				<textElement textAlignment="Center" markup="none">
 					<font size="16"/>
 				</textElement>
-				<text><![CDATA[การจำหน่ายข้าวสารในสต๊อกของรัฐ]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
+			</textField>
 			<textField evaluationTime="Auto">
 				<reportElement style="FBold" x="0" y="33" width="555" height="20" uuid="e4cca118-a53e-4a8d-8d4c-7547a136680b"/>
 				<textElement textAlignment="Center">

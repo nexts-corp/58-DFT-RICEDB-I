@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02-06-01" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" columnWidth="968" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="16735893-7f1b-40bf-babd-bf0c7bc77a5a">
-	<property name="ireport.zoom" value="2.0490403660952126"/>
-	<property name="ireport.x" value="1178"/>
-	<property name="ireport.y" value="113"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="8" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
 	</style>
@@ -16,6 +16,9 @@
 	<parameter name="auctionCode" class="java.lang.String"/>
 	<parameter name="auctionDate" class="java.lang.String"/>
 	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -78,13 +81,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA["ครั้งที่ "+$P{auctionCode}+" วันที่ "+$P{auctionDate}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement style="FBold" x="0" y="0" width="968" height="20" uuid="897f363f-6edc-4401-b718-b066bd544b7c"/>
-				<textElement textAlignment="Center">
+			<textField>
+				<reportElement style="FBold" x="0" y="0" width="968" height="20" uuid="128f464c-e757-46b4-bbfe-9ee1fbd9d81f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16"/>
 				</textElement>
-				<text><![CDATA[การจำหน่ายข้าวสารในสต๊อกของรัฐ]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA[$P{auctionName}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02_09-01-04" language="groovy" pageWidth="595" pageHeight="842" columnWidth="454" leftMargin="85" rightMargin="56" topMargin="70" bottomMargin="56" isFloatColumnFooter="true" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
+	<property name="ireport.zoom" value="1.2100000000001594"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="FBold" fill="Solid" hAlign="Left" vAlign="Top" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H"/>
+	<style name="Rpt" fontName="TH SarabunPSK" fontSize="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
+	<style name="Default" isDefault="true" fontName="TH SarabunPSK" fontSize="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
+	<parameter name="PUBLISHER" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["พงศ์ปณต ทัศนียาชุมพาลี"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="MONTH" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["มิถุนายน 2558"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="printBy" class="java.lang.String"/>
+	<parameter name="auctionName" class="java.lang.String">
+		<defaultValueExpression><![CDATA[การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="no" class="java.lang.String"/>
+	<field name="to" class="java.lang.String"/>
+	<field name="reference" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="amountWarehouse" class="java.lang.String"/>
+	<field name="day_limited" class="java.lang.String"/>
+	<field name="warehouse" class="java.lang.String"/>
+	<field name="aprroveBy" class="java.lang.String"/>
+	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
+	</variable>
+	<title>
+		<band height="303">
+			<textField>
+				<reportElement x="0" y="86" width="454" height="35" uuid="7bf906b3-db1f-458b-8053-b4e17efbdb86"/>
+				<box leftPadding="80"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$P{MONTH}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center" vAlign="Middle">
+				<reportElement x="169" y="0" width="86" height="86" uuid="be3af543-f2ea-450e-bd95-a853e97bf604"/>
+				<imageExpression><![CDATA[new java.io.ByteArrayInputStream(com.sun.org.apache.xerces.internal.impl.dv.util.Base64.decode("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"))]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="0" width="169" height="86" uuid="f5b0e507-b0c3-4c3a-a028-4c403e1b8626"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ที่ พณ ๐๓๐๕/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="255" y="0" width="199" height="86" uuid="397abb28-666d-49f0-917c-489d362e5093"/>
+				<box leftPadding="88"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom"/>
+				<text><![CDATA[กรมการค้าต่างประเทศ
+563 ถนน นนทบุรี
+อ.เมือง จ.นนทบุรี ๑๑ooo]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="178" width="454" height="20" uuid="44ae1d2c-beac-4493-a937-4768f9ff2c0a"/>
+				<textFieldExpression><![CDATA["อ้างถึง      "+$F{reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="126" width="454" height="20" uuid="99f3052e-0b22-432c-b9be-abd3e4027e99"/>
+				<textFieldExpression><![CDATA["เรื่อง        ผลการพิจาณาอนุมัติ"+$P{auctionName}+" ครั้งที่ "+$F{no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="151" width="454" height="20" uuid="40a814fd-6efb-4410-9ba4-2f12f4b237d2"/>
+				<textFieldExpression><![CDATA["เรียน        "+$F{to}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="203" width="454" height="40" uuid="231a1a0e-ed88-44f0-8528-becedac88299"/>
+				<textFieldExpression><![CDATA["                    ตามหนังสือที่อ้างถึง "+$F{to}.trim()+"ได้เสนอซื้อข้าวสารในสต๊อกของรัฐจาก การประมูลครั้งที่ "+$F{no}.trim()+" นั้น"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" evaluationTime="Report">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="248" width="454" height="55" uuid="916ef3bd-9b85-49d4-beae-f07316fd24e8"/>
+				<textFieldExpression><![CDATA["                    กรมการค้าต่างประเทศขอเรียนว่า"+$F{to}.trim()+"ได้รับการพิจารณาอนุมัติให้ เป็นผู้ซื้อข้าวสารใน"+$P{auctionName}+" "+$F{amountWarehouse}.trim()+" คลังสินค้า โดยมีระยะเวลารับมอบและขนย้ายข้าวให้เสร็จสิ้น ภายใน "+$F{day_limited}.trim()+" วันนับถัดจากวันทำสัญญารายละเอียดดังนี้"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="198" width="454" height="5" uuid="e738ec66-e4b5-41d1-b8e8-c92bdbbc23cd"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="121" width="454" height="5" uuid="6e8928d2-9742-4bd2-a472-5c09663dad7e"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="146" width="454" height="5" uuid="47e4d295-0077-42cf-929d-432c9fe43be1"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="173" width="454" height="5" uuid="4f59ed48-fd4b-4007-9d87-05228a75a083"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="243" width="454" height="5" uuid="117f092b-b1eb-4066-aa25-97b67b7c0391"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="25">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="5" width="454" height="20" uuid="96265dc8-a684-4ffc-82fd-f71448d29600"/>
+				<box leftPadding="0"/>
+				<textFieldExpression><![CDATA["                    "+$V{REPORT_COUNT}+". "+$F{warehouse}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="454" height="5" uuid="6aca3049-5c2c-46f5-a73e-81630759d16e"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="377">
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="196" width="454" height="20" uuid="c589a374-5549-4cbe-be72-2c822fb9d095"/>
+				<box leftPadding="80"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[ประธานคณะทำงานดำเนินการระบายข้าว]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="216" width="454" height="161" uuid="1f62de53-9e7d-42c5-b05d-84c7ad311948"/>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[กองบริหารการค้าข้าว
+โทร. ๐-๒๕๔๗-๕๑๓๘
+โทรสาร. ๐-๒๕๔๗-๔๘๒๑]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="90" width="454" height="20" uuid="c474b92a-7f3b-42bd-8ac5-3fb982d2ec46"/>
+				<box leftPadding="80"/>
+				<textElement textAlignment="Center" verticalAlignment="Top"/>
+				<text><![CDATA[ขอแสดงความนับถือ]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="0" width="454" height="55" uuid="3881ef5f-10d2-4d29-af67-7ba65bf18611"/>
+				<textFieldExpression><![CDATA["                    ทั้งนี้ ขอให้ประสานและดำเนินการทำสัญญาซื้อขายข้าวสารตามปริมาณที่ได้รับอนุมัติกับ "+$F{aprroveBy}+" ภายใน15วันทำการนับแต่วันที่ได้รับ หนังสือแจ้งผล"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="55" width="454" height="5" uuid="56f0a19c-fb62-46a6-9b5d-41b5ee7a39f9"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="60" width="454" height="20" uuid="41995c88-834b-447e-86e1-a54d9652ddea"/>
+				<text><![CDATA[                     จึงเรียนมาเพื่อโปรดทราบและดำเนินการต่อไปด้วย]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="85" width="454" height="5" uuid="4ba5faf2-ce28-4403-9852-82414ba45f8c"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="80" width="454" height="5" uuid="839073fd-6e2b-4fc2-8520-7935a5ead6e2"/>
+				<text><![CDATA[Static text]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="176" width="454" height="20" uuid="9a0599a1-e10f-44f3-882f-fb93e0231ed1"/>
+				<box leftPadding="80"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[อธิบดีกรมการค้าต่างประเทศ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="156" width="454" height="20" uuid="0b0f8d17-f188-40ff-ab68-2e33e266737a"/>
+				<box leftPadding="80"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[(นางดวงพร  รอดพยาธิ์)]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+</jasperReport>
