@@ -7,10 +7,10 @@ if (PHP_SAPI == "cli")
 require(dirname(__FILE__) . "/PHPExcel/Classes/PHPExcel.php");
 require(dirname(__FILE__) . "/PHPExcel/Classes/PHPExcel/IOFactory.php");
 require(dirname(__FILE__) . "/configExcel.php");
-require("../apps/rice/entity/FloorValue.php");
+require("../apps/common/model/FloorValue.php");
 
-//$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
-$link = new PDO("dblib:host=202.44.34.86; dbname=RiceDB", "riceuser", "l2ice2015");
+$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
+//$link = new PDO("dblib:host=202.44.34.86; dbname=RiceDB2", "riceuser", "l2ice2015");
 
 // rice type in this auction
 
@@ -58,10 +58,11 @@ putWord($objPHPExcel, 0, 2, $columnArr[18], "FV2 ปัดเศษ", 1, 1, "cen
 //$objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(25);
 //$objPHPExcel->getActiveSheet()->getRowDimension(2)->setRowHeight(20);
 //$objPHPExcel->getActiveSheet()->getRowDimension(3)->setRowHeight(20);
-$sql = "exec sp_dft_floor_value 'AU4/2558',0,0,0,0";
+$sql = "select * from dft_auction_stack where auctionNo = 'AU7/2558'";
 $q = $link->prepare($sql);
 $q->execute();
-$result = $q->fetchAll(PDO::FETCH_CLASS, "FloorValue");
+//$result = $q->fetchAll(PDO::FETCH_CLASS,  __NAMESPACE__ . '\\apps\\common\\model\\FloorValue');
+$result = $q->fetchAll(PDO::FETCH_ASSOC);
 //$sqlType = "EXEC	[sp_dft_price_avg] 'AU4/2558'";
 //$resType = $link->query($sqlType);
 $lineStart = 3;
@@ -96,7 +97,7 @@ $i = 0;
             )
         );
 foreach ($result as $key => $value) {
-    if ($tempSilo != str_replace(' ', '', $value->Silo) && $tempSilo != "") {
+    if ($tempSilo != str_replace(' ', '', $value["wareHouseCode"]) && $tempSilo != "") {
         
     
         putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $tempWeight, 1, 1, "left", "border");
@@ -125,73 +126,73 @@ foreach ($result as $key => $value) {
         $tempKeySub = 1;
         $lineStart++;
         putWord($objPHPExcel, 0, $lineStart, $columnArr[0], $tempKey . " (" . $tempKeySub.")", 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[1], $value->Province, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[2], str_replace('(2)','',str_replace('(1)','',$value->Project)), 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[3], $value->Round, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[4], $value->Silo, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[5], $value->Address, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[6], $value->Associate, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[7], $value->riceType, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[8], $value->Warehouse, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[9], $value->Stack, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[10], $value->Grade, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $value->Weight_All, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $value->FP2, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $value->FV2, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $value->FP3, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $value->FV3, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $value->FP4, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $value->FV4, 1, 1, "left", "border");
-        $fvp = (int) $value->FV2;
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[1], $value["province"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[2], str_replace('(2)','',str_replace('(1)','',$value["project"])), 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[3], $value["projectRound"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[4], $value["wareHouseCode"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[5], $value["wareHouseAddress"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[6], $value["associate"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[7], $value["typeName"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[8], $value["warehouse"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[9], $value["stack"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[10], $value["grade"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $value["oweightAll"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $value["FP2"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $value["FV2"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $value["FP3"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $value["FV3"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $value["FP4"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $value["FV4"], 1, 1, "left", "border");
+        $fvp = (int) $value["FV2"];
         if ($fvp % 100) {
             $xx = $fvp % 100;
             $fvp = ($fvp - $xx) + 100;
         }
         putWord($objPHPExcel, 0, $lineStart, $columnArr[18], $fvp, 1, 1, "left", "border");
-    } else if ($tempSilo == str_replace(' ', '', $value->Silo) || $tempSilo == "") {
+    } else if ($tempSilo == str_replace(' ', '', $value["wareHouseCode"]) || $tempSilo == "") {
         putWord($objPHPExcel, 0, $lineStart, $columnArr[0], $tempKey . " (" . $tempKeySub.")", 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[1], $value->Province, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[2], str_replace('(2)','',str_replace('(1)','',$value->Project)), 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[3], $value->Round, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[4], $value->Silo, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[5], $value->Address, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[6], $value->Associate, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[7], $value->riceType, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[8], $value->Warehouse, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[9], $value->Stack, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[10], $value->Grade, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $value->Weight_All, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $value->FP2, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $value->FV2, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $value->FP3, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $value->FV3, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $value->FP4, 1, 1, "left", "border");
-        putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $value->FV4, 1, 1, "left", "border");
-        $fvp = (int) $value->FV2;
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[1], $value["province"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[2], str_replace('(2)','',str_replace('(1)','',$value["project"])), 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[3], $value["projectRound"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[4], $value["wareHouseCode"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[5], $value["wareHouseAddress"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[6], $value["associate"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[7], $value["typeName"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[8], $value["warehouse"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[9], $value["stack"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[10], $value["grade"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $value["oweightAll"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $value["FP2"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $value["FV2"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $value["FP3"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $value["FV3"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $value["FP4"], 1, 1, "left", "border");
+        putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $value["FV4"], 1, 1, "left", "border");
+        $fvp = (int) $value["FV2"];
         if ($fvp % 100) {
             $xx = $fvp % 100;
             $fvp = ($fvp - $xx) + 100;
         }
         putWord($objPHPExcel, 0, $lineStart, $columnArr[18], $fvp, 1, 1, "left", "border");
     }
-    $tempSilo = str_replace(' ', '', $value->Silo);
-    $tempWeight +=(double)$value->Weight_All;
-    $tempFP2 += (double)$value->FP2;
-    $tempFV2 += (double)$value->FV2;
-    $tempFP3 += (double)$value->FP3;
-    $tempFV3 += (double)$value->FV3;
-    $tempFP4 += (double)$value->FP4;
-    $tempFV4 += (double)$value->FV4;
+    $tempSilo = str_replace(' ', '', $value["wareHouseCode"]);
+    $tempWeight +=(double)$value["oweightAll"];
+    $tempFP2 += (double)$value["FP2"];
+    $tempFV2 += (double)$value["FV2"];
+    $tempFP3 += (double)$value["FP3"];
+    $tempFV3 += (double)$value["FV3"];
+    $tempFP4 += (double)$value["FP4"];
+    $tempFV4 += (double)$value["FV4"];
     
-    $stempWeight +=(double)$value->Weight_All;
-    $stempFP2 += (double)$value->FP2;
-    $stempFV2 += (double)$value->FV2;
-    $stempFP3 += (double)$value->FP3;
-    $stempFV3 += (double)$value->FV3;
-    $stempFP4 += (double)$value->FP4;
-    $stempFV4 += (double)$value->FV4;
+    $stempWeight +=(double)$value["oweightAll"];
+    $stempFP2 += (double)$value["FP2"];
+    $stempFV2 += (double)$value["FV2"];
+    $stempFP3 += (double)$value["FP3"];
+    $stempFV3 += (double)$value["FV3"];
+    $stempFP4 += (double)$value["FP4"];
+    $stempFV4 += (double)$value["FV4"];
     
-    $fvp = (int) $value->FV2;
+    $fvp = (int) $value["FV2"];
         if ($fvp % 100) {
             $xx = $fvp % 100;
             $fvp = ($fvp - $xx) + 100;

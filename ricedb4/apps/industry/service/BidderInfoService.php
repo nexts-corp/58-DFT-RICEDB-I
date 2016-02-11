@@ -122,7 +122,6 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
 
         $info = new BidderInfo();
         $info->taxId = $bidderInfo->taxId;
-        $info->bidderName = $bidderInfo->bidderName;
         $dataInfo = $this->datacontext->getObject($info);
         //insert bidder information data
         if(count($dataInfo) == 0){
@@ -132,6 +131,11 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         }
         //update bidder information data
         else{
+            $info2 = new BidderInfo();
+            $info2->taxId = $bidderInfo->taxId;
+            $getId = $this->datacontext->getObject($info2)[0];
+
+            $dataInfo[0]->id = $getId->id;
             $dataInfo[0]->taxId = $bidderInfo->taxId;
             $dataInfo[0]->bidderName = $bidderInfo->bidderName;
             $dataInfo[0]->fax = $bidderInfo->fax;

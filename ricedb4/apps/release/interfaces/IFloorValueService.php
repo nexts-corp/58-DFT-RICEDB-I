@@ -32,4 +32,13 @@ interface IFloorValueService {
      * @description hello
      */
     public function getFloorValueSilo($auction);
+
+    /**
+     * @name exportTOR
+     * @uri /exportTOR
+     * @param String auction Description
+     * @return file export Description
+     * @description  export excel
+     */
+    public function exportTOR($auction);
 } 

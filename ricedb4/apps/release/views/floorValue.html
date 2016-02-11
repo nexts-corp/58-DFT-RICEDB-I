@@ -42,6 +42,9 @@
                 <div class="col-sm-2">
                     <button id="btn_date" class="btn btn-primary"><i class="fa fa-search"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
                 </div>
+                <div class="col-sm-4 text-right">
+                    <button id="btn_export" class="btn btn-success"><i class="fa fa-file-excel-o"></i> เอกสาร TOR</button>
+                </div>
             </div>
 
             <div style="clear: both;"></div>
@@ -244,6 +247,13 @@
 
         $("#btn_date").click(function () {
             getData();
+        });
+
+
+        $("#btn_export").click(function () {
+            var auccode = $('#auction').val();
+
+            window.open( "{{_context_path}}/api/release/floorValue/exportTOR" + "?auction=" + auccode);
         });
     });
 

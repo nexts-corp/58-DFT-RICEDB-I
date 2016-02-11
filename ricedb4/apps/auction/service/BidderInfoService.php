@@ -101,9 +101,10 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
     public function search($bidderInfo){
         //get bidder info
         $sql = "SELECT"
-                ." bi.id as bidderInfoId, bi.taxId, bi.bidderName, bi.fax, bi.email, bi.typeBiz"
+            ." bi.id as bidderInfoId, bi.taxId, bi.bidderName, bi.fax, bi.email, bi.typeBiz"
             ." FROM ".$this->ent."\\BidderInfo bi "
-            ." WHERE bi.taxId = :taxId";
+            ." WHERE bi.taxId = :taxId"
+            ." ORDER BY bi.dateCreated DESC";
         $param = array(
             "taxId" => $bidderInfo->taxId
         );
@@ -133,10 +134,10 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         //update bidder information data
         else{
             $dataInfo[0]->taxId = $bidderInfo->taxId;
-            $dataInfo[0]->bidderName = $bidderInfo->bidderName;
             $dataInfo[0]->fax = $bidderInfo->fax;
             $dataInfo[0]->email = $bidderInfo->email;
             $dataInfo[0]->typeBiz = $bidderInfo->typeBiz;
+            $dataInfo[0]->typeOptional = $bidderInfo->typeOptional;
             $dataInfo[0]->dateUpdated = $bidderInfo->dateUpdated;
 
             if (!$this->datacontext->updateObject($dataInfo[0])) {
@@ -146,6 +147,8 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
 
         $info2 = new BidderInfo();
         $info2->taxId = $bidderInfo->taxId;
+        $info2->bidderName = $bidderInfo->bidderName;
+
         $dataInfo2 = $this->datacontext->getObject($info2);
 
         $sql = "SELECT"
