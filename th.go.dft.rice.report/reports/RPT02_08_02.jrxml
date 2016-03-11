@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02_08_01" language="groovy" pageWidth="595" pageHeight="842" columnWidth="511" leftMargin="42" rightMargin="42" topMargin="20" bottomMargin="42" uuid="7a1da91c-587f-47a5-bc73-0820913508b1">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="467"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
 		<paragraph leftIndent="5"/>
@@ -734,27 +734,23 @@ $P{auctionDate}.split("-")[0]
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="20">
+		<band height="72">
 			<textField pattern="dd/MM/yyyy HH:mm:ss">
-				<reportElement x="0" y="0" width="293" height="20" uuid="c8ed0646-ea70-4a56-8f4b-1e3d7cea3386"/>
+				<reportElement x="0" y="52" width="293" height="20" uuid="c8ed0646-ea70-4a56-8f4b-1e3d7cea3386"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Auto">
-				<reportElement x="293" y="0" width="218" height="20" uuid="917f7a3e-47c2-464a-af80-d6e6d44328f6"/>
+				<reportElement x="293" y="52" width="218" height="20" uuid="917f7a3e-47c2-464a-af80-d6e6d44328f6"/>
 				<textElement textAlignment="Right">
 					<font isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["หน้า " + $V{CURRENT_PAGE}+" จาก " +$V{PAGE_NUMBER}+" หน้า"]]></textFieldExpression>
 			</textField>
-		</band>
-	</pageFooter>
-	<summary>
-		<band height="85" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
-				<reportElement x="10" y="64" width="203" height="20" uuid="7a11ba29-86b9-4817-927a-e0cfbf088402"/>
+				<reportElement x="0" y="20" width="203" height="20" uuid="7a11ba29-86b9-4817-927a-e0cfbf088402"/>
 				<box>
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
 				</box>
@@ -764,7 +760,31 @@ $P{auctionDate}.split("-")[0]
 				<textFieldExpression><![CDATA["(  "+$P{printBy}+"  )"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="10" y="43" width="218" height="20" uuid="a97b7e79-0d7a-45da-9f03-50dc8b22e484"/>
+				<reportElement x="262" y="20" width="186" height="20" uuid="5e9e7700-a203-44b3-9adf-54bc4f01d72f"/>
+				<box>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["(                                           )"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="262" y="0" width="249" height="20" uuid="959fa958-f77f-4fad-a5e2-ef74fc892ee8"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#666666"/>
+					<topPen lineWidth="0.0" lineColor="#666666"/>
+					<leftPen lineWidth="0.0" lineColor="#666666"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
+					<rightPen lineWidth="0.0" lineColor="#666666"/>
+				</box>
+				<textElement verticalAlignment="Bottom">
+					<font isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ลงซื่อ.............................................................ผู้รับคืนหลักประกัน"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="218" height="20" uuid="a97b7e79-0d7a-45da-9f03-50dc8b22e484"/>
 				<box>
 					<pen lineWidth="0.5" lineColor="#666666"/>
 					<topPen lineWidth="0.0" lineColor="#666666"/>
@@ -777,16 +797,10 @@ $P{auctionDate}.split("-")[0]
 				</textElement>
 				<textFieldExpression><![CDATA["ลงซื่อ.............................................................คณะทำงานฯ"]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="265" y="64" width="186" height="20" uuid="5e9e7700-a203-44b3-9adf-54bc4f01d72f"/>
-				<box>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font isUnderline="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["(                                           )"]]></textFieldExpression>
-			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="35" splitType="Stretch">
 			<textField isStretchWithOverflow="true">
 				<reportElement x="0" y="0" width="511" height="34" uuid="d886545a-12e3-47b1-8123-5c90cbc635e8"/>
 				<box>
@@ -797,20 +811,6 @@ $P{auctionDate}.split("-")[0]
 				</textElement>
 				<textFieldExpression><![CDATA["ไว้เรียบร้อยแล้ว เมื่อวันที่ "
 +(new SimpleDateFormat("dd MMMM yyyy",$P{REPORT_LOCALE}).format(new Date()))]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true">
-				<reportElement x="262" y="44" width="249" height="20" uuid="959fa958-f77f-4fad-a5e2-ef74fc892ee8"/>
-				<box>
-					<pen lineWidth="0.5" lineColor="#666666"/>
-					<topPen lineWidth="0.0" lineColor="#666666"/>
-					<leftPen lineWidth="0.0" lineColor="#666666"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#666666"/>
-					<rightPen lineWidth="0.0" lineColor="#666666"/>
-				</box>
-				<textElement verticalAlignment="Bottom">
-					<font isUnderline="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA["ลงซื่อ.............................................................ผู้รับคืนหลักประกัน"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

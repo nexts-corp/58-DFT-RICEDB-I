@@ -124,18 +124,11 @@
                         <h3>{{#i18n}}auction.payment{{/i18n}}</h3>
 
                         <div class="col-md-12" style="margin:5px;">
+                            <label class="col-md-5 control-label req" for="txtCountGrt">{{#i18n}}auction.countPayment{{/i18n}} :</label>
                             <div class="col-md-3">
-                                <select id="pGrtType" class="form-control pGrt"></select>
+                                <input type="text" class="form-control" id="txtCountGrt" value="1" required/>
                             </div>
-                            <div class="col-md-3">
-                                <select id="pGrtBank" class="form-control pGrt"></select>
-                            </div>
-                            <!--                            <label class="col-md-5 control-label req" for="txtCountGrt">{{#i18n}}auction.countPayment{{/i18n}} :</label>-->
-
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" id="txtCountGrt" value="1" placeholder="จำนวนหลักค้ำประกัน" required/>
-                            </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <button type="button" class="btn btn-primary" id="btnAddGrt"><i class="fa fa-plus-circle"></i> {{#i18n}}auction.buttonAdd{{/i18n}}</button>
                             </div>
                         </div>
@@ -161,7 +154,7 @@
                                 </div>
                             </div>
 
-                            <div method="post"  id="form_grt" name="bidderPayment" action="{{_context_path}}/api/auction/bidderPayment/saveBidderPayment" isArray="true" data-size="0">
+                            <div method="post"  id="form_grt" name="bidderPayment" action="{{_context_path}}/api/industry/bidderPayment/saveBidderPayment" isArray="true" data-size="0">
                             </div>
 
                             <div class="col-md-12 text-center" style="margin:5px;">
@@ -309,8 +302,6 @@
     var globalAmount = 0;
 
     var listsP = '';
-    var listsB = '';
-    var countGrt = 0;
     $(function () {
         showBidderPayment();
 
@@ -324,7 +315,7 @@
                 // window.open("/reporter/api/rice/report/checklist?auccode=AU5/2558&bidderqueue="+$("#bidderHistoryId").find('option:selected').attr("data-queue")+"&export=view", "_blank");
                 var dataHistory = {};
                 dataHistory["queue"] = $("#bidderHistoryId").find('option:selected').attr("data-queue");
-                dataHistory["type"] = "industry";
+				dataHistory["type"]="industry";
                 var fdata = {};
                 fdata["report"] = dataHistory;
                 var dataJSON = JSON.stringify({report: fdata["report"]});
@@ -355,18 +346,14 @@
             decimal: false,
             negative: false
         });
-        $("#pGrtType").html(listsTypePayment(0)); // 0 is not selected
-        $("#pGrtBank").html(listsBank(0)); // 0 is not selected
-        $('.pGrt').select2();
+
         $('#btnAddGrt').click(function () {
             var bidderHistoryId = $("#bidderHistoryId").val();
-            countGrt = $('#txtCountGrt').val();
-            var pGrtType = $("#pGrtType").val();
-            var pGrtBank = $("#pGrtBank").val();
+            var countGrt = $('#txtCountGrt').val();
             var html = "";
             if (countGrt > 0) {
                 $("#divAddGrt").show();
-                $('#form_grt').html(listsPayment(bidderHistoryId, countGrt, pGrtType));
+                $('#form_grt').html(listsPayment(bidderHistoryId, countGrt));
                 $('.paymentDate').datepicker({
                     format: "yyyy-mm-dd",
                     autoclose: true
@@ -380,7 +367,7 @@
                     var row = $(this).attr("row-index"); //ReplaceNumberWithCommas
                     $("#showAmount" + row).text(ReplaceNumberWithCommas($(this).val()));
                 });
-                $(".bankId").html(listsBank(pGrtBank));
+                listsBank();
                 $('.bankId').select2();
                 $('.listsPayment').select2();
 
@@ -393,9 +380,7 @@
             return dateString.match(regEx) != null;
         }
         $("#btn_save").click(function () {
-//            alert(countGrt);
-//            return false;
-           // countGrt = $('#txtCountGrt').val();
+            var countGrt = $('#txtCountGrt').val();
             $('.paymentDate').each(function () {
                 if (isValidDate(this.value) == false) {
                     var dateAr = this.value.split('-');
@@ -410,7 +395,7 @@
                     $("#txtCountGrt").val("1");
                     $("#divAddGrt").hide();
                 } else {
-                    alert("บันทึกไม่สำเร็จ\r\n" + msg.save);
+                    alert("บันทึกไม่สำเร็จ\r\n"+msg.save);
                     showBidderGrt();
                 }
             });
@@ -420,7 +405,7 @@
     function showBidderPayment() {
         var dataSet = [];
         var searchQueue = {};
-        var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/listsPayment", "post", {}, "json");
+        var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/listsPayment", "post", {}, "json");
         if (typeof datas !== 'undefined' && datas !== null) {
             $.each(datas["lists"], function (key, value) {
                 dataSet.push(value);
@@ -543,7 +528,7 @@
 
         listArr = [];
         allSilo = [];
-        var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/listsItemPrice", "post", dataJSONEN, "json");
+        var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/listsItemPrice", "post", dataJSONEN, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             var html = '';
             var totalPrice = 0, totalGrt = 0, totalRFV = 0;
@@ -637,7 +622,7 @@
                     var dataJSON = JSON.stringify({bidderItem: fdata["BidderItem"]});
                     var dataJSONEN = encodeURIComponent(dataJSON);
 
-                    var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/changeReserved", "post", dataJSONEN, "json");
+                    var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/changeReserved", "post", dataJSONEN, "json");
                     if (typeof datas !== undefined && datas !== null) {
                         if (datas["save"] == true) {
 
@@ -676,7 +661,7 @@
     function listBidder() {
         var html = '';
 
-        var datas = callAjax("{{_context_path}}/api/auction/bidderInfo/listsPass", "post", {}, "json");
+        var datas = callAjax("{{_context_path}}/api/industry/bidderInfo/listsPass", "post", {}, "json");
         if (typeof datas !== 'undefined' && datas !== null) {
             $.each(datas["lists"], function (key, value) {
                 html += '<option value="' + value["bidderHistoryId"] + '" data-queue="' + value["queue"] + '">' + value["bidderName"] + '</option>';
@@ -685,44 +670,28 @@
         return html;
     }
 
-    function listsBank(id) {
-        //   if (listsB == "") {
-        listsB = '';
-        var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/listsBank", "post", {}, "json");
+    function listsBank() {
+        var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/listsBank", "post", {}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
+            var listsBank = "";
+
             $.each(datas["lists"], function (key, value) {
-                if (value["id"] == id) {
-                    listsB += "<option value='" + value["id"] + "' selected>" + value["bankTH"] + "</option>";
-                } else {
-                    listsB += "<option value='" + value["id"] + "'>" + value["bankTH"] + "</option>";
-                }
+                listsBank += "<option value='" + value["id"] + "'>" + value["bankTH"] + "</option>";
             });
 
-            // $(".bankId").html(listsB);
+            $(".bankId").html(listsBank);
         }
-        //   }
-        return listsB;
     }
-    function listsTypePayment(id) {
-        var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/listsTypePayment", "post", {}, "json");
-        var html = '';
-        if (typeof datas !== "undefined" && datas !== null) {
-            $.each(datas["lists"], function (key, value) {
-                if (value["id"] == id) {
-                    html += "<option value='" + value["id"] + "' selected>" + value["payment"] + "</option>";
-                } else {
-                    html += "<option value='" + value["id"] + "'>" + value["payment"] + "</option>";
-                }
-            });
+    function listsPayment(bidderHistoryId, countGrt) {
+        if(listsP == ""){
+            var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/listsTypePayment", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function (key, value) {
+                    listsP += "<option value='" + value["id"] + "'>" + value["payment"] + "</option>";
+                });
+            }
+        }
 
-        }
-        return html;
-    }
-    function listsPayment(bidderHistoryId, countGrt, pGrtType) {
-        //    if (listsP == "") {
-        //  listsP = '';
-        listsP = listsTypePayment(pGrtType);
-        //  }
         var html = "";
         for (var i = 0; i < countGrt; i++) {
             html += '<div class="col-md-12" style="margin:5px;">' +
@@ -783,7 +752,7 @@
         grtArr = [];
         globalAmount = 0;
 
-        var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/listsBidderGrt", "post", {bidderHistoryId: $("#bidderHistoryId").val()}, "json");
+        var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/listsBidderGrt", "post", {bidderHistoryId: $("#bidderHistoryId").val()}, "json");
         if (typeof datas !== 'undefined' && datas !== null) {
             var html = '';
             var totalAmount = 0;
@@ -833,7 +802,7 @@
                 $("#confirmDelete").unbind().click(function () {
                     var dataJSON = JSON.stringify({paymentId: data["id"]});
                     var dataJSONEN = encodeURIComponent(dataJSON);
-                    var datas = callAjax("{{_context_path}}/api/auction/bidderPayment/deletePayment", "post", dataJSONEN, "json");
+                    var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/deletePayment", "post", dataJSONEN, "json");
                     if (typeof datas !== undefined && datas !== null) {
                         if (datas["delete"] == true) {
                             $("#bidderHistoryId").trigger("change");

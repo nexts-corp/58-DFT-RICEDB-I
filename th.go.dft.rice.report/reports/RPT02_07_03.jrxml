@@ -48,7 +48,7 @@
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
 	</variable>
-	<variable name="bidderLastPrice_1" class="java.lang.Double" calculation="Sum">
+	<variable name="bidderLastPrice_1" class="java.lang.Double" incrementType="Group" incrementGroup="GroupByWarehouse" calculation="Sum">
 		<variableExpression><![CDATA[$F{bidderLastPrice}]]></variableExpression>
 	</variable>
 	<variable name="oweightAll_1" class="java.math.BigDecimal" calculation="Sum">

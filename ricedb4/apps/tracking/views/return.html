@@ -421,13 +421,16 @@
             var auccode = $('#auction').val();
             dataHistory["queue"] = value["queue"];
             dataHistory["auccode"] = auccode;
+			dataHistory["type"]="industry";
             var fdata = {};
             fdata["report"] = dataHistory;
             var dataJSON = JSON.stringify({report: fdata["report"]});
             var dataJSONEN = encodeURIComponent(dataJSON);
+//			alert(dataJSONEN);
 
             var datas = callAjax("{{_context_path}}/api/report/report/trackingPayment", "post", dataJSONEN, "json");
             if (typeof datas !== 'undefined' && datas !== null) {
+			//alert(datas["export"]);
                 var win = window.open(datas["export"], '_blank');
                 win.focus();
             }
@@ -447,7 +450,7 @@
             sumWareHouse = 0;
             var sumPassPrice = 0;
             $.each(datas["lists"], function (key, value) {
-                if (value.isSale == 'S' || value.isSale == 'C' || value.isSale == 'R') {
+                if (value.isSale == 'Y' || value.isSale == 'C' || value.isSale == 'R') {
                     html += '<tr>'
                             + '<td class="text-center">' + (key + 1) + '</td>'
                             + '<td class="text-center">' + value["province"] + '</td>'

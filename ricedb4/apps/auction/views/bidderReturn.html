@@ -345,7 +345,8 @@
         $("button.checkList").unbind().click(function () {
             var dataHistory = {};
             dataHistory["queue"] = value["queue"];
-
+			dataHistory["type"]="normal";
+			
             var fdata = {};
             fdata["report"] = dataHistory;
             var dataJSON = JSON.stringify({report: fdata["report"]});

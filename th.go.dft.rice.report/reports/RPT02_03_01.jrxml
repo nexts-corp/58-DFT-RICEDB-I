@@ -184,7 +184,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[ร.ง. ๔]]></text>
+				<text><![CDATA[กรมการค้าภายใน]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="51" y="0" width="49" height="58" uuid="38ec1e9f-f874-4a3c-9c86-9c95b665cce1"/>

@@ -9,17 +9,28 @@ namespace apps\industry\interfaces;
 interface IAutoUpdate {
     
     /**
-     * @name update
-     * @uri /update
-     * @return String[] lists Description
+     * @name download
+     * @uri /download
+     * @return String lists
      * @description ผู้เสนอราคาสูงสุดต่อคลัง
      */
-    public function update();
+    public function download();
     
-    /**
+   
+	
+	/**
+     * @name upload
+     * @uri /upload
+	 * @param apps\common\model\SQLUpdate lists
+     * @return string status
+     * @description คลังที่ถูกเสนอซื้อ + FV
+     */
+    public function upload($lists);
+	
+	 /**
      * @name checkupdate
      * @uri /checkupdate
-     * @return string[] lists Description
+     * @return string status
      * @description คลังที่ถูกเสนอซื้อ + FV
      */
     public function checkupdate();

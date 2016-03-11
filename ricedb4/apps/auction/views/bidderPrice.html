@@ -155,7 +155,7 @@
                // window.open("/reporter/api/rice/report/checklist?auccode=AU5/2558&bidderqueue="+$("#bidderHistoryId").find('option:selected').attr("data-queue")+"&export=view", "_blank");
                 var dataHistory = {};
                 dataHistory["queue"] = $("#bidderHistoryId").find('option:selected').attr("data-queue");
-
+				dataHistory["type"]="normal";
                 var fdata = {};
                 fdata["report"] = dataHistory;
                 var dataJSON = JSON.stringify({report: fdata["report"]});

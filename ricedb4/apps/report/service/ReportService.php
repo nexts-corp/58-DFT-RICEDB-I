@@ -23,7 +23,7 @@ class ReportService extends CServiceBase implements IReportService{
         return $url;
     }
     
-    function getReportAuction($reportName, $queue){
+    function getReportAuction($reportName, $queue,$type){
         $sql = "SELECT"
                 ." st"
             ." FROM ".$this->ent."\\Status st"
@@ -31,6 +31,9 @@ class ReportService extends CServiceBase implements IReportService{
         $param = array(
             "active" => "Y"
         );
+		if($type=="industry"){
+			$param["active"]="YA";
+		}
         $data = $this->datacontext->getObject($sql, $param); //get STATUS is Active
         
         $url = $this->getReportURL()."?reportcode=".$reportName."&auccode=".$data[0]->keyword."&export=view&p_1=".$queue;
@@ -38,7 +41,7 @@ class ReportService extends CServiceBase implements IReportService{
         return $url;
     }
     
-    function getReportTracking($reportName, $queue){
+    function getReportTracking($reportName, $queue,$type){
         $sql = "SELECT"
                 ." st"
             ." FROM ".$this->ent."\\Status st"
@@ -46,6 +49,9 @@ class ReportService extends CServiceBase implements IReportService{
         $param = array(
             "active" => "Y"
         );
+		if($type=="industry"){
+			$param["active"]="YA";
+		}
         $data = $this->datacontext->getObject($sql, $param); //get STATUS is Active
         
         $url = $this->getReportURL()."?reportcode=".$reportName."&auccode=".$data[0]->keyword."&export=view&p_1=".$queue;
@@ -96,14 +102,14 @@ class ReportService extends CServiceBase implements IReportService{
     public function checkList($report){
         $reportName = "RPT02_04";
         
-        $url = $this->getReportAuction($reportName, $report->queue);     
+        $url = $this->getReportAuction($reportName, $report->queue,$report->type);     
         return $url;
     }
     
     public function payment($report){
         $reportName = "RPT02_08_00";
         
-        $url = $this->getReportAuction($reportName, $report->queue);     
+        $url = $this->getReportAuction($reportName, $report->queue,$report->type);     
         return $url;
     }
     
@@ -111,14 +117,14 @@ class ReportService extends CServiceBase implements IReportService{
         $reportName = "RPT02_08_01";
         
         
-        $url = $this->getReportAuction($reportName, $report->queue);         
+        $url = $this->getReportAuction($reportName, $report->queue,$report->type);         
         return $url;
 
     }
     
     public function trackingPayment($report){
         $reportName = "RPT02_08_02";
-        $url = $this->getReportTrackingAuccode($reportName, $report);
+        $url = $this->getReportTrackingAuccode($reportName, $report,$report->type);
         return $url;
 
     }
