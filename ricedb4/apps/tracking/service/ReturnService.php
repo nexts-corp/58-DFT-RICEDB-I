@@ -29,7 +29,7 @@ class ReturnService extends CServiceBase implements IReturnService {
     }
 
     public function listsAuction() {
-        $sql = "select s from ".$this->ent."\\Status s "
+        $sql = "select s from " . $this->ent . "\\Status s "
                 . " where s.keyword like 'AU%' "
                 . " order by s.id desc";
         return $this->datacontext->getObject($sql);
@@ -103,7 +103,7 @@ class ReturnService extends CServiceBase implements IReturnService {
         return $this->datacontext->getObject($sql, $param);
     }
 
-    public function listsWarehouse($bidderId,$auccode) {
+    public function listsWarehouse($bidderId, $auccode) {
         $sql = "select 
 	
 	province,
@@ -133,7 +133,9 @@ class ReturnService extends CServiceBase implements IReturnService {
             } else {
                 $bidderPayment[$key]->dateReturn = "";
             }
-            //  print_r($bidderPayment[$key]);
+            if (isset($bidderPayment[$key]->financeDate)) {
+                $bidderPayment[$key]->financeDate = new \DateTime(date($bidderPayment[$key]->financeDate));
+            }
         }
         // return $bidderPayment;
         if ($this->datacontext->updateObject($bidderPayment)) {
