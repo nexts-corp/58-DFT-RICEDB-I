@@ -127,7 +127,13 @@ public class ReportService extends CServiceBase implements IReportService {
                 bparam.setAuctionDate(datas.get(0).getAuctionDate());
                 bparam.setREPORT_MAX_COUNT(datas.size());
                 bparam.setPrintBy(printBy);
-                bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
+                if(auctionCode.indexOf("-I")>-1){
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
+                }else{
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต๊อกของรัฐ");
+                }
+                //การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม
+                //การจำหน่ายข้าวสารในสต๊อกของรัฐ
 
             } else {
                 bparam.setAuctionNo(auctionCode);
@@ -136,9 +142,14 @@ public class ReportService extends CServiceBase implements IReportService {
                 datas = new ArrayList<>();
                 bparam.setREPORT_MAX_COUNT(0);
                 bparam.setPrintBy(printBy);
-                bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
+                if(auctionCode.indexOf("-I")>-1){
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
+                }else{
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต๊อกของรัฐ");
+                }
                 //BaseModel bm=new BaseModel();
                 //datas.add(bm);
+                //การจำหน่ายข้าวสารในสต๊อกของรัฐ
             }
             
             bparam.setREPORT_LOCALE(this.locale);

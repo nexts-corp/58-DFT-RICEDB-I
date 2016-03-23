@@ -50,7 +50,10 @@ public class RPT02_03_01_02_model  extends BaseReport  {
     @Column
     private String propertyFactory3;
     
-   
+    @Column
+    private String typeOptional;
+    
+    
 
   
 
@@ -188,6 +191,14 @@ public class RPT02_03_01_02_model  extends BaseReport  {
 
     public void setPropertyFactory3(String propertyFactory3) {
         this.propertyFactory3 = propertyFactory3;
+    }
+
+    public String getTypeOptional() {
+        return typeOptional;
+    }
+
+    public void setTypeOptional(String typeOptional) {
+        this.typeOptional = typeOptional;
     }
     
     
