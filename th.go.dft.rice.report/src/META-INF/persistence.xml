@@ -56,8 +56,9 @@
     <class>th.go.dft.rice.report.model.RPT03_14_03_model</class>
     <class>th.go.dft.rice.report.model.RPT02_03_01_02_model</class>
     <class>th.go.dft.rice.report.model.RPT02_08_04_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_08_05_model</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://202.44.34.86:1433;databaseName=RiceDBTest"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://10.3.1.173:1433;databaseName=RiceDB"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
       <property name="javax.persistence.jdbc.user" value="riceuser"/>
       <property name="javax.persistence.jdbc.password" value="l2ice2015"/>

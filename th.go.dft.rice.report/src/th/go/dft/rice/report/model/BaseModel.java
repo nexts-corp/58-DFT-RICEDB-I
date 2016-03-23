@@ -80,6 +80,8 @@ public class BaseModel extends BaseReport implements Serializable {
     private String bidderAgent;
     @Column
     private String bidderAgent2;
+    @Column
+    private String bidderAgent3;
 
     @Column
     private double bidderFirstPrice;
@@ -101,6 +103,14 @@ public class BaseModel extends BaseReport implements Serializable {
 
     public void setBidderAgent2(String bidderAgent2) {
         this.bidderAgent2 = bidderAgent2;
+    }
+
+    public String getBidderAgent3() {
+        return bidderAgent3;
+    }
+
+    public void setBidderAgent3(String bidderAgent3) {
+        this.bidderAgent3 = bidderAgent3;
     }
 
     public double getRFV() {
