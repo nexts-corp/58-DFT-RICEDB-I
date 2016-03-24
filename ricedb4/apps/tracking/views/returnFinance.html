@@ -3,6 +3,7 @@
     .row-tr,.pointer :hover{
         cursor: pointer;
     }
+    .datepicker { position: relative; z-index: 10000 !important; }
 </style>
 <div role="main" class="main">
     <section class="page-top none-margin">
@@ -244,11 +245,53 @@
             </div><!-- col-md-9 -->
         </div><!--  row  -->
     </div><!--  container  -->
+
+    <div id="modalFinance" aria-labelledby="finance" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{#i18n}}tracking.return.title{{/i18n}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formFinance" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="fNo" class="control-label col-sm-4">เลขที่แคชเชียร์เช็ค</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="fNo" id="fNo" placeholder="เลขที่แคชเชียร์เช็ค">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fBank" class="control-label col-sm-4">ธนาคาร</label>
+                            <div class="col-sm-8">
+                                <select id="fBank" name="fBank" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fDate" class="control-label col-sm-4">วันที่</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control paymentDate" name="fDate" id="fDate"  />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fAmount" class="control-label col-sm-4">จำนวนเงิน</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" disabled name="fAmount" id="fAmount"  />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnConfirm" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-save"></i> {{#i18n}}tracking.buttonSave{{/i18n}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}tracking.buttonCancel{{/i18n}}</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- end delete bidder info form -->
 </div><!-- main -->
 {{>footer}}
 <script type="text/javascript">
     var listArr = [];
-
     var sumNeedGrt = 0;
     var sumPassGrt = 0;
     var sumPayment = 0;
@@ -257,20 +300,23 @@
     var dataPayment;
     var sumReturn = 0;
     var sumReturned = 0;
+    var sumFinance = 0;
     $(function () {
         listsAuction();
         $("#btn_date").click(function () {
             var auccode = $('#auction').val();
             listBidder(auccode);
         });
-
         $("#searchQueue").select2();
-
         $("button.table").click(function () {
             toggleShow("list");
         });
-
-        $("#btnSave").click(function () {
+        $('.paymentDate').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true
+        });
+        listsBank();
+        $("#btnSave").unbind().click(function () {
             var data = checkSelect();
             if (data == "noCheckbox") {
                 $.alert({
@@ -281,50 +327,111 @@
                     columnClass: 'col-md-4 col-md-offset-4'
                 });
             } else {
-                var cfm = $.confirm({
-                    title: 'ยืนยันการอนุมัติ!',
-                    content: "คุณต้องการที่จะทำต่อ?",
-                    confirmButton: 'ตกลง',
-                    cancelButton: 'ยกเลิก',
-                    confirmButtonClass: 'btn-success',
-                    cancelButtonClass: 'btn-warning',
-                    theme: 'holodark',
-                    columnClass: 'col-md-4 col-md-offset-4',
-                    autoClose: 'cancel|11000',
-                    confirm: function () {
-                        $("#bidderBody").html("<tr><td colspan='3' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
-                        cfm.close();
-                        setTimeout(function () {
-                            var jData = {};
-                            jData["bidderPayment"] = checkSelect();
-                            var dataJSON = JSON.stringify(jData);
-                            var dataJSONEN = encodeURIComponent(dataJSON);
-                            var msg = callAjax("{{_context_path}}/api/tracking/return/update", "post", dataJSONEN, "json");
-                            if (msg.update === true) {
-                                alert("บันทึกเรียบร้อย");
-                                var auccode = $('#auction').val();
-                                listBidder(auccode);
-                                $(".checkList").focus();
-                                listPayment(data[0]["bidderHistoryId"]);
-                                $('.checkboxWH').each(function (k, v) {
-                                    $(this).prop("checked", false);
-                                });
-                                sumWareHouse = 0;
-                                $("#txtWarehouse").text(accounting.formatNumber(sumWareHouse, 2, ",", "."));
-                                //swap();
-                                //listPayment();
-                            } else {
-                                alert("ERROR!!");
-                            }
-                        }, 1000);
-
+                $("#modalFinance").modal("show");
+                $('#formFinance').find("input[type=text]").val("");
+                sumFinance = 0;
+                $.each(data, function (k, v) {
+                    if (v["paymentId"] == 3) {
+                        sumFinance += parseFloat(v["amount"]);
                     }
                 });
+                $("#fAmount").val(accounting.formatNumber(sumFinance, 2, ",", "."));
+                $("#btnConfirm").unbind().click(function () {
+                    var fNo = $("#fNo").val();
+                    var fBank = $("#fBank").val();
+                    var fDate = $("#fDate").val();
+                    var nData = data;
+                    if (fNo != "" && fDate != "") {
+                        $.each(nData, function (k, v) {
+                            if (v["paymentId"] == 3) {
+                                nData[k]["financeNo"] = fNo;
+                                nData[k]["financeBank"] = fBank;
+                                nData[k]["financeDate"] = fDate;
+                                nData[k]["financeAmount"] = parseFloat(sumFinance);
+                            }
+                        });
+                    }
+                    $("#bidderBody").html("<tr><td colspan='3' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
+                    setTimeout(function () {
+                        var jData = {};
+                        jData["bidderPayment"] = nData;
+                        var dataJSON = JSON.stringify(jData);
+                        var dataJSONEN = encodeURIComponent(dataJSON);
+                        var msg = callAjax("{{_context_path}}/api/tracking/return/update", "post", dataJSONEN, "json");
+                        if (msg.update === true) {
+                            alert("บันทึกเรียบร้อย");
+                            var auccode = $('#auction').val();
+                            listBidder(auccode);
+                            $(".checkList").focus();
+                            listPayment(data[0]["bidderHistoryId"]);
+                            $('.checkboxWH').each(function (k, v) {
+                                $(this).prop("checked", false);
+                            });
+                            sumWareHouse = 0;
+                            $("#txtWarehouse").text(accounting.formatNumber(sumWareHouse, 2, ",", "."));
+                        } else {
+                            alert("ERROR!!");
+                        }
+                    }, 1000);
+                });
+//                var cfm = $.confirm({
+//                    title: 'ยืนยันการอนุมัติ!',
+//                    content: "คุณต้องการที่จะทำต่อ?",
+//                    confirmButton: 'ตกลง',
+//                    cancelButton: 'ยกเลิก',
+//                    confirmButtonClass: 'btn-success',
+//                    cancelButtonClass: 'btn-warning',
+//                    theme: 'holodark',
+//                    columnClass: 'col-md-4 col-md-offset-4',
+//                    autoClose: 'cancel|11000',
+//                    confirm: function () {
+//                        $("#bidderBody").html("<tr><td colspan='3' class='text-center'>กำลังโหลดข้อมูล</td></tr>");
+//                        cfm.close();
+//                        setTimeout(function () {
+//                            var jData = {};
+//                            jData["bidderPayment"] = checkSelect();
+//                            var dataJSON = JSON.stringify(jData);
+//                            var dataJSONEN = encodeURIComponent(dataJSON);
+//                            var msg = callAjax("{{_context_path}}/api/tracking/return/update", "post", dataJSONEN, "json");
+//                            if (msg.update === true) {
+//                                alert("บันทึกเรียบร้อย");
+//                                var auccode = $('#auction').val();
+//                                listBidder(auccode);
+//                                $(".checkList").focus();
+//                                listPayment(data[0]["bidderHistoryId"]);
+//                                $('.checkboxWH').each(function (k, v) {
+//                                    $(this).prop("checked", false);
+//                                });
+//                                sumWareHouse = 0;
+//                                $("#txtWarehouse").text(accounting.formatNumber(sumWareHouse, 2, ",", "."));
+//                                //swap();
+//                                //listPayment();
+//                            } else {
+//                                alert("ERROR!!");
+//                            }
+//                        }, 1000);
+//
+//                    }
+//                });
 
             }
         });
     });
-
+    function listsBank() {
+        //   if (listsB == "") {
+        var listsB = '';
+        var datas = callAjax("{{_context_path}}/api/industry/bidderPayment/listsBank", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+//                if (value["id"] == id) {
+//                    listsB += "<option value='" + value["id"] + "' selected>" + value["bankTH"] + "</option>";
+//                } else {
+                listsB += "<option value='" + value["id"] + "'>" + value["bankTH"] + "</option>";
+                // }
+            });
+        }
+        $("#fBank").html(listsB);
+    }
     function listsAuction() {
         var datas = callAjax("{{_context_path}}/api/tracking/return/listsAuction", "post", {}, "json");
         var dataAuction = datas["lists"];
@@ -345,10 +452,8 @@
             $.each(datas["lists"], function (key, value) {
                 listArr[value["bidderHistoryId"]] = value;
                 dataSet.push(value);
-
                 searchQueue[value["queue"]] = value["queue"];
             });
-
             $("#searchQueue").empty();
             $("#searchQueue").append('<option value="" selected="selected">ทั้งหมด</option>');
             $.each(searchQueue, function (key, value) {
@@ -384,7 +489,6 @@
                 }
             ]
         });
-
         $('#searchQueue').change(function () {
             if ($('#searchQueue').val() != "") {
                 t.columns(0).search("^" + $(this).val() + "$", true, false, true).draw();
@@ -393,10 +497,8 @@
                 t.columns(0).search($(this).val()).draw();
             }
         });
-
         $("#table").off("click", "button.return").on("click", "button.return", function () {
             toggleShow("payment");
-
             var historyId = $(this).attr("data-hid");
             bindBidder(historyId);
             listWarehouse(historyId);
@@ -406,22 +508,19 @@
 
     function bindBidder(hId) {
         var value = listArr[hId];
-
         var html = '';
         html += '<tr>'
                 + '<td class="text-center">' + value["queue"] + '</td>'
                 + '<td class="text-center">' + value["bidderName"] + '</td>'
                 + '<td class="text-center">' + value["mobile"] + '</td>'
                 + '</tr>';
-
         $("#bdBody").html(html);
-
         $("button.checkList").unbind().click(function () {
             var dataHistory = {};
             var auccode = $('#auction').val();
             dataHistory["queue"] = value["queue"];
             dataHistory["auccode"] = auccode;
-			dataHistory["type"]="industry";
+            dataHistory["type"] = "industry";
             var fdata = {};
             fdata["report"] = dataHistory;
             var dataJSON = JSON.stringify({report: fdata["report"]});
@@ -430,7 +529,7 @@
 
             var datas = callAjax("{{_context_path}}/api/report/report/trackingPayment", "post", dataJSONEN, "json");
             if (typeof datas !== 'undefined' && datas !== null) {
-			//alert(datas["export"]);
+                //alert(datas["export"]);
                 var win = window.open(datas["export"], '_blank');
                 win.focus();
             }
@@ -508,7 +607,6 @@
                     "<td class='text-center'></td>" +
                     "</tr>";
             $("#whBody").html(html);
-
             $('.checkboxWH').click(function () {
                 if (this.checked) {
                     sumWareHouse += parseFloat(this.value);
@@ -533,7 +631,6 @@
             var returnHTML = "";
             var countPayment = 1;
             var countReturn = 1;
-
             sumPayment = 0;
             sumReturned = 0;
             sumReturn = 0;
@@ -575,7 +672,6 @@
                             + "<td class='text-center'>" + (value.isReturn == "Y" ? "คืนแล้ว" : "ถูกริบ") + "</td>"
                             + '</tr>';
                     sumReturned += parseFloat(value.amount);
-
                 }
 
 
@@ -590,7 +686,6 @@
                     + '<td class="text-center text-bold">' + accounting.formatNumber(sumReturned, 2, ",", ".") + '</td>'
                     + '<td colspan="3"></td>'
                     + '</tr>';
-
             $("#paymentBody").html(paymentHTML);
             $("#returnBody").html(returnHTML);
             $("#countReturn").text(--countReturn);
@@ -598,37 +693,36 @@
             $("#countCheckbox").html(countCheck);
             $("#txtReturn").text(accounting.formatNumber(sumPayment - sumNeedGrt, 2, ",", "."));
             $("#txtSelect").text(accounting.formatNumber(0, 2, ",", "."));
-
             $("#txtBalance").text(accounting.formatNumber(sumPayment, 2, ",", "."));
             $("input.switch-input").click(function (event) {
                 event.stopPropagation();
             });
-
             $(".row-tr").unbind().click(function (event) {
                 var input = $(this).find("td label input.switch-input");
-
                 if (!input.is(":checked"))
                     input.prop("checked", true);
                 else
                     input.prop("checked", false);
-
                 if (input.is(":checked")) {
                     countCheck++;
                     sumReturn += parseFloat(input.val());
-
                 } else {
                     countCheck--;
                     sumReturn -= parseFloat(input.val());
                 }
                 if ((parseInt(sumReturn) > parseInt(sumWareHouse)) && (parseInt(sumReturn) <= parseInt(sumPayment - sumNeedGrt))) {
-                    alert("จำนวนที่เลือกเกินหลักค้ำประกันของคลังที่เลือกไว้");
-
+                    // alert("จำนวนที่เลือกเกินหลักค้ำประกันของคลังที่เลือกไว้");
+                    $.alert({
+                        title: 'คำแนะนำ!',
+                        content: 'จำนวนที่เลือกเกินหลักค้ำประกันของคลังที่เลือกไว้',
+                        confirmButton: "ตกลง",
+                        theme: 'black',
+                        columnClass: 'col-md-4 col-md-offset-4'
+                    });
                 } else if ((parseInt(sumReturn) > parseInt(sumWareHouse)) && (parseInt(sumReturn) > parseInt(sumPayment - sumNeedGrt))) {
                     alert("จำนวนหลักค้ำประกันไม่พอ!");
-
                     countCheck--;
                     sumReturn -= parseFloat(input.val());
-
                     input.prop("checked", false);
                     $("#checkall").prop("checked", false);
                 }
@@ -637,9 +731,7 @@
                 $("#countCheckbox").html(countCheck);
                 $("#txtSelect").text(accounting.formatNumber(sumReturn, 2, ",", "."));
                 $("#txtBalance").text(accounting.formatNumber(sumPayment - sumReturn, 2, ",", "."));
-
             });
-
             //    $("#checkall").prop("checked", false);
             $("#checkall").unbind().click(function () {
                 if ($("#checkall").is(":checked")) {
@@ -674,7 +766,6 @@
                 $("#txtSelect").text(accounting.formatNumber(sumReturn, 2, ",", "."));
                 $("#txtBalance").text(accounting.formatNumber(sumPayment - sumReturn, 2, ",", "."));
             });
-
         }
     }
 
@@ -690,14 +781,12 @@
                 dataPayment[$(this).closest("tr").attr("row-index")]["isReturn"] = "Y";
                 dataPayment[$(this).closest("tr").attr("row-index")]["dateReturn"] = date;
                 dataApprove[i++] = dataPayment[$(this).closest("tr").attr("row-index")];
-
             }
 //            else {
 //                dataPayment[$(this).closest("tr").attr("row-index")]["isReturn"] = "N";
 //            }
 //            dataApprove[i++] = dataPayment[$(this).closest("tr").attr("row-index")];
         });
-
         if (dataApprove[0] == null) {
             return "noCheckbox";
         } else {

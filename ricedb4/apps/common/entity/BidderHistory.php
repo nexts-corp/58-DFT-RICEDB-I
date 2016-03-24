@@ -1,5 +1,7 @@
 <?php
- namespace apps\common\entity;
+
+namespace apps\common\entity;
+
 /**
  * @Entity
  * @Table(name="dft_Bidder_History")
@@ -18,10 +20,10 @@ class BidderHistory extends EntityBase {
 
     /** @Column(type="string",length=255, name="LK_Status_Keyword") */
     public $statusKeyword;
-    
+
     /** @Column(type="integer",length=11, name="Queue") */
     public $queue;
-    
+
     /** @Column(type="datetime", name="Date_Register") */
     public $dateRegister;
 
@@ -30,6 +32,9 @@ class BidderHistory extends EntityBase {
 
     /** @Column(type="string",length=255, name="Agent_Name2") */
     public $agentName2;
+
+    /** @Column(type="string",length=255, name="Agent_Name3") */
+    public $agentName3;
 
     /** @Column(type="string",length=100, name="Mobile") */
     public $mobile;
@@ -63,7 +68,7 @@ class BidderHistory extends EntityBase {
 
     /** @Column(type="string",length=255, name="Remark5") */
     public $remark5;
-    
+
     /** @Column(type="string",length=1, name="Check_In") */
     public $checkIn;
 
@@ -87,6 +92,12 @@ class BidderHistory extends EntityBase {
 
     /** @Column(type="string", name="Attachment") */
     public $attachment;
+
+    /** @Column(type="integer",length=11, name="LK_Type_Biz") */
+    public $typeBiz;
+
+    /** @Column(type="string",length=255, name="Type_Optional") */
+    public $typeOptional;
 
     function getId() {
         return $this->id;
@@ -112,11 +123,15 @@ class BidderHistory extends EntityBase {
         return $this->agentName;
     }
 
-    function getAgentName2(){
+    function getAgentName2() {
         return $this->agentName2;
     }
 
-    function getMobile(){
+    function getAgentName3() {
+        return $this->agentName3;
+    }
+
+    function getMobile() {
         return $this->mobile;
     }
 
@@ -136,60 +151,68 @@ class BidderHistory extends EntityBase {
         return $this->remark2;
     }
 
-    function getProperty3(){
+    function getProperty3() {
         return $this->property3;
     }
 
-    function getProperty4(){
-        return $this->property4;
-    }
-
-    function getProperty5(){
-        return $this->property5;
-    }
-
-    function getRemark3(){
+    function getRemark3() {
         return $this->remark3;
     }
 
-    function getRemark4(){
+    function getProperty4() {
+        return $this->property4;
+    }
+
+    function getRemark4() {
         return $this->remark4;
     }
 
-    function getRemark5(){
+    function getProperty5() {
+        return $this->property5;
+    }
+
+    function getRemark5() {
         return $this->remark5;
     }
 
-    function getCheckIn(){
+    function getCheckIn() {
         return $this->checkIn;
     }
 
-    function getPropertyFactory1(){
+    function getPropertyFactory1() {
         return $this->propertyFactory1;
     }
 
-    function getRemarkFactory1(){
+    function getRemarkFactory1() {
         return $this->remarkFactory1;
     }
 
-    function getPropertyFactory2(){
+    function getPropertyFactory2() {
         return $this->propertyFactory2;
     }
 
-    function getRemarkFactory2(){
+    function getRemarkFactory2() {
         return $this->remarkFactory2;
     }
 
-    function getPropertyFactory3(){
+    function getPropertyFactory3() {
         return $this->propertyFactory3;
     }
 
-    function getRemarkFactory3(){
+    function getRemarkFactory3() {
         return $this->remarkFactory3;
     }
 
-    function getAttachment(){
+    function getAttachment() {
         return $this->attachment;
+    }
+
+    function getTypeBiz() {
+        return $this->typeBiz;
+    }
+
+    function getTypeOptional() {
+        return $this->typeOptional;
     }
 
     function setId($id) {
@@ -216,11 +239,15 @@ class BidderHistory extends EntityBase {
         $this->agentName = $agentName;
     }
 
-    function setAgentName2($agentName2){
+    function setAgentName2($agentName2) {
         $this->agentName2 = $agentName2;
     }
 
-    function setMobile($mobile){
+    function setAgentName3($agentName3) {
+        $this->agentName3 = $agentName3;
+    }
+
+    function setMobile($mobile) {
         $this->mobile = $mobile;
     }
 
@@ -240,59 +267,68 @@ class BidderHistory extends EntityBase {
         $this->remark2 = $remark2;
     }
 
-    function setProperty3($property3){
+    function setProperty3($property3) {
         $this->property3 = $property3;
     }
 
-    function setProperty4($property4){
-        $this->property4 = $property4;
-    }
-
-    function setProperty5($property5){
-        $this->property5 = $property5;
-    }
-
-    function setRemark3($remark3){
+    function setRemark3($remark3) {
         $this->remark3 = $remark3;
     }
 
-    function setRemark4($remark4){
+    function setProperty4($property4) {
+        $this->property4 = $property4;
+    }
+
+    function setRemark4($remark4) {
         $this->remark4 = $remark4;
     }
 
-    function setRemark5($remark5){
+    function setProperty5($property5) {
+        $this->property5 = $property5;
+    }
+
+    function setRemark5($remark5) {
         $this->remark5 = $remark5;
     }
 
-    function setCheckIn($checkIn){
+    function setCheckIn($checkIn) {
         $this->checkIn = $checkIn;
     }
 
-    function setPropertyFactory1($propertyFactory1){
+    function setPropertyFactory1($propertyFactory1) {
         $this->propertyFactory1 = $propertyFactory1;
     }
 
-    function setRemarkFactory1($remarkFactory1){
+    function setRemarkFactory1($remarkFactory1) {
         $this->remarkFactory1 = $remarkFactory1;
     }
 
-    function setPropertyFactory2($propertyFactory2){
+    function setPropertyFactory2($propertyFactory2) {
         $this->propertyFactory2 = $propertyFactory2;
     }
 
-    function setRemarkFactory2($remarkFactory2){
+    function setRemarkFactory2($remarkFactory2) {
         $this->remarkFactory2 = $remarkFactory2;
     }
 
-    function setPropertyFactory3($propertyFactory3){
+    function setPropertyFactory3($propertyFactory3) {
         $this->propertyFactory3 = $propertyFactory3;
     }
 
-    function setRemarkFactory3($remarkFactory3){
+    function setRemarkFactory3($remarkFactory3) {
         $this->remarkFactory3 = $remarkFactory3;
     }
 
-    function setAttachment($attachment){
+    function setAttachment($attachment) {
         $this->attachment = $attachment;
     }
+
+    function setTypeBiz($typeBiz) {
+        $this->typeBiz = $typeBiz;
+    }
+
+    function setTypeOptional($typeOptional) {
+        $this->typeOptional = $typeOptional;
+    }
+
 }

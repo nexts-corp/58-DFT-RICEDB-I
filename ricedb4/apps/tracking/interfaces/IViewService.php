@@ -29,6 +29,13 @@ interface IViewService {
      * @description  คืนหลักค้ำประกันที่เหลือ
      */
     public function returns();
+    
+    /**
+     * @name returnFinance
+     * @uri /returnFinance
+     * @description  คืนหลักค้ำประกันจากกองคลัง
+     */
+    public function returnFinance();
 
     /**
      * @name follow
