@@ -331,7 +331,7 @@
                 $('#formFinance').find("input[type=text]").val("");
                 sumFinance = 0;
                 $.each(data, function (k, v) {
-                    if (v["paymentId"] == 3) {
+                    if (v["paymentId"] != 1) { //ไม่ใช่หนังสือสัญญาค้ำประกัน
                         sumFinance += parseFloat(v["amount"]);
                     }
                 });
@@ -343,7 +343,7 @@
                     var nData = data;
                     if (fNo != "" && fDate != "") {
                         $.each(nData, function (k, v) {
-                            if (v["paymentId"] == 3) {
+                            if (v["paymentId"] != 1) { //ไม่ใช่หนังสือสัญญาค้ำประกัน
                                 nData[k]["financeNo"] = fNo;
                                 nData[k]["financeBank"] = fBank;
                                 nData[k]["financeDate"] = fDate;
@@ -527,7 +527,7 @@
             var dataJSONEN = encodeURIComponent(dataJSON);
 //			alert(dataJSONEN);
 
-            var datas = callAjax("{{_context_path}}/api/report/report/trackingPayment", "post", dataJSONEN, "json");
+            var datas = callAjax("{{_context_path}}/api/report/report/financePayment", "post", dataJSONEN, "json");
             if (typeof datas !== 'undefined' && datas !== null) {
                 //alert(datas["export"]);
                 var win = window.open(datas["export"], '_blank');

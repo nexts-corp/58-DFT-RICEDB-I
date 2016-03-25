@@ -128,5 +128,11 @@ class ReportService extends CServiceBase implements IReportService{
         return $url;
 
     }
-    
+
+    public function financePayment($report) {
+         $reportName = "RPT02_08_05";
+        $url = $this->getReportTrackingAuccode($reportName, $report,$report->type);
+        return $url;
+    }
+
 } 

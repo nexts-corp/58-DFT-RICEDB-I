@@ -69,4 +69,13 @@ interface IReportService {
      * @description เมนูรายงาน
      */
     public function trackingPayment($report);
+    
+     /**
+     * @name financePayment
+     * @uri /financePayment
+     * @param String[] report Description
+     * @return string export Description
+     * @description เมนูรายงาน
+     */
+    public function financePayment($report);
 } 
