@@ -33,7 +33,7 @@ class BidderItemService extends CServiceBase implements IBidderItemService {
 
     public function listsCountItem(){
         $sql = "SELECT"
-                ." bi.id, bi.taxId, bi.bidderName, bi.typeBiz,"
+                ." bi.id, bi.taxId, bi.bidderName, bh.typeBiz,"
                 ." bh.id bidderHistoryId, bh.statusKeyword, bh.agentName, bh.mobile, bh.queue, bh.dateRegister,"
                 ." count(bt.id) as countSilo, count(bp.id) as countPrice"
             ." FROM ".$this->ent."\\BidderHistory bh"
@@ -42,7 +42,7 @@ class BidderItemService extends CServiceBase implements IBidderItemService {
             ." LEFT JOIN ".$this->ent."\\BidderPriceSilo bp WITH bp.bidderItemId = bt.id AND bp.round = '0'"
             ." WHERE bh.statusKeyword = :statusKeyword"
             ." GROUP BY"
-                ." bi.id, bi.taxId, bi.bidderName, bi.typeBiz,"
+                ." bi.id, bi.taxId, bi.bidderName, bh.typeBiz,"
                 ." bh.id, bh.statusKeyword, bh.agentName, bh.mobile, bh.queue, bh.dateRegister"
             ." ORDER BY bh.queue ASC";
         $param = array(
