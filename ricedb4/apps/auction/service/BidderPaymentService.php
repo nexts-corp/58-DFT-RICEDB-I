@@ -193,6 +193,7 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
                     $check->bankId = $bidderPayment[$key]->bankId;
                     $check->paymentNo = $bidderPayment[$key]->paymentNo;
                     $check->paymentDate = $bidderPayment[$key]->paymentDate;
+					$check->isReturn = 'N';
 
                     $data = $this->datacontext->getObject($check);
 
