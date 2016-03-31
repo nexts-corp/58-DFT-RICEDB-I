@@ -331,7 +331,7 @@
                 $('#formFinance').find("input[type=text]").val("");
                 sumFinance = 0;
                 $.each(data, function (k, v) {
-                    if (v["paymentId"] != 1) { //ไม่ใช่หนังสือสัญญาค้ำประกัน
+                    if (v["paymentId"] != 1) {
                         sumFinance += parseFloat(v["amount"]);
                     }
                 });
@@ -343,7 +343,7 @@
                     var nData = data;
                     if (fNo != "" && fDate != "") {
                         $.each(nData, function (k, v) {
-                            if (v["paymentId"] != 1) { //ไม่ใช่หนังสือสัญญาค้ำประกัน
+                            if (v["paymentId"] != 1) {
                                 nData[k]["financeNo"] = fNo;
                                 nData[k]["financeBank"] = fBank;
                                 nData[k]["financeDate"] = fDate;
