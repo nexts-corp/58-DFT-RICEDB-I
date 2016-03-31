@@ -68,8 +68,8 @@ class AutoUpdate extends CServiceBase implements IAutoUpdate {
 			$out=((new \DateTime())->format('Y-m-d H:i:s'))." : Update Data From Master Server  <br/>";
 			$out.=$this->download4Master();
 			
-			$out.="<br/>".((new \DateTime())->format('Y-m-d H:i:s'))." : Upload Data to Master Server  <br/>";
-			$out.=$this->upload2Master();
+			//$out.="<br/>".((new \DateTime())->format('Y-m-d H:i:s'))." : Upload Data to Master Server  <br/>";
+			//$out.=$this->upload2Master();
 			
 			echo $out;
 			header("Refresh:30");
