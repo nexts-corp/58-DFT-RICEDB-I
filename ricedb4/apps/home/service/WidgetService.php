@@ -65,11 +65,10 @@ class WidgetService extends CServiceBase implements IWidgetService{
         $sqlSt = "SELECT"
                 ." st.status, st.auctionDate, st.keyword"
             ." FROM ".$this->ent."\\Status st"
-            ." WHERE st.keyword LIKE 'AU%' AND st.active != :active AND st.active != :activeI "
+            ." WHERE st.keyword LIKE 'AU%' AND st.active = :active "
             ." ORDER BY st.dateCreated DESC";
         $paramSt = array(
-            "active" => "Y",
-			"activeI" => "YA"
+            "active" => "F"
         );
 
         $dataSt = $this->datacontext->getObject($sqlSt, $paramSt, 1); //get STATUS is Active
