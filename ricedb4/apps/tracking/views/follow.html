@@ -208,8 +208,8 @@
         $("#btn_excel").click(function () {
             var auccode = $('#auction').val();
             var associateId = $('#associateId').val();
-			console.log("{{_context_path}}/api/tracking/follow/export" + "?auccode=" + auccode+"&associateId="+associateId);
-            //window.open( "{{_context_path}}/api/tracking/follow/export" + "?auccode=" + auccode+"&associateId="+associateId);
+			//console.log("{{_context_path}}/api/tracking/follow/export" + "?auccode=" + auccode+"&associateId="+associateId);
+            window.open( "{{_context_path}}/api/tracking/follow/export" + "?auccode=" + auccode+"&associateId="+associateId);
         });
         $("#btn_show").click(function () {
             $('#tableExport').html("<tr><td colspan='16'  class='text-center' style='vertical-align: middle;'>Loading...</td></tr>");
