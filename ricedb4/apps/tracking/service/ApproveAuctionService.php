@@ -109,13 +109,24 @@ class ApproveAuctionService extends CServiceBase implements IApproveAuctionServi
                 $dataTracking[$index]->isSale = "N";
                 $dataTracking[$index]->remarkSale = NULL;
             }
-            if(!$this->datacontext->updateObject($dataTracking)){
+            if (!$this->datacontext->updateObject($dataTracking)) {
                 $return = false;
             }
         } else {
             $return = false;
         }
         return $return;
+    }
+
+    public function checkStatus($auccode) {
+        $status = new \apps\common\entity\Status();
+        $status->keyword = $auccode;
+        $data = $this->datacontext->getObject($status)[0];
+        if ($data->active == "F" || $data->active == "FA") {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

@@ -37,7 +37,7 @@ interface IApproveAuctionService {
      * @return string update Description
      * @description บันทึกการขาย
      */
-    public function update($data, $isSale, $remark,$auccode);
+    public function update($data, $isSale, $remark, $auccode);
 
     /**
      * @name delete
@@ -47,4 +47,13 @@ interface IApproveAuctionService {
      * @description บันทึกการขาย
      */
     public function delete($dataAuction);
+
+    /**
+     * @name checkStatus
+     * @uri /checkStatus
+     * @param string auccode
+     * @return string checkStatus
+     * @description ตรวจสอบสถานะการประมูล
+     */
+    public function checkStatus($auccode);
 }
