@@ -337,9 +337,9 @@
                 },
                 {
                     "targets": 4,
-                    "data": "WeightAll",
+                    "data": "OWeightAll",
                     "sClass": "text-right col-md-2",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
@@ -347,11 +347,37 @@
                     "targets": 5,
                     "data": "FV2",
                     "sClass": "text-right text-bold col-md-2",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
                     }
                 }
-            ]
+            ],
+            "drawCallback": function () {
+                var api = this.api();
+                var rows = api.rows({page: 'current'}).nodes();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                };
+                var sumWeight = 0, sumFV = 0, count = 0;
+                api.column(4).data().reduce(function (a, b) {
+                    sumWeight += intVal(b);
+                    count++;
+                    // console.log(a+' '+b);
+                }, 0);
+                api.column(5).data().reduce(function (a, b) {
+                    sumFV += intVal(b);
+                    // console.log(a+' '+b);
+                }, 0);
+                $(rows).eq(rows.length - 1).after('<tr>'
+                        + '<td class="text-bold text-center" colspan="4">รวม</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV, 2, ",", ".") + '</td>'
+                        + '</tr>'
+                        );
+            }
         });
         t2.on('order.dt search.dt', function () {
             t2.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
@@ -388,9 +414,9 @@
                 },
                 {
                     "targets": 4,
-                    "data": "WeightAll",
+                    "data": "OWeightAll",
                     "sClass": "text-right col-md-2",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
@@ -398,11 +424,37 @@
                     "targets": 5,
                     "data": "FV3",
                     "sClass": "text-right text-bold col-md-2",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
                     }
                 }
-            ]
+            ],
+            "drawCallback": function () {
+                var api = this.api();
+                var rows = api.rows({page: 'current'}).nodes();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                };
+                var sumWeight = 0, sumFV = 0, count = 0;
+                api.column(4).data().reduce(function (a, b) {
+                    sumWeight += intVal(b);
+                    count++;
+                    // console.log(a+' '+b);
+                }, 0);
+                api.column(5).data().reduce(function (a, b) {
+                    sumFV += intVal(b);
+                    // console.log(a+' '+b);
+                }, 0);
+                $(rows).eq(rows.length - 1).after('<tr>'
+                        + '<td class="text-bold text-center" colspan="4">รวม</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV, 2, ",", ".") + '</td>'
+                        + '</tr>'
+                        );
+            }
         });
         t3.on('order.dt search.dt', function () {
             t3.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
@@ -439,9 +491,9 @@
                 },
                 {
                     "targets": 4,
-                    "data": "WeightAll",
+                    "data": "OWeightAll",
                     "sClass": "text-right col-md-2",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
@@ -449,11 +501,37 @@
                     "targets": 5,
                     "data": "FV4",
                     "sClass": "text-right text-bold col-md-2",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
                     }
                 }
-            ]
+            ],
+            "drawCallback": function () {
+                var api = this.api();
+                var rows = api.rows({page: 'current'}).nodes();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                };
+                var sumWeight = 0, sumFV = 0, count = 0;
+                api.column(4).data().reduce(function (a, b) {
+                    sumWeight += intVal(b);
+                    count++;
+                    // console.log(a+' '+b);
+                }, 0);
+                api.column(5).data().reduce(function (a, b) {
+                    sumFV += intVal(b);
+                    // console.log(a+' '+b);
+                }, 0);
+                $(rows).eq(rows.length - 1).after('<tr>'
+                        + '<td class="text-bold text-center" colspan="4">รวม</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV, 2, ",", ".") + '</td>'
+                        + '</tr>'
+                        );
+            }
         });
         t4.on('order.dt search.dt', function () {
             t4.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
@@ -490,9 +568,9 @@
                 },
                 {
                     "targets": 4,
-                    "data": "WeightAll",
+                    "data": "OWeightAll",
                     "sClass": "text-right col-md-2",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
                     }
                 },
@@ -500,7 +578,7 @@
                     "targets": 5,
                     "data": "FV2",
                     "sClass": "text-right text-bold col-md-1",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
                     }
                 },
@@ -508,7 +586,7 @@
                     "targets": 6,
                     "data": "FV3",
                     "sClass": "text-right text-bold col-md-1",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
                     }
                 },
@@ -516,11 +594,47 @@
                     "targets": 7,
                     "data": "FV4",
                     "sClass": "text-right text-bold col-md-1",
-                    "render": function(data){
+                    "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
                     }
                 }
-            ]
+            ],
+            "drawCallback": function () {
+                var api = this.api();
+                var rows = api.rows({page: 'current'}).nodes();
+                var intVal = function (i) {
+                    return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                };
+                var sumWeight = 0, sumFV2 = 0, sumFV3 = 0, sumFV4 = 0, count = 0;
+                api.column(4).data().reduce(function (a, b) {
+                    sumWeight += intVal(b);
+                    count++;
+                    // console.log(a+' '+b);
+                }, 0);
+                api.column(5).data().reduce(function (a, b) {
+                    sumFV2 += intVal(b);
+                    // console.log(a+' '+b);
+                }, 0);
+                api.column(6).data().reduce(function (a, b) {
+                    sumFV3 += intVal(b);
+                    // console.log(a+' '+b);
+                }, 0);
+                api.column(7).data().reduce(function (a, b) {
+                    sumFV4 += intVal(b);
+                    // console.log(a+' '+b);
+                }, 0);
+                $(rows).eq(rows.length - 1).after('<tr>'
+                        + '<td class="text-bold text-center" colspan="4">รวม</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV2, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV3, 2, ",", ".") + '</td>'
+                        + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV4, 2, ",", ".") + '</td>'
+                        + '</tr>'
+                        );
+            }
         });
         t234.on('order.dt search.dt', function () {
             t234.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
