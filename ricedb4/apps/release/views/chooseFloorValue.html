@@ -31,7 +31,7 @@
             </ul>
         </div>
     </div><!-- end button action on header -->
-    
+
     <div class="container">
         <div class="row">
             <div id="divTable"><!-- table shown -->
@@ -95,7 +95,7 @@
                                 <div class="col-sm-3 text-right">{{#i18n}}release.total.countSiloPass{{/i18n}} :</div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary whSell"></span> / <span class="whAll"></span></div>
                             </div>
-                             <div class="form-group">
+                            <div class="form-group">
                                 <div class="col-sm-3 text-right">{{#i18n}}release.total.countBidder{{/i18n}} :</div>
                                 <div class="col-sm-6 text-bold"><span class="text-tertiary bidSellCount"></span>/<span class="text-tertiary bidCount"></span></div>
                             </div>
@@ -150,20 +150,20 @@
                         <div class="row" style="margin-top: 10px;">
                             <table class="table table-bordered">
                                 <thead>
-                                <tr>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloFail{{/i18n}}</th>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuctionPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.diffPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
-                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuction{{/i18n}}</th>
-                                </tr>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.total.siloFail{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.weightAll{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.floorValue{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuctionPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.diffPrice{{/i18n}} ({{#i18n}}release.bath{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.maxAuction{{/i18n}}</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td colspan="7" class="text-center">-</td>
-                                </tr>
+                                    <tr>
+                                        <td colspan="7" class="text-center">-</td>
+                                    </tr>
                                 </tbody>
                                 <tfoot>
                                 </tfoot>
@@ -225,52 +225,55 @@
 {{>footer}}
 
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         listsAuction();
-
-        $("#auction").unbind().change(function(){
+        $("#auction").unbind().change(function () {
             showRiceType();
-
-            if($("#auction").val() == ""){
+            if ($("#auction").val() == "") {
                 $("button.save, button.undo, button.calculate").prop("disabled", true);
             }
-            else{
+            else {
                 $("button.save, button.undo, button.calculate").prop("disabled", false);
+                $("#riceTypeAll").unbind().change(function () {
+                    var value = $(this).val();
+                    $(".riceFV").each(function (k, v) {
+                        $(this).val(value);
+                    });
+                });
             }
         });
-
-        $("button.calculate").unbind().click(function(){
+        $("button.calculate").unbind().click(function () {
             var fdata = dataObject();
-
             var auction = $("#auction").val();
             var dataJSON = JSON.stringify({auction: auction, riceType: fdata["RiceType"]});
             var dataJSONEN = encodeURIComponent(dataJSON);
-
             previewFV(dataJSONEN);
+            $("tr.dataHistory").click(function () {
+                var silo = $(this).find("td:eq(1)").html(); //หจก.โรงสีไฟทวีศักดิ์ สรรคบุรี หลัง 4 [ชัยนาท] [อคส.]
+                silo = silo.substr(0, silo.indexOf(' [')); //หจก.โรงสีไฟทวีศักดิ์ สรรคบุรี หลัง 4" " 
+                if(silo.substr(-1,1)==" "){
+                    silo = silo.substr(0,silo.length-1); //หจก.โรงสีไฟทวีศักดิ์ สรรคบุรี หลัง 4""
+                }
+                var dataSilo = JSON.stringify({silo:silo});
+                siloHistory(dataSilo);
+            });
         });
-
-        $("button.save").unbind().click(function(){
+        $("button.save").unbind().click(function () {
             $("#saveModal").modal("show");
             $("#auctionHead").html($("#auction option:selected").text());
-
-            $("button.confirm").unbind().click(function(){
+            $("button.confirm").unbind().click(function () {
                 var fdata = dataObject();
-
                 var auction = $("#auction").val();
                 var dataJSON = JSON.stringify({auction: auction, riceType: fdata["RiceType"]});
                 var dataJSONEN = encodeURIComponent(dataJSON);
-
                 saveChooseFV(dataJSONEN);
             });
         });
-
-        $("button.undo").unbind().click(function(){
+        $("button.undo").unbind().click(function () {
             $("#saveModal").modal("show");
             $("#auctionHead").html($("#auction option:selected").text());
-
-            $("button.confirm").unbind().click(function(){
+            $("button.confirm").unbind().click(function () {
                 var fdata = dataObject();
-
                 var auction = $("#auction").val();
                 var dataJSON = JSON.stringify({auction: auction});
                 var dataJSONEN = encodeURIComponent(dataJSON);
@@ -278,10 +281,9 @@
             });
         });
     });
-
-    function listsAuction(){
+    function listsAuction() {
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/listsAuction", "post", {}, "json");
-        if(typeof datas !== "undefined" && datas !== null){
+        if (typeof datas !== "undefined" && datas !== null) {
             var html = '<option value="">เลือกครั้งการประมูล</option>';
             $.each(datas["lists"], function (key, value) {
                 html += '<option value="' + value["keyword"] + '">ประมูลครั้งที่ ' + value["status"] + '</option>';
@@ -290,211 +292,215 @@
         }
     }
 
-    function showRiceType(){
+    function showRiceType() {
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/listsRiceType", "post", {auction: $("#auction").val()}, "json");
-        if(typeof datas !== "undefined" && datas !== null){
-            var  html = '';
-            $.each(datas["lists"], function(key, value){
-                html += '<tr>'
-                    + '<td class="text-center">'+value["type"]+'</td>'
-                    + '<td>'
-                        + '<select id="riceType'+value["typeId"]+'" name="riceType'+value["typeId"]+'" data-tid="'+value["typeId"]+'" class="form-control">'
+        if (typeof datas !== "undefined" && datas !== null) {
+            var html = '';
+            $.each(datas["lists"], function (key, value) {
+                if (key == 0) {
+                    html += '<tr>'
+                            + '<td class="text-center">ทั้งหมด</td>'
+                            + '<td>'
+                            + '<select id="riceTypeAll' + '" name="riceTypeAll"  class="form-control">'
+                            + '<option value="fv">Floor Value 0</option>'
                             + '<option value="fv2">Floor Value 2</option>'
                             + '<option value="fv3">Floor Value 3</option>'
                             + '<option value="fv4">Floor Value 4</option>'
+                            + '</select>'
+                            + '</td>'
+                            + '</tr>';
+                }
+                html += '<tr>'
+                        + '<td class="text-center">' + value["type"] + '</td>'
+                        + '<td>'
+                        + '<select id="riceType' + value["typeId"] + '" name="riceType' + value["typeId"] + '" data-tid="' + value["typeId"] + '" class="form-control riceFV">'
+                        + '<option value="fv">Floor Value 0</option>'
+                        + '<option value="fv2">Floor Value 2</option>'
+                        + '<option value="fv3">Floor Value 3</option>'
+                        + '<option value="fv4">Floor Value 4</option>'
                         + '</select>'
-                    + '</td>'
-                + '</tr>';
+                        + '</td>'
+                        + '</tr>';
             });
-
             $("#table tbody").html(html);
         }
     }
 
-    function previewFV(dataJSONEN){
+    function previewFV(dataJSONEN) {
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/previewFV", "post", dataJSONEN, "json");
-        if(typeof datas !== "undefined" && datas !== null){
+        if (typeof datas !== "undefined" && datas !== null) {
             var html1 = '';
             var html2 = '';
             var html3 = '';
-
             var count1 = 0;
             var count2 = 0;
             var count3 = 0;
-
             var tWeight1 = 0;
             var tFV1 = 0;
             var tPrice1 = 0;
             var tDiff1 = 0;
-
             var tWeight2 = 0;
             var tFV2 = 0;
             var tPrice2 = 0;
             var tDiff2 = 0;
-
             var whSell = 0;
             var whFailSell = 0;
             var whAll = 0;
-            
             var bidCount = 0;
             var bidSellCount = 0;
-            
-            var bNameOld=[];
-            $.each(datas["lists"], function(key, val){
+            var bNameOld = [];
+            $.each(datas["lists"], function (key, val) {
                 whAll++;
-                var bchk=true;
-                $.each(bNameOld,function(k,v){
-                      if(v==val["bidderName"]){
-                          bchk=false;
-                          //break;
-                          return false;
-                      }
+                var bchk = true;
+                $.each(bNameOld, function (k, v) {
+                    if (v == val["bidderName"]) {
+                        bchk = false;
+                        //break;
+                        return false;
+                    }
                 });
-                if(bchk){
-                    bNameOld.push(val["bidderName"]);
-                    bidCount++;
+                if (bchk) {
+                    if (val["bidderName"] != "") {
+                        bNameOld.push(val["bidderName"]);
+                        bidCount++;
+                    }
+//                    console.log(bidCount + " " + val["bidderName"]);
+//                    console.log(val);
                 }
-              
-                if(parseFloat(val["bidderPrice"]) >= parseFloat(val["sFV"])){
+
+                if (parseFloat(val["bidderPrice"]) >= parseFloat(val["sFV"])) {
                     var diff = parseFloat(val["bidderPrice"]) - parseFloat(val["sFV"]);
-
-                    html1 += '<tr>'
-                        + '<td class="text-center">'+(++count1)+'</td>'
-                        + '<td>'+val["silo"]+' ['+val["province"]+'] ['+val["associate"]+']</td>'
-                        + '<td class="text-right">'+accounting.formatNumber(val["sOWeightAll"], 6, ",", ".")+'</td>'
-                        + '<td class="text-right">'+accounting.formatNumber(val["sFV"], 2, ",", ".")+'</td>'
-                        + '<td class="text-right text-tertiary text-bold">'+accounting.formatNumber(val["bidderPrice"], 2, ",", ".")+'</td>'
-                        + '<td class="text-right text-bold text-success">'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
-                        + '<td>'+val["bidderName"]+'</td>'
-                    + '</tr>';
-
+                    html1 += '<tr class="dataHistory">'
+                            + '<td class="text-center">' + (++count1) + '</td>'
+                            + '<td>' + val["silo"] + ' [' + val["province"] + '] [' + val["associate"] + ']</td>'
+                            + '<td class="text-right">' + accounting.formatNumber(val["sOWeightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-right">' + accounting.formatNumber(val["sFV"], 2, ",", ".") + '</td>'
+                            + '<td class="text-right text-tertiary text-bold">' + accounting.formatNumber(val["bidderPrice"], 2, ",", ".") + '</td>'
+                            + '<td class="text-right text-bold text-success">' + accounting.formatNumber(diff, 2, ",", ".") + '</td>'
+                            + '<td>' + val["bidderName"] + '</td>'
+                            + '</tr>';
                     tWeight1 += parseFloat(val["sOWeightAll"]);
                     tFV1 += parseFloat(val["sFV"]);
                     tPrice1 += parseFloat(val["bidderPrice"]);
                     tDiff1 += parseFloat(diff);
-
                     whSell++;
-                    
-                    if(bchk){
+                    if (bchk) {
                         bidSellCount++;
                     }
-                    
+
                 }
-                else{
-                    var diff = parseFloat(val["bidderPrice"]) - parseFloat(val["sFV"]);
-
-                    html2 += '<tr>'
-                        + '<td class="text-center">'+(++count1)+'</td>'
-                        + '<td>'+val["silo"]+' ['+val["province"]+'] ['+val["associate"]+']</td>'
-                        + '<td class="text-right">'+accounting.formatNumber(val["sOWeightAll"], 6, ",", ".")+'</td>'
-                        + '<td class="text-right">'+accounting.formatNumber(val["sFV"], 2, ",", ".")+'</td>'
-                        + '<td class="text-right text-tertiary text-bold">'+accounting.formatNumber(val["bidderPrice"], 2, ",", ".")+'</td>'
-                        + '<td class="text-right text-bold text-danger">'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
-                        + '<td>'+val["bidderName"]+'</td>'
-                    + '</tr>';
-
-                    tWeight2 += parseFloat(val["sOWeightAll"]);
-                    tFV2 += parseFloat(val["sFV"]);
-                    tPrice2 += parseFloat(val["bidderPrice"]);
-                    tDiff2 += parseFloat(diff);
-
+                else {
+                    var parsePrice = function (price) {
+                        if (price == "") {
+                            return parseFloat(0);
+                        } else {
+                            return parseFloat(price);
+                        }
+                    };
+                    var diff = parsePrice(val["bidderPrice"]) - parsePrice(val["sFV"]);
+                    html2 += '<tr class="dataHistory">'
+                            + '<td class="text-center">' + (++count1) + '</td>'
+                            + '<td>' + val["silo"] + ' [' + val["province"] + '] [' + val["associate"] + ']</td>'
+                            + '<td class="text-right">' + accounting.formatNumber(val["sOWeightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-right">' + accounting.formatNumber(val["sFV"], 2, ",", ".") + '</td>'
+                            + '<td class="text-right text-tertiary text-bold">' + accounting.formatNumber(val["bidderPrice"], 2, ",", ".") + '</td>'
+                            + '<td class="text-right text-bold text-danger">' + accounting.formatNumber(diff, 2, ",", ".") + '</td>'
+                            + '<td>' + val["bidderName"] + '</td>'
+                            + '</tr>';
+                    tWeight2 += parsePrice(val["sOWeightAll"]);
+                    tFV2 += parsePrice(val["sFV"]);
+                    tPrice2 += parsePrice(val["bidderPrice"]);
+                    tDiff2 += parsePrice(diff);
                     whFailSell++;
                 }
 
                 count3++;
                 var sub3 = 0;
-                $.each(val["stackArr"], function(key2, val2){
+                $.each(val["stackArr"], function (key2, val2) {
                     html3 += '<tr>'
-                        + '<td class="text-center">'+count3+'('+(++sub3)+')</td>'
-                        + '<td>'+val["silo"]+' ['+val["province"]+'] ['+val["associate"]+']</td>'
-                        + '<td class="text-center">'+val2["warehouse"]+'</td>'
-                        + '<td class="text-center">'+val2["stack"]+'</td>'
-                        + '<td>'+val2["typeName"]+'</td>'
-                        + '<td class="text-right">'+accounting.formatNumber(val2["oweightAll"], 6, ",", ".")+'</td>'
-                        + '<td class="text-right">'+accounting.formatNumber(val2["FV"], 2, ",", ".")+'</td>'
-                        + '<td class="text-center">'+val2["useFV"]+'</td>'
-                    + '</tr>';
+                            + '<td class="text-center">' + count3 + '(' + (++sub3) + ')</td>'
+                            + '<td>' + val["silo"] + ' [' + val["province"] + '] [' + val["associate"] + ']</td>'
+                            + '<td class="text-center">' + val2["warehouse"] + '</td>'
+                            + '<td class="text-center">' + val2["stack"] + '</td>'
+                            + '<td>' + val2["typeName"] + '</td>'
+                            + '<td class="text-right">' + accounting.formatNumber(val2["oweightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-right">' + accounting.formatNumber(val2["FV"], 2, ",", ".") + '</td>'
+                            + '<td class="text-center">' + val2["useFV"] + '</td>'
+                            + '</tr>';
                 });
                 html3 += '<tr class="bg-tertiary">'
-                    + '<td colspan="5" class="text-right text-bold">รวม</td>'
-                    + '<td class="text-right text-bold">'+accounting.formatNumber(val["sOWeightAll"], 6, ",", ".")+'</td>'
-                    + '<td class="text-right text-bold">'+accounting.formatNumber(val["sFV"], 2, ",", ".")+'</td>'
-                    + '<td></td>'
-                + '</tr>';
+                        + '<td colspan="5" class="text-right text-bold">รวม</td>'
+                        + '<td class="text-right text-bold">' + accounting.formatNumber(val["sOWeightAll"], 6, ",", ".") + '</td>'
+                        + '<td class="text-right text-bold">' + accounting.formatNumber(val["sFV"], 2, ",", ".") + '</td>'
+                        + '<td></td>'
+                        + '</tr>';
             });
-
             //console.log(bNameOld);
             $(".whSell").html(whSell);
             $(".whFailSell").html(whFailSell);
-            
             $(".bidSellCount").html(bidSellCount);
             $(".bidCount").html(bidCount);
-            
             $(".whAll").html(whAll);
             $(".weightSell").html(accounting.formatNumber(tWeight1, 6, ",", "."));
             $(".weightFailSell").html(accounting.formatNumber(tWeight2, 6, ",", "."));
             $(".fvSell").html(accounting.formatNumber(tPrice1, 2, ",", "."));
-
             $("#summaryTab table tbody").html(html1);
             $("#summaryTab table tfoot").html('<tr>'
                     + '<td colspan="2" class="text-right text-bold">รวม</td>'
-                    + '<td class="text-right text-bold">'+accounting.formatNumber(tWeight1, 6, ",", ".")+'</td>'
-                    + '<td class="text-right text-bold">'+accounting.formatNumber(tFV1, 2, ",", ".")+'</td>'
-                    + '<td class="text-right text-bold text-tertiary">'+accounting.formatNumber(tPrice1, 2, ",", ".")+'</td>'
-                    + '<td class="text-right text-bold text-success">'+accounting.formatNumber(tDiff1, 2, ",", ".")+'</td>'
-                + '</tr>'
-            );
-
+                    + '<td class="text-right text-bold">' + accounting.formatNumber(tWeight1, 6, ",", ".") + '</td>'
+                    + '<td class="text-right text-bold">' + accounting.formatNumber(tFV1, 2, ",", ".") + '</td>'
+                    + '<td class="text-right text-bold text-tertiary">' + accounting.formatNumber(tPrice1, 2, ",", ".") + '</td>'
+                    + '<td class="text-right text-bold text-success">' + accounting.formatNumber(tDiff1, 2, ",", ".") + '</td>'
+                    + '</tr>'
+                    );
             $("#failFloorTab table tbody").html(html2);
             $("#failFloorTab table tfoot").html('<tr>'
                     + '<td colspan="2" class="text-right text-bold">รวม</td>'
-                    + '<td class="text-right text-bold">'+accounting.formatNumber(tWeight2, 6, ",", ".")+'</td>'
-                    + '<td class="text-right text-bold">'+accounting.formatNumber(tFV2, 2, ",", ".")+'</td>'
-                    + '<td class="text-right text-bold text-tertiary">-</td>'
-                    + '<td class="text-right text-bold text-danger">-</td>'
-                + '</tr>'
-            );
-
-
+                    + '<td class="text-right text-bold">' + accounting.formatNumber(tWeight2, 6, ",", ".") + '</td>'
+                    + '<td class="text-right text-bold">' + accounting.formatNumber(tFV2, 2, ",", ".") + '</td>'
+                    + '<td class="text-right text-bold text-tertiary">' + accounting.formatNumber(tPrice2, 2, ",", ".") + '</td>'
+                    + '<td class="text-right text-bold text-danger">' + accounting.formatNumber(tDiff2, 2, ",", ".") + '</td>'
+                    + '</tr>'
+                    );
             $("#detailTab table tbody").html(html3);
         }
     }
+    function siloHistory(dataSilo){
+        var datas = callAjax("{{_context_path}}/api/release/chooseFV/siloHistory", "post", dataSilo, "json");
+        console.log(datas);
+    }
 
-    function saveChooseFV(dataJSONEN){
+    function saveChooseFV(dataJSONEN) {
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/saveFV", "post", dataJSONEN, "json");
-        if(typeof datas !== "undefined" && datas !== null){
-            if(datas["save"] == true){
+        if (typeof datas !== "undefined" && datas !== null) {
+            if (datas["save"] == true) {
                 $("#saveModal").modal("hide");
             }
         }
     }
 
-    function clearChooseFV(dataJSONEN){
+    function clearChooseFV(dataJSONEN) {
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/clearFV", "post", dataJSONEN, "json");
-        if(typeof datas !== "undefined" && datas !== null){
-            if(datas["save"] == true){
+        if (typeof datas !== "undefined" && datas !== null) {
+            if (datas["save"] == true) {
                 $("#saveModal").modal("hide");
             }
         }
     }
 
-    function dataObject(){
+    function dataObject() {
         var dataType = [];
-        $("#form select").each(function(){
+        $("#form select.riceFV").each(function () {
             //var name = $(this).attr("name");
             var typeId = $(this).attr("data-tid");
             var val = $(this).val();
-
             dataType.push({
                 typeId: typeId,
                 value: val
             });
-
         });
-
         var fdata = {};
         fdata["RiceType"] = dataType;
-
         return fdata;
     }
 </script>

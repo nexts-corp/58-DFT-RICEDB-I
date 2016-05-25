@@ -31,11 +31,11 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
 
     public function listsRiceType($auction){
         $sql = "SELECT"
-                ." rt.typeId, tp.type"
+                ." rt.useType as typeId, tp.type"
             ." FROM ".$this->ent."\\RiceTracking rt"
-            ." JOIN ".$this->ent."\\Type tp WITH tp.id = rt.typeId"
+            ." JOIN ".$this->ent."\\Type tp WITH tp.id = rt.useType"
             ." WHERE rt.statusKeyword = :auction"
-            ." GROUP BY rt.typeId, tp.type";
+            ." GROUP BY rt.useType, tp.type";
         $param = array(
             "auction" => $auction
         );
@@ -53,7 +53,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
         $st = new \apps\common\entity\AuctionStack();
         $st->auctionNo = $auction;
         $data = $this->datacontext->getObject($st);
-
+        
         $sArr = [];
         foreach($data as $key => $val){
             //$fv = $val->$rArr[$val->typeId];
@@ -67,7 +67,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
                 "FV" => $val->$rArr[$val->typeId]
             );
         }
-
+        
         //get bidder max
         $bMax = [];
         $sql = "SELECT * FROM fn_auction_info(:auction)"
@@ -77,6 +77,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
             "isMax" => 'Y'
         );
         $data2 = $this->datacontext->pdoQuery($sql, $param);
+        
         foreach($data2 as $key => $val){
             $bMax[$val["province"]][$val["wareHouseCode"]][$val["associate"]] = array(
                 "bidderName" => $val["bidderName"],
@@ -178,4 +179,19 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
 
         return true;
     }
+
+    public function siloHistory($silo) {
+        $sql = "SELECT rt.silo,rt.statusKeyword "
+                . "FROM ".$this->ent."\\RiceTracking rt "
+                . "WHERE rt.silo = :silo "
+                . "AND rt.statusKeyword not like '%_BAK' "
+                . "AND rt.statusKeyword not like '%_CUT' "
+                . "GROUP BY rt.silo,rt.statusKeyword ";
+        $param = array(
+          "silo" => $silo  
+        );
+        
+        return $this->datacontext->getObject($sql,$param);
+    }
+
 }

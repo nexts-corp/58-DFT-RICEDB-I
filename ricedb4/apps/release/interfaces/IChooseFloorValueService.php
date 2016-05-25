@@ -52,4 +52,13 @@ interface IChooseFloorValueService {
      * @description รายชื่อการประมูล
      */
     public function clearFV($auction);
+    
+    /**
+     * @name siloHistory
+     * @uri /siloHistory
+     * @param String silo Description
+     * @return string lists Description
+     * @description ประวัติคลังสินค้า
+     */
+    public function siloHistory($silo);
 } 
