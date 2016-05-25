@@ -38,7 +38,7 @@
                             <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
                             <a class="btn btn-default" role="button"><i class="fa fa-file-word-o"></i> Word</a>
                             <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
-                            <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                            <a class="btn btn-default btn-excel" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
                             <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
                         </div>
                     </div>
@@ -77,10 +77,14 @@
 {{>footer}}
 <script type="text/javascript">
     $(function(){
+        //window.open( "{{_context_path}}/api/tracking/follow/export" + "?auccode=" + auccode);
         listsAuction();
 
         $("#auction").change(function(){
             showFloorPrice();
+            $(".btn-excel").click(function(){
+                window.open( "{{_context_path}}/api/release/compareFP/export" + "?auccode=" + $("#auction").val());
+            });
         }).trigger("change");
     });
 

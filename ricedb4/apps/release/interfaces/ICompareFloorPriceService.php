@@ -23,4 +23,13 @@ interface ICompareFloorPriceService {
      * @description เปรียบเทียบราคา Floor Price
      */
     public function showFloorPrice($auction);
+    
+    /**
+     * @name export
+     * @uri /export
+     * @param string auccode
+     * @return file export Description
+     * @description  export excel
+     */
+    public function export($auccode);
 } 
