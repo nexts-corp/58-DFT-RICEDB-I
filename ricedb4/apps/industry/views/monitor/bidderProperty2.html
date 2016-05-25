@@ -14,7 +14,7 @@
             <span class="col-md-4">ผู้ยื่นซองเสนอซื้อ: <span id="countIn" class="flash">-</span> ราย</span>
         </p>
     </div>
-    
+
     <div class="main-container">
         <div class="page-content page-thin" style="width: 100%; height: 100%; ">
             <div class="panel-content widget-maybe-head widget-stock stock2" style="" >
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="panel-content widget-maybe-foot widget-stock stock2 slide_div" >
                 <div class="tab_right">
                     <div class="tab-content" style=" background-color: transparent; box-shadow: none; border: none;">
@@ -57,39 +57,39 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(function(){
+    $(function () {
 
         showProperty();
-        autoScroller('monitorBody',1,30);
+        autoScroller('monitorBody', 1, 30);
 
-        $( "#social a" ).each(function() {
+        $("#social a").each(function () {
             var tipt = $(this).attr('title');
-            $(this).attr('title','');
+            $(this).attr('title', '');
             $(this).append('<span>');
             $(this).children('span').text(tipt);
             var spanWidth = $(this).children('span').width() + 20;
-            var spanMarg = 0 - spanWidth/2;
-            $(this).children('span').css('width',spanWidth);
-            $(this).children('span').css('margin-left',spanMarg);
-            $(this).hover (
-                function() {
-                    $(this).children('span').fadeIn();
-                    //$('#social a').css('opacity','.1');
-                    $(this).css('opacity','1');
-                }, function() {
-                    $(this).children('span').fadeOut();
-                    $('#social a').css('opacity','.1');
-                }
+            var spanMarg = 0 - spanWidth / 2;
+            $(this).children('span').css('width', spanWidth);
+            $(this).children('span').css('margin-left', spanMarg);
+            $(this).hover(
+                    function () {
+                        $(this).children('span').fadeIn();
+                        //$('#social a').css('opacity','.1');
+                        $(this).css('opacity', '1');
+                    }, function () {
+                $(this).children('span').fadeOut();
+                $('#social a').css('opacity', '.1');
+            }
             );
-        });     
+        });
     });
-    
-    function showProperty(){
-           setTimeout(showProperty, 120000);
+
+    function showProperty() {
+        setTimeout(showProperty, 120000);
         var html = '<div class="col-md-12">'
-            + '<div class="table-responsive">'
+                + '<div class="table-responsive">'
                 + '<table class="table">'
-                    + '<tbody>';
+                + '<tbody>';
         var countAll = 0;
         var countPass = 0;
         var countIn = 0;
@@ -97,39 +97,47 @@
         var datas = callAjax("{{_context_path}}/api/industry/bidderMonitor/listsProperty", "post", {}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             auction = datas["auction"]["status"];
-            $.each(datas["lists"], function(key, value){
+            $.each(datas["lists"], function (key, value) {
                 countAll++;
                 var property = "";
-                if(value["property"] == "Y"){
+                if (value["property"] == "Y") {
                     countPass++;
                     property = '<span class="text-success">ผ่าน</span>';
                 }
-                else{
+                else {
                     property = '<span class="text-danger">ไม่ผ่าน</span>';
                 }
-                
+
                 var checkIn = "";
-                if(value["checkIn"] == "Y"){
+                if (value["checkIn"] == "Y") {
                     countIn++;
                     checkIn = '<span class="text-success">ยื่นซอง</span>';
                 }
-                else{
+                else {
                     checkIn = '<span class="text-danger">ไม่มายื่นซอง</span>';
                 }
-                
+
+                var remark = function (remark) {
+                    if (remark != null) {
+                        return '<span class="text-danger"> (' + remark + ')</span>';
+                    } else {
+                        return '';
+                    }
+                };
+
                 html += '<tr>'
-                    + '<td class="col-md-2 center spacer"><h3 class="flash">'+value["queue"]+'<h3></td>'
-                    + '<td class="col-md-6 spacer" ><h3 class="flash">'+value["bidderName"]+'</h3></td>'
-                    + '<td class="col-md-2 center spacer"><h3>'+property+'</h3></td>'
-                    + '<td class="col-md-2 center spacer"><h3>'+checkIn+'</h3></td>'
-                + '</td>';
+                        + '<td class="col-md-2 center spacer"><h3 class="flash">' + value["queue"] + '<h3></td>'
+                        + '<td class="col-md-6 spacer" ><h3 class="flash">' + value["bidderName"] + remark(value["remarkSpecial"]) + '</h3></td>'
+                        + '<td class="col-md-2 center spacer"><h3>' + property + '</h3></td>'
+                        + '<td class="col-md-2 center spacer"><h3>' + checkIn + '</h3></td>'
+                        + '</td>';
             });
         }
         $("#auction").html(auction);
         $("#monitorBody").html(html);
         $("#countAll").html(countAll);
-        $("#countPass").html(countPass); 
-        $("#countIn").html(countIn); 
+        $("#countPass").html(countPass);
+        $("#countIn").html(countIn);
     }
 </script>
 

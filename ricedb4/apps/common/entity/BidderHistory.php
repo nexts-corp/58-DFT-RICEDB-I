@@ -99,6 +99,9 @@ class BidderHistory extends EntityBase {
     /** @Column(type="string",length=255, name="Type_Optional") */
     public $typeOptional;
 
+    /** @Column(type="string",length=255, name="Remark_Special") */
+    public $remarkSpecial;
+
     function getId() {
         return $this->id;
     }
@@ -329,6 +332,14 @@ class BidderHistory extends EntityBase {
 
     function setTypeOptional($typeOptional) {
         $this->typeOptional = $typeOptional;
+    }
+
+    function getRemarkSpecial() {
+        return $this->remarkSpecial;
+    }
+
+    function setRemarkSpecial($remarkSpecial) {
+        $this->remarkSpecial = $remarkSpecial;
     }
 
 }

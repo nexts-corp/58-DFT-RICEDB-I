@@ -118,9 +118,17 @@
                     checkIn = '<span class="text-danger">ไม่มายื่นซอง</span>';
                 }
                 
+                var remark = function(remark){
+                    if(remark!= null){
+                        return '<span class="text-danger"> ('+remark+')</span>';
+                    }else{
+                        return '';
+                    }
+                };
+                
                 html += '<tr>'
                     + '<td class="col-md-2 center spacer"><h3 class="flash">'+value["queue"]+'<h3></td>'
-                    + '<td class="col-md-6 spacer" ><h3 class="flash">'+value["bidderName"]+'</h3></td>'
+                    + '<td class="col-md-6 spacer" ><h3 class="flash">'+value["bidderName"] + remark(value["remarkSpecial"]) +'</h3></td>'
                     + '<td class="col-md-2 center spacer"><h3>'+property+'</h3></td>'
                     + '<td class="col-md-2 center spacer"><h3>'+checkIn+'</h3></td>'
                 + '</td>';

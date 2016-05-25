@@ -36,7 +36,7 @@ class BidderMonitorService extends CServiceBase implements IBidderMonitorService
 
         $sql = "SELECT"
                 . " bh.queue, bi.bidderName, bh.property1, bh.property2,"
-                . " bh.property3, bh.property4, bh.property5, bh.checkIn"
+                . " bh.property3, bh.property4, bh.property5, bh.checkIn ,bh.remarkSpecial"
                 . " FROM " . $this->ent . "\\BidderHistory bh"
                 . " JOIN " . $this->ent . "\\BidderInfo bi WITH bi.id = bh.bidderId"
                 . " WHERE bh.statusKeyword = :statusKeyword"
@@ -55,7 +55,8 @@ class BidderMonitorService extends CServiceBase implements IBidderMonitorService
                 "queue" => $value["queue"],
                 "bidderName" => $value["bidderName"],
                 "property" => $property,
-                "checkIn" => $value["checkIn"]
+                "checkIn" => $value["checkIn"],
+                "remarkSpecial" => $value["remarkSpecial"]
             ));
         }
 

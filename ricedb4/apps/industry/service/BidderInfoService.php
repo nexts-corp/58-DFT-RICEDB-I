@@ -53,7 +53,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
                 . " bh.agentName, bh.agentName2,bh.agentName3, bh.mobile, bh.property1, bh.remark1, bh.property2, bh.remark2,"
                 . " bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5, bh.checkIn,"
                 . " bh.propertyFactory1, bh.remarkFactory1, bh.propertyFactory2, bh.remarkFactory2,"
-                . " bh.propertyFactory3, bh.remarkFactory3, bh.attachment, bh.typeOptional"
+                . " bh.propertyFactory3, bh.remarkFactory3, bh.attachment, bh.typeOptional, bh.remarkSpecial"
                 . " FROM " . $this->ent . "\\BidderHistory bh"
                 . " JOIN " . $this->ent . "\\BidderInfo bi WITH bh.bidderId = bi.id"
                 . " WHERE bh.statusKeyword = :statusKeyword "
@@ -266,6 +266,8 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         
         $dataHistory[0]->typeBiz = $bidderHistory->typeBiz;
         $dataHistory[0]->typeOptional = $bidderHistory->typeOptional;
+        
+        $dataHistory[0]->remarkSpecial = $bidderHistory->remarkSpecial;
 
         //update bidder history data
         if (!$this->datacontext->updateObject($dataHistory[0])) {

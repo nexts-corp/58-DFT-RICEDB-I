@@ -365,6 +365,12 @@
                                         </div>
                                     </div>-->
                                 </div>
+                                 <div class="form-group">
+                                      <label class="col-md-3 control-label" for="remarkSpecial">{{#i18n}}auction.remarkSpecial{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="remarkSpecial" id="remarkSpecial">
+                                        </div>
+                                </div>
                             </div>
 
                         </section>
@@ -797,7 +803,14 @@
                 {
                     "targets": 3,
                     "data": "bidderName",
-                    "sClass": "col-md-2"
+                    "sClass": "col-md-2",
+                    "render":function(data,type,full){
+                        if(full["remarkSpecial"]!=null&&full["remarkSpecial"]!=''){
+                            return full["bidderName"]+ '<br><span class="text-danger"> ('+full["remarkSpecial"]+')</span>';
+                        }else{
+                            return full["bidderName"];
+                        }
+                    }
                 },
                 {
                     "targets": 4,
@@ -971,6 +984,8 @@
             $("#remark5").val(value["remark5"]);
 
             $("#fileGroup").html('<div id="fileNew"></div><div id="fileBak"></div>');
+            
+            $("#remarkSpecial").val((value["remarkSpecial"]==null?'':value["remarkSpecial"]));
 
             var fileUpload = 0;
             if (getTag(value["attachment"], "") != "") {

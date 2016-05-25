@@ -263,9 +263,17 @@
                     checkIn = '<span class="text-danger">ไม่มา</span>';
                 }
 
+                var remark = function (remark) {
+                    if (remark != null && remark != '') {
+                        return '<span class="text-danger"> (' + remark + ')</span>';
+                    } else {
+                        return '';
+                    }
+                };
+
                 html += '<tr>'
                         + '<td class="text-center">' + value["queue"] + '</td>'
-                        + '<td class="text-left">' + value["bidderName"] + '</td>'
+                        + '<td class="text-left">' + value["bidderName"] + remark(value["remarkSpecial"]) + '</td>'
                         + '<td class="text-center">' + property + '</td>'
                         + '<td class="text-center">' + checkIn + '</td>'
                         + '</tr>';
@@ -403,7 +411,7 @@
 
         $("#countAll").html(countAll);
     }
-    
+
     function showMaxPriceOne2() {
         var html = '<h3>ผู้เสนอซื้อที่เสนอราคาสูงสุดในแต่ละคลัง</h3>'
                 + '<div class="col-md-12" style="margin-bottom: 10px;">'
