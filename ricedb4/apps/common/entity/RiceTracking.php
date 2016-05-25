@@ -81,6 +81,12 @@ class RiceTracking extends EntityBase {
     /** @Column(type="string",length=10, name="UseFV") */
     public $useFV;
 
+    /** @Column(type="string",length=10, name="UseType") */
+    public $useType;
+
+    /** @Column(type="string",length=10, name="UseGrade") */
+    public $useGrade;
+
     /** @Column(type="string",length=10, name="Is_Bid") */
     public $isBid;
 
@@ -97,11 +103,11 @@ class RiceTracking extends EntityBase {
         return $this->id;
     }
 
-    function getWarehouseCode(){
+    function getWarehouseCode() {
         return $this->warehouseCode;
     }
 
-    function getStackCode(){
+    function getStackCode() {
         return $this->stackCode;
     }
 
@@ -185,6 +191,14 @@ class RiceTracking extends EntityBase {
         return $this->useFV;
     }
 
+    function getUseType() {
+        return $this->useType;
+    }
+
+    function getUseGrade() {
+        return $this->useGrade;
+    }
+
     function getIsBid() {
         return $this->isBid;
     }
@@ -205,11 +219,11 @@ class RiceTracking extends EntityBase {
         $this->id = $id;
     }
 
-    function setWarehouseCode($warehouseCode){
+    function setWarehouseCode($warehouseCode) {
         $this->warehouseCode = $warehouseCode;
     }
 
-    function setStackCode($stackCode){
+    function setStackCode($stackCode) {
         $this->stackCode = $stackCode;
     }
 
@@ -291,6 +305,14 @@ class RiceTracking extends EntityBase {
 
     function setUseFV($useFV) {
         $this->useFV = $useFV;
+    }
+
+    function setUseType($useType) {
+        $this->useType = $useType;
+    }
+
+    function setUseGrade($useGrade) {
+        $this->useGrade = $useGrade;
     }
 
     function setIsBid($isBid) {
