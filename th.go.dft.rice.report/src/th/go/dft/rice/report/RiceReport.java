@@ -38,7 +38,7 @@ public class RiceReport extends AbstractService {
                 unregister();
             }
         } else {
-            System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
+            //System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
             ChangdaoEngine.start(args);
         }
     }
