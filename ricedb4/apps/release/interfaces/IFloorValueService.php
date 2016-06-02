@@ -34,11 +34,20 @@ interface IFloorValueService {
     public function getFloorValueSilo($auction);
 
     /**
-     * @name exportTOR
-     * @uri /exportTOR
+     * @name exportStack
+     * @uri /exportStack
      * @param String auction Description
      * @return file export Description
      * @description  export excel
      */
-    public function exportTOR($auction);
+    public function exportStack($auction);
+    
+     /**
+     * @name exportWarehouse
+     * @uri /exportWarehouse
+     * @param String auction Description
+     * @return file export Description
+     * @description  export excel
+     */
+    public function exportWarehouse($auction);
 } 

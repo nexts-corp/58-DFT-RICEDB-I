@@ -20,9 +20,9 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
 
     public function listsAuction() {
         $sql = "SELECT st.id, st.status, st.keyword"
-            ." FROM ".$this->ent."\\Status st"
-            ." WHERE st.keyword like 'AU%'"
-            ." ORDER BY st.id DESC";
+                . " FROM " . $this->ent . "\\Status st"
+                . " WHERE st.keyword like 'AU%'"
+                . " ORDER BY st.id DESC";
         $data = $this->datacontext->getObject($sql);
         return $data;
     }
@@ -37,7 +37,7 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
 
         return $result;
     }
-    
+
     public function getFloorValueSilo($auction) {
         //return $auction;
         $sql = "EXEC sp_floor_value_warehouse :auction";
@@ -50,274 +50,366 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
         return $result;
     }
 
-    public function exportTOR($auction){
-        $columnArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Z'];
-
-        $sql = "EXEC sp_floor_value_stack :auction";
-        $param  = array(
-            "auction" => $auction
-        );
-        $result = $this->datacontext->pdoQuery($sql, $param);
-
-        $objPHPExcel = new \PHPExcel();
-
-        // Create new PHPExcel object
-        $objPHPExcel->getActiveSheet()->setTitle("TOR");
-        //$objPHPExcel->getActiveSheet()->getColumnDimensionByColumn('A')->setWidth('30');
-        //$objPHPExcel->getActiveSheet()->getColumnDimensionByColumn('A')->setAutoSize(false);
+    public function exportStack($auction) {
+        $status = new \apps\common\entity\Status();
+        $status->keyword = $auction;
+        $status = $this->datacontext->getObject($status);
+        if (count($status) > 0) {
+            $sql = "EXEC sp_floor_value_stack :auction";
+            $param = array(
+                "auction" => $auction
+            );
+            $data = $this->datacontext->pdoQuery($sql, $param);
 
 
-        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('H')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('I')->setWidth(16);
-        $objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(16);
+            if (isset($data)) {
+                ///////////////////////////// Excel /////////////////////////////
+                //style
+                $middle = array(
+                    'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER
+                );
 
-        $this->putWord($objPHPExcel, 0, 1, $columnArr[0], "รายละเอียดคลังกลางข้าวสำหรับการประกาศเปิดประมูล ครั้งที่ ".$result[0]["auctionCode"]."  ".$result[0]["auctionDate"], 1, 10, "center", "");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[0], "ลำดับ ", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[1], "จังหวัด", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[2], "ปีโครงการ", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[3], "รอบ", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[4], "ชื่อคลังสินค้ากลาง/ไซโล", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[5], "ที่ตั้งโกดัง", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[6], "เข้าร่วมฯ", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[7], "ชนิดข้าว", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[8], "หลังที่", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[9], "กองที่", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[10], "เกรด", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[11], "น้ำหนักรวมเนื้อข้าว กระสอบ(ตัน)", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[12], "Floor Price 2", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[13], "มูลค่าขั้นต่ำ (บาท) (Floor Value 2)", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[14], "Floor Price 3", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[15], "มูลค่าขั้นต่ำ (บาท) (Floor Value 3)", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[16], "Floor Price 4", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[17], "มูลค่าขั้นต่ำ (บาท) (Floor Value 4)", 1, 1, "center", "border");
-        $this->putWord($objPHPExcel, 0, 2, $columnArr[18], "FV2 ปัดเศษ", 1, 1, "center", "border");
+                $center = array(
+                    'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+                );
 
+                $bold = array(
+                    'font' => array(
+                        'bold' => true
+                    )
+                );
+                $objPHPExcel = new \PHPExcel();
+                $sheet = 0;
+                $objWorkSheet = $objPHPExcel->createSheet($sheet);
+                $objWorkSheet = $objPHPExcel->setActiveSheetIndex($sheet);
+                $objWorkSheet = $objPHPExcel->getActiveSheet();
 
+                $name = $status[0]->status;
+                $objWorkSheet->setTitle(str_replace("/", "_", $name));
 
-        //return $result;
+                //column name
+                $row = 1;
+                $objWorkSheet->mergeCells('A1:J1')
+                        ->setCellValueByColumnAndRow(0, $row, "รายละเอียดคลังสินค้ากลางสำหรับการจำหน่ายข้าวสารในสต็อกของรัฐ ครั้งที่ " . $name)
+                        ->getStyleByColumnAndRow(0, $row)->getAlignment()->applyFromArray($middle)->setWrapText(true);
 
-        $lineStart = 3;
-        $tempSilo = "";
-        $tempKey = 1;
-        $tempKeySub = 1;
-        $tempWeight = 0;
-        $tempFP2 = 0;
-        $tempFP3 = 0;
-        $tempFP4 = 0;
-        $tempFV2 = 0;
-        $tempFV3 = 0;
-        $tempFV4 = 0;
+//                $row = 2;
+//                $objWorkSheet->setCellValue('A' . $row, "Code:" . $value . "-" . $associateId);
 
-        $tempXFP2 = 0;
+                $row = 2;
+                // $objWorkSheet->mergeCells('A' . $row . ':A' . ($row + 1))->setCellValue('A' . $row, "ลำดับ");
+                $objWorkSheet->setCellValue('A' . $row, "ลำดับ");
+                $objWorkSheet->setCellValue('B' . $row, "จังหวัด");
+                $objWorkSheet->setCellValue('C' . $row, "ปีโครงการ");
+                $objWorkSheet->setCellValue('D' . $row, "คลังสินค้า");
+                $objWorkSheet->setCellValue('E' . $row, "ผู้เข้าร่วม");
+                $objWorkSheet->setCellValue('F' . $row, "ชนิดข้าว");
+                $objWorkSheet->setCellValue('G' . $row, "หลังที่");
+                $objWorkSheet->setCellValue('H' . $row, "กองที่");
+                $objWorkSheet->setCellValue('I' . $row, "เกรด");
+                $objWorkSheet->setCellValueByColumnAndRow(9, $row, "น้ำหนัก\nรวมกระสอบ(ตัน)")
+                        ->getStyleByColumnAndRow(9, $row)->getAlignment()->applyFromArray($middle)->setWrapText(true);
+                //$objWorkSheet->setCellValue('J' . $row, "น้ำหนักรวมกระสอบ(ตัน)");
+                $objWorkSheet->setCellValue('K' . $row, "FP2");
+                $objWorkSheet->setCellValue('L' . $row, "FV2");
+                $objWorkSheet->setCellValue('M' . $row, "FP3");
+                $objWorkSheet->setCellValue('N' . $row, "FV3");
+                $objWorkSheet->setCellValue('O' . $row, "FP4");
+                $objWorkSheet->setCellValue('P' . $row, "FV4");
+                $row++;
 
-        $stempWeight = 0;
-        $stempFP2 = 0;
-        $stempFP3 = 0;
-        $stempFP4 = 0;
-        $stempFV2 = 0;
-        $stempFV3 = 0;
-        $stempFV4 = 0;
+                $temp = array(
+                    "no" => 0,
+                    "silo" => '',
+                    "weight" => 0,
+                    "fp2" => 0,
+                    "fp3" => 0,
+                    "fp4" => 0,
+                    "fv2" => 0,
+                    "fv3" => 0,
+                    "fv4" => 0
+                );
+                $sum = array(
+                    "no" => 0,
+                    "weight" => 0,
+                    "fp2" => 0,
+                    "fp3" => 0,
+                    "fp4" => 0,
+                    "fv2" => 0,
+                    "fv3" => 0,
+                    "fv4" => 0
+                );
 
-        $stempXFP2 = 0;
-
-        $i = 0;
-        $style=array(
-            'type'=>  \PHPExcel_Style_Fill::FILL_SOLID,
-            'startcolor'=>array(
-                "rgb"=>"fff000"
-            )
-        );
-        foreach ($result as $key => $value) {
-            if($value["projectRound"] == "1") $value["projectRound"] = "รอบ 1";
-            elseif($value["projectRound"] == "2") $value["projectRound"] = "รอบ 2";
-            else $value["projectRound"] = "";
-
-            if ($tempSilo != str_replace(' ', '', $value["wareHouseCode"]) && $tempSilo != "") {
-
-
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $tempWeight, 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $tempFV2 / $tempWeight, 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $tempFV2, 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $tempFV3 / $tempWeight, 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $tempFV3, 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $tempFV4 / $tempWeight, 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $tempFV4, 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[18], $tempXFP2, 1, 1, "left", "border");
-                for($jj=0;$jj<19;$jj++){
-                    $objPHPExcel->getActiveSheet()->getStyle($columnArr[$jj].$lineStart)->getFill()->applyFromArray($style);
+                foreach ($data as $k => $v) {
+                    if ($v["wareHouseCode"] != $temp["silo"] && $temp["silo"] != '') {
+                        $sum = $this->summary($sum, $temp);
+                        $temp = $this->printSum($objWorkSheet, $row, $temp, $center, "รวม");
+                        $row++;
+                    }
+                    $temp = $this->printRow($objWorkSheet, $row, $sum, $v, $temp, $center);
+                    $row++;
                 }
+                $sum = $this->summary($sum, $temp);
+                $temp = $this->printSum($objWorkSheet, $row, $temp, $center, "รวม");
+                $sum = $this->printSum($objWorkSheet, ++$row, $sum, $center, "รวมทั้งหมด");
+                //style column
+                $objWorkSheet->getStyle('A1:P2')->getFont()->setBold(true);
+                $objWorkSheet->getStyle('A1:P2')->getAlignment()->applyFromArray($middle);
+                $objWorkSheet->getColumnDimension('A')->setWidth(10); //ลำดับ
+                $objWorkSheet->getColumnDimension('B')->setWidth(15); //จังหวัด
+                $objWorkSheet->getColumnDimension('C')->setWidth(15); //ปีโครงการ
+                $objWorkSheet->getColumnDimension('D')->setWidth(35); //คลังสินค้า
+                $objWorkSheet->getColumnDimension('E')->setWidth(10); //ผู้เข้าร่วม
+                $objWorkSheet->getColumnDimension('F')->setWidth(20); //ชนิดข้าว
+                $objWorkSheet->getColumnDimension('G')->setWidth(10); //หลังที่
+                $objWorkSheet->getColumnDimension('H')->setWidth(10); //กองที่
+                $objWorkSheet->getColumnDimension('I')->setWidth(10); //เกรด
+                $objWorkSheet->getColumnDimension('J')->setWidth(15); //น้ำหนักรวมกระสอบ(ตัน)
+                $objWorkSheet->getColumnDimension('K')->setWidth(15); //FP2
+                $objWorkSheet->getColumnDimension('L')->setWidth(15); //FV2
+                $objWorkSheet->getColumnDimension('M')->setWidth(15); //FP3
+                $objWorkSheet->getColumnDimension('N')->setWidth(15); //FV3
+                $objWorkSheet->getColumnDimension('O')->setWidth(15); //FP4
+                $objWorkSheet->getColumnDimension('P')->setWidth(15); //FV4
 
-
-
-                $tempWeight = 0;
-                $tempFP2 = 0;
-                $tempFP3 = 0;
-                $tempFP4 = 0;
-                $tempFV2 = 0;
-                $tempFV3 = 0;
-                $tempFV4 = 0;
-                $tempXFP2=0;
-                $tempKey++;
-                $tempKeySub = 1;
-                $lineStart++;
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[0], $tempKey . " (" . $tempKeySub.")", 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[1], $value["province"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[2], str_replace('(2)','',str_replace('(1)','',$value["project"])), 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[3], $value["projectRound"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[4], $value["wareHouseCode"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[5], $value["wareHouseAddress"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[6], $value["associate"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[7], $value["typeName"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[8], $value["Warehouse"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[9], $value["Stack"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[10], $value["grade"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $value["OWeightAll"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $value["FP2"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $value["FV2"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $value["FP3"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $value["FV3"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $value["FP4"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $value["FV4"], 1, 1, "left", "border");
-                $fvp = (int) $value["FV2"];
-                if ($fvp % 100) {
-                    $xx = $fvp % 100;
-                    $fvp = ($fvp - $xx) + 100;
-                }
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[18], $fvp, 1, 1, "left", "border");
-            } else if ($tempSilo == str_replace(' ', '', $value["wareHouseCode"]) || $tempSilo == "") {
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[0], $tempKey . " (" . $tempKeySub.")", 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[1], $value["province"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[2], str_replace('(2)','',str_replace('(1)','',$value["project"])), 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[3], $value["projectRound"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[4], $value["wareHouseCode"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[5], $value["wareHouseAddress"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[6], $value["associate"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[7], $value["typeName"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[8], $value["Warehouse"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[9], $value["Stack"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[10], $value["grade"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $value["OWeightAll"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $value["FP2"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $value["FV2"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $value["FP3"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $value["FV3"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $value["FP4"], 1, 1, "left", "border");
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $value["FV4"], 1, 1, "left", "border");
-                $fvp = (int) $value["FV2"];
-                if ($fvp % 100) {
-                    $xx = $fvp % 100;
-                    $fvp = ($fvp - $xx) + 100;
-                }
-                $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[18], $fvp, 1, 1, "left", "border");
-            }
-            $tempSilo = str_replace(' ', '', $value["wareHouseCode"]);
-            $tempWeight +=(double)$value["OWeightAll"];
-            $tempFP2 += (double)$value["FP2"];
-            $tempFV2 += (double)$value["FV2"];
-            $tempFP3 += (double)$value["FP3"];
-            $tempFV3 += (double)$value["FV3"];
-            $tempFP4 += (double)$value["FP4"];
-            $tempFV4 += (double)$value["FV4"];
-
-            $stempWeight +=(double)$value["OWeightAll"];
-            $stempFP2 += (double)$value["FP2"];
-            $stempFV2 += (double)$value["FV2"];
-            $stempFP3 += (double)$value["FP3"];
-            $stempFV3 += (double)$value["FV3"];
-            $stempFP4 += (double)$value["FP4"];
-            $stempFV4 += (double)$value["FV4"];
-
-            $fvp = (int) $value["FV2"];
-            if ($fvp % 100) {
-                $xx = $fvp % 100;
-                $fvp = ($fvp - $xx) + 100;
+                $sheet++;
             }
 
-            $tempXFP2 += $fvp;
 
-            $stempXFP2+=$fvp;
+            //create excel file
+            ob_clean();
 
-            $tempKeySub++;
-            $lineStart++;
+            header('Content-Type: application/vnd.ms-excel');
+            header("Content-Disposition: attachment;filename=รายละเอียดคลังสินค้ากลางสำหรับการจำหน่ายข้าวสารในสต็อกของรัฐ ครั้งที่" . str_replace("/", "_", $name) . ".xls");
+
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+            $objWriter->save('php://output');
+
+            ob_end_flush();
+            exit();
+        } else {
+            return false;
         }
-
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $tempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $tempFV2 / $tempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $tempFV2, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $tempFV3 / $tempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $tempFV3, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $tempFV4 / $tempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $tempFV4, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[18], $tempXFP2, 1, 1, "left", "border");
-
-        for($jj=0;$jj<19;$jj++){
-            $objPHPExcel->getActiveSheet()->getStyle($columnArr[$jj].$lineStart)->getFill()->applyFromArray($style);
-        }
-        $lineStart++;
-
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[11], $stempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[12], $stempFV2 / $stempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[13], $stempFV2, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[14], $tempFV3 / $tempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[15], $stempFV3, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[16], $stempFV4 / $tempWeight, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[17], $stempFV4, 1, 1, "left", "border");
-        $this->putWord($objPHPExcel, 0, $lineStart, $columnArr[18], $stempXFP2, 1, 1, "left", "border");
-
-
-        //create excel file
-        ob_clean();
-
-        header('Content-Type: application/vnd.ms-excel');
-        header("Content-Disposition: attachment;filename=TOR_" . str_replace("/", "_", $auction) . ".xls");
-
-        $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-        $objWriter->save('php://output');
-
-        ob_end_flush();
-        exit();
     }
 
-    function putWord($sheet, $index, $row, $column, $word, $rowWidth = 1, $columnWidth = 1, $align, $border = null){
+    public function exportWarehouse($auction) {
+        $status = new \apps\common\entity\Status();
+        $status->keyword = $auction;
+        $status = $this->datacontext->getObject($status);
+        if (count($status) > 0) {
+            $sql = "EXEC sp_floor_value_warehouse :auction";
+            $param = array(
+                "auction" => $auction
+            );
+            $data = $this->datacontext->pdoQuery($sql, $param);
+
+
+            if (isset($data)) {
+                ///////////////////////////// Excel /////////////////////////////
+                //style
+                $middle = array(
+                    'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                    'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER
+                );
+
+                $center = array(
+                    'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+                );
+
+                $bold = array(
+                    'font' => array(
+                        'bold' => true
+                    )
+                );
+                $objPHPExcel = new \PHPExcel();
+                $sheet = 0;
+                $objWorkSheet = $objPHPExcel->createSheet($sheet);
+                $objWorkSheet = $objPHPExcel->setActiveSheetIndex($sheet);
+                $objWorkSheet = $objPHPExcel->getActiveSheet();
+
+                $name = $status[0]->status;
+                $objWorkSheet->setTitle(str_replace("/", "_", $name));
+
+                //column name
+                $row = 1;
+                $objWorkSheet->mergeCells('A1:H1')
+                        ->setCellValueByColumnAndRow(0, $row, "คลังสินค้ากลางสำหรับการจำหน่ายข้าวสารในสต็อกของรัฐ ครั้งที่ " . $name)
+                        ->getStyleByColumnAndRow(0, $row)->getAlignment()->applyFromArray($middle)->setWrapText(true);
+
+//                $row = 2;
+//                $objWorkSheet->setCellValue('A' . $row, "Code:" . $value . "-" . $associateId);
+
+                $row = 2;
+                // $objWorkSheet->mergeCells('A' . $row . ':A' . ($row + 1))->setCellValue('A' . $row, "ลำดับ");
+                $objWorkSheet->setCellValue('A' . $row, "ลำดับ");
+                $objWorkSheet->setCellValue('B' . $row, "จังหวัด");
+                $objWorkSheet->setCellValue('C' . $row, "คลังสินค้า");
+                $objWorkSheet->setCellValue('D' . $row, "ผู้เข้าร่วม");
+                $objWorkSheet->setCellValue('E' . $row, "น้ำหนัก\nรวมกระสอบ(ตัน)")
+                        ->getStyleByColumnAndRow(9, $row)->getAlignment()->applyFromArray($middle)->setWrapText(true);
+                $objWorkSheet->setCellValue('F' . $row, "FV2");
+                $objWorkSheet->setCellValue('G' . $row, "FV3");
+                $objWorkSheet->setCellValue('H' . $row, "FV4");
+                $row++;
+
+                $temp = array(
+                    "weight" => 0,
+                    "fv2" => 0,
+                    "fv3" => 0,
+                    "fv4" => 0
+                );
+
+                foreach ($data as $k => $v) {
+                    $objWorkSheet->setCellValueExplicit('A' . $row, ($k + 1))->getStyle('A' . $row)->getAlignment()->applyFromArray($center);
+                    $objWorkSheet->setCellValue('B' . $row, $v["province"]);
+                    $objWorkSheet->setCellValue('C' . $row, $v["wareHouseCode"]);
+                    $objWorkSheet->setCellValue('D' . $row, $v["associate"]);
+                    $objWorkSheet->setCellValue('E' . $row, round($v["OWeightAll"], 6));
+                    $objWorkSheet->setCellValue('F' . $row, $v["FV2"]);
+                    $objWorkSheet->setCellValue('G' . $row, $v["FV3"]);
+                    $objWorkSheet->setCellValue('H' . $row, $v["FV4"]);
+                    $temp["weight"] += (float) (round($v["OWeightAll"], 6));
+                    $temp["fv2"] += (float) ($v["FV2"]);
+                    $temp["fv3"] += (float) ($v["FV3"]);
+                    $temp["fv4"] += (float) ($v["FV4"]);
+                    $row++;
+                }
+                $objWorkSheet->mergeCells('A' . $row . ':D' . $row);
+                $objWorkSheet->setCellValue('A' . $row, "รวม")->getStyle('A' . $row)->getAlignment()->applyFromArray($center);
+                $objWorkSheet->setCellValue('E' . $row, $temp["weight"]);
+                $objWorkSheet->setCellValue('F' . $row, $temp["fv2"]);
+                $objWorkSheet->setCellValue('G' . $row, $temp["fv3"]);
+                $objWorkSheet->setCellValue('H' . $row, $temp["fv4"]);
+                $objWorkSheet->getStyle('A' . $row . ':H' . $row)->getFont()->setBold(true);
+                //style column
+                $objWorkSheet->getStyle('A1:H2')->getFont()->setBold(true);
+                $objWorkSheet->getStyle('A1:H2')->getAlignment()->applyFromArray($middle);
+                $objWorkSheet->getColumnDimension('A')->setWidth(10); //ลำดับ
+                $objWorkSheet->getColumnDimension('B')->setWidth(15); //จังหวัด
+                $objWorkSheet->getColumnDimension('C')->setWidth(35); //คลังสินค้า
+                $objWorkSheet->getColumnDimension('D')->setWidth(10); //ผู้เข้าร่วม
+                $objWorkSheet->getColumnDimension('E')->setWidth(15); //น้ำหนักรวมกระสอบ(ตัน)
+                $objWorkSheet->getColumnDimension('F')->setWidth(15); //FV2
+                $objWorkSheet->getColumnDimension('G')->setWidth(15); //FV3
+                $objWorkSheet->getColumnDimension('H')->setWidth(15); //FV4
+
+                $sheet++;
+            }
+
+
+            //create excel file
+            ob_clean();
+
+            header('Content-Type: application/vnd.ms-excel');
+            header("Content-Disposition: attachment;filename=คลังสินค้ากลางสำหรับการจำหน่ายข้าวสารในสต็อกของรัฐ ครั้งที่" . str_replace("/", "_", $name) . ".xls");
+
+            $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+            $objWriter->save('php://output');
+
+            ob_end_flush();
+            exit();
+        } else {
+            return false;
+        }
+    }
+
+    function summary($sum, $temp) {
+        $sum["no"] ++;
+        $sum["weight"] += (float) ($temp["weight"]);
+        $sum["fp2"] += (float) ($temp["fp2"]);
+        $sum["fp3"] += (float) ($temp["fp3"]);
+        $sum["fp4"] += (float) ($temp["fp4"]);
+        $sum["fv2"] += (float) ($temp["fv2"]);
+        $sum["fv3"] += (float) ($temp["fv3"]);
+        $sum["fv4"] += (float) ($temp["fv4"]);
+        return $sum;
+    }
+
+    function printRow($objWorkSheet, $row, $sum, $v, $temp, $center) {
+        $objWorkSheet->setCellValueExplicit('A' . $row, ($sum["no"] + 1) . "." . ++$temp["no"])->getStyle('A' . $row)->getAlignment()->applyFromArray($center);
+        $objWorkSheet->setCellValue('B' . $row, $v["province"]);
+        $objWorkSheet->setCellValue('C' . $row, $v["project"]);
+        $objWorkSheet->setCellValue('D' . $row, $v["wareHouseCode"]);
+        $objWorkSheet->setCellValue('E' . $row, $v["associate"]);
+        $objWorkSheet->setCellValue('F' . $row, $v["typeName"]);
+        $objWorkSheet->setCellValue('G' . $row, $v["Warehouse"]);
+        $objWorkSheet->setCellValue('H' . $row, $v["Stack"]);
+        $objWorkSheet->setCellValue('I' . $row, $v["grade"]);
+        $objWorkSheet->setCellValue('J' . $row, round($v["OWeightAll"], 6));
+        $objWorkSheet->setCellValue('K' . $row, $v["FP2"]);
+        $objWorkSheet->setCellValue('L' . $row, $v["FV2"]);
+        $objWorkSheet->setCellValue('M' . $row, $v["FP3"]);
+        $objWorkSheet->setCellValue('N' . $row, $v["FV3"]);
+        $objWorkSheet->setCellValue('O' . $row, $v["FP4"]);
+        $objWorkSheet->setCellValue('P' . $row, $v["FV4"]);
+
+        $temp["silo"] = $v["wareHouseCode"];
+        $temp["weight"] += (float) (round($v["OWeightAll"], 6));
+        $temp["fp2"] += (float) ($v["FP2"]);
+        $temp["fp3"] += (float) ($v["FP3"]);
+        $temp["fp4"] += (float) ($v["FP4"]);
+        $temp["fv2"] += (float) ($v["FV2"]);
+        $temp["fv3"] += (float) ($v["FV3"]);
+        $temp["fv4"] += (float) ($v["FV4"]);
+        return $temp;
+    }
+
+    function printSum($objWorkSheet, $row, $temp, $center, $text) {
+        $objWorkSheet->mergeCells('A' . $row . ':I' . $row);
+        $objWorkSheet->setCellValue('A' . $row, $text)->getStyle('A' . $row)->getAlignment()->applyFromArray($center);
+        $objWorkSheet->setCellValue('J' . $row, $temp["weight"]);
+        $objWorkSheet->setCellValue('K' . $row, $temp["fp2"]);
+        $objWorkSheet->setCellValue('L' . $row, $temp["fv2"]);
+        $objWorkSheet->setCellValue('M' . $row, $temp["fp3"]);
+        $objWorkSheet->setCellValue('N' . $row, $temp["fv3"]);
+        $objWorkSheet->setCellValue('O' . $row, $temp["fp4"]);
+        $objWorkSheet->setCellValue('P' . $row, $temp["fv4"]);
+        $objWorkSheet->getStyle('A' . $row . ':P' . $row)->getFont()->setBold(true);
+        $temp["no"] = 0;
+        $temp["weight"] = 0;
+        $temp["fp2"] = 0;
+        $temp["fp3"] = 0;
+        $temp["fp4"] = 0;
+        $temp["fv2"] = 0;
+        $temp["fv3"] = 0;
+        $temp["fv4"] = 0;
+        return $temp;
+    }
+
+    function putWord($sheet, $index, $row, $column, $word, $rowWidth = 1, $columnWidth = 1, $align, $border = null) {
         $columnArr = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Z'];
 
         $rowNew = $row + $rowWidth - 1;
         $keyNew = array_search($column, $columnArr) + $columnWidth - 1;
 
-        if($rowWidth != 1 || $columnWidth != 1){
-            $sheet -> setActiveSheetIndex($index)
-                -> mergeCells($column.$row.":".$columnArr[$keyNew].$rowNew);
+        if ($rowWidth != 1 || $columnWidth != 1) {
+            $sheet->setActiveSheetIndex($index)
+                    ->mergeCells($column . $row . ":" . $columnArr[$keyNew] . $rowNew);
         }
 
-        $sheet->getActiveSheet()->getStyle($column.$row)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_TOP);
+        $sheet->getActiveSheet()->getStyle($column . $row)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_TOP);
 
-        $sheet -> setActiveSheetIndex($index)
-            -> setCellValue($column.$row, $word);
+        $sheet->setActiveSheetIndex($index)
+                ->setCellValue($column . $row, $word);
 
-        $sheet->getActiveSheet()->getStyle($column.$row)->getAlignment()->setWrapText(true);
+        $sheet->getActiveSheet()->getStyle($column . $row)->getAlignment()->setWrapText(true);
 
-        if(strpos($word,"\n") !== false){
-            $sheet->getActiveSheet()->getStyle($column.$row)->getAlignment()->setWrapText(true);
+        if (strpos($word, "\n") !== false) {
+            $sheet->getActiveSheet()->getStyle($column . $row)->getAlignment()->setWrapText(true);
         }
 
-        if($align == "center"){
-            $sheet->getActiveSheet()->getStyle($column.$row)->getAlignment()->applyFromArray(
-                array('horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        if ($align == "center") {
+            $sheet->getActiveSheet()->getStyle($column . $row)->getAlignment()->applyFromArray(
+                    array('horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
             );
         }
-        if($align == "right"){
-            $sheet->getActiveSheet()->getStyle($column.$row)->getAlignment()->applyFromArray(
-                array('horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_RIGHT,)
+        if ($align == "right") {
+            $sheet->getActiveSheet()->getStyle($column . $row)->getAlignment()->applyFromArray(
+                    array('horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_RIGHT,)
             );
         }
-        if($border == "border"){
+        if ($border == "border") {
             $styleArray = array(
                 'borders' => array(
                     'allborders' => array(
@@ -326,12 +418,12 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
                 )
             );
 
-            $sheet -> getActiveSheet() -> getStyle($column.$row.":".$columnArr[$keyNew].$rowNew) -> applyFromArray($styleArray);
+            $sheet->getActiveSheet()->getStyle($column . $row . ":" . $columnArr[$keyNew] . $rowNew)->applyFromArray($styleArray);
             unset($styleArray);
         }
 
 
-        $sheet->getActiveSheet()->getStyle($column.$row)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
-
+        $sheet->getActiveSheet()->getStyle($column . $row)->getAlignment()->setVertical(\PHPExcel_Style_Alignment::VERTICAL_CENTER);
     }
+
 }

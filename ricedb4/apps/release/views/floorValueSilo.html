@@ -39,6 +39,15 @@
             <div class="col-sm-2">
                 <button id="btn_date" class="btn btn-primary"><i class="fa fa-search"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
             </div>
+            <div class="col-md-2 col-md-offset-2">
+                <div class="btn-group btn-group-justified">
+                    <!--                        <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                                            <a class="btn btn-default" role="button"><i class="fa fa-file-word-o"></i> Word</a>
+                                            <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>-->
+                    <a class="btn btn-default btn-excel" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                    <!--                        <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>-->
+                </div>
+            </div>
         </div>
         <div style="clear: both;"></div>
         <fieldset class="col-sm-12" style="border: 1px solid #cccccc; margin-top: 20px;">
@@ -212,6 +221,10 @@
         $("#btn_date").click(function () {
             getData();
         });
+
+        $(".btn-excel").click(function () {
+            window.open("{{_context_path}}/api/release/floorValue/exportWarehouse" + "?auction=" + $("#auction").val());
+        });
     });
 
     function listsAuction() {
@@ -311,7 +324,7 @@
         var t2 = $("#fv2 table").DataTable({
             "destroy": true,
             "data": dataPublic,
-            "order": [[1, 'asc'], [2, 'asc']],
+            "order": [[1, 'asc'], [3, 'asc'],[2,'asc']],
             "iDisplayLength": 50,
             "columnDefs": [
                 {

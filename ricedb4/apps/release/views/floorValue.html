@@ -42,6 +42,15 @@
                 <div class="col-sm-2">
                     <button id="btn_date" class="btn btn-primary"><i class="fa fa-search"></i> {{#i18n}}release.buttonShow{{/i18n}}</button>
                 </div>
+                <div class="col-md-2 col-md-offset-2">
+                    <div class="btn-group btn-group-justified">
+                        <!--                        <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
+                                                <a class="btn btn-default" role="button"><i class="fa fa-file-word-o"></i> Word</a>
+                                                <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>-->
+                        <a class="btn btn-default btn-excel" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
+                        <!--                        <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>-->
+                    </div>
+                </div>
             </div>
 
             <div style="clear: both;"></div>
@@ -245,6 +254,10 @@
         $("#btn_date").click(function () {
             getData();
         });
+
+        $(".btn-excel").click(function () {
+            window.open("{{_context_path}}/api/release/floorValue/exportStack" + "?auction=" + $("#auction").val());
+        });
     });
 
     function listsAuction() {
@@ -356,6 +369,7 @@
 
         $("#searchProject, #searchProvince, #searchType, #searchGrade").select2();
 
+
         var t2 = $("#fv2 table").DataTable({
             "destroy": true,
             "bSort": false,
@@ -365,70 +379,53 @@
             "drawCallback": function (oSettings) {
                 var api = this.api();
                 var rows = api.rows({page: 'current'}).nodes();
-                var lastSilo = null;
-                var lastAsso = null;
-
+                var temp = {"no": 1, "silo": '', "asso": '', "weight": 0, "fp": 0, "fv": 0};
+                var sum = {"weight": 0, "fp": 0, "fv": 0};
                 var count = 0;
-                var tempWeight = 0;
-                var tempFP2 = 0;
-                var tempFV2 = 0;
-                var sumWeight = 0;
-                var sumFP = 0;
-                var sumFV = 0;
                 api.column(0, {page: 'current'}).data().each(function (group, i) {
-                    var silo = listArr[group]["wareHouseCode"];
-                    var asso = listArr[group]["associate"];
-                    count++;
-                    //console.log(count+' '+Object.keys(listArr).length);
-                    sumWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    sumFP += parseFloat(listArr[group]["FP2"]);
-                    sumFV += parseFloat(listArr[group]["FV2"]);
-                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                    var no = parseInt(group.split(".")[0]);
+                    if (temp["no"] != no) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-                        tempWeight = 0;
-                        tempFP2 = 0;
-                        tempFV2 = 0;
+                        temp["no"] = no;
+                        temp["weight"] = 0;
+                        temp["fp"] = 0;
+                        temp["fv"] = 0;
                     }
-                    else if (count == Object.keys(listArr).length) {
-
+                    temp["silo"] = listArr[group]["wareHouseCode"];
+                    temp["asso"] = listArr[group]["associate"];
+                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    temp["fp"] += parseFloat(listArr[group]["FP2"]);
+                    temp["fv"] += parseFloat(listArr[group]["FV2"]);
+                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    sum["fp"] += parseFloat(listArr[group]["FP2"]);
+                    sum["fv"] += parseFloat(listArr[group]["FV2"]);
+                    count++;
+                    if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 + '<tr>'
                                 + '<td class="text-bold text-center" colspan="9">รวมทั้งหมด</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFP, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-
-                        tempWeight = 0;
-                        tempFP2 = 0;
-                        tempFV2 = 0;
-                        sumWeight = 0;
-                        sumFP = 0;
-                        sumFV = 0;
                     }
-
-                    lastSilo = silo;
-                    lastAsso = asso;
-
-                    tempWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    tempFP2 += parseFloat(listArr[group]["FP2"]);
-                    tempFV2 += parseFloat(listArr[group]["FV2"]);
-
                 });
+
+
             },
             "columnDefs": [
                 {
@@ -510,65 +507,50 @@
             "drawCallback": function (oSettings) {
                 var api = this.api();
                 var rows = api.rows({page: 'current'}).nodes();
-                var lastSilo = null;
-                var lastAsso = null;
-
+                var temp = {"no": 1, "silo": '', "asso": '', "weight": 0, "fp": 0, "fv": 0};
+                var sum = {"weight": 0, "fp": 0, "fv": 0};
                 var count = 0;
-                var tempWeight = 0;
-                var tempFP3 = 0;
-                var tempFV3 = 0;
-                var sumWeight = 0;
-                var sumFP = 0;
-                var sumFV = 0;
                 api.column(0, {page: 'current'}).data().each(function (group, i) {
-                    var silo = listArr[group]["wareHouseCode"];
-                    var asso = listArr[group]["associate"];
-
-                    count++;
-                    // console.log(count + ' ' + Object.keys(listArr).length);
-                    sumWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    sumFP += parseFloat(listArr[group]["FP2"]);
-                    sumFV += parseFloat(listArr[group]["FV2"]);
-                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                    var no = parseInt(group.split(".")[0]);
+                    if (temp["no"] != no) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-                        tempWeight = 0;
-                        tempFP3 = 0;
-                        tempFV3 = 0;
+                        temp["no"] = no;
+                        temp["weight"] = 0;
+                        temp["fp"] = 0;
+                        temp["fv"] = 0;
                     }
-                    else if (count == Object.keys(listArr).length) {
+                    temp["silo"] = listArr[group]["wareHouseCode"];
+                    temp["asso"] = listArr[group]["associate"];
+                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    temp["fp"] += parseFloat(listArr[group]["FP3"]);
+                    temp["fv"] += parseFloat(listArr[group]["FV3"]);
+                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    sum["fp"] += parseFloat(listArr[group]["FP3"]);
+                    sum["fv"] += parseFloat(listArr[group]["FV3"]);
+                    count++;
+                    if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
-                                  +'<tr>'
+                                + '<tr>'
                                 + '<td class="text-bold text-center" colspan="9">รวมทั้งหมด</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFP, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-                        tempWeight = 0;
-                        tempFP3 = 0;
-                        tempFV3 = 0;
                     }
-
-
-                    lastSilo = silo;
-                    lastAsso = asso;
-
-                    tempWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    tempFP3 += parseFloat(listArr[group]["FP3"]);
-                    tempFV3 += parseFloat(listArr[group]["FV3"]);
                 });
             },
             "columnDefs": [
@@ -651,65 +633,50 @@
             "drawCallback": function (oSettings) {
                 var api = this.api();
                 var rows = api.rows({page: 'current'}).nodes();
-                var lastSilo = null;
-                var lastAsso = null;
-
+                var temp = {"no": 1, "silo": '', "asso": '', "weight": 0, "fp": 0, "fv": 0};
+                var sum = {"weight": 0, "fp": 0, "fv": 0};
                 var count = 0;
-                var tempWeight = 0;
-                var tempFP4 = 0;
-                var tempFV4 = 0;
-                var sumWeight = 0;
-                var sumFP = 0;
-                var sumFV = 0;
                 api.column(0, {page: 'current'}).data().each(function (group, i) {
-                    var silo = listArr[group]["wareHouseCode"];
-                    var asso = listArr[group]["associate"];
-
-                    count++;
-                    // console.log(count + ' ' + Object.keys(listArr).length);
-                    sumWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    sumFP += parseFloat(listArr[group]["FP2"]);
-                    sumFV += parseFloat(listArr[group]["FV2"]);
-                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                    var no = parseInt(group.split(".")[0]);
+                    if (temp["no"] != no) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-                        tempWeight = 0;
-                        tempFP4 = 0;
-                        tempFV4 = 0;
+                        temp["no"] = no;
+                        temp["weight"] = 0;
+                        temp["fp"] = 0;
+                        temp["fv"] = 0;
                     }
-                    else if (count == Object.keys(listArr).length) {
+                    temp["silo"] = listArr[group]["wareHouseCode"];
+                    temp["asso"] = listArr[group]["associate"];
+                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    temp["fp"] += parseFloat(listArr[group]["FP4"]);
+                    temp["fv"] += parseFloat(listArr[group]["FV4"]);
+                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    sum["fp"] += parseFloat(listArr[group]["FP4"]);
+                    sum["fv"] += parseFloat(listArr[group]["FV4"]);
+                    count++;
+                    if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
-                               +'<tr>'
+                                + '<tr>'
                                 + '<td class="text-bold text-center" colspan="9">รวมทั้งหมด</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFP, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fp"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fv"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-                        tempWeight = 0;
-                        tempFP4 = 0;
-                        tempFV4 = 0;
                     }
-
-
-                    lastSilo = silo;
-                    lastAsso = asso;
-
-                    tempWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    tempFP4 += parseFloat(listArr[group]["FP4"]);
-                    tempFV4 += parseFloat(listArr[group]["FV4"]);
                 });
             },
             "columnDefs": [
@@ -792,103 +759,73 @@
             "drawCallback": function (oSettings) {
                 var api = this.api();
                 var rows = api.rows({page: 'current'}).nodes();
-                var lastSilo = null;
-                var lastAsso = null;
-
+                var temp = {"no": 1, "silo": '', "asso": '', "weight": 0, "fp2": 0, "fv2": 0, "fp3": 0, "fv3": 0, "fp4": 0, "fv4": 0};
+                var sum = {"weight": 0, "fp2": 0, "fv2": 0, "fp3": 0, "fv3": 0, "fp4": 0, "fv4": 0};
                 var count = 0;
-                var tempWeight = 0;
-                var tempFP2 = 0;
-                var tempFV2 = 0;
-                var tempFP3 = 0;
-                var tempFV3 = 0;
-                var tempFP4 = 0;
-                var tempFV4 = 0;
-                var sumWeight = 0;
-                var sumFP2 = 0;
-                var sumFV2 = 0;
-                var sumFP3 = 0;
-                var sumFV3 = 0;
-                var sumFP4 = 0;
-                var sumFV4 = 0;
                 api.column(0, {page: 'current'}).data().each(function (group, i) {
-                    var silo = listArr[group]["wareHouseCode"];
-                    var asso = listArr[group]["associate"];
-
-                    count++;
-                    // console.log(count + ' ' + Object.keys(listArr).length);
-                    sumWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    sumFP2 += parseFloat(listArr[group]["FP2"]);
-                    sumFV2 += parseFloat(listArr[group]["FV2"]);
-                    sumFP3 += parseFloat(listArr[group]["FP3"]);
-                    sumFV3 += parseFloat(listArr[group]["FV3"]);
-                    sumFP4 += parseFloat(listArr[group]["FP4"]);
-                    sumFV4 += parseFloat(listArr[group]["FV4"]);
-                    if ((lastSilo !== silo || lastAsso !== asso) && lastSilo !== null) {
+                    var no = parseInt(group.split(".")[0]);
+                    if (temp["no"] != no) {
                         $(rows).eq(i).before('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp2"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv2"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp3"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv3"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp4"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv4"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-                        tempWeight = 0;
-                        tempFP2 = 0;
-                        tempFV2 = 0;
-                        tempFP3 = 0;
-                        tempFV3 = 0;
-                        tempFP4 = 0;
-                        tempFV4 = 0;
-
+                        temp["no"] = no;
+                        temp["weight"] = 0;
+                        temp["fp"] = 0;
+                        temp["fv"] = 0;
                     }
-                    else if (count == Object.keys(listArr).length) {
+                    temp["silo"] = listArr[group]["wareHouseCode"];
+                    temp["asso"] = listArr[group]["associate"];
+                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    temp["fp2"] += parseFloat(listArr[group]["FP2"]);
+                    temp["fv2"] += parseFloat(listArr[group]["FV2"]);
+                    temp["fp3"] += parseFloat(listArr[group]["FP3"]);
+                    temp["fv3"] += parseFloat(listArr[group]["FV3"]);
+                    temp["fp4"] += parseFloat(listArr[group]["FP4"]);
+                    temp["fv4"] += parseFloat(listArr[group]["FV4"]);
+                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
+                    sum["fp2"] += parseFloat(listArr[group]["FP2"]);
+                    sum["fv2"] += parseFloat(listArr[group]["FV2"]);
+                    sum["fp3"] += parseFloat(listArr[group]["FP3"]);
+                    sum["fv3"] += parseFloat(listArr[group]["FV3"]);
+                    sum["fp4"] += parseFloat(listArr[group]["FP4"]);
+                    sum["fv4"] += parseFloat(listArr[group]["FV4"]);
+                    count++;
+                    if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
                                 + '<td class="text-bold text-center">รวม</td>'
-                                + '<td class="text-bold text-center" colspan="8">' + lastSilo + ' [' + lastAsso + ']</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFP4, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(tempFV4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-center" colspan="8">' + temp["silo"] + ' [' + temp["asso"] + ']</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp2"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv2"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp3"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv3"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fp4"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(temp["fv4"], 2, ",", ".") + '</td>'
                                 + '</tr>'
-                                +'<tr>'
+                                + '<tr>'
                                 + '<td class="text-bold text-center" colspan="9">รวมทั้งหมด</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFP2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV2, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFP3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV3, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFP4, 2, ",", ".") + '</td>'
-                                + '<td class="text-bold text-right">' + accounting.formatNumber(sumFV4, 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["weight"], 6, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fp2"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fv2"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fp3"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fv3"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fp4"], 2, ",", ".") + '</td>'
+                                + '<td class="text-bold text-right">' + accounting.formatNumber(sum["fv4"], 2, ",", ".") + '</td>'
                                 + '</tr>'
                                 );
-                        tempWeight = 0;
-                        tempFP2 = 0;
-                        tempFV2 = 0;
-                        tempFP3 = 0;
-                        tempFV3 = 0;
-                        tempFP4 = 0;
-                        tempFV4 = 0;
                     }
-
-
-                    lastSilo = silo;
-                    lastAsso = asso;
-
-                    tempWeight += parseFloat(listArr[group]["OWeightAll"]);
-                    tempFP2 += parseFloat(listArr[group]["FP2"]);
-                    tempFV2 += parseFloat(listArr[group]["FV2"]);
-                    tempFP3 += parseFloat(listArr[group]["FP3"]);
-                    tempFV3 += parseFloat(listArr[group]["FV3"]);
-                    tempFP4 += parseFloat(listArr[group]["FP4"]);
-                    tempFV4 += parseFloat(listArr[group]["FV4"]);
                 });
+
+
             },
             "columnDefs": [
                 {
