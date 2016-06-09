@@ -21,7 +21,7 @@ class CompareFloorPriceService extends CServiceBase implements ICompareFloorPric
     public function listsAuction() {
         $sql = "SELECT st.id, st.status, st.keyword"
                 . " FROM " . $this->ent . "\\Status st"
-                . " WHERE st.keyword like 'AU%'"
+                . " WHERE st.keyword like 'AU%' and st.active is not null"
                 . " ORDER BY st.id DESC";
         $data = $this->datacontext->getObject($sql);
         return $data;
