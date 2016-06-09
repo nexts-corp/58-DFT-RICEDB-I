@@ -393,9 +393,7 @@
             return dateString.match(regEx) != null;
         }
         $("#btn_save").click(function () {
-//            alert(countGrt);
-//            return false;
-           // countGrt = $('#txtCountGrt').val();
+            $("#btn_save").prop("disabled", true);
             $('.paymentDate').each(function () {
                 if (isValidDate(this.value) == false) {
                     var dateAr = this.value.split('-');
@@ -404,6 +402,7 @@
             });
             $("#form_grt").attr("data-size", countGrt);
             sendData("form_grt", function (msg) {
+                $("#btn_save").prop("disabled", false);
                 if (msg.save == true) {
                     showBidderGrt();
                     $("#form_grt").empty();
