@@ -83,7 +83,7 @@ class ReportService extends CServiceBase implements IReportService{
     public function listsAuction(){
         $sql = "SELECT st "
             ." FROM ".$this->ent."\\Status st"
-            ." WHERE st.keyword LIKE :keyword"
+            ." WHERE st.keyword LIKE :keyword and st.active is not null"
             ." ORDER BY st.id DESC";
         $param = array(
             "keyword" => "AU%"
