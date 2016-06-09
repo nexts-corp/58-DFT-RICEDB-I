@@ -18,16 +18,6 @@ class ApproveAuctionService extends CServiceBase implements IApproveAuctionServi
         $this->datacontext = new CDataContext("default");
     }
 
-    function getStatus() {
-        $sqStatus = "select s from " . $this->ent . "\\Status s "
-                . "where s.active = :active";
-        $paramS = array(
-            "active" => "T"
-        );
-        $dataStatus = $this->datacontext->getObject($sqStatus, $paramS); //get STATUS is Active
-        return $dataStatus[0];
-    }
-
     public function listsBidder($auccode) {
 //        $sql = "select bidderNo,bidderAuctionNo,bidderQueue,bidderRound,bidderName,"
 //                . " bidderPrice,bidderFirstPrice,bidderLastPrice,RFV2,"

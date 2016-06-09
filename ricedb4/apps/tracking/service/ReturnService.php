@@ -18,19 +18,9 @@ class ReturnService extends CServiceBase implements IReturnService {
         $this->datacontext = new CDataContext("default");
     }
 
-    function getStatus() {
-        $sqStatus = "select s from " . $this->ent . "\\Status s "
-                . "where s.active = :active";
-        $paramS = array(
-            "active" => "T"
-        );
-        $dataStatus = $this->datacontext->getObject($sqStatus, $paramS); //get STATUS is Active
-        return $dataStatus[0];
-    }
-
     public function listsAuction() {
         $sql = "select s from " . $this->ent . "\\Status s "
-                . " where s.keyword like 'AU%' "
+                . " where s.keyword like 'AU%' and s.active is not null "
                 . " order by s.id desc";
         return $this->datacontext->getObject($sql);
     }
@@ -118,7 +108,7 @@ class ReturnService extends CServiceBase implements IReturnService {
                 isSale
 	from 
 		fn_auction_info('" . $auccode . "')
-	where bidderNo = " . $bidderId . " and bidderWinner = 'Y'
+	where bidderNo = " . $bidderId . " and bidderWinner = 'Y' and isSale= 'Y'
 
 	order by province,associateId,warehouseCode";
         return $this->datacontext->pdoQuery($sql);
