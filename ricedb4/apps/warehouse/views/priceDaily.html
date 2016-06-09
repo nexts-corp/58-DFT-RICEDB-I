@@ -65,6 +65,7 @@
                         <div class="col-sm-5 text-right">
                             <!--                        <input type="button" value="บันทึก" id="btn_save" class="btn btn-primary" />-->
                             <button id="btn_save" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}warehouse.buttonSave{{/i18n}}</button>
+                            <a class="btn btn-default btn-excel" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
                         </div>
                     </div>
                     <div id="div_table" class="col-sm-12">
@@ -110,7 +111,7 @@
     </div>
     <div id="window2" class="col-sm-12" style="display: none;">
         <div class="col-sm-2">
-            </div>
+        </div>
         <div id="calendar" style="width: 50%; margin: 0 auto;"></div>
     </div>
 </div>
@@ -128,6 +129,9 @@
         $("#date").on("changeDate", function () {
             $('#date').datepicker('hide');
             callRicePriceDaily();
+            $(".btn-excel").click(function () {
+                window.open("{{_context_path}}/api/warehouse/priceDaily/export" + "?date=" + $("#date").val());
+            });
         }).trigger("change");
 
         $("#date").datepicker('setDate', new Date());
@@ -172,30 +176,30 @@
         $("#div_status").hide();
         $("#tb_body").html('<tr><td colspan="10" class="text-center">Loading...</td></tr>');
 
-        setTimeout(function(){
+        setTimeout(function () {
             var datas = callAjax("{{_context_path}}/api/warehouse/priceDaily/whereDate", "post", {
                 date: $("#date").val()
             }, "json");
-            if (typeof datas !== 'undefined' && datas !== null){
+            if (typeof datas !== 'undefined' && datas !== null) {
                 $("#frm_priceDaily").attr("data-size", datas["lists"].length);
 
                 var html = '';
                 $.each(datas["lists"], function (key, value) {
                     html += '<tr>'
-                        + '<input type="hidden" row-index="' + key + '"  name="id" value="' + value["id"] + '">'
-                        + '<input type="hidden" row-index="' + key + '"  name="typeId" value="' + value["typeId"] + '">'
-                        + '<input type="hidden" row-index="' + key + '"  name="date" value="' + value["date"] + '">'
-                        + '<td class="text-center">' + (key + 1) + '</td>'
-                        + '<td>' + value["type"] + '</td>'
-                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMin1" class="form-control text-right" value="' + value["oldPriceMin1"] + '" /></td>'
-                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMax1" class="form-control text-right" value="' + value["oldPriceMax1"] + '" /></td>'
-                        + '<td><input type="text" row-index="' + key + '" name="newPriceMin1" class="form-control text-right" value="' + value["newPriceMin1"] + '" /></td>'
-                        + '<td><input type="text" row-index="' + key + '" name="newPriceMax1" class="form-control text-right" value="' + value["newPriceMax1"] + '" /></td>'
-                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMin2" class="form-control text-right" value="' + value["oldPriceMin2"] + '" /></td>'
-                        + '<td><input type="text" row-index="' + key + '" name="oldPriceMax2" class="form-control text-right" value="' + value["oldPriceMax2"] + '" /></td>'
-                        + '<td><input type="text" row-index="' + key + '" name="newPriceMin2" class="form-control text-right" value="' + value["newPriceMin2"] + '" /></td>'
-                        + '<td><input type="text" row-index="' + key + '" name="newPriceMax2" class="form-control text-right" value="' + value["newPriceMax2"] + '" /></td>'
-                    + '</tr>';
+                            + '<input type="hidden" row-index="' + key + '"  name="id" value="' + value["id"] + '">'
+                            + '<input type="hidden" row-index="' + key + '"  name="typeId" value="' + value["typeId"] + '">'
+                            + '<input type="hidden" row-index="' + key + '"  name="date" value="' + value["date"] + '">'
+                            + '<td class="text-center">' + (key + 1) + '</td>'
+                            + '<td>' + value["type"] + '</td>'
+                            + '<td><input type="text" row-index="' + key + '" name="oldPriceMin1" class="form-control text-right" value="' + value["oldPriceMin1"] + '" /></td>'
+                            + '<td><input type="text" row-index="' + key + '" name="oldPriceMax1" class="form-control text-right" value="' + value["oldPriceMax1"] + '" /></td>'
+                            + '<td><input type="text" row-index="' + key + '" name="newPriceMin1" class="form-control text-right" value="' + value["newPriceMin1"] + '" /></td>'
+                            + '<td><input type="text" row-index="' + key + '" name="newPriceMax1" class="form-control text-right" value="' + value["newPriceMax1"] + '" /></td>'
+                            + '<td><input type="text" row-index="' + key + '" name="oldPriceMin2" class="form-control text-right" value="' + value["oldPriceMin2"] + '" /></td>'
+                            + '<td><input type="text" row-index="' + key + '" name="oldPriceMax2" class="form-control text-right" value="' + value["oldPriceMax2"] + '" /></td>'
+                            + '<td><input type="text" row-index="' + key + '" name="newPriceMin2" class="form-control text-right" value="' + value["newPriceMin2"] + '" /></td>'
+                            + '<td><input type="text" row-index="' + key + '" name="newPriceMax2" class="form-control text-right" value="' + value["newPriceMax2"] + '" /></td>'
+                            + '</tr>';
                 });
                 $("#tb_body").html(html);
             }
@@ -237,7 +241,6 @@
                 var dataToFind = moment(event["start"]["date"]).format('YYYY-MM-DD');
                 $("td[data-date='" + dataToFind + "']").addClass('dayWithEvent');
             },
-
             dayClick: function (date, jsEvent, view) {
                 var day = new Date(date.unix() * 1000).toISOString().slice(0, 10);
                 var n = new Date(day).getDay();

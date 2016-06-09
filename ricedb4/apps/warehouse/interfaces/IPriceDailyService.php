@@ -43,4 +43,14 @@ interface IPriceDailyService {
      * @description hello
      */
     public function save($prices);
+    
+    /**
+     * @name export
+     * @uri /export
+     * @param string date
+     * @return file export Description
+     * @description  export excel
+     */
+    public function export($date);
+    
 } 
