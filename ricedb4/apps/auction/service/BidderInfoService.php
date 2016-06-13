@@ -99,7 +99,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
     public function search($bidderInfo) {
         //get bidder info
         $sql = "SELECT"
-                . " bi.id as bidderInfoId, bi.taxId, bi.bidderName, bi.fax, bi.email, bh.typeBiz, bh.typeOptional"
+                . " bi.id as bidderInfoId, bi.taxId, bi.bidderName,bh.agentName,bh.mobile, bi.fax, bi.email, bh.typeBiz, bh.typeOptional"
                 . " FROM " . $this->ent . "\\BidderInfo bi "
                 . "JOIN " . $this->ent . "\\BidderHistory bh WITH bh.bidderId = bi.id "
                 . " WHERE bi.taxId = :taxId "
