@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT03-02" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
 	<property name="ireport.zoom" value="1.331000000000145"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="47"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
 	</style>
@@ -370,56 +370,17 @@
 	<summary>
 		<band height="20">
 			<textField isStretchWithOverflow="true" evaluationTime="Report">
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="0" y="0" width="198" height="20" uuid="a3211b79-d03a-4c38-8b34-0f1a6f2b6a09"/>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="0" y="0" width="555" height="20" uuid="a3211b79-d03a-4c38-8b34-0f1a6f2b6a09"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
 					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["จำนวน  "+$V{group_index}+"  บริษัท"]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.000000">
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="364" y="0" width="86" height="20" uuid="b73b22c9-cae0-4184-ae71-f6c5a2477b6b"/>
-				<box rightPadding="5">
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_AMOUNT}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="450" y="0" width="105" height="20" uuid="992212c4-1a1e-4ce4-86a7-635fe213f8c5"/>
-				<box rightPadding="5">
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_VALUE}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" evaluationTime="Report">
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="198" y="0" width="166" height="20" uuid="c0c46735-a068-4422-9358-4391e1690e51"/>
-				<box rightPadding="5">
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["รวมทั้งสิ้น"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
