@@ -110,6 +110,7 @@ class NavWidget extends CWidget {
 					ksort( $srts);
 					$list_apps[$kk]->routeTables=[];
 					foreach ($srts as $i => $rt) {
+						 $rt->operationDesc=substr($rt->operationDesc,4);
 						 $list_apps[$kk]->routeTables[]=$rt;
 					}
 					//print_r($srts);
@@ -123,6 +124,7 @@ class NavWidget extends CWidget {
 		ksort($list_apps);
 		$list_apps_sort = [];
 		foreach ($list_apps as $i => $a) {
+			 $a->title=substr($a->title,4);
 			$list_apps_sort[]=$a;
 		}
 		
