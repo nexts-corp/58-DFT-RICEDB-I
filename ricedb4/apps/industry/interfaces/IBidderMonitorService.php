@@ -15,7 +15,7 @@ interface IBidderMonitorService {
      * @return String[] lists Description
      * @description รายชื่อผู้เสนอราคาที่ลงทะเบียนแล้ว ณ การประมูลล่าสุด
      * @authen true
-     * @resource 1111
+     
      */
     public function listsProperty();
 
@@ -25,7 +25,7 @@ interface IBidderMonitorService {
      * @return String[] lists Description
      * @description คลังที่มีผู้ชนะสูงสุด และไม่เท่ากันในแต่ละคลัง
      * @authen true
-     * @resource 1111
+     
      */
     public function maxPriceOne();
     
@@ -36,7 +36,7 @@ interface IBidderMonitorService {
      * @return String[] lists Description
      * @description คลังที่มีผู้ชนะสูงสุด และไม่เท่ากันในแต่ละคลัง
      * @authen true
-     * @resource 1111
+     
      */
     public function maxPriceOne2();
 
@@ -46,7 +46,7 @@ interface IBidderMonitorService {
      * @return String[] lists Description
      * @description คลังที่มีผู้ชนะสูงสุด และเท่ากันในแต่ละคลัง
      * @authen true
-     * @resource 1111
+     
      */
     public function maxPriceMore();
 
@@ -56,7 +56,7 @@ interface IBidderMonitorService {
      * @return String[] lists Description
      * @description คลังที่มีผู้ชนะสูงสุด หลังการต่อรอง
      * @authen true
-     * @resource 1111
+     
      */
     public function winner();
 
@@ -66,7 +66,7 @@ interface IBidderMonitorService {
      * @return String[] lists Description
      * @description คลังที่มีการเสนอซื้อ
      * @authen true
-     * @resource 1111
+     
      */
     public function priceAll();
 }

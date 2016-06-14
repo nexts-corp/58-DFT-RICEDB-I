@@ -14,7 +14,7 @@ interface IBidderPaymentService {
      * @return String[] lists Description
      * @description ชนิดของหลักประกัน
      * @authen true
-     * @resource 1001
+     
      */
     public function listsTypePayment();
 
@@ -24,7 +24,7 @@ interface IBidderPaymentService {
      * @return String[] lists Description
      * @description หลักประกัน 2%
      * @authen true
-     * @resource 1001
+     
      */
     public function listsPayment();
 
@@ -35,7 +35,7 @@ interface IBidderPaymentService {
      * @return string[] bidderItem Description
      * @description คลังที่ถูกเสนอซื้อ
      * @authen true
-     * @resource 1001
+     
      */
     public function listsItemPrice($bidderHistory);
 
@@ -45,7 +45,7 @@ interface IBidderPaymentService {
      * @return string[] lists Description
      * @description รายชื่อธนาคาร
      * @authen true
-     * @resource 1001
+     
      */
     public function listsBank();
     
@@ -56,7 +56,7 @@ interface IBidderPaymentService {
      * @return String[] lists Description
      * @description ลิสต์หลักค้ำประกันของผู้เสนอซื้อ
      * @authen true
-     * @resource 1001
+     
      */
     public function listsBidderGrt($bidderHistoryId);
     
@@ -67,7 +67,7 @@ interface IBidderPaymentService {
      * @return boolean save Description
      * @description รายชื่อธนาคาร
      * @authen true
-     * @resource 1001
+     
      */
     public function saveBidderPayment($bidderPayment);
 
@@ -78,7 +78,7 @@ interface IBidderPaymentService {
      * @return boolean delete Description
      * @description ลบหลักค้ำประกัน
      * @authen true
-     * @resource 1001
+     
      */
     public function deletePayment($paymentId);
     
@@ -89,7 +89,7 @@ interface IBidderPaymentService {
      * @return string save Description
      * @description ลบคลังที่ผู้ประมูลเสนอราคาซื้อ
      * @authen true
-     * @resource 1001
+     
      */
     public function changeReserved($bidderItem);
 }

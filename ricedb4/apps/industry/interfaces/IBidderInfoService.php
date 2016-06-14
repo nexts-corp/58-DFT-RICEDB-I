@@ -15,7 +15,7 @@ interface IBidderInfoService {
      * @return String[] lists Description
      * @description ประเภทผู้เสนอซื้อ
      * @authen true
-     * @resource 1111
+     
      */
     public function listsBidderType();
 
@@ -25,7 +25,7 @@ interface IBidderInfoService {
      * @return String[] lists Description
      * @description รายชื่อผู้เสนอราคาที่ลงทะเบียนแล้ว ณ การประมูลล่าสุด
      * @authen true
-     * @resource 1100
+     
      */
     
     public function listsRegister();
@@ -36,7 +36,7 @@ interface IBidderInfoService {
      * @return String[] lists Description
      * @description รายชื่อผู้เสนอราคาที่ลงทะเบียนแล้ว ณ การประมูลล่าสุด
      * @authen true
-     * @resource 1111
+     
      */
     public function listsPass();
 
@@ -47,7 +47,7 @@ interface IBidderInfoService {
      * @return String[] lists Description
      * @description รายชื่อผู้เสนอราคาที่ลงทะเบียนแล้ว ณ การประมูลล่าสุด
      * @authen true
-     * @resource 1100
+     
      */
     public function search($bidderInfo);
 
@@ -60,7 +60,7 @@ interface IBidderInfoService {
      * @return boolean add Description
      * @description เพิ่มข้อมูลผู้เสนอราคารายใหม่
      * @authen true
-     * @resource 1100
+     
      */
     public function insert($bidderInfo, $bidderHistory, $file);
 
@@ -74,7 +74,7 @@ interface IBidderInfoService {
      * @return boolean update Description
      * @description อัพเดทข้อมูลผู้เสนอราคา
      * @authen true
-     * @resource 1100
+     
      **/
     public function update($bidderInfo, $bidderHistory, $file, $fileUpload);
 
@@ -86,7 +86,7 @@ interface IBidderInfoService {
      * @return boolean delete Description
      * @description ลบข้อมูลผู้เสนอราคา
      * @authen true
-     * @resource 1100
+     
      **/
     public function delete($bidderInfo, $bidderHistory);
     
@@ -97,7 +97,7 @@ interface IBidderInfoService {
      * @return boolean save Description
      * @description อัพเดทข้อมูลผู้เสนอราคา
      * @authen true
-     * @resource 1100
+     
      **/
     public function changeCheckIn($bidderHistory);
 }

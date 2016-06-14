@@ -14,7 +14,7 @@ interface IBidderAuctionService {
      * @return String[] lists Description
      * @description ผู้เสนอราคาสูงสุดต่อคลัง
      * @authen true
-     * @resource 1010
+     
      */
     public function listsAuction();
     
@@ -26,7 +26,7 @@ interface IBidderAuctionService {
      * @return string[] lists Description
      * @description คลังที่ถูกเสนอซื้อ + FV
      * @authen true
-     * @resource 1010
+     
      */
     public function listsBidderPriceCF($bidderItem, $bidderInfo);
     
@@ -37,7 +37,7 @@ interface IBidderAuctionService {
      * @return string save Description
      * @description บันทึกราคาที่เสนอซื้อ
      * @authen true
-     * @resource 1010
+     
      */
     public function savePriceCF($bidderPrice);
     
@@ -48,7 +48,7 @@ interface IBidderAuctionService {
      * @return string delete Description
      * @description ลบราคาที่เสนอซื้อ
      * @authen true
-     * @resource 1010
+     
      */
     public function deletePriceCF($bidderPrice);
 }

@@ -14,7 +14,7 @@ interface IBidderItemService {
      * @return string[] lists Description
      * @description รายชื่อผู้ที่เสนอราคาที่ผ่าน Property2
      * @authen true
-     * @resource 1110
+     
      */
     public function listsCountItem();
 
@@ -25,7 +25,7 @@ interface IBidderItemService {
      * @return string[] bidderItem Description
      * @description คลังที่ถูกเสนอซื้อ
      * @authen true
-     * @resource 1110
+     
      */
     public function listsBidderItem($bidderHistory);
 
@@ -35,7 +35,7 @@ interface IBidderItemService {
      * @return String[] lists Description
      * @description รายชื่อจังหวัดในการประมูลข้าวครั้งนี้
      * @authen true
-     * @resource 1110
+     
      */
     public function listsProvince();
 
@@ -47,7 +47,7 @@ interface IBidderItemService {
      * @return String[] lists Description
      * @description รายชื่อคลังที่มีในการประมูลข้าวครั้งนี้
      * @authen true
-     * @resource 1110
+     
      */
     public function listsSilo($bidderHistory, $province);
 
@@ -59,7 +59,7 @@ interface IBidderItemService {
      * @return String[] lists Description
      * @description รายละเอียดคลัง
      * @authen true
-     * @resource 1110
+     
      */
     public function getSiloData($bidderItem, $province);
 
@@ -70,7 +70,7 @@ interface IBidderItemService {
      * @return boolean add Description
      * @description เพิ่มคลังที่เสนอของผู้ประมูล
      * @authen true
-     * @resource 1110
+     
      */
     public function insert($bidderItem);
 
@@ -81,7 +81,7 @@ interface IBidderItemService {
      * @return string delete Description
      * @description ลบคลังที่ผู้ประมูลเสนอราคาซื้อ
      * @authen true
-     * @resource 1110
+     
      */
     public function delete($bidderItem);
 }

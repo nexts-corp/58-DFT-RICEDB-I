@@ -8,6 +8,7 @@ namespace apps\industry\interfaces;
  * @description ราคาเสนอซื้อ
  */
 interface IBidderPriceService {
+
     /**
      * @name listsPrice
      * @uri /listsPrice
@@ -15,7 +16,7 @@ interface IBidderPriceService {
      * @return string[] bidderPrice Description
      * @description คลังที่ถูกเสนอซื้อ + FV
      * @authen true
-     * @resource 1010
+
      */
     public function listsPrice($bidderHistory);
 
@@ -26,7 +27,7 @@ interface IBidderPriceService {
      * @return string save Description
      * @description บันทึกราคาที่เสนอซื้อ
      * @authen true
-     * @resource 1010
+
      */
     public function savePrice($bidderPrice);
 }

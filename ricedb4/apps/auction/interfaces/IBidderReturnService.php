@@ -14,6 +14,7 @@ interface IBidderReturnService {
      * @uri /listsBidder
      * @return String[] lists Description
      * @description รายชื่อผู้ที่มีหลักค้ำประกัน
+     * @authen true
      */
     public function listsBidder();
     
@@ -23,6 +24,7 @@ interface IBidderReturnService {
      * @param integer bidderHistoryId Description
      * @return String[] lists Description
      * @description รายชื่อผู้ที่มีหลักค้ำประกัน
+     * @authen true
      */
     public function listsPayment($bidderHistoryId);
     
@@ -32,6 +34,7 @@ interface IBidderReturnService {
      * @param integer bidderId Description
      * @return String[] lists Description
      * @description รายชื่อคลังสินค้าที่ผู้เสนอซื้อเสนอราคา
+     * @authen true
      */
     public function listsWarehouse($bidderId);
     
@@ -41,6 +44,7 @@ interface IBidderReturnService {
      * @param apps\common\entity\BidderPayment bidderPayment Description
      * @return boolean update Description
      * @description เปลี่ยนสถานะหลักค้ำประกัน
+     * @authen true
      */
     public function update($bidderPayment);
 }
