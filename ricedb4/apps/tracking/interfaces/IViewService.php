@@ -14,7 +14,7 @@ interface IViewService {
      * @uri /return
      * @description M71 คืนหลักค้ำประกันผู้ที่ไม่ชนะ
      * @authen true
-     * @resource 10000000
+     * @resource 10001000
      * @sitemap true
      */
     public function returns();
@@ -24,7 +24,7 @@ interface IViewService {
      * @uri /returnFinance
      * @description M72 คืนหลักค้ำประกันผู้ที่ชนะ
      * @authen true
-     * @resource 10000000
+     * @resource 10001000
      * @sitemap true
      */
     public function returnFinance();
@@ -34,7 +34,7 @@ interface IViewService {
      * @uri /forfeit
      * @description M73 ริบหลักค้ำประกัน
      * @authen true
-     * @resource 10000000
+     * @resource 10001000
      * @sitemap true
      */
     public function forfeit();
@@ -44,7 +44,7 @@ interface IViewService {
      * @uri /approveAuction
      * @description M74 อนุมัติคลังสินค้าจากการประมูล
      * @authen true
-     * @resource 10000000
+     * @resource 10001000
      * @sitemap true
      */
     public function approveAuction();
@@ -54,7 +54,7 @@ interface IViewService {
      * @uri /approveSell
      * @description M75 อนุมัติคลังสินค้าจากรูปแบบอื่น
      * @authen true
-     * @resource 10000000
+     * @resource 10001000
      * @sitemap true
      */
     public function approveSell();
@@ -65,7 +65,7 @@ interface IViewService {
      * @uri /follow
      * @description M76 ติดตามปริมาณที่รับมอบ
      * @authen true
-     * @resource 10000000
+     * @resource 10001000
      * @sitemap true
      */
     public function follow();
