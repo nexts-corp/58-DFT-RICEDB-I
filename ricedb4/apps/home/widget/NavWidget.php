@@ -140,6 +140,7 @@ class NavWidget extends CWidget {
     }
     public function render2($datax,$appId) {
         $this->_context_path = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CONTEXT_PATH;
+		$datax["_context_path"]= \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CONTEXT_PATH;
         $loaders = array("apps/" . $appId . '/views', "views");
         if (!is_dir("views")) {
             $loaders = array("apps/" . $appId . '/views');
