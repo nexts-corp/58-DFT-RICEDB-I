@@ -15,7 +15,6 @@ interface IUserManagerService {
      * @return String[] lists Description
      * @description รายชื่อเจ้าหน้าที่
      * @authen true
-     * @resource 1000
      */
     public function listsUser();
     
@@ -25,7 +24,6 @@ interface IUserManagerService {
      * @return String[] lists Description
      * @description สิทธิผู้ใช้งาน
      * @authen true
-     * @resource 1000
      */
     public function listsRole();
     
@@ -35,7 +33,6 @@ interface IUserManagerService {
      * @return String[] lists Description
      * @description หน่วยงาน
      * @authen true
-     * @resource 1000
      */
     public function listsDepartment();
     
@@ -46,7 +43,6 @@ interface IUserManagerService {
      * @return boolean add Description
      * @description เพิ่มข้อมูลเจ้าหน้าที่
      * @authen true
-     * @resource 1000
      */
     public function insert($user);
 
@@ -57,7 +53,6 @@ interface IUserManagerService {
      * @return boolean update Description
      * @description อัพเดทข้อมูลเจ้าหน้าที่
      * @authen true
-     * @resource 1000
      **/
     public function update($user);
 
@@ -68,7 +63,6 @@ interface IUserManagerService {
      * @return boolean delete Description
      * @description ลบข้อมูลเจ้าหน้าที่
      * @authen true
-     * @resource 1000
      **/
     public function delete($user);
 }
