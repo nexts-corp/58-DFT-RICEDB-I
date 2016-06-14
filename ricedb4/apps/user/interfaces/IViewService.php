@@ -4,16 +4,17 @@ namespace apps\user\interfaces;
 /**
  * @name ViewService
  * @uri /view
- * @description ViewService
+ * @description M10 ผู้ใช้งาน
  */
 interface IViewService {
    
     /**
      * @name userManager
      * @uri /userManager
-     * @description  userManager
+     * @description M11 จัดการข้อมูลเจ้าหน้าที่
      * @authen true
-     * @resource 1000
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function userManager();
     

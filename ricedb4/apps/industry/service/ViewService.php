@@ -96,11 +96,6 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
-    public function bidderMonitor() {
-        $view = new CJView("monitor/bidderMonitor", CJViewType::HTML_VIEW_ENGINE);
-        return $view;
-    }
-
     public function closeAuction() {
         $view = new CJView("closeAuction", CJViewType::HTML_VIEW_ENGINE);
         $status = "select st from apps\\common\\entity\\Status st "

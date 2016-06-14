@@ -4,28 +4,17 @@ namespace apps\report\interfaces;
 /**
  * @name ViewService
  * @uri /view
- * @description ViewService
+ * @description M80 รายงาน
  */
 interface IViewService {
    
     /**
      * @name reportAuction
      * @uri /reportAuction
-     * @description  reportAuction
+     * @description M81 รายงานการประมูล
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function reportAuction();
-    
-     /**
-     * @name stack
-     * @uri /stack
-     * @description  stack
-     */ 
-    public function stack();
-    
-     /**
-     * @name warehouse
-     * @uri /warehouse
-     * @description  warehouse
-     */ 
-    public function warehouse();
 }

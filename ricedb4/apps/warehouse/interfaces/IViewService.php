@@ -4,49 +4,67 @@ namespace apps\warehouse\interfaces;
 /**
  * @name ViewService
  * @uri /view
- * @description ViewService
+ * @description M20 คลังสินค้า
  */
 interface IViewService {
    
     /**
      * @name warehouseInfo
      * @uri /warehouseInfo
-     * @description ข้อมูลคลังสินค้า
+     * @description M21 ข้อมูลคลังสินค้า
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function warehouseInfo();
     
     /**
      * @name warehouseImport
      * @uri /warehouseImport
-     * @description ข้อมูลคลังสินค้า
+     * @description M22 นำเข้าข้อมูลคลังสินค้า
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function warehouseImport();
 
     /**
      * @name priceDaily
      * @uri /priceDaily
-     * @description  priceDaily
+     * @description M23 ราคาข้าวประจำวัน
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */
     public function priceDaily();
 
     /**
      * @name viewRicePrice
      * @uri /viewRicePrice
-     * @description ข้อมูลคลังสินค้า
+     * @description M24 ข้อมูลราคาข้าว
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function viewRicePrice();
     
     /**
      * @name viewRicePriceAvg
      * @uri /viewRicePriceAvg
-     * @description ข้อมูลคลังสินค้า
+     * @description M25 ข้อมูลราคาข้าวเฉลี่ย
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function viewRicePriceAvg();
     
     /**
      * @name viewInventory
      * @uri /viewInventory
-     * @description ข้อมูลคลังสินค้า
+     * @description M26 สินค้าคงคลัง
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function viewInventory();
     

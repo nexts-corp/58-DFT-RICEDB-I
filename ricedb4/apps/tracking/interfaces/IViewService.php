@@ -5,49 +5,70 @@ namespace apps\tracking\interfaces;
 /**
  * @name ViewService
  * @uri /view
- * @description ViewService
+ * @description M70 ติดตาม
  */
 interface IViewService {
-
-    /**
-     * @name approveAuction
-     * @uri /approveAuction
-     * @description  อนุมัติคลังสินค้า
-     */
-    public function approveAuction();
-
-    /**
-     * @name approveSell
-     * @uri /approveSell
-     * @description  อนุมัติคลังสินค้า
-     */
-    public function approveSell();
-
+    
     /**
      * @name return
      * @uri /return
-     * @description  คืนหลักค้ำประกันที่เหลือ
+     * @description M71 คืนหลักค้ำประกันผู้ที่ไม่ชนะ
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */
     public function returns();
     
     /**
      * @name returnFinance
      * @uri /returnFinance
-     * @description  คืนหลักค้ำประกันจากกองคลัง
+     * @description M72 คืนหลักค้ำประกันผู้ที่ชนะ
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */
     public function returnFinance();
-
-    /**
-     * @name follow
-     * @uri /follow
-     * @description  ติดตามปริมาณที่รับมอบแล้ว
-     */
-    public function follow();
     
     /**
      * @name forfeit
      * @uri /forfeit
-     * @description  ริบหลักค้ำประกัน
+     * @description M73 ริบหลักค้ำประกัน
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */
     public function forfeit();
+
+    /**
+     * @name approveAuction
+     * @uri /approveAuction
+     * @description M74 อนุมัติคลังสินค้าจากการประมูล
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
+     */
+    public function approveAuction();
+
+    /**
+     * @name approveSell
+     * @uri /approveSell
+     * @description M75 อนุมัติคลังสินค้าจากรูปแบบอื่น
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
+     */
+    public function approveSell();
+
+
+    /**
+     * @name follow
+     * @uri /follow
+     * @description M76 ติดตามปริมาณที่รับมอบ
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
+     */
+    public function follow();
+    
+    
 }

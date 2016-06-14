@@ -4,77 +4,89 @@ namespace apps\release\interfaces;
 /**
  * @name ViewService
  * @uri /view
- * @description ViewService
+ * @description M40 ระบายข้าว
  */
 interface IViewService {
     
     /**
      * @name manageRelease
      * @uri /manageRelease
-     * @description  manageRelease
+     * @description M41 รายการระบายข้าว
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function manageRelease();
-
-    /**
-     * @name createRelease
-     * @uri /createRelease
-     * @description  createRelease
-     */
-    public function createRelease();
-    
-    /**
-     * @name viewRelease
-     * @uri /viewRelease
-     * @description  createRelease
-     */ 
-    public function viewRelease();
     
     /**
      * @name manageDiscount
      * @uri /manageDiscount
-     * @description  createRelease
+     * @description M42 อัตราส่วนลด
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function manageDiscount();
     
+      
     /**
      * @name manageShippingCost
      * @uri /manageShippingCost
-     * @description  createRelease
+     * @description M43 อัตราค่าขนส่ง
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function manageShippingCost();
+    /**
+     * @name chooseFloorValue
+     * @uri /chooseFloorValue
+     * @description M44 กำหนด Floor Value
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
+     */
+    public function chooseFloorValue();
+    
+     /**
+     * @name compareFloorPrice
+     * @uri /compareFloorPrice
+     * @description M45 เปรียบเทียบ Floor Price
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
+     */
+    public function compareFloorPrice();
     
     /**
      * @name floorPrice
      * @uri /floorPrice
-     * @description  floorPrice
+     * @description M46 Final Floor Price
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function floorPrice();
     
     /**
      * @name floorValue
      * @uri /floorValue
-     * @description  floorValue
+     * @description M47 ข้อมูลรายกอง
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function floorValue();
     
     /**
      * @name floorValueSilo
      * @uri /floorValueSilo
-     * @description  floorValue
+     * @description M48 ข้อมูลรายคลัง
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
      */ 
     public function floorValueSilo();
 
-    /**
-     * @name compareFloorPrice
-     * @uri /compareFloorPrice
-     * @description  compareFloorPrice
-     */
-    public function compareFloorPrice();
-
-    /**
-     * @name chooseFloorValue
-     * @uri /chooseFloorValue
-     * @description  chooseFloorPrice
-     */
-    public function chooseFloorValue();
+    
 }
