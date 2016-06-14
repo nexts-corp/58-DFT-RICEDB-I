@@ -118,7 +118,7 @@
                 }
 
                 var remark = function (remark) {
-                    if (remark != null) {
+                    if(remark!= null && remark != ''){
                         return '<span class="text-danger"> (' + remark + ')</span>';
                     } else {
                         return '';

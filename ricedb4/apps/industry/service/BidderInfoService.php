@@ -82,7 +82,9 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
                 . " AND bh.property3 = :p3"
                 . " AND bh.property4 = :p4"
                 . " AND bh.property5 = :p5"
-                . " AND bh.checkIn = :checkIn";
+                . " AND bh.checkIn = :checkIn"                
+				. " ORDER BY bh.queue";
+
         $param = array(
             "statusKeyword" => $this->getStatus()->keyword,
             "p1" => "Y",

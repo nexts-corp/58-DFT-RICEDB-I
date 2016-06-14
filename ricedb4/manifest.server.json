@@ -8,9 +8,9 @@
             "contextType": "data",
             "propertys": [
                 {"name": "driver","value": "pdo_sqlsrv"},
-                {"name": "host","value": "202.44.34.86"},
+                {"name": "host","value": "10.3.1.173"},
                 {"name": "port","value": "1433"},
-                {"name": "dbname","value": "RiceDB2"},
+                {"name": "dbname","value": "RiceDB"},
                 {"name": "user","value": "riceuser"},
                 {"name": "password","value": "l2ice2015"}
 
@@ -24,7 +24,7 @@
                 {"name": "OAUTH2_CLIENT_SECRET","value": "123456"},
                 {"name": "OAUTH2_ACCESS_KEY","value": "code"},
                 {"name": "OAUTH2_AUTH_URL","value": "/ricedb4/api/oauth/authen/authorization"},
-                {"name": "OAUTH2_TOKEN_URI","value":"http://202.44.34.67/ricedb4/api/oauth/authen/authenticate"}
+                {"name": "OAUTH2_TOKEN_URI","value":"http://10.3.1.172/ricedb4/api/oauth/authen/authenticate"}
        ]
     }
 }

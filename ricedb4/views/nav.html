@@ -2,11 +2,41 @@
     <div class="container">
         <nav class="nav-main mega-menu">
             <ul class="nav nav-pills nav-main" id="mainMenu">
-                <li>
+			
+			 <li>
                     <a href="{{_context_path}}/api/root/view/index">
-                        หน้าหลัก
+						หน้าหลัก
                     </a>
                 </li>
+			
+			 {{#apps}}
+				{{#sitemaps}}
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle">
+						
+						<span class="menu-text">
+							{{title}}
+						</span>
+						<i class="fa fa-angle-down"></i>
+					</a>
+					
+					<ul class="dropdown-menu">
+						{{#routeTables}}
+							{{#sitemap}}
+							<li class="">
+								<a href="{{uri}}">
+									{{operationDesc}}
+								</a>
+							</li>
+							{{/sitemap}}
+						{{/routeTables}}
+					</ul>
+				</li>  
+				{{/sitemaps}}
+			{{/apps}}
+			
+			
+               
 
                 <li class="dropdown">
                     <a class="dropdown-toggle" href="#">
@@ -77,10 +107,10 @@
                         <li><a href="{{_context_path}}/api/auction/view/bidderAuction">ผลการประมูล</a></li>
                         <li><a href="{{_context_path}}/api/auction/view/bidderPriceCF">ต่อรองราคา</a></li>
                         <li><a href="{{_context_path}}/api/auction/view/bidderReturn">คืนหลักประกันซอง</a></li>
-                        <li><a href="{{_context_path}}/api/auction/view/closeAuction">ปิดการประมูล</a></li>
+                      <!--  <li><a href="{{_context_path}}/api/auction/view/closeAuction">ปิดการประมูล</a></li> -->
                     </ul>
                 </li>
-                 <li class="dropdown">
+         <!--        <li class="dropdown">
                     <a class="dropdown-toggle" href="#">
                         ประมูลอุตฯ
                         <i class="fa fa-angle-down"></i>
@@ -95,7 +125,7 @@
                         <li><a href="{{_context_path}}/api/industry/view/bidderReturn">คืนหลักประกันซอง</a></li>
                         <li><a href="{{_context_path}}/api/industry/view/closeAuction">ปิดการประมูล</a></li>
                     </ul>
-                </li>
+                </li> -->
 
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" href="#">
