@@ -93,12 +93,17 @@ class NavWidget extends CWidget {
 				   $srts=[];
 				   foreach ($rts as $i => $rt) {
 						if($rt->sitemap==true){
-							
-							$permin=bindec($rt->resource);
-							if(($role & $permin)>0){
+							if($rt->resource!=null &&  $rt->resource!="*"){
+								$permin=bindec($rt->resource);
+								if(($role & $permin)>0){
+									$xx= $rt->operationDesc;
+									$srts[$xx]=$rt;
+									$list_apps[$kk]->sitemaps=true;
+								}
+							}else{
 								$xx= $rt->operationDesc;
-								$srts[$xx]=$rt;
-								$list_apps[$kk]->sitemaps=true;
+							    $srts[$xx]=$rt;
+							    $list_apps[$kk]->sitemaps=true;
 							}
 					   }
 					}
