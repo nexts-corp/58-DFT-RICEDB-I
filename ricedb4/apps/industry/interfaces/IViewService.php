@@ -23,7 +23,7 @@ interface IViewService {
      * @uri /bidderItem
      * @description  M62 บันทึกคลังพร้อมผู้เสนอซื้อ
      * @authen true
-     * @resource 10000000
+     * @resource 11000000
      * @sitemap true
      */
     public function bidderItem();
@@ -33,7 +33,7 @@ interface IViewService {
      * @uri /bidderPrice
      * @description  M63 บันทึกราคาเสนอซื้อ
      * @authen true
-     * @resource 10000000
+     * @resource 10100000
      * @sitemap true
      */
     public function bidderPrice();
@@ -43,7 +43,7 @@ interface IViewService {
      * @uri /bidderPayment
      * @description M64 ตรวจหลักประกันซอง
      * @authen true
-     * @resource 10000000
+     * @resource 10010000
      * @sitemap true
      */
     public function bidderPayment();
@@ -73,7 +73,7 @@ interface IViewService {
      * @uri /bidderReturn
      * @description  M67 คืนหลักประกันซอง
      * @authen true
-     * @resource 10000000
+     * @resource 10010000
      * @sitemap true
      */
     public function bidderReturn();

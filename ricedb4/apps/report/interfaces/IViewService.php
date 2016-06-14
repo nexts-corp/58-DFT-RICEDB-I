@@ -13,7 +13,6 @@ interface IViewService {
      * @uri /reportAuction
      * @description M81 รายงานการประมูล
      * @authen true
-     * @resource 10000000
      * @sitemap true
      */ 
     public function reportAuction();
