@@ -21,6 +21,10 @@ class Report extends EntityBase{
 
     /** @Column(type="string",length=255, name="Report_Code") */
     public $reportCode;
+	
+	
+	 /** @Column(type="string",length=255, name="Permission") */
+    public $permission;
 
     function getId(){
         return $this->id;
@@ -36,6 +40,14 @@ class Report extends EntityBase{
 
     function getReportCode(){
         return $this->reportCode;
+    }
+	
+	 function getPermission(){
+        return $this->permission;
+    }
+	
+	 function setPermission($permission){
+         $this->permission=$permission;
     }
 
     function setId($id){

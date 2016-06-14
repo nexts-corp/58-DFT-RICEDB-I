@@ -69,15 +69,27 @@ class ReportService extends CServiceBase implements IReportService{
 
     public function listsReport($reportType){
         $sql = "SELECT"
-                ." rp.id, rp.reportName, rp.reportCode, rt.reportGroup"
+                ." rp.id, rp.reportName, rp.reportCode, rt.reportGroup,rp.permission "
             ." FROM ".$this->ent."\\Report rp"
             ." JOIN ".$this->ent."\\ReportType rt WITH rt.id=rp.reportTypeId"
             ." WHERE rt.reportType=:reportType ORDER BY rt.reportGroup, rp.reportCode ASC";
         $param = array(
             "reportType" => $reportType
         );
+		
+		$role=bindec($this->createBy = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CURRENT_USER->resources[0]);
+		
+		
         $dataReport = $this->datacontext->getObject($sql, $param);
-        return $dataReport;
+		//print_r($dataReport);
+		$dataReport_p=[];
+		for($i=0;$i<count($dataReport);$i++){
+		$p=bindec($dataReport[$i]["permission"]);
+			if(($role & $p)>0){
+				$dataReport_p[]=$dataReport[$i];
+			}
+		}
+        return $dataReport_p;
     }
 
     public function listsAuction(){
