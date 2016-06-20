@@ -46,18 +46,20 @@
                         </thead>
                         <tbody>
                             {{#permission}}
-                            <tr>
-                                <td class="text-center primary" colspan="{{countRole}}">{{title}}</td>
-                               
-                            </tr>
-                            {{#routeTables}}
-                            <tr>
-                                <td class="text-center">{{operationDesc}}</td>
-                                {{#role}}
-                                <td class="text-center"><input type="checkbox" data-role="{{code}}" data-uri="{{uri}}" /></td>
-                                {{/role}}
-                            </tr>
-                            {{/routeTables}}
+                               {{#sitemaps}}
+                                <tr>
+                                    <td class="text-center primary" colspan="{{countRole}}">{{title}}</td>
+
+                                </tr>
+                                {{#routeTables}}
+                                <tr>
+                                    <td class="text-center">{{operationDesc}}</td>
+                                    {{#role}}
+                                    <td class="text-center"><input type="checkbox" data-role="{{code}}" data-resource="{{service}}\{{operationName}}" /></td>
+                                    {{/role}}
+                                </tr>
+                                {{/routeTables}}
+                                {{/sitemaps}}
                             {{/permission}}
                         </tbody>
                     </table>

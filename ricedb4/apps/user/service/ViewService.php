@@ -36,9 +36,10 @@ class ViewService extends CServiceBase implements IViewService {
         $role = bindec($this->createBy = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CURRENT_USER->resources[0]);
         foreach ($apps as $i => $value) {
             if ($value !== "." && $value !== "..") {
-
                 $app_load = $loader->load($value);
-                if (substr($app_load->title, 0, 1) == 'M') {
+//              // print_r($app_load->getConfig("Sitemap"));
+               // print_r($app_load);
+                //if (substr($app_load->title, 0, 1) == 'M') {
                     $kk = $app_load->title;
                     $list_apps[$kk] = $app_load;
 
@@ -47,34 +48,34 @@ class ViewService extends CServiceBase implements IViewService {
                     $srts = [];
                     foreach ($rts as $i => $rt) {
                         if ($rt->sitemap == true) {
-                            if ($rt->resource != null && $rt->resource != "*") {
-                                $permin = bindec($rt->resource);
-                                if (($role & $permin) > 0) {
-                                    $xx = $rt->operationDesc;
-                                    $srts[$xx] = $rt;
-                                    $list_apps[$kk]->sitemaps = true;
-                                }
-                            } else {
+                        //    if ($rt->resource != null && $rt->resource != "*") {
+                           //     $permin = bindec($rt->resource);
+                          //      if (($role & $permin) > 0) {
+                          //          $xx = $rt->operationDesc;
+                           //         $srts[$xx] = $rt;
+                           //         $list_apps[$kk]->sitemaps = true;
+                              //  }
+                          //  } else {
                                 $xx = $rt->operationDesc;
                                 $srts[$xx] = $rt;
                                 $list_apps[$kk]->sitemaps = true;
-                            }
+                           // }
                         }
                     }
                     ksort($srts);
                     $list_apps[$kk]->routeTables = [];
                     foreach ($srts as $i => $rt) {
-                        $rt->operationDesc = substr($rt->operationDesc, 4);
+                        //$rt->operationDesc = substr($rt->operationDesc, 4);
                         $list_apps[$kk]->routeTables[] = $rt;
                     }
                     $k++;
-                }
+                //}
             }
         }
         ksort($list_apps);
         $list_apps_sort = [];
         foreach ($list_apps as $i => $a) {
-            $a->title = substr($a->title, 4);
+            //$a->title = substr($a->title, 4);
             $list_apps_sort[] = $a;
         }
 
@@ -84,7 +85,7 @@ class ViewService extends CServiceBase implements IViewService {
         return $datax["apps"];
     }
 
-    public function render2($datax, $appId) {
+    /*public function render2($datax, $appId) {
         $this->_context_path = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CONTEXT_PATH;
         $datax["_context_path"] = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CONTEXT_PATH;
         $loaders = array("apps/" . $appId . '/views', "views");
@@ -99,6 +100,6 @@ class ViewService extends CServiceBase implements IViewService {
             )
         ));
         return $m->render("nav", $datax);
-    }
+    }*/
 
 }
