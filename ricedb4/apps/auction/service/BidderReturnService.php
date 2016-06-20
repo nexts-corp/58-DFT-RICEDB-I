@@ -77,7 +77,8 @@ class BidderReturnService extends CServiceBase implements IBidderReturnService {
                         bp.paymentNo,
                         bp.amount,
                         bp.paymentDate,
-                        bp.isReturn
+                        bp.isReturn,
+						bp.remark
                 from " . $this->ent . "\\BidderHistory bh
                 inner join " . $this->ent . "\\BidderInfo bi
                         with bi.id = bh.bidderId

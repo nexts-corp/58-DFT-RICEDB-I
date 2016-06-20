@@ -1,0 +1,73 @@
+{{>header}}
+
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}user.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}user.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}role.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button class="btn btn-primary save"><i class="fa fa-save"></i> {{#i18n}}user.buttonSave{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="userTable"><!-- table shown user information list -->
+                <div class="col-md-12">
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}role.permission{{/i18n}}</th>
+                                {{#role}}
+                                <th class="text-center" style="vertical-align: middle;">{{role}}</th>
+                                {{/role}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#permission}}
+                            <tr>
+                                <td class="text-center primary">{{title}}</td>
+                                <td colspan="{{countRole}}" class="text-center"></td>
+                            </tr>
+                            {{#routeTables}}
+                            <tr>
+                                <td class="text-center">{{operationDesc}}</td>
+                                {{#role}}
+                                <td class="text-center"><input type="checkbox" /></td>
+                                {{/role}}
+                            </tr>
+                            {{/routeTables}}
+                            {{/permission}}
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end table shown user information list -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+
+{{>footer}}
+
+<script src="{{_context_path}}/apps/user/views/js/roleManager.js"></script>
+

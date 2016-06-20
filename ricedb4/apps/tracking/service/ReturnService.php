@@ -75,7 +75,8 @@ class ReturnService extends CServiceBase implements IReturnService {
                         bp.amount,
                         bp.paymentDate,
                         bp.isReturn,
-                        bp.dateReturn
+                        bp.dateReturn,
+						bp.remark
                 from " . $this->ent . "\\BidderHistory bh
                 inner join " . $this->ent . "\\BidderInfo bi
                         with bi.id = bh.bidderId
@@ -94,6 +95,26 @@ class ReturnService extends CServiceBase implements IReturnService {
     }
 
     public function listsWarehouse($bidderId, $auccode) {
+        $sql = "select 
+	
+	province,
+	associateId,
+	associate,
+	wareHouseCode,
+	weightAll,
+               oweightAll,
+	RFV2,
+	bidderLastPrice,
+	bidderLastPrice*0.02  as guarantee,
+                isSale
+	from 
+		fn_auction_info('" . $auccode . "')
+	where bidderNo = " . $bidderId . " and bidderWinner = 'Y'
+
+	order by province,associateId,warehouseCode";
+        return $this->datacontext->pdoQuery($sql);
+    }
+	public function listsWarehouse2($bidderId, $auccode) {
         $sql = "select 
 	
 	province,

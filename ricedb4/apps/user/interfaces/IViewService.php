@@ -18,5 +18,13 @@ interface IViewService {
      */ 
     public function userManager();
     
-
+    /**
+     * @name roleManager
+     * @uri /roleManager
+     * @description M12 จัดการบทบาท
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
+     */ 
+    public function roleManager();
 }

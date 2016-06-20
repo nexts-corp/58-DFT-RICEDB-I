@@ -5,7 +5,7 @@ set_time_limit(0);
 ini_set('memory_limit', '-1');
 require("phpexcel/Classes/PHPExcel/IOFactory.php");
 
-$inputFileName = 'rice_14032016.xlsx';
+$inputFileName = 'rice_14032016.xlsx'; //ทำล่าสุดให้พี่แก้ว
 //$extend = "2";
 
 $count = 0;

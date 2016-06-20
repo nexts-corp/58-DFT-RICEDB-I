@@ -12,7 +12,7 @@ interface IViewService {
     /**
      * @name return
      * @uri /return
-     * @description M71 คืนหลักค้ำประกันผู้ที่ไม่ชนะ
+     * @description M71 คืนหลักค้ำประกันก่อนอนุมัติคลัง
      * @authen true
      * @resource 10001000
      * @sitemap true
@@ -22,7 +22,7 @@ interface IViewService {
     /**
      * @name returnFinance
      * @uri /returnFinance
-     * @description M72 คืนหลักค้ำประกันผู้ที่ชนะ
+     * @description M72 คืนหลักค้ำประกันหลังอนุมัติคลัง
      * @authen true
      * @resource 10001000
      * @sitemap true

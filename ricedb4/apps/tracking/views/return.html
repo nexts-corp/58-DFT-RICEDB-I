@@ -540,6 +540,7 @@
             countCheck = 0;
             dataPayment = datas["lists"];
             $.each(datas["lists"], function (key, value) {
+				console.log(value.remark);
                 if (value.remark == null || value.remark == "") {
                     value.remark = "-";
                 }
@@ -551,8 +552,8 @@
                             + '<td class="text-center">' + (value.paymentDate["date"].substr(0, 10)) + '</td>'
                             + '<td class="text-center">' + (value.paymentNo) + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value.amount, 2, ",", ".") + '</td>'
-                            + "<td class='text-center'></td>" +
-                            +'<td class="text-center">' + (value.remark) + '</td>'
+                            + '<td class="text-center">' + (value.remark) + '</td>' 
+                           // +'<td class="text-center">' + (value.remark) + '</td>'
                             + '<td class="text-center text-bold">'
                             + '<label class="switch switch-green">'
                             + '<input class="switch-input" type="checkbox" onclick="return false" value="' + value.amount + '">'

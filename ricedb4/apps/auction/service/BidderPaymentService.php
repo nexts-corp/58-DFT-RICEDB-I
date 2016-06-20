@@ -52,8 +52,8 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
             ." JOIN " . $this->ent . "\\BidderHistory bh WITH bh.id = bt.bidderHistoryId"
             ." JOIN " . $this->ent . "\\BidderInfo bi WITH bi.id = bh.bidderId"
             ." JOIN " . $this->ent . "\\BidderPriceSilo ps WITH ps.bidderItemId = bt.id"
-           // ." WHERE bh.statusKeyword = :keyword and ps.round = '0' and bt.isReserved = 'Y'"
-            ." WHERE bh.statusKeyword = :keyword and ps.round = '0' "
+            ." WHERE bh.statusKeyword = :keyword and ps.round = '0' and bt.isReserved = 'Y'"
+           // ." WHERE bh.statusKeyword = :keyword and ps.round = '0' "
             ." GROUP BY"
                 ." bt.bidderHistoryId, bh.queue, bi.bidderName"
             ." ORDER BY bh.queue ASC";

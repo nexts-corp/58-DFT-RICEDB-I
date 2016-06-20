@@ -43,6 +43,16 @@ interface IReturnService {
      * @description รายชื่อคลังสินค้าที่ผู้เสนอซื้อเสนอราคา
      */
     public function listsWarehouse($bidderId,$auccode);
+	
+	/**
+     * @name listsWarehouse2
+     * @uri /listsWarehouse2
+     * @param integer bidderId Description
+     * @param string auccode
+     * @return String[] lists Description
+     * @description รายชื่อคลังสินค้าที่ผู้เสนอซื้อเสนอราคา
+     */
+    public function listsWarehouse2($bidderId,$auccode);
     
     /**
      * @name update

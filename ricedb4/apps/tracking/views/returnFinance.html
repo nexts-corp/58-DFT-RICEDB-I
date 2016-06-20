@@ -264,7 +264,9 @@
                         <div class="form-group">
                             <label for="fBank" class="control-label col-sm-4">ธนาคาร</label>
                             <div class="col-sm-8">
-                                <select id="fBank" name="fBank" class="form-control"></select>
+                                <select id="fBank" name="fBank" class="form-control" disabled>
+									<option value="2">กรุงไทย</option>
+								</select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -315,7 +317,7 @@
             format: "yyyy-mm-dd",
             autoclose: true
         });
-        listsBank();
+        //listsBank();
         $("#btnSave").unbind().click(function () {
             var data = checkSelect();
             if (data == "noCheckbox") {
@@ -538,7 +540,7 @@
 
     function listWarehouse(hId) {
         var auccode = $('#auction').val();
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsWarehouse", "post", {bidderId: listArr[hId]["bidderId"], auccode: auccode}, "json");
+        var datas = callAjax("{{_context_path}}/api/tracking/return/listsWarehouse2", "post", {bidderId: listArr[hId]["bidderId"], auccode: auccode}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             var html = "";
             var sumBidderPrice = 0;
@@ -648,7 +650,7 @@
                             + '<td class="text-center">' + (value.paymentDate["date"].substr(0, 10)) + '</td>'
                             + '<td class="text-center">' + (value.paymentNo) + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value.amount, 2, ",", ".") + '</td>'
-                            + "<td class='text-center'></td>" +
+                           // + "<td class='text-center'></td>" +
                             +'<td class="text-center">' + (value.remark) + '</td>'
                             + '<td class="text-center text-bold">'
                             + '<label class="switch switch-green">'
