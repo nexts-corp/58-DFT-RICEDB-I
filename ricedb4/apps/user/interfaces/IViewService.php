@@ -21,7 +21,7 @@ interface IViewService {
     /**
      * @name roleManager
      * @uri /roleManager
-     * @description M12 จัดการบทบาท
+     * @description M12 จัดการสิทธิ์
      * @authen true
      * @resource 10000000
      * @sitemap true
