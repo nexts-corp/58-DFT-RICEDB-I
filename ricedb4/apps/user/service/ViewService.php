@@ -21,7 +21,7 @@ class ViewService extends CServiceBase implements IViewService {
 
         $userServ = new UserManagerService();
         $view->role = $userServ->listsRole();
-        $view->countRole = count($view->role);
+        $view->countRole = count($view->role)+1;
         $view->permission = $this->render();
         //return $this->render();
         return $view;
