@@ -2,10 +2,10 @@
 
 namespace apps\user\service;
 
+use apps\user\interfaces\IViewService;
 use th\co\bpg\cde\core\CServiceBase;
 use th\co\bpg\cde\collection\CJView;
 use th\co\bpg\cde\collection\CJViewType;
-use apps\user\interfaces\IViewService;
 use th\co\bpg\cde\core\impl\CServiceLoaderImpl;
 use th\co\bpg\cde\collection\impl\CViewLoader;
 
