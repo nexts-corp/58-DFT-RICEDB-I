@@ -9,22 +9,22 @@ namespace apps\user\interfaces;
 interface IViewService {
    
     /**
-     * @name userManager
-     * @uri /userManager
+     * @name userManage
+     * @uri /userManage
      * @description M11 จัดการข้อมูลเจ้าหน้าที่
      * @authen true
      * @resource 10000000
      * @sitemap true
      */ 
-    public function userManager();
+    public function userManage();
     
     /**
-     * @name roleManager
-     * @uri /roleManager
+     * @name permissionManage
+     * @uri /permissionManage
      * @description M12 จัดการสิทธิ์
      * @authen true
      * @resource 10000000
      * @sitemap true
      */ 
-    public function roleManager();
+    public function permissionManage();
 }

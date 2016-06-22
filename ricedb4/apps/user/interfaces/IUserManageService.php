@@ -3,11 +3,11 @@
 namespace apps\user\interfaces;
 
 /**
- * @name IUserManagerService
- * @uri /userManager
+ * @name IUserManageService
+ * @uri /userManage
  * @description ข้อมูลเจ้าหน้าที่
  */
-interface IUserManagerService {
+interface IUserManageService {
 
     /**
      * @name listsUser

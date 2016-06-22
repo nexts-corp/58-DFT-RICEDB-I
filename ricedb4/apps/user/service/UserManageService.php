@@ -4,9 +4,9 @@ namespace apps\user\service;
 
 use th\co\bpg\cde\core\CServiceBase;
 use th\co\bpg\cde\data\CDataContext;
-use apps\user\interfaces\IUserManagerService;
+use apps\user\interfaces\IUserManageService;
 
-class UserManagerService extends CServiceBase implements IUserManagerService {
+class UserManageService extends CServiceBase implements IUserManageService {
 
     public $datacontext;
     public $logger;
@@ -32,8 +32,9 @@ class UserManagerService extends CServiceBase implements IUserManagerService {
 
     public function listsRole() {
         $sql = "SELECT"
-                . " rl.id, rl.role, rl.code"
-                . " FROM " . $this->ent . "\\Role rl";
+                . " rl.id, rl.role, rl.code,rl.permission "
+                . " FROM " . $this->ent . "\\Role rl "
+                . " Order by rl.permission desc";
         $data = $this->datacontext->getObject($sql);
 
         return $data;

@@ -47,7 +47,7 @@ function showAllUser() {
     $("#table tbody").html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
 
     setTimeout(function () {
-        var datas = callAjax(js_context_path + "/api/user/userManager/listsUser", "post", {}, "json");
+        var datas = callAjax(js_context_path + "/api/user/userManage/listsUser", "post", {}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             $.each(datas["lists"], function (key, value) {
                 listArr[value["id"]] = value;
@@ -240,7 +240,7 @@ function insertUser(dataJSONEN) {
         $("#loading").html("กำลังบันทึกข้อมูล...");
 
         setTimeout(function () {
-            var datas = callAjax(js_context_path + "/api/user/userManager/insert", "post", dataJSONEN, "json");
+            var datas = callAjax(js_context_path + "/api/user/userManage/insert", "post", dataJSONEN, "json");
             if (typeof datas !== "undefined" && datas !== null) {
                 if (datas["add"] == true) {
                     $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
@@ -260,7 +260,7 @@ function editUser(dataJSONEN) {
     $("#loading").html("กำลังบันทึกข้อมูล...");
 
     setTimeout(function () {
-        var datas = callAjax(js_context_path + "/api/user/userManager/update", "post", dataJSONEN, "json");
+        var datas = callAjax(js_context_path + "/api/user/userManage/update", "post", dataJSONEN, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             if (datas["update"] == true) {
                 $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
@@ -276,7 +276,7 @@ function editUser(dataJSONEN) {
 }
 
 function deleteUser(dataJSONEN) {
-    var datas = callAjax(js_context_path + "/api/user/userManager/delete", "post", dataJSONEN, "json");
+    var datas = callAjax(js_context_path + "/api/user/userManage/delete", "post", dataJSONEN, "json");
     if (typeof datas !== "undefined" && datas !== null) {
         if (datas["delete"] == true) {
             toggleShow("list");
@@ -286,7 +286,7 @@ function deleteUser(dataJSONEN) {
 
 function listsRole() {
     var html = '<option value="">เลือกสิทธิผู้ใช้งาน</option>';
-    var datas = callAjax(js_context_path + "/api/user/userManager/listsRole", "post", {}, "json");
+    var datas = callAjax(js_context_path + "/api/user/userManage/listsRole", "post", {}, "json");
     if (typeof datas !== "undefined" && datas !== null) {
         $.each(datas["lists"], function (key, value) {
             html += '<option value="' + value["code"] + '">' + value["role"] + '</option>'
@@ -298,7 +298,7 @@ function listsRole() {
 
 function listsDepartment() {
     var html = '<option value="">เลือกหน่วยงาน</option>';
-    var datas = callAjax(js_context_path + "/api/user/userManager/listsDepartment", "post", {}, "json");
+    var datas = callAjax(js_context_path + "/api/user/userManage/listsDepartment", "post", {}, "json");
     if (typeof datas !== "undefined" && datas !== null) {
         $.each(datas["lists"], function (key, value) {
             html += '<option value="' + value["id"] + '">' + value["department"] + '</option>'

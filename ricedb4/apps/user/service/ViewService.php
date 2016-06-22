@@ -4,25 +4,35 @@ namespace apps\user\service;
 
 use apps\user\interfaces\IViewService;
 use th\co\bpg\cde\core\CServiceBase;
+use th\co\bpg\cde\data\CDataContext;
 use th\co\bpg\cde\collection\CJView;
 use th\co\bpg\cde\collection\CJViewType;
 use th\co\bpg\cde\core\impl\CServiceLoaderImpl;
-use th\co\bpg\cde\collection\impl\CViewLoader;
 
 class ViewService extends CServiceBase implements IViewService {
 
-    public function userManager() {
-        $view = new CJView("userManager", CJViewType::HTML_VIEW_ENGINE);
+    public $datacontext;
+    public $logger;
+    public $md = "apps\\common\\model";
+    public $ent = "apps\\common\\entity";
+
+    public function __construct() {
+        $this->logger = \Logger::getLogger("root");
+        $this->datacontext = new CDataContext(NULL);
+    }
+
+    public function userManage() {
+        $view = new CJView("userManage", CJViewType::HTML_VIEW_ENGINE);
         return $view;
     }
 
-    public function roleManager() {
-        $view = new CJView("roleManager", CJViewType::HTML_VIEW_ENGINE);
+    public function permissionManage() {
+        $view = new CJView("permissionManage", CJViewType::HTML_VIEW_ENGINE);
 
-        $userServ = new UserManagerService();
+        $userServ = new UserManageService();
         $view->role = $userServ->listsRole();
-        $view->countRole = count($view->role)+1;
-        $view->permission = $this->render();
+        $view->countRole = count($view->role) + 1;
+        $view->permissions = $this->render();
         //return $this->render();
         return $view;
     }
@@ -37,69 +47,81 @@ class ViewService extends CServiceBase implements IViewService {
         foreach ($apps as $i => $value) {
             if ($value !== "." && $value !== "..") {
                 $app_load = $loader->load($value);
-//              // print_r($app_load->getConfig("Sitemap"));
-               // print_r($app_load);
-                //if (substr($app_load->title, 0, 1) == 'M') {
-                    $kk = $app_load->title;
-                    $list_apps[$kk] = $app_load;
+                $kk = $app_load->title;
+                $list_apps[$kk] = $app_load;
 
-                    $rts = $list_apps[$kk]->routeTables;
-                    $list_apps[$kk]->sitemaps = false;
-                    $srts = [];
-                    foreach ($rts as $i => $rt) {
-                        if ($rt->sitemap == true) {
-                        //    if ($rt->resource != null && $rt->resource != "*") {
-                           //     $permin = bindec($rt->resource);
-                          //      if (($role & $permin) > 0) {
-                          //          $xx = $rt->operationDesc;
-                           //         $srts[$xx] = $rt;
-                           //         $list_apps[$kk]->sitemaps = true;
-                              //  }
-                          //  } else {
-                                $xx = $rt->operationDesc;
-                                $srts[$xx] = $rt;
-                                $list_apps[$kk]->sitemaps = true;
-                           // }
+                $rts = $list_apps[$kk]->routeTables;
+                $list_apps[$kk]->sitemaps = false;
+                $srts = [];
+
+                $dataPermis = $this->datacontext->getObject(new \apps\common\entity\Permission());
+                $userServ = new UserManageService();
+                $dataRole = $userServ->listsRole();
+                foreach ($rts as $i => $rt) {
+                    if ($rt->sitemap == true) {
+                        $xx = $rt->operationDesc;
+                        for ($i = 0; $i < 8; $i++) {
+                            $listsPer[$i] = array(
+                                "checked" => "",
+                                "role" => $dataRole[$i]['permission']
+                            );
                         }
+                        $rt->permission = $listsPer;
+                        foreach ($dataPermis as $key => $value) {
+                            if ($rt->service . '\\' . $rt->operationName == $value->resourceCode) {
+                                $listsPer = [];
+                                for ($i = 0; $i < strlen($value->permission); $i++) {
+                                    if (substr($value->permission, $i, 1) == "1") {
+                                        $listsPer[$i] = array(
+                                            "checked" => "checked",
+                                            "role" => $dataRole[$i]['permission']
+                                        );
+                                    } else {
+                                        $listsPer[$i] = array(
+                                            "checked" => "",
+                                            "role" => $dataRole[$i]['permission']
+                                        );
+                                    }
+                                }
+                                $rt->permission = $listsPer;
+                            }
+                        }
+                        $srts[$xx] = $rt;
+                        $list_apps[$kk]->sitemaps = true;
                     }
-                    ksort($srts);
-                    $list_apps[$kk]->routeTables = [];
-                    foreach ($srts as $i => $rt) {
-                        //$rt->operationDesc = substr($rt->operationDesc, 4);
-                        $list_apps[$kk]->routeTables[] = $rt;
+                }
+                ksort($srts);
+                $list_apps[$kk]->routeTables = [];
+                foreach ($srts as $i => $rt) {
+                    if (substr($rt->operationDesc, 0, 2) == ' M') {
+                        $rt->operationDesc = substr($rt->operationDesc, 5);
+                    } else {
+                        $rt->operationDesc = substr($rt->operationDesc, 1);
                     }
-                    $k++;
+                    if (substr($rt->serviceDesc, 0, 2) == ' M') {
+                        $rt->serviceDesc = substr($rt->serviceDesc, 5);
+                    } else {
+                        $rt->serviceDesc = substr($rt->serviceDesc, 1);
+                    }
+                    $list_apps[$kk]->routeTables[] = $rt;
+                }
+                $k++;
                 //}
             }
         }
         ksort($list_apps);
         $list_apps_sort = [];
         foreach ($list_apps as $i => $a) {
-            //$a->title = substr($a->title, 4);
+            if (substr($a->title, 0, 1) == 'M') {
+                $a->title = substr($a->title, 4);
+            }
             $list_apps_sort[] = $a;
         }
 
         $datax = [];
         $datax["apps"] = $list_apps_sort;
-        // $cc = $this->render2($datax, "home");
+
         return $datax["apps"];
     }
-
-    /*public function render2($datax, $appId) {
-        $this->_context_path = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CONTEXT_PATH;
-        $datax["_context_path"] = \th\co\bpg\cde\core\impl\ChangdaoEngineImpl::$_CONTEXT_PATH;
-        $loaders = array("apps/" . $appId . '/views', "views");
-        if (!is_dir("views")) {
-            $loaders = array("apps/" . $appId . '/views');
-        }
-        $options = array('extension' => '.html');
-        $m = new \Mustache_Engine(array(
-            'loader' => new CViewLoader($loaders, $options),
-            'charset' => 'UTF-8',
-            'helpers' => array(
-            )
-        ));
-        return $m->render("nav", $datax);
-    }*/
 
 }

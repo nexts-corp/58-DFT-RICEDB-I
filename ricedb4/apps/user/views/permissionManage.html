@@ -44,23 +44,23 @@
                                 {{/role}}
                             </tr>
                         </thead>
-                        <tbody>
-                            {{#permission}}
-                               {{#sitemaps}}
-                                <tr>
-                                    <td class="text-center primary" colspan="{{countRole}}">{{title}}</td>
+                        <tbody id="tbody">
+                            {{#permissions}}
+                            {{#sitemaps}}
+                            <tr>
+                                <td class="text-center primary" colspan="{{countRole}}">{{title}}</td>
 
-                                </tr>
-                                {{#routeTables}}
-                                <tr>
-                                    <td class="text-center">{{operationDesc}}</td>
-                                    {{#role}}
-                                    <td class="text-center"><input type="checkbox" data-role="{{code}}" data-resource="{{service}}\{{operationName}}" /></td>
-                                    {{/role}}
-                                </tr>
-                                {{/routeTables}}
-                                {{/sitemaps}}
-                            {{/permission}}
+                            </tr>
+                            {{#routeTables}}
+                            <tr>
+                                <td class="text-left">{{operationDesc}}</td>
+                                {{#permission}}
+                                <td class="text-center"><input type="checkbox" {{checked}} data-role="{{role}}" data-name="{{title}}\{{operationDesc}}" data-resource="{{service}}\{{operationName}}" /></td>
+                                {{/permission}}
+                            </tr>
+                            {{/routeTables}}
+                            {{/sitemaps}}
+                            {{/permissions}}
                         </tbody>
                     </table>
                 </div>
@@ -71,5 +71,9 @@
 
 {{>footer}}
 
-<script src="{{_context_path}}/apps/user/views/js/roleManager.js"></script>
+<script type="text/javascript">
+    var js_context_path = "{{_context_path}}";
+    var countRole = "{{countRole}}";
+</script>
+<script src="{{_context_path}}/apps/user/views/js/permissionManage.js"></script>
 
