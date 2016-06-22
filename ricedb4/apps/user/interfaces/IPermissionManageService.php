@@ -21,7 +21,7 @@ interface IPermissionManageService {
     /**
      * @name save
      * @uri /save
-     * @param app\common\entity\Permission permission ข้อมูลสิทธิ์
+     * @param apps\common\entity\Permission permission ข้อมูลสิทธิ์
      * @return boolean save
      * @description ลิสต์ Role & Permission
      * @authen true

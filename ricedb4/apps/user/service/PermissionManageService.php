@@ -27,7 +27,7 @@ class PermissionManageService extends CServiceBase implements IPermissionManageS
 
     public function save($permission) {
         $json = new CJSONDecodeImpl();
-        $permission = $json->decode(new entity\Permission(), $permission);
+       // $permission = $json->decode(new entity\Permission(), $permission);
         $data = $this->datacontext->getObject(new entity\Permission());
         if (count($data) > 0) {
             if (!$this->datacontext->removeObject($data)) {
