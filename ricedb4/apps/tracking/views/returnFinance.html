@@ -245,7 +245,60 @@
             </div><!-- col-md-9 -->
         </div><!--  row  -->
     </div><!--  container  -->
-
+    <div id="modalRemark" aria-labelledby="remark" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- edit remark form -->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">{{#i18n}}tracking.remark.title{{/i18n}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="formRemark" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="rpayment" class="control-label col-sm-3">ประเภท</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="rpayment" id="rpayment" disabled> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rpaymentNo" class="control-label col-sm-3">เลขที่</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="rpaymentNo" id="rpaymentNo" disabled> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rbankTH" class="control-label col-sm-3">ธนาคาร</label>
+                            <div class="col-sm-9">
+                                <input type="text" id="rbankTH" name="rbankTH" class="form-control" disabled />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rpaymentDate" class="control-label col-sm-3">วันที่</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="rpaymentDate" id="rpaymentDate" disabled  />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ramount" class="control-label col-sm-3">จำนวนเงิน</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" disabled name="ramount" id="ramount" disabled  />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="rremark" class="control-label col-sm-3">หมายเหตุ</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="rremark" name="rremark"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnRemark" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-save"></i> {{#i18n}}tracking.buttonSave{{/i18n}}</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}tracking.buttonCancel{{/i18n}}</button>
+                </div>
+            </div>
+        </div>
+    </div><!-- end delete bidder info form -->
     <div id="modalFinance" aria-labelledby="finance" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
         <div class="modal-dialog">
             <div class="modal-content">
@@ -265,8 +318,8 @@
                             <label for="fBank" class="control-label col-sm-4">ธนาคาร</label>
                             <div class="col-sm-8">
                                 <select id="fBank" name="fBank" class="form-control" disabled>
-									<option value="2">กรุงไทย</option>
-								</select>
+                                    <option value="2">กรุงไทย</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -650,8 +703,8 @@
                             + '<td class="text-center">' + (value.paymentDate["date"].substr(0, 10)) + '</td>'
                             + '<td class="text-center">' + (value.paymentNo) + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value.amount, 2, ",", ".") + '</td>'
-                           // + "<td class='text-center'></td>" +
-                            +'<td class="text-center">' + (value.remark) + '</td>'
+                            // + "<td class='text-center'></td>" +
+                            + '<td class="text-center remark">' + (value.remark) + '</td>'
                             + '<td class="text-center text-bold">'
                             + '<label class="switch switch-green">'
                             + '<input class="switch-input" type="checkbox" onclick="return false" value="' + value.amount + '">'
@@ -659,6 +712,7 @@
                             + '<span class="switch-handle"></span>'
                             + '</label>'
                             + '</td>'
+                            + '<td class="text-center"><button class="editRemark btn btn-primary" data-paymentId="' + value.id + '" data-rowIndex="' + key + '">แก้ไข</button></td>'
                             + '</tr>';
                     sumPayment += parseFloat(value.amount);
                 } else {
@@ -698,6 +752,43 @@
             $("#txtBalance").text(accounting.formatNumber(sumPayment, 2, ",", "."));
             $("input.switch-input").click(function (event) {
                 event.stopPropagation();
+            });
+            $('.row-tr .editRemark').unbind().click(function (e) {
+                e.stopPropagation();
+                var rowIndex = $(this).attr("data-rowIndex");
+                var paymentId = $(this).attr("data-paymentId");
+                $("#modalRemark").modal('show');
+                $("#rremark").focus();
+                $("#formRemark input[type=text],textarea").each(function (k, v) {
+                    var idName = $(this).attr("id").substr(1);
+                    //console.log(idName);
+                    if (idName == 'paymentDate') {
+                        $("#r" + idName).val(dataPayment[rowIndex][idName]['date'].substr(0, 10));
+                    } else if (idName == 'amount') {
+                        $("#r" + idName).val(accounting.formatNumber(dataPayment[rowIndex][idName], 2, ",", "."));
+                    } else {
+                        $("#r" + idName).val(dataPayment[rowIndex][idName]);
+                    }
+                });
+
+                $("#btnRemark").unbind().click(function () {
+                    
+                    setTimeout(function () {
+                        var jData = {};
+                        jData["bidderPayment"] = {"id":paymentId,"remark":$("#rremark").val()};
+                        var dataJSON = JSON.stringify(jData);
+                        var dataJSONEN = encodeURIComponent(dataJSON);
+                        var msg = callAjax("{{_context_path}}/api/tracking/return/update", "post", dataJSONEN, "json");
+                        if (msg.update === true) {
+                            dataPayment[rowIndex]["remark"] = $("#rremark").val();
+                            $("tr[row-index='"+rowIndex+"'] td.remark").text($("#rremark").val());
+                        } else {
+                            alert("ERROR!!");
+                        }
+                    }, 100);
+                });
+
+
             });
             $(".row-tr").unbind().click(function (event) {
                 var input = $(this).find("td label input.switch-input");

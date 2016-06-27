@@ -114,7 +114,8 @@ class ReturnService extends CServiceBase implements IReturnService {
 	order by province,associateId,warehouseCode";
         return $this->datacontext->pdoQuery($sql);
     }
-	public function listsWarehouse2($bidderId, $auccode) {
+
+    public function listsWarehouse2($bidderId, $auccode) {
         $sql = "select 
 	
 	province,
@@ -136,18 +137,21 @@ class ReturnService extends CServiceBase implements IReturnService {
     }
 
     public function update($bidderPayment) {
-        foreach ($bidderPayment as $key => $value) {
-            //     echo substr($bidderPayment[$key]->paymentDate->date,0,10);
-            $bidderPayment[$key]->paymentDate = new \DateTime(date(substr($bidderPayment[$key]->paymentDate->date, 0, 10)));
-            if ($bidderPayment[$key]->dateReturn != "-") {
-                $bidderPayment[$key]->dateReturn = new \DateTime(date($bidderPayment[$key]->dateReturn));
-            } else {
-                $bidderPayment[$key]->dateReturn = "";
-            }
-            if (isset($bidderPayment[$key]->financeDate)) {
-                $bidderPayment[$key]->financeDate = new \DateTime(date($bidderPayment[$key]->financeDate));
+        if (is_array($bidderPayment)) {
+            foreach ($bidderPayment as $key => $value) {
+                //     echo substr($bidderPayment[$key]->paymentDate->date,0,10);
+                $bidderPayment[$key]->paymentDate = new \DateTime(date(substr($bidderPayment[$key]->paymentDate->date, 0, 10)));
+                if ($bidderPayment[$key]->dateReturn != "-") {
+                    $bidderPayment[$key]->dateReturn = new \DateTime(date($bidderPayment[$key]->dateReturn));
+                } else {
+                    $bidderPayment[$key]->dateReturn = "";
+                }
+                if (isset($bidderPayment[$key]->financeDate)) {
+                    $bidderPayment[$key]->financeDate = new \DateTime(date($bidderPayment[$key]->financeDate));
+                }
             }
         }
+
         // return $bidderPayment;
         if ($this->datacontext->updateObject($bidderPayment)) {
             return true;
