@@ -91,9 +91,8 @@ public class ReportService extends CServiceBase implements IReportService {
             Class reportParamClass = Class.forName("th.go.dft.rice.report.parameter." + reportCode.toUpperCase() + "_parameter");
             String reportName = reportCode.toUpperCase();
 
-            String printBy="";
-            
-            
+            String printBy = "";
+
             List<String> param_keys = this.request.getKeys();
             List<String> lparams = new ArrayList<>();
             lparams.add(auctionCode);
@@ -107,8 +106,8 @@ public class ReportService extends CServiceBase implements IReportService {
                         }
                     }
                 }
-                if(k.equals("userinfo")){
-                    printBy=(String) this.request.getValue(String.class, k);
+                if (k.equals("userinfo")) {
+                    printBy = (String) this.request.getValue(String.class, k);
                 }
             }
             for (int i = 1; i < lparams.size(); i++) {
@@ -127,10 +126,12 @@ public class ReportService extends CServiceBase implements IReportService {
                 bparam.setAuctionDate(datas.get(0).getAuctionDate());
                 bparam.setREPORT_MAX_COUNT(datas.size());
                 bparam.setPrintBy(printBy);
-                if(auctionCode.indexOf("-I")>-1){
+                if (auctionCode.indexOf("-I") > -1) {
                     bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
-                }else{
-                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต๊อกของรัฐ");
+                } else if (auctionCode.indexOf("-O") > -1) {
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศ");
+                } else {
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐ");
                 }
                 //การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม
                 //การจำหน่ายข้าวสารในสต๊อกของรัฐ
@@ -142,16 +143,18 @@ public class ReportService extends CServiceBase implements IReportService {
                 datas = new ArrayList<>();
                 bparam.setREPORT_MAX_COUNT(0);
                 bparam.setPrintBy(printBy);
-                if(auctionCode.indexOf("-I")>-1){
+                if (auctionCode.indexOf("-I") > -1) {
                     bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
-                }else{
-                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต๊อกของรัฐ");
+                } else if (auctionCode.indexOf("-O") > -1) {
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศ");
+                } else {
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐ");
                 }
                 //BaseModel bm=new BaseModel();
                 //datas.add(bm);
                 //การจำหน่ายข้าวสารในสต๊อกของรัฐ
             }
-            
+
             bparam.setREPORT_LOCALE(this.locale);
             CReportGenerater gen = this.newReportGenerater(reportName, exportType);
             gen.setParameter(bparam);

@@ -1,0 +1,672 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}auction.item.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li data-option-value=".websites" class="padding-left">
+                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus-circle"></i>&nbsp;{{#i18n}}auction.buttonAdd{{/i18n}}</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.buttonInfoList{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="bidderTable"><!-- table shown bidder information list -->
+                <section class="panel form-wizard" id="w1"><!-- search -->
+                    <div class="panel-body panel-body-nopadding">
+                        <div class="col-md-12" style="margin: 20px 0px 20px 0px;">
+                            <div class="col-xs-4">
+                                <label class="col-md-4 control-label text-right" for="searchQueue">{{#i18n}}auction.queue{{/i18n}} :</label>
+                                <div class="col-md-8">
+                                    <select class="form-control input-sm" name="searchQueue" id="searchQueue" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- end search -->
+                
+                <div class="col-md-12">
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-2">{{#i18n}}auction.queue{{/i18n}}</th>
+                                <th class="text-center col-md-6">{{#i18n}}auction.bidder{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}auction.countSilo{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}auction.action{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bidderBody">
+                            <tr>
+                                <td colspan="4" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end table shown bidder item list -->
+
+            <div id="bidderForm" class="col-md-12" style="display: none;"><!-- bidder item form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <div class="form-group" >
+                                <label class="col-md-3 control-label req" for="bidderHistoryId">{{#i18n}}auction.bidder{{/i18n}} :</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm" name="bidderHistoryId" id="bidderHistoryId" required>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-down"></a>
+                                </div>
+                                <h2 class="panel-title">{{#i18n}}auction.item.title{{/i18n}} : <span class="itemListHead" style="display: inline-block;"></span></h2>
+                            </header>
+
+                            <div class="panel-body"><!-- add item -->
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="provinceId">{{#i18n}}auction.province{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <select class="form-control input-sm" name="provinceId" id="provinceId" required>
+                                            <option value="">เลือกจังหวัด</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="silo">{{#i18n}}auction.silo{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <select class="form-control input-sm" name="silo" id="silo" required>
+                                            <option value="">เลือกคลังสินค้า</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table id="dataSilo" class="table table-striped mb-none">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2" class="text-center">{{#i18n}}auction.siloDetail{{/i18n}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="2" class="text-center">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div id="loading" class="col-xs-12" style="text-align: center; margin: 20px;"></div>
+
+                                <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                                    <li data-option-value="*" class="">
+                                        <button id="submit" class="btn btn-primary submit"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" class="btn btn-default cancel">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                                    </li>
+                                </ul>
+                            </div><!-- end add item -->
+
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-down"></a>
+                                </div>
+                                <h2 class="panel-title">
+                                    {{#i18n}}auction.item.panelItem{{/i18n}} : <span class="itemListHead" style="display: inline-block;"></span>
+                                    <button class="btn btn-primary refresh" style="margin-left: 20px;" formnovalidate>
+                                        <span class="fa fa-refresh" style="display: inline-block;"></span>
+                                    </button>
+                                </h2>                                
+                            </header>
+
+                            <div class="panel-body"><!-- show list item -->
+                                <div class="table-responsive col-md-12">
+                                    <table id="listTable" class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center col-md-2">{{#i18n}}auction.no{{/i18n}}</th>
+                                            <th class="text-center col-md-4">{{#i18n}}auction.silo{{/i18n}}</th>
+                                            <th class="text-center col-md-3 text-dark">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}})</th>
+                                            <th class="text-center col-md-2">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                            <th class="text-center col-md-1">{{#i18n}}auction.action{{/i18n}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="5" class="text-center">-</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="2" class="text-center text-bold">{{#i18n}}auction.total{{/i18n}}</td>
+                                                <td class="text-bold text-tertiary text-right"></td>
+                                                <td class="text-bold text-right"></td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="bidderModal" tabindex="-1" role="dialog" aria-labelledby="bidderLabel" aria-hidden="true"><!-- delete  form -->
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">{{#i18n}}auction.item.modalDelete{{/i18n}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table class="table mb-none">
+                                                    <tbody>
+                                                    <tr class="no-border">
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderName{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="bidderNameDel"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="siloDel"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}}) :</td>
+                                                        <td class="col-md-8 text-left"><div id="weightAllDel"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                        <td class="col-md-8 text-left"><div id="rfvDel"></div></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}auction.buttonDelete{{/i18n}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div><!-- col-xs-12 -->
+
+                </form>
+            </div><!-- bidder item form -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+
+<script type="text/javascript">
+    var listArr = [];
+
+    $(function () {
+        // show all bidder
+        showCountItem();
+        
+        $("#searchQueue").select2();
+
+        $("#bidderHistoryId, #provinceId, #silo").select2();
+
+        // when you change the bidder
+        $("#bidderHistoryId").html(listBidder()).change(function () {
+            if(getTag($("#bidderHistoryId").val(), "") != ""){
+                $(".itemListHead").html($("#bidderHistoryId option:selected").text());
+                showBidderItem();
+
+                $("#provinceId").html(listProvince());
+
+                $("#dataSiloBody").html('<td colspan="5" class="text-center">-</td>');
+
+                $("#silo").html('<option value="">เลือกคลัง/คลังสินค้า/ไซโล</option>');
+            }
+        });
+
+        // when you change the province
+        $("#provinceId").change(function () {
+            if(getTag($("#provinceId").val(), "") != ""){
+                $("#silo").html(listSilo()).trigger("change");
+            }
+        });
+
+        // when you change the silo
+        $("#silo").change(function () {
+            if ($("#silo").val() == "") {
+                $("#dataSilo tbody").html('<td colspan="5" class="text-center">-</td>');
+            }
+            else {
+                var dataItem = {};
+                var dataProvince = {};
+
+                dataItem["silo"] = $("#silo").val();
+                dataItem["associateId"] = $("#silo option:selected").attr("data-asso");
+                dataProvince["id"] = $("#provinceId").val();
+
+                var fdata = {};
+                fdata["BidderItem"] = dataItem;
+                fdata["Province"] = dataProvince;
+
+                var dataJSON = JSON.stringify({bidderItem: fdata["BidderItem"], province: fdata["Province"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                var html = '';
+                var datas = callAjax("{{_context_path}}/api/order/bidderItem/getSiloData", "post", dataJSONEN, "json");
+                if (typeof datas !== 'undefined' && datas !== null) {
+                    var value = datas["lists"];
+                    html += '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">ผู้เสนอซื้อ :</td>'
+                            + '<td class="col-md-8 text-left">' + $("#bidderHistoryId option:selected").text() + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">จังหวัด :</td>'
+                            + '<td class="col-md-8 text-left">' + value["province"] + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">คลังสินค้า</td>'
+                            + '<td class="col-md-8 text-left">' + value["silo"] + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">ผู้เข้าร่วม</td>'
+                            + '<td class="col-md-8 text-left">' + value["associate"] + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">น้ำหนักรวมกระสอบ (ตัน) :</td>'
+                            + '<td class="col-md-8 text-left text-bold text-tertiary">' + accounting.formatNumber(value["weightAll"], 6, ",", ".") + '</td>'
+                        + '</tr>'
+                        + '<tr>'
+                            + '<td class="col-md-4 text-right text-bold">มูลค่าขั้นต่ำ (บาท)</td>'
+                            + '<td class="col-md-8 text-left text-bold">' + accounting.formatNumber(value["rfv"], 2, ",", ".") + '</td>'
+                        + '</tr>';
+                }
+
+                $("#dataSilo tbody").html(html);
+            }
+        });
+
+        // when you click to show table
+        $("button.table").click(function () {
+            toggleShow("list");
+        });
+
+        // when you click to add bidder item
+        $("button.add").click(function () {
+            toggleShow("form");
+        });
+
+        $("button.refresh").unbind().click(function(){
+            showBidderItem();
+        });
+        
+        // when you save form
+        $("button.submit").click(function () {
+            var isValid = true;
+            $('#form select[required]').each(function () {
+                if ($(this).val() == "" && !$(this).prop("disabled"))
+                    isValid = false;
+            });
+            if (isValid) {
+                var fdata = dataObject();
+                var dataJSON = JSON.stringify({bidderItem: fdata["BidderItem"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                insertItem(dataJSONEN);
+            }
+        });
+
+        // when you click to cancel
+        $("button.cancel").click(function () {
+            $("#form select[name=provinceId], #form select[name=silo]").each(function () {
+                $(this).val("").trigger("change");
+            });
+            $("#dataSiloBody").html('<tr><td class="text-center">-</td></tr>');
+            $("#loading").empty();
+        });
+    });
+
+    function showCountItem() {
+        var dataSet = [];
+        var searchQueue = {};
+        var datas = callAjax("{{_context_path}}/api/order/bidderItem/listsCountItem", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            $.each(datas["lists"], function(key, value){
+                dataSet.push(value);
+                
+                searchQueue[value["queue"]] = value["queue"];
+            });
+            
+            $("#searchQueue").empty();
+            $("#searchQueue").append('<option value="" selected="selected">ทั้งหมด</option>');
+            $.each(searchQueue, function(key, value){
+                $("#searchQueue").append('<option value="'+value+'">'+value+'</option>');
+            });
+        }
+        var t = $("#table").DataTable( {
+            "destroy": true,
+            "data": dataSet,
+            "order": [[ 0, 'asc' ]],
+            "iDisplayLength": 50,
+            "columnDefs": [ 
+                { 
+                    "targets": 0,
+                    "data": "queue",
+                    "sClass": "text-center col-md-2"
+                },
+                {
+                    "targets": 1,
+                    "data": "bidderName",
+                    "sClass": "col-md-6"
+                },
+                {
+                    "targets": 2,
+                    "data": "countSilo",
+                    "sClass": "text-center text-bold col-md-2"
+                },
+                {
+                    "targets": 3,
+                    "orderable": false,
+                    "data": "bidderHistoryId",
+                    "sClass": "text-center col-md-2",
+                    "render": function (data) {
+                        var content = '<button class="btn btn-primary view" title="ดูข้อมูล" data-bhid="' + data+'"><i class="fa fa-list"></i></button>';
+                        return content;
+                    }   
+                }
+            ]
+        });
+
+        /*t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();*/
+
+        $('#searchQueue').change(function() {
+            if($('#searchQueue').val() != ""){
+                t.columns(0).search("^"+$(this).val()+"$", true, false, true).draw();
+            }
+            else{
+                t.columns(0).search($(this).val()).draw();
+            }
+        });
+        
+        $("#table").off("click", "button.view").on("click", "button.view", function(){
+            var index = $(this).attr("data-bhid");
+
+            toggleShow("form");
+
+            $("#bidderHistoryId").val(index).trigger("change");
+        });
+    }
+
+    function showBidderItem() {
+        var dataHistory = {};
+        dataHistory["id"] = $("#bidderHistoryId").val();
+
+        var fdata = {};
+        fdata["BidderHistory"] = dataHistory;
+
+        var dataJSON = JSON.stringify({bidderHistory: fdata["BidderHistory"]});
+        var dataJSONEN = encodeURIComponent(dataJSON);
+
+        listArr = [];
+        var dataSet = [];
+        var sumWeight = 0;
+        var sumRfv = 0;
+        $("#listTable tbody").html('<tr><td colspan="5" class="text-center">Loading...</td></tr>');
+        $("#listTable").find("tfoot td").eq(1).html("-");
+        $("#listTable").find("tfoot td").eq(2).html("-");
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/order/bidderItem/listsBidderItem", "post", dataJSONEN, "json");
+            if (typeof datas !== 'undefined' && datas !== null) {
+                $.each(datas["bidderItem"], function(key, value){
+                    dataSet.push(value);
+                    listArr[value["id"]] = value;
+
+                    sumWeight += parseFloat(value["weightAll"]);
+                    sumRfv += parseFloat(value["rfv"]);
+                });      
+            }
+
+            var t = $("#listTable").DataTable( {
+                "destroy": true,
+                "data": dataSet,
+                "order": [[ 0, 'asc' ]],
+                "iDisplayLength": 50,
+                "columnDefs": [ 
+                    { 
+                        "targets": 0,
+                        "data": "id",
+                        "sClass": "text-center col-md-2"
+                    },
+                    {
+                        "targets": 1,
+                        "data": "id",
+                        "sClass": "col-md-4",
+                        "render": function (data, key, full) {
+                            var content = full["silo"] + ' ['+full["province"]+'] ['+full["associate"]+']';
+                            return content;
+                        }  
+                    },
+                    {
+                        "targets": 2,
+                        "data": "weightAll",
+                        "sClass": "text-right text-tertiary col-md-3",
+                        "render": function (data) {
+                            var content = accounting.formatNumber(data, 6, ",", ".");
+                            return content;
+                        }   
+                    },
+                    {
+                        "targets": 3,
+                        "data": "rfv",
+                        "sClass": "text-right col-md-2",
+                        "render": function (data) {
+                            var content = accounting.formatNumber(data, 2, ",", ".");
+                            return content;
+                        }   
+                    },
+                    {
+                        "targets": 4,
+                        "orderable": false,
+                        "data": "id",
+                        "sClass": "text-center col-md-1",
+                        "render": function (data) {
+                            var content = '<button class="btn btn-default delete" title="ลบ" data-itemid="' + data + '"><i class="fa fa-trash"></i></button>';
+                            return content;
+                        }   
+                    }
+                ]
+            });
+            t.on( 'order.dt search.dt', function () {
+                t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                    cell.innerHTML = i+1;
+                } );
+            } ).draw();
+
+            $("#listTable").find("tfoot td").eq(1).html(accounting.formatNumber(sumWeight, "6", ",", "."));
+            $("#listTable").find("tfoot td").eq(2).html(accounting.formatNumber(sumRfv, "2", ",", "."));
+            
+            $("#listTable").off("click", "button.delete").on("click", "button.delete", function(){
+                $("#bidderModal").modal("show");
+                
+                var index = $(this).attr("data-itemid");
+                $("#bidderNameDel").html($("#bidderHistoryId option:selected").text());
+                $("#siloDel").html(listArr[index]["silo"]);
+                $("#weightAllDel").html(accounting.formatNumber(listArr[index]["weightAll"], 6, ",", "."));
+                $("#rfvDel").html(accounting.formatNumber(listArr[index]["rfv"], 2, ",", "."));
+
+                $("#confirmDelete").unbind().click(function(){
+                    var dataItemDel = {};
+                    dataItemDel["id"] = index;
+
+                    var fdataDel = {};
+                    fdataDel["BidderItem"] = dataItemDel;
+
+                    var dataJSONDel = JSON.stringify({bidderItem: fdataDel["BidderItem"]});
+                    var dataJSONENDel = encodeURIComponent(dataJSONDel);
+
+                    deleteItem(dataJSONENDel);
+                });
+            });
+        }, 100);
+    }
+
+    function listBidder() {
+        var html = '<option value="">เลือกผู้เสนอซื้อ</option>';
+
+        var datas = callAjax("{{_context_path}}/api/order/bidderInfo/listsPass", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+
+                html += '<option value="' + value["bidderHistoryId"] + '">' + value["bidderName"] + '</option>';
+            }
+        }
+        return html;
+    }
+
+    function listProvince() {
+        var html = '<option value="">เลือกจังหวัด</option>';
+
+        var datas = callAjax("{{_context_path}}/api/order/bidderItem/listsProvince", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+
+                html += '<option value="' + value["provinceId"] + '">' + value["provinceNameTH"] + '</option>';
+            }
+        }
+        return html;
+    }
+
+    function listSilo() {
+        var dataHistory = {};
+        var dataProvince = {};
+
+        dataHistory["id"] = $("#bidderHistoryId").val();
+        dataProvince["id"] = $("#provinceId").val();
+
+        var fdata = {};
+        fdata["BidderHistory"] = dataHistory;
+        fdata["Province"] = dataProvince;
+
+        var dataJSON = JSON.stringify({bidderHistory: fdata["BidderHistory"], province: fdata["Province"]});
+        var dataJSONEN = encodeURIComponent(dataJSON);
+
+        var html = '<option value="">เลือกคลังสินค้า</option>';
+
+        var datas = callAjax("{{_context_path}}/api/order/bidderItem/listsSilo", "post", dataJSONEN, "json");
+     //   console.log(datas);
+        if (typeof datas !== 'undefined' && datas !== null) {
+            $.each(datas["lists"], function(key, value){
+                html += '<option value="' + value["silo"]+'"  data-asso="'+value["associateId"]+'">' + value["silo"] + ' ['+value["associate"]+']</option>';
+            });
+        }
+        return html;
+    }
+
+    function insertItem(dataJSONEN) {
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/order/bidderItem/insert", "post", dataJSONEN, "json");
+            if (typeof datas !== 'undefined' && datas !== null) {
+                if (datas["add"] == true) {
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function(){
+                        toggleShow("formRefresh");
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["add"]+'</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function deleteItem(dataJSONEN) {
+        var datas = callAjax("{{_context_path}}/api/order/bidderItem/delete", "post", dataJSONEN, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            if (datas["delete"] == true) {
+                toggleShow("formRefresh");
+            }
+        }
+    }
+
+    function dataObject() {
+        var dataItem = {};
+
+        $("#form select").each(function () {
+            var fname = $(this).attr("name");
+            var fvalue = $(this).val();
+            dataItem[fname] = fvalue
+        });
+
+        dataItem["silo"] = $("#silo").val();
+        dataItem["associateId"]= $("#silo option:selected").attr("data-asso");
+
+        var fdata = {};
+        fdata["BidderItem"] = dataItem;
+
+        return fdata;
+    }
+
+    function toggleShow(option) {
+        if (option == "form") {
+            $("#bidderForm, #showTable").show();
+            $("#bidderTable, #bidderList, #addToTable").hide();
+
+            $("#form select").each(function () {
+                $(this).val("").trigger("change");
+            });
+            $("#dataSilo tbody").html('<tr><td class="text-center">-</td></tr>');
+            $("#listTable tbody").html('<tr><td colspan="5" class="text-center">-</td></tr>');
+            $("#loading").empty();
+        }
+        else if (option == "formRefresh") {
+            $("#bidderForm, #showTable").show();
+            $("#bidderTable, #addToTable").hide();
+
+            showBidderItem();
+
+            $("#form select[name=provinceId], #form select[name=silo]").each(function () {
+                $(this).val("").trigger("change");
+            });
+            $("#dataSilo tbody").html('<tr><td class="text-center">-</td></tr>');
+            $("#loading").empty();
+        }
+        else if (option == "list") {
+            $("#bidderTable, #addToTable").show();
+            $("#bidderForm, #showTable").hide();
+            
+            showCountItem();            
+            $("#searchQueue").val("").trigger("change");
+        }
+    }
+</script>
+

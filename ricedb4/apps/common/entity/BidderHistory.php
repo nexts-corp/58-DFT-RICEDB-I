@@ -69,6 +69,12 @@ class BidderHistory extends EntityBase {
     /** @Column(type="string",length=255, name="Remark5") */
     public $remark5;
 
+    /** @Column(type="string",length=1, name="Property6") */
+    public $property6;
+
+    /** @Column(type="string",length=255, name="Remark6") */
+    public $remark6;
+
     /** @Column(type="string",length=1, name="Check_In") */
     public $checkIn;
 
@@ -178,6 +184,14 @@ class BidderHistory extends EntityBase {
         return $this->remark5;
     }
 
+    function getProperty6() {
+        return $this->property6;
+    }
+
+    function getRemark6() {
+        return $this->remark6;
+    }
+
     function getCheckIn() {
         return $this->checkIn;
     }
@@ -216,6 +230,10 @@ class BidderHistory extends EntityBase {
 
     function getTypeOptional() {
         return $this->typeOptional;
+    }
+
+    function getRemarkSpecial() {
+        return $this->remarkSpecial;
     }
 
     function setId($id) {
@@ -294,6 +312,14 @@ class BidderHistory extends EntityBase {
         $this->remark5 = $remark5;
     }
 
+    function setProperty6($property6) {
+        $this->property6 = $property6;
+    }
+
+    function setRemark6($remark6) {
+        $this->remark6 = $remark6;
+    }
+
     function setCheckIn($checkIn) {
         $this->checkIn = $checkIn;
     }
@@ -332,10 +358,6 @@ class BidderHistory extends EntityBase {
 
     function setTypeOptional($typeOptional) {
         $this->typeOptional = $typeOptional;
-    }
-
-    function getRemarkSpecial() {
-        return $this->remarkSpecial;
     }
 
     function setRemarkSpecial($remarkSpecial) {

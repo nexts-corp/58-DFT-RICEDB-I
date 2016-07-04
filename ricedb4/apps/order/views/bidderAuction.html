@@ -1,0 +1,750 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">{{#i18n}}auction.result.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.result.buttonHome{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="bidderTable" class="col-md-12"><!-- table shown bidder winner -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.no{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.result{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.show{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td class="text-left">[ก่อนยื่นซอง] รายงานแสดงผู้เสนอซื้อ</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderProperty1"><i class="fa fa-list"></i></button></td>
+                            </tr>
+
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td class="text-left">[หลังยื่นซอง] รายงานแสดงผู้เสนอซื้อ</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderProperty2"><i class="fa fa-list"></i></button></td>
+                            </tr>                       
+                            <tr>
+                                <td class="text-center">3</td>
+                                <td class="text-left">[ก่อนต่อรองราคา] รายงานคลังสินค้าที่มีผู้เสนอซื้อ เรียงตามมูลค่าเสนอซื้อสูงสุด</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderPriceAll"><i class="fa fa-list"></i></button></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" class="text-bold">กรณีประกาศ Floor Value</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">4</td>
+                                <td class="text-left">[ก่อนต่อรองราคา] ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และเสนอมูลค่าสูงสุด</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderMaxPriceOne"><i class="fa fa-list"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">5</td>
+                                <td class="text-left">[ก่อนต่อรองราคา] ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และมูลค่าเสนอซื้อเท่ากัน</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderMaxPriceMore"><i class="fa fa-list"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">6</td>
+                                <td class="text-left">[หลังต่อรองราคา] ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และเสนอมูลค่าสูงสุด</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-list"></i></button></td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="3" class="text-bold">กรณีไม่ประกาศ Floor Value</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">7</td>
+                                <td class="text-left">[ก่อนต่อรองราคา] ผู้เสนอซื้อที่เสนอมูลค่าเสนอซื้อสูงสุดในแต่ละคลัง</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderMaxPriceOne2"><i class="fa fa-list"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">8</td>
+                                <td class="text-left">[ก่อนต่อรองราคา] ผู้เสนอซื้อที่เสนอมูลค่าเสนอซื้อเท่ากันในแต่ละคลัง</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderMaxPriceMore2"><i class="fa fa-list"></i></button></td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">9</td>
+                                <td class="text-left">[หลังต่อรองราคา] ผู้เสนอซื้อที่เสนอมูลค่าเสนอซื้อสูงสุดในแต่ละคลัง</td>
+                                <td class="text-center"><button class="btn btn-primary view" data-monitor="bidderWinner2"><i class="fa fa-list"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="bidderView" class="col-md-12" style="display: none;"><!-- bidder view -->
+
+            </div><!-- end bidder view -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    $(function () {
+        $("button.table").click(function () {
+            toggleShow("list");
+        });
+
+        $("button.view").click(function () {
+            toggleShow("view");
+
+            var page = $(this).attr("data-monitor");
+            if (page == "bidderProperty1") {
+                showProperty1();
+            }
+            else if (page == "bidderProperty2") {
+                showProperty2();
+            }
+            else if (page == "bidderPriceAll") {
+                showPriceAll();
+            }
+            else if (page == "bidderMaxPriceOne") {
+                showMaxPriceOne();
+            }
+            else if (page == "bidderMaxPriceMore") {
+                showMaxPriceMore();
+            }
+            else if (page == "bidderWinner") {
+                showWinner();
+            }
+            else if (page == "bidderMaxPriceOne2") {
+                showMaxPriceOne2();
+            }
+            else if (page == "bidderMaxPriceMore2") {
+                showMaxPriceMore2();
+            }
+            else if (page == "bidderWinner2") {
+                showWinner2();
+            }
+        });
+    });
+
+    function showProperty1() {
+        var html = '<h3>รายงานแสดงผู้เสนอซื้อ</h3>'
+                + '<div class="col-md-12">'
+                + '<div class="col-md-6" style="margin-bottom: 10px;">'
+                + '<div>ผู้เข้าเสนอซื้อ: <span id="countAll" class="text-bold">-</span> ราย</div>'
+                + '<div>ผู้ผ่านคุณสมบัติเบื้องต้น: <span id="countPass" class="text-bold">-</span> ราย</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderProperty" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คิวที่</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">คุณสมบัติ</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var countPass = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/listsProperty", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+                countAll++;
+                var property = "";
+                if (value["property"] == "Y") {
+                    countPass++;
+                    property = '<span class="text-success">ผ่าน</span>';
+                }
+                else {
+                    property = '<span class="text-danger">ไม่ผ่าน</span>';
+                }
+
+                html += '<tr>'
+                        + '<td class="text-center">' + value["queue"] + '</td>'
+                        + '<td class="text-left">' + value["bidderName"] + '</td>'
+                        + '<td class="text-center">' + property + '</td>'
+                        + '</tr>';
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+        $("#countPass").html(countPass);
+    }
+
+    function showProperty2() {
+        var html = '<h3>รายงานแสดงผู้เสนอซื้อ</h3>'
+                + '<div class="col-md-12">'
+                + '<div class="col-md-6" style="margin-bottom: 10px;">'
+                + '<div>ผู้เข้าเสนอซื้อ: <span id="countAll" class="text-bold">-</span> ราย</div>'
+                + '<div>ผู้ผ่านคุณสมบัติเบื้องต้น: <span id="countPass" class="text-bold">-</span> ราย</div>'
+                + '<div>ผู้ยื่นซองเสนอซื้อ: <span id="countIn" class="text-bold">-</span> ราย</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderProperty2" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คิวที่</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">คุณสมบัติ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้ยื่นซองเสนอซื้อ</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var countPass = 0;
+        var countIn = 0
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/listsProperty", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+                countAll++;
+                var property = "";
+                var checkIn = ""
+                
+                if (value["property"] == "Y") {
+                    countPass++;
+                    property = '<span class="text-success">ผ่าน</span>';
+                }
+                else {
+                    property = '<span class="text-danger">ไม่ผ่าน</span>';
+                }
+
+                if (value["checkIn"] == "Y") {
+                    countIn++;
+                    checkIn = '<span class="text-success">มา</span>';
+                }
+                else {
+                    checkIn = '<span class="text-danger">ไม่มา</span>';
+                }
+                
+                var remark = function(remark){
+                    if(remark!= null && remark != ''){
+                        return '<span class="text-danger"> ('+remark+')</span>';
+                    }else{
+                        return '';
+                    }
+                };
+
+                html += '<tr>'
+                        + '<td class="text-center">' + value["queue"] + '</td>'
+                        + '<td class="text-left">' + value["bidderName"] + remark(value["remarkSpecial"]) +'</td>'
+                        + '<td class="text-center">' + property + '</td>'
+                        + '<td class="text-center">' + checkIn + '</td>'
+                        + '</tr>';
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+        $("#countPass").html(countPass);
+        $("#countIn").html(countIn);
+    }
+
+    function showPriceAll() {
+        var html = '<h3>รายงานคลังสินค้าที่มีผู้เสนอซื้อ เรียงตามมูลค่าเสนอซื้อสูงสุด</h3>'
+                + '<div class="col-md-12" style="margin-bottom: 10px;">'
+                + '<div class="col-md-6">'
+                + '<div>จำนวน: <span id="countAll" class="text-bold">-</span> คลัง</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderPriceAll" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>'
+                + '<th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อ (บาท)</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/priceAll", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (province, value) {
+                html += '<tr">'
+                        + '<td class="text-bold">' + province + '</td>'
+                        + '</tr>';
+
+                $.each(value, function (silo, value2) {
+                    $.each(value2, function (associate, value3) {
+                        countAll++;
+
+                        html += '<tr>'
+                                + '<td style="padding-left: 20px;">' + countAll + '. ' + silo + ' [' + associate + ']</td>';
+
+                        var count = 0;
+                        $.each(value3, function (key, value4) {
+                            if (count == 0) {
+                                html += '<td>' + value4["bidderName"] + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '</tr>';
+                            }
+                            else {
+                                html += '<tr>'
+                                        + '<td></td>'
+                                        + '<td>' + value4["bidderName"] + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '</tr>';
+                            }
+                            count++;
+                        });
+                    });
+                });
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+    }
+    function showMaxPriceOne() {
+        var html = '<h3>ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และเสนอมูลค่าสูงสุด</h3>'
+                + '<div class="col-md-12" style="margin-bottom: 10px;">'
+                + '<div class="col-md-6">'
+                + '<div>จำนวน: <span id="countAll" class="text-bold">-</span> คลัง</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderMaxPriceOne" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>'
+                + '<th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อ (บาท)</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/maxPriceOne", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (province, value) {
+                html += '<tr>'
+                        + '<td class="text-bold">' + province + '</td>'
+                        + '</tr>';
+                $.each(value, function (key2, value2) {
+                    countAll++;
+
+                    html += '<tr>'
+                            + '<td style="padding-left:20px;">' + countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']</td>'
+                            + '<td>' + value2["bidderName"] + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
+                            + '</tr>';
+                });
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+    }
+    
+    function showMaxPriceOne2() {
+        var html = '<h3>ผู้เสนอซื้อที่เสนอราคาสูงสุดในแต่ละคลัง</h3>'
+                + '<div class="col-md-12" style="margin-bottom: 10px;">'
+                + '<div class="col-md-6">'
+                + '<div>จำนวน: <span id="countAll" class="text-bold">-</span> คลัง</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderMaxPriceOne2" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>'
+                + '<th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อ (บาท)</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/maxPriceOne", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (province, value) {
+                html += '<tr>'
+                        + '<td class="text-bold">' + province + '</td>'
+                        + '</tr>';
+                $.each(value, function (key2, value2) {
+                    countAll++;
+
+                    html += '<tr>'
+                            + '<td style="padding-left:20px;">' + countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']</td>'
+                            + '<td>' + value2["bidderName"] + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
+                            + '</tr>';
+                });
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+    }
+
+    function showMaxPriceMore() {
+        var html = '<h3>ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และมูลค่าเสนอซื้อเท่ากัน</h3>'
+                + '<div class="col-md-12" style="margin-bottom: 10px;">'
+                + '<div class="col-md-6">'
+                + '<div>จำนวน: <span id="countAll" class="text-bold">-</span> คลัง</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderMaxPriceMore" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>'
+                + '<th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อ (บาท)</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/maxPriceMore", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (province, value) {
+                html += '<tr">'
+                        + '<td class="text-bold">' + province + '</td>'
+                        + '</tr>';
+
+                $.each(value, function (silo, value2) {
+                    $.each(value2, function (associate, value3) {
+                        countAll++;
+
+                        html += '<tr>'
+                                + '<td style="padding-left: 20px;">' + countAll + '. ' + silo + ' [' + associate + ']</td>';
+
+                        var count = 0;
+                        $.each(value3, function (key, value4) {
+                            if (count == 0) {
+                                html += '<td>' + value4["bidderName"] + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '</tr>';
+                            }
+                            else {
+                                html += '<tr>'
+                                        + '<td></td>'
+                                        + '<td>' + value4["bidderName"] + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '</tr>';
+                            }
+                            count++;
+                        });
+                    });
+                });
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+    }
+
+    function showMaxPriceMore2() {
+        var html = '<h3>ผู้เสนอซื้อที่เสนอมูลค่าเสนอซื้อเท่ากัน</h3>'
+                + '<div class="col-md-12" style="margin-bottom: 10px;">'
+                + '<div class="col-md-6">'
+                + '<div>จำนวน: <span id="countAll" class="text-bold">-</span> คลัง</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderMaxPriceMore2" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>'
+                + '<th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อ (บาท)</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/maxPriceMore", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (province, value) {
+                html += '<tr">'
+                        + '<td class="text-bold">' + province + '</td>'
+                        + '</tr>';
+
+                $.each(value, function (silo, value2) {
+                    $.each(value2, function (associate, value3) {
+                        countAll++;
+
+                        html += '<tr>'
+                                + '<td style="padding-left: 20px;">' + countAll + '. ' + silo + ' [' + associate + ']</td>';
+
+                        var count = 0;
+                        $.each(value3, function (key, value4) {
+                            if (count == 0) {
+                                html += '<td>' + value4["bidderName"] + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '</tr>';
+                            }
+                            else {
+                                html += '<tr>'
+                                        + '<td></td>'
+                                        + '<td>' + value4["bidderName"] + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '</tr>';
+                            }
+                            count++;
+                        });
+                    });
+                });
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+    }
+
+    function showWinner() {
+        var html = '<h3>ผู้เสนอซื้อที่ผ่านมูลค่าขั้นต่ำ (Floor Value) และเสนอมูลค่าสูงสุด</h3>'
+                + '<div class="col-md-12" style="margin-bottom: 10px;">'
+                + '<div class="col-md-6">'
+                + '<div>รวมทั้งสิ้น: <span id="countAll" class="text-bold">-</span> คลัง</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderWinner" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>'
+                + '<th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อ (บาท)</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/winner", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var tmp = '';
+            $.each(datas["lists"], function (province, value) {
+                html += '<tr>'
+                        + '<td class="text-bold">' + province + '</td>'
+                        + '</tr>';
+                $.each(value, function (key2, value2) {
+                    var siloName = '';
+                    if (tmp != value2["wareHouseCode"] + ' [' + value2["associate"] + ']') {
+                        countAll++;
+                        siloName = countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']';
+                    }
+                    html += '<tr>'
+                            + '<td style="padding-left:20px;">' + siloName + '</td>'
+                            + '<td>' + value2["bidderName"] + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
+                            + '</tr>';
+
+                    tmp = value2["wareHouseCode"] + ' [' + value2["associate"] + ']';
+
+                });
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+    }
+
+    function showWinner2() {
+        var html = '<h3>ผู้เสนอซื้อที่เสนอมูลค่าสูงสุดในแต่ละคลัง</h3>'
+                + '<div class="col-md-12" style="margin-bottom: 10px;">'
+                + '<div class="col-md-6">'
+                + '<div>รวมทั้งสิ้น: <span id="countAll" class="text-bold">-</span> คลัง</div>'
+                + '</div>'
+                + '<div class="col-md-6 text-right">'
+                + '<a href="{{_context_path}}/api/order/view/monitor/bidderWinner2" target="_blank" class="btn btn-primary view" data-monitor="bidderWinner"><i class="fa fa-youtube-play "></i></a>'
+                + '</div>'
+                + '</div>'
+
+                + '<div class="table-responsive col-md-12">'
+                + '<table class="table table-bordered table-striped table-condensed mb-none">'
+                + '<thead>'
+                + '<tr>'
+                + '<th class="text-center" style="vertical-align: middle;">คลังสินค้า</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ผู้เสนอซื้อ</th>'
+                + '<th class="text-center" style="vertical-align: middle;">ปริมาณ (ตัน)</th>'
+                + '<th class="text-center" style="vertical-align: middle;">มูลค่าเสนอซื้อ (บาท)</th>'
+                + '</tr>'
+                + '</thead>'
+                + '<tbody id="bidderBody">'
+                + '</tbody>'
+                + '</table>'
+                + '</div>';
+
+        $("#bidderView").html(html);
+
+        var countAll = 0;
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderMonitor/winner", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var tmp = '';
+            $.each(datas["lists"], function (province, value) {
+                html += '<tr>'
+                        + '<td class="text-bold">' + province + '</td>'
+                        + '</tr>';
+                $.each(value, function (key2, value2) {
+                    var siloName = '';
+                    if (tmp != value2["wareHouseCode"] + ' [' + value2["associate"] + ']') {
+                        countAll++;
+                        siloName = countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']';
+                    }
+                    html += '<tr>'
+                            + '<td style="padding-left:20px;">' + siloName + '</td>'
+                            + '<td>' + value2["bidderName"] + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
+                            + '</tr>';
+
+                    tmp = value2["wareHouseCode"] + ' [' + value2["associate"] + ']';
+
+                });
+            });
+        }
+
+        $("#bidderBody").html(html);
+
+        $("#countAll").html(countAll);
+    }
+
+    function toggleShow(option) {
+        if (option == "view") {
+            $("#bidderTable").hide();
+            $("#bidderView, #showTable").show();
+
+            $("#bidderView").empty();
+        }
+        else if (option == "list") {
+            $("#bidderTable").show();
+            $("#bidderView, #showTable").hide();
+        }
+    }
+
+
+</script>

@@ -1,0 +1,626 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}auction.price.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li data-option-value=".websites" class="padding-left">
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.buttonInfoList{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="bidderTable"><!-- table shown bidder price list -->
+                <section class="panel form-wizard" id="w1"><!-- search -->
+                    <div class="panel-body panel-body-nopadding">
+                        <div class="col-md-12" style="margin: 20px 0px 20px 0px;">
+                            <div class="col-xs-4">
+                                <label class="col-md-4 control-label text-right" for="searchQueue">{{#i18n}}auction.queue{{/i18n}} :</label>
+                                <div class="col-md-8">
+                                    <select class="form-control input-sm" name="searchQueue" id="searchQueue" required>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-8 text-right">{{#i18n}}auction.savePrice{{/i18n}} <span id="totalInsert" class="text-bold text-tertiary"></span> {{#i18n}}auction.person{{/i18n}} / {{#i18n}}auction.bidder{{/i18n}} <span id="totalBidder" class="text-bold"></span> {{#i18n}}auction.person{{/i18n}}</div>
+                        </div>
+                    </div>
+                </section><!-- end search -->
+                
+                <div class="col-md-12">
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                        <tr>
+                            <th class="text-center col-md-2" style="vertical-align: middle;">{{#i18n}}auction.queue{{/i18n}}</th>
+                            <th class="text-center col-md-6" style="vertical-align: middle;">{{#i18n}}auction.bidder{{/i18n}}</th>
+                            <th class="text-center col-md-2">{{#i18n}}auction.savePrice{{/i18n}} / {{#i18n}}auction.countSilo{{/i18n}}</th>
+                            <th class="text-center col-md-2" style="vertical-align: middle;">{{#i18n}}auction.action{{/i18n}}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="4" class="text-center">-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end table shown bidder item price list -->
+
+            <div id="bidderForm" class="col-md-12" style="display: none;"><!-- bidder item price form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <div class="form-group" >
+                                <label class="col-md-3 control-label req" for="bidderHistoryId">{{#i18n}}auction.bidder{{/i18n}} :</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm" name="bidderHistoryId" id="bidderHistoryId" required>
+                                    </select>
+                                </div>
+                                <div style="float: right;"><button class="btn btn-primary checkList"><i class="fa fa-print"></i> {{#i18n}}auction.buttonCheckList{{/i18n}}</button></div>
+                            </div>
+
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-down"></a>
+                                </div>
+                                <h2 class="panel-title">{{#i18n}}auction.bidder{{/i18n}} : <div id="bidderHead" style="display: inline-block;"></div></h2>
+                            </header>
+
+                            <div class="panel-body"><!-- show list item price -->
+                                <div class="table-responsive col-md-12">
+                                    <table id="listTable" class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.queue{{/i18n}}</th>
+                                            <th class="text-center col-md-4" style="vertical-align: middle;">{{#i18n}}auction.silo{{/i18n}}</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}})</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                            <th class="text-center col-md-2" style="vertical-align: middle;">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.diffPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                            <th class="text-center col-md-2" style="vertical-align: middle;">{{#i18n}}auction.action{{/i18n}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td colspan="7" class="text-center">-</td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="2" class="text-center text-bold">{{#i18n}}auction.total{{/i18n}}</td>
+                                                <td class="text-bold text-tertiary text-right"></td>
+                                                <td class="text-bold text-right"></td>
+                                                <td class="text-bold text-right"></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div><!-- end show list item price -->
+
+                        </section>
+                    </div>
+                </form>
+            </div><!-- end bidder item price form -->
+        </div><!-- row -->
+    </div><!-- container -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    var listArr = [];
+    var sumPrice = 0;
+    
+    $(function(){
+        showAllItem();
+
+        $("#searchQueue").select2();
+        $("#bidderHistoryId").select2();
+
+        $("#bidderHistoryId").html(listBidder()).change(function(){
+            if(getTag($("#bidderHistoryId").val(), "") != ""){
+                showBidderPrice();
+            }
+        });
+
+        $("button.table").click(function () {
+            toggleShow("list");
+        });
+        
+        $("button.checkList").click(function(){
+            if($("#bidderHistoryId").val() != ""){
+                //window.open("/reporter/api/rice/report/export?reportcode=RPT02_04&auccode=AU5/2558&export=view&p_1="+$("#bidderHistoryId").find('option:selected').attr("data-queue"), "_blank");
+               // window.open("/reporter/api/rice/report/checklist?auccode=AU5/2558&bidderqueue="+$("#bidderHistoryId").find('option:selected').attr("data-queue")+"&export=view", "_blank");
+                var dataHistory = {};
+                dataHistory["queue"] = $("#bidderHistoryId").find('option:selected').attr("data-queue");
+				dataHistory["type"]="normal";
+                var fdata = {};
+                fdata["report"] = dataHistory;
+                var dataJSON = JSON.stringify({report: fdata["report"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                var datas = callAjax("{{_context_path}}/api/report/report/checkList", "post", dataJSONEN, "json");
+                if (typeof datas !== 'undefined' && datas !== null) {
+                    var win = window.open(datas["export"], '_blank');
+                    win.focus();
+                }
+            }
+        });
+    });
+
+    function showAllItem() {
+        var dataSet = [];
+        var searchQueue = {};
+        
+        var datas = callAjax("{{_context_path}}/api/order/bidderItem/listsCountItem", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            var insertPrice = 0;
+            $.each(datas["lists"], function(key, value){
+                dataSet.push(value);
+
+                searchQueue[value["queue"]] = value["queue"];
+                
+                if(value["countPrice"] != 0){
+                    insertPrice++;
+                }
+            });
+
+            $("#searchQueue").empty();
+            $("#searchQueue").append('<option value="" selected="selected">ทั้งหมด</option>');
+            $.each(searchQueue, function(key, value){
+                $("#searchQueue").append('<option value="'+value+'">'+value+'</option>');
+            });
+            
+            $("#totalInsert").html(insertPrice);
+            $("#totalBidder").html(datas["lists"].length);
+        }
+
+        var t = $("#table").DataTable( {
+            "destroy": true,
+            "data": dataSet,
+            "order": [[ 0, 'asc' ]],
+            "iDisplayLength": 50,
+            "columnDefs": [ 
+                { 
+                    "targets": 0,
+                    "data": "queue",
+                    "sClass": "text-center col-md-2"
+                },
+                {
+                    "targets": 1,
+                    "data": "bidderName",
+                    "sClass": "col-md-6"
+                },
+                {
+                    "targets": 2,
+                    "data": "bidderHistoryId",
+                    "sClass": "text-center text-bold col-md-2",
+                    "render": function (data, type, full) {
+                        var content = '<span class="text-tertiary">'+full["countPrice"]+"</span> / "+full["countSilo"];
+                        return content;
+                    }
+                },
+                {
+                    "targets": 3,
+                    "orderable": false,
+                    "data": "bidderHistoryId",
+                    "sClass": "text-center col-md-2",
+                    "render": function (data) {
+                        var content = '<button class="btn btn-primary view" title="ดูข้อมูล" data-bhid="' + data+'"><i class="fa fa-list"></i></button>';
+                        return content;
+                    }   
+                }
+            ]
+        });
+
+        /*t.on( 'order.dt search.dt', function () {
+            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                cell.innerHTML = i+1;
+            } );
+        } ).draw();*/
+
+        $('#searchQueue').change(function() {
+            if($('#searchQueue').val() != ""){
+                t.columns(0).search("^"+$(this).val()+"$", true, false, true).draw();
+            }
+            else{
+                t.columns(0).search($(this).val()).draw();
+            }
+        });
+
+        $("#table").off("click", "button.view").on("click", "button.view", function(event){
+            event.preventDefault();
+            var index = $(this).attr("data-bhid");
+
+            toggleShow("form");
+
+            $("#bidderHistoryId").val(index).trigger("change");
+        });
+    }
+
+    function showBidderPrice() {
+        var dataHistory = {};
+        dataHistory["id"] = $("#bidderHistoryId").val();
+
+        var fdata = {};
+        fdata["BidderHistory"] = dataHistory;
+
+        var dataJSON = JSON.stringify({bidderHistory: fdata["BidderHistory"]});
+        var dataJSONEN = encodeURIComponent(dataJSON);
+
+        listArr = [];
+        var dataSet = [];
+        var sumWeight = 0;
+        var sumRfv = 0;
+        sumPrice = 0;
+        $("#listTable tbody").html('<tr><td colspan="7" class="text-center">Loading...</td></tr>');
+        $("#listTable").find("tfoot td").eq(1).html("-");
+        $("#listTable").find("tfoot td").eq(2).html("-");
+        $("#listTable").find("tfoot td").eq(3).html("-");
+        $("#bidderHead").html($("#bidderHistoryId option:selected").text());
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/order/bidderPrice/listsPrice", "post", dataJSONEN, "json");
+            if (typeof datas !== undefined && datas !== null) {                
+                $.each(datas["bidderPrice"], function(key, value){
+                    dataSet.push(value);
+                    listArr[value["id"]] = value;
+
+                    sumWeight += parseFloat(value["weightAll"]);
+                    sumRfv += parseFloat(value["rfv"]);
+                    if(value["auctionPrice"] != ""){
+                        sumPrice += parseFloat(value["auctionPrice"]);
+                        //console.log(sumPrice);
+                    }
+
+                });
+                
+                $("#listTable").find("tfoot td").eq(1).html(accounting.formatNumber(sumWeight, 6, ",", "."));
+                $("#listTable").find("tfoot td").eq(2).html(accounting.formatNumber(sumRfv, 2, ",", "."));
+                $("#listTable").find("tfoot td").eq(3).html(accounting.formatNumber(sumPrice, 2, ",", "."));
+        
+                
+                var t = $("#listTable").DataTable( {
+                    "destroy": true,
+                    "data": dataSet,
+                    "order": [[ 0, 'asc' ]],
+                    "iDisplayLength": 50,
+                    "columnDefs": [ 
+                        { 
+                            "targets": 0,
+                            "data": "id",
+                            "sClass": "text-center col-md-1"
+                        },
+                        {
+                            "targets": 1,
+                            "data": "id",
+                            "sClass": "col-md-3",
+                            "render": function (data, key, full) {
+                                var content = full["silo"] + ' ['+full["province"]+'] ['+full["associate"]+']';
+                                return content;
+                            }  
+                        },
+                        {
+                            "targets": 2,
+                            "data": "weightAll",
+                            "sClass": "text-right text-tertiary",
+                            "render": function (data) {
+                                var content = accounting.formatNumber(data, 6, ",", ".");
+                                return content;
+                            }   
+                        },
+                        {
+                            "targets": 3,
+                            "data": "rfv",
+                            "sClass": "text-right",
+                            "render": function (data) {
+                                var content = accounting.formatNumber(data, 2, ",", ".");
+                                return content;
+                            }   
+                        },
+                        {
+                            "targets": 4,
+                            "data": "id",
+                            "sClass": "text-right text-bold",
+                            "render": function (data, key, full) {
+                                var content = '<span id="price-'+full["id"]+'">' + accounting.formatNumber(full["auctionPrice"], 2, ",", ".") + '</span>';
+                                return content;
+                            }   
+                        },
+                        {
+                            "targets": 5,
+                            "data": "id",
+                            "sClass": "text-right text-bold",
+                            "render": function (data, key, full, meta) {
+                                var diff = full["auctionPrice"] - full["rfv"];
+
+                                var bg = "bg-green";
+                                var icon = "fa fa-thumbs-o-up";
+                                if(diff < 0){
+                                    bg = "bg-red";
+                                    icon = "fa fa-thumbs-o-down";
+                                }
+                                var content = '<span id="diff-'+full["id"]+'"><i class="'+icon+'"></i><br>'+accounting.formatNumber(diff, 2, ",", ".")+'</span>';
+                                return content;
+                            },
+                            "createdCell": function (td, data, full) {
+                                if (full["auctionPrice"] >= full["rfv"]) {
+                                    $(td).addClass("bg-green");
+                                }
+                                else{
+                                    $(td).addClass("bg-red");
+                                }
+                            }
+                        },
+                        {
+                            "targets": 6,
+                            "orderable": false,
+                            "data": "id",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                var content = '<div id="button1-'+data+'">'
+                                    + '<button class="btn btn-primary edit" title="แก้ไข" data-pid="'+data+'"><i class="fa fa-pencil"></i></button>'
+                                + '</div>'
+                                + '<div id="button2-'+data+'" style="display: none;">'
+                                    + '<button class="btn btn-primary save" title="บันทึก" data-pid="'+data+'"><i class="fa fa-check"></i></button>&nbsp;'
+                                    + '<button class="btn btn-default cancel" title="ยกเลิก" data-pid="'+data+'"><i class="fa fa-times"></i></button>'
+                                + '</div>';
+                        
+                                return content;
+                            }   
+                        }
+                    ]
+                });
+                t.on( 'order.dt search.dt', function () {
+                    t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                        cell.innerHTML = i+1;
+                    } );
+                } ).draw();
+                
+                $("#listTable").on("click", "button.edit", function(){
+                    var index = $(this).attr("data-pid");
+                    var dt = listArr[index];
+
+                    $("#price-"+dt["id"]).html('<input type="text" name="auctionPrice-'+dt["id"]+'" id="auctionPrice-'+dt["id"]+'" value="'+accounting.formatNumber(dt["auctionPrice"], 2, ",", ".")+'">');
+                    $("#button1-"+dt["id"]).hide();
+                    $("#button2-"+dt["id"]).show();
+                    
+                    $("#auctionPrice-"+dt["id"]).focus().select();
+
+                });
+                
+                $("#listTable").on("click", "button.save", function(){
+                    var index = $(this).attr("data-pid");
+                    var st = listArr[index];
+                    var dataPrice = {};
+                    //console.log(st["id"]);
+                    var price = $("#auctionPrice-"+st["id"]).val();
+
+                    var diff = parseFloat(price.replace(/,/g, "")) - parseFloat(st["rfv"]);
+
+                    var isPass = "Y";
+                    if(diff < 0){ 
+                        isPass = "N";
+                    }
+
+                    //alert(price.replace("/,/g", ""));
+                    dataPrice["bidderItemId"] = st["id"];
+                    dataPrice["round"] = 0;
+                    dataPrice["auctionPrice"] = price.replace(/,/g, "");
+                    dataPrice["isPassFV"] = isPass;
+                    dataPrice["isSale"] = "N";
+
+                    var fdata = {};
+                    fdata["BidderPriceSilo"] = dataPrice;
+                    var dataJSON = JSON.stringify({bidderPrice: fdata["BidderPriceSilo"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    saveAuctionPrice(dataJSONEN, st, price.replace(/,/g, ""));
+                });
+
+                $("#listTable").on("click", "button.cancel", function(){
+                    var index = $(this).attr("data-pid");
+                    var st = listArr[index];
+
+                    $("#price-"+st["id"]).html(accounting.formatNumber(st["auctionPrice"], 2, ",", "."));
+                    //$("#diff-"+st["id"]).html(accounting.formatNumber(st["auctionPrice"]-st["rfv"], 2, ",", "."));
+
+                    $("#button1-"+st["id"]).show();
+                    $("#button2-"+st["id"]).hide();
+                });
+    /*
+                var html = '';
+                for (var i = 0; i < datas["bidderPrice"].length; i++) {
+                    var value = datas["bidderPrice"][i];
+                    listArr[value["id"]] = value;
+
+                    var diff = value["auctionPrice"] - value["rfv"];
+
+                    var bg = "bg-green";
+                    var icon = "fa fa-thumbs-o-up";
+                    if(diff < 0){
+                        bg = "bg-red";
+                        icon = "fa fa-thumbs-o-down";
+                    }
+
+                    html += '<tr>'
+                        + '<td class="text-center" style="vertical-align: middle;">' + (i + 1) + '</td>'
+                        + '<td class="text-left" style="vertical-align: middle;">' + value["silo"] + ' ['+value["province"]+'] ['+value["associate"]+']</td>'
+                        + '<td class="text-right text-tertiary" style="vertical-align: middle;">' + accounting.formatNumber(value["weightAll"], 6, ",", ".") + '</td>'
+                        + '<td class="text-right" style="vertical-align: middle;">' + accounting.formatNumber(value["rfv"], 2, ",", ".") + '</td>'
+                        + '<td class="text-right text-bold" style="vertical-align: middle;" id="price-'+value["id"]+'">' + accounting.formatNumber(value["auctionPrice"], 2, ",", ".") + '</td>'
+                        + '<td class="text-right '+bg+'" style="vertical-align: middle;" id="diff-'+value["id"]+'"><i class="'+icon+'"></i><br>'+accounting.formatNumber(diff, 2, ",", ".")+'</div></td>'
+                        + '<td class="text-center">'
+                            + '<div id="button1-'+value["id"]+'">'
+                                + '<button class="btn btn-primary edit" data-pid="'+value["id"]+'"><i class="fa fa-pencil"></i></button>'
+                            + '</div>'
+                            + '<div id="button2-'+value["id"]+'" style="display: none;">'
+                                + '<button class="btn btn-primary save" data-pid="'+value["id"]+'"><i class="fa fa-check"></i></button>&nbsp;'
+                                + '<button class="btn btn-default cancel" data-pid="'+value["id"]+'"><i class="fa fa-times"></i></button>'
+                            + '</div>'
+                        + '</td>'
+                    + '</tr>';
+                }
+                $(".itemListBody").html(html);
+                $("#bidderHead").html($("#bidderHistoryId option:selected").text());
+
+                $("button.edit").unbind().click(function () {
+                    var index = $(this).attr("data-pid");
+                    var dt = listArr[index];
+
+                    $("#price-"+dt["id"]).html('<input type="text" name="auctionPrice-'+dt["id"]+'" id="auctionPrice-'+dt["id"]+'" value="'+accounting.formatNumber(dt["auctionPrice"], 2, ",", ".")+'">');
+                    $("#button1-"+dt["id"]).hide();
+                    $("#button2-"+dt["id"]).show();
+                    
+                    $("#auctionPrice-"+dt["id"]).focus().select();
+
+                });
+
+                $("button.save").unbind().click(function(){
+                    var index = $(this).attr("data-pid");
+                    var st = listArr[index];
+                    var dataPrice = {};
+                    var price = $("#auctionPrice-"+st["id"]).val();
+
+                    var diff = parseFloat(price.replace(/,/g, "")) - parseFloat(st["rfv"]);
+
+                    var isPass = "Y";
+                    if(diff < 0){ 
+                        isPass = "N";
+                    }
+
+                    //alert(price.replace("/,/g", ""));
+                    dataPrice["bidderItemId"] = st["id"];
+                    dataPrice["round"] = 0;
+                    dataPrice["auctionPrice"] = price.replace(/,/g, "");
+                    dataPrice["isPassFV"] = isPass;
+
+                    var fdata = {};
+                    fdata["BidderPriceSilo"] = dataPrice;
+                    var dataJSON = JSON.stringify({bidderPrice: fdata["BidderPriceSilo"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    saveAuctionPrice(dataJSONEN, st["id"], price.replace(/,/g, ""), st["rfv"]);
+                });
+
+                $("button.cancel").unbind().click(function(){
+                    var index = $(this).attr("data-pid");
+                    var st = listArr[index];
+
+                    $("#price-"+st["id"]).html(accounting.formatNumber(st["auctionPrice"], 2, ",", "."));
+                    //$("#diff-"+st["id"]).html(accounting.formatNumber(st["auctionPrice"]-st["rfv"], 2, ",", "."));
+
+                    $("#button1-"+st["id"]).show();
+                    $("#button2-"+st["id"]).hide();
+                });*/
+            }
+        }, 100);
+    }
+
+    function listBidder() {
+        var html = '';
+        var datas = callAjax("{{_context_path}}/api/order/bidderInfo/listsPass", "post", {}, "json");
+        if (typeof datas !== undefined && datas !== null) {
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+
+                html += '<option value="' + value["bidderHistoryId"] + '" data-queue="'+value["queue"]+'">' + value["bidderName"] + '</option>';
+            }
+        }
+        return html;
+    }
+
+    function saveAuctionPrice(dataJSONEN, arr, price){
+        var divLoading = arr["id"];
+
+        $("#price-"+divLoading).html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function(){
+            var datas = callAjax("{{_context_path}}/api/order/bidderPrice/savePrice", "post", dataJSONEN, "json");
+
+            if (typeof datas !== "undefined" && datas !== null) {
+                if(datas["save"] == true){
+                    
+                    $("#price-"+divLoading).html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+
+                    setTimeout(function(){
+                        $("#price-"+divLoading).html(accounting.formatNumber(price, 2, ",", "."));
+
+                        $("#diff-"+divLoading).parent().closest("td").removeClass("bg-green, bg-red");
+
+                        var diff = parseFloat(price.replace(/,/g, "")) - parseFloat(arr["rfv"]);
+                        if(diff < 0){
+                            $("#diff-"+divLoading).html('<i class="fa fa-thumbs-o-down"></i><br>'+ accounting.formatNumber(diff, 2, ",", "."));
+                            $("#diff-"+divLoading).parent().closest("td").addClass("bg-red");
+                        }
+                        else{
+                            $("#diff-"+divLoading).html('<i class="fa fa-thumbs-o-up"></i><br>'+ accounting.formatNumber(diff, 2, ",", "."));
+                            $("#diff-"+divLoading).parent().closest("td").addClass("bg-green");
+                        }
+
+                        $("#button1-"+divLoading).show();
+                        $("#button2-"+divLoading).hide();
+
+                        if(arr["auctionPrice"] == ""){
+                            sumPrice += parseFloat(price.replace(/,/g, ""));
+                        }
+                        else{
+                            sumPrice = sumPrice - parseFloat(arr["auctionPrice"]) + parseFloat(price.replace(/,/g, ""));
+                        }
+
+                        //console.log(parseFloat(sumPrice)+" "+parseFloat(arr["auctionPrice"])+" "+parseFloat(price.replace(/,/g, "")));
+
+                        $("#listTable").find("tfoot td").eq(3).html(accounting.formatNumber(sumPrice, 2, ",", "."));
+                        listArr[arr["id"]]["auctionPrice"] = price;
+
+                    }, 500);
+                }
+                else{
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function toggleShow(option) {
+        if (option == "form") {
+            $("#bidderForm, #showTable").show();
+            $("#bidderTable").hide();
+
+            $("#form select").each(function () {
+                $(this).val("").trigger("change");
+            });
+            $("#dataSiloBody").html('<tr><td class="text-center">-</td></tr>');
+            $("#listTable tbody").html('<tr><td colspan="5" class="text-center">-</td></tr>');
+            $("#bidderHead").html("");
+        }
+        else if (option == "list") {
+            $("#bidderTable").show();
+            $("#bidderForm, #showTable").hide();
+            showAllItem();
+        }
+    }
+
+</script>
+

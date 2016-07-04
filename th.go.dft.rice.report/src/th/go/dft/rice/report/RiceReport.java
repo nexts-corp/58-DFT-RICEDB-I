@@ -38,7 +38,7 @@ public class RiceReport extends AbstractService {
                 unregister();
             }
         } else {
-            //System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
+           // System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
             ChangdaoEngine.start(args);
         }
     }
@@ -46,7 +46,7 @@ public class RiceReport extends AbstractService {
     @Override
     public int serviceMain(String[] strings) throws ServiceException {
         try {
-            System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
+           // System.setProperty("java.util.logging.manager", "org.apache.logging.log4j.jul.LogManager");
             ChangdaoEngine.start(strings);
             return 0;
         } catch (Exception ex) {
