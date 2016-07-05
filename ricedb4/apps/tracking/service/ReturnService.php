@@ -21,6 +21,7 @@ class ReturnService extends CServiceBase implements IReturnService {
     public function listsAuction() {
         $sql = "select s from " . $this->ent . "\\Status s "
                 . " where s.keyword like 'AU%' and s.active is not null "
+                . " and s.keyword not like '%O' "
                 . " order by s.id desc";
         return $this->datacontext->getObject($sql);
     }
