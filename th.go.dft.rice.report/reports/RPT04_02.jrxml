@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02_09" language="groovy" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="36" bottomMargin="36" isFloatColumnFooter="true" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
 	<property name="ireport.zoom" value="1.1269722013523664"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="322"/>
 	<style name="FBold" fill="Solid" hAlign="Left" vAlign="Top" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H"/>
 	<style name="Rpt" fontName="TH SarabunPSK" fontSize="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
 	<style name="Default" isDefault="true" fontName="TH SarabunPSK" fontSize="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
@@ -246,9 +246,9 @@ $P{auctionDate}.split("-")[0]
 					<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="0" y="383" width="483" height="33" uuid="63b3ebc8-e43d-43c5-8189-3ebc71ec453f"/>
 					<box leftPadding="0"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="22"/>
+						<font size="18"/>
 					</textElement>
-					<text><![CDATA[มูลค่ารวม (ตัวอักษร) ............................................................................................]]></text>
+					<text><![CDATA[มูลค่ารวม (ตัวอักษร) .................................................................................................................................]]></text>
 				</staticText>
 				<textField pattern="#,##0.00">
 					<reportElement style="FBold" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="165" y="350" width="269" height="30" uuid="6817a7eb-45b0-4548-b75d-8f339398b4c9"/>
@@ -257,6 +257,13 @@ $P{auctionDate}.split("-")[0]
 						<font size="22" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{bidderPrice}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="107" y="388" width="376" height="20" uuid="50578565-79c1-4f7c-8bf4-8e2567411625"/>
+					<textElement textAlignment="Center">
+						<font size="15" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["-"+new th.go.dft.rice.report.util.ThaiBaht().getText($F{bidderPrice})+"-"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
