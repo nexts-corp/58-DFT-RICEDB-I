@@ -5,19 +5,21 @@ $(function () {
         var resource = '';
         var name = '';
         var permission = '';
+        var uri = '';
         var send = [];
         var data;
         var total = $("input[type=checkbox]").length;
         $("input[type=checkbox]").each(function (k, v) {
             resource = $(this).attr("data-resource");
             name = $(this).attr("data-name");
+            uri = $(this).attr("data-uri");
             if ($(this).prop("checked")) {
                 permission += '1';
             } else {
                 permission += '0';
             }
             if ((k == (total - 1)) || ((k + 1) % (countRole - 1) == 0)) { //last checkbox
-                data = {"resourceCode": resource, "resourceName": name, "permission": permission};
+                data = {"resourceCode": resource, "resourceName": name, "permission": permission, "uri": uri};
                 send.push(data);
                 permission = '';
             }

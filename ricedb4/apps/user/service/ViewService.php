@@ -93,16 +93,16 @@ class ViewService extends CServiceBase implements IViewService {
                 ksort($srts);
                 $list_apps[$kk]->routeTables = [];
                 foreach ($srts as $i => $rt) {
-                    if (substr($rt->operationDesc, 0, 2) == ' M') {
-                        $rt->operationDesc = substr($rt->operationDesc, 5);
-                    } else {
-                        $rt->operationDesc = substr($rt->operationDesc, 1);
-                    }
-                    if (substr($rt->serviceDesc, 0, 2) == ' M') {
-                        $rt->serviceDesc = substr($rt->serviceDesc, 5);
-                    } else {
-                        $rt->serviceDesc = substr($rt->serviceDesc, 1);
-                    }
+//                    if (substr($rt->operationDesc, 0, 2) == ' M') {
+//                        $rt->operationDesc = substr($rt->operationDesc, 5);
+//                    } else {
+//                        $rt->operationDesc = substr($rt->operationDesc, 1);
+//                    }
+//                    if (substr($rt->serviceDesc, 0, 2) == ' M') {
+//                        $rt->serviceDesc = substr($rt->serviceDesc, 5);
+//                    } else {
+//                        $rt->serviceDesc = substr($rt->serviceDesc, 1);
+//                    }
                     $list_apps[$kk]->routeTables[] = $rt;
                 }
                 $k++;
@@ -112,9 +112,9 @@ class ViewService extends CServiceBase implements IViewService {
         ksort($list_apps);
         $list_apps_sort = [];
         foreach ($list_apps as $i => $a) {
-            if (substr($a->title, 0, 1) == 'M') {
-                $a->title = substr($a->title, 4);
-            }
+//            if (substr($a->title, 0, 1) == 'M') {
+//                $a->title = substr($a->title, 4);
+//            }
             $list_apps_sort[] = $a;
         }
 

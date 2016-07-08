@@ -20,6 +20,9 @@ class Permission extends EntityBase {
     /** @Column(type="string", length=255, name="permission") */
     public $permission;
 
+    /** @Column(type="string", length=255, name="uri") */
+    public $uri;
+
     function getResourceCode() {
         return $this->resourceCode;
     }
@@ -32,6 +35,10 @@ class Permission extends EntityBase {
         return $this->permission;
     }
 
+    function getUri() {
+        return $this->uri;
+    }
+
     function setResourceCode($resourceCode) {
         $this->resourceCode = $resourceCode;
     }
@@ -42,6 +49,10 @@ class Permission extends EntityBase {
 
     function setPermission($permission) {
         $this->permission = $permission;
+    }
+
+    function setUri($uri) {
+        $this->uri = $uri;
     }
 
 }
