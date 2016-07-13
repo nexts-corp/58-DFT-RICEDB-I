@@ -345,8 +345,8 @@
         $("button.checkList").unbind().click(function () {
             var dataHistory = {};
             dataHistory["queue"] = value["queue"];
-			dataHistory["type"]="normal";
-			
+            dataHistory["type"] = "order";
+
             var fdata = {};
             fdata["report"] = dataHistory;
             var dataJSON = JSON.stringify({report: fdata["report"]});
@@ -511,7 +511,7 @@
              console.log("1");
              countCheck++;
              sumReturn += parseFloat($(this).val());
-              
+             
              //$(this).prop("checked", true);
              }
              else{
@@ -519,25 +519,25 @@
              countCheck--;
              sumReturn -= parseFloat($(this).val());
              }
-              
+             
              if (parseInt(sumPayment - sumReturn) < parseInt(sumGuarantee)) {  
              //$(this).removeAttr("checked");
              //event.stopImmediatePropagation();
              alert("จำนวนหลักค้ำประกันไม่พอ");
-              
+             
              countCheck--;
              sumReturn -= parseFloat($(this).val());
-              
+             
              $(this).prop("checked", false);
              $("#checkall").prop("checked", false);
-              
+             
              }
-              
+             
              $("#countCheckbox").html(countCheck);
              $("#txtSelect").text(accounting.formatNumber(sumReturn, 2, ",", "."));
              $("#txtBalance").text(accounting.formatNumber(sumPayment - sumReturn, 2, ",", "."));
              });
-              
+             
              $("#checkall").prop("checked", false); 
              $("#checkall").unbind().click(function(){
              if ($("#checkall").is(":checked")) {
@@ -556,10 +556,10 @@
              });
              }
              });
-              
+             
              $(".row-tr").unbind().click(function (event) {
              //event.stopPropagation();
-              
+             
              //var input = $(this).find("td label input.switch-input");
              //input.trigger("click");
              if (event.target.type !== 'checkbox') {

@@ -54,6 +54,10 @@
 	<field name="failBidder" class="java.lang.Integer"/>
 	<field name="bidderRegister" class="java.lang.String"/>
 	<field name="bidderAgent" class="java.lang.String"/>
+	<field name="auctionDay1" class="java.lang.String"/>
+	<field name="auctionDay2" class="java.lang.String"/>
+	<field name="auctionDay3" class="java.lang.String"/>
+	<field name="auctionDay4" class="java.lang.String"/>
 	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
@@ -191,7 +195,7 @@ $P{auctionDate}.split("-")[0]
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ผู้มายื่นซองตรวจ\nคุณสมบัติเบื้องต้น \n("+$V{date1}+")"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ผู้มายื่นซองตรวจ\nคุณสมบัติเบื้องต้น \n("+$F{auctionDay1}+")"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="Default" stretchType="RelativeToBandHeight" mode="Transparent" x="445" y="0" width="165" height="60" uuid="5a630b09-5271-41c6-ad2d-9c5cd17f02b8"/>
@@ -204,7 +208,7 @@ $P{auctionDate}.split("-")[0]
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ผู้มายื่นซองเสนอซื้อ\n(กรุณาเขียนตัวบรรจง)\n("+$V{date2}+")"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ผู้มายื่นซองเสนอซื้อ\n(กรุณาเขียนตัวบรรจง)\n("+$F{auctionDay2}+")"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>

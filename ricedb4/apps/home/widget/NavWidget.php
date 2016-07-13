@@ -52,10 +52,12 @@ class NavWidget extends CWidget {
 
         if (count($data) > 0) {
             //13 มิถุนายน 2559
-            $d1 = $data[0]->auctionDateFirst;
-            $d2 = $data[0]->auctionDateLast;
+            $d1 = $data[0]->auctionDay1;
+            $d2 = $data[0]->auctionDay2;
+            $d3 = $data[0]->auctionDay3;
+            $d4 = $data[0]->auctionDay4;
             $c = $this->DateThai();
-            if ($d1 == $c || $d2 == $c) {
+            if ($d1 == $c || $d2 == $c || $d3 == $c || $d4 == $c) {
                 return true;
             } else {
                 return false;

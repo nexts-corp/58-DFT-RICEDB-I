@@ -324,7 +324,7 @@
                 // window.open("/reporter/api/rice/report/checklist?auccode=AU5/2558&bidderqueue="+$("#bidderHistoryId").find('option:selected').attr("data-queue")+"&export=view", "_blank");
                 var dataHistory = {};
                 dataHistory["queue"] = $("#bidderHistoryId").find('option:selected').attr("data-queue");
-                dataHistory["type"] = "normal";
+                dataHistory["type"] = "order";
                 var fdata = {};
                 fdata["report"] = dataHistory;
                 var dataJSON = JSON.stringify({report: fdata["report"]});
@@ -394,7 +394,7 @@
         }
         $("#btn_save").click(function () {
             $("#btn_save").prop("disabled", true);
-            
+
             $('.paymentDate').each(function () {
                 if (isValidDate(this.value) == false && this.value != "") {
                     var dateAr = this.value.split('-');

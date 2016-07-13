@@ -1,0 +1,131 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}report.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}report.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">{{#i18n}}report.auction.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="row">
+            <div class="col-md-12" style="text-align: center; margin: 15px;">
+                <div class="form-group">
+                    <label class="col-md-3 control-label text-right req" for="auCode">{{#i18n}}report.auctionNo{{/i18n}} :</label>
+                    <div class="col-md-6">
+                        <select class="form-control input-sm" name="auCode" id="auCode" required>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bidderTable" class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                        <tr>
+                            <th class="text-center">{{#i18n}}report.no{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}report.doc{{/i18n}}</th>
+                            <th class="text-center">{{#i18n}}report.export{{/i18n}}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="bidderBody">
+                        <tr>
+                            <td colspan="3" class="text-center">-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- col-md-12 -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    $(function(){
+        $("#auCode").html(listAuction());
+        showReportAuction();
+    });
+
+    function listAuction(){
+        var html = '';
+
+        var datas = callAjax("{{_context_path}}/api/report/report/listsAuction", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+
+                html += '<option value="' + value["keyword"] + '">' + value["status"] + '</option>';
+            }
+        }
+        return html;
+    }
+
+        function showReportAuction(){
+        var datas = callAjax("{{_context_path}}/api/report/report/listsReport", "post", {reportType: "Auction"}, "json");
+        if (typeof datas !== 'undefined' && datas !== null){
+            var html = '';
+            var tmp = '';
+            var i = 0;
+            $.each(datas["lists"], function(key, data){
+                if(tmp != data["reportGroup"]){
+                    html += '<tr>'
+                        + '<td colspan="3" class="text-center text-bold" style="background-color: #66ccff !important;">'+data["reportGroup"]+'</td>'
+                    + '</tr>';
+                }
+
+                html += '<tr>'
+                    + '<td class="text-center">'+(++i)+'</td>'
+                    + '<td>['+data["reportCode"]+'] '+data["reportName"]+'</td>'
+                    + '<td class="text-center">'
+                        + '<button class="btn btn-default export" data-type="view" data-code="'+data["reportCode"]+'"><i class="fa fa-file-pdf-o"></i> PDF</button>&nbsp;'
+                        + '<button class="btn btn-default export" data-type="word" data-code="'+data["reportCode"]+'"><i class="fa fa-file-word-o"></i> Word</button>&nbsp;'
+                        + '<button class="btn btn-default export" data-type="excel" data-code="'+data["reportCode"]+'"><i class="fa fa-file-excel-o"></i> Excel</button>'
+                    + '</td>'
+                +'</tr>'
+
+                tmp = data["reportGroup"];
+            });
+            $("#bidderBody").html(html);
+
+            $("button.export").unbind().click(function () {
+                var type = $(this).attr("data-type");
+                var code = $(this).attr("data-code");
+
+                sendParam(type, code);
+            });
+        }
+    }
+
+    function sendParam(type, code){
+        //alert($("#auCode").val()+" "+type+" "+code);
+        var dataExport = {};
+        dataExport["auCode"] = $("#auCode").val();
+        dataExport["reportCode"] = code;
+        dataExport["reportType"] = type;
+
+        var fdata = {};
+        fdata["report"] = dataExport;
+        var dataJSON = JSON.stringify({report: fdata["report"]});
+        var dataJSONEN = encodeURIComponent(dataJSON);
+
+        var datas = callAjax("{{_context_path}}/api/report/report/export", "post", dataJSONEN, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            var win = window.open(datas["export"], '_blank');
+            win.focus();
+        }
+    }
+</script>

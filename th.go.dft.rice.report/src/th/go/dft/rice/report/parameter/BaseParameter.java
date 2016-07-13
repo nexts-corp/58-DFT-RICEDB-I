@@ -12,13 +12,13 @@ import java.util.Locale;
  * @author somchit
  */
 public class BaseParameter {
+
     private String auctionNo;
     private String auctionCode;
     private String auctionDate;
     private int REPORT_MAX_COUNT;
     private String printBy;
     private Locale REPORT_LOCALE;
-    
     private String auctionName;
 
     public String getAuctionNo() {
@@ -76,9 +76,7 @@ public class BaseParameter {
     public void setAuctionName(String auctionName) {
         this.auctionName = auctionName;
     }
-    
-    
 
-    
-    
+
+   
 }

@@ -24,6 +24,28 @@ interface IReportService {
      * @description เมนูรายงาน
      */
     public function listsAuction();
+    
+    /**
+     * @name listsOrder
+     * @uri /listsOrder
+     * @return String[] lists Description
+     * @description เมนูรายงาน
+     */
+    public function listsOrder();
+    /**
+     * @name listsIndustry
+     * @uri /listsIndustry
+     * @return String[] lists Description
+     * @description เมนูรายงาน
+     */
+    public function listsIndustry();
+    /**
+     * @name listsIndustry2
+     * @uri /listsIndustry2
+     * @return String[] lists Description
+     * @description เมนูรายงาน
+     */
+    public function listsIndustry2();
 
     /**
      * @name export
