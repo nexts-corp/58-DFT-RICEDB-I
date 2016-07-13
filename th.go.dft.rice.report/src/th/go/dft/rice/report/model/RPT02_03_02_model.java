@@ -15,6 +15,9 @@ public class RPT02_03_02_model extends BaseReport {
 
     @Column
     private int bidderNo;
+    
+    @Column
+    private String bidderTaxId;
     @Column
     private String bidderName;
     @Column
@@ -46,20 +49,20 @@ public class RPT02_03_02_model extends BaseReport {
     @Column
     private String isCheckIn;
 
-    public String getIsCheckIn() {
-        return isCheckIn;
-    }
-
-    public void setIsCheckIn(String isCheckIn) {
-        this.isCheckIn = isCheckIn;
-    }
-
     public int getBidderNo() {
         return bidderNo;
     }
 
     public void setBidderNo(int bidderNo) {
         this.bidderNo = bidderNo;
+    }
+
+    public String getBidderTaxId() {
+        return bidderTaxId;
+    }
+
+    public void setBidderTaxId(String bidderTaxId) {
+        this.bidderTaxId = bidderTaxId;
     }
 
     public String getBidderName() {
@@ -76,6 +79,14 @@ public class RPT02_03_02_model extends BaseReport {
 
     public void setBidderQueue(String bidderQueue) {
         this.bidderQueue = bidderQueue;
+    }
+
+    public String getBidderRegister() {
+        return bidderRegister;
+    }
+
+    public void setBidderRegister(String bidderRegister) {
+        this.bidderRegister = bidderRegister;
     }
 
     public String getProperty1() {
@@ -158,12 +169,14 @@ public class RPT02_03_02_model extends BaseReport {
         this.failBidder = failBidder;
     }
 
-    public String getBidderRegister() {
-        return bidderRegister;
+    public String getIsCheckIn() {
+        return isCheckIn;
     }
 
-    public void setBidderRegister(String bidderRegister) {
-        this.bidderRegister = bidderRegister;
+    public void setIsCheckIn(String isCheckIn) {
+        this.isCheckIn = isCheckIn;
     }
+
+    
 
 }

@@ -69,6 +69,8 @@ public class BaseModel extends BaseReport implements Serializable {
     // @Id
     @Column
     private int bidderNo;
+    @Column
+    private String bidderTaxId;
 
     @Column
     private String bidderName;
@@ -88,38 +90,6 @@ public class BaseModel extends BaseReport implements Serializable {
 
     @Column
     private double bidderLastPrice;
-
-    public String getBidderAgent() {
-        return bidderAgent;
-    }
-
-    public void setBidderAgent(String bidderAgent) {
-        this.bidderAgent = bidderAgent;
-    }
-
-    public String getBidderAgent2() {
-        return bidderAgent2;
-    }
-
-    public void setBidderAgent2(String bidderAgent2) {
-        this.bidderAgent2 = bidderAgent2;
-    }
-
-    public String getBidderAgent3() {
-        return bidderAgent3;
-    }
-
-    public void setBidderAgent3(String bidderAgent3) {
-        this.bidderAgent3 = bidderAgent3;
-    }
-
-    public double getRFV() {
-        return RFV;
-    }
-
-    public void setRFV(double RFV) {
-        this.RFV = RFV;
-    }
 
     public int getWareHouseId() {
         return wareHouseId;
@@ -169,6 +139,46 @@ public class BaseModel extends BaseReport implements Serializable {
         this.associate = associate;
     }
 
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getStack() {
+        return stack;
+    }
+
+    public void setStack(String stack) {
+        this.stack = stack;
+    }
+
     public double getWeightAll() {
         return weightAll;
     }
@@ -183,6 +193,14 @@ public class BaseModel extends BaseReport implements Serializable {
 
     public void setOweightAll(double oweightAll) {
         this.oweightAll = oweightAll;
+    }
+
+    public double getRFV() {
+        return RFV;
+    }
+
+    public void setRFV(double RFV) {
+        this.RFV = RFV;
     }
 
     public double getFV2() {
@@ -225,6 +243,14 @@ public class BaseModel extends BaseReport implements Serializable {
         this.bidderNo = bidderNo;
     }
 
+    public String getBidderTaxId() {
+        return bidderTaxId;
+    }
+
+    public void setBidderTaxId(String bidderTaxId) {
+        this.bidderTaxId = bidderTaxId;
+    }
+
     public String getBidderName() {
         return bidderName;
     }
@@ -239,6 +265,30 @@ public class BaseModel extends BaseReport implements Serializable {
 
     public void setBidderPrice(double bidderPrice) {
         this.bidderPrice = bidderPrice;
+    }
+
+    public String getBidderAgent() {
+        return bidderAgent;
+    }
+
+    public void setBidderAgent(String bidderAgent) {
+        this.bidderAgent = bidderAgent;
+    }
+
+    public String getBidderAgent2() {
+        return bidderAgent2;
+    }
+
+    public void setBidderAgent2(String bidderAgent2) {
+        this.bidderAgent2 = bidderAgent2;
+    }
+
+    public String getBidderAgent3() {
+        return bidderAgent3;
+    }
+
+    public void setBidderAgent3(String bidderAgent3) {
+        this.bidderAgent3 = bidderAgent3;
     }
 
     public double getBidderFirstPrice() {
@@ -257,44 +307,6 @@ public class BaseModel extends BaseReport implements Serializable {
         this.bidderLastPrice = bidderLastPrice;
     }
 
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getProject() {
-        return project;
-    }
-
-    public void setProject(String project) {
-        this.project = project;
-    }
-
-    public int getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(int typeId) {
-        this.typeId = typeId;
-    }
-
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
-    }
-
-    public String getStack() {
-        return stack;
-    }
-
-    public void setStack(String stack) {
-        this.stack = stack;
-    }
+   
 
 }

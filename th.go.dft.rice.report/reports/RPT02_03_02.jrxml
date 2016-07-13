@@ -41,6 +41,7 @@
 	<field name="failBidder" class="java.lang.Integer"/>
 	<field name="bidderRegister" class="java.lang.String"/>
 	<field name="isCheckIn" class="java.lang.String"/>
+	<field name="bidderTaxId" class="java.lang.String"/>
 	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
@@ -204,7 +205,7 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{bidderName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bidderTaxId}+" "+$F{bidderName}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="292" y="0" width="75" height="20" uuid="c932fe87-6de1-4e14-b3e1-2d6ce7406cfa"/>
