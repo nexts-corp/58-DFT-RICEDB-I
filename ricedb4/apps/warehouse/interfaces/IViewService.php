@@ -33,7 +33,7 @@ interface IViewService {
      * @uri /priceDaily
      * @description M23 ราคาข้าวประจำวัน
      * @authen true
-     * @resource 10000000
+     * @resource 10000100
      * @sitemap true
      */
     public function priceDaily();
