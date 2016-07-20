@@ -5,7 +5,7 @@ set_time_limit(0);
 ini_set('memory_limit', '-1');
 require("phpexcel/Classes/PHPExcel/IOFactory.php");
 
-$inputFileName = 'files/AU4_2559.xlsx';
+$inputFileName = 'files/AU1_2559-I2.xlsx';
 //$extend = "2";
 
 $count = 0;
@@ -27,7 +27,7 @@ try {
             . '": ' . $e->getMessage());
 }
 
-$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
+$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
 
 // province
 $provArr = array();
@@ -158,11 +158,21 @@ for ($row = 4; $row <= $highestRow; $row++) {
 $link = null;
 
 function insertData($val) {
-    $statusKeyword = "AU4/2559";
+    $statusKeyword = "AU1/2559-I2";
+//    if($val["grade"]==10&&$val["type"]!=11){
+//        $val["useType"] = 20;
+//    }else{
+//        $val["useType"] = $val["type"];
+//    }
+    if($val["grade"]>=10){
+       $val["useType"] = 20;
+    }else{
+       $val["useType"] = $val["type"]; 
+    }
     //$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
     // $sqlIns = "INSERT INTO dft_Rice_Original(No, Code, Bag_No, Province, Project, Silo, Associate, Type, Warehouse, Stack, Weight, Sampling_Id, Grade, Discount_Rate, Grade_Optional, Is_Grade_Selected)"
     $sqlIns = "INSERT INTO dft_Rice_Tracking (Code, Bag_No, LK_Province_Id, LK_Project_Id,Round, Silo,Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight,Weight_All,TWeight, Sampling_Id, LK_Grade_Id, Discount_Rate,Remark,LK_Status_Keyword,UseType,UseGrade)"
-            . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "'," . $val["round"] . ", '" . $val["silo"] . "', '" . $val["address"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "','" . $val["weightAll"] . "'," . (float) $val["weightAll"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "','" . $val["remark"] . "','" . $statusKeyword . "','" . $val["type"] . "','" . $val["grade"] . "');";
+            . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "'," . $val["round"] . ", '" . $val["silo"] . "', '" . $val["address"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "','" . $val["weightAll"] . "'," . (float) $val["weightAll"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "','" . $val["remark"] . "','" . $statusKeyword . "','" . $val["useType"] . "','" . $val["grade"] . "');";
 
     print $sqlIns . "<br>";
 

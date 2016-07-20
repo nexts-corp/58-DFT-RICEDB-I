@@ -5,7 +5,7 @@ set_time_limit(0);
 ini_set('memory_limit', '-1');
 require("phpexcel/Classes/PHPExcel/IOFactory.php");
 
-$inputFileName = 'rice_14032016.xlsx'; //ทำล่าสุดให้พี่แก้ว
+$inputFileName = 'files/kae15072016.xlsx'; //ทำล่าสุดให้พี่แก้ว
 //$extend = "2";
 
 $count = 0;
@@ -26,7 +26,7 @@ try {
             . '": ' . $e->getMessage());
 }
 
-$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
+$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
 
 // province
 $provArr = array();
@@ -85,7 +85,7 @@ for ($row = 4; $row <= $highestRow; $row++) {
 
     //if(str_replace(" ", "", $rowData[0][9]) != '"' || str_replace(" ", "", $rowData[0][9]) == '')
     //print $rowData[0][1]."<br>";
-    if (strlen($rowData[0][3]) != 0) {
+    if (strlen($rowData[0][1]) != 0) {
         /* print '<tr>';
           print '<td>'.(++$count).'</td>'; */
         $val = array();
@@ -96,16 +96,16 @@ for ($row = 4; $row <= $highestRow; $row++) {
         $prov = $rowData[0][3]; //จังหวัด
         $proj = $rowData[0][4]; //ปีโครงการ
         $silo = $rowData[0][5]; //คลังสินค้า
-        $asso = $rowData[0][8]; //ผู้เข้าร่วม
-        $type = $rowData[0][9]; //ชนิดข้าว
-        $warehouse = $rowData[0][10]; //หลังที่
-        $stack = $rowData[0][11]; //กองที่
-        $weight = str_replace(",", "", $rowData[0][12]); //น้ำหนักไม่รวมกระสอบ
-        $samp = $rowData[0][13]; //คณะที่เก็บตัวอย่าง
-        $grade = $rowData[0][14]; //เกรดข้าว
-        $disc = $rowData[0][15];
-        $gradeOptional = $rowData[0][16];
-        $canSelect = $rowData[0][17];
+        $asso = $rowData[0][7]; //ผู้เข้าร่วม
+        $type = $rowData[0][8]; //ชนิดข้าว
+        $warehouse = $rowData[0][9]; //หลังที่
+        $stack = $rowData[0][10]; //กองที่
+        $weight = str_replace(",", "", $rowData[0][11]); //น้ำหนักไม่รวมกระสอบ
+        $samp = $rowData[0][12]; //คณะที่เก็บตัวอย่าง
+        $grade = $rowData[0][13]; //เกรดข้าว
+        $disc = $rowData[0][14];
+//        $gradeOptional = $rowData[0][16];
+//        $canSelect = $rowData[0][17];
 //        $status = $rowData[0][16];
 //        $weightAll = $rowData[0][17];
         // . "', '" .. "', '" . $val["discount"] . "', '" . $val["gradeOptional"] . "', '" . $val["canSelect"] . "');";
@@ -125,8 +125,8 @@ for ($row = 4; $row <= $highestRow; $row++) {
             "sampling" => $samp,
             "grade" => $gradeArr[str_replace(" ", "", $grade)], // $grade,
             "discount" => $disc,
-            "gradeOptional" => $gradeOptional,
-            "canSelect" => $canSelect,
+//            "gradeOptional" => $gradeOptional,
+//            "canSelect" => $canSelect,
 //            "status" => $status,
 //            "weightAll" => $weightAll,
         );
@@ -145,11 +145,11 @@ for ($row = 4; $row <= $highestRow; $row++) {
 $link = null;
 
 function insertData($val) {
-    $link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
+    //$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
 
     // $sqlIns = "INSERT INTO dft_Rice_Original(No, Code, Bag_No, Province, Project, Silo, Associate, Type, Warehouse, Stack, Weight, Sampling_Id, Grade, Discount_Rate, Grade_Optional, Is_Grade_Selected)"
-    $sqlIns = "INSERT INTO dft_Rice_Info_20160314(Code, Bag_No, LK_Province_Id, LK_Project_Id, Silo, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight,TWeight, Sampling_Id, LK_Grade_Id, Discount_Rate, Grade_Optional, Is_Grade_Selected)"
-            . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "', '" . $val["silo"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "'," . (float) $val["weight"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "', '" . $val["gradeOptional"] . "', '" . $val["canSelect"] . "');";
+    $sqlIns = "INSERT INTO dft_Rice_Info_15072016(Code, Bag_No, LK_Province_Id, LK_Project_Id, Silo, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight,TWeight, Sampling_Id, LK_Grade_Id, Discount_Rate)"
+            . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "', '" . $val["silo"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "'," . (float) $val["weight"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "');";
 
     print $sqlIns . "<br>";
 
