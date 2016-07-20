@@ -41,16 +41,16 @@
         <div class="tabs">
             <ul class="nav nav-tabs">
                 <li class="active">
-                    <a href="#waiting" data-toggle="tab">{{#i18n}}tracking.siloWaiting{{/i18n}}</a>
+                    <a href="#waiting" data-toggle="tab">{{#i18n}}tracking.siloWaiting{{/i18n}}<span id="count0"></span></a>
                 </li>
                 <li>
-                    <a href="#sale" data-toggle="tab">{{#i18n}}tracking.siloSell{{/i18n}}</a>
+                    <a href="#sale" data-toggle="tab">{{#i18n}}tracking.siloSell{{/i18n}}<span id="count1"></span></a>
                 </li>
                 <li>
-                    <a href="#condition" data-toggle="tab">{{#i18n}}tracking.siloCondition{{/i18n}}</a>
+                    <a href="#condition" data-toggle="tab">{{#i18n}}tracking.siloCondition{{/i18n}}<span id="count2"></span></a>
                 </li>
                 <li>
-                    <a href="#reserve" data-toggle="tab">{{#i18n}}tracking.siloProblem{{/i18n}}</a>
+                    <a href="#reserve" data-toggle="tab">{{#i18n}}tracking.siloProblem{{/i18n}}<span id="count3"></span></a>
                 </li>
             </ul>
             <div class="tab-content">
@@ -209,13 +209,30 @@
         } else {
             $.alert({
                 title: 'คำแนะนำ!',
-                content: 'กรุณาปิดการประมูลครั้งที่ ' + auccode.replace(/(AU)|(-I)/ig, "") + (auccode.search("-I") > -1 ? "(อุตฯ)" : "(ทั่วไป)") + ' ก่อนอนุมัติคลัง!',
+//                content: 'กรุณาปิดการประมูลครั้งที่ ' + auccode.replace(/(AU)|(-I2) | (-I) | (-IO) /ig, "") +
+//                        (auccode.search("-I2") > -1
+//                                ? "(ทั่วไปเพื่อเข้าสู่อุตฯ)" :
+//                                (auccode.search("-I") > -1
+//                                        ? "(อุตฯ)" :
+//                                        (auccode.search("-O") > -1
+//                                                ? "(คำสั่งซื้อ)" : "(ทั่วไป)"
+//
+//                                                )
+//
+//                                        )
+//                                )
+//                        + ' ก่อนอนุมัติคลัง!',
+                content: 'กรุณาปิดการประมูล' + $("#auction option[value='" + auccode + "']").text() + ' ก่อนอนุมัติคลัง!',
                 confirmButton: "ตกลง",
                 theme: 'black',
                 columnClass: 'col-md-4 col-md-offset-4',
                 confirm: function () {
-                    if (auccode.search("-I") > -1) {
+                    if (auccode.search("-I2") > -1) {
+                        location.href = "{{_context_path}}/api/industry2/view/closeAuction";
+                    } else if (auccode.search("-I") > -1) {
                         location.href = "{{_context_path}}/api/industry/view/closeAuction";
+                    } else if (auccode.search("-O") > -1) {
+                        location.href = "{{_context_path}}/api/order/view/closeAuction";
                     } else {
                         location.href = "{{_context_path}}/api/auction/view/closeAuction";
                     }
@@ -224,8 +241,8 @@
         }
     });
     function listsAuction() {
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsAuction", "post", {}, "json");
-        var dataAuction = datas["lists"];
+        var data = callAjax("{{_context_path}}/api/tracking/approve/listsAuction", "post", {}, "json");
+        var dataAuction = data["lists"];
         if (dataAuction != null) {
             var html = "";
             $.each(dataAuction, function (key, value) {
@@ -333,11 +350,13 @@
                             "<td class='text-center'><input type='checkbox' class='cb-element' name='check' value='" + key + "' /></td>" +
                             "</tr>";
                     $("#countAll").text((key + 1));
+                    $("#count0").text("(" + parseInt(key + 1) + ")");
                 });
                 $("#bidderBody").html(html);
             } else {
                 var html = "<tr><td colspan=8 class='text-center'>ไม่มีข้อมูล</td></tr>";
                 $("#bidderBody").html(html);
+                $("#count0").text("(0)");
             }
             if (datasApprove != null) {
                 var html = [];
@@ -398,7 +417,9 @@
                 $("#saleBody").html(html[0]);
                 $("#conditionBody").html(html[1]);
                 $("#reserveBody").html(html[2]);
-
+                $("#count1").text("("+c1+")");
+                $("#count2").text("("+c2+")");
+                $("#count3").text("("+c3+")");
                 $('.delApprove').click(function () {
                     var index = $(this).closest('tr').attr('row-index');
                     var dataJSON = JSON.stringify({dataAuction: datasApprove[index]});

@@ -10,6 +10,14 @@ namespace apps\tracking\interfaces;
 interface IApproveAuctionService {
 
     /**
+     * @name listsAuction
+     * @uri /listsAuction
+     * @return String[] lists Description
+     * @description การประมูล
+     */
+    public function listsAuction();
+
+    /**
      * @name listsBidder
      * @uri /listsBidder
      *  @param string auccode

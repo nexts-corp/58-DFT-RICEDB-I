@@ -17,6 +17,12 @@ class ApproveAuctionService extends CServiceBase implements IApproveAuctionServi
         $this->logger = \Logger::getLogger("root");
         $this->datacontext = new CDataContext("default");
     }
+    public function listsAuction() {
+        $sql = "select s from " . $this->ent . "\\Status s "
+                . " where s.keyword like 'AU%' and s.active is not null "
+                . " order by s.id desc";
+        return $this->datacontext->getObject($sql);
+    }
 
     public function listsBidder($auccode) {
 //        $sql = "select bidderNo,bidderAuctionNo,bidderQueue,bidderRound,bidderName,"
@@ -112,7 +118,7 @@ class ApproveAuctionService extends CServiceBase implements IApproveAuctionServi
         $status = new \apps\common\entity\Status();
         $status->keyword = $auccode;
         $data = $this->datacontext->getObject($status)[0];
-        if ($data->active == "F" || $data->active == "FA") {
+        if ($data->active == "F" || $data->active == "FA" || $data->active == "FO" || $data->active == "FI2" ) {
             return true;
         } else {
             return false;
