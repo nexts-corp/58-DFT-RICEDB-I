@@ -1,0 +1,839 @@
+{{>header}}
+<style>
+    .text-dismiss{
+        text-decoration: line-through;
+    }
+</style>
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}auction.payment.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li data-option-value=".websites" class="padding-left">
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.buttonInfoList{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="bidderTable"><!-- table shown bidder payment list -->
+                <section class="panel form-wizard" id="w1"><!-- search -->
+                    <div class="panel-body panel-body-nopadding">
+                        <div class="col-md-12" style="margin: 20px 0px 20px 0px;">
+                            <div class="col-xs-4">
+                                <label class="col-md-4 control-label text-right" for="searchQueue">{{#i18n}}auction.queue{{/i18n}} :</label>
+                                <div class="col-md-8">
+                                    <select class="form-control input-sm" name="searchQueue" id="searchQueue" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- end search -->
+
+                <div class="col-md-12">
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.queue{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle; width: 20%;">{{#i18n}}auction.bidder{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.countSilo{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.totalPayment{{/i18n}} (2%) ({{#i18n}}auction.bath{{/i18n}})</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidderPayment{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.remark{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.action{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="8" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end table shown bidder item list -->
+
+            <div id="bidderForm" class="col-md-12" style="display: none;"><!-- bidder guarantee form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <div class="form-group" >
+                                <label class="col-md-3 control-label req" for="bidderHistoryId">{{#i18n}}auction.bidder{{/i18n}} :</label>
+                                <div class="col-md-6">
+                                    <select class="form-control input-sm" name="bidderHistoryId" id="bidderHistoryId" required>
+                                    </select>
+                                </div>
+                                <div style="float: right;">
+                                    <button class="btn btn-primary checkList"><i class="fa fa-print"></i> {{#i18n}}auction.buttonPayment{{/i18n}}</button>
+                                </div>
+                            </div>
+
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-down"></a>
+                                </div>
+                                <h2 class="panel-title">{{#i18n}}auction.payment.panelForm{{/i18n}} : <div class="itemListHead" style="display: inline-block;"></div></h2>
+                            </header>
+
+                            <div class="panel-body"><!-- show list item -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">{{#i18n}}auction.no{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.silo{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.valuePayment{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.status{{/i18n}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="itemListBody">
+                                            <tr>
+                                                <td colspan="6" class="text-center">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="guarantee">
+                        <h3>{{#i18n}}auction.payment{{/i18n}}</h3>
+
+                        <div class="col-md-12" style="margin:5px;">
+                            <label class="col-md-5 control-label req" for="txtCountGrt">{{#i18n}}auction.countPayment{{/i18n}} :</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="txtCountGrt" value="1" required/>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-primary" id="btnAddGrt"><i class="fa fa-plus-circle"></i> {{#i18n}}auction.buttonAdd{{/i18n}}</button>
+                            </div>
+                        </div>
+                        <div  id="divAddGrt">
+                            <div class="col-md-12">
+                                <div class="col-md-1 text-center">
+                                    <h4>{{#i18n}}auction.no{{/i18n}}</h4>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <h4>{{#i18n}}auction.typePayment{{/i18n}}</h4>
+                                </div>
+                                <div class="col-md-3 text-center">
+                                    <h4>{{#i18n}}auction.bank{{/i18n}}</h4>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <h4>{{#i18n}}auction.bankNo{{/i18n}}</h4>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <h4>{{#i18n}}auction.bankDate{{/i18n}}</h4>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <h4>{{#i18n}}auction.bankAmount{{/i18n}}</h4>
+                                </div>
+                            </div>
+
+                            <div method="post"  id="form_grt" name="bidderPayment" action="{{_context_path}}/api/industry2/bidderPayment/saveBidderPayment" isArray="true" data-size="0">
+                            </div>
+
+                            <div class="col-md-12 text-center" style="margin:5px;">
+                                <button class="btn btn-primary" id="btn_save"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
+                            </div>
+                        </div>
+                    </div><!-- guarantee -->
+
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <h2 class="panel-title">{{#i18n}}auction.payment.panelPayment{{/i18n}} : <div class="itemListHead" style="display: inline-block;"></div></h2>
+                            <div class="panel-body"><!-- show list item -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">{{#i18n}}auction.no{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.typePayment{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.bank{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.bankNo{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.bankDate{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.bankAmount{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.remark{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.action{{/i18n}}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="grtListBody">
+                                            <tr>
+                                                <td colspan="8" class="text-center">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><!-- delete  form -->
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">{{#i18n}}auction.payment.modalDelete{{/i18n}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table mb-none">
+                                            <tbody>
+                                                <tr class="no-border">
+                                                    <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
+                                                    <td class="col-md-9 text-left"><div id="bidderNameDel"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3 text-right text-bold">{{#i18n}}auction.typePayment{{/i18n}} :</td>
+                                                    <td class="col-md-9 text-left"><div id="paymentDel"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bank{{/i18n}} :</td>
+                                                    <td class="col-md-9 text-left"><div id="bankDel"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bankNo{{/i18n}} :</td>
+                                                    <td class="col-md-9 text-left"><div id="paymentNoDel"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bankDate{{/i18n}} :</td>
+                                                    <td class="col-md-9 text-left"><div id="dateDel"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bankAmount{{/i18n}} :</td>
+                                                    <td class="col-md-9 text-left"><div id="amountDel"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-3 text-right text-bold">{{#i18n}}auction.remark{{/i18n}} :</td>
+                                                    <td class="col-md-9 text-left"><div id="remarkDel"></div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                                    <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}auction.buttonDelete{{/i18n}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="changeReserved" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><!-- delete  form -->
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel">{{#i18n}}auction.confirm{{/i18n}} : <span id="headerReserved"></span></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table mb-none">
+                                            <tbody>
+                                                <tr class="no-border">
+                                                    <td class="col-md-5 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
+                                                    <td class="col-md-7 text-left"><div id="bidderNameRes"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-5 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
+                                                    <td class="col-md-7 text-left"><div id="siloRes"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-5 text-right text-bold">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                    <td class="col-md-7 text-left"><div id="rfvRes"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-5 text-right text-bold">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                    <td class="col-md-7 text-left"><div id="auctionPriceRes"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col-md-5 text-right text-bold">{{#i18n}}auction.valuePayment{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                    <td class="col-md-7 text-left"><div id="guaranteePriceRes"></div></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="confirmChange" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form><!-- bidder guarantee form -->
+            </div><!-- col-md-9 -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+
+<script type="text/javascript">
+    var listArr = [];
+    var allSilo = [];
+    var grtArr = [];
+
+    var globalRFV = 0;
+    var globalPrice = 0;
+    var globalGrt = 0;
+    var globalAmount = 0;
+
+    var listsP = '';
+    $(function () {
+        showBidderPayment();
+
+        $("#searchQueue").select2();
+        $("#bidderHistoryId").select2();
+
+        $("button.checkList").click(function () {
+            if ($("#bidderHistoryId").val() != "") {
+                //alert($("#bidderHistoryId").find('option:selected').attr("data-queue"));
+                //window.open("/reporter/api/rice/report/export?reportcode=RPT02_08&auccode=AU5/2558&export=view&p_1="+$("#bidderHistoryId").find('option:selected').attr("data-queue"), "_blank");
+                // window.open("/reporter/api/rice/report/checklist?auccode=AU5/2558&bidderqueue="+$("#bidderHistoryId").find('option:selected').attr("data-queue")+"&export=view", "_blank");
+                var dataHistory = {};
+                dataHistory["queue"] = $("#bidderHistoryId").find('option:selected').attr("data-queue");
+				dataHistory["type"]="industry2";
+                var fdata = {};
+                fdata["report"] = dataHistory;
+                var dataJSON = JSON.stringify({report: fdata["report"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                var datas = callAjax("{{_context_path}}/api/report/report/payment", "post", dataJSONEN, "json");
+                if (typeof datas !== 'undefined' && datas !== null) {
+                    var win = window.open(datas["export"], '_blank');
+                    win.focus();
+                }
+            }
+        });
+
+        $("button.table").click(function () {
+            toggleShow("list");
+        });
+
+        $("#bidderHistoryId").html(listBidder()).change(function () {
+            $("#divAddGrt").hide();
+            $(".itemListHead").html($("#bidderHistoryId option:selected").text());
+            if (getTag($("#bidderHistoryId").val()) != "") {
+                showBidderItem();
+                showBidderGrt();
+            }
+        });
+
+        $('#txtCountGrt').numeric({
+            decimal: false,
+            negative: false
+        });
+
+        $('#btnAddGrt').click(function () {
+            var bidderHistoryId = $("#bidderHistoryId").val();
+            var countGrt = $('#txtCountGrt').val();
+            var html = "";
+            if (countGrt > 0) {
+                $("#divAddGrt").show();
+                $('#form_grt').html(listsPayment(bidderHistoryId, countGrt));
+                $('.paymentDate').datepicker({
+                    format: "yyyy-mm-dd",
+                    autoclose: true
+                });
+                $('.amount').numeric({
+                    negative: false,
+                    decimalPlaces: 4
+                });
+
+                $(".amount").keyup(function () {
+                    var row = $(this).attr("row-index"); //ReplaceNumberWithCommas
+                    $("#showAmount" + row).text(ReplaceNumberWithCommas($(this).val()));
+                });
+                listsBank();
+                $('.bankId').select2();
+                $('.listsPayment').select2();
+
+            } else {
+                $("#txtCountGrt").focus();
+            }
+        });
+        function isValidDate(dateString) {
+            var regEx = /^\d{4}-\d{2}-\d{2}$/;
+            return dateString.match(regEx) != null;
+        }
+        $("#btn_save").click(function () {
+            var countGrt = $('#txtCountGrt').val();
+            $('.paymentDate').each(function () {
+                if (isValidDate(this.value) == false) {
+                    var dateAr = this.value.split('-');
+                    this.value = dateAr[2] + '-' + dateAr[1] + '-' + dateAr[0];
+                }
+            });
+            $("#form_grt").attr("data-size", countGrt);
+            sendData("form_grt", function (msg) {
+                if (msg.save == true) {
+                    showBidderGrt();
+                    $("#form_grt").empty();
+                    $("#txtCountGrt").val("1");
+                    $("#divAddGrt").hide();
+                } else {
+                    alert("บันทึกไม่สำเร็จ\r\n"+msg.save);
+                    showBidderGrt();
+                }
+            });
+        });
+    });
+
+    function showBidderPayment() {
+        var dataSet = [];
+        var searchQueue = {};
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderPayment/listsPayment", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+                dataSet.push(value);
+
+                searchQueue[value["queue"]] = value["queue"];
+            });
+
+            $("#searchQueue").empty();
+            $("#searchQueue").append('<option value="" selected="selected">ทั้งหมด</option>');
+            $.each(searchQueue, function (key, value) {
+                $("#searchQueue").append('<option value="' + value + '">' + value + '</option>');
+            });
+        }
+
+        var t = $("#table").DataTable({
+            "destroy": true,
+            "data": dataSet,
+            "order": [[0, 'asc']],
+            "iDisplayLength": 50,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "data": "queue",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 1,
+                    "data": "bidderName"
+                },
+                {
+                    "targets": 2,
+                    "data": "countSilo",
+                    "sClass": "text-center"
+                },
+                {
+                    "targets": 3,
+                    "data": "auctionPrice",
+                    "sClass": "text-center",
+                    "render": function (data) {
+                        var content = accounting.formatNumber(data, 2, ",", ".");
+                        return content;
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "guaranteePrice",
+                    "sClass": "text-center",
+                    "render": function (data) {
+                        var content = '<span class="text-bold text-tertiary">' + accounting.formatNumber(data, 2, ",", ".") + '</span>';
+                        return content;
+                    }
+                },
+                {
+                    "targets": 5,
+                    "data": "amount",
+                    "sClass": "text-center",
+                    "render": function (data) {
+                        var content = '<span class="text-bold">' + accounting.formatNumber(data, 2, ",", ".") + '</span>';
+                        return content;
+                    }
+                },
+                {
+                    "targets": 6,
+                    "data": "bidderHistoryId",
+                    "sClass": "text-center",
+                    "render": function (data, type, full) {
+                        var content = '<label class="text-success"><i class="fa fa-check"></i> ผ่าน</label>';
+
+                        if (parseFloat(full["amount"]) < parseInt(full["guaranteePrice"]) || full["amount"] === null) {
+                            content = '<label class="text-danger"><i class="fa fa-times"></i> ไม่ผ่าน</label>';
+                        }
+                        return content;
+                    }
+                },
+                {
+                    "targets": 7,
+                    "orderable": false,
+                    "data": "bidderHistoryId",
+                    "sClass": "text-center",
+                    "render": function (data) {
+                        var content = '<button class="btn btn-primary edit" data-hid="' + data + '"><i class="fa fa-list"></i></button>';
+                        return content;
+                    }
+                }
+            ]
+        });
+
+        /*t.on( 'order.dt search.dt', function () {
+         t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+         cell.innerHTML = i+1;
+         } );
+         } ).draw();*/
+
+        $('#searchQueue').change(function () {
+            if ($('#searchQueue').val() != "") {
+                t.columns(0).search("^" + $(this).val() + "$", true, false, true).draw();
+            }
+            else {
+                t.columns(0).search($(this).val()).draw();
+            }
+        });
+
+        $("#table").off("click", "button.edit").on("click", "button.edit", function () {
+            toggleShow("form");
+
+            var hid = $(this).attr("data-hid");
+            $("#bidderHistoryId").val(hid).trigger("change");
+        });
+    }
+
+    function showBidderItem() {
+        var dataHistory = {};
+        dataHistory["id"] = $("#bidderHistoryId").val();
+
+        var fdata = {};
+        fdata["BidderHistory"] = dataHistory;
+
+        var dataJSON = JSON.stringify({bidderHistory: fdata["BidderHistory"]});
+        var dataJSONEN = encodeURIComponent(dataJSON);
+
+        listArr = [];
+        allSilo = [];
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderPayment/listsItemPrice", "post", dataJSONEN, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var html = '';
+            var totalPrice = 0, totalGrt = 0, totalRFV = 0;
+            for (var i = 0; i < datas["bidderItem"].length; i++) {
+                var value = datas["bidderItem"][i];
+                listArr[value["id"]] = value;
+                allSilo[i] = value["silo"] + ' [' + value["province"] + '] [' + value["associate"] + ']';
+
+                if (value["isReserved"] == "Y") {
+                    totalRFV += parseFloat(value["rfv"]);
+                    totalPrice += parseFloat(value["auctionPrice"]);
+                    totalGrt += parseFloat(value["auctionPrice"] * 0.02);
+                }
+
+                var checked = "";
+                var dismiss = "text-dismiss";
+                if (value["isReserved"] == "Y") {
+                    checked = "checked";
+                    dismiss = "";
+                }
+
+                html += '<tr>'
+                        + '<td class="text-center">' + (i + 1) + '</td>'
+                        + '<td class="text-left ' + dismiss + '">' + value["silo"] + ' [' + value["province"] + '] [' + value["associate"] + ']</td>'
+                        + '<td class="text-center ' + dismiss + '">' + accounting.formatNumber(value["rfv"], 0, ",", ".") + '</td>'
+                        + '<td class="text-center text-bold ' + dismiss + '">' + accounting.formatNumber(value["auctionPrice"], 2, ",", ".") + '</td>'
+                        + '<td class="text-center text-bold text-tertiary ' + dismiss + '">' + accounting.formatNumber(value["auctionPrice"] * 0.02, 2, ",", ".") + '</td>'
+                        + '<td class="text-center">'
+                        + '<label class="switch switch-green">'
+                        + '<input class="switch-input" type="checkbox" data-item="' + value["id"] + '" onclick="return false" ' + checked + '>'
+
+                        + '<span class="switch-label" data-on="ผ่าน" data-off="ไม่ผ่าน"></span>'
+                        + '<span class="switch-handle"></span>'
+                        + '</label>'
+                        + '</tr>';
+
+                if (i == datas["bidderItem"].length - 1) {
+                    html += '<tr>'
+                            + '<td colspan="2" class="text-center">รวม</td>'
+                            + '<td class="text-center"><div id="totalRFV" style="font-weight: bold;">' + accounting.formatNumber(totalRFV, 2, ",", ".") + '</div></td>'
+                            + '<td class="text-center"><div id="totalPrice" style="font-weight: bold;">' + accounting.formatNumber(totalPrice, 2, ",", ".") + '</div></td>'
+                            + '<td class="text-center"><div id="totalGrt" class="text-bold text-tertiary">' + accounting.formatNumber(totalGrt, 2, ",", ".") + '</div></td>'
+                            + '</tr>'
+                            + '<tr>'
+                            + '<td colspan="4" class="text-center">มูลค่าหลักค้ำประกัน</td>'
+                            + '<td class="text-center"><div id="totalPayment" class="text-bold">-</div></td>'
+                            + '</tr>'
+                            + '<tr>'
+                            + '<td colspan="4" class="text-center">ผลต่าง</td>'
+                            + '<td class="text-center"><div id="diffPayment" style="font-weight: bold;">-</div></td>'
+                            + '</tr>';
+                }
+            }
+            globalRFV = totalRFV;
+            globalPrice = totalPrice;
+            globalGrt = totalGrt;
+            $(".itemListBody").html(html);
+
+            $(".switch-input").click(function (event) {
+                $("#changeReserved").modal("show");
+
+                var check = $(this);
+                var itemId = $(this).attr("data-item");
+                var isReserved = "";
+                var value = listArr[itemId];
+
+                //toggle "no check" to "check"
+                if ($(this).is(':checked')) {
+                    $("#headerReserved").html("การจองคลังสินค้า");
+                    isReserved = "Y";
+                }
+                else {
+                    $("#headerReserved").html("การยกเลิกจองคลังสินค้า")
+                    isReserved = "N";
+                }
+
+                $("#bidderNameRes").html($("#bidderHistoryId option:selected").text());
+                $("#siloRes").html(value["silo"]);
+                $("#rfvRes").html(accounting.formatNumber(value["rfv"], 2, ",", "."));
+                $("#auctionPriceRes").html(accounting.formatNumber(value["auctionPrice"], 2, ",", "."));
+                $("#guaranteePriceRes").html(accounting.formatNumber(value["auctionPrice"] * 0.02, 2, ",", "."));
+
+                $("#confirmChange").unbind().click(function () {
+                    var dataItem = {};
+                    dataItem["id"] = itemId;
+                    dataItem["isReserved"] = isReserved;
+
+                    var fdata = {};
+                    fdata["BidderItem"] = dataItem;
+
+                    var dataJSON = JSON.stringify({bidderItem: fdata["BidderItem"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    var datas = callAjax("{{_context_path}}/api/industry2/bidderPayment/changeReserved", "post", dataJSONEN, "json");
+                    if (typeof datas !== undefined && datas !== null) {
+                        if (datas["save"] == true) {
+
+                            //IsReserved = 'N'
+                            if (check.is(":checked")) {
+                                check.prop("checked", false);
+
+                                globalRFV -= parseFloat(value["rfv"]);
+                                globalPrice -= parseFloat(value["auctionPrice"]);
+                                globalGrt -= parseFloat(value["auctionPrice"] * 0.02);
+
+                                check.closest('tr').children('td:eq(1), td:eq(2), td:eq(3), td:eq(4)').addClass("text-dismiss");
+
+                            }
+                            else {
+                                check.prop("checked", true);
+
+                                globalRFV += parseFloat(value["rfv"]);
+                                globalPrice += parseFloat(value["auctionPrice"]);
+                                globalGrt += parseFloat(value["auctionPrice"] * 0.02);
+
+                                check.closest('tr').children('td:eq(1), td:eq(2), td:eq(3), td:eq(4)').removeClass("text-dismiss");
+                            }
+                            $("#totalRFV").html(accounting.formatNumber(globalRFV, 2, ",", "."));
+                            $("#totalPrice").html(accounting.formatNumber(globalPrice, 2, ",", "."));
+                            $("#totalGrt").html(accounting.formatNumber(globalGrt, 2, ",", "."));
+
+                            calDiffPayment(globalGrt, globalAmount);
+                        }
+                    }
+                });
+            });
+        }
+    }
+
+    function listBidder() {
+        var html = '';
+
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderInfo/listsPass", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+                html += '<option value="' + value["bidderHistoryId"] + '" data-queue="' + value["queue"] + '">' + value["bidderName"] + '</option>';
+            });
+        }
+        return html;
+    }
+
+    function listsBank() {
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderPayment/listsBank", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var listsBank = "";
+
+            $.each(datas["lists"], function (key, value) {
+                listsBank += "<option value='" + value["id"] + "'>" + value["bankTH"] + "</option>";
+            });
+
+            $(".bankId").html(listsBank);
+        }
+    }
+    function listsPayment(bidderHistoryId, countGrt) {
+        if(listsP == ""){
+            var datas = callAjax("{{_context_path}}/api/industry2/bidderPayment/listsTypePayment", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function (key, value) {
+                    listsP += "<option value='" + value["id"] + "'>" + value["payment"] + "</option>";
+                });
+            }
+        }
+
+        var html = "";
+        for (var i = 0; i < countGrt; i++) {
+            html += '<div class="col-md-12" style="margin:5px;">' +
+                    '<div class="col-md-1 text-center">' +
+                    '<strong>' + (i + 1) + '</strong>' +
+                    '<input type="hidden" class="form-control paymentNo" name="bidderHistoryId" row-index=' + i + ' value=' + bidderHistoryId + ' />' +
+                    '</div>' +
+                    '<div class="col-md-2">' +
+                    '<select class="form-control listsPayment" name="paymentId" row-index=' + i + '>' +
+                    listsP +
+                    '</select>' +
+                    '</div>' +
+                    '<div class="col-md-3">' +
+                    '<select class="form-control bankId" name="bankId" row-index=' + i + '>' +
+                    '</select>' +
+                    '</div>' +
+                    '<div class="col-md-2">' +
+                    '<input type="text" class="form-control paymentNo" name="paymentNo" row-index=' + i + ' />' +
+                    '</div>' +
+                    '<div class="col-md-2">' +
+                    '<input type="text" class="form-control paymentDate" name="paymentDate" row-index=' + i + ' />' +
+                    '</div>' +
+                    '<div class="col-md-2">' +
+                    '<input type="text" class="form-control amount" name="amount" row-index=' + i + ' />' +
+                    '</div>' +
+                    '</div>' +
+                    '<div class="col-md-12" style="margin-top:10px">' +
+                    '<div class="col-md-2 text-right">' +
+                    '<h4>หมายเหตุ</h4>' +
+                    '</div>' +
+                    '<div class="col-md-8">' +
+                    '<input type="text" class="form-control remark" name="remark" row-index=' + i + ' />' +
+                    '</div>' +
+                    '<div class="col-md-2">' +
+                    '<h4 id="showAmount' + i + '" class="text-center"></h4>' +
+                    '</div>' +
+                    '</div>';
+        }
+        return html;
+    }
+
+    function toggleShow(option) {
+        if (option == "form") {
+            $("#bidderForm, #showTable").show();
+            $("#bidderTable").hide();
+
+
+            $("#loading").html("");
+        }
+        else if (option == "list") {
+            $("#bidderTable").show();
+            $("#bidderForm, #showTable").hide();
+            showBidderPayment();
+        }
+    }
+
+    function showBidderGrt() {
+        grtArr = [];
+        globalAmount = 0;
+
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderPayment/listsBidderGrt", "post", {bidderHistoryId: $("#bidderHistoryId").val()}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            var html = '';
+            var totalAmount = 0;
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+                grtArr[value["id"]] = value;
+                if (value["remark"] == null || value["remark"] == "") {
+                    value["remark"] = "-";
+                }
+                totalAmount += parseFloat(value["amount"]);
+                html += '<tr>'
+                        + '<td class="text-center">' + (i + 1) + '</td>'
+                        + '<td class="text-center">' + value["payment"] + '</td>'
+                        + '<td class="text-center">' + value["bankTH"] + '</td>'
+                        + '<td class="text-center">' + value["paymentNo"] + '</td>'
+                        + '<td class="text-center">' + value["paymentDate"]["date"].substr(0, 10) + '</td>'
+                        + '<td class="text-center">' + accounting.formatNumber(value["amount"], 2, ",", ".") + '</td>'
+                        + '<td class="text-center">' + value["remark"] + '</td>'
+                        + '<td class="text-center"><button type="button" class="btn btn-default cancel" data-id=' + value["id"] + '><i class="fa fa-trash"></i></button></td>'
+                        + '</tr>';
+
+                if (i == datas["lists"].length - 1) {
+                    html += '<tr>'
+                            + '<td colspan="5" class="text-center">รวม</td>'
+                            + '<td class="text-center"><strong>' + accounting.formatNumber(totalAmount, 2, ",", ".") + '</strong></td>'
+                            + '<td colspan="2" class="text-center"></td>'
+                            + '</tr>';
+                }
+            }
+            globalAmount = totalAmount;
+            $(".grtListBody").html(html);
+
+            calDiffPayment(globalGrt, globalAmount);
+
+            $(".cancel").click(function () {
+                $("#delModal").modal("show");
+
+                var i = $(this).attr("data-id");
+                var data = grtArr[i];
+                $("#bidderNameDel").html($("#bidderHistoryId option:selected").text());
+                $("#paymentDel").html(data["payment"]);
+                $("#bankDel").html(data["bankTH"]);
+                $("#paymentNoDel").html(data["paymentNo"]);
+                $("#dateDel").html(data["paymentDate"]["date"].substr(0, 10));
+                $("#amountDel").html(accounting.formatNumber(data["amount"], 2, ",", ".") + " บาท");
+                $("#remarkDel").html(data["remark"]);
+                $("#confirmDelete").unbind().click(function () {
+                    var dataJSON = JSON.stringify({paymentId: data["id"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+                    var datas = callAjax("{{_context_path}}/api/industry2/bidderPayment/deletePayment", "post", dataJSONEN, "json");
+                    if (typeof datas !== undefined && datas !== null) {
+                        if (datas["delete"] == true) {
+                            $("#bidderHistoryId").trigger("change");
+                        }
+                    }
+                });
+            });
+        }
+    }
+
+    function calDiffPayment(allPay, amount) {
+        $("#totalPayment").html(accounting.formatNumber(amount, 2, ",", "."));
+
+        var diff = amount - allPay;
+        $("#diffPayment").removeClass("text-success, text-danger");
+
+        if (diff < 0)
+            $("#diffPayment").addClass("text-danger");
+        else
+            $("#diffPayment").addClass("text-success");
+        $("#diffPayment").html(accounting.formatNumber(diff, 2, ",", "."));
+    }
+
+    function ReplaceNumberWithCommas(yourNumber) {
+        //Seperates the components of the number
+        var n = yourNumber.toString().split(".");
+        //Comma-fies the first part
+        n[0] = n[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        //Combines the two sections
+        return n.join(".");
+    }
+
+</script>
+

@@ -1,0 +1,449 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}auction.cf.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.result{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="bidderTable" class="col-md-12"><!-- table shown bidder winner -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                        <tr>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.no{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.silo{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidder{{/i18n}} ({{#i18n}}auction.max{{/i18n}})</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.diffFloorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.priceMore{{/i18n}}</th>
+                        </tr>
+                        </thead>
+                        <tbody id="bidderBody">
+                        <tr>
+                            <td colspan="6" class="text-center">-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end table shown bidder winner -->
+
+            <div id="bidderForm" class="col-md-12" style="display: none;"><!-- bidder auction form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="col-xs-12">
+                        <section class="panel">
+
+                            <div class="test">
+                                <header class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="fa fa-caret-down"></a>
+                                    </div>
+                                    <h2 class="panel-title">{{#i18n}}auction.silo{{/i18n}} : <div id="siloHead" style="display: inline-block;"></div></h2>
+                                </header>
+
+                                <div class="panel-body"><!-- show list item -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped table-condensed mb-none">
+                                            <thead>
+                                            <tr>
+                                                <th class="text-center">{{#i18n}}auction.no{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.bidder{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.priceMore{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.action{{/i18n}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="itemListBody">
+                                            <tr>
+                                                <td colspan="7" class="text-center">-</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><!-- delete  form -->
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">{{#i18n}}auction.cf.modalAdd{{/i18n}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table class="table mb-none">
+                                                    <tbody>
+                                                    <tr class="no-border">
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="bidderNameAdd"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="siloAdd"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.associate{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="assoAdd"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}}) :</td>
+                                                        <td class="col-md-8 text-left"><div id="weightAllAdd"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                        <td class="text-left"><div id="rfvAdd"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.priceBefore{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="oldPriceAdd"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                        <td class="col-md-8 text-left"><input type="text" name="auctionPrice" id="auctionPrice" value="0.00"></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                                                <li>
+                                                    <button id="submit" class="btn btn-primary submit" data-dismiss="modal" disabled><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
+                                                </li>
+                                                <li>
+                                                    <button type="button" class="btn btn-default cancel" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><!-- delete  form -->
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title">{{#i18n}}auction.cf.modalDelete{{/i18n}}</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="table-responsive">
+                                                <table class="table mb-none">
+                                                    <tbody>
+                                                    <tr class="no-border">
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="bidderNameDel"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="siloDel"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.priceMore{{/i18n}} :</td>
+                                                        <td class="col-md-8 text-left"><div id="roundDel"></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                        <td class="col-md-8 text-left"><div id="priceDel"></div></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}auction.buttonDelete{{/i18n}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </form>
+            </div><!-- end bidder auction form -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    var siloArr = {};
+    var listArr = [];
+    $(function(){
+        showAllAuction();
+
+        $("button.table").click(function(){
+            toggleShow("list");
+        });
+    });
+
+    function showAllAuction(){
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderAuction/listsAuction", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null){
+            var html = '';
+            var i = 0;
+            $.each(datas["lists"], function(province, value1){
+                $.each(value1, function(silo, value2){
+                    siloArr[silo] = {};
+                    $.each(value2, function(asso, value3){
+                        siloArr[silo][asso] = value3;
+                    
+                    
+                        $.each(value3, function(count, value4){
+                            var diff = value4["bidderPrice"] - value4["rfv"];
+
+                            if(diff > 0){
+                                var bg = "bg-green";
+                                var icon = "fa fa-thumbs-o-up"
+                            }
+                            else if(diff < 0){
+                                var bg = "bg-red";
+                                var icon = "fa fa-thumbs-o-down"
+                            }
+                            else{
+                                var bg = "";
+                                var icon = "";
+                            }
+
+                            if(count == 0){
+                                html += '<tr>'
+                                    + '<td class="text-center" style="vertical-align: middle;">'+(++i)+'</td>'
+                                    + '<td class="text-center" style="vertical-align: middle;">'+silo+' ['+province+'] ['+asso+']</td>'
+                                    + '<td class="text-center" style="vertical-align: middle;">'+value4["bidderName"]+'</td>'
+                                    + '<td class="text-center" style="vertical-align: middle;">'+accounting.formatNumber(value4["bidderPrice"], 2, ",", ".")+'</td>'
+                                    + '<td class="text-center '+bg+'"><i class="'+icon+'"></i><br>'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
+                                    + '<td class="text-center"><button class="btn btn-primary plus" data-silo="'+silo+'" data-asso="'+asso+'"><i class="fa fa-plus-circle"></i></button></td>'
+                                + '</tr>';
+                            }
+                            else{
+                                html += '<tr>'
+                                    + '<td class="text-center" style="vertical-align: middle;"></td>'
+                                    + '<td class="text-center" style="vertical-align: middle;"></td>'
+                                    + '<td class="text-center" style="vertical-align: middle;">'+value4["bidderName"]+'</td>'
+                                    + '<td class="text-center" style="vertical-align: middle;">'+accounting.formatNumber(value4["bidderPrice"], 2, ",", ".")+'</td>'
+                                    + '<td class="text-center '+bg+'"><i class="'+icon+'"></i><br>'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
+                                    + '<td class="text-center"><button class="btn btn-primary plus" data-silo="'+silo+'" data-asso="'+asso+'"><i class="fa fa-plus-circle"></i></button></td>'
+                                + '</tr>';
+                            }
+                        });
+                    });
+                });
+            });
+            $("#bidderBody").html(html);
+
+            $("button.plus").unbind().click(function () {
+                toggleShow("form", $(this).attr("data-silo"), $(this).attr("data-asso"));
+            });
+        }
+    }
+
+    function showAuctionCF(dataJSONEN, silo, asso) {
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderAuction/listsBidderPriceCF", "post", dataJSONEN, "json");
+        if (typeof datas !== undefined && datas !== null) {
+            var html = '';
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+
+                listArr[value["bidderItemId"]] = value;
+                html += '<tr>'
+                    + '<td class="text-center">' + (i + 1) + '</td>'
+                    + '<td class="text-center">' + value["bidderName"] + '</td>'
+                    //+ '<td class="text-center">' + accounting.formatNumber(value["weightAll"], 6, ",", ".") + '</td>'
+                    + '<td class="text-center">' + accounting.formatNumber(siloArr[silo][asso][0]["rfv"], 2, ",", ".") + '</td>';
+
+                for(var j = 0; j < value["round"].length; j++){
+                    var value2 = value["round"][j];
+
+                    if(value2["round"] == 0) var round = "-";
+                    else var round = "ครั้งที่ "+value2["round"];
+                    if(j == 0){
+                        html += '<td class="text-center">' +round+ '</td>'
+                            + '<td class="text-center" id="price-'+value["id"]+'-'+value2["round"]+'">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
+                            + '<td class="text-center"><button class="btn btn-primary add" data-itemid="' + value["bidderItemId"] +'"><i class="fa fa-plus-circle"></i></button></td>'
+                            + '</tr>';
+                    }
+                    else if(j == value["round"].length - 1){
+                        html += '<tr>'
+                            + '<td></td><td></td><td></td>'
+                            + '<td class="text-center">' + round + '</td>'
+                            + '<td class="text-center" id="price-'+value["id"]+'-'+value2["round"]+'">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
+                            + '<td class="text-center"><button class="btn btn-default delete" data-itemid="' + value["bidderItemId"] + '" data-roundid="'+value2["round"]+'"><i class="fa fa-trash"></i></button></td>'
+                            + '</tr>';
+                    }
+                    else{
+                        html += '<tr>'
+                            + '<td></td><td></td><td></td>'
+                            + '<td class="text-center">' + round + '</td>'
+                            + '<td class="text-center" id="price-'+value["id"]+'-'+value2["round"]+'">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
+                            + '<td></td>'
+                            + '</tr>';
+                    }
+                }
+            }
+            $(".itemListBody").html(html);
+
+            $("button.add").unbind().click(function () {
+                $("#addModal").modal("show");
+                
+                var index = $(this).attr("data-itemid");
+                var dt = listArr[index];
+
+                $("#bidderNameAdd").html(dt["bidderName"]);
+                $("#siloAdd").html(silo);
+                $("#assoAdd").html(asso);
+                $("#weightAllAdd").html(accounting.formatNumber(siloArr[silo][asso][0]["weightAll"], 6, ",", "."));
+                $("#rfvAdd").html(accounting.formatNumber(siloArr[silo][asso][0]["rfv"], 2, ",", "."));
+                $("#oldPriceAdd").html(accounting.formatNumber(dt["round"][dt["round"].length-1]["auctionPrice"], 2, ",", "."));
+                $("#auctionPrice").val("");
+
+                $("#auctionPrice").keyup(function(){
+                    if( parseFloat($("#auctionPrice").val().replace(/,/g, "")) <= parseFloat(dt["round"][dt["round"].length-1]["auctionPrice"]) || $("#auctionPrice").val() == ""){
+                        $("#submit").prop("disabled", true);
+                    }
+                    else{
+                        $("#submit").prop("disabled", false);
+                    }
+                });
+
+                $("#submit").unbind().click(function(){
+                    var pdata = {};
+                    pdata["bidderItemId"] = dt["bidderItemId"];
+                    //  pdata["round"] = "";
+                    pdata["auctionPrice"] = $("#auctionPrice").val().replace(/,/g, "");
+
+                    var diff = parseFloat($("#auctionPrice").val().replace(/,/g, "")) - parseFloat(siloArr[silo][asso][0]["rfv"]);
+                    if(diff >= 0) var isPass = "Y";
+                    else var isPass = "N";
+
+                    pdata["isPassFV"] = isPass;
+                    var fdata = {};
+                    fdata["BidderPriceSilo"] = pdata;
+                    var dataJSON = JSON.stringify({bidderPrice: fdata["BidderPriceSilo"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    saveAuctionPrice(dataJSONEN, silo, asso);
+                });
+                //alert(index);
+            });
+
+            $("button.delete").unbind().click(function () {
+                $('#delModal').modal("show");
+
+                var index = $(this).attr("data-itemid");
+                var round = $(this).attr("data-roundid");
+                var dt = listArr[index];
+
+                $("#bidderNameDel").html(dt["bidderName"]);
+                $("#siloDel").html(silo);
+                //$("#weightAllDel").html(accounting.formatNumber(dt["weightAll"], 6, ",", "."));
+                $("#roundDel").html(dt["round"][round]["round"]);
+                $("#priceDel").html(accounting.formatNumber(dt["round"][round]["auctionPrice"], 2, ",", "."));
+
+                $("#confirmDelete").unbind().click(function(){
+                    var pdata = {};
+                    pdata["bidderItemId"] = index;
+                    pdata["round"] = dt["round"][round]["round"];
+                    var fdata = {};
+                    fdata["BidderPriceSilo"] = pdata;
+                    var dataJSON = JSON.stringify({bidderPrice: fdata["BidderPriceSilo"]});
+                    var dataJSONEN = encodeURIComponent(dataJSON);
+
+                    deleteAuctionPrice(dataJSONEN, silo, asso);
+                });
+            });
+        }
+    }
+
+    function toggleShow(option, silo, asso){
+        if (option == "form") {
+            $("#bidderForm, #showTable, #header2").show();
+            $("#bidderTable, #header1").hide();
+
+            $("#form select").each(function () {
+                $(this).val("");
+            });
+            $("#dataSiloBody").html('<tr><td class="text-center">-</td></tr>');
+            $("#itemListBody").html('<tr><td colspan="5" class="text-center">-</td></tr>');
+            $("#bidderHead").html("");
+
+            $("#siloHead").html(silo+' ['+asso+']');
+
+            var tdata = {};
+            var assoId = 0;
+            if(asso == "อคส.") assoId = 1;
+            else if(asso == "อตก.") assoId = 2;
+            tdata["silo"] = silo;
+            tdata["associateId"] = assoId;
+
+            var idata = {};
+            
+            var idata = [];
+            for(var i = 0; i < siloArr[silo][asso].length; i++){
+                var bidder = siloArr[silo][asso][i];
+                idata[i] = {
+                    bidderName: bidder["bidderName"]
+                }
+
+            }
+            
+            var fdata = {};
+            fdata["BidderItem"] = tdata;
+            fdata["BidderInfo"] = idata;
+            
+            var dataJSON = JSON.stringify({bidderItem: fdata["BidderItem"], bidderInfo: fdata["BidderInfo"]});
+            var dataJSONEN = encodeURIComponent(dataJSON);
+
+            showAuctionCF(dataJSONEN, silo, asso);
+        }
+        else if (option == "list") {
+            $("#bidderTable, #header1").show();
+            $("#bidderForm, #showTable, #header2").hide();
+            showAllAuction();
+        }
+    }
+
+    function saveAuctionPrice(dataJSONEN, silo, asso){
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderAuction/savePriceCF", "post", dataJSONEN, "json");
+        if (typeof datas !== undefined && datas !== null) {
+            if(datas["save"] == true){
+                toggleShow("form", silo, asso);
+            }
+        }
+    }
+
+    function deleteAuctionPrice(dataJSONEN, silo, asso){
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderAuction/deletePriceCF", "post", dataJSONEN, "json");
+        if (typeof datas !== undefined && datas !== null) {
+            if(datas["delete"] == true){
+                toggleShow("form", silo, asso);
+            }
+        }
+    }
+</script>

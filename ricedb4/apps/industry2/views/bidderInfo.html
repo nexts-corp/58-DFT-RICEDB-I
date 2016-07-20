@@ -1,0 +1,1345 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}auction.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}auction.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}auction.info.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus-circle"></i> {{#i18n}}auction.buttonAdd{{/i18n}}</button>
+                    <button id="showTable" class="btn btn-primary table" style="display: none;"><i class="fa fa-list"></i> {{#i18n}}auction.buttonInfoList{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container">
+        <div class="row">
+            <div id="bidderTable"><!-- table shown bidder information list -->
+                <section class="panel form-wizard" id="w1"><!-- search -->
+                    <div class="panel-body panel-body-nopadding">
+                        <div class="col-md-12" style="margin: 20px 0px 20px 0px;">
+                            <div class="col-xs-4">
+                                <label class="col-md-4 control-label text-right" for="searchQueue">{{#i18n}}auction.queue{{/i18n}} :</label>
+                                <div class="col-md-8">
+                                    <select class="form-control input-sm" name="searchQueue" id="searchQueue" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section><!-- end search -->
+
+                <div class="col-md-12">
+                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.no{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.queue{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.time{{/i18n}}</th>
+                                <th class="text-center col-md-2" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.bidder{{/i18n}}</th>
+                                <th class="text-center col-md-4" colspan="6">{{#i18n}}auction.property{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.checkIn{{/i18n}}</th>
+                                <th class="text-center col-md-1" rowspan="2" style="vertical-align: middle;">{{#i18n}}auction.action{{/i18n}}</th>
+                                <!--<th class="text-center">ลบ</th>-->
+                            </tr>
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyDoc{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyWork{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyOffer{{/i18n}}</th>
+                                <!--                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyInternal{{/i18n}}</th>-->
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.licenseIndustry{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyBusiness{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.propertyTargetFull{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bidderBody">
+                            <tr>
+                                <td colspan="11" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- end table shown bidder information list -->
+
+            <div id="bidderForm" class="col-md-12" style="display: none;"><!-- bidder info form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="col-xs-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-up"></a>
+                                </div>
+                                <h2 class="panel-title">{{#i18n}}auction.info.panelForm{{/i18n}}</h2>
+                            </header>
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="queue">{{#i18n}}auction.queue{{/i18n}} :</label>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="queue" id="queue" required>
+                                        </div>
+                                    </div>
+
+                                    <label class="col-md-2 control-label req" for="dateRegister">{{#i18n}}auction.time{{/i18n}} :</label>
+                                    <div class="col-md-2">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-clock-o"></i>
+                                            </span>
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="dateRegister" id="dateRegister" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="taxId">{{#i18n}}auction.taxId{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-tag"></i>
+                                            </span>
+                                            <input type="text" data-entity="info" class="form-control input-sm number" name="taxId" id="taxId" required>
+                                        </div>
+                                    </div>
+                                    <div id="searching"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="bidderName">{{#i18n}}auction.bidderName{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" data-entity="info" class="form-control input-sm" name="bidderName" id="bidderName" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="agentName">{{#i18n}}auction.agentName{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="agentName" id="agentName" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="agentName">{{#i18n}}auction.agentName2{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="agentName2" id="agentName2">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="agentName3">{{#i18n}}auction.agentName3{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="agentName3" id="agentName3">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="mobile">{{#i18n}}auction.mobile{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="mobile" id="mobile" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="fax">{{#i18n}}auction.fax{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-fax"></i>
+                                            </span>
+                                            <input type="text" data-entity="info" class="form-control input-sm" name="fax" id="fax">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="email">{{#i18n}}auction.email{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                            <input type="text" data-entity="info" class="form-control input-sm" name="email" id="email">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{#i18n}}auction.bidderType{{/i18n}} :</label>
+                                    <div class="col-md-6" id="listsBidderType"></div>
+                                    <div class="col-md-6 col-md-offset-3" id="showOptional">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div><!-- col-xs-12 -->
+
+                    <div class="col-xs-12">
+                        <section class="panel">
+
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-up"></a>
+                                </div>
+                                <h2 class="panel-title">{{#i18n}}auction.property{{/i18n}}</h2>
+                            </header>
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label text-bold">{{#i18n}}auction.propertyDoc{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl"  type="radio" data-entity="history" name="property1" id="property1_1" value="Y" checked>
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property1" id="property1_2" value="N">
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel1" class="col-md-3 control-label" for="remark1">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="remark1" id="remark1">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label text-bold">{{#i18n}}auction.propertyWorkFull{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property2" id="property2_1" value="Y" checked>
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property2" id="property2_2" value="N">
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel2" class="col-md-3 control-label" for="remark2">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="remark2" id="remark2">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label text-bold">{{#i18n}}auction.propertyOfferFull{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property3" id="property3_1" value="Y" checked>
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property3" id="property3_2" value="N">
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel3" class="col-md-3 control-label" for="remark3">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="remark3" id="remark3">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!--                                    <label class="col-md-3 control-label">{{#i18n}}auction.propertyInternalFull{{/i18n}} :</label>-->
+                                    <label class="col-md-3 control-label text-bold">{{#i18n}}auction.propertyLicenseIndustry{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property4" id="property4_1" value="Y" checked>
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property4" id="property4_2" value="N">
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel4" class="col-md-3 control-label" for="remark4">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="remark4" id="remark4">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label text-bold">{{#i18n}}auction.propertyBusinessFull{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property5" id="property5_1" value="Y" checked>
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property5" id="property5_2" value="N">
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel5" class="col-md-3 control-label" for="remark5">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="remark5" id="remark5">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label text-bold">{{#i18n}}auction.propertyTargetFull{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property6" id="property6_1" value="Y" checked>
+                                                <i class="fa fa-check text-success"></i> {{#i18n}}auction.pass{{/i18n}}
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input class="remarkControl" type="radio" data-entity="history" name="property6" id="property6_2" value="N">
+                                                <i class="fa fa-times text-danger"></i> {{#i18n}}auction.fail{{/i18n}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel61" class="col-md-3 control-label" for="remark61">{{#i18n}}auction.remark61{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <textarea data-entity="history" class="form-control input-sm" name="remark61" id="remark61"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel62" class="col-md-3 control-label" for="remark62">{{#i18n}}auction.remark62{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <textarea data-entity="history" class="form-control input-sm" name="remark62" id="remark62"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel63" class="col-md-3 control-label" for="remark63">{{#i18n}}auction.remark63{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <textarea data-entity="history" class="form-control input-sm" name="remark63" id="remark63"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">
+                                        <label id="remarkLabel6" class="col-md-3 control-label" for="remark6">{{#i18n}}auction.remark{{/i18n}} :</label>
+                                        <div class="col-md-6">
+                                            <input type="text" data-entity="history" class="form-control input-sm" name="remark6" id="remark6">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label text-bold">{{#i18n}}auction.file{{/i18n}} :</label>
+                                    <div id="fileGroup" class="col-md-8"></div>
+                                    <!--<div class="col-md-7">
+                                        <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="fileUpload btn btn-primary">
+                                            <span><i class="fa fa-folder-open"></i> {{#i18n}}auction.buttonChoose{{/i18n}}</span>
+                                            <input id="fileUpload" type="file" class="upload" />
+                                        </div>
+                                    </div>-->
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label text-bold" for="remarkSpecial">{{#i18n}}auction.remarkSpecial{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <input type="text" data-entity="history" class="form-control input-sm" name="remarkSpecial" id="remarkSpecial">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div><!-- col-xs-12 -->
+
+                    <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+                    <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                        <li data-option-value="*" class="">
+                            <button id="submit" class="btn btn-primary submit"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-default cancel">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                        </li>
+                    </ul>
+
+                </form>
+            </div><!-- end bidder info form -->
+
+            <div id="bidderModal" aria-labelledby="bidderLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">{{#i18n}}auction.info.modalDelete{{/i18n}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table mb-none">
+                                    <tbody>
+                                        <tr class="no-border">
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.queue{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="queueDel"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.taxId{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="taxIdDel"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bidderName{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="bidderNameDel"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.agentName{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="agentNameDel"></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-trash"></i> {{#i18n}}auction.buttonDelete{{/i18n}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete bidder info form -->
+
+            <div id="changeCheckIn" aria-labelledby="bidderLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">{{#i18n}}auction.info.modalCheckIn{{/i18n}}</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="table-responsive">
+                                <table class="table mb-none">
+                                    <tbody>
+                                        <tr class="no-border">
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.queue{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="queueChange"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.taxId{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="taxIdChange"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.bidderName{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="bidderNameChange"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3 text-right text-bold">{{#i18n}}auction.checkIn{{/i18n}} :</td>
+                                            <td class="col-md-9 text-left"><div id="statusChange"></div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="confirmChange" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-save"></i> {{#i18n}}auction.buttonSave{{/i18n}}</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}auction.buttonCancel{{/i18n}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end delete bidder info form -->
+
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    var listArr = [];
+    var callBidderType = 0;
+    var typeOptional = "";
+    $(function () {
+        // show bidder info list
+        showAllBidder();
+
+        $("#searchQueue").select2();
+
+        $("#dateRegister").mask("00:00", {
+            placeholder: "__:__"
+        });
+
+        $.validator.addMethod("time", function (value, element) {
+            return this.optional(element) || /^(([0-1]?[0-9])|([2][0-3])):([0-5]?[0-9])(:([0-5]?[0-9]))?$/i.test(value);
+        }, "Please enter a valid time.");
+
+        $("#taxId").on("blur", function () {
+            if ($(this).val().length == 13) {
+                var dataInfo = {};
+                dataInfo["taxId"] = $("#taxId").val();
+
+                var fdata = {};
+                fdata["BidderInfo"] = dataInfo;
+                var dataJSON = JSON.stringify({bidderInfo: fdata["BidderInfo"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                searchBidder(dataJSONEN);
+            }
+            else {
+                $("#searching").html('<span class="text-danger">เลขผู้เสียภาษีต้องจำนวน 13 หลักเท่านั้น</span>');
+            }
+        });
+        $("#taxId").focus(function () {
+            $("#searching").empty();
+        });
+
+        /*$("#mobile").mask("000-000-0000", {
+         placeholder: "000-000-0000"
+         });*/
+
+        $("#fileUpload").change(function () {
+            $("#fileName").val($(this).val());
+        });
+
+        // when you click to show table
+        $("button.table").click(function () {
+            toggleShow("list");
+
+        });
+
+        // when you click to cancel
+        $("button.cancel").click(function () {
+            toggleShow("list");
+        });
+
+        // when you click to add bidder info
+        $("button.add").click(function () {
+            toggleShow("form");
+
+            $("#fileGroup").html('<div id="fileNew"></div><div id="fileBak"></div>');
+            $("#fileNew").html(
+                    '<input type="file" id="attachment" name="attachment"> '
+                    + '<a href="javascript: void(0);" onclick="$(\'#attachment\').val(\'\');">[Reset]</a>'
+                    ).show();
+            $("#fileBak").hide();
+
+            // when you save form
+            $("button.submit").unbind().click(function () {
+                var isValid = true;
+                $('#form input[required]').each(function () {
+                    if ($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                    if ($(this).attr("name") == "taxId") {
+                        if ($(this).val().length != 13) {
+                            $(this).focus();
+                            $("#searching").html('<span class="text-danger">เลขผู้เสียภาษีต้องจำนวน 13 หลักเท่านั้น</span>');
+                            isValid = false;
+                        }
+                    }
+                });
+                if (isValid) {
+                    /*var fdata = dataObject(null);
+                     var dataJSON = JSON.stringify({bidderInfo: fdata["BidderInfo"], bidderHistory: fdata["BidderHistory"]});
+                     var dataJSONEN = encodeURIComponent(dataJSON);
+                     
+                     insertBidder(dataJSONEN);*/
+
+                    var fdata = dataObject(null);
+
+                    var formData = new FormData();
+
+                    formData.append('bidderInfo', JSON.stringify(fdata["BidderInfo"]));
+                    formData.append('bidderHistory', JSON.stringify(fdata["BidderHistory"]));
+
+                    if ($('#attachment').length)
+                        formData.append('file', $('#attachment')[0].files[0]);
+                    else
+                        formData.append('file', '');
+
+                    insertBidder(formData)
+                }
+            });
+        });
+
+        // when you select remark control
+        $("input.remarkControl").click(function () {
+            var remarkId = $(this).attr("name").replace("property", "");
+            if ($(this).val() == "Y") {
+                $("#remarkLabel" + remarkId).removeClass("req");
+                $("#remark" + remarkId).prop("required", false).val("");
+            }
+            else {
+                $("#remarkLabel" + remarkId).addClass("req");
+                $("#remark" + remarkId).prop("required", true).val("");
+            }
+        });
+    });
+
+    function listsBidderType() {
+        if (callBidderType == 0) {
+            var datas = callAjax("{{_context_path}}/api/industry2/bidderInfo/listsBidderType", "post", {}, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                var html = '';
+                $.each(datas["lists"], function (key, value) {
+                    html += '<div class="radio">'
+                            + '<label>'
+                            + '<input type="radio" data-entity="history" name="typeBiz" id="typeBiz' + value["id"] + '" value="' + value["id"] + '" data-option="' + value["optional"] + '">'
+                            + value["typeBiz"]
+                            + '</label>'
+                            + '</div>';
+                });
+
+                $("#listsBidderType").html(html);
+
+                $("input[name=typeBiz]").click(function () {
+                    var option = $(this).attr("data-option");
+
+                    var htmlSub = '';
+                    if (option == 1) {
+                        htmlSub = '<div class="col-md-12" style="border: 1px solid #cccccc; padding-top: 20px; padding-bottom: 20px;">'
+                                + '<div class="form-group">'
+                                + '<label class="col-md-5 control-label req">ประเภทอุตสาหกรรม :</label>'
+                                + '<div class="col-md-6">'
+                                + '<input type="text" data-entity="history" class="form-control input-sm" name="typeOptional" id="typeOptional" value="' + typeOptional + '" required>'
+                                + '</div>'
+                                + '</div>'
+
+                                + '<div class="form-group">'
+                                + '<label class="col-md-5 control-label">สำเนาใบอนุญาตประกอบกิจการโรงงาน (ร.ง.4) :</label>'
+                                + '<div class="col-md-6">'
+                                + '<div class="radio">'
+                                + '<label>'
+                                + '<input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_1" value="Y" checked>'
+                                + '<i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}'
+                                + '</label>'
+                                + '</div>'
+                                + '<div class="radio">'
+                                + '<label>'
+                                + '<input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory1" id="propertyFactory1_2" value="N">'
+                                + '<i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}'
+                                + '</label>'
+                                + '</div>'
+                                + '</div>'
+                                + '<div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">'
+                                + '<label id="remarkFactoryLabel1" class="col-md-5 control-label" for="remarkFactory1">{{#i18n}}auction.remark{{/i18n}} :</label>'
+                                + '<div class="col-md-6">'
+                                + '<input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory1" id="remarkFactory1">'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+
+                                + '<div class="form-group">'
+                                + '<label class="col-md-5 control-label">สำเนาใบทะเบียนภาษีมูลค่าเพิ่ม (ภ.พ.๒๐) :</label>'
+                                + '<div class="col-md-6">'
+                                + '<div class="radio">'
+                                + '<label>'
+                                + '<input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_1" value="Y" checked>'
+                                + '<i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}'
+                                + '</label>'
+                                + '</div>'
+                                + '<div class="radio">'
+                                + '<label>'
+                                + '<input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory2" id="propertyFactory2_2" value="N">'
+                                + '<i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}'
+                                + '</label>'
+                                + '</div>'
+                                + '</div>'
+                                + '<div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">'
+                                + '<label id="remarkFactoryLabel2" class="col-md-5 control-label" for="remarkFactory2">{{#i18n}}auction.remark{{/i18n}} :</label>'
+                                + '<div class="col-md-6">'
+                                + '<input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory2" id="remarkFactory2">'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+
+                                + '<div class="form-group">'
+                                + '<label class="col-md-5 control-label">แผนที่ตั้งโรงงานอุตสาหกรรม :</label>'
+                                + '<div class="col-md-6">'
+                                + '<div class="radio">'
+                                + '<label>'
+                                + '<input class="remarkFactoryControl"  type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_1" value="Y" checked>'
+                                + '<i class="fa fa-check text-success"></i> {{#i18n}}auction.fully{{/i18n}}'
+                                + '</label>'
+                                + '</div>'
+                                + '<div class="radio">'
+                                + '<label>'
+                                + '<input class="remarkFactoryControl" type="radio" data-entity="history" name="propertyFactory3" id="propertyFactory3_2" value="N">'
+                                + '<i class="fa fa-times text-danger"></i> {{#i18n}}auction.noFully{{/i18n}}'
+                                + '</label>'
+                                + '</div>'
+                                + '</div>'
+                                + '<div class="col-md-12" style="margin-left: -8px; margin-top: 10px;">'
+                                + '<label id="remarkFactoryLabel3" class="col-md-5 control-label" for="remarkFactory3">{{#i18n}}auction.remark{{/i18n}} :</label>'
+                                + '<div class="col-md-6">'
+                                + '<input type="text" data-entity="history" class="form-control input-sm" name="remarkFactory3" id="remarkFactory3">'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>'
+                                + '</div>';
+                    }
+
+                    $("#showOptional").html(htmlSub);
+
+                    // when you select remark factory control
+                    $("input.remarkFactoryControl").click(function () {
+                        var remarkId = $(this).attr("name").replace("propertyFactory", "");
+                        if ($(this).val() == "Y") {
+                            $("#remarkFactoryLabel" + remarkId).removeClass("req");
+                            $("#remarkFactory" + remarkId).prop("required", false).val("");
+                        }
+                        else {
+                            $("#remarkFactoryLabel" + remarkId).addClass("req");
+                            $("#remarkFactory" + remarkId).prop("required", true).val("");
+
+                            if (!$("input[name=property1][value=N]").is(":checked")) {
+                                $("input[name=property1][value=N]").prop('checked', true).trigger("click");
+                                $("#remark1").val("เอกสารไม่ครบถ้วน");
+                            }
+                        }
+
+                        //if (remarkId == "1") {
+                            if ($(this).val() == "Y") {
+                                $("input[name=property4][value=Y]").prop('checked', true).trigger("click");
+                            }
+                            else {
+                                $("input[name=property4][value=N]").prop('checked', true).trigger("click");
+                                $("#remark4").val("เอกสารไม่ครบถ้วน");
+                            }
+                       // }
+                    });
+                });
+
+                callBidderType = 1;
+            }
+        }
+    }
+
+    function searchBidder(dataJSONEN) {
+        $("#searching").html("ค้นหาข้อมูล...");
+
+        setTimeout(function () {
+            var datas = callAjax("{{_context_path}}/api/industry2/bidderInfo/search", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if (datas["lists"].length > 0) {
+                    $("#searching").html('<span class="text-success"><i class="fa fa-check"></i> พบข้อมูล</span>');
+
+                    var value = datas["lists"][0];
+
+                    $("#bidderName").val(value["bidderName"]);
+                    $("#fax").val(value["fax"]);
+                    $("#email").val(value["email"]);
+                    $("#agentName").val(value["agentName"]);
+                    $("#mobile").val(value["mobile"]);
+                    typeOptional = value["typeOptional"];
+                    $("input[name=typeBiz][value=" + getTag(value["typeBiz"], "1") + "]").prop('checked', true);
+                }
+                else {
+                    $("#searching").html('<span class="text-danger"><i class="fa fa-times"></i> ไม่พบข้อมูล</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function showAllBidder() {
+        listArr = [];
+
+        var dataSet = [];
+        var searchQueue = {};
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderInfo/listsRegister", "post", {}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+                listArr[value["bidderHistoryId"]] = value;
+                dataSet.push(value);
+
+                searchQueue[value["queue"]] = value["queue"];
+            });
+
+            $("#searchQueue").empty();
+            $("#searchQueue").append('<option value="" selected="selected">ทั้งหมด</option>');
+            $.each(searchQueue, function (key, value) {
+                $("#searchQueue").append('<option value="' + value + '">' + value + '</option>');
+            });
+        }
+
+        var t = $("#table").DataTable({
+            "destroy": true,
+            "data": dataSet,
+//            "order": [[ 1, 'asc' ]],
+            "iDisplayLength": 50,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "searchable": false,
+                    "orderable": false,
+                    "data": "bidderHistoryId",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 1,
+                    "data": "queue",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 2,
+                    "data": "dateRegister",
+                    "sClass": "text-center col-md-1",
+                    "render": function (data) {
+                        return showTime(data["date"]);
+                    }
+                },
+                {
+                    "targets": 3,
+                    "data": "bidderName",
+                    "sClass": "col-md-2",
+                    "render": function (data, type, full) {
+                        if (full["remarkSpecial"] != null && full["remarkSpecial"] != '') {
+                            return full["bidderName"] + '<br><span class="text-danger"> (' + full["remarkSpecial"] + ')</span>';
+                        } else {
+                            return full["bidderName"];
+                        }
+                    }
+                },
+                {
+                    "targets": 4,
+                    "orderable": false,
+                    "data": "property1",
+                    "sClass": "text-center",
+                    "render": function (data, type, full) {
+                        var content = '<i class="fa fa-times text-danger"></i>';
+                        if (data == 'Y')
+                            content = '<i class="fa fa-check text-success"></i>';
+
+                        if (getTag(full["remark1"], "") != "")
+                            content += '<br>' + full["remark1"];
+
+                        return content;
+                    }
+                },
+                {
+                    "targets": 5,
+                    "orderable": false,
+                    "data": "property2",
+                    "sClass": "text-center",
+                    "render": function (data, type, full) {
+                        var content = '<i class="fa fa-times text-danger"></i>';
+                        if (data == 'Y')
+                            content = '<i class="fa fa-check text-success"></i>';
+
+                        if (getTag(full["remark2"], "") != "")
+                            content += '<br>' + full["remark2"];
+
+                        return content;
+                    }
+                },
+                {
+                    "targets": 6,
+                    "orderable": false,
+                    "data": "property3",
+                    "sClass": "text-center",
+                    "render": function (data, type, full) {
+                        var content = '<i class="fa fa-times text-danger"></i>';
+                        if (data == 'Y')
+                            content = '<i class="fa fa-check text-success"></i>';
+
+                        if (getTag(full["remark3"], "") != "")
+                            content += '<br>' + full["remark3"];
+
+                        return content;
+                    }
+                },
+                {
+                    "targets": 7,
+                    "orderable": false,
+                    "data": "property4",
+                    "sClass": "text-center",
+                    "render": function (data, type, full) {
+                        var content = '<i class="fa fa-times text-danger"></i>';
+                        if (data == 'Y')
+                            content = '<i class="fa fa-check text-success"></i>';
+
+                        if (getTag(full["remark4"], "") != "")
+                            content += '<br>' + full["remark4"];
+
+                        return content;
+                    }
+                },
+                {
+                    "targets": 8,
+                    "orderable": false,
+                    "data": "property5",
+                    "sClass": "text-center",
+                    "render": function (data, type, full) {
+                        var content = '<i class="fa fa-times text-danger"></i>';
+                        if (data == 'Y')
+                            content = '<i class="fa fa-check text-success"></i>';
+
+                        if (getTag(full["remark5"], "") != "")
+                            content += '<br>' + full["remark5"];
+
+                        return content;
+                    }
+                },
+                {
+                    "targets": 9,
+                    "orderable": false,
+                    "data": "property6",
+                    "sClass": "text-center",
+                    "render": function (data, type, full) {
+                        var content = '<i class="fa fa-times text-danger"></i>';
+                        if (data == 'Y')
+                            content = '<i class="fa fa-check text-success"></i>';
+
+                        if (getTag(full["remark6"], "") != "")
+                            content += '<br>' + full["remark6"];
+
+                        return content;
+                    }
+                },
+                {
+                    "targets": 10,
+                    "orderable": false,
+                    "data": "checkIn",
+                    "sClass": "text-center col-md-1",
+                    "render": function (data, key, full) {
+                        var checked = "";
+                        if (data == "Y") {
+                            checked = "checked";
+                        }
+
+                        var content = '<label class="switch switch-green">'
+                                + '<input class="switch-input" type="checkbox" data-hid="' + full["bidderHistoryId"] + '" onclick="return false" ' + checked + '>'
+
+                                + '<span class="switch-label" data-on="มา" data-off="ไม่มา"></span>'
+                                + '<span class="switch-handle"></span>'
+                                + '</label>';
+
+                        return content;
+                    }
+                },
+                {
+                    "targets": 11,
+                    "orderable": false,
+                    "data": "bidderHistoryId",
+                    "sClass": "text-center col-md-1",
+                    "render": function (data) {
+                        var content = '<button class="btn btn-primary edit" data-hid="' + data + '"><i class="fa fa-pencil"></i></button>&nbsp;'
+                                + '<button class="btn btn-default delete" data-hid="' + data + '"><i class="fa fa-trash"></i></button>';
+                        return content;
+                    }
+                }
+            ]
+        });
+
+        t.on('order.dt search.dt', function () {
+            t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+        $('#searchQueue').change(function () {
+            if ($('#searchQueue').val() != "") {
+                t.columns(1).search("^" + $(this).val() + "$", true, false, true).draw();
+            }
+            else {
+                t.columns(1).search($(this).val()).draw();
+            }
+        });
+
+        $("#table").off("click", "button.edit").on("click", "button.edit", function () {
+            toggleShow("form");
+
+            var historyId = $(this).attr("data-hid");
+            var value = listArr[historyId];
+
+            $("#queue").val(value["queue"]);
+            $("#dateRegister").val(showTime(value["dateRegister"]["date"]));
+            $("#taxId").val(value["taxId"]);
+            $("#bidderName").val(value["bidderName"]);
+            $("#agentName").val(value["agentName"]);
+            $("#agentName2").val(value["agentName2"]);
+            $("#agentName3").val(value["agentName3"]);
+            $("#mobile").val(value["mobile"]);
+            $("#fax").val(value["fax"]);
+            $("#email").val(value["email"]);
+            $("input[name=typeBiz][value=" + getTag(value["typeBiz"], "1") + "]").prop('checked', true).trigger("click");
+            if ($("input[name=typeBiz][type='radio']:checked").attr("data-option") == 1) {
+                $("input[name=propertyFactory1][value=" + getTag(value["propertyFactory1"], "N") + "]").prop('checked', true).trigger("click");
+                $("input[name=propertyFactory2][value=" + getTag(value["propertyFactory2"], "N") + "]").prop('checked', true).trigger("click");
+                $("input[name=propertyFactory3][value=" + getTag(value["propertyFactory3"], "N") + "]").prop('checked', true).trigger("click");
+
+                $("#remarkFactory1").val(value["remarkFactory1"]);
+                $("#remarkFactory2").val(value["remarkFactory2"]);
+                $("#remarkFactory3").val(value["remarkFactory3"]);
+
+                $("#typeOptional").val(value["typeOptional"]);
+            }
+
+            $("input[name=property1][value=" + getTag(value["property1"], "N") + "]").prop('checked', true).trigger("click");
+            $("input[name=property2][value=" + getTag(value["property2"], "N") + "]").prop('checked', true).trigger("click");
+            $("input[name=property3][value=" + getTag(value["property3"], "N") + "]").prop('checked', true).trigger("click");
+            $("input[name=property4][value=" + getTag(value["property4"], "N") + "]").prop('checked', true).trigger("click");
+            $("input[name=property5][value=" + getTag(value["property5"], "N") + "]").prop('checked', true).trigger("click");
+            $("input[name=property6][value=" + getTag(value["property6"], "N") + "]").prop('checked', true).trigger("click");
+
+            $("#remark1").val(value["remark1"]);
+            $("#remark2").val(value["remark2"]);
+            $("#remark3").val(value["remark3"]);
+            $("#remark4").val(value["remark4"]);
+            $("#remark5").val(value["remark5"]);
+            $("#remark6").val(value["remark6"]);
+            $("#remark61").val(value["remark61"]);
+            $("#remark62").val(value["remark62"]);
+            $("#remark63").val(value["remark63"]);
+
+            $("#fileGroup").html('<div id="fileNew"></div><div id="fileBak"></div>');
+
+            $("#remarkSpecial").val((value["remarkSpecial"] == null ? '' : value["remarkSpecial"]));
+
+            var fileUpload = 0;
+            if (getTag(value["attachment"], "") != "") {
+                $("#fileNew").hide();
+                $("#fileBak").html(
+                        '<i class="fa fa-file-o"></i>'
+                        + '<a href="javascript: void(0);" style="color:blue !important;" onclick="downloadFile(\'' + value["attachment"] + '\');"> ' + fileNameCut(value["attachment"]) + '</a> &nbsp;&nbsp;'
+                        + '<a href="javascript: void(0);" style="color:blue !important;" title="ลบ" class="ic-edit" id="deleteFile"><i class="fa fa-trash"></i></a>'
+                        );
+
+                $("#deleteFile").click(function () {
+                    $("#fileNew").html(
+                            '<input type="file" id="attachment" name="attachment"> '
+                            + '<a href="javascript: void(0);" id="fileOld" style="color: blue !important;">[ไฟล์เดิม]</a>&nbsp;&nbsp;'
+                            + '<a href="javascript: void(0);" onclick="$(\'#attachment\').val(\'\');">[Reset]</a>'
+                            ).show();
+                    $("#fileBak").hide();
+                    fileUpload = 1;
+
+                    $("#fileOld").click(function () {
+                        $("#fileNew").hide();
+                        $("#fileBak").show();
+                        fileUpload = 0;
+                    });
+                });
+            }
+            else {
+                $("#fileNew").html(
+                        '<input type="file" id="attachment" name="attachment"> '
+                        + '<a href="javascript: void(0);" onclick="$(\'#attachment\').val(\'\');">[Reset]</a>'
+                        ).show();
+                $("#fileBak").hide();
+
+                fileUpload = 1;
+            }
+
+            // when you save the bidder info was modified
+            $("button.submit").unbind().click(function () {
+                var isValid = true;
+                $('#form input[required]').each(function () {
+                    if ($(this).val() == "" && !$(this).prop("disabled"))
+                        isValid = false;
+                    if ($(this).attr("name") == "taxId") {
+                        if ($(this).val().length != 13) {
+                            $(this).focus();
+                            $("#searching").html('<span class="text-danger">เลขผู้เสียภาษีต้องจำนวน 13 หลักเท่านั้น</span>');
+                            isValid = false;
+                        }
+                    }
+                });
+                if (isValid) {
+                    /*var fdata = dataObject(historyId);
+                     var dataJSON = JSON.stringify({bidderInfo: fdata["BidderInfo"], bidderHistory: fdata["BidderHistory"]});
+                     var dataJSONEN = encodeURIComponent(dataJSON);
+                     
+                     editBidder(dataJSONEN);*/
+                    var fdata = dataObject(historyId);
+
+                    var formData = new FormData();
+
+                    formData.append('fileUpload', fileUpload);
+                    formData.append('bidderInfo', JSON.stringify(fdata["BidderInfo"]));
+                    formData.append('bidderHistory', JSON.stringify(fdata["BidderHistory"]));
+
+                    if ($('#attachment').length)
+                        formData.append('file', $('#attachment')[0].files[0]);
+                    else
+                        formData.append('file', '');
+
+
+                    editBidder(formData)
+                }
+            });
+
+        });
+
+        // when you click to delete bidder info
+        $("#table").off("click", "button.delete").on("click", "button.delete", function () {
+            $('#bidderModal').modal("show");
+
+            var historyId = $(this).attr("data-hid");
+            var value = listArr[historyId];
+
+            $("#queueDel").html(value["queue"]);
+            $("#taxIdDel").html(value["taxId"]);
+            $("#bidderNameDel").html(value["bidderName"]);
+            $("#agentNameDel").html(value["agentName"]);
+
+            $("#confirmDelete").unbind().click(function () {
+                var dataInfo = {};
+                var dataHistory = {};
+
+                dataInfo["id"] = value["bidderInfoId"];
+                dataHistory["id"] = historyId;
+
+                var fdata = {};
+                fdata["BidderInfo"] = dataInfo;
+                fdata["BidderHistory"] = dataHistory;
+
+                var dataJSON = JSON.stringify({bidderInfo: fdata["BidderInfo"], bidderHistory: fdata["BidderHistory"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                deleteBidder(dataJSONEN);
+            });
+
+        });
+
+        $("#table").off("click", ".switch-input").on("click", ".switch-input", function () {
+            $("#changeCheckIn").modal("show");
+
+            var check = $(this);
+            var hId = $(this).attr("data-hid");
+            var value = listArr[hId];
+            var checkIn = "";
+
+            //toggle "no check" to "check"
+            if ($(this).is(':checked')) {
+                $("#statusChange").html('<span class="text-bold text-success">มา</span>');
+                checkIn = "Y";
+            }
+            else {
+                $("#statusChange").html('<span class="text-bold text-danger">ไม่มา</span>');
+                checkIn = "N";
+            }
+
+            $("#queueChange").html(value["queue"]);
+            $("#taxIdChange").html(value["taxId"]);
+            $("#bidderNameChange").html(value["bidderName"]);
+
+            $("#confirmChange").unbind().click(function () {
+                var dataHistory = {};
+                dataHistory["id"] = hId;
+                dataHistory["checkIn"] = checkIn;
+
+                var fdata = {};
+                fdata["BidderHistory"] = dataHistory;
+
+                var dataJSON = JSON.stringify({bidderHistory: fdata["BidderHistory"]});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+
+                var datas = callAjax("{{_context_path}}/api/industry2/bidderInfo/changeCheckIn", "post", dataJSONEN, "json");
+                if (typeof datas !== undefined && datas !== null) {
+                    if (datas["save"] == true) {
+
+                        if (checkIn == "Y") {
+                            check.prop("checked", true);
+                        }
+                        else {
+                            check.prop("checked", false);
+                        }
+                    }
+                }
+            });
+        });
+    }
+
+    function insertBidder(dataJSONEN) {
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function () {
+            var datas = callAjaxFile("{{_context_path}}/api/industry2/bidderInfo/insert", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if (datas["add"] == true) {
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function () {
+                        toggleShow("list");
+                    }, 500);
+                }
+                else {
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>' + datas["add"] + '</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function editBidder(dataJSONEN) {
+        $("#loading").html("กำลังบันทึกข้อมูล...");
+
+        setTimeout(function () {
+            var datas = callAjaxFile("{{_context_path}}/api/industry2/bidderInfo/update", "post", dataJSONEN, "json");
+            if (typeof datas !== "undefined" && datas !== null) {
+                if (datas["update"] == true) {
+                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                    setTimeout(function () {
+                        toggleShow("list");
+                    }, 500);
+                }
+                else {
+                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้</span>');
+                }
+            }
+        }, 100);
+    }
+
+    function deleteBidder(dataJSONEN) {
+        var datas = callAjax("{{_context_path}}/api/industry2/bidderInfo/delete", "post", dataJSONEN, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            if (datas["delete"] == true) {
+                toggleShow("list");
+            }
+        }
+    }
+
+    function dataObject(hid) {
+        var dataInfo = {};
+        var dataHistory = {};
+
+        if (hid !== null) {
+            $.each(listArr[hid], function (key, value) {
+                //alert(key+" "+value);
+                if (key == "bidderInfoId") {
+                    dataInfo["id"] = value;
+                }
+                else if (key == "bidderHistoryId") {
+                    dataHistory["id"] = value;
+                }
+            });
+        }
+
+        $("#form input[type=text], #form input[type=text], #form input[type=radio]:checked,#form textarea").each(function (i) {
+            var fattr = $(this).attr("data-entity");
+            var fname = $(this).attr("name");
+            var fvalue = $(this).val();
+            if (fattr == "info") {
+                dataInfo[fname] = fvalue;
+                //alert(fname+" "+fvalue)
+            }
+            if (fattr == "history") {
+                dataHistory[fname] = fvalue;
+                //alert(fname+" "+fvalue)
+            }
+        });
+        var fdata = {};
+        fdata["BidderInfo"] = dataInfo;
+        fdata["BidderHistory"] = dataHistory;
+
+        return fdata;
+    }
+
+    function toggleShow(option) {
+        if (option == "form") {
+            listsBidderType();
+
+            $("#bidderForm, #showTable").show();
+            $("#bidderTable, #addToTable").hide();
+
+            $("#form input[type=time], #form input[type=text],#form textarea").each(function () {
+                $(this).val("");
+            });
+            $("input[name=typeBiz]:radio:first").prop('checked', true).trigger("click");
+            $("input[name=property1]:radio:first").prop('checked', true).trigger("click");
+
+            $("#loading, #searching").empty();
+        }
+        else if (option == "list") {
+            $("#bidderTable, #addToTable").show();
+            $("#bidderForm, #showTable").hide();
+
+            showAllBidder();
+            $("#searchQueue").val("").trigger("change");
+        }
+    }
+
+    function showTime(val) {
+        var dt = val.split(" ");
+        var time = dt[1].split(":");
+        var output = time[0] + ":" + time[1];
+        return output;
+    }
+
+    function changeToIcon(val) {
+        var output;
+
+        if (val == "Y")
+            output = '<i class="fa fa-check text-success"></i>';
+        else
+            output = '<i class="fa fa-times text-danger"></i>';
+
+        return output;
+    }
+
+    function downloadFile(input) {
+        window.open("{{_context_path}}/apps/industry2/views/attachment/" + input, '_blank');
+    }
+
+    function fileNameCut(input) {
+        return input.substring(17);
+    }
+</script>
+
