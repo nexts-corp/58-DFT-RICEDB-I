@@ -30,7 +30,7 @@ interface IViewService {
     /**
      * @name reportOrder
      * @uri /reportOrder
-     * @description M83 ประมูลคำสั่งซื้อ
+     * @description M83 คำสั่งซื้อ
      * @authen true
      * @sitemap true
      */
