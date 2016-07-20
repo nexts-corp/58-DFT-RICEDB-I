@@ -186,7 +186,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
 
         if ($file != '') {
             $time = date("YmdHis");
-            $target_dir = "apps\\auction\\views\\attachment\\";
+            $target_dir = "apps\\order\\views\\attachment\\";
 
             $update = new BidderHistory();
             $update->statusKeyword = $bidderHistory->statusKeyword;
@@ -282,7 +282,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         $hasFile = $dataHistory[0]->attachment;
         if ($fileUpload == "1") {
             $time = date("YmdHis");
-            $target_dir = "apps\\auction\\views\\attachment\\";
+            $target_dir = "apps\\order\\views\\attachment\\";
 
             $update = new BidderHistory();
             $update->id = $bidderHistory->id;
@@ -343,7 +343,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         $dataHistoryCk = $this->datacontext->getObject($historyCk);
 
         if ($hasFile != "") {
-            $target_dir = "apps\\auction\\views\\attachment\\";
+            $target_dir = "apps\\order\\views\\attachment\\";
 
             if (file_exists($target_dir . $hasFile)) {
                 //return $data[0];
