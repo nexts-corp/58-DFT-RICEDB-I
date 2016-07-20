@@ -10,6 +10,9 @@
     <class>th.go.dft.rice.report.model.RPT02_02_model</class>
     <class>th.go.dft.rice.report.model.RPT02_03_00_model</class>
     <class>th.go.dft.rice.report.model.RPT02_03_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_03_01_02_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_03_01_03_model</class>
+    <class>th.go.dft.rice.report.model.RPT02_03_01_04_model</class>
     <class>th.go.dft.rice.report.model.RPT02_03_02_model</class>
     <class>th.go.dft.rice.report.model.RPT02_03_03_model</class>
     <class>th.go.dft.rice.report.model.RPT02_04_model</class>
@@ -56,8 +59,6 @@
     <class>th.go.dft.rice.report.model.RPT02_08_03_model</class>
     <class>th.go.dft.rice.report.model.RPT02_08_02_model</class>
     <class>th.go.dft.rice.report.model.RPT03_14_03_model</class>
-    <class>th.go.dft.rice.report.model.RPT02_03_01_02_model</class>
-    <class>th.go.dft.rice.report.model.RPT02_03_01_03_model</class>
     <class>th.go.dft.rice.report.model.RPT02_08_04_model</class>
     <class>th.go.dft.rice.report.model.RPT02_08_05_model</class>
     <class>th.go.dft.rice.report.model.RPT02_07_00_model</class>
