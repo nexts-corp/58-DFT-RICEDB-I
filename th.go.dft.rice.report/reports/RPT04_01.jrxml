@@ -46,6 +46,8 @@
 	<field name="bidderPassFV" class="java.lang.String"/>
 	<field name="isReserved" class="java.lang.String"/>
 	<field name="RFV" class="java.lang.Double"/>
+	<field name="bidderPriceDuplicate" class="java.lang.String"/>
+	<field name="bidderRoundMaxprice" class="java.lang.String"/>
 	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
@@ -307,7 +309,8 @@
     ?
     (
       ($F{bidderPassFV}=="N"?" <<ตกFV>>":"")+
-      ($F{isReserved}=="N"?" <<ตกหลักค้ำประกัน>>":"")
+      ($F{isReserved}=="N"?" <<ตกหลักค้ำประกัน>>":"")+
+      ($F{bidderPriceDuplicate}=="Y"&&$F{bidderRoundMaxprice}=="Y"?" <<เสนอซื้อเท่ากัน>>":"")
     ):""
 )]]></textFieldExpression>
 			</textField>

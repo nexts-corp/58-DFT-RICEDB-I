@@ -28,7 +28,7 @@
 	<field name="wareHouseCode" class="java.lang.String"/>
 	<field name="provinceId" class="java.lang.Integer"/>
 	<field name="province" class="java.lang.String"/>
-	<field name="associateId" class="java.lang.String"/>
+	<field name="associateId" class="java.lang.Integer"/>
 	<field name="associate" class="java.lang.String"/>
 	<field name="bidderNo" class="java.lang.Integer"/>
 	<field name="bidderName" class="java.lang.String"/>
@@ -57,6 +57,14 @@
 	<variable name="COUNT_BIDDER" class="java.lang.Integer" calculation="DistinctCount">
 		<variableExpression><![CDATA[$F{bidderNo}]]></variableExpression>
 	</variable>
+	<variable name="COUNT_ASSO1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[($F{associateId}==1?1:0)]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="COUNT_ASSO2" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[($F{associateId}==2?1:0)]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -66,10 +74,10 @@
 				<reportElement style="Heading" x="0" y="28" width="802" height="20" uuid="0c3c7f6e-2114-4550-83aa-33a7f3e46c3a"/>
 				<box rightPadding="0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["สรุปผลการประมูล"+$P{auctionName}+" ครั้งที่ "+$P{auctionCode}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["สรุปผล"+$P{auctionName}+" ครั้งที่ "+$P{auctionCode}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Bold" x="638" y="28" width="164" height="20" uuid="f0fa0b30-f6c6-4987-8cd7-1d937e0743a6"/>
+				<reportElement style="Bold" x="638" y="8" width="164" height="20" uuid="f0fa0b30-f6c6-4987-8cd7-1d937e0743a6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="16" isBold="true"/>
 				</textElement>
@@ -347,8 +355,8 @@
 					<bottomPen lineWidth="0.75"/>
 					<rightPen lineWidth="0.75"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["รวมทั้งสิ้น "+$V{REPORT_COUNT}+" คลังสินค้า    ผู้เสนอซื้อ "+$V{COUNT_BIDDER}+" ราย"]]></textFieldExpression>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["รวมทั้งสิ้น "+$V{REPORT_COUNT}+" คลังฯ (อคส. " + $V{COUNT_ASSO1} +" คลัง , อ.ต.ก. "+ $V{COUNT_ASSO2} +" คลัง)  ผู้เสนอซื้อ "+$V{COUNT_BIDDER}+" ราย"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

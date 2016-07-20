@@ -126,10 +126,12 @@ public class ReportService extends CServiceBase implements IReportService {
                 bparam.setAuctionDate(datas.get(0).getAuctionDate());
                 bparam.setREPORT_MAX_COUNT(datas.size());
                 bparam.setPrintBy(printBy);
-                if (auctionCode.indexOf("-I") > -1) {
+                if (auctionCode.indexOf("-I2") > -1) {
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐเป็นการทั่วไปและเพื่อเข้าสู่อุตสาหกรรม");
+                } else if (auctionCode.indexOf("-I") > -1) {
                     bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
                 } else if (auctionCode.indexOf("-O") > -1) {
-                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศ");
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศเพื่อการส่งออกต่างประเทศ");
                 } else {
                     bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐ");
                 }
@@ -143,10 +145,12 @@ public class ReportService extends CServiceBase implements IReportService {
                 datas = new ArrayList<>();
                 bparam.setREPORT_MAX_COUNT(0);
                 bparam.setPrintBy(printBy);
-                if (auctionCode.indexOf("-I") > -1) {
+                if (auctionCode.indexOf("-I2") > -1) {
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐเป็นการทั่วไปและเพื่อเข้าสู่อุตสาหกรรม");
+                } else if (auctionCode.indexOf("-I") > -1) {
                     bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกรัฐบาลเข้าสู่อุตสาหกรรม");
                 } else if (auctionCode.indexOf("-O") > -1) {
-                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศ");
+                    bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศเพื่อการส่งออกต่างประเทศ");
                 } else {
                     bparam.setAuctionName("การจำหน่ายข้าวสารในสต็อกของรัฐ");
                 }

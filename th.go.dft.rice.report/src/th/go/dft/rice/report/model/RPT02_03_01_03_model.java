@@ -9,18 +9,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Entity
-public class RPT02_03_01_03_model  extends BaseReport  {
+public class RPT02_03_01_03_model extends BaseReport {
 
     @Column
     private int bidderNo;
     @Column
+    private String bidderTaxId;
+    @Column
     private String bidderName;
     @Column
+    private String bidderTypeId;
+    @Column
+    private String bidderTypeName;
+    @Column
     private String bidderQueue;
-    
+
     @Column
     private String bidderRegister;
-    
+
     @Column
     private String property1;
     @Column
@@ -43,17 +49,47 @@ public class RPT02_03_01_03_model  extends BaseReport  {
     private int passBidder;
     @Column
     private int failBidder;
-    
-    
+
     @Column
     private String propertyFactory1;
     @Column
     private String propertyFactory2;
     @Column
     private String propertyFactory3;
-    
+
     @Column
     private String typeOptional;
+
+    @Column
+    private String remark61;
+    @Column
+    private String remark62;
+    @Column
+    private String remark63;
+
+    public String getRemark61() {
+        return remark61;
+    }
+
+    public void setRemark61(String remark61) {
+        this.remark61 = remark61;
+    }
+
+    public String getRemark62() {
+        return remark62;
+    }
+
+    public void setRemark62(String remark62) {
+        this.remark62 = remark62;
+    }
+
+    public String getRemark63() {
+        return remark63;
+    }
+
+    public void setRemark63(String remark63) {
+        this.remark63 = remark63;
+    }
 
     public int getBidderNo() {
         return bidderNo;
@@ -63,12 +99,36 @@ public class RPT02_03_01_03_model  extends BaseReport  {
         this.bidderNo = bidderNo;
     }
 
+    public String getBidderTaxId() {
+        return bidderTaxId;
+    }
+
+    public void setBidderTaxId(String bidderTaxId) {
+        this.bidderTaxId = bidderTaxId;
+    }
+
     public String getBidderName() {
         return bidderName;
     }
 
     public void setBidderName(String bidderName) {
         this.bidderName = bidderName;
+    }
+
+    public String getBidderTypeId() {
+        return bidderTypeId;
+    }
+
+    public void setBidderTypeId(String bidderTypeId) {
+        this.bidderTypeId = bidderTypeId;
+    }
+
+    public String getBidderTypeName() {
+        return bidderTypeName;
+    }
+
+    public void setBidderTypeName(String bidderTypeName) {
+        this.bidderTypeName = bidderTypeName;
     }
 
     public String getBidderQueue() {
@@ -206,6 +266,5 @@ public class RPT02_03_01_03_model  extends BaseReport  {
     public void setTypeOptional(String typeOptional) {
         this.typeOptional = typeOptional;
     }
-    
-    
+
 }

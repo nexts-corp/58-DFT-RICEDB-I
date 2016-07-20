@@ -146,7 +146,7 @@
 				<textFieldExpression><![CDATA["วันที่ "+$P{auctionDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Bold" x="424" y="38" width="131" height="20" uuid="ff268dd2-f067-40f6-adb7-71a28c16474a"/>
+				<reportElement style="Bold" x="424" y="18" width="131" height="20" uuid="ff268dd2-f067-40f6-adb7-71a28c16474a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>

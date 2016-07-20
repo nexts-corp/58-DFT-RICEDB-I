@@ -19,9 +19,28 @@ public class RPT04_01_model extends BaseModel implements Serializable {
 
     @Column
     private String bidderPassFV;
-
+    @Column
+    private String bidderPriceDuplicate;
     @Column
     private String isReserved;
+    @Column
+    private String bidderRoundMaxprice;
+
+    public String getBidderRoundMaxprice() {
+        return bidderRoundMaxprice;
+    }
+
+    public void setBidderRoundMaxprice(String bidderRoundMaxprice) {
+        this.bidderRoundMaxprice = bidderRoundMaxprice;
+    }
+
+    public String getBidderPriceDuplicate() {
+        return bidderPriceDuplicate;
+    }
+
+    public void setBidderPriceDuplicate(String bidderPriceDuplicate) {
+        this.bidderPriceDuplicate = bidderPriceDuplicate;
+    }
 
     public String getBidderWinner() {
         return bidderWinner;

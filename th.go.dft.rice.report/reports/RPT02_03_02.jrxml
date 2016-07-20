@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02_03_02" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
 	<property name="ireport.zoom" value="1.3310000000000004"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="72"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
@@ -87,7 +87,7 @@
 	<columnHeader>
 		<band height="36" splitType="Stretch">
 			<staticText>
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="432" y="0" width="123" height="36" uuid="8946d1d8-4641-4ca2-8773-9ee6950501d7"/>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="475" y="0" width="80" height="36" uuid="8946d1d8-4641-4ca2-8773-9ee6950501d7"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -101,7 +101,7 @@
 				<text><![CDATA[หมายเหตุ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="0" y="0" width="45" height="36" uuid="115cfd5e-2c0f-4da3-963a-bbff00bc9417"/>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="0" y="0" width="35" height="36" uuid="115cfd5e-2c0f-4da3-963a-bbff00bc9417"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -115,7 +115,7 @@
 				<text><![CDATA[คิวที่]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="45" y="0" width="45" height="36" uuid="721d51c1-2738-4244-b361-1e76799b32a2"/>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="35" y="0" width="45" height="36" uuid="721d51c1-2738-4244-b361-1e76799b32a2"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -129,21 +129,7 @@
 				<text><![CDATA[เวลา]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="292" y="0" width="75" height="36" uuid="13b7dd16-36dc-435a-8eb4-473723cc036b"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[สถานะ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="90" y="0" width="202" height="36" uuid="da3959f0-bab1-4270-8202-3908bf063f5b"/>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="160" y="0" width="175" height="36" uuid="da3959f0-bab1-4270-8202-3908bf063f5b"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -157,7 +143,7 @@
 				<text><![CDATA[ผู้เสนอซื้อ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="367" y="0" width="65" height="36" uuid="b59445f0-9450-44e1-ac70-15e473acf48f"/>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="410" y="0" width="65" height="36" uuid="b59445f0-9450-44e1-ac70-15e473acf48f"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -170,12 +156,40 @@
 				</textElement>
 				<text><![CDATA[ยื่นซอง]]></text>
 			</staticText>
+			<staticText>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="335" y="0" width="75" height="36" uuid="13b7dd16-36dc-435a-8eb4-473723cc036b"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[สถานะ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="80" y="0" width="80" height="36" uuid="4a8ab48b-0c25-4c81-ac48-37c147d208bf"/>
+				<box>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tax ID]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="45" height="20" uuid="c5894dc1-0c1c-4de3-843f-46e5cb28e369"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="35" height="20" uuid="c5894dc1-0c1c-4de3-843f-46e5cb28e369"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -186,7 +200,7 @@
 				<textFieldExpression><![CDATA[$F{bidderQueue}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="45" y="0" width="45" height="20" uuid="60719600-2bd7-4de7-86c6-0bdc1aa7782d"/>
+				<reportElement x="35" y="0" width="45" height="20" uuid="60719600-2bd7-4de7-86c6-0bdc1aa7782d"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -197,7 +211,7 @@
 				<textFieldExpression><![CDATA[$F{bidderRegister}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="90" y="0" width="202" height="20" uuid="eca22915-33c2-49e5-a799-4a7de26cca0d"/>
+				<reportElement x="160" y="0" width="175" height="20" uuid="eca22915-33c2-49e5-a799-4a7de26cca0d"/>
 				<box leftPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -205,10 +219,31 @@
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{bidderTaxId}+" "+$F{bidderName}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bidderName}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="292" y="0" width="75" height="20" uuid="c932fe87-6de1-4e14-b3e1-2d6ce7406cfa"/>
+				<reportElement x="475" y="0" width="80" height="20" uuid="406a3806-5558-435a-9d7b-9135c1b44a43"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[""]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="410" y="0" width="65" height="20" uuid="861f412e-1868-44d3-b22a-665d1d5d7fe5"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{isCheckIn}=='Y'?"มายื่นซอง":"ไม่มายื่นซอง"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="0" width="75" height="20" uuid="c932fe87-6de1-4e14-b3e1-2d6ce7406cfa"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -219,25 +254,15 @@
 				<textFieldExpression><![CDATA[$F{bidderStatus}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="432" y="0" width="123" height="20" uuid="406a3806-5558-435a-9d7b-9135c1b44a43"/>
-				<box>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textFieldExpression><![CDATA[""]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="367" y="0" width="65" height="20" uuid="861f412e-1868-44d3-b22a-665d1d5d7fe5"/>
-				<box>
+				<reportElement x="80" y="0" width="80" height="20" uuid="e9af9d50-94e8-486b-99fa-1823b31cd8cb"/>
+				<box leftPadding="2">
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{isCheckIn}=='Y'?"มายื่นซอง":"ไม่มายื่นซอง"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{bidderTaxId}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
