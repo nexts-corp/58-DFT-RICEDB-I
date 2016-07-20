@@ -38,6 +38,9 @@ class ReportService extends CServiceBase implements IReportService {
         if ($type == "order") {
             $param["active"] = "YO";
         }
+        if ($type == "industry2") {
+            $param["active"] = "YI2";
+        }
         $data = $this->datacontext->getObject($sql, $param); //get STATUS is Active
 
         $url = $this->getReportURL() . "?reportcode=" . $reportName . "&auccode=" . $data[0]->keyword . "&export=view&p_1=" . $queue;
@@ -58,6 +61,9 @@ class ReportService extends CServiceBase implements IReportService {
         }
         if ($type == "order") {
             $param["active"] = "YO";
+        }
+        if ($type == "industry2") {
+            $param["active"] = "YI2";
         }
         $data = $this->datacontext->getObject($sql, $param); //get STATUS is Active
 
