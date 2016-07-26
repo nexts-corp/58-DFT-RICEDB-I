@@ -51,7 +51,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
                 . " bi.id as bidderInfoId, bi.taxId, bi.bidderName, bi.fax, bi.email, bh.typeBiz,"
                 . " bh.id as bidderHistoryId, bh.statusKeyword, bh.queue, bh.dateRegister,"
                 . " bh.agentName, bh.agentName2,bh.agentName3, bh.mobile, bh.property1, bh.remark1, bh.property2, bh.remark2,"
-                . " bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5,bh.property6, bh.remark6, bh.checkIn,"
+                . " bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5,bh.property6, bh.remark6,bh.weightOrder, bh.checkIn,"
                 . " bh.propertyFactory1, bh.remarkFactory1, bh.propertyFactory2, bh.remarkFactory2,"
                 . " bh.propertyFactory3, bh.remarkFactory3, bh.attachment, bh.typeOptional, bh.remarkSpecial"
                 . " FROM " . $this->ent . "\\BidderHistory bh"
@@ -73,7 +73,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
                 . " bi.id as bidderInfoId, bi.taxId, bi.bidderName, bi.fax, bi.email, bh.typeBiz,"
                 . " bh.id as bidderHistoryId, bh.statusKeyword, bh.queue, bh.dateRegister,"
                 . " bh.agentName, bh.agentName2, bh.agentName3, bh.mobile, bh.property1, bh.remark1, bh.property2, bh.remark2,"
-                . " bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5, bh.property6, bh.remark6"
+                . " bh.property3, bh.remark3, bh.property4, bh.remark4, bh.property5, bh.remark5, bh.property6, bh.remark6,bh.weightOrder "
                 . " FROM " . $this->ent . "\\BidderHistory bh"
                 . " JOIN " . $this->ent . "\\BidderInfo bi WITH bh.bidderId = bi.id"
                 . " WHERE bh.statusKeyword = :statusKeyword"
@@ -261,7 +261,8 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
         $dataHistory[0]->remark5 = $bidderHistory->remark5;
         $dataHistory[0]->property6 = $bidderHistory->property6;
         $dataHistory[0]->remark6 = $bidderHistory->remark6;
-
+        $dataHistory[0]->weightOrder = $bidderHistory->weightOrder;
+        
         $dataHistory[0]->propertyFactory1 = $bidderHistory->propertyFactory1;
         $dataHistory[0]->remarkFactory1 = $bidderHistory->remarkFactory1;
         $dataHistory[0]->propertyFactory2 = $bidderHistory->propertyFactory2;
