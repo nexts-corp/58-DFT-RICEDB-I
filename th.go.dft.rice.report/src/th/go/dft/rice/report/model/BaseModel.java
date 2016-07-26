@@ -53,6 +53,10 @@ public class BaseModel extends BaseReport implements Serializable {
     @Column
     private double oweightAll;
     @Column
+    private double weightGood;
+    @Column
+    private double weightBad;
+    @Column
     private double RFV;
     @Column
     private double FV2;
@@ -195,6 +199,22 @@ public class BaseModel extends BaseReport implements Serializable {
         this.oweightAll = oweightAll;
     }
 
+    public double getWeightGood() {
+        return weightGood;
+    }
+
+    public void setWeightGood(double weightGood) {
+        this.weightGood = weightGood;
+    }
+
+    public double getWeightBad() {
+        return weightBad;
+    }
+
+    public void setWeightBad(double weightBad) {
+        this.weightBad = weightBad;
+    }
+
     public double getRFV() {
         return RFV;
     }
@@ -306,7 +326,5 @@ public class BaseModel extends BaseReport implements Serializable {
     public void setBidderLastPrice(double bidderLastPrice) {
         this.bidderLastPrice = bidderLastPrice;
     }
-
-   
 
 }

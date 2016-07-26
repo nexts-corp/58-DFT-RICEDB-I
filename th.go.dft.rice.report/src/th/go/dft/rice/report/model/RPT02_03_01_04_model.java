@@ -59,7 +59,18 @@ public class RPT02_03_01_04_model extends BaseReport {
 
     @Column
     private String typeOptional;
-
+    @Column
+    private String remark1;
+    @Column
+    private String remark2;
+    @Column
+    private String remark3;
+    @Column
+    private String remark4;
+    @Column
+    private String remark5;
+    @Column
+    private String remark6;
     @Column
     private String remark61;
     @Column
@@ -67,28 +78,15 @@ public class RPT02_03_01_04_model extends BaseReport {
     @Column
     private String remark63;
 
-    public String getRemark61() {
-        return remark61;
+    @Column
+    private double weightOrder;
+
+    public double getWeightOrder() {
+        return weightOrder;
     }
 
-    public void setRemark61(String remark61) {
-        this.remark61 = remark61;
-    }
-
-    public String getRemark62() {
-        return remark62;
-    }
-
-    public void setRemark62(String remark62) {
-        this.remark62 = remark62;
-    }
-
-    public String getRemark63() {
-        return remark63;
-    }
-
-    public void setRemark63(String remark63) {
-        this.remark63 = remark63;
+    public void setWeightOrder(double weightOrder) {
+        this.weightOrder = weightOrder;
     }
 
     public int getBidderNo() {
@@ -265,6 +263,78 @@ public class RPT02_03_01_04_model extends BaseReport {
 
     public void setTypeOptional(String typeOptional) {
         this.typeOptional = typeOptional;
+    }
+
+    public String getRemark1() {
+        return remark1;
+    }
+
+    public void setRemark1(String remark1) {
+        this.remark1 = remark1;
+    }
+
+    public String getRemark2() {
+        return remark2;
+    }
+
+    public void setRemark2(String remark2) {
+        this.remark2 = remark2;
+    }
+
+    public String getRemark3() {
+        return remark3;
+    }
+
+    public void setRemark3(String remark3) {
+        this.remark3 = remark3;
+    }
+
+    public String getRemark4() {
+        return remark4;
+    }
+
+    public void setRemark4(String remark4) {
+        this.remark4 = remark4;
+    }
+
+    public String getRemark5() {
+        return remark5;
+    }
+
+    public void setRemark5(String remark5) {
+        this.remark5 = remark5;
+    }
+
+    public String getRemark6() {
+        return remark6;
+    }
+
+    public void setRemark6(String remark6) {
+        this.remark6 = remark6;
+    }
+
+    public String getRemark61() {
+        return remark61;
+    }
+
+    public void setRemark61(String remark61) {
+        this.remark61 = remark61;
+    }
+
+    public String getRemark62() {
+        return remark62;
+    }
+
+    public void setRemark62(String remark62) {
+        this.remark62 = remark62;
+    }
+
+    public String getRemark63() {
+        return remark63;
+    }
+
+    public void setRemark63(String remark63) {
+        this.remark63 = remark63;
     }
 
 }
