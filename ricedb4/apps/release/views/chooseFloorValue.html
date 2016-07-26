@@ -251,10 +251,10 @@
             $("tr.dataHistory").click(function () {
                 var silo = $(this).find("td:eq(1)").html(); //หจก.โรงสีไฟทวีศักดิ์ สรรคบุรี หลัง 4 [ชัยนาท] [อคส.]
                 silo = silo.substr(0, silo.indexOf(' [')); //หจก.โรงสีไฟทวีศักดิ์ สรรคบุรี หลัง 4" " 
-                if(silo.substr(-1,1)==" "){
-                    silo = silo.substr(0,silo.length-1); //หจก.โรงสีไฟทวีศักดิ์ สรรคบุรี หลัง 4""
+                if (silo.substr(-1, 1) == " ") {
+                    silo = silo.substr(0, silo.length - 1); //หจก.โรงสีไฟทวีศักดิ์ สรรคบุรี หลัง 4""
                 }
-                var dataSilo = JSON.stringify({silo:silo});
+                var dataSilo = JSON.stringify({silo: silo});
                 siloHistory(dataSilo);
             });
         });
@@ -349,6 +349,7 @@
             var bidCount = 0;
             var bidSellCount = 0;
             var bNameOld = [];
+            var bNameSell = [];
             $.each(datas["lists"], function (key, val) {
                 whAll++;
                 var bchk = true;
@@ -363,6 +364,7 @@
                     if (val["bidderName"] != "") {
                         bNameOld.push(val["bidderName"]);
                         bidCount++;
+                        // console.log(bidCount + " "+ val["bidderName"]);
                     }
 //                    console.log(bidCount + " " + val["bidderName"]);
 //                    console.log(val);
@@ -384,8 +386,23 @@
                     tPrice1 += parseFloat(val["bidderPrice"]);
                     tDiff1 += parseFloat(diff);
                     whSell++;
+
+                    bchk = true;
+                    $.each(bNameSell, function (k, v) {
+                        if (v == val["bidderName"]) {
+                            bchk = false;
+                            //break;
+                            return false;
+                        }
+                    });
                     if (bchk) {
-                        bidSellCount++;
+                        if (val["bidderName"] != "") {
+                            bNameSell.push(val["bidderName"]);
+                            bidSellCount++;
+                            // console.log(bidCount + " "+ val["bidderName"]);
+                        }
+//                        bidSellCount++;
+//                        console.log(bidSellCount + " " + val["bidderName"]);
                     }
 
                 }
@@ -465,7 +482,7 @@
             $("#detailTab table tbody").html(html3);
         }
     }
-    function siloHistory(dataSilo){
+    function siloHistory(dataSilo) {
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/siloHistory", "post", dataSilo, "json");
         console.log(datas);
     }
