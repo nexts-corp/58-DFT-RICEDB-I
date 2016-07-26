@@ -117,6 +117,9 @@ class BidderHistory extends EntityBase {
     /** @Column(type="string",length=255, name="Remark_Special") */
     public $remarkSpecial;
 
+    /** @Column(type="float", name="weightOrder") */
+    public $weightOrder;
+
     function getId() {
         return $this->id;
     }
@@ -257,6 +260,10 @@ class BidderHistory extends EntityBase {
         return $this->remarkSpecial;
     }
 
+    function getWeightOrder() {
+        return $this->weightOrder;
+    }
+
     function setId($id) {
         $this->id = $id;
     }
@@ -395,6 +402,10 @@ class BidderHistory extends EntityBase {
 
     function setRemarkSpecial($remarkSpecial) {
         $this->remarkSpecial = $remarkSpecial;
+    }
+
+    function setWeightOrder($weightOrder) {
+        $this->weightOrder = $weightOrder;
     }
 
 }
