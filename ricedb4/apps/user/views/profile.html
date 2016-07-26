@@ -1,0 +1,213 @@
+{{>header}}
+
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}user.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}user.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}profile.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container">
+        <div class="row">
+            <div id="userForm" class="col-md-12"><!-- user form -->
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div id="form-part1" class="col-xs-12">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-up"></a>
+                                </div>
+                                <h2 class="panel-title">{{#i18n}}user.panelInfo{{/i18n}}</h2>
+                            </header>
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="name">{{#i18n}}user.name{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="name" id="name" required>
+                                        </div>
+                                    </div>
+                                    <div id="searching"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="surname">{{#i18n}}user.surname{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="surname" id="surname" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="roleCode">{{#i18n}}user.permission{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-lock"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="roleCode" id="roleCode" required disabled />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="departmentId">{{#i18n}}user.department{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-building"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="departmentId" id="departmentId" required disabled /> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="departmentId">{{#i18n}}user.active{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-building"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="isActive" id="isActive" required disabled />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="email">{{#i18n}}user.email{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-envelope"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="email" id="email">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="telephone">{{#i18n}}user.phone{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-phone"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="telephone" id="telephone">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="address">{{#i18n}}user.address{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-map-marker"></i>
+                                            </span>
+                                            <textarea data-entity="user" class="form-control input-sm" name="address" id="address"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div><!-- col-xs-12 -->
+
+                    <div id="form-part2" class="col-xs-12">
+                        <section class="panel">
+
+                            <header class="panel-heading">
+                                <div class="panel-actions">
+                                    <a href="#" class="fa fa-caret-up"></a>
+                                </div>
+                                <h2 class="panel-title">{{#i18n}}user.panelLogin{{/i18n}}</h2>
+                            </header>
+
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="username">{{#i18n}}user.username{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-user"></i>
+                                            </span>
+                                            <input type="text" data-entity="user" class="form-control input-sm" name="username" id="username" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="password">{{#i18n}}user.password{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-key"></i>
+                                            </span>
+                                            <input type="password" data-entity="user" class="form-control input-sm" name="password" id="password" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label req" for="passwordCheck">{{#i18n}}user.passwordConfirm{{/i18n}} :</label>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-key"></i>
+                                            </span>
+                                            <input type="password" class="form-control input-sm" name="passwordCheck" id="passwordCheck" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div><!-- col-xs-12 -->
+
+                    <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+                    <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                        <li data-option-value="*" class="">
+                            <button id="submit" class="btn btn-primary submit"><i class="fa fa-save"></i> {{#i18n}}user.buttonSave{{/i18n}}</button>
+                        </li>
+                        <li data-option-value=".websites" class="padding-left">
+                            <button type="button" class="btn btn-default cancel">{{#i18n}}user.buttonCancel{{/i18n}}</button>
+                        </li>
+                    </ul>
+
+                </form>
+            </div><!-- end bidder info form -->
+
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+
+{{>footer}}
+
+<script type="text/javascript">
+    var js_context_path = "{{_context_path}}";
+</script>
+
+<script src="{{_context_path}}/apps/user/views/js/profile.js"></script>
+

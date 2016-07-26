@@ -29,7 +29,7 @@ class AuthenService extends CServiceBase implements IAuthenService {
             $check = new \apps\common\entity\User();
             $check->username = $username;
             $check->password = $password;
-			$check->isActive="Y";
+            $check->isActive = "Y";
 
             $user = $this->datacontext->getObject($check);
             //print_r($user);
@@ -84,7 +84,7 @@ class AuthenService extends CServiceBase implements IAuthenService {
 
             $acc = new \th\co\bpg\cde\collection\CJAccount();
             $acc->code = $user[0]->username;
-            $acc->name =$user[0]->name." ".$user[0]->surname;
+            $acc->name = $user[0]->name . " " . $user[0]->surname;
             $acc->role = $user[0]->roleCode;
             $acc->domain = $user[0]->roleCode;
             $acc->resources = array();

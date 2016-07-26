@@ -27,4 +27,14 @@ interface IViewService {
      * @sitemap true
      */ 
     public function permissionManage();
+    
+    /**
+     * @name profile
+     * @uri /profile
+     * @description M13 จัดการข้อมูลส่วนตัว
+     * @authen true
+     * @resource 11111111
+     * @sitemap true
+     */ 
+    public function profile();
 }

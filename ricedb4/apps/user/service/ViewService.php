@@ -124,4 +124,9 @@ class ViewService extends CServiceBase implements IViewService {
         return $datax["apps"];
     }
 
+    public function profile() {
+        $view = new CJView("profile", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
 }

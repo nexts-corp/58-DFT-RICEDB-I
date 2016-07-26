@@ -100,6 +100,7 @@ class AuthClient extends COAuthClient {
        // $acc->code = "xxx";
     //    print_r($acc);
           setcookie("userinfo",$acc->name, 0, "/");
+          setcookie("username",$acc->code, 0, "/");
         return $acc;
     }
 
