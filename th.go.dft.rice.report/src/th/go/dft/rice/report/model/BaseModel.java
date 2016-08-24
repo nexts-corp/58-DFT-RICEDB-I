@@ -40,6 +40,11 @@ public class BaseModel extends BaseReport implements Serializable {
     private String project;
 
     @Column
+    private int gradeId;
+    @Column
+    private String grade;
+
+    @Column
     private int typeId;
 
     @Column
@@ -157,6 +162,22 @@ public class BaseModel extends BaseReport implements Serializable {
 
     public void setProject(String project) {
         this.project = project;
+    }
+
+    public int getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(int gradeId) {
+        this.gradeId = gradeId;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 
     public int getTypeId() {
