@@ -114,7 +114,7 @@ class ReportService extends CServiceBase implements IReportService {
                 . " ORDER BY st.id DESC";
         $param = array(
             "keyword" => "AU%",
-            "keyword2" => "%-_"
+            "keyword2" => "%-%"
         );
         $dataAuction = $this->datacontext->getObject($sql, $param);
         return $dataAuction;

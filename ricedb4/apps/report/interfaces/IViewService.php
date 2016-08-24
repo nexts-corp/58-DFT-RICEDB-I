@@ -44,4 +44,5 @@ interface IViewService {
      * @sitemap true
      */
     public function reportIndustry2();
+  
 }
