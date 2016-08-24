@@ -449,15 +449,25 @@
                 html += '<tr>'
                         + '<td class="text-bold">' + province + '</td>'
                         + '</tr>';
+                var whCode = '';//
                 $.each(value, function (key2, value2) {
-                    countAll++;
-
-                    html += '<tr>'
-                            + '<td style="padding-left:20px;">' + countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']</td>'
-                            + '<td>' + value2["bidderName"] + '</td>'
-                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
-                            + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
-                            + '</tr>';
+                    if (whCode == '' || whCode != value2["wareHouseCode"]) {//
+                        whCode = value2["wareHouseCode"];//
+                        countAll++;
+                        html += '<tr>'
+                                + '<td style="padding-left:20px;">' + countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']</td>'
+                                + '<td>' + value2["bidderName"] + '</td>'
+                                + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                                + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
+                                + '</tr>';
+                    } else {//
+                        html += '<tr>'
+                                + '<td style="padding-left:20px;"></td>'
+                                + '<td>' + value2["bidderName"] + '</td>'
+                                + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                                + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
+                                + '</tr>';
+                    }//
                 });
             });
         }
