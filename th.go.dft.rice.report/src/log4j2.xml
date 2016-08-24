@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-    <Properties>
+<!--    <Properties>
         <Property name="filename">logs/access.log</Property>
     </Properties>
     <Appenders>
@@ -15,12 +15,57 @@
             
         </File>
 
+    </Appenders>-->
+    
+    <Appenders>
+        <RollingFile name="access_file" fileName="logs/access.log" filePattern="logs/access-%d{MM-dd-yyyy}.log"
+                     ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy />
+        </RollingFile>
+        
+<!--        <RollingFile name="error_file" fileName="logs/error.log" 
+                     filePattern="logs/error-%d{MM-dd-yyyy}.log"
+                   >
+            <PatternLayout>
+                <Pattern>%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Pattern>
+            </PatternLayout>
+            <TimeBasedTriggeringPolicy />
+        </RollingFile>-->
+        
+        <Console name="STDOUT" target="SYSTEM_OUT" ignoreExceptions="false">
+            <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <!--      <Failover name="Failover" primary="RollingFile">
+            <Failovers>
+                <AppenderRef ref="Console"/>
+            </Failovers>
+        </Failover>-->
     </Appenders>
+    
   
     <Loggers>
+<!--        <logger name="access_l">
+            <appender-ref ref="access_file"  level="info"/>
+        </logger>
+        
+         <logger name="access_l_2" >
+            <appender-ref ref="access_file" level="SEVERE"/>
+        </logger>
+        
+         <logger name="access_l_3" >
+            <appender-ref ref="access_file" level="WARNING"/>
+        </logger>
+        
+        <logger name="error_l">
+            <appender-ref ref="error_file"  level="error"/>
+        </logger>-->
+
         <Root level="info">
-            <AppenderRef ref="file"/>
-            <AppenderRef ref="Console"/>
+            <AppenderRef ref="access_file"/>
+            <!--            <AppenderRef ref="Console"/>-->
         </Root>
     </Loggers>
 </Configuration>

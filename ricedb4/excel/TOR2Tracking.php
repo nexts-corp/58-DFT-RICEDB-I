@@ -5,15 +5,17 @@ set_time_limit(0);
 ini_set('memory_limit', '-1');
 require("phpexcel/Classes/PHPExcel/IOFactory.php");
 
-$inputFileName = 'files/I2EDIT.xlsx';
+$inputFileName = 'files/AU2_2559_I2.xlsx';
 //$extend = "2";
 
 $count = 0;
+
 
 //  Read your Excel workbook
 try {
     $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
     $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+    $objReader->setReadDataOnly(true);
     $objPHPExcel = $objReader->load($inputFileName);
 
     /* $objPHPExcel->getActiveSheet()->getStyle('N4')
@@ -26,8 +28,7 @@ try {
     die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME)
             . '": ' . $e->getMessage());
 }
-
-$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB", "riceuser", "l2ice2015");
+$link = new PDO("sqlsrv:server=202.44.34.86; Database=RiceDB", "riceuser", "l2ice2015");
 
 // province
 $provArr = array();
@@ -36,6 +37,7 @@ $res1 = $link->query($sql1);
 while ($data1 = $res1->fetch(PDO::FETCH_ASSOC)) {
     $provArr[str_replace(" ", "", $data1["Province_Name_TH"])] = $data1["Id"];
 }
+
 
 // project
 $projArr = array();
@@ -74,15 +76,17 @@ while ($data5 = $res5->fetch(PDO::FETCH_ASSOC)) {
 
 //  Get worksheet dimensions
 $sheet = $objPHPExcel->getSheet(0);
-$highestRow = $sheet->getHighestRow();
+//$highestRow = $sheet->getHighestRow();
 $highestColumn = $sheet->getHighestColumn();
-
-
+//echo $highestRow."<br>";
+$highestRow = 161;
+//echo $highestRow;
+//exit();
 $count = 0;
 for ($row = 4; $row <= $highestRow; $row++) {
     //  Read a row of data into an array
 
-    $rowData = $sheet->rangeToArray('A' . $row . ':' . 'T' . $row);
+    $rowData = $sheet->rangeToArray('A' . $row . ':' . 'S' . $row);
 
     //if(str_replace(" ", "", $rowData[0][9]) != '"' || str_replace(" ", "", $rowData[0][9]) == '')
     //print $rowData[0][1]."<br>";
@@ -111,11 +115,15 @@ for ($row = 4; $row <= $highestRow; $row++) {
         $samp = $rowData[0][14]; //คณะที่เก็บตัวอย่าง
         $grade = $rowData[0][15]; //เกรดข้าว
         $disc = $rowData[0][16]; //อัตราส่วนลด
-        if ($rowData[0][17] != "") {
-            $grade = $rowData[0][17]; //เกรดข้าวหอมมะลิ
-        }
+//        if ($rowData[0][17] != "") {
+//            $grade = $rowData[0][17]; //เกรดข้าวหอมมะลิ
+//        }
         //  $gradeOptional = $rowData[0][19];
-        $remark = $rowData[0][19]; //หมายเหตุ
+        $remark = $rowData[0][17]; //หมายเหตุ
+        if ($remark != "") {
+            $remark .= ",";
+        }
+        $remark .= $rowData[0][18]; //ประวัติ
         // $canSelect = $rowData[0][17];
 //        $status = $rowData[0][16];
         // . "', '" .. "', '" . $val["discount"] . "', '" . $val["gradeOptional"] . "', '" . $val["canSelect"] . "');";
@@ -158,21 +166,22 @@ for ($row = 4; $row <= $highestRow; $row++) {
 $link = null;
 
 function insertData($val) {
-    $statusKeyword = "AU1/2559-I2";
+    $statusKeyword = "AU2/2559-I2";
 //    if($val["grade"]==10&&$val["type"]!=11){
 //        $val["useType"] = 20;
 //    }else{
 //        $val["useType"] = $val["type"];
 //    }
-    if($val["grade"]>=10){
-       $val["useType"] = 20;
-    }else{
-       $val["useType"] = $val["type"]; 
+    if ($val["grade"] >= 10) {
+        $val["useType"] = 20;
+    } else {
+        $val["useType"] = $val["type"];
     }
+    $val["useGrade"] = $val["grade"];
     //$link = new PDO("sqlsrv:server=202.44.34.86 ; Database=RiceDB2", "riceuser", "l2ice2015");
     // $sqlIns = "INSERT INTO dft_Rice_Original(No, Code, Bag_No, Province, Project, Silo, Associate, Type, Warehouse, Stack, Weight, Sampling_Id, Grade, Discount_Rate, Grade_Optional, Is_Grade_Selected)"
     $sqlIns = "INSERT INTO dft_Rice_Tracking (Code, Bag_No, LK_Province_Id, LK_Project_Id,Round, Silo,Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight,Weight_All,TWeight, Sampling_Id, LK_Grade_Id, Discount_Rate,Remark,LK_Status_Keyword,UseType,UseGrade)"
-            . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "'," . $val["round"] . ", '" . $val["silo"] . "', '" . $val["address"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "','" . $val["weightAll"] . "'," . (float) $val["weightAll"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "','" . $val["remark"] . "','" . $statusKeyword . "','" . $val["useType"] . "','" . $val["grade"] . "');";
+            . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "'," . $val["round"] . ", '" . $val["silo"] . "', '" . $val["address"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "','" . $val["weightAll"] . "'," . (float) $val["weightAll"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "','" . $val["remark"] . "','" . $statusKeyword . "','" . $val["useType"] . "','" . $val["useGrade"] . "');";
 
     print $sqlIns . "<br>";
 
