@@ -52,6 +52,9 @@
                 <li>
                     <a href="#reserve" data-toggle="tab">{{#i18n}}tracking.siloProblem{{/i18n}}<span id="count3"></span></a>
                 </li>
+                <li>
+                    <a href="#notsale" data-toggle="tab">{{#i18n}}tracking.siloNotsale{{/i18n}}<span id="count4"></span></a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div id="waiting" class="tab-pane active">
@@ -68,6 +71,7 @@
                                     <option value="Y">ขาย</option>
                                     <option value="C">ติดเงื่อนไข</option>
                                     <option value="R">สงวนสิทธิ์</option>
+                                    <option value="N">ไม่ขาย</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -189,6 +193,34 @@
                         </div>
                     </div>
                 </div>
+                <div id="notsale" class="tab-pane">
+                    <div class="row">
+                        <div id="notsaleTable" class="col-md-12" style="margin-top:10px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-condensed mb-none">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">{{#i18n}}tracking.no{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.province{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.associate{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.silo{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.bidder{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.floorValue{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.bidderLastPrice{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.remark{{/i18n}}</th>
+                                            <th class="text-center">{{#i18n}}tracking.action{{/i18n}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="notsaleBody">
+                                        <tr>
+                                            <td colspan="9" class="text-center">-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div><!--  row  -->
@@ -267,7 +299,7 @@
             });
         } else {
             var remark = $("#txtRemark").val();
-            if (remark == "" && select != "Y") {
+            if (remark == "" && select != "Y" && select != "N") {
                 $.alert({
                     title: 'คำแนะนำ!',
                     content: 'กรุณาใส่หมายเหตุ!',
@@ -279,7 +311,7 @@
                     }
                 });
             } else {
-                if (remark == "" && select == "Y") {
+                if (remark == "" && (select == "Y" || select == "N")) {
                     remark = "-";
                 }
                 var data = checkSelect();
@@ -331,14 +363,16 @@
         $("#txtRemark").val('');
         function listBidder(auccode) {
 
-            datas = callAjax("{{_context_path}}/api/tracking/approve/listsBidder", "post", {auccode: auccode}, "json");
-            datasApprove = callAjax("{{_context_path}}/api/tracking/approve/listsApprove", "post", {auccode: auccode}, "json");
-            datas = datas["lists"];
-            datasApprove = datasApprove["lists"];
+            datas = callAjax("{{_context_path}}/api/tracking/approve/listsBidder", "post", {auccode: auccode}, "json")["lists"];
+            datasApprove = callAjax("{{_context_path}}/api/tracking/approve/listsApprove", "post", {auccode: auccode}, "json")["lists"];
+//            datas = datas["lists"];
+//            datasApprove = datasApprove["lists"];
             if (!$.isEmptyObject(datas)) {
                 var html = "";
                 $.each(datas, function (key, value) {
-                    html += "<tr row-index='" + key + "' class='row-tr'>" +
+                    console.log(value.bidderPriceNo);
+                    html += "<tr row-index='" + key + "' " +
+                            "class='row-tr " + (value.bidderWinner == "Y" ? "text-success text-bold" : "") + "'>" +
                             "<td class='text-center'>" + (key + 1) + "</td>" +
                             "<td class='text-center'>" + (value.province) + "</td>" +
                             "<td class='text-center'>" + (value.associate) + "</td>" +
@@ -360,7 +394,7 @@
             }
             if (datasApprove != null) {
                 var html = [];
-                var c1 = 0, c2 = 0, c3 = 0;
+                var c1 = 0, c2 = 0, c3 = 0, c4 = 0;
                 $.each(datasApprove, function (key, value) {
                     if (value.remark == null) {
                         value.remark = "-";
@@ -407,9 +441,23 @@
                                 "<td class='text-center'>" + (value.remark) + "</td>" +
                                 "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
                                 "</tr>";
+                    } else if (value.isSale == "N") {
+                        c4++;
+                        html[3] += "<tr row-index='" + key + "' class='row-tr'>" +
+                                "<td class='text-center'>" + c4 + "</td>" +
+                                "<td class='text-center'>" + (value.province) + "</td>" +
+                                "<td class='text-center'>" + (value.associate) + "</td>" +
+                                "<td class='text-center'>" + (value.wareHouseCode) + "</td>" +
+                                // "<td class='text-center'>" + (value.bidderQueue) + "</td>" +
+                                "<td class='text-center'>" + (value.bidderName) + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.RFV2, 0, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + accounting.formatNumber(value.bidderLastPrice, 2, ",", ".") + "</td>" +
+                                "<td class='text-center'>" + (value.remark) + "</td>" +
+                                "<td class='text-center'><button class='btn btn-default delApprove'><i class='fa fa-trash'></i></button></td>" +
+                                "</tr>";
                     }
                 });
-                for (var i = 0; i < 3; i++) {
+                for (var i = 0; i < 4; i++) {
                     if (typeof html[i] === "undefined") {
                         html[i] = '<tr><td colspan="10" class="text-center">ไม่มีข้อมูล</td></tr>';
                     }
@@ -417,9 +465,11 @@
                 $("#saleBody").html(html[0]);
                 $("#conditionBody").html(html[1]);
                 $("#reserveBody").html(html[2]);
-                $("#count1").text("("+c1+")");
-                $("#count2").text("("+c2+")");
-                $("#count3").text("("+c3+")");
+                $("#notsaleBody").html(html[3]);
+                $("#count1").text("(" + c1 + ")");
+                $("#count2").text("(" + c2 + ")");
+                $("#count3").text("(" + c3 + ")");
+                $("#count4").text("(" + c4 + ")");
                 $('.delApprove').click(function () {
                     var index = $(this).closest('tr').attr('row-index');
                     var dataJSON = JSON.stringify({dataAuction: datasApprove[index]});
