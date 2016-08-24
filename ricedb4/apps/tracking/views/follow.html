@@ -65,9 +65,9 @@
                                                 <tr>
                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ลำดับ</th>
                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ผู้เสนอราคา</th>
+                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">คลังสินค้า</th>
                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ชนิดข้าว</th>
                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ปีโครงการ</th>
-                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">คลังสินค้า</th>
                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">จังหวัด</th>
                                                     <th class="text-center" style="vertical-align: middle;" colspan="5">ปริมาณ (ตัน)</th>
                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">เลขที่สัญญา</th>
@@ -152,9 +152,9 @@
                                                                 <tr>
                                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ลำดับ</th>
                                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ผู้เสนอราคา</th>
+                                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">คลังสินค้า</th>
                                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ชนิดข้าว</th>
                                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">ปีโครงการ</th>
-                                                                    <th class="text-center" style="vertical-align: middle;" rowspan="2">คลังสินค้า</th>
                                                                     <th class="text-center" style="vertical-align: middle;" rowspan="2">จังหวัด</th>
 
                                                                     <th class="text-center" style="vertical-align: middle;" colspan="5">ปริมาณ (ตัน)</th>
@@ -229,9 +229,9 @@
                             table += '<tr>'
                                     + '<td class="text-center">' + (k + 1) + '</td>'
                                     + '<td>' + v["bidderName"] + '</td>'
+                                    + '<td>' + v["silo"] + '</td>'
                                     + '<td>' + v["type"] + '</td>'
                                     + '<td>' + v["project"] + '</td>'
-                                    + '<td>' + v["silo"] + '</td>'
                                     + '<td>' + v["province"] + '</td>'
                                     + '<td class="text-right">' + checkZero(v["weightApprove"]) + '</td>'
                                     + '<td class="text-right">' + checkZero(v["weightContract"]) + '</td>'
@@ -288,9 +288,9 @@
                         html += '<tr>'
                                 + '<td class="text-center">'+value[0]+'</td>'
                                 + '<td>'+value[1]+'</td>'
+                                + '<td>'+value[4]+'</td>'
                                 + '<td>'+value[2]+'</td>'
                                 + '<td>'+value[3]+'</td>'
-                                + '<td>'+value[4]+'</td>'
                                 + '<td>'+value[5]+'</td>'
                                 + '<td class="text-right">'+value[6]+'</td>'
                                 + '<td class="text-right">'+value[7]+'</td>'

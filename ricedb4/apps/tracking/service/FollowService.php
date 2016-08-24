@@ -23,7 +23,7 @@ class FollowService extends CServiceBase implements IFollowService
         $sql = "select vf from apps\\common\\model\\ViewFollow vf "
             . " where vf.associateId = :associateId and "
             . " vf.statusKeyword = :keyword "
-            . " order by vf.lotCode desc ";
+            . " order by vf.bidderName,vf.silo,vf.associateId,vf.typeId,vf.project ";
         //$sql = "SELECT v0_.followCode AS followCode0, v0_.lotCode AS lotCode1, v0_.statusKeyword AS statusKeyword2, v0_.statusName AS statusName3, v0_.bidderNo AS bidderNo4, v0_.bidderName AS bidderName5, v0_.associateId AS associateId6, v0_.associate AS associate7, v0_.provinceId AS provinceId8, v0_.province AS province9, v0_.projectId AS projectId10, v0_.project AS project11, v0_.typeId AS typeId12, v0_.type AS type13, v0_.silo AS silo14, v0_.weightApprove AS weightApprove15, v0_.weightContract AS weightContract16, v0_.weightReceived AS weightReceived17, v0_.weightBalance AS weightBalance18, v0_.weightLost AS weightLost19, v0_.contractNo AS contractNo20, v0_.followDate AS followDate21, v0_.dueDate AS dueDate22, v0_.remark AS remark23 FROM view_rice_follow v0_ WHERE v0_.associateId = :associateId AND v0_.statusKeyword = :keyword ORDER BY v0_.lotCode DESC";
         $param = array(
             "associateId" => $associateId,
@@ -176,9 +176,9 @@ class FollowService extends CServiceBase implements IFollowService
                 $objWorkSheet->mergeCells('A' . $row . ':A' . ($row + 1))->setCellValue('A' . $row, "รหัส");
                 $objWorkSheet->mergeCells('B' . $row . ':B' . ($row + 1))->setCellValue('B' . $row, "ลำดับที่");
                 $objWorkSheet->mergeCells('C' . $row . ':C' . ($row + 1))->setCellValue('C' . $row, "ผู้เสนอราคา");
-                $objWorkSheet->mergeCells('D' . $row . ':D' . ($row + 1))->setCellValue('D' . $row, "ชนิดข้าว");
-                $objWorkSheet->mergeCells('E' . $row . ':E' . ($row + 1))->setCellValue('E' . $row, "ปีโครงการ");
-                $objWorkSheet->mergeCells('F' . $row . ':F' . ($row + 1))->setCellValue('F' . $row, "คลังสินค้า");
+                $objWorkSheet->mergeCells('D' . $row . ':D' . ($row + 1))->setCellValue('D' . $row, "คลังสินค้า");
+                $objWorkSheet->mergeCells('E' . $row . ':E' . ($row + 1))->setCellValue('E' . $row, "ชนิดข้าว");
+                $objWorkSheet->mergeCells('F' . $row . ':F' . ($row + 1))->setCellValue('F' . $row, "ปีโครงการ");
                 $objWorkSheet->mergeCells('G' . $row . ':G' . ($row + 1))->setCellValue('G' . $row, "จังหวัด");
                 $objWorkSheet->mergeCells('H' . $row . ':L' . $row)->setCellValue('H' . $row, "ปริมาณ (ตัน)");
                 $objWorkSheet->mergeCells('M' . $row . ':M' . ($row + 1))->setCellValue('M' . $row, "เลขที่สัญญา");
@@ -198,9 +198,9 @@ class FollowService extends CServiceBase implements IFollowService
                     $objWorkSheet->setCellValueExplicit('A' . $row, $v->followCode)->getStyle('A' . $row)->getAlignment()->applyFromArray($center);
                     $objWorkSheet->setCellValue('B' . $row, $k + 1)->getStyle('B' . $row)->getAlignment()->applyFromArray($center);
                     $objWorkSheet->setCellValue('C' . $row, $v->bidderName);
-                    $objWorkSheet->setCellValue('D' . $row, $v->type)->getStyle('D' . $row)->getAlignment()->applyFromArray($center);
-                    $objWorkSheet->setCellValue('E' . $row, $v->project)->getStyle('E' . $row)->getAlignment()->applyFromArray($center);
-                    $objWorkSheet->setCellValue('F' . $row, $v->silo);
+                    $objWorkSheet->setCellValue('D' . $row, $v->silo);
+                    $objWorkSheet->setCellValue('E' . $row, $v->type)->getStyle('E' . $row)->getAlignment()->applyFromArray($center);
+                    $objWorkSheet->setCellValue('F' . $row, $v->project)->getStyle('F' . $row)->getAlignment()->applyFromArray($center);
                     $objWorkSheet->setCellValue('G' . $row, $v->province)->getStyle('G' . $row)->getAlignment()->applyFromArray($center);
                     $objWorkSheet->setCellValue('H' . $row, $v->weightApprove);
                     $objWorkSheet->setCellValue('I' . $row, $v->weightContract);
@@ -222,9 +222,9 @@ class FollowService extends CServiceBase implements IFollowService
                 $objWorkSheet->getColumnDimension('A')->setWidth(20);
                 $objWorkSheet->getColumnDimension('B')->setWidth(10);
                 $objWorkSheet->getColumnDimension('C')->setWidth(30);
-                $objWorkSheet->getColumnDimension('D')->setWidth(20);
+                $objWorkSheet->getColumnDimension('D')->setWidth(30);
                 $objWorkSheet->getColumnDimension('E')->setWidth(20);
-                $objWorkSheet->getColumnDimension('F')->setWidth(30);
+                $objWorkSheet->getColumnDimension('F')->setWidth(20);
                 $objWorkSheet->getColumnDimension('G')->setWidth(20);
                 $objWorkSheet->getColumnDimension('H')->setWidth(20);
                 $objWorkSheet->getColumnDimension('I')->setWidth(20);
