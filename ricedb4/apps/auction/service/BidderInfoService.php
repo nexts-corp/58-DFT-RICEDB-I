@@ -105,7 +105,7 @@ class BidderInfoService extends CServiceBase implements IBidderInfoService {
                 . " FROM " . $this->ent . "\\BidderInfo bi "
                 . "JOIN " . $this->ent . "\\BidderHistory bh WITH bh.bidderId = bi.id "
                 . " WHERE bi.taxId = :taxId "
-                . " and bh.statusKeyword not like '%-I' "
+                . " and bh.statusKeyword not like '%-I%' "
                 . " ORDER BY bh.dateCreated DESC";
         $param = array(
             "taxId" => $bidderInfo->taxId
