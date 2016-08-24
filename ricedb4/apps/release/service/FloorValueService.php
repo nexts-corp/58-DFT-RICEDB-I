@@ -28,25 +28,35 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
     }
 
     public function getFloorValue($auction) {
-        $sql = "EXEC sp_floor_value_stack :auction";
+//        $sql = "EXEC sp_floor_value_stack :auction";
+//        $param = array(
+//            "auction" => $auction
+//        );
+//
+//        $result = $this->datacontext->pdoQuery($sql, $param);
+        $sql = "select st from " . $this->ent . "\\AuctionStack st "
+                . "where st.auctionNo = :auction ";
         $param = array(
             "auction" => $auction
         );
-
-        $result = $this->datacontext->pdoQuery($sql, $param);
+        $result = $this->datacontext->getObject($sql, $param);
 
         return $result;
     }
 
     public function getFloorValueSilo($auction) {
-        //return $auction;
-        $sql = "EXEC sp_floor_value_warehouse :auction";
+//        $sql = "EXEC sp_floor_value_warehouse :auction";
+//        $param = array(
+//            "auction" => $auction
+//        );
+//
+//        $result = $this->datacontext->pdoQuery($sql, $param);
+        $sql = "select wh from " . $this->ent . "\\AuctionWarehouse wh "
+                . "where wh.auctionNo = :auction ";
         $param = array(
             "auction" => $auction
         );
-
-        $result = $this->datacontext->pdoQuery($sql, $param);
-
+        $result = $this->datacontext->getObject($sql, $param);
         return $result;
     }
 

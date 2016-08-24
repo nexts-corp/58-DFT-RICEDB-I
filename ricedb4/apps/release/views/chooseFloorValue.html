@@ -37,11 +37,12 @@
             <div id="divTable"><!-- table shown -->
                 <div class="col-md-12">
                     <div class="col-md-6">
-                        <label class="col-md-4 control-label text-right" for="auction">{{#i18n}}release.auctionNo{{/i18n}} :</label>
+                        <label class="col-md-3 control-label text-right" for="auction">{{#i18n}}release.auctionNo{{/i18n}} :</label>
                         <div class="col-md-8">
                             <select class="form-control input-sm" name="auction" id="auction" required>
                             </select>
                         </div>
+                        <label class="col-md-1 control-label text-center text-success" id="curFV"></label>
                     </div>
                     <div class="col-md-4 col-md-offset-2">
                         <div class="btn-group btn-group-justified">
@@ -236,6 +237,7 @@
                 $("button.save, button.undo, button.calculate").prop("disabled", false);
                 $("#riceTypeAll").unbind().change(function () {
                     var value = $(this).val();
+                    $("#curFV").text(value);
                     $(".riceFV").each(function (k, v) {
                         $(this).val(value);
                     });
@@ -302,10 +304,10 @@
                             + '<td class="text-center">ทั้งหมด</td>'
                             + '<td>'
                             + '<select id="riceTypeAll' + '" name="riceTypeAll"  class="form-control">'
-                            + '<option value="fv">Floor Value 0</option>'
-                            + '<option value="fv2">Floor Value 2</option>'
-                            + '<option value="fv3">Floor Value 3</option>'
-                            + '<option value="fv4">Floor Value 4</option>'
+                            + '<option value="FV">Floor Value 0</option>'
+                            + '<option value="FV2">Floor Value 2</option>'
+                            + '<option value="FV3">Floor Value 3</option>'
+                            + '<option value="FV4">Floor Value 4</option>'
                             + '</select>'
                             + '</td>'
                             + '</tr>';
@@ -314,15 +316,33 @@
                         + '<td class="text-center">' + value["type"] + '</td>'
                         + '<td>'
                         + '<select id="riceType' + value["typeId"] + '" name="riceType' + value["typeId"] + '" data-tid="' + value["typeId"] + '" class="form-control riceFV">'
-                        + '<option value="fv">Floor Value 0</option>'
-                        + '<option value="fv2">Floor Value 2</option>'
-                        + '<option value="fv3">Floor Value 3</option>'
-                        + '<option value="fv4">Floor Value 4</option>'
+                        + '<option value="FV">Floor Value 0</option>'
+                        + '<option value="FV2">Floor Value 2</option>'
+                        + '<option value="FV3">Floor Value 3</option>'
+                        + '<option value="FV4">Floor Value 4</option>'
                         + '</select>'
                         + '</td>'
                         + '</tr>';
             });
             $("#table tbody").html(html);
+            var countFV = {"FV": 0, "FV2": 0, "FV3": 0, "FV4": 0};
+            var max = "";
+            var min = "";
+            $.each(datas["lists"], function (key, value) {
+                $("#riceType" + value["typeId"]).val(value["useFV"]);
+                countFV[value["useFV"]]++;
+                if (max == "" || (countFV[max] < countFV[value["useFV"]])) {
+                    max = value["useFV"];
+                }
+
+                if (min == "" || (countFV[min] > countFV[value["useFV"]])) {
+                    min = value["useFV"];
+                }
+            });
+            $("#curFV").text(max);
+            $("#riceTypeAll").val(max);
+//            console.log(countFV);
+//            console.log('max' + max + ' min' + min);
         }
     }
 
@@ -491,7 +511,11 @@
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/saveFV", "post", dataJSONEN, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             if (datas["save"] == true) {
-                $("#saveModal").modal("hide");
+                $("#auctionHead").html("บันทึกเรียบร้อย!");
+                setTimeout(function () {
+                    $("#saveModal").modal("hide");
+                }, 500);
+
             }
         }
     }
@@ -500,6 +524,7 @@
         var datas = callAjax("{{_context_path}}/api/release/chooseFV/clearFV", "post", dataJSONEN, "json");
         if (typeof datas !== "undefined" && datas !== null) {
             if (datas["save"] == true) {
+                $("#auctionHead").html("ยกเลิกเรียบร้อย!");
                 $("#saveModal").modal("hide");
             }
         }

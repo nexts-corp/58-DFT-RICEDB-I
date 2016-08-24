@@ -31,11 +31,11 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
 
     public function listsRiceType($auction){
         $sql = "SELECT"
-                ." rt.useType as typeId, tp.type"
+                ." rt.useType as typeId, tp.type, rt.useFV "
             ." FROM ".$this->ent."\\RiceTracking rt"
             ." JOIN ".$this->ent."\\Type tp WITH tp.id = rt.useType"
             ." WHERE rt.statusKeyword = :auction"
-            ." GROUP BY rt.useType, tp.type";
+            ." GROUP BY rt.useType, tp.type, rt.useFV";
         $param = array(
             "auction" => $auction
         );
@@ -130,7 +130,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
             $sql = "UPDATE"
                 ." dft_Rice_Tracking"
                 ." SET UseFV = '".strtoupper($val->value)."'"
-                ." WHERE LK_Type_Id = '".$val->typeId."'"
+                ." WHERE useType = '".$val->typeId."'"
                 ." AND LK_Status_Keyword = '".$auction."'";
 
             $cmd="EXEC sp_batch_exce :cmd";

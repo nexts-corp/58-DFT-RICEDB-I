@@ -400,12 +400,12 @@
                     }
                     temp["silo"] = listArr[group]["wareHouseCode"];
                     temp["asso"] = listArr[group]["associate"];
-                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    temp["fp"] += parseFloat(listArr[group]["FP2"]);
-                    temp["fv"] += parseFloat(listArr[group]["FV2"]);
-                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    sum["fp"] += parseFloat(listArr[group]["FP2"]);
-                    sum["fv"] += parseFloat(listArr[group]["FV2"]);
+                    temp["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    temp["fp"] += parseFloat(listArr[group]["fp2"]);
+                    temp["fv"] += parseFloat(listArr[group]["fv2"]);
+                    sum["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    sum["fp"] += parseFloat(listArr[group]["fp2"]);
+                    sum["fv"] += parseFloat(listArr[group]["fv2"]);
                     count++;
                     if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
@@ -458,12 +458,12 @@
                 },
                 {
                     "targets": 6,
-                    "data": "Warehouse",
+                    "data": "warehouse",
                     "sClass": "text-center"
                 },
                 {
                     "targets": 7,
-                    "data": "Stack",
+                    "data": "stack",
                     "sClass": "text-center"
                 },
                 {
@@ -473,7 +473,7 @@
                 },
                 {
                     "targets": 9,
-                    "data": "OWeightAll",
+                    "data": "oweightAll",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
@@ -481,7 +481,7 @@
                 },
                 {
                     "targets": 10,
-                    "data": "FP2",
+                    "data": "fp2",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -489,7 +489,7 @@
                 },
                 {
                     "targets": 11,
-                    "data": "FV2",
+                    "data": "fv2",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -528,12 +528,12 @@
                     }
                     temp["silo"] = listArr[group]["wareHouseCode"];
                     temp["asso"] = listArr[group]["associate"];
-                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    temp["fp"] += parseFloat(listArr[group]["FP3"]);
-                    temp["fv"] += parseFloat(listArr[group]["FV3"]);
-                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    sum["fp"] += parseFloat(listArr[group]["FP3"]);
-                    sum["fv"] += parseFloat(listArr[group]["FV3"]);
+                    temp["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    temp["fp"] += parseFloat(listArr[group]["fp3"]);
+                    temp["fv"] += parseFloat(listArr[group]["fv3"]);
+                    sum["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    sum["fp"] += parseFloat(listArr[group]["fp3"]);
+                    sum["fv"] += parseFloat(listArr[group]["fv3"]);
                     count++;
                     if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
@@ -584,12 +584,12 @@
                 },
                 {
                     "targets": 6,
-                    "data": "Warehouse",
+                    "data": "warehouse",
                     "sClass": "text-center"
                 },
                 {
                     "targets": 7,
-                    "data": "Stack",
+                    "data": "stack",
                     "sClass": "text-center"
                 },
                 {
@@ -599,7 +599,7 @@
                 },
                 {
                     "targets": 9,
-                    "data": "OWeightAll",
+                    "data": "oweightAll",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
@@ -607,7 +607,7 @@
                 },
                 {
                     "targets": 10,
-                    "data": "FP3",
+                    "data": "fp3",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -615,7 +615,7 @@
                 },
                 {
                     "targets": 11,
-                    "data": "FV3",
+                    "data": "fv3",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -654,12 +654,12 @@
                     }
                     temp["silo"] = listArr[group]["wareHouseCode"];
                     temp["asso"] = listArr[group]["associate"];
-                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    temp["fp"] += parseFloat(listArr[group]["FP4"]);
-                    temp["fv"] += parseFloat(listArr[group]["FV4"]);
-                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    sum["fp"] += parseFloat(listArr[group]["FP4"]);
-                    sum["fv"] += parseFloat(listArr[group]["FV4"]);
+                    temp["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    temp["fp"] += parseFloat(listArr[group]["fp4"]);
+                    temp["fv"] += parseFloat(listArr[group]["fv4"]);
+                    sum["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    sum["fp"] += parseFloat(listArr[group]["fp4"]);
+                    sum["fv"] += parseFloat(listArr[group]["fv4"]);
                     count++;
                     if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
@@ -710,12 +710,12 @@
                 },
                 {
                     "targets": 6,
-                    "data": "Warehouse",
+                    "data": "warehouse",
                     "sClass": "text-center"
                 },
                 {
                     "targets": 7,
-                    "data": "Stack",
+                    "data": "stack",
                     "sClass": "text-center"
                 },
                 {
@@ -725,7 +725,7 @@
                 },
                 {
                     "targets": 9,
-                    "data": "OWeightAll",
+                    "data": "oweightAll",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
@@ -733,7 +733,7 @@
                 },
                 {
                     "targets": 10,
-                    "data": "FP4",
+                    "data": "fp4",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -741,7 +741,7 @@
                 },
                 {
                     "targets": 11,
-                    "data": "FV4",
+                    "data": "fv4",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -784,20 +784,20 @@
                     }
                     temp["silo"] = listArr[group]["wareHouseCode"];
                     temp["asso"] = listArr[group]["associate"];
-                    temp["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    temp["fp2"] += parseFloat(listArr[group]["FP2"]);
-                    temp["fv2"] += parseFloat(listArr[group]["FV2"]);
-                    temp["fp3"] += parseFloat(listArr[group]["FP3"]);
-                    temp["fv3"] += parseFloat(listArr[group]["FV3"]);
-                    temp["fp4"] += parseFloat(listArr[group]["FP4"]);
-                    temp["fv4"] += parseFloat(listArr[group]["FV4"]);
-                    sum["weight"] += parseFloat(listArr[group]["OWeightAll"]);
-                    sum["fp2"] += parseFloat(listArr[group]["FP2"]);
-                    sum["fv2"] += parseFloat(listArr[group]["FV2"]);
-                    sum["fp3"] += parseFloat(listArr[group]["FP3"]);
-                    sum["fv3"] += parseFloat(listArr[group]["FV3"]);
-                    sum["fp4"] += parseFloat(listArr[group]["FP4"]);
-                    sum["fv4"] += parseFloat(listArr[group]["FV4"]);
+                    temp["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    temp["fp2"] += parseFloat(listArr[group]["fp2"]);
+                    temp["fv2"] += parseFloat(listArr[group]["fv2"]);
+                    temp["fp3"] += parseFloat(listArr[group]["fp3"]);
+                    temp["fv3"] += parseFloat(listArr[group]["fv3"]);
+                    temp["fp4"] += parseFloat(listArr[group]["fp4"]);
+                    temp["fv4"] += parseFloat(listArr[group]["fv4"]);
+                    sum["weight"] += parseFloat(listArr[group]["oweightAll"]);
+                    sum["fp2"] += parseFloat(listArr[group]["fp2"]);
+                    sum["fv2"] += parseFloat(listArr[group]["fv2"]);
+                    sum["fp3"] += parseFloat(listArr[group]["fp3"]);
+                    sum["fv3"] += parseFloat(listArr[group]["fv3"]);
+                    sum["fp4"] += parseFloat(listArr[group]["fp4"]);
+                    sum["fv4"] += parseFloat(listArr[group]["fv4"]);
                     count++;
                     if (count == rows.length) {
                         $(rows).eq(i).after('<tr>'
@@ -858,12 +858,12 @@
                 },
                 {
                     "targets": 6,
-                    "data": "Warehouse",
+                    "data": "warehouse",
                     "sClass": "text-center"
                 },
                 {
                     "targets": 7,
-                    "data": "Stack",
+                    "data": "stack",
                     "sClass": "text-center"
                 },
                 {
@@ -873,7 +873,7 @@
                 },
                 {
                     "targets": 9,
-                    "data": "OWeightAll",
+                    "data": "oweightAll",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 6, ",", ".");
@@ -881,7 +881,7 @@
                 },
                 {
                     "targets": 10,
-                    "data": "FP2",
+                    "data": "fp2",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -889,7 +889,7 @@
                 },
                 {
                     "targets": 11,
-                    "data": "FV2",
+                    "data": "fv2",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -897,7 +897,7 @@
                 },
                 {
                     "targets": 12,
-                    "data": "FP3",
+                    "data": "fp3",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -905,7 +905,7 @@
                 },
                 {
                     "targets": 13,
-                    "data": "FV3",
+                    "data": "fv3",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -913,7 +913,7 @@
                 },
                 {
                     "targets": 14,
-                    "data": "FP4",
+                    "data": "fp4",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
@@ -921,7 +921,7 @@
                 },
                 {
                     "targets": 15,
-                    "data": "FV4",
+                    "data": "fv4",
                     "sClass": "text-right col-md-1 text-bold",
                     "render": function (data) {
                         return accounting.formatNumber(data, 2, ",", ".");
