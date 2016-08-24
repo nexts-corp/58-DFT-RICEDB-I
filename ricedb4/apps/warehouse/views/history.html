@@ -1,0 +1,87 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}warehouse.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}warehouse.menu{{/i18n}} </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">{{#i18n}}warehouse.history.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+                <label class="col-md-4 control-label text-right" for="name">{{#i18n}}warehouse.name{{/i18n}}{{#i18n}}warehouse.silo{{/i18n}} :</label>
+                <div class="col-md-4">
+                    <input type="text" data-entity="user" class="form-control input-sm" name="findName" id="findName" placeholder="ชื่อคลังสินค้า" required>
+                </div>
+                <button class="btn btn-primary" id="btnFind"><i class="fa fa-search"></i> {{#i18n}}button.find{{/i18n}}</button>
+            </div>
+            <div class="form-group" style="display:none;" id="divLists">
+                <table id="tbLists" class="table table-bordered table-striped table-condensed mb-none">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.no{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.province{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.associate{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.silo{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.detail{{/i18n}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" class="text-center">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="divHistory" class="form-group" style="display:none;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <button class="btn btn-primary" id="btnBack"><i class="fa fa-backward"></i> {{#i18n}}button.backward{{/i18n}}</button>
+                    </div>
+                    <p class="col-md-8 control-label text-right">{{#i18n}}warehouse.name{{/i18n}}{{#i18n}}warehouse.silo{{/i18n}} : <span id="curWareHouse"></span></p>
+
+                </div>
+                <table id="tbHistory" class="table table-bordered table-striped table-condensed mb-none">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.no{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.history{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.weight{{/i18n}} ({{#i18n}}warehouse.ton{{/i18n}})</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.bidderName{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.bidderPrice{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.fv{{/i18n}}</th>
+                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}warehouse.history.status{{/i18n}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="7" class="text-center">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!--  container  -->
+</div><!-- main -->
+
+{{>footer}}
+
+<script type="text/javascript">
+    var js_context_path = "{{_context_path}}";
+</script>
+
+<script src="{{_context_path}}/apps/warehouse/views/js/history.js"></script>

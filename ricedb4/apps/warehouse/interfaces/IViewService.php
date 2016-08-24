@@ -67,5 +67,14 @@ interface IViewService {
      * @sitemap true
      */ 
     public function viewInventory();
+      
+    /**
+     * @name history
+     * @uri /history
+     * @description M27 ประวัติคลังสินค้า
+     * @authen true
+     * @sitemap true
+     */
+    public function history();
     
 }

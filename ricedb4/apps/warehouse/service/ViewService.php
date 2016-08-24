@@ -39,4 +39,9 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
+    public function history() {
+        $view = new CJView("history", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
 }
