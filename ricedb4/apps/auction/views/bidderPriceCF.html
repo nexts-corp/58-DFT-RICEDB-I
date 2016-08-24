@@ -343,6 +343,7 @@
                     else var isPass = "N";
 
                     pdata["isPassFV"] = isPass;
+                    //pdata["isSale"] = "N";
                     var fdata = {};
                     fdata["BidderPriceSilo"] = pdata;
                     var dataJSON = JSON.stringify({bidderPrice: fdata["BidderPriceSilo"]});
@@ -398,7 +399,7 @@
             var tdata = {};
             var assoId = 0;
             if(asso == "อคส.") assoId = 1;
-            else if(asso == "อตก.") assoId = 2;
+            else if(asso == "อ.ต.ก.") assoId = 2;
             tdata["silo"] = silo;
             tdata["associateId"] = assoId;
 
