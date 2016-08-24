@@ -204,4 +204,12 @@ class RiceFollow extends EntityBase {
         $this->remark = $remark;
     }
 
+    function getLotCode() {
+        return $this->lotCode;
+    }
+
+    function setLotCode($lotCode) {
+        $this->lotCode = $lotCode;
+    }
+
 }

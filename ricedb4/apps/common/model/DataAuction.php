@@ -3,8 +3,8 @@
 namespace apps\common\model;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this license header; choose License Headers in Project Properties.
+ * To change this template file; choose Tools | Templates
  * and open the template in the editor.
  */
 
@@ -24,13 +24,19 @@ class DataAuction {
     public $province;
     public $associateId;
     public $associate;
+    public $oweightAll;
     public $weightAll;
+    public $weightGood;
+    public $weightBad;
+    public $AFV;
     public $AFV2;
     public $AFV3;
     public $AFV4;
+    public $FV;
     public $FV2;
     public $FV3;
     public $FV4;
+    public $RFV;
     public $RFV2;
     public $RFV3;
     public $RFV4;
@@ -40,12 +46,13 @@ class DataAuction {
     public $bidderRegister;
     public $bidderQueue;
     public $bidderAuctionNo;
-    public $bidderPriceId;
+    public $bidderPriceNo;
     public $Property1;
     public $Property2;
     public $Property3;
     public $Property4;
     public $Property5;
+    public $Property6;
     public $bidderStatus;
     public $bidderStatusCode;
     public $bidderRound;
@@ -55,6 +62,14 @@ class DataAuction {
     public $bidderPassFV;
     public $bidderWinner;
     public $bidderMaxPrice;
+    public $bidderRoundMaxprice;
+    public $bidderPriceDuplicate;
+    public $isSale;
+    public $isReserved;
+    public $createWarehouseBy;
+    public $createPriceBy;
+    public $typeOptional;
+    public $weightOrder;
 
     function getWareHouseId() {
         return $this->wareHouseId;
@@ -92,8 +107,24 @@ class DataAuction {
         return $this->associate;
     }
 
+    function getOweightAll() {
+        return $this->oweightAll;
+    }
+
     function getWeightAll() {
         return $this->weightAll;
+    }
+
+    function getWeightGood() {
+        return $this->weightGood;
+    }
+
+    function getWeightBad() {
+        return $this->weightBad;
+    }
+
+    function getAFV() {
+        return $this->AFV;
     }
 
     function getAFV2() {
@@ -108,6 +139,10 @@ class DataAuction {
         return $this->AFV4;
     }
 
+    function getFV() {
+        return $this->FV;
+    }
+
     function getFV2() {
         return $this->FV2;
     }
@@ -118,6 +153,10 @@ class DataAuction {
 
     function getFV4() {
         return $this->FV4;
+    }
+
+    function getRFV() {
+        return $this->RFV;
     }
 
     function getRFV2() {
@@ -156,8 +195,8 @@ class DataAuction {
         return $this->bidderAuctionNo;
     }
 
-    function getBidderPriceId() {
-        return $this->bidderPriceId;
+    function getBidderPriceNo() {
+        return $this->bidderPriceNo;
     }
 
     function getProperty1() {
@@ -178,6 +217,10 @@ class DataAuction {
 
     function getProperty5() {
         return $this->Property5;
+    }
+
+    function getProperty6() {
+        return $this->Property6;
     }
 
     function getBidderStatus() {
@@ -216,6 +259,38 @@ class DataAuction {
         return $this->bidderMaxPrice;
     }
 
+    function getBidderRoundMaxprice() {
+        return $this->bidderRoundMaxprice;
+    }
+
+    function getBidderPriceDuplicate() {
+        return $this->bidderPriceDuplicate;
+    }
+
+    function getIsSale() {
+        return $this->isSale;
+    }
+
+    function getIsReserved() {
+        return $this->isReserved;
+    }
+
+    function getCreateWarehouseBy() {
+        return $this->createWarehouseBy;
+    }
+
+    function getCreatePriceBy() {
+        return $this->createPriceBy;
+    }
+
+    function getTypeOptional() {
+        return $this->typeOptional;
+    }
+
+    function getWeightOrder() {
+        return $this->weightOrder;
+    }
+
     function setWareHouseId($wareHouseId) {
         $this->wareHouseId = $wareHouseId;
     }
@@ -252,8 +327,24 @@ class DataAuction {
         $this->associate = $associate;
     }
 
+    function setOweightAll($oweightAll) {
+        $this->oweightAll = $oweightAll;
+    }
+
     function setWeightAll($weightAll) {
         $this->weightAll = $weightAll;
+    }
+
+    function setWeightGood($weightGood) {
+        $this->weightGood = $weightGood;
+    }
+
+    function setWeightBad($weightBad) {
+        $this->weightBad = $weightBad;
+    }
+
+    function setAFV($AFV) {
+        $this->AFV = $AFV;
     }
 
     function setAFV2($AFV2) {
@@ -268,6 +359,10 @@ class DataAuction {
         $this->AFV4 = $AFV4;
     }
 
+    function setFV($FV) {
+        $this->FV = $FV;
+    }
+
     function setFV2($FV2) {
         $this->FV2 = $FV2;
     }
@@ -278,6 +373,10 @@ class DataAuction {
 
     function setFV4($FV4) {
         $this->FV4 = $FV4;
+    }
+
+    function setRFV($RFV) {
+        $this->RFV = $RFV;
     }
 
     function setRFV2($RFV2) {
@@ -316,8 +415,8 @@ class DataAuction {
         $this->bidderAuctionNo = $bidderAuctionNo;
     }
 
-    function setBidderPriceId($bidderPriceId) {
-        $this->bidderPriceId = $bidderPriceId;
+    function setBidderPriceNo($bidderPriceNo) {
+        $this->bidderPriceNo = $bidderPriceNo;
     }
 
     function setProperty1($Property1) {
@@ -338,6 +437,10 @@ class DataAuction {
 
     function setProperty5($Property5) {
         $this->Property5 = $Property5;
+    }
+
+    function setProperty6($Property6) {
+        $this->Property6 = $Property6;
     }
 
     function setBidderStatus($bidderStatus) {
@@ -374,6 +477,38 @@ class DataAuction {
 
     function setBidderMaxPrice($bidderMaxPrice) {
         $this->bidderMaxPrice = $bidderMaxPrice;
+    }
+
+    function setBidderRoundMaxprice($bidderRoundMaxprice) {
+        $this->bidderRoundMaxprice = $bidderRoundMaxprice;
+    }
+
+    function setBidderPriceDuplicate($bidderPriceDuplicate) {
+        $this->bidderPriceDuplicate = $bidderPriceDuplicate;
+    }
+
+    function setIsSale($isSale) {
+        $this->isSale = $isSale;
+    }
+
+    function setIsReserved($isReserved) {
+        $this->isReserved = $isReserved;
+    }
+
+    function setCreateWarehouseBy($createWarehouseBy) {
+        $this->createWarehouseBy = $createWarehouseBy;
+    }
+
+    function setCreatePriceBy($createPriceBy) {
+        $this->createPriceBy = $createPriceBy;
+    }
+
+    function setTypeOptional($typeOptional) {
+        $this->typeOptional = $typeOptional;
+    }
+
+    function setWeightOrder($weightOrder) {
+        $this->weightOrder = $weightOrder;
     }
 
 }

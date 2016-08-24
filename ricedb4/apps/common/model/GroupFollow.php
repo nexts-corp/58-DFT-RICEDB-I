@@ -9,16 +9,21 @@ namespace apps\common\model;
 class GroupFollow {
 
     /**
-     * @Id 
+     * @Id
+     * @Column(type="integer",length=11, name="groupId")
+     */
+    public $groupId;
+
+    /**
      * @Column(type="string",length=50, name="statusKeyword") */
     public $statusKeyword;
+
     /**
      * @Column(type="string",length=255, name="statusName")
      */
     public $statusName;
 
     /**
-     * @Id  
      * @Column(type="integer",length=11, name="associateId") */
     public $associateId;
 
@@ -26,7 +31,6 @@ class GroupFollow {
     public $associate;
 
     /**
-     * @Id  
      * @Column(type="integer",length=11, name="provinceId") */
     public $provinceId;
 
@@ -34,15 +38,13 @@ class GroupFollow {
     public $province;
 
     /**
-     * @Id 
      * @Column(type="integer",length=11, name="projectId") */
     public $projectId;
 
     /** @Column(type="string",length=255, name="project") */
     public $project;
 
-    /** 
-     * @Id 
+    /**
      * @Column(type="integer",length=11, name="typeId") */
     public $typeId;
 
@@ -60,6 +62,14 @@ class GroupFollow {
 
     /** @Column(type="string",length=255, name="bidderName") */
     public $bidderName;
+
+    function getGroupId() {
+        return $this->groupId;
+    }
+
+    function setGroupId($groupId) {
+        $this->groupId = $groupId;
+    }
 
     function getProvinceId() {
         return $this->provinceId;
