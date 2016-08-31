@@ -47,7 +47,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
     public function previewFV($auction, $riceType){
         $rArr = [];
         foreach($riceType as $key => $val){
-            $rArr[$val->typeId] = $val->value;
+            $rArr[$val->typeId] = strtolower($val->value);
         }
 
         $st = new \apps\common\entity\AuctionStack();
