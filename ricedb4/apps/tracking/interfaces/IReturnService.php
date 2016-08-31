@@ -15,6 +15,13 @@ interface IReturnService {
      * @description การประมูล
      */
     public function listsAuction();
+    /**
+     * @name listsAuction2
+     * @uri /listsAuction2
+     * @return String[] lists Description
+     * @description การประมูล
+     */
+    public function listsAuction2();
 
     /**
      * @name listsBidder

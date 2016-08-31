@@ -488,7 +488,7 @@
         $("#fBank").html(listsB);
     }
     function listsAuction() {
-        var datas = callAjax("{{_context_path}}/api/tracking/return/listsAuction", "post", {}, "json");
+        var datas = callAjax("{{_context_path}}/api/tracking/return/listsAuction2", "post", {}, "json");
         var dataAuction = datas["lists"];
         if (dataAuction != null) {
             var html = "";
