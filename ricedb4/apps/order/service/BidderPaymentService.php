@@ -44,36 +44,81 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
     }
 
     public function listsPayment() {
-        $sql = "SELECT"
-                ." bt.bidderHistoryId, bh.queue, bi.bidderName,"
-                ." count(bt.id) AS countSilo, sum(ps.auctionPrice) AS auctionPrice,"
-                ." sum(ps.auctionPrice)*2/100 AS guaranteePrice"
-            ." FROM " . $this->ent . "\\BidderItem bt"
-            ." JOIN " . $this->ent . "\\BidderHistory bh WITH bh.id = bt.bidderHistoryId"
-            ." JOIN " . $this->ent . "\\BidderInfo bi WITH bi.id = bh.bidderId"
-            ." JOIN " . $this->ent . "\\BidderPriceSilo ps WITH ps.bidderItemId = bt.id"
-            ." WHERE bh.statusKeyword = :keyword and ps.round = '0' and bt.isReserved = 'Y'"
-           // ." WHERE bh.statusKeyword = :keyword and ps.round = '0' "
-            ." GROUP BY"
-                ." bt.bidderHistoryId, bh.queue, bi.bidderName"
-            ." ORDER BY bh.queue ASC";
-
+        // $sql = "SELECT"
+        //         ." bt.bidderHistoryId, bh.queue, bi.bidderName,"
+        //         ." count(bt.id) AS countSilo, sum(ps.auctionPrice) AS auctionPrice,"
+        //         ." sum(ps.auctionPrice)*2/100 AS guaranteePrice"
+        //     ." FROM " . $this->ent . "\\BidderItem bt"
+        //     ." JOIN " . $this->ent . "\\BidderHistory bh WITH bh.id = bt.bidderHistoryId"
+        //     ." JOIN " . $this->ent . "\\BidderInfo bi WITH bi.id = bh.bidderId"
+        //     ." JOIN " . $this->ent . "\\BidderPriceSilo ps WITH ps.bidderItemId = bt.id"
+        //     ." WHERE bh.statusKeyword = :keyword and ps.round = '0' and bt.isReserved = 'Y'"
+        //    // ." WHERE bh.statusKeyword = :keyword and ps.round = '0' "
+        //     ." GROUP BY"
+        //         ." bt.bidderHistoryId, bh.queue, bi.bidderName"
+        //     ." ORDER BY bh.queue ASC";
+        //
+        // $param = array(
+        //     "keyword" => $this->getStatus()->keyword
+        // );
+        // $data = $this->datacontext->getObject($sql, $param);
+        // foreach ($data as $key => $value) {
+        //     $sql2 = "SELECT"
+        //             ." sum(pm.amount) AS amount"
+        //         . " FROM ".$this->ent."\\BidderPayment pm"
+        //         . " WHERE pm.bidderHistoryId = :hid";
+        //     $param2 = array(
+        //         "hid" => $value["bidderHistoryId"]
+        //     );
+        //     $data2 = $this->datacontext->getObject($sql2, $param2);
+        //     $data[$key]["amount"] = $data2[0]["amount"];
+        // }
+        $sql = "select
+                        ai.bidderAuctionNo as bidderHistoryId,
+                        ai.bidderQueue as queue,
+                        ai.bidderName,
+                        isnull(pb.countSilo,0) as countSilo,
+                        isnull(pb.bidderPrice,0) as auctionPrice,
+                        isnull(pb.guarantee,0) as guaranteePrice,
+                        isnull(pm.amount,0) as amount
+                from fn_auction_info(:auctionNo1) ai
+                left join (
+                        select
+                                bidderAuctionNo,
+                                count(bidderPrice) as countSilo,
+                                sum(bidderPrice) as bidderPrice,
+                                sum(bidderPrice*0.02)  as guarantee
+                        from
+                                fn_auction_info(:auctionNo2)
+                        where
+                                bidderRound = '0' and isReserved = 'Y'
+                        group by bidderAuctionNo
+                ) pb on ai.bidderAuctionNo = pb.bidderAuctionNo
+                left join (
+                        select
+                                bidderRegisterId,
+                                sum(guaranteeAmount) as amount
+                        from
+                                fn_auction_bidder_guarantee(:auctionNo3)
+                        group by bidderRegisterId
+                ) pm on ai.bidderAuctionNo = pm.bidderRegisterId
+                where
+                        ai.bidderRound = '0' and ai.bidderName is not null
+                group by
+                        ai.bidderAuctionNo,
+                        ai.bidderQueue,
+                        ai.bidderName,
+                        pb.countSilo,
+                        pb.bidderPrice,
+                        pb.guarantee,
+                        pm.amount
+                order by ai.bidderQueue";
         $param = array(
-            "keyword" => $this->getStatus()->keyword
+            "auctionNo1" => $this->getStatus()->keyword,
+            "auctionNo2" => $this->getStatus()->keyword,
+            "auctionNo3" => $this->getStatus()->keyword
         );
-        $data = $this->datacontext->getObject($sql, $param);
-        foreach ($data as $key => $value) {
-            $sql2 = "SELECT"
-                    ." sum(pm.amount) AS amount"
-                . " FROM ".$this->ent."\\BidderPayment pm"
-                . " WHERE pm.bidderHistoryId = :hid";
-            $param2 = array(
-                "hid" => $value["bidderHistoryId"]
-            );
-            $data2 = $this->datacontext->getObject($sql2, $param2);
-            $data[$key]["amount"] = $data2[0]["amount"];
-        }
-
+        $data = $this->datacontext->pdoQuery($sql, $param);
         return $data;
     }
 
@@ -154,7 +199,7 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         }
         return $data;
     }
-    
+
     public function listsBidderGrt($bidderHistoryId) {
         $sql = "select bp.id, bp.bidderHistoryId, bp.paymentId, p.payment, bp.bankId, b.bankTH, bp.paymentNo, bp.amount, bp.paymentDate,bp.remark"
                 . " from " . $this->ent . "\\BidderPayment bp"
@@ -227,19 +272,19 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
             return $this->datacontext->getLastMessage();
         }
     }
-    
+
     public function changeReserved($bidderItem) {
         $item = new \apps\common\entity\BidderItem();
         $item->id = $bidderItem->id;
         $data = $this->datacontext->getObject($item);
         $data[0]->isReserved = $bidderItem->isReserved;
-        
+
         if ($this->datacontext->updateObject($data)) {
             return true;
         } else {
             return $this->datacontext->getLastMessage();
         }
-        
+
     }
 }
 
