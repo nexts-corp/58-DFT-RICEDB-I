@@ -411,13 +411,15 @@
     function listWarehouse(hId) {
         var datas = callAjax("{{_context_path}}/api/industry2/return/listsWarehouse", "post", {bidderId: listArr[hId]["bidderId"]}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
-            var html = "<tr><td colspan='7' class='text-center'>ไม่มีคลังสินค้าที่ชนะการประมูล</td></tr>";
+            var html = "";
             var sumBidderPrice = 0;
             var sumWeight = 0;
             sumGuarantee = 0;
-
+            if (datas["lists"].length == 0) {
+                html = "<tr><td colspan='7' class='text-center'>ไม่มีคลังสินค้าที่ชนะการประมูล</td></tr>";
+            }
             $.each(datas["lists"], function (key, value) {
-                html = '<tr>'
+                html += '<tr>'
                         + '<td class="text-center">' + (key + 1) + '</td>'
                         + '<td class="text-center">' + value["province"] + '</td>'
                         + '<td class="text-center">' + value["associate"] + '</td>'
@@ -559,7 +561,7 @@
              console.log("1");
              countCheck++;
              sumReturn += parseFloat($(this).val());
-
+             
              //$(this).prop("checked", true);
              }
              else{
@@ -567,25 +569,25 @@
              countCheck--;
              sumReturn -= parseFloat($(this).val());
              }
-
+             
              if (parseInt(sumPayment - sumReturn) < parseInt(sumGuarantee)) {
              //$(this).removeAttr("checked");
              //event.stopImmediatePropagation();
              alert("จำนวนหลักค้ำประกันไม่พอ");
-
+             
              countCheck--;
              sumReturn -= parseFloat($(this).val());
-
+             
              $(this).prop("checked", false);
              $("#checkall").prop("checked", false);
-
+             
              }
-
+             
              $("#countCheckbox").html(countCheck);
              $("#txtSelect").text(accounting.formatNumber(sumReturn, 2, ",", "."));
              $("#txtBalance").text(accounting.formatNumber(sumPayment - sumReturn, 2, ",", "."));
              });
-
+             
              $("#checkall").prop("checked", false);
              $("#checkall").unbind().click(function(){
              if ($("#checkall").is(":checked")) {
@@ -604,10 +606,10 @@
              });
              }
              });
-
+             
              $(".row-tr").unbind().click(function (event) {
              //event.stopPropagation();
-
+             
              //var input = $(this).find("td label input.switch-input");
              //input.trigger("click");
              if (event.target.type !== 'checkbox') {
