@@ -22,6 +22,10 @@ public class BaseReport implements Serializable {
     @Id
     @Column
     private int rowNo;
+    @Column
+    private String statusKeyword;
+    @Column
+    private String statusName;
     // @Id
     @Column
     private String auctionNo;
@@ -48,6 +52,22 @@ public class BaseReport implements Serializable {
 
     public void setRowNo(int rowNo) {
         this.rowNo = rowNo;
+    }
+
+    public String getStatusKeyword() {
+        return statusKeyword;
+    }
+
+    public void setStatusKeyword(String statusKeyword) {
+        this.statusKeyword = statusKeyword;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
     }
 
     public String getAuctionNo() {
