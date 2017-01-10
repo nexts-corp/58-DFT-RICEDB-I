@@ -67,17 +67,24 @@
                                     <div id="typeChart" style="width: 90%; height: 400px; margin: 0 auto;"></div>
                                     <table id="type" class="table table-bordered table-striped table-condensed mb-none">
                                         <thead>
-                                        <tr>
-                                            <th class="text-center col-md-5">ชนิดข้าว</th>
-                                            <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
-                                            <th class="text-center col-md-2">ร้อยละ (%)</th>
-                                        </tr>
+                                            <tr>
+                                                <th class="text-center col-md-5">ชนิดข้าว</th>
+                                                <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
+                                                <th class="text-center col-md-2">ร้อยละ (%)</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="text-right">
-                                            <td colspan="3" class="text-center">-</td>
-                                        </tr>
+                                            <tr class="text-right">
+                                                <td colspan="3" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="text-center text-bold">{{#i18n}}total{{/i18n}}</td>
+                                                <td class="text-bold text-tertiary text-right"></td>
+                                                <td class="text-bold text-right"></td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </section>
@@ -88,17 +95,24 @@
                                     <div id="projectChart" style="width: 90%; height: 400px; margin: 0 auto;"></div>
                                     <table id="project" class="table table-bordered table-striped table-condensed mb-none">
                                         <thead>
-                                        <tr>
-                                            <th class="text-center col-md-5">ปีโครงการ</th>
-                                            <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
-                                            <th class="text-center col-md-2">ร้อยละ (%)</th>
-                                        </tr>
+                                            <tr>
+                                                <th class="text-center col-md-5">ปีโครงการ</th>
+                                                <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
+                                                <th class="text-center col-md-2">ร้อยละ (%)</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="text-right">
-                                            <td colspan="2" class="text-center">-</td>
-                                        </tr>
+                                            <tr class="text-right">
+                                                <td colspan="2" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="text-center text-bold">{{#i18n}}total{{/i18n}}</td>
+                                                <td class="text-bold text-tertiary text-right"></td>
+                                                <td class="text-bold text-right"></td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </section>
@@ -109,17 +123,24 @@
                                     <div id="gradeChart" style="width: 90%; height: 400px; margin: 0 auto;"></div>
                                     <table id="grade" class="table table-bordered table-striped table-condensed mb-none">
                                         <thead>
-                                        <tr>
-                                            <th class="text-center col-md-5">เกรด</th>
-                                            <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
-                                            <th class="text-center col-md-2">ร้อยละ (%)</th>
-                                        </tr>
+                                            <tr>
+                                                <th class="text-center col-md-5">เกรด</th>
+                                                <th class="text-center col-md-5">จำนวนคงเหลือ (ตัน)</th>
+                                                <th class="text-center col-md-2">ร้อยละ (%)</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr class="text-right">
-                                            <td colspan="2" class="text-center">-</td>
-                                        </tr>
+                                            <tr class="text-right">
+                                                <td colspan="2" class="text-center">-</td>
+                                            </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td class="text-center text-bold">{{#i18n}}total{{/i18n}}</td>
+                                                <td class="text-bold text-tertiary text-right"></td>
+                                                <td class="text-bold text-right"></td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </section>
@@ -141,7 +162,7 @@
 
                 <hr class="tall dashboard">
 
-                <div class="col-md-12">
+<!--                <div class="col-md-12">
                     <h3>ปริมาณข้าวที่สำรองไว้</h3>
                     <section class="panel panel-featured panel-featured-info" style="max-height: 450px; overflow-y: auto;">
                         <div class="panel-body">
@@ -151,7 +172,7 @@
                     </section>
                 </div>
 
-                <hr class="tall dashboard">
+                <hr class="tall dashboard">-->
 
                 <!--<div class="col-md-12">
                     <h3>ราคาข้าว</h3>
@@ -162,6 +183,18 @@
                         </div>
                     </section>
                 </div>-->
+
+<!--                <hr class="tall dashboard">-->
+
+                <div class="col-md-12">
+                    <h3>ปริมาณข้าวที่รับมอบ</h3>
+                    <section class="panel panel-featured panel-featured-info" style="max-height: 450px; overflow-y: auto;">
+                        <div class="panel-body">
+                            <div id="tracking">
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ namespace apps\warehouse\interfaces;
  * @description ประมูล
  */
 interface IWarehouseInfoService {
+
     /**
      * @name listsAllRice
      * @uri /listsAllRice
@@ -128,4 +129,12 @@ interface IWarehouseInfoService {
      * @description เพิ่มข้อมูลผู้เสนอราคารายใหม่
      */
     public function delete($riceInfo);
+
+    /**
+     * @name export
+     * @uri /export
+     * @return file export Description
+     * @description  export excel
+     */
+    public function export();
 }

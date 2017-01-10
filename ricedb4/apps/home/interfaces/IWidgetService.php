@@ -8,6 +8,7 @@ namespace apps\home\interfaces;
  * @description หน้าหลัก
  */
 interface IWidgetService {
+
     /**
      * @name projectGroup
      * @uri /projectGroup
@@ -55,4 +56,12 @@ interface IWidgetService {
      * @description ปริมาณข้าวที่สำรองไว้
      */
     public function viewReserve();
+
+    /**
+     * @name tracking
+     * @uri /tracking
+     * @return String[] lists Description
+     * @description ปริมาณข้าวที่รับมอบ
+     */
+    public function tracking();
 }

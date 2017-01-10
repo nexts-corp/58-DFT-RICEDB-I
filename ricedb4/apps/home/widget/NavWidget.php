@@ -79,11 +79,15 @@ class NavWidget extends CWidget {
         foreach ($apps as $i => $value) {
             if ($value !== "." && $value !== "..") {
                 $chk = true;
-                if ($value == "auction") {
-                    $chk = $this->getAuction("Y");
-                } else if ($value == "industry") {
-                    $chk = $this->getAuction("YA");
-                }
+//                if ($value == "auction") {
+//                    $chk = $this->getAuction("Y");
+//                } else if ($value == "industry") {
+//                    $chk = $this->getAuction("YA");
+//                } else if ($value == "industry2") {
+//                    $chk = $this->getAuction("YI2");
+//                } else if ($value == "order") {
+//                    $chk = $this->getAuction("YO");
+//                }
 
                 if ($chk) {
                     $app_load = $loader->load($value);
