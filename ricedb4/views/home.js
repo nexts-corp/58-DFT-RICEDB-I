@@ -338,7 +338,7 @@ function tracking() {
                     + '</div>'
                     + '<div class="row">'
                     + '<div class="col-md-3 text-right text-bold">ส่งมอบ :</div>'
-                    + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["weightContract"], 2, ",", ".") + ' ตัน</div>'
+                    + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["weightReceived"], 2, ",", ".") + ' ตัน</div>'
                     + '</div>'
                     + '<table class="table">'
                     + '<thead>'

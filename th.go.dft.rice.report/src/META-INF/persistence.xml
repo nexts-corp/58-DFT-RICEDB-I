@@ -66,6 +66,7 @@
     <class>th.go.dft.rice.report.model.RPT02_06_05_model</class>
     <class>th.go.dft.rice.report.model.RPT02_06_06_model</class>
     <class>th.go.dft.rice.report.model.RPT05_01_model</class>
+    <class>th.go.dft.rice.report.model.RPT01_02_02_model</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=RiceDB"/>
       <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>

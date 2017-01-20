@@ -1,4 +1,5 @@
 $(function () {
+    var getUrl = window.location;
     $("#date1, #date2").datepicker({
         format: 'yyyy-mm-dd',
         //daysOfWeekDisabled: [0, 6],
@@ -20,24 +21,34 @@ $(function () {
     });
 
     showRicePriceAvg();
+
+    $("#btnPDF").click(function () {
+        window.open("http://" + getUrl.host.split("/")[0] + "/reporter/api/rice/report/priceAvg?startDate=" + $("#date1").val() + "&endDate=" + $("#date2").val() + "&export=view");
+    })
+    $("#btnWORD").click(function () {
+        window.open("http://" + getUrl.host.split("/")[0] + "/reporter/api/rice/report/priceAvg?startDate=" + $("#date1").val() + "&endDate=" + $("#date2").val() + "&export=word");
+    })
+    $("#btnEXCEL").click(function () {
+        window.open("http://" + getUrl.host.split("/")[0] + "/reporter/api/rice/report/priceAvg?startDate=" + $("#date1").val() + "&endDate=" + $("#date2").val() + "&export=excel");
+    })
 });
 
-function showRicePriceAvg(){
+function showRicePriceAvg() {
     $("#dataBody").html('<tr><td colspan="11" class="text-center">Loading...</td></tr>');
 
-    setTimeout(function(){
+    setTimeout(function () {
         var dataSet = [];
 
-        var datas = callAjax(js_context_path+"/api/warehouse/viewRicePriceAvg/view", "post", {date1: $("#date1").val(), date2: $("#date2").val()}, "json");
+        var datas = callAjax(js_context_path + "/api/warehouse/viewRicePriceAvg/view", "post", {date1: $("#date1").val(), date2: $("#date2").val()}, "json");
         if (typeof datas !== "undefined" && datas !== null) {
-            $.each(datas["lists"], function(key, value){
+            $.each(datas["lists"], function (key, value) {
                 dataSet.push(value);
             });
         }
 
-        var t = $("#table").DataTable( {
+        var t = $("#table").DataTable({
             "data": dataSet,
-            "order": [[ 0, 'asc' ]],
+            "order": [[0, 'asc']],
             "columnDefs": [
                 {
                     "targets": 0,
@@ -56,8 +67,10 @@ function showRicePriceAvg(){
                     "data": "sumOldMean1",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -65,8 +78,10 @@ function showRicePriceAvg(){
                     "data": "sumOldMean2",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -74,8 +89,10 @@ function showRicePriceAvg(){
                     "data": "OldPrice",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -83,8 +100,10 @@ function showRicePriceAvg(){
                     "data": "sumOldNewMean1",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -92,8 +111,10 @@ function showRicePriceAvg(){
                     "data": "sumOldNewMean2",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -101,8 +122,10 @@ function showRicePriceAvg(){
                     "data": "OldNewPrice",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -110,8 +133,10 @@ function showRicePriceAvg(){
                     "data": "sumNewMean1",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -119,8 +144,10 @@ function showRicePriceAvg(){
                     "data": "sumNewMean2",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 },
                 {
@@ -128,17 +155,19 @@ function showRicePriceAvg(){
                     "data": "NewPrice",
                     "sClass": "text-right col-md-1",
                     "render": function (data) {
-                        if(data == 0) return "-";
-                        else return accounting.formatNumber(data, 0, ",", ".");
+                        if (data == 0)
+                            return "-";
+                        else
+                            return accounting.formatNumber(data, 0, ",", ".");
                     }
                 }
             ]
         });
 
-        t.on( 'order.dt search.dt', function () {
-            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
-                cell.innerHTML = i+1;
-            } );
-        } ).draw();
+        t.on('order.dt search.dt', function () {
+            t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
     }, 100);
 }

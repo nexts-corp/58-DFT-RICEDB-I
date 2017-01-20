@@ -27,4 +27,9 @@ public interface IReportService {
     public CJFile checklist(@CIParam(Name="auccode") String auctionCode
             ,@CIParam(Name="bidderqueue") String bidderQueue
             ,@CIParam(Name="export") String exportType);
+    
+    @CIOperation(Uri = "/priceAvg")
+    public CJFile priceAvg(@CIParam(Name="startDate") String startDate
+            ,@CIParam(Name="endDate") String endDate
+            ,@CIParam(Name="export") String exportType);
 }

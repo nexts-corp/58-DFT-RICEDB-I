@@ -209,4 +209,41 @@ public class ReportService extends CServiceBase implements IReportService {
         return this.outputFile("RPTERROR", exportType, new byte[]{});
     }
 
+    @Override
+    public CJFile priceAvg(String startDate, String endDate, String exportType) {
+        try {
+            Class reportClass = Class.forName("th.go.dft.rice.report.model.RPT01_02_02_model");
+            Class reportParamClass = Class.forName("th.go.dft.rice.report.parameter.RPT01_02_02_parameter");
+            //String reportName = reportCode.toUpperCase().replaceAll("_", "-");
+            String reportProceduce = "exec sp_RPT01_02_02" + " ?1,?2";
+            List<BaseReport> datas = (List<BaseReport>) this.dbcon.nativeQuery(reportClass, reportProceduce, startDate, endDate);
+            Object paramObj = reportParamClass.newInstance();
+            BaseParameter bparam = (BaseParameter) paramObj;
+            if (datas != null && !datas.isEmpty()) {
+
+                bparam.setAuctionNo(datas.get(0).getAuctionNo());
+                bparam.setAuctionCode(datas.get(0).getAuctionCode());
+                bparam.setAuctionDate(datas.get(0).getAuctionDate());
+                bparam.setREPORT_MAX_COUNT(datas.size());
+            } else {
+                bparam.setAuctionNo(startDate);
+                bparam.setAuctionCode(endDate);
+                bparam.setAuctionDate("");
+                datas = new ArrayList<>();
+                bparam.setREPORT_MAX_COUNT(0);
+                //BaseModel bm=new BaseModel();
+                //datas.add(bm);
+            }
+            CReportGenerater gen = this.newReportGenerater("RPT01_02_02", exportType);
+            gen.setParameter(bparam);
+            gen.setReportData(datas);
+            byte[] out = gen.Export();
+            return this.outputFile("RPT01_02_02", exportType, out);
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            Logger.getLogger(ReportService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.outputFile("RPTERROR", exportType, new byte[]{});
+    }
+
 }

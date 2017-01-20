@@ -43,7 +43,7 @@ interface IViewService {
      * @uri /viewRicePrice
      * @description M24 ข้อมูลราคาข้าว
      * @authen true
-     * @resource 10000000
+     * @resource 10000100
      * @sitemap true
      */ 
     public function viewRicePrice();
@@ -53,7 +53,7 @@ interface IViewService {
      * @uri /viewRicePriceAvg
      * @description M25 ข้อมูลราคาข้าวเฉลี่ย
      * @authen true
-     * @resource 10000000
+     * @resource 10000100
      * @sitemap true
      */ 
     public function viewRicePriceAvg();
@@ -73,6 +73,7 @@ interface IViewService {
      * @uri /history
      * @description M27 ประวัติคลังสินค้า
      * @authen true
+     * @resource 10000000
      * @sitemap true
      */
     public function history();

@@ -170,7 +170,7 @@ class WidgetService extends CServiceBase implements IWidgetService {
                     }
                 }
             }
-            $day = split(" ", $status["auctionDay2"]);
+            $day = explode(" ", $status["auctionDay2"]);
             $strMonthCut = Array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤภษาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
             $d = $day[0];
             $m = array_search($day[1], $strMonthCut);
