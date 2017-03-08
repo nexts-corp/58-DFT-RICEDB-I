@@ -39,6 +39,15 @@ class NavWidget extends CWidget {
         return "$strDay $strMonthThai $strYear";
     }
 
+    function dateThaiToTimeStamp($dateThai) {
+        $strMonthCut = Array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤภษาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+
+        $date = explode(" ", $dateThai);
+        $dateEng = intval($date[2] - 543) . "-" . array_search($date[1], $strMonthCut) . "-" . intVal($date[0]);
+        $dateTime = strtotime($dateEng);
+        return $dateEng;
+    }
+
     function getAuction($status) {
         $sql = "SELECT"
                 . " st"
@@ -57,7 +66,21 @@ class NavWidget extends CWidget {
             $d3 = $data[0]->auctionDay3;
             $d4 = $data[0]->auctionDay4;
             $c = $this->DateThai();
-            if ($d1 == $c || $d2 == $c || $d3 == $c || $d4 == $c) {
+
+            $dateStart = $d1;
+            $dateEnd = $d2;
+//            if ($d1 == $c || $d2 == $c || $d3 == $c || $d4 == $c) {
+//                return true;
+//            } else {
+//                return false;
+//            }
+            if ($d3 != null && $d3 != "") {
+                $dateEnd = $d3;
+            }
+            if ($d4 != null && $d4 != "") {
+                $dateEnd = $d4;
+            }
+            if ($this->dateThaiToTimeStamp($c) >= $this->dateThaiToTimeStamp($dateStart) && $this->dateThaiToTimeStamp($c) <= $this->dateThaiToTimeStamp($dateEnd)) {
                 return true;
             } else {
                 return false;
@@ -79,15 +102,15 @@ class NavWidget extends CWidget {
         foreach ($apps as $i => $value) {
             if ($value !== "." && $value !== "..") {
                 $chk = true;
-//                if ($value == "auction") {
-//                    $chk = $this->getAuction("Y");
-//                } else if ($value == "industry") {
-//                    $chk = $this->getAuction("YA");
-//                } else if ($value == "industry2") {
-//                    $chk = $this->getAuction("YI2");
-//                } else if ($value == "order") {
-//                    $chk = $this->getAuction("YO");
-//                }
+                if ($value == "auction") {
+                    $chk = $this->getAuction("Y");
+                } else if ($value == "industry") {
+                    $chk = $this->getAuction("YA");
+                } else if ($value == "industry2") {
+                    $chk = $this->getAuction("YI2");
+                } else if ($value == "order") {
+                    $chk = $this->getAuction("YO");
+                }
 
                 if ($chk) {
                     $app_load = $loader->load($value);
