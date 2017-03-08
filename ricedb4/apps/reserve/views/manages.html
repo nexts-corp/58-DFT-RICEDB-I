@@ -1,0 +1,436 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}system.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}reserve.title{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">{{#i18n}}reserve.manage.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <!--<button class="btn btn-success" id="btn_excel"><i class="fa fa-file-excel-o"></i> Export คงคลัง</button>-->
+                    <button class="btn btn-primary" id="btnAdd"><i class="fa fa-plus-circle"></i> {{#i18n}}system.add{{/i18n}}{{#i18n}}reserve.manage.title{{/i18n}}</button>
+                    <button class="btn btn-primary" id="btnBack" style="display: none;"><i class="fa fa-list-ul"></i> {{#i18n}}system.back{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="row">
+            <div id="divTable">
+                <div class="col-md-12" ><!-- table shown file detail -->
+                    <table id="tableList" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-1">{{#i18n}}system.no{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}system.type{{/i18n}}</th>
+                                <th class="text-center col-md-3">{{#i18n}}system.list{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}system.date{{/i18n}}{{#i18n}}system.create{{/i18n}}</th>
+                                <th class="text-center col-md-1">{{#i18n}}system.status{{/i18n}}</th>
+                                <th class="text-center col-md-3">{{#i18n}}system.tools{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td colspan="6" class="text-center">ไม่มีข้อมูล</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end table shown file detail -->
+            </div>
+            <div id="divForm" style="display: none">
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label req text-right" for="reserveCode">{{#i18n}}reserve.manage.title{{/i18n}}{{#i18n}}system.for{{/i18n}} :</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" data-entity="list" name="reserveCode" id="reserveCode" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group div-auction">
+                        <label class="col-sm-3 control-label req text-right" for="reserveCode">{{#i18n}}system.type{{/i18n}}{{#i18n}}reserve.auction{{/i18n}} :</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" data-entity="list" name="typeAuction" id="typeAuction" required>
+                                <option value=" ">ทั่วไป</option>
+                                <option value="I">เข้าสู่อุตสาหกรรม</option>
+                                <option value="I2">ทั่วไป&เข้าสู่อุตฯ</option>
+                                <option value="O">คำสั่งซื้อ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label req text-right" for="detail">{{#i18n}}system.ordinal{{/i18n}} :</label>
+                        <div class="col-sm-6">
+                            <input type="text" data-entity="list" class="form-control" name="name" id="name" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group div-auction">
+                        <label class="col-sm-3 control-label req text-right" for="target">{{#i18n}}reserve.typeSale{{/i18n}} :</label>
+                        <div class="col-md-6">
+                            <div class="radio">
+                                <label>
+                                    <input class="remarkControl"  type="radio" data-entity="list" name="typeSale" id="typeSale_1" value="SILO" checked>
+                                    {{#i18n}}reserve.typeSilo{{/i18n}}
+                                </label>
+                                <label>
+                                    <input class="remarkControl" type="radio" data-entity="list" name="typeSale" id="typeSale_2" value="STACK">
+                                    {{#i18n}}reserve.typeStack{{/i18n}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+                    <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                        <li data-option-value="*" class="">
+                            <button id="btnSave" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}system.save{{/i18n}}</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-default">{{#i18n}}system.cancel{{/i18n}}</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+            <div class="modal fade" id="siloModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h4>คลังสินค้าที่คัดแล้ว</h4>
+                            <table id="tableSilo1" class="table table-hover table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.code{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.remark{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.date{{/i18n}}{{#i18n}}system.save{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.tools{{/i18n}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <td colspan="6" class="text-center">ไม่มีข้อมูล</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <h4>คลังสินค้าที่เลือก</h4>
+                            <table id="tableSilo2" class="table table-hover table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.no{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.code{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.remark{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.date{{/i18n}}{{#i18n}}system.save{{/i18n}}</th>
+                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.tools{{/i18n}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <td colspan="6" class="text-center">ไม่มีข้อมูล</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<style>
+    #table2 tbody tr{
+        cursor: pointer;
+    }
+    .modal-wide .modal-dialog {
+        width: 80% !important; /* or whatever you wish */
+    }
+</style>
+<!--<script src="{{_context_path}}/asset/vendor/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>-->
+
+<script type="text/javascript">
+    $(function () {
+        var lkReserves = listsReserve();
+
+        lkStatusReserv(lkReserves);
+
+        $("#reserveCode").change(function () {
+            if ($(this).val() == "AU") {
+                $(".div-auction").show();
+            } else {
+                $(".div-auction").hide();
+            }
+        });
+//        $("#btn_excel").click(function () {
+//            window.open("{{_context_path}}/api/reserve/manages/export");
+//        });
+        $("#btnAdd").click(function () {
+            toggleShow("form");
+        });
+        $("#btnBack").click(function () {
+            toggleShow("table");
+        });
+        $("#btnSave").click(function () {
+            var isValid = true;
+            var preData = {};
+            $('#form input[type=text],select,input[type=radio]:checked').each(function () {
+                if ($(this).val() == "" && !$(this).prop("disabled")) {
+                    $(this).focus();
+                    isValid = false;
+                    return;
+                } else {
+                    if ($(this).attr("name") == "typeAuction" && $(this).val() == " ") {
+                        preData["typeAuction"] = "";
+                    } else {
+                        preData[$(this).attr("name")] = $(this).val();
+                    }
+                }
+            });
+            if (isValid) {
+                var data = {};
+                data["status"] = preData["name"] + ($("#reserveCode").val() == "AU" ? " (" + $("#typeAuction option:selected").text() + ")" : "");
+                data["keyword"] = preData["reserveCode"] + preData["name"] + (preData["typeAuction"] != "" ? "-" + preData["typeAuction"] : "");
+                data["saleBy"] = preData["typeSale"];
+                data["active"] = "R" + (preData["typeAuction"] != "" ? preData["typeAuction"] : "");
+                var dataJSON = JSON.stringify({status: data});
+                var dataJSONEN = encodeURIComponent(dataJSON);
+                setTimeout(function () {
+                    var datas = callAjaxFile("{{_context_path}}/api/reserve/manages/insert", "post", dataJSONEN, "json");
+                    if (typeof datas !== "undefined" && datas !== null) {
+                        if (datas["add"] == true) {
+                            $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
+                            lkStatusReserv(lkReserves);
+                            setTimeout(function () {
+                                toggleShow("table");
+                            }, 500);
+                        }
+                        else {
+                            $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>' + datas["add"] + '</span>');
+                        }
+                    }
+                }, 100);
+            }
+        });
+
+
+    });
+    function listsBook(status_id, lkReserves) {
+        var datas1 = callAjax("{{_context_path}}/api/reserve/filter/lists", "post", {}, "json")["lists"];
+        var tb1 = $("#tableSilo1").DataTable({
+            "destroy": true,
+            "processing": true,
+            "data": datas1,
+            "order": [[0, 'asc']],
+            "iDisplayLength": 10,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "data": "book_id",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 1,
+                    "data": "book_id",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 2,
+                    "data": "remark",
+                    "sClass": "text-left col-md-3"
+                },
+                {
+                    "targets": 3,
+                    "data": "weightAll",
+                    "sClass": "text-right col-md-2",
+                    "render": function (data) {
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "dateCreated",
+                    "sClass": "text-center",
+                    "render": function (data) {
+                        return data;
+                    }
+                },
+                {
+                    "targets": 5,
+                    "orderable": false,
+                    "data": "weightAll",
+                    "sClass": "text-center",
+                    "render": function (data, key, full) {
+                        return ' <button class="btn btn-default select-book" data-id="' + full['book_id'] + '"><i class="fa fa-check"></i> {{#i18n}}filter.choose{{/i18n}}</button>'
+                    }
+                }
+            ]
+        });
+        tb1.on('order.dt search.dt', function () {
+            tb1.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+        $("#tableSilo1").off("click", "button.select-book").on("click", "button.select-book", function () {
+            var result = callAjax("{{_context_path}}/api/reserve/manages/select/book", "post", {status_id: status_id, book_id: $(this).data('id')}, "json")["select"];
+            if (result) {
+                listsBook(status_id, lkReserves);
+            }
+        });
+
+        var datas2 = callAjax("{{_context_path}}/api/reserve/manages/lists/book", "post", {status_id: status_id}, "json")["lists"];
+        var tb2 = $("#tableSilo2").DataTable({
+            "destroy": true,
+            "processing": true,
+            "data": datas2,
+            "order": [[0, 'asc']],
+            "iDisplayLength": 10,
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "data": "book_id",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 1,
+                    "data": "book_id",
+                    "sClass": "text-center col-md-1"
+                },
+                {
+                    "targets": 2,
+                    "data": "remark",
+                    "sClass": "text-left col-md-3"
+                },
+                {
+                    "targets": 3,
+                    "data": "weightAll",
+                    "sClass": "text-right col-md-2",
+                    "render": function (data) {
+                        return accounting.formatNumber(data, 2, ",", ".");
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "dateCreated",
+                    "sClass": "text-center",
+                    "render": function (data) {
+                        return data;
+                    }
+                },
+                {
+                    "targets": 5,
+                    "orderable": false,
+                    "data": "book_id",
+                    "sClass": "text-center",
+                    "render": function (data, key, full) {
+                        return ' <button class="btn btn-default delete-book" data-id="' + data + '"><i class="fa fa-delete"></i> {{#i18n}}system.delete{{/i18n}}</button>'
+                    }
+                }
+            ]
+        });
+        tb2.on('order.dt search.dt', function () {
+            tb2.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+        $("#tableSilo2").off("click", "button.delete-book").on("click", "button.delete-book", function () {
+            var result = callAjax("{{_context_path}}/api/reserve/manages/cancel/book", "post", {book_id: $(this).data('id')}, "json")["cancel"];
+            if (result) {
+                listsBook(status_id, lkReserves);
+            }
+        });
+        lkStatusReserv(lkReserves);
+    }
+    function listsReserve() {
+        var datas = callAjax("{{_context_path}}/api/reserve/manages/lkReserve", "post", {}, "json");
+        var html = '';
+        var x = [];
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+                x[value['reserveCode']] = value['reserveName'];
+                html += '<option value="' + value["reserveCode"] + '">' + value["reserveName"] + '</option>';
+            });
+        }
+        $("#reserveCode").html(html);
+        return x;
+    }
+    function lkStatusReserv(lkReserves) {
+        var datas = callAjax("{{_context_path}}/api/reserve/manages/lkStatusReserv", "post", {}, "json");
+        var html = '<tr><td colspan="6" class="text-center">ไม่มีรายการสำรอง</td></tr>';
+        if (typeof datas !== "undefined" && datas !== null && datas['lists'].length != 0) {
+            html = '';
+            var i = 0;
+            $.each(datas["lists"], function (key, value) {
+                html += '<tr>'
+                        + '<td class="text-center">' + (++i) + '</td>'
+                        + '<td class="text-center">' + lkReserves[value['keyword'].substr(0, 2)] + '</td>'
+                        + '<td>' + value["status"] + '</td>'
+                        + '<td class="text-center">' + value["dateCreated"]['date'].substr(0, 10) + '</td>'
+                        + '<td class="text-center">' + (value['active'].indexOf('R') > -1 ? 'รอเลือกคลัง' : 'รอยืนยัน') + '</td>'
+                        + '<td class="text-center">'
+                        + '<button class="btn btn-default select-silo" data-keyword="' + value['keyword'] + '" data-status="' + value["status"] + '" data-status_id="' + value["id"] + '"><i class="fa fa-home"></i> คลังสินค้า</button>'
+                        + ' <button class="btn btn-default confirm-status"' + (value['active'].indexOf('R') > -1 ? 'disabled' : '') + '  data-status_id="' + value["id"] + '"><i class="fa fa-check"></i> ยืนยัน</button>'
+                        + ' <button class="btn btn-default delete-status" disabled data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
+                        + '</td>'
+                        + '</tr>';
+            });
+        }
+        $("#tableList tbody").html(html);
+
+        $('.select-silo').unbind().click(function () {
+            var status_id = $(this).data('status_id');
+            listsBook(status_id, lkReserves);
+            $("#siloModal").modal('show');
+            $(".modal-title").text(' [' + lkReserves[$(this).data('keyword').substr(0, 2)] + '] ' + $(this).data('status'));
+        });
+
+        $('.confirm-status').unbind().click(function () {
+            var status_id = $(this).data('status_id');
+            var result = callAjax("{{_context_path}}/api/reserve/manages/confirm/status", "post", {status_id: status_id}, "json")["confirm"];
+            if (result) {
+                lkStatusReserv(lkReserves);
+            }
+        });
+    }
+
+    function toggleShow(option) {
+        $("#loading").html('');
+        if (option == "form") {
+            $("input[type=text]").each(function () {
+                $(this).val('');
+            })
+            $("#divTable, #btnAdd").hide();
+            $("#divForm, #btnBack").show();
+        }
+        else if (option == "table") {
+            $("#divTable, #btnAdd").show();
+            $("#divForm, #btnBack").hide();
+        }
+    }
+</script>

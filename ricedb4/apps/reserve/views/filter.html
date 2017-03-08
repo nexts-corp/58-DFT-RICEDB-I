@@ -1,0 +1,1051 @@
+{{>header}}
+<style>
+    .list-group-item-heading{
+        color:#CCC;
+    }
+    li.active>a>p.list-group-item-text,
+    li.active>a>h4.list-group-item-heading{
+        color: white;
+    }
+</style>
+<!--<link rel="stylesheet" href="{{_context_path}}/asset/vendor/jquery-datatables/dataTables.bootstrap.min.css" />-->
+<!--<link rel="stylesheet" href="{{_context_path}}/asset/vendor/jquery-datatables/responsive.bootstrap.min.css" />-->
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}system.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}reserve.title{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">{{#i18n}}reserve.filter.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <!--<button class="btn btn-success" id="btn_excel"><i class="fa fa-file-excel-o"></i> Export คงคลัง</button>-->
+                    <button class="btn btn-primary" id="btnAdd"><i class="fa fa-plus-circle"></i> {{#i18n}}system.add{{/i18n}}{{#i18n}}reserve.filter.title{{/i18n}}</button>
+                    <button class="btn btn-primary" id="btnBack" style="display: none;"><i class="fa fa-list-ul"></i> {{#i18n}}system.back{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="row">
+            <div id="divTable">
+                <div class="col-md-12"><!-- table shown file detail -->
+                    <table id="tableHome" class="table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.no{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.code{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.remark{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.date{{/i18n}}{{#i18n}}system.save{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.tools{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr>
+                                <td colspan="6" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end table shown file detail -->
+            </div>
+
+            <div id="divForm" style="display: none;">
+                <div class="row form-group">
+                    <div class="col-xs-12">
+                        <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                            <li class="active"><a href="#step-1">
+                                    <h4 class="list-group-item-heading">Step 1</h4>
+                                    <p class="list-group-item-text">จัดกลุ่มข้าว</p>
+                                </a></li>
+                            <li class="disabled"><a href="#step-2">
+                                    <h4 class="list-group-item-heading">Step 2</h4>
+                                    <p class="list-group-item-text">เลือกคลังสินค้า</p>
+                                </a></li>
+                            <li class="disabled"><a href="#step-3">
+                                    <h4 class="list-group-item-heading">Step 3</h4>
+                                    <p class="list-group-item-text">สรุปข้อมูล</p>
+                                </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row setup-content" id="step-1">
+                    <div class="col-xs-12">
+                        <div class="col-md-12 well">
+                            <h1 class="text-center">จัดกลุ่มข้าว</h1>
+                            <div class="row">
+                                <form class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}filter.type{{/i18n}} :</label>
+                                        <div class="col-sm-6 form-inline" id="divType">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-inline">
+                                                <label class="checkbox inline">
+                                                    <input type="checkbox" class="checkbox chk-all" value="type"> {{#i18n}}system.all{{/i18n}}
+                                                </label>
+                                            </div>
+                                            <!--                                            <div class="form-inline">
+                                                                                            <label class="checkbox inline">
+                                                                                                <input type="checkbox" class="checkbox" id="chkNoType"> ไม่เอาที่ไม่เลือก
+                                                                                            </label>
+                                                                                        </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label req text-right" >No{{#i18n}}filter.type{{/i18n}} :</label>
+                                        <div class="col-sm-6 form-inline" id="divNoType">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-inline">
+                                                <label class="checkbox inline">
+                                                    <input type="checkbox" class="checkbox chk-all" value="noType"> {{#i18n}}system.all{{/i18n}}
+                                                </label>
+                                            </div>
+                                            <!--                                            <div class="form-inline">
+                                                                                            <label class="checkbox inline">
+                                                                                                <input type="checkbox" class="checkbox" id="chkNoType"> ไม่เอาที่ไม่เลือก
+                                                                                            </label>
+                                                                                        </div>-->
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}filter.project{{/i18n}} :</label>
+                                        <div class="col-sm-6 form-inline" id="divProject">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-inline">
+                                                <label class="checkbox inline">
+                                                    <input type="checkbox" class="checkbox chk-all" value="project" > {{#i18n}}system.all{{/i18n}}
+                                                </label>
+                                            </div>
+                                            <!--                                            <div class="form-inline">
+                                                                                            <label class="checkbox inline">
+                                                                                                <input type="checkbox" class="checkbox" id="chkNoProject"> ไม่เอาที่ไม่เลือก
+                                                                                            </label>
+                                                                                        </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label req text-right" >No{{#i18n}}filter.project{{/i18n}} :</label>
+                                        <div class="col-sm-6 form-inline" id="divNoProject">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-inline">
+                                                <label class="checkbox inline">
+                                                    <input type="checkbox" class="checkbox chk-all" value="noProject" > {{#i18n}}system.all{{/i18n}}
+                                                </label>
+                                            </div>
+                                            <!--                                            <div class="form-inline">
+                                                                                            <label class="checkbox inline">
+                                                                                                <input type="checkbox" class="checkbox" id="chkNoProject"> ไม่เอาที่ไม่เลือก
+                                                                                            </label>
+                                                                                        </div>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label req text-right" >No{{#i18n}}filter.grade{{/i18n}} :</label>
+                                        <div class="col-sm-6 form-inline" id="divNoGrade">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-inline">
+                                                <label class="checkbox inline">
+                                                    <input type="checkbox" class="checkbox chk-all" value="noGrade" > {{#i18n}}system.all{{/i18n}}
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}filter.grade{{/i18n}} :</label>
+                                        <div class="col-sm-6 form-inline">
+                                            <div class="row" id="divGrade">
+
+                                            </div>
+                                            <div class="row text-center">
+                                                <button class="btn btn-default" id="btnGradeAdd">{{#i18n}}system.add{{/i18n}}{{#i18n}}filter.grade{{/i18n}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="text-right">
+                                <button id="btnStep1" class="btn btn-primary btn-lg">Next Step 2</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row setup-content" id="step-2">
+                    <div class="col-xs-12">
+                        <div class="col-md-12">
+                            <h1 class="text-center">เลือกคลังสินค้า</h1>
+                            <table id="tableStep2" class="table table-hover table-striped table-bordered nowrap">
+                                <thead>
+                                    <tr id="headStep2"></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="9" class="text-center">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-12" style="margin-top: 20px">
+                            <div class="col-md-6 text-left"> 
+                                <h4>{{#i18n}}reserve.quantity{{/i18n}}{{#i18n}}reserve.silo{{/i18n}} : <span id="countSiloStep2">0</span></h4>
+                                <h4>{{#i18n}}reserve.weight{{/i18n}} : <span id="weightStep2">0.00</span> {{#i18n}}reserve.ton{{/i18n}}</h4>
+                            </div>
+                            <div class="col-md-6 text-right"> 
+                                <div class="row">
+                                    <label class="checkbox inline">
+                                        <input type="checkbox" id="chkAllStep2"> {{#i18n}}filter.choose{{/i18n}}{{#i18n}}system.all{{/i18n}} 
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <button id="btnStep2" class="btn btn-primary btn-lg disabled">Next Step 3</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row setup-content" id="step-3">
+                    <div class="col-xs-12">
+                        <div class="col-md-12">
+                            <h1 class="text-center">สรุปข้อมูล</h1>
+                            <div class="row">
+                                <form class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}system.code{{/i18n}} :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="book_id" name="book_id" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label text-right" >{{#i18n}}system.remark{{/i18n}} :</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="remark" name="remark">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label text-right" >{{#i18n}}system.condition{{/i18n}} :</label>
+                                        <div class="col-sm-6">
+                                            <p id="conType"></p>
+                                            <p id="conProject"></p>
+                                            <p id="conGrade"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label text-right" >{{#i18n}}reserve.silo{{/i18n}} :</label>
+                                        <div class="col-sm-6">
+                                            <table class="table table-striped table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-center">{{#i18n}}system.no{{/i18n}}</th>
+                                                        <th class="text-center">{{#i18n}}reserve.province{{/i18n}}</th>
+                                                        <th class="text-center">{{#i18n}}reserve.silo{{/i18n}}</th>
+                                                        <th class="text-center">{{#i18n}}reserve.associate{{/i18n}}</th>
+                                                        <th class="text-center">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="table" id="bodyStep3">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="text-right">
+                                <button id="btnStep3" class="btn btn-primary btn-lg">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="loading" class="col-xs-12" style="text-align: center; margin: 20px;"></div>
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">{{#i18n}}system.no{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}reserve.stack{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}reserve.project{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}reserve.type{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}reserve.grade{{/i18n}}</th>
+                                        <th class="text-center">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table" id="bodyModal">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div class="modal fade" id="editModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Modal title</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label req text-right" >{{#i18n}}system.code{{/i18n}} :</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="edit_book_id" name="edit_book_id" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label text-right" >{{#i18n}}system.remark{{/i18n}} :</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="edit_remark" name="edit_remark">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" id="btn-edit">Edit</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<!--<script src="{{_context_path}}/asset/vendor/jquery-datatables/dataTables.bootstrap.min.js"></script>-->
+<!--<script src="{{_context_path}}/asset/vendor/jquery-datatables/dataTables.responsive.min.js"></script>-->
+<!--<script src="{{_context_path}}/asset/vendor/jquery-datatables/responsive.bootstrap.min.js"></script>-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        //start wizard
+        var navListItems = $('ul.setup-panel li a'), // 
+                allWells = $('.setup-content');
+        allWells.hide();
+        navListItems.click(function (e)
+        {
+            e.preventDefault();
+            var $target = $($(this).attr('href')),
+                    $item = $(this).closest('li');
+            if (!$item.hasClass('disabled')) {
+                navListItems.closest('li').removeClass('active');
+                $item.addClass('active');
+                allWells.hide();
+                $target.show();
+            }
+        });
+        $('ul.setup-panel li.active a').trigger('click');
+        //end wizard
+        var old_book_id = "";
+        var cGrade = 0;
+        var gGrade = lkGrade(); //, gType = lkType(), gProject = lkProject();
+        var text = {"type": [], "noType": [], "project": [], "noProject": [], "grade": [], "noGrade": []};
+        var obj4Query = "";
+        lists();
+        lkType();
+        lkProject();
+        createGrade();
+        $("#btnStep1").unbind().click(function () {
+            var dType = [];
+            var dNoType = [];
+            $("input[name=type]").each(function () {
+                if ($(this).prop("checked")) {
+                    dType.push($(this).val());
+                    text.type.push($(this).data('text'));
+                } else {
+                    if ($("#chkNoType").prop("checked")) {
+                        dNoType.push($(this).val());
+                        text.noType.push($(this).data('text'));
+                    }
+                }
+            });
+            $("input[name=noType]").each(function () {
+                if ($(this).prop("checked")) {
+                    dNoType.push($(this).val());
+                    text.noType.push($(this).data('text'));
+                }
+            });
+            var dProject = [];
+            var dNoProject = [];
+            $("input[name=project]").each(function () {
+                if ($(this).prop("checked")) {
+                    dProject.push($(this).val());
+                    text.project.push($(this).data('text'));
+                }
+            });
+            $("input[name=noProject]").each(function () {
+                if ($(this).prop("checked")) {
+                    dNoProject.push($(this).val());
+                    text.noProject.push($(this).data('text'));
+                }
+            });
+            var dNoGrade = [];
+            $("input[name=noGrade]").each(function () {
+                if ($(this).prop("checked")) {
+                    dNoGrade.push($(this).val());
+                    text.noGrade.push($(this).data('text'));
+                }
+            });
+            var dGrade = [];
+            for (var i = 0; i < cGrade; i++) {
+                var x = 0;
+                $(".chk-grade[row-index='" + i + "']").each(function () {
+                    if ($(this).prop("checked")) {
+                        var start = parseInt($('.chk-start[row-index="' + i + '"]').val());
+                        var end = parseInt($('.chk-end[row-index="' + i + '"]').val());
+                        if (!dGrade.hasOwnProperty(i)) {
+                            dGrade[i] = [];
+                            if (!dGrade[i].hasOwnProperty("id")) {
+                                dGrade[i] = {"id": [], "start": 0, "end": 100, "text": []};
+                            }
+                        }
+                        dGrade[i]["id"][x] = $(this).val();
+                        dGrade[i]["text"][x++] = $(this).data('text');
+                        dGrade[i]["start"] = (isNaN(start) ? 0 : start);
+                        dGrade[i]["end"] = (isNaN(end) ? 100 : end);
+                    }
+                });
+            }
+            dGrade = dGrade.filter(function (e) {
+                return e
+            });
+            var columns = [
+                {
+                    "data": "silo",
+                    "sClass": "text-center",
+                    "title": "{{#i18n}}system.no{{/i18n}}",
+                    "targets": [0]
+                },
+                {
+                    "data": "province",
+                    "sClass": "text-center",
+                    "title": "{{#i18n}}reserve.province{{/i18n}}",
+                    "targets": [1]
+                },
+                {
+                    "data": "silo",
+                    "sClass": "col-sm-3 text-center",
+                    "title": "{{#i18n}}reserve.silo{{/i18n}}",
+                    "targets": [2]
+                },
+                {
+                    "data": "associate",
+                    "sClass": "col-sm-1 text-center",
+                    "title": "{{#i18n}}reserve.associate{{/i18n}}",
+                    "targets": [3]
+                },
+                {
+                    "data": "weightAll",
+                    "sClass": "text-right",
+                    "title": "{{#i18n}}filter.weightAll{{/i18n}}<br>({{#i18n}}reserve.ton{{/i18n}})",
+                    "targets": [4],
+                    "render": function (data) {
+                        var content = accounting.formatNumber(data, 2, ",", ".");
+                        return content;
+                    }
+                }
+            ];
+            if (dGrade.length > 0) {
+                $.each(dGrade, function (k, v) {
+                    var title = v.text.reduce(function (l, r) {
+                        return l + '/' + r;
+                    })
+                    title += '<br>' + v.start + '-' + v.end + '%';
+                    text.grade.push(title);
+                    columns.push(
+                            {
+                                "title": title,
+                                "data": "percent" + k,
+                                "targets": [(k + 5)],
+                                "sClass": "col-sm-2 text-right",
+                                "render": function (data) {
+                                    var content = accounting.formatNumber(data, 2, ",", ".") + "%";
+                                    return content;
+                                }
+                            }
+                    );
+                });
+            } else {
+                columns.push(
+                        {
+                            "title": "{{#i18n}}filter.weightGood{{/i18n}}<br>({{#i18n}}reserve.ton{{/i18n}})",
+                            "data": "weightGood",
+                            "targets": [5],
+                            "sClass": "col-sm-2 text-center",
+                            "render": function (data) {
+                                var content = accounting.formatNumber(data, 2, ",", ".");
+                                return content;
+                            }
+                        }
+                );
+                columns.push(
+                        {
+                            "title": "{{#i18n}}filter.weightBad{{/i18n}}<br>({{#i18n}}reserve.ton{{/i18n}})",
+                            "data": "weightBad",
+                            "targets": [6],
+                            "sClass": "col-sm-2 text-center",
+                            "render": function (data) {
+                                var content = accounting.formatNumber(data, 2, ",", ".");
+                                return content;
+                            }
+                        }
+                );
+            }
+            columns.push(
+                    {
+                        "title": "{{#i18n}}filter.detail{{/i18n}}",
+                        "data": "silo",
+                        "targets": [columns.length],
+                        "sClass": "text-center",
+                        "render": function (data, key, full) {
+                            return  '<button class="btn btn-primary view-stack" data-silo="' + full['silo']
+                                    + '" data-associate="' + full['associate']
+                                    + '" data-province="' + full['province']
+                                    + '" data-associateid="' + full['lk_associate_id']
+                                    + '" data-provinceid="' + full['lk_province_id']
+                                    + '"><i class="fa fa-list"></i></button>';
+                        }
+                    }
+            );
+            columns.push(
+                    {
+                        "title": "{{#i18n}}filter.choose{{/i18n}}",
+                        "data": "silo",
+                        "targets": [columns.length],
+                        "sClass": "text-center",
+                        "render": function (data, key, full) {
+                            var html = '<input type="checkbox" class="checkbok select-silo" '
+                                    + 'data-silo="' + full['silo']
+                                    + '" data-associateId="' + full['lk_associate_id']
+                                    + '" data-associate="' + full['associate']
+                                    + '" data-province="' + full['province']
+                                    + '" data-provinceId="' + full['lk_province_id']
+                                    + '" data-weight="' + full['weightAll']
+                                    + '" ';
+                            var i = 0;
+                            var txt_percent = '';
+                            do {
+                                if (full.hasOwnProperty('percent' + i)) {
+                                    txt_percent += full['percent' + i] + ',';
+                                    i++;
+                                } else {
+                                    i = 0;
+                                }
+                            }
+                            while (i != 0);
+                            if (txt_percent != '') {
+                                html += ' data-percent="' + txt_percent.substring(0, txt_percent.length - 1) + '" ';
+                            }
+                            if (full['status'] == "true") {
+                                html += ' checked ';
+                            }
+                            html += '/>';
+                            return html;
+                        }
+                    }
+            );
+            var data = {
+                "type": dType,
+                "noType": dNoType,
+                "project": dProject,
+                "noProject": dNoProject,
+                "grade": dGrade,
+                "noGrade": dNoGrade
+            };
+            var dataJSON = JSON.stringify({selector: data, status: old_book_id});
+            var dataJSONEN = encodeURIComponent(dataJSON);
+            obj4Query = JSON.stringify(data);
+//            console.log("obj4Query");
+//            console.log(obj4Query);
+//            console.log("dGrade");
+//            console.log(dGrade);
+//            console.log(columns);
+//            console.log(dataJSON);
+            // return false;
+            $("#loading").html("กำลังโหลดข้อมูล...");
+            setTimeout(function () {
+
+                var datas = callAjaxFile("{{_context_path}}/api/reserve/filter/selector", "post", dataJSONEN, "json")["selector"];
+//                console.log(datas);
+                $("#loading").html("");
+                $('ul.setup-panel li:eq(1)').removeClass('disabled');
+                $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+//                        $(this).remove();
+                var headTb = '';
+                $.each(columns, function (k, v) {
+                    headTb += '<th class="text-center" style="vertical-align: middle;"></th>'
+                });
+                $("#headStep2").html(headTb);
+                var t = $('#tableStep2').DataTable({
+                    "destroy": true,
+                    "processing": true,
+                    "data": datas,
+                    "order": [[0, 'asc']],
+                    "iDisplayLength": 10,
+                    "columnDefs": columns
+                });
+                t.on('order.dt search.dt', function () {
+                    t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+                $("#tableStep2").off("click", "button.view-stack").on("click", "button.view-stack", function () {
+//                    console.log('click');
+                    var silo = $(this).data('silo');
+                    var associate = $(this).data('associate');
+                    var province = $(this).data('province');
+                    var associateId = $(this).data('associateid');
+                    var provinceId = $(this).data('provinceid');
+                    $("#myModal").modal("show");
+                    $(".modal-title").text("[" + province + "] " + silo + " (" + associate + ")");
+                    var data_detail = callAjax("{{_context_path}}/api/reserve/filter/detail", "post", {silo: silo, associateId: associateId, provinceId: provinceId, book_id: old_book_id}, "json")['detail'];
+                    var html_detail = '';
+                    var sum_detail = 0;
+                    $.each(data_detail, function (k, v) {
+                        html_detail += '<tr>'
+                                + '<td class="text-center">' + (k + 1) + '</td>'
+                                + '<td class="text-center">' + v.stack + '</td>'
+                                + '<td class="text-center">' + v.productProject + '</td>'
+                                + '<td class="text-center">' + v.productType + '</td>'
+                                + '<td class="text-center">' + v.productGrade + '</td>'
+                                + '<td class="text-right">' + accounting.formatNumber(v.tWeight, 2, ",", ".") + '</td>'
+                                + '</tr>';
+                        sum_detail += parseFloat(v.tWeight);
+                    });
+                    html_detail += '<tr>'
+                            + '<td class="text-center text-bold" colspan="5">รวม</td>'
+                            + '<td class="text-right text-bold">' + accounting.formatNumber(sum_detail, 2, ",", ".") + '</td>'
+                            + '</tr>';
+                    $("#bodyModal").html(html_detail);
+                });
+                calcWeightSelect();
+                $("#tableStep2").off("click", "input[type='checkbox'].select-silo").on("click", "input[type='checkbox'].select-silo", function () {
+                    //console.log('check');
+                    calcWeightSelect();
+                });
+                function calcWeightSelect() {
+                    var weight = 0;
+                    var countSilo = 0;
+                    var oTable = $("#tableStep2").dataTable();
+                    $('.select-silo', oTable.fnGetNodes()).each(function () {
+                        if ($(this).prop("checked")) {
+                            weight += parseFloat($(this).data('weight'));
+                            countSilo++;
+                        }
+                    });
+
+                    $("#weightStep2").text(accounting.formatNumber(weight, 2, ",", "."));
+                    $("#countSiloStep2").text(countSilo);
+                    if (countSilo > 0) {
+                        $("#btnStep2").removeClass("disabled");
+                    } else {
+                        $("#btnStep2").addClass("disabled");
+                    }
+                }
+                $('ul.setup-panel li a[href="#step-1"]').on('click', function () {
+                    $("#tableStep2").dataTable().fnClearTable();
+                    $('ul.setup-panel li:eq(1)').addClass('disabled');
+                    $("#weightStep2").text(accounting.formatNumber(0, 2, ",", "."));
+                    $("#countSiloStep2").text(0);
+                    $("#chkAllStep2").prop("checked", false);
+                    $('#btnStep2').addClass('disabled');
+                    text = {"type": [], "noType": [], "project": [], "noProject": [], "grade": [], "noGrade": []};
+                });
+            }, 100);
+        });
+        var data_silo = [];
+        $("#btnStep2").unbind().click(function () {
+            data_silo = [];
+            var oTable = $("#tableStep2").dataTable();
+            $('.select-silo', oTable.fnGetNodes()).each(function () {
+                if ($(this).prop("checked")) {
+                    data_silo.push($(this).data());
+//                    data_silo.push({silo: $(this).data('silo'), associateId: $(this).data('associateId')});
+                }
+            });
+            if (data_silo.length > 0) {
+                $('ul.setup-panel li:eq(2)').removeClass('disabled');
+                $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+                if (text.type.length > 0) {
+                    $("#conType").text(text.type.reduce(function (l, r) {
+                        return l + ', ' + r;
+                    }));
+                }
+                if (text.project.length > 0) {
+                    $("#conProject").text(text.project.reduce(function (l, r) {
+                        return l + ', ' + r;
+                    }));
+                }
+                if (text.grade.length > 0) {
+                    $("#conGrade").text(text.grade.reduce(function (l, r) {
+                        return l.replace("<br>", " ") + ', ' + r.replace("<br>", " ");
+                    }).replace("<br>", " "));
+                }
+                var html_silo = '';
+                var sum_weight = 0;
+                $.each(data_silo, function (k, v) {
+                    sum_weight += parseFloat(v.weight);
+                    html_silo += '<tr>'
+                            + '<td class="text-center">' + (k + 1) + '</td>'
+                            + '<td class="text-center">' + v.province + '</td>'
+                            + '<td class="text-center">' + v.silo + '</td>'
+                            + '<td class="text-center">' + v.associate + '</td>'
+                            + '<td class="text-right">' + accounting.formatNumber(v.weight, 2, ",", ".") + '</td>'
+                            + '</tr>';
+                });
+                console.log(data_silo);
+                html_silo += '<tr>'
+                        + '<td class="text-center text-bold" colspan="4">รวม</td>'
+                        + '<td class="text-right text-bold text-success">' + accounting.formatNumber(sum_weight, 2, ",", ".") + '</td>'
+                        + '</tr>';
+                $("#bodyStep3").html(html_silo);
+            }
+        });
+        $('ul.setup-panel li a[href="#step-2"]').on('click', function () {
+            $('ul.setup-panel li:eq(2)').addClass('disabled');
+        });
+        $("#btnStep3").unbind().click(function () {
+//            console.log(data_silo);
+            var book_id = $("#book_id").val();
+            var remark = $("#remark").val();
+            var data_book = {book_id: book_id, remark: remark, silo: data_silo, obj_query: obj4Query};
+            var dataJSON = JSON.stringify(data_book);
+            var dataJSONEN = encodeURIComponent(dataJSON);
+            console.log(dataJSON);
+            $("#loading").html("กำลังบันทึกข้อมูล...");
+            setTimeout(function () {
+                var result = callAjaxFile("{{_context_path}}/api/reserve/filter/save", "post", dataJSONEN, "json")["save"];
+                if (result) {
+                    $("#loading").html("<span class='text-success'>บันทึกเรียบร้อย</span>");
+                    $('ul.setup-panel li a[href="#step-1"]').trigger('click');
+                    toggleShow("table");
+                }
+            }, 100);
+        });
+        $("#chkAllStep2").unbind().click(function () {
+            var val = $(this).prop("checked");
+            var oTable = $("#tableStep2").dataTable();
+            var weight = 0;
+            var countSilo = 0;
+            $('.select-silo', oTable.fnGetNodes()).each(function () {
+                $(this).prop("checked", val);
+                if (val) {
+                    weight += parseFloat($(this).data('weight'));
+                    countSilo++;
+                }
+            });
+            $("#weightStep2").text(accounting.formatNumber(weight, 2, ",", "."));
+            $("#countSiloStep2").text(countSilo);
+            if (countSilo > 0) {
+                $("#btnStep2").removeClass("disabled");
+            } else {
+                $("#btnStep2").addClass("disabled");
+            }
+        });
+        $("#btnAdd").click(function () {
+            old_book_id = "";
+            toggleShow("form");
+        });
+        $("#btnBack").click(function () {
+            toggleShow("table");
+        });
+        $("#btnGradeAdd").click(function () {
+            createGrade();
+        });
+        function createGrade() {
+            var html = '<div class="opGrade" row-index="' + cGrade + '">';
+            html += '<div class="col-md-8">'
+                    + '<div class="row form-inline">';
+            $.each(gGrade, function (key, value) {
+                html += '<label class="checkbox inline col-md-4">'
+                        + '<input type="checkbox" class="chk-grade" name="grade' + cGrade + '"  row-index="' + cGrade + '" value="' + value["id"] + '" data-text="' + value["grade"] + '"> ' + value["grade"]
+                        + '</label>';
+            });
+            html += '</div>'
+                    + '</div>'
+                    + '<div class="form-group col-md-4">'
+                    + '<input type="text" row-index="' + cGrade + '" class="form-control text-right chk-start" placeholder="มากกว่า %">'
+                    + '<input type="text" row-index="' + cGrade + '" class="form-control text-right chk-end" placeholder="น้อยกว่า %">'
+                    + '</div>'
+                    + '<p class="col-sm-12 text-right">'
+                    + '<div class="form-inline">'
+                    + '  <label class="checkbox inline">'
+                    + ' <input type="checkbox" class="checkbox chk-all" value="grade' + cGrade + '"" > {{#i18n}}system.all{{/i18n}}'
+                    + ' </label>'
+                    + ' </div>'
+                    + '<button class="btn btn-warning btn-remove" row-index="' + cGrade + '"><i class="fa fa-trash"></i> {{#i18n}}system.delete{{/i18n}}</button>'
+                    + '</p>'
+                    + '<p class="row">'
+                    + '<hr>'
+                    + '</p>'
+                    + '</div>';
+            $("#divGrade").append(html);
+            cGrade++;
+            $(".chk-all").unbind().click(function () {
+                var val = $(this).prop("checked");
+                var name = $(this).val();
+                $("input[name=" + name + "]").each(function () {
+                    $(this).prop("checked", val);
+                })
+            });
+            //            $(".chk-grade").unbind().click(function (e) {
+            //                console.log($(this).attr("name"), $(this).val());
+            //            });
+            $(".btn-remove").unbind().click(function () {
+                var c = 0;
+                var old_index = $(this).attr("row-index");
+                $(".opGrade").each(function () {
+                    c++;
+                });
+                if (c != 1) {
+                    $(".opGrade[row-index=" + old_index + "]").remove();
+                    c = 0;
+                    $(".opGrade").each(function () {
+                        var cur_index = $(this).attr("row-index");
+                        $(this).attr("row-index", c);
+                        $(".chk-grade[row-index=" + cur_index + "],.chk-start[row-index=" + cur_index + "],.chk-end[row-index=" + cur_index + "],.btn-remove[row-index=" + cur_index + "]").each(function () {
+                            $(this).attr('row-index', c);
+                            if ($(this).attr("name") == "grade" + cur_index) {
+                                $(this).attr("name", "grade" + c);
+                            }
+                        });
+                        $(".chk-all[value=grade" + cur_index + "]").val("grade" + c);
+                        c++;
+                    });
+                    cGrade = c;
+                } else {
+                    alert("ต้องมีระดับชั้นคุณภาพอย่างน้อย 1 ชั้นคุณภาพ");
+                }
+            });
+        }
+        function lkType() {
+            var datas = callAjax("{{_context_path}}/api/reserve/filter/lkType", "post", {}, "json");
+            var html = '', html2 = '';
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function (key, value) {
+                    html += '<label class="checkbox inline col-md-4">'
+                            + '<input type="checkbox" class="chk-type" name="type"  value="' + value["id"] + '" data-text="' + value["type"] + '"> ' + value["type"]
+                            + '</label>';
+                    html2 += '<label class="checkbox inline col-md-4">'
+                            + '<input type="checkbox" class="chk-noType" name="noType"  value="' + value["id"] + '" data-text="' + value["type"] + '"> ' + value["type"]
+                            + '</label>';
+                });
+            }
+            $("#divType").html(html);
+            $("#divNoType").html(html2);
+            return datas["lists"];
+        }
+        function lkProject() {
+            var datas = callAjax("{{_context_path}}/api/reserve/filter/lkProject", "post", {}, "json");
+            var html = '', html2 = '';
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function (key, value) {
+                    html += '<label class="checkbox inline col-md-4">'
+                            + '<input type="checkbox" class="chk-project" name="project" value="' + value["id"] + '" data-text="' + value["project"] + '"> ' + value["project"]
+                            + '</label>';
+                    html2 += '<label class="checkbox inline col-md-4">'
+                            + '<input type="checkbox" class="chk-noProject"  name="noProject" value="' + value["id"] + '" data-text="' + value["project"] + '"> ' + value["project"]
+                            + '</label>';
+                });
+            }
+            $("#divProject").html(html);
+            $("#divNoProject").html(html2);
+            return datas["lists"];
+        }
+        function lkGrade() {
+            var datas = callAjax("{{_context_path}}/api/reserve/filter/lkGrade", "post", {}, "json");
+            var html = '';
+            if (typeof datas !== "undefined" && datas !== null) {
+                $.each(datas["lists"], function (key, value) {
+                    html += '<label class="checkbox inline col-md-4">'
+                            + '<input type="checkbox" class="chk-noGrade" name="noGrade"  value="' + value["id"] + '" data-text="' + value["grade"] + '"> ' + value["grade"]
+                            + '</label>';
+                });
+            }
+            $("#divNoGrade").html(html);
+            return datas["lists"];
+        }
+
+        function lists() {
+            var datas = callAjax("{{_context_path}}/api/reserve/filter/lists", "post", {}, "json")["lists"];
+            var tb = $("#tableHome").DataTable({
+                "destroy": true,
+                "processing": true,
+                "data": datas,
+                "order": [[0, 'asc']],
+                "iDisplayLength": 10,
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "data": "book_id",
+                        "sClass": "text-center col-md-1"
+                    },
+                    {
+                        "targets": 1,
+                        "data": "book_id",
+                        "sClass": "text-center col-md-1"
+                    },
+                    {
+                        "targets": 2,
+                        "data": "remark",
+                        "sClass": "text-left col-md-3"
+                    },
+                    {
+                        "targets": 3,
+                        "data": "weightAll",
+                        "sClass": "text-right col-md-2",
+                        "render": function (data) {
+                            return accounting.formatNumber(data, 2, ",", ".");
+                        }
+                    },
+                    {
+                        "targets": 4,
+                        "data": "dateCreated",
+                        "sClass": "text-center",
+                        "render": function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        "targets": 5,
+                        "orderable": false,
+                        "data": "weightAll",
+                        "sClass": "text-center col-md-3",
+                        "render": function (data, key, full) {
+                            return '<button class="btn btn-primary edit-book" data-id="' + full['book_id'] + '"><i class="fa fa-edit"></i> {{#i18n}}system.edit{{/i18n}}</button>'
+                                    + ' <button class="btn btn-default export-excel" data-id="' + full['book_id'] + '"><i class="fa fa-file-excel-o"></i> {{#i18n}}system.excel{{/i18n}}</button>'
+                                    + ' <button class="btn btn-default delete-book" data-id="' + full['book_id'] + '"><i class="fa fa-remove"></i> {{#i18n}}system.delete{{/i18n}}</button>'
+                        }
+                    }
+                ]
+            });
+            tb.on('order.dt search.dt', function () {
+                tb.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+            $("#tableHome").off("click", "button.edit-book").on("click", "button.edit-book", function () {
+                old_book_id = $(this).data('id');
+                var result = callAjax("{{_context_path}}/api/reserve/filter/get", "post", {book_id: old_book_id}, "json")["get"];
+                $("#book_id").val(old_book_id);
+                $("#remark").val(result.remark);
+                var obj = $.parseJSON(result.obj_query);
+                toggleShow("form");
+                $.each(obj, function (k, v) {
+                    if (k != "grade") {
+                        $.each(v, function (kk, vv) {
+                            //console.log(k, vv);
+                            $("input.chk-" + k + "[value=" + vv + "]").prop("checked", true);
+                        });
+                    } else {
+                        cGrade = 1;
+                        $.each(v, function (kk, vv) {
+                            if (kk > 0) {
+                                createGrade();
+                            }
+                            $(".chk-start[row-index=" + kk + "]").val(vv.start);
+                            $(".chk-end[row-index=" + kk + "]").val(vv.end);
+                            $.each(vv.id, function (kkk, vvv) {
+                                $("input.chk-grade[row-index=" + kk + "][value=" + vvv + "]").prop("checked", true);
+                            });
+                        });
+                    }
+                });
+            });
+            $("#tableHome").off("click", "button.delete-book").on("click", "button.delete-book", function () {
+                var book_id = $(this).data('id');
+                var cfm = $.confirm({
+                    title: 'ยืนยันการลบ',
+                    content: "คุณต้องการลบการคัดคลังสินค้าครั้งนี้?",
+                    confirmButton: 'ตกลง',
+                    cancelButton: 'ยกเลิก',
+                    confirmButtonClass: 'btn-success',
+                    cancelButtonClass: 'btn-warning',
+                    theme: 'holodark',
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    autoClose: 'cancel|11000',
+                    confirm: function () {
+                        cfm.close();
+                        setTimeout(function () {
+                            var result = callAjax("{{_context_path}}/api/reserve/filter/delete", "post", {book_id: book_id}, "json")["delete"];
+                            if (result) {
+                                toggleShow("table");
+                            }
+                        }, 1000);
+
+                    }
+                });
+
+            });
+            $("#tableHome").off("click", "button.export-excel").on("click", "button.export-excel", function () {
+                // callAjax("{{_context_path}}/api/reserve/filter/export", "post", {book_id: $(this).data('id')}, "json")["delete"];
+                window.open("{{_context_path}}/api/reserve/filter/export/" + $(this).data('id'));
+            });
+        }
+        function toggleShow(option) {
+            $("#loading").html('');
+            if (option == "form") {
+                resetForm();
+                $("#divTable, #btnAdd").hide();
+                $("#divForm, #btnBack").show();
+            }
+            else if (option == "table") {
+                lists();
+                $('ul.setup-panel li a[href="#step-1"]').trigger('click');
+                $('ul.setup-panel li:eq(2)').addClass('disabled');
+                $("#divTable, #btnAdd").show();
+                $("#divForm, #btnBack").hide();
+            }
+        }
+        function resetForm() {
+            if (old_book_id == "") {
+                var book_id = "B" + new Date().getTime();
+                $("#book_id").val(book_id);
+            }
+            $(".chk-type,.chk-noType,.chk-project,.chk-noProject,.chk-noGrade,.chk-grade,.chk-start,.chk-end").each(function () {
+                if ($(this).attr("type") == "checkbox") {
+                    $(this).prop("checked", false);
+                } else {
+                    $(this).val("");
+                }
+            });
+        }
+
+
+    });
+
+</script>
