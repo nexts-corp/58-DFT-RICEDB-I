@@ -20,22 +20,22 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
 
     public function listsAuction() {
         $sql = "SELECT"
-                ." st.id, st.status, st.keyword"
-            ." FROM ".$this->ent."\\Status st"
-            ." WHERE st.keyword like 'AU%'"
-                ." AND (st.active = 'Y' or st.active = 'YO' or st.active='YI' or st.active='YI2') "
-            ." ORDER BY st.id DESC";
+                . " st.id, st.status, st.keyword"
+                . " FROM " . $this->ent . "\\Status st"
+                . " WHERE st.keyword like 'AU%'"
+                . " AND (st.active = 'Y' or st.active = 'YO' or st.active='YI' or st.active='YI2') "
+                . " ORDER BY st.id DESC";
         $data = $this->datacontext->getObject($sql);
         return $data;
     }
 
-    public function listsRiceType($auction){
+    public function listsRiceType($auction) {
         $sql = "SELECT"
-                ." rt.useType as typeId, tp.type, rt.useFV "
-            ." FROM ".$this->ent."\\RiceTracking rt"
-            ." JOIN ".$this->ent."\\Type tp WITH tp.id = rt.useType"
-            ." WHERE rt.statusKeyword = :auction"
-            ." GROUP BY rt.useType, tp.type, rt.useFV";
+                . " rt.useType as typeId, tp.type, rt.useFV "
+                . " FROM " . $this->ent . "\\RiceTracking rt"
+                . " JOIN " . $this->ent . "\\Type tp WITH tp.id = rt.useType"
+                . " WHERE rt.statusKeyword = :auction"
+                . " GROUP BY rt.useType, tp.type, rt.useFV";
         $param = array(
             "auction" => $auction
         );
@@ -44,41 +44,47 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
         return $data;
     }
 
-    public function previewFV($auction, $riceType){
+    public function previewFV($auction, $riceType) {
         $rArr = [];
-        foreach($riceType as $key => $val){
+        foreach ($riceType as $key => $val) {
             $rArr[$val->typeId] = strtolower($val->value);
         }
 
         $st = new \apps\common\entity\AuctionStack();
         $st->auctionNo = $auction;
         $data = $this->datacontext->getObject($st);
-        
+        //return $rArr;
         $sArr = [];
-        foreach($data as $key => $val){
-            //$fv = $val->$rArr[$val->typeId];
-
+        foreach ($data as $key => $val) {
+            $fv = $val->fv;
+            if ($rArr[$val->typeId] == "fv2") {
+                $fv = $val->fv2;
+            } else if ($rArr[$val->typeId] == "fv3") {
+                $fv = $val->fv3;
+            } else if ($rArr[$val->typeId] == "fv4") {
+                $fv = $val->fv4;
+            }
             $sArr[$val->province][$val->wareHouseCode][$val->associate][] = array(
                 "warehouse" => $val->warehouse,
                 "stack" => $val->stack,
                 "typeName" => $val->typeName,
                 "oweightAll" => $val->oweightAll,
                 "useFV" => strtoupper($rArr[$val->typeId]),
-                "FV" => $val->$rArr[$val->typeId]
+                "FV" => $fv
             );
         }
-        
+
         //get bidder max
         $bMax = [];
         $sql = "SELECT * FROM fn_auction_info(:auction)"
-            ." WHERE bidderMaxPrice = :isMax";
-        $param =  array(
+                . " WHERE bidderMaxPrice = :isMax";
+        $param = array(
             "auction" => $auction,
             "isMax" => 'Y'
         );
         $data2 = $this->datacontext->pdoQuery($sql, $param);
-        
-        foreach($data2 as $key => $val){
+
+        foreach ($data2 as $key => $val) {
             $bMax[$val["province"]][$val["wareHouseCode"]][$val["associate"]] = array(
                 "bidderName" => $val["bidderName"],
                 "bidderPrice" => $val["bidderPrice"]
@@ -87,14 +93,14 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
 
         $result = [];
 
-        foreach($sArr as $prov => $val1){
-            foreach($val1 as $wh => $val2){
-                foreach($val2 as $ac => $val3){
+        foreach ($sArr as $prov => $val1) {
+            foreach ($val1 as $wh => $val2) {
+                foreach ($val2 as $ac => $val3) {
                     $stArr = [];
                     $sWeight = 0;
                     $sFV = 0;
 
-                    foreach($val3 as $key => $val4){
+                    foreach ($val3 as $key => $val4) {
                         $stArr[] = $val4;
 
                         $sWeight += $val4["oweightAll"];
@@ -103,7 +109,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
 
                     $bName = '';
                     $bPrice = '';
-                    if(isset($bMax[$prov][$wh][$ac])){
+                    if (isset($bMax[$prov][$wh][$ac])) {
                         $bName = $bMax[$prov][$wh][$ac]["bidderName"];
                         $bPrice = $bMax[$prov][$wh][$ac]["bidderPrice"];
                     }
@@ -125,20 +131,20 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
         return $result;
     }
 
-    public function saveFV($auction, $riceType){
-        foreach($riceType as $key => $val){
+    public function saveFV($auction, $riceType) {
+        foreach ($riceType as $key => $val) {
             $sql = "UPDATE"
-                ." dft_Rice_Tracking"
-                ." SET UseFV = '".strtoupper($val->value)."'"
-                ." WHERE useType = '".$val->typeId."'"
-                ." AND LK_Status_Keyword = '".$auction."'";
+                    . " dft_Rice_Tracking"
+                    . " SET UseFV = '" . strtoupper($val->value) . "'"
+                    . " WHERE useType = '" . $val->typeId . "'"
+                    . " AND LK_Status_Keyword = '" . $auction . "'";
 
-            $cmd="EXEC sp_batch_exce :cmd";
+            $cmd = "EXEC sp_batch_exce :cmd";
             $param = array(
                 "cmd" => $sql
             );
 
-            if(!$this->datacontext->pdoQuery($cmd, $param, "apps\\common\\model\\SQLUpdate")){
+            if (!$this->datacontext->pdoQuery($cmd, $param, "apps\\common\\model\\SQLUpdate")) {
                 return $this->datacontext->getLastMessage();
             }
         }
@@ -147,25 +153,25 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
         $param = array(
             "auctionId" => $auction
         );
-        if(!$this->datacontext->pdoQuery($up, $param)){
+        if (!$this->datacontext->pdoQuery($up, $param)) {
             return $this->datacontext->getLastMessage();
         }
 
         return true;
     }
 
-    public function clearFV($auction){
+    public function clearFV($auction) {
         $sql = "UPDATE"
-            ." dft_Rice_Tracking"
-            ." SET UseFV = ''"
-            ." WHERE LK_Status_Keyword = '".$auction."'";
+                . " dft_Rice_Tracking"
+                . " SET UseFV = ''"
+                . " WHERE LK_Status_Keyword = '" . $auction . "'";
 
-        $cmd="EXEC sp_batch_exce :cmd";
+        $cmd = "EXEC sp_batch_exce :cmd";
         $param = array(
             "cmd" => $sql
         );
 
-        if(!$this->datacontext->pdoQuery($cmd, $param, "apps\\common\\model\\SQLUpdate")){
+        if (!$this->datacontext->pdoQuery($cmd, $param, "apps\\common\\model\\SQLUpdate")) {
             return $this->datacontext->getLastMessage();
         }
 
@@ -173,7 +179,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
         $param = array(
             "auctionId" => $auction
         );
-        if(!$this->datacontext->pdoQuery($up, $param)){
+        if (!$this->datacontext->pdoQuery($up, $param)) {
             return $this->datacontext->getLastMessage();
         }
 
@@ -182,16 +188,16 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
 
     public function siloHistory($silo) {
         $sql = "SELECT rt.silo,rt.statusKeyword "
-                . "FROM ".$this->ent."\\RiceTracking rt "
+                . "FROM " . $this->ent . "\\RiceTracking rt "
                 . "WHERE rt.silo = :silo "
                 . "AND rt.statusKeyword not like '%_BAK' "
                 . "AND rt.statusKeyword not like '%_CUT' "
                 . "GROUP BY rt.silo,rt.statusKeyword ";
         $param = array(
-          "silo" => $silo  
+            "silo" => $silo
         );
-        
-        return $this->datacontext->getObject($sql,$param);
+
+        return $this->datacontext->getObject($sql, $param);
     }
 
 }
