@@ -52,17 +52,24 @@ class UserManageService extends CServiceBase implements IUserManageService {
     public function insert($user) {
         $return = true;
 
-        $info = new \apps\common\entity\User();
-        $info->username = $user->username;
-        $dataInfo = $this->datacontext->getObject($info);
-        if (count($dataInfo) == 0) {
-            if (!$this->datacontext->saveObject($user)) {
-                $return = $this->datacontext->getLastMessage();
+        $chk_user = new \apps\common\entity\User();
+        $chk_user->username = $user->username;
+        $count_user = $this->datacontext->getObject($chk_user);
+        if (count($count_user) == 0) {
+            $chk_name = new \apps\common\entity\User();
+            $chk_name->name = $user->name;
+            $chk_name->surname = $user->surname;
+            $count_name = $this->datacontext->getObject($chk_name);
+            if (count($count_user) == 0) {
+                if (!$this->datacontext->saveObject($user)) {
+                    $return = $this->datacontext->getLastMessage();
+                }
+            } else {
+                $return = "ชื่อกับนามสกุลนี้ถูกใช้แล้ว";
             }
         } else {
-            $return = "Username already exists";
+            $return = "ชื่อผู้ใช้งานนี้ถูกใช้แล้ว";
         }
-
         return $return;
     }
 
@@ -85,11 +92,25 @@ class UserManageService extends CServiceBase implements IUserManageService {
             $checkuser->username = $user->username;
             $dataCheck = $this->datacontext->getObject($checkuser);
             if (count($dataCheck) > 0) {
-                $return = false;
+                $return = "ชื่อผู้ใช้งานนี้ถูกใช้แล้ว";
             } else {
                 $dataInfo[0]->username = $user->username;
             }
         }
+
+        if ($user->name || $user->surname) {
+            $chk_name = new \apps\common\entity\User();
+            $chk_name->name = $user->name;
+            $chk_name->surname = $user->surname;
+            $count_name = $this->datacontext->getObject($chk_name);
+            if (count($count_name) > 0) {
+                $return = "ชื่อกับนามสกุลนี้ถูกใช้แล้ว";
+            } else {
+                $dataInfo[0]->name = $user->name;
+                $dataInfo[0]->surname = $user->surname;
+            }
+        }
+
         if ($user->password) {
             $dataInfo[0]->password = $user->password;
         }
@@ -97,10 +118,7 @@ class UserManageService extends CServiceBase implements IUserManageService {
             if (!$this->datacontext->updateObject($dataInfo[0])) {
                 $return = $this->datacontext->getLastMessage();
             }
-        } else {
-            $return = "Username นี้มีผู้ใช้งานแล้ว";
         }
-
         return $return;
     }
 

@@ -32,7 +32,7 @@ function initUser() {
             if ($(this).val() == "")
                 isValid = false;
         });
-        var username = $("#username").val();
+//        var username = $("#username").val();
         var password = $("#password").val();
         var passwordCheck = $("#passwordCheck").val();
         if (username == "" || password != passwordCheck) {
@@ -44,9 +44,9 @@ function initUser() {
         } else {
             $("#loading").html('');
             var newData = {};
-            if (username != value["username"]) {
-                newData["username"] = username;
-            }
+//            if (username != value["username"]) {
+//                newData["username"] = username;
+//            }
             if (password != "") {
                 newData["password"] = password;
             }
