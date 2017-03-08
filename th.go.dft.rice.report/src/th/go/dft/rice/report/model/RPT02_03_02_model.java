@@ -15,11 +15,16 @@ public class RPT02_03_02_model extends BaseReport {
 
     @Column
     private int bidderNo;
-    
+
     @Column
     private String bidderTaxId;
     @Column
     private String bidderName;
+    @Column
+    private String bidderAgent;
+    @Column
+    private String bidderMobile;
+
     @Column
     private String bidderQueue;
 
@@ -48,6 +53,8 @@ public class RPT02_03_02_model extends BaseReport {
     private int failBidder;
     @Column
     private String isCheckIn;
+    @Column
+    private String remark1;
 
     public int getBidderNo() {
         return bidderNo;
@@ -71,6 +78,22 @@ public class RPT02_03_02_model extends BaseReport {
 
     public void setBidderName(String bidderName) {
         this.bidderName = bidderName;
+    }
+
+    public String getBidderAgent() {
+        return bidderAgent;
+    }
+
+    public void setBidderAgent(String bidderAgent) {
+        this.bidderAgent = bidderAgent;
+    }
+
+    public String getBidderMobile() {
+        return bidderMobile;
+    }
+
+    public void setBidderMobile(String bidderMobile) {
+        this.bidderMobile = bidderMobile;
     }
 
     public String getBidderQueue() {
@@ -177,6 +200,12 @@ public class RPT02_03_02_model extends BaseReport {
         this.isCheckIn = isCheckIn;
     }
 
-    
+    public String getRemark1() {
+        return remark1;
+    }
+
+    public void setRemark1(String remark1) {
+        this.remark1 = remark1;
+    }
 
 }
