@@ -38,9 +38,24 @@ class AuthenService extends CServiceBase implements IAuthenService {
                 $data = base64_decode($code);
                 $datas = explode("|", $data);
                 $cc = (array) JWT::decode($datas[1], "123456", array('HS256'));
+
+                $role = new \apps\common\entity\Role();
+                $role->code = $user[0]->roleCode;
+
+                $xrole = $this->datacontext->getObject($role);
+
+
+
+
                 $pp = array(
-                    "uid" => $user[0]->id
+                    "uid" => $user[0]->id,
+                    "name" => $user[0]->name . " " . $user[0]->surname,
+                    "code" => $user[0]->username,
+                    "role" => $user[0]->roleCode,
+                    "domain" => $user[0]->roleCode,
+                    "resources" => $xrole[0]->permission
                 );
+                //print_r($pp);
                 $uid = JWT::encode($pp, "123456");
                 $euid = base64_encode($uid);
 
