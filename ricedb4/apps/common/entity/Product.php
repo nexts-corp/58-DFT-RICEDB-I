@@ -14,11 +14,11 @@ class Product extends EntityBase {
      */
     public $id;
 
-    /** @Column(type="string", length=20, name="Warehouse_Code") */
-    public $warehouseCode;
-
-    /** @Column(type="string", length=20, name="Stack_Code") */
-    public $stackCode;
+//    /** @Column(type="string", length=20, name="Warehouse_Code") */
+//    public $warehouseCode;
+//
+//    /** @Column(type="string", length=20, name="Stack_Code") */
+//    public $stackCode;
 
     /** @Column(type="string",length=255, name="Code") */
     public $code;
@@ -35,7 +35,7 @@ class Product extends EntityBase {
     /** @Column(type="string",length=50, name="LK_Province_Id") */
     public $provinceId;
 
-    /** @Column(type="string",length=255, name="province) */
+    /** @Column(type="string",length=255, name="province") */
     public $province;
 
     /** @Column(type="string",length=255, name="Silo") */
@@ -64,7 +64,11 @@ class Product extends EntityBase {
 
     /** @Column(type="string",length=255, name="stack") */
     public $stack;
-
+    
+    /** @Column(type="string",length=255, name="sampling") */
+    public $sampling;
+    /** @Column(type="string",length=255, name="weight") */
+    public $weight;
     /** @Column(type="float", name="tWeight") */
     public $tWeight;
 
@@ -163,7 +167,12 @@ class Product extends EntityBase {
     function getStack() {
         return $this->stack;
     }
-
+function getSampling() {
+        return $this->sampling;
+    }
+    function getWeight() {
+        return $this->weight;
+    }
     function getTWeight() {
         return $this->tWeight;
     }
@@ -271,7 +280,13 @@ class Product extends EntityBase {
     function setStack($stack) {
         $this->stack = $stack;
     }
-
+    
+    function setSampling($sampling) {
+        $this->sampling = $sampling;
+    }
+    function setWeight($weight) {
+        $this->weight = $weight;
+    }
     function setTWeight($tWeight) {
         $this->tWeight = $tWeight;
     }

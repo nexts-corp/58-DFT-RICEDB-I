@@ -4,7 +4,7 @@ namespace apps\common\entity;
 
 /**
  * @Entity
- * @Table(name="dft_Permission")
+ * @Table(name="dft_permission")
  */
 class Permission extends EntityBase {
 
