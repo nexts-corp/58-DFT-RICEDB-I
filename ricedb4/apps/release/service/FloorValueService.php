@@ -35,7 +35,8 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
 //
 //        $result = $this->datacontext->pdoQuery($sql, $param);
         $sql = "select st from " . $this->ent . "\\AuctionStack st "
-                . "where st.auctionNo = :auction ";
+                . "where st.auctionNo = :auction "
+                . "order by st.province,st.wareHouseCode,st.warehouse,st.stack,st.associate ";
         $param = array(
             "auction" => $auction
         );
