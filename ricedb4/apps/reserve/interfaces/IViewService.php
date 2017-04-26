@@ -30,9 +30,19 @@ interface IViewService {
     public function manageReserve();
 
     /**
+     * @name confirm
+     * @uri /confirm
+     * @description M33 นำเข้าข้อมูลคลังสินค้า
+     * @authen true
+     * @resource 10000000
+     * @sitemap true
+     */
+    public function confirm();
+
+    /**
      * @name exportReserve
      * @uri /exportReserve
-     * @description M33 ส่งไฟล์ให้ อคส./อตก. ตรวจสอบ
+     * @description M34 ส่งไฟล์ให้ อคส./อตก. ตรวจสอบ
      * @authen true
      * @resource 10000000
      * @sitemap true
@@ -42,7 +52,7 @@ interface IViewService {
     /**
      * @name importReserve
      * @uri /importReserve
-     * @description M34 นำไฟล์เข้าจาก อคส./อตก.
+     * @description M35 นำไฟล์เข้าจาก อคส./อตก.
      * @authen true
      * @resource 10000000
      * @sitemap true

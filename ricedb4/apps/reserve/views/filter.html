@@ -1,10 +1,11 @@
 {{>header}}
 <style>
-    .list-group-item-heading{
-        color:#CCC;
+    .list-group-item-heading {
+        color: #CCC;
     }
+
     li.active>a>p.list-group-item-text,
-    li.active>a>h4.list-group-item-heading{
+    li.active>a>h4.list-group-item-heading {
         color: white;
     }
 </style>
@@ -31,7 +32,8 @@
 
     <hr class="tall dashboard">
 
-    <div class="sort-source-wrapper"><!-- button action on header -->
+    <div class="sort-source-wrapper">
+        <!-- button action on header -->
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
@@ -41,12 +43,15 @@
                 </li>
             </ul>
         </div>
-    </div><!-- end button action on header -->
+    </div>
+    <!-- end button action on header -->
 
-    <div class="container"><!-- table shown bidder information list -->
+    <div class="container">
+        <!-- table shown bidder information list -->
         <div class="row">
             <div id="divTable">
-                <div class="col-md-12"><!-- table shown file detail -->
+                <div class="col-md-12">
+                    <!-- table shown file detail -->
                     <table id="tableHome" class="table table-hover table-striped table-bordered">
                         <thead>
                             <tr>
@@ -58,31 +63,38 @@
                                 <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.tools{{/i18n}}</th>
                             </tr>
                         </thead>
-                        <tbody >
+                        <tbody>
                             <tr>
                                 <td colspan="6" class="text-center">-</td>
                             </tr>
                         </tbody>
                     </table>
-                </div><!-- end table shown file detail -->
+                </div>
+                <!-- end table shown file detail -->
             </div>
 
             <div id="divForm" style="display: none;">
                 <div class="row form-group">
                     <div class="col-xs-12">
                         <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                            <li class="active"><a href="#step-1">
+                            <li class="active">
+                                <a href="#step-1">
                                     <h4 class="list-group-item-heading">Step 1</h4>
                                     <p class="list-group-item-text">จัดกลุ่มข้าว</p>
-                                </a></li>
-                            <li class="disabled"><a href="#step-2">
+                                </a>
+                            </li>
+                            <li class="disabled">
+                                <a href="#step-2">
                                     <h4 class="list-group-item-heading">Step 2</h4>
                                     <p class="list-group-item-text">เลือกคลังสินค้า</p>
-                                </a></li>
-                            <li class="disabled"><a href="#step-3">
+                                </a>
+                            </li>
+                            <li class="disabled">
+                                <a href="#step-3">
                                     <h4 class="list-group-item-heading">Step 3</h4>
                                     <p class="list-group-item-text">สรุปข้อมูล</p>
-                                </a></li>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -93,7 +105,7 @@
                             <div class="row">
                                 <form class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}filter.type{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label req text-right">{{#i18n}}filter.type{{/i18n}} :</label>
                                         <div class="col-sm-6 form-inline" id="divType">
                                         </div>
                                         <div class="col-sm-3">
@@ -110,7 +122,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label req text-right" >No{{#i18n}}filter.type{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label req text-right">No{{#i18n}}filter.type{{/i18n}} :</label>
                                         <div class="col-sm-6 form-inline" id="divNoType">
                                         </div>
                                         <div class="col-sm-3">
@@ -128,7 +140,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}filter.project{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label req text-right">{{#i18n}}filter.project{{/i18n}} :</label>
                                         <div class="col-sm-6 form-inline" id="divProject">
                                         </div>
                                         <div class="col-sm-3">
@@ -145,7 +157,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label req text-right" >No{{#i18n}}filter.project{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label req text-right">No{{#i18n}}filter.project{{/i18n}} :</label>
                                         <div class="col-sm-6 form-inline" id="divNoProject">
                                         </div>
                                         <div class="col-sm-3">
@@ -162,7 +174,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label req text-right" >No{{#i18n}}filter.grade{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label req text-right">No{{#i18n}}filter.grade{{/i18n}} :</label>
                                         <div class="col-sm-6 form-inline" id="divNoGrade">
                                         </div>
                                         <div class="col-sm-3">
@@ -176,7 +188,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}filter.grade{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label req text-right">{{#i18n}}filter.grade{{/i18n}} :</label>
                                         <div class="col-sm-6 form-inline">
                                             <div class="row" id="divGrade">
 
@@ -211,11 +223,11 @@
                             </table>
                         </div>
                         <div class="col-md-12" style="margin-top: 20px">
-                            <div class="col-md-6 text-left"> 
+                            <div class="col-md-6 text-left">
                                 <h4>{{#i18n}}reserve.quantity{{/i18n}}{{#i18n}}reserve.silo{{/i18n}} : <span id="countSiloStep2">0</span></h4>
                                 <h4>{{#i18n}}reserve.weight{{/i18n}} : <span id="weightStep2">0.00</span> {{#i18n}}reserve.ton{{/i18n}}</h4>
                             </div>
-                            <div class="col-md-6 text-right"> 
+                            <div class="col-md-6 text-right">
                                 <div class="row">
                                     <label class="checkbox inline">
                                         <input type="checkbox" id="chkAllStep2"> {{#i18n}}filter.choose{{/i18n}}{{#i18n}}system.all{{/i18n}} 
@@ -236,19 +248,19 @@
                             <div class="row">
                                 <form class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label req text-right" >{{#i18n}}system.code{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label req text-right">{{#i18n}}system.code{{/i18n}} :</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="book_id" name="book_id" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label text-right" >{{#i18n}}system.remark{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label text-right">{{#i18n}}system.remark{{/i18n}} :</label>
                                         <div class="col-sm-6">
                                             <input type="text" class="form-control" id="remark" name="remark">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label text-right" >{{#i18n}}system.condition{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label text-right">{{#i18n}}system.condition{{/i18n}} :</label>
                                         <div class="col-sm-6">
                                             <p id="conType"></p>
                                             <p id="conProject"></p>
@@ -256,7 +268,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label text-right" >{{#i18n}}reserve.silo{{/i18n}} :</label>
+                                        <label class="col-sm-3 control-label text-right">{{#i18n}}reserve.silo{{/i18n}} :</label>
                                         <div class="col-sm-6">
                                             <table class="table table-striped table-bordered table-hover">
                                                 <thead>
@@ -279,6 +291,53 @@
                             <div class="text-right">
                                 <button id="btnStep3" class="btn btn-primary btn-lg">Save</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="divCut" style="display: none;">
+                <div class="col-sm-12 text-right">
+                    <label class="col-sm-offset-6 col-sm-2 control-label text-right">{{#i18n}}reserve.silo{{/i18n}} :</label>
+                    <div class="col-sm-4">
+                        <select id="searchSilo" class="form-control"></select>
+                    </div>
+                </div>
+                <h2 class="text-center">เลือกกองที่ต้องการตัดออก</h2>
+
+                <div class="col-md-12">
+                    <table id="tableCut" class="table table-hover table-striped table-bordered nowrap">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.no{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}system.code{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.bagNo{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.province{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.associate{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.silo{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.stack{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}filter.project{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}filter.type{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}filter.grade{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}filter.weightAll{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}filter.choose{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="12" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12" style="margin-top: 20px">
+                    <div class="col-md-6 text-left">
+                        <h4>{{#i18n}}reserve.quantity{{/i18n}}{{#i18n}}reserve.stack{{/i18n}} : <span id="countCut">0</span></h4>
+                        <h4>{{#i18n}}reserve.weight{{/i18n}} : <span id="weightCut">0.00</span> {{#i18n}}reserve.ton{{/i18n}}</h4>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <div class="row">
+                            <button id="btnCut" class="btn btn-primary btn-lg disabled">{{#i18n}}reserve.cutstack{{/i18n}}</button>
                         </div>
                     </div>
                 </div>
@@ -310,9 +369,12 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
             <div class="modal fade" id="editModal">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -323,13 +385,13 @@
                         <div class="modal-body">
                             <form class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label req text-right" >{{#i18n}}system.code{{/i18n}} :</label>
+                                    <label class="col-sm-3 control-label req text-right">{{#i18n}}system.code{{/i18n}} :</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" id="edit_book_id" name="edit_book_id" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-3 control-label text-right" >{{#i18n}}system.remark{{/i18n}} :</label>
+                                    <label class="col-sm-3 control-label text-right">{{#i18n}}system.remark{{/i18n}} :</label>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" id="edit_remark" name="edit_remark">
                                     </div>
@@ -340,12 +402,18 @@
                             <button type="button" class="btn btn-default" id="btn-edit">Edit</button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-        </div><!--  row  -->
-    </div><!--  container  -->
-</div><!-- main -->
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        </div>
+        <!--  row  -->
+    </div>
+    <!--  container  -->
+</div>
+<!-- main -->
 {{>footer}}
 <!--<script src="{{_context_path}}/asset/vendor/jquery-datatables/dataTables.bootstrap.min.js"></script>-->
 <!--<script src="{{_context_path}}/asset/vendor/jquery-datatables/dataTables.responsive.min.js"></script>-->
@@ -356,8 +424,7 @@
         var navListItems = $('ul.setup-panel li a'), // 
                 allWells = $('.setup-content');
         allWells.hide();
-        navListItems.click(function (e)
-        {
+        navListItems.click(function (e) {
             e.preventDefault();
             var $target = $($(this).attr('href')),
                     $item = $(this).closest('li');
@@ -532,7 +599,7 @@
                         "targets": [columns.length],
                         "sClass": "text-center",
                         "render": function (data, key, full) {
-                            return  '<button class="btn btn-primary view-stack" data-silo="' + full['silo']
+                            return '<button class="btn btn-primary view-stack" data-silo="' + full['silo']
                                     + '" data-associate="' + full['associate']
                                     + '" data-province="' + full['province']
                                     + '" data-associateid="' + full['lk_associate_id']
@@ -589,22 +656,22 @@
             var dataJSON = JSON.stringify({selector: data, status: old_book_id});
             var dataJSONEN = encodeURIComponent(dataJSON);
             obj4Query = JSON.stringify(data);
-//            console.log("obj4Query");
-//            console.log(obj4Query);
-//            console.log("dGrade");
-//            console.log(dGrade);
-//            console.log(columns);
-//            console.log(dataJSON);
+            //            console.log("obj4Query");
+            //            console.log(obj4Query);
+            //            console.log("dGrade");
+            //            console.log(dGrade);
+            //            console.log(columns);
+            //            console.log(dataJSON);
             // return false;
             $("#loading").html("กำลังโหลดข้อมูล...");
             setTimeout(function () {
 
                 var datas = callAjaxFile("{{_context_path}}/api/reserve/filter/selector", "post", dataJSONEN, "json")["selector"];
-//                console.log(datas);
+                //                console.log(datas);
                 $("#loading").html("");
                 $('ul.setup-panel li:eq(1)').removeClass('disabled');
                 $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-//                        $(this).remove();
+                //                        $(this).remove();
                 var headTb = '';
                 $.each(columns, function (k, v) {
                     headTb += '<th class="text-center" style="vertical-align: middle;"></th>'
@@ -624,7 +691,7 @@
                     });
                 }).draw();
                 $("#tableStep2").off("click", "button.view-stack").on("click", "button.view-stack", function () {
-//                    console.log('click');
+                    //                    console.log('click');
                     var silo = $(this).data('silo');
                     var associate = $(this).data('associate');
                     var province = $(this).data('province');
@@ -694,7 +761,7 @@
             $('.select-silo', oTable.fnGetNodes()).each(function () {
                 if ($(this).prop("checked")) {
                     data_silo.push($(this).data());
-//                    data_silo.push({silo: $(this).data('silo'), associateId: $(this).data('associateId')});
+                    //                    data_silo.push({silo: $(this).data('silo'), associateId: $(this).data('associateId')});
                 }
             });
             if (data_silo.length > 0) {
@@ -727,7 +794,7 @@
                             + '<td class="text-right">' + accounting.formatNumber(v.weight, 2, ",", ".") + '</td>'
                             + '</tr>';
                 });
-                console.log(data_silo);
+//                console.log(data_silo);
                 html_silo += '<tr>'
                         + '<td class="text-center text-bold" colspan="4">รวม</td>'
                         + '<td class="text-right text-bold text-success">' + accounting.formatNumber(sum_weight, 2, ",", ".") + '</td>'
@@ -739,7 +806,7 @@
             $('ul.setup-panel li:eq(2)').addClass('disabled');
         });
         $("#btnStep3").unbind().click(function () {
-//            console.log(data_silo);
+            //            console.log(data_silo);
             var book_id = $("#book_id").val();
             var remark = $("#remark").val();
             var data_book = {book_id: book_id, remark: remark, silo: data_silo, obj_query: obj4Query};
@@ -899,8 +966,12 @@
             $("#divNoGrade").html(html);
             return datas["lists"];
         }
-
+        var data_cut = [];
+        var weight_cut = 0;
+        var count_cut = 0;
+        var siloGroup = [];
         function lists() {
+            old_book_id = "";
             var datas = callAjax("{{_context_path}}/api/reserve/filter/lists", "post", {}, "json")["lists"];
             var tb = $("#tableHome").DataTable({
                 "destroy": true,
@@ -944,9 +1015,10 @@
                         "targets": 5,
                         "orderable": false,
                         "data": "weightAll",
-                        "sClass": "text-center col-md-3",
+                        "sClass": "text-center col-md-4",
                         "render": function (data, key, full) {
                             return '<button class="btn btn-primary edit-book" data-id="' + full['book_id'] + '"><i class="fa fa-edit"></i> {{#i18n}}system.edit{{/i18n}}</button>'
+                                    + ' <button class="btn btn-default cut-stack" data-id="' + full['book_id'] + '"><i class="fa fa-cut"></i> {{#i18n}}reserve.cutstack{{/i18n}}</button>'
                                     + ' <button class="btn btn-default export-excel" data-id="' + full['book_id'] + '"><i class="fa fa-file-excel-o"></i> {{#i18n}}system.excel{{/i18n}}</button>'
                                     + ' <button class="btn btn-default delete-book" data-id="' + full['book_id'] + '"><i class="fa fa-remove"></i> {{#i18n}}system.delete{{/i18n}}</button>'
                         }
@@ -1015,7 +1087,181 @@
                 // callAjax("{{_context_path}}/api/reserve/filter/export", "post", {book_id: $(this).data('id')}, "json")["delete"];
                 window.open("{{_context_path}}/api/reserve/filter/export/" + $(this).data('id'));
             });
+            $("#tableHome").off("click", "button.cut-stack").on("click", "button.cut-stack", function () {
+                data_cut = [];
+                weight_cut = 0;
+                count_cut = 0;
+                siloGroup = [];
+                old_book_id = $(this).data('id');
+                var result = callAjax("{{_context_path}}/api/reserve/filter/stack", "post", {book_id: old_book_id}, "json")["stack"];
+
+                var tbCut = $("#tableCut").DataTable({
+                    "destroy": true,
+                    "processing": true,
+                    "data": result,
+                    "order": [[1, 'asc']],
+                    "iDisplayLength": 10,
+                    "columnDefs": [
+                        {
+                            "targets": 0,
+                            "data": "id",
+                            "sClass": "text-center"
+                        },
+                        {
+                            "targets": 1,
+                            "data": "code",
+                            "sClass": "text-center"
+                        },
+                        {
+                            "targets": 2,
+                            "data": "bagNo",
+                            "sClass": "text-center"
+                        },
+                        {
+                            "targets": 3,
+                            "data": "province",
+                            "sClass": "text-center"
+                        },
+                        {
+                            "targets": 4,
+                            "data": "associate",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                return data;
+                            }
+                        },
+                        {
+                            "targets": 5,
+                            "data": "silo",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                return data;
+                            }
+                        },
+                        {
+                            "targets": 6,
+                            "data": "stack",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                return data;
+                            }
+                        },
+                        {
+                            "targets": 7,
+                            "data": "productProject",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                return data;
+                            }
+                        },
+                        {
+                            "targets": 8,
+                            "data": "productType",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                return data;
+                            }
+                        },
+                        {
+                            "targets": 9,
+                            "data": "productGrade",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                return data;
+                            }
+                        },
+                        {
+                            "targets": 10,
+                            "data": "weightAll",
+                            "sClass": "text-center",
+                            "render": function (data) {
+                                return accounting.formatNumber(data, 2, ",", ".");
+                            }
+                        },
+                        {
+                            "targets": 11,
+                            "data": "id",
+                            "sClass": "text-center",
+                            "render": function (data, key, full) {
+                                return  '<input type="checkbox" class="checkbok cut-stack" '
+                                        + 'data-id="' + data + '" '
+                                        + ' data-weight="' + full["weightAll"] + ' "/>';
+                            }
+                        }
+                    ]
+                });
+                tbCut.on('order.dt search.dt', function () {
+                    tbCut.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                        cell.innerHTML = i + 1;
+                    });
+                }).draw();
+
+                siloGroup = result.map(function (i) {
+                    return i.silo;
+                }).filter(function (x, i, a) {
+                    return a.indexOf(x) === i;
+                });
+                $("#searchSilo").empty().append('<option value="" selected="selected">ทั้งหมด</option>');
+                $.each(siloGroup, function (key, value) {
+                    $("#searchSilo").append('<option value="' + value + '">' + value + '</option>');
+                });
+                $("#searchSilo").select2();
+                $("#searchSilo").change(function () {
+                    tbCut.columns(5).search(this.value).draw();
+                });
+
+                $("#tableCut").off("click", "input[type='checkbox'].cut-stack").on("click", "input[type='checkbox'].cut-stack", function () {
+                    if ($(this).prop("checked")) {
+                        weight_cut += parseFloat($(this).data('weight'));
+                        count_cut++;
+                        data_cut.push($(this).data('id'));
+                    } else {
+                        weight_cut -= parseFloat($(this).data('weight'));
+                        count_cut--;
+                        var index = data_cut.indexOf($(this).data('id'));
+                        data_cut.splice(index, 1);
+                    }
+                    if (count_cut == 0) {
+                        weight_cut = 0;
+                    }
+                    $("#weightCut").text(accounting.formatNumber(weight_cut, 2, ",", "."));
+                    $("#countCut").text(count_cut);
+                    if (count_cut > 0) {
+                        $("#btnCut").removeClass("disabled");
+                    } else {
+                        $("#btnCut").addClass("disabled");
+                    }
+//                    console.log(weight_cut, count_cut, data_cut);
+
+                });
+                toggleShow("cut");
+
+
+            });
         }
+
+        $("#btnCut").unbind().click(function () {
+            var data_txt = "";
+            for (var i in data_cut) {
+                data_txt += "'" + data_cut[i] + "',"
+            }
+            data_txt = data_txt.substr(0, data_txt.length - 1);
+//            console.log(old_book_id);
+            var data_stack = {book_id: old_book_id, data_cut: data_txt};
+//            console.log(data_stack);
+            var dataJSON = JSON.stringify(data_stack);
+//            console.log(dataJSON);
+            var dataJSONEN = encodeURIComponent(dataJSON);
+            $("#loading").html("กำลังบันทึกข้อมูล...");
+            setTimeout(function () {
+                var result = callAjaxFile("{{_context_path}}/api/reserve/filter/cut", "post", dataJSONEN, "json")["cut"];
+                if (result) {
+                    $("#loading").html("<span class='text-success'>บันทึกเรียบร้อย</span>");
+                    toggleShow("table");
+                }
+            }, 100);
+        });
+
         function toggleShow(option) {
             $("#loading").html('');
             if (option == "form") {
@@ -1028,7 +1274,13 @@
                 $('ul.setup-panel li a[href="#step-1"]').trigger('click');
                 $('ul.setup-panel li:eq(2)').addClass('disabled');
                 $("#divTable, #btnAdd").show();
-                $("#divForm, #btnBack").hide();
+                $("#divForm,#divCut, #btnBack").hide();
+                $("#btnCut").addClass("disabled");
+            } else if (option == "cut") {
+                $("#divTable, #btnAdd").hide();
+                $("#divCut, #btnBack").show();
+                $("#weightCut").text(accounting.formatNumber(weight_cut, 2, ",", "."));
+                $("#countCut").text(count_cut);
             }
         }
         function resetForm() {

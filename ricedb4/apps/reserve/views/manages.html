@@ -396,7 +396,7 @@
                         + '<td class="text-center">'
                         + '<button class="btn btn-default select-silo" data-keyword="' + value['keyword'] + '" data-status="' + value["status"] + '" data-status_id="' + value["id"] + '"><i class="fa fa-home"></i> คลังสินค้า</button>'
                         + ' <button class="btn btn-default confirm-status"' + (value['active'].indexOf('R') > -1 ? 'disabled' : '') + '  data-status_id="' + value["id"] + '"><i class="fa fa-check"></i> ยืนยัน</button>'
-                        + ' <button class="btn btn-default delete-status" disabled data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
+                        + ' <button class="btn btn-default delete-status"' + (value['active'].indexOf('R') > -1 ? '' : 'disabled') + ' data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
                         + '</td>'
                         + '</tr>';
             });

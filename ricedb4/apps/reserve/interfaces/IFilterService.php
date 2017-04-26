@@ -109,4 +109,23 @@ interface IFilterService {
      * @description export excel
      */
     public function export($book_id);
+
+    /**
+     * @name stack
+     * @uri /stack
+     * @param String book_id
+     * @return String stack
+     * @description รายการคลังสินค้าที่จองเป็นรายกอง
+     */
+    public function stack($book_id);
+
+    /**
+     * @name cut
+     * @uri /cut
+     * @param String book_id
+     * @param String data_cut
+     * @return boolean cut
+     * @description ตัดกอง
+     */
+    public function cut($book_id, $data_cut);
 }

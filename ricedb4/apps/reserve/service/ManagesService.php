@@ -98,7 +98,7 @@ class ManagesService extends CServiceBase implements IManagesService {
         $status = new \apps\common\entity\Status();
         $status->id = $status_id;
         $data = $this->datacontext->getObject($status)[0];
-        $data->active = str_replace("C", "Y", $data->active);
+        $data->active = str_replace("C", "W", $data->active);
         return $this->datacontext->updateObject($data);
     }
 

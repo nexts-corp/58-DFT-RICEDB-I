@@ -1,0 +1,207 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">{{#i18n}}system.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}reserve.title{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">{{#i18n}}reserve.confirm.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="sort-source-wrapper"><!-- button action on header -->
+        <div class="container">
+            <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
+                <li class="active">
+                    <!--<button class="btn btn-success" id="btn_excel"><i class="fa fa-file-excel-o"></i> Export คงคลัง</button>-->
+                    <!--<button class="btn btn-primary" id="btnAdd"><i class="fa fa-plus-circle"></i> {{#i18n}}system.add{{/i18n}}{{#i18n}}reserve.manage.title{{/i18n}}</button>-->
+                    <button class="btn btn-primary" id="btnBack" style="display: none;"><i class="fa fa-list-ul"></i> {{#i18n}}system.back{{/i18n}}</button>
+                </li>
+            </ul>
+        </div>
+    </div><!-- end button action on header -->
+
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="row">
+            <div id="divTable">
+                <div class="col-md-12" ><!-- table shown file detail -->
+                    <table id="tableList" class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center col-md-1">{{#i18n}}system.no{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}system.type{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}system.list{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}system.date{{/i18n}}{{#i18n}}system.create{{/i18n}}</th>
+                                <th class="text-center col-md-1">{{#i18n}}system.status{{/i18n}}</th>
+                                <th class="text-center col-md-2"><i class="fa fa-file-excel-o"></i> {{#i18n}}system.excel{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}system.tools{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center">
+                                <td colspan="7" class="text-center">ไม่มีข้อมูล</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- end table shown file detail -->
+            </div>
+            <div id="divForm" style="display: none">
+                <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label req text-right" for="reserveCode">{{#i18n}}reserve.manage.title{{/i18n}}{{#i18n}}system.for{{/i18n}} :</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" data-entity="list" name="reserveCode" id="reserveCode" required></select>
+                        </div>
+                    </div>
+                    <div class="form-group div-auction">
+                        <label class="col-sm-3 control-label req text-right" for="reserveCode">{{#i18n}}system.type{{/i18n}}{{#i18n}}reserve.auction{{/i18n}} :</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" data-entity="list" name="typeAuction" id="typeAuction" required>
+                                <option value=" ">ทั่วไป</option>
+                                <option value="I">เข้าสู่อุตสาหกรรม</option>
+                                <option value="I2">ทั่วไป&เข้าสู่อุตฯ</option>
+                                <option value="O">คำสั่งซื้อ</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label req text-right" for="detail">{{#i18n}}system.ordinal{{/i18n}} :</label>
+                        <div class="col-sm-6">
+                            <input type="text" data-entity="list" class="form-control" name="name" id="name" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group div-auction">
+                        <label class="col-sm-3 control-label req text-right" for="target">{{#i18n}}reserve.typeSale{{/i18n}} :</label>
+                        <div class="col-md-6">
+                            <div class="radio">
+                                <label>
+                                    <input class="remarkControl"  type="radio" data-entity="list" name="typeSale" id="typeSale_1" value="SILO" checked>
+                                    {{#i18n}}reserve.typeSilo{{/i18n}}
+                                </label>
+                                <label>
+                                    <input class="remarkControl" type="radio" data-entity="list" name="typeSale" id="typeSale_2" value="STACK">
+                                    {{#i18n}}reserve.typeStack{{/i18n}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="loading" class="col-xs-12" style="text-align: center;"></div>
+                    <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
+                        <li data-option-value="*" class="">
+                            <button id="btnSave" class="btn btn-primary"><i class="fa fa-save"></i> {{#i18n}}system.save{{/i18n}}</button>
+                        </li>
+                        <li>
+                            <button class="btn btn-default">{{#i18n}}system.cancel{{/i18n}}</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<style>
+    #table2 tbody tr{
+        cursor: pointer;
+    }
+    .modal-wide .modal-dialog {
+        width: 80% !important; /* or whatever you wish */
+    }
+</style>
+<!--<script src="{{_context_path}}/asset/vendor/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>-->
+
+<script type="text/javascript">
+    $(function () {
+        var lkReserves = listsReserve();
+
+        lkStatusReserv(lkReserves);
+
+        $("#reserveCode").change(function () {
+            if ($(this).val() == "AU") {
+                $(".div-auction").show();
+            } else {
+                $(".div-auction").hide();
+            }
+        });
+        $(".export-excel").click(function () {
+            window.open("{{_context_path}}/api/reserve/confirm/export/" + $(this).data('status_id'));
+        });
+//        $("#btnAdd").click(function () {
+//            toggleShow("form");
+//        });
+        $("#btnBack").click(function () {
+            toggleShow("table");
+        });
+
+
+
+    });
+
+    function listsReserve() {
+        var datas = callAjax("{{_context_path}}/api/reserve/confirm/lkReserve", "post", {}, "json");
+        var x = [];
+        if (typeof datas !== "undefined" && datas !== null) {
+            $.each(datas["lists"], function (key, value) {
+                x[value['reserveCode']] = value['reserveName'];
+            });
+        }
+        return x;
+    }
+    function lkStatusReserv(lkReserves) {
+        var datas = callAjax("{{_context_path}}/api/reserve/confirm/lkStatusReserv", "post", {}, "json");
+        var html = '<tr><td colspan="6" class="text-center">ไม่มีรายการสำรอง</td></tr>';
+        if (typeof datas !== "undefined" && datas !== null && datas['lists'].length != 0) {
+            html = '';
+            var i = 0;
+            $.each(datas["lists"], function (key, value) {
+                html += '<tr>'
+                        + '<td class="text-center">' + (++i) + '</td>'
+                        + '<td class="text-center">' + lkReserves[value['keyword'].substr(0, 2)] + '</td>'
+                        + '<td>' + value["status"] + '</td>'
+                        + '<td class="text-center">' + value["dateCreated"]['date'].substr(0, 10) + '</td>'
+                        + '<td class="text-center">' + (value['active'].indexOf('R') > -1 ? 'รอเลือกคลัง' : 'รอยืนยัน') + '</td>'
+                        + '<td class="text-center">'
+                        + '<button class="btn btn-default export-excel" data-status_id="' + value["id"] + '"><i class="fa fa-toggle-up"></i> Export</button>'
+                        + '<button class="btn btn-default import-excel" data-status_id="' + value["id"] + '"><i class="fa fa-toggle-down"></i> Import</button>'
+                        + '</td>'
+                        + '<td class="text-center">'
+                        + ' <button class="btn btn-default confirm-status"' + (value['active'].indexOf('R') > -1 ? 'disabled' : '') + '  data-status_id="' + value["id"] + '"><i class="fa fa-check"></i> ยืนยัน</button>'
+                        + ' <button class="btn btn-default delete-status"' + (value['active'].indexOf('R') > -1 ? '' : 'disabled') + ' data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
+                        + '</td>'
+                        + '</tr>';
+            });
+        }
+        $("#tableList tbody").html(html);
+
+
+    }
+
+    function toggleShow(option) {
+        $("#loading").html('');
+        if (option == "form") {
+            $("input[type=text]").each(function () {
+                $(this).val('');
+            })
+            $("#divTable, #btnAdd").hide();
+            $("#divForm, #btnBack").show();
+        }
+        else if (option == "table") {
+            $("#divTable, #btnAdd").show();
+            $("#divForm, #btnBack").hide();
+        }
+    }
+</script>

@@ -29,4 +29,9 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
+    public function confirm() {
+        $view = new CJView("confirm", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
 }

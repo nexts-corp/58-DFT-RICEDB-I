@@ -150,8 +150,8 @@ class FilterService extends CServiceBase implements IFilterService {
     }
 
     public function save($book_id, $remark, $silo, $obj_query) {
-        $nocount = "SET NOCOUNT ON;";
-        $this->datacontext->pdoQuery($nocount);
+//        $nocount = "SET NOCOUNT ON;";
+//        $this->datacontext->pdoQuery($nocount);
 
         $res = true;
         $book = new \apps\common\entity\Booking();
@@ -172,8 +172,9 @@ class FilterService extends CServiceBase implements IFilterService {
         }
 
         if ($res) {
+            $sql = "";
             foreach ($silo as $key => $value) {
-                $sql = "update dft_product "
+                $sql .= "update dft_product "
                         . "set status = '" . $book_id . "' ";
                 if (property_exists($value, 'percent')) {
                     $sql .= ",remark0 ='" . $value->percent . "' ";
@@ -182,16 +183,20 @@ class FilterService extends CServiceBase implements IFilterService {
                         . "and lk_associate_id = '" . $value->associateid . "' "
                         . "and lk_province_id = '" . $value->provinceid . "' "
                         . "and (status='' or status is null); ";
-                $this->datacontext->pdoQuery($sql);
+//                $this->datacontext->pdoQuery($sql);
             }
-            $nocount = "SET NOCOUNT OFF;";
-            $this->datacontext->pdoQuery($nocount);
-//            $cmd = "EXEC sp_batch_exce :cmd";
-//            $param = array(
-//                "cmd" => $sql
-//            );
-//            $this->datacontext->pdoQuery($cmd, $param, "apps\\common\\model\\SQLUpdate");
-            return true;
+//            $nocount = "SET NOCOUNT OFF;";
+//            $this->datacontext->pdoQuery($nocount);
+            $cmd = "EXEC sp_batch_exce :cmd";
+            $param = array(
+                "cmd" => $sql
+            );
+            if ($this->datacontext->pdoQuery($cmd, $param, "apps\\common\\model\\SQLUpdate")[0]->sdata == "ok") {
+                return true;
+            } else {
+                return false;
+            }
+//            return $sql;
         } else {
             return false;
         }
@@ -217,9 +222,9 @@ class FilterService extends CServiceBase implements IFilterService {
         $sql2 = "SELECT * FROM dft_booking where book_id = '" . $book_id . "'";
         $data_book = $this->datacontext->pdoQuery($sql2);
 
-        //if (isset($data)) {
-        ///////////////////////////// Excel /////////////////////////////
-        //style
+//if (isset($data)) {
+///////////////////////////// Excel /////////////////////////////
+//style
         $middle = array(
             'horizontal' => \PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
             'vertical' => \PHPExcel_Style_Alignment::VERTICAL_CENTER
@@ -246,7 +251,7 @@ class FilterService extends CServiceBase implements IFilterService {
         $objWorkSheet = $objPHPExcel->getActiveSheet();
         $objWorkSheet->setTitle(str_replace("/", "_", $name));
 
-        //column name
+//column name
         $row = 1;
         $objWorkSheet->mergeCells('A1:X1')
                 ->setCellValueByColumnAndRow(0, $row, $name)
@@ -332,7 +337,7 @@ class FilterService extends CServiceBase implements IFilterService {
 //        $objWorkSheet->getStyle('B4:B' . $row)->getProtection()->setLocked(
 //                \PHPExcel_Style_Protection::PROTECTION_UNPROTECTED
 //        );
-        //create excel file
+//create excel file
         ob_clean();
 
         header('Content-Type: application/vnd.ms-excel');
@@ -343,7 +348,28 @@ class FilterService extends CServiceBase implements IFilterService {
 
         ob_end_flush();
         exit();
-        //}
+//}
+    }
+
+    public function stack($book_id) {
+        $product = new \apps\common\entity\Product();
+        $product->status = $book_id;
+        return $this->datacontext->getObject($product);
+    }
+
+    public function cut($book_id, $data_cut) {
+        $update = "update dft_product "
+                . "set status = null,remark0 = null "
+                . "where status = '" . $book_id . "' and Id in (" . $data_cut . ") ";
+        $sql = "EXEC sp_batch_exce :data";
+        $param = array(
+            "data" => $update
+        );
+        if ($this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")[0]->sdata == "ok") {
+            return true;
+        } else {
+            return false;
+        };
     }
 
 }
