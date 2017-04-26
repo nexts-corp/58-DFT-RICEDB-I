@@ -335,7 +335,7 @@
                         $.each(value3, function (key, value4) {
                             if (count == 0) {
                                 html += '<td>' + value4["bidderName"] + '</td>'
-                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["oweightAll"], 6, ",", ".") + '</td>'
                                         + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
                                         + '</tr>';
                             }
@@ -343,7 +343,7 @@
                                 html += '<tr>'
                                         + '<td></td>'
                                         + '<td>' + value4["bidderName"] + '</td>'
-                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["oweightAll"], 6, ",", ".") + '</td>'
                                         + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
                                         + '</tr>';
                             }
@@ -400,7 +400,7 @@
                     html += '<tr>'
                             + '<td style="padding-left:20px;">' + countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']</td>'
                             + '<td>' + value2["bidderName"] + '</td>'
-                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["oweightAll"], 6, ",", ".") + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
                             + '</tr>';
                 });
@@ -456,14 +456,14 @@
                         html += '<tr>'
                                 + '<td style="padding-left:20px;">' + countAll + '. ' + value2["wareHouseCode"] + ' [' + value2["associate"] + ']</td>'
                                 + '<td>' + value2["bidderName"] + '</td>'
-                                + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                                + '<td class="text-center">' + accounting.formatNumber(value2["oweightAll"], 6, ",", ".") + '</td>'
                                 + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
                                 + '</tr>';
                     } else {//
                         html += '<tr>'
                                 + '<td style="padding-left:20px;"></td>'
                                 + '<td>' + value2["bidderName"] + '</td>'
-                                + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                                + '<td class="text-center">' + accounting.formatNumber(value2["oweightAll"], 6, ",", ".") + '</td>'
                                 + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
                                 + '</tr>';
                     }//
@@ -524,7 +524,7 @@
                         $.each(value3, function (key, value4) {
                             if (count == 0) {
                                 html += '<td>' + value4["bidderName"] + '</td>'
-                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["oweightAll"], 6, ",", ".") + '</td>'
                                         + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
                                         + '</tr>';
                             }
@@ -532,7 +532,7 @@
                                 html += '<tr>'
                                         + '<td></td>'
                                         + '<td>' + value4["bidderName"] + '</td>'
-                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["oweightAll"], 6, ",", ".") + '</td>'
                                         + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
                                         + '</tr>';
                             }
@@ -596,7 +596,7 @@
                         $.each(value3, function (key, value4) {
                             if (count == 0) {
                                 html += '<td>' + value4["bidderName"] + '</td>'
-                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["oweightAll"], 6, ",", ".") + '</td>'
                                         + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
                                         + '</tr>';
                             }
@@ -604,7 +604,7 @@
                                 html += '<tr>'
                                         + '<td></td>'
                                         + '<td>' + value4["bidderName"] + '</td>'
-                                        + '<td>' + accounting.formatNumber(value4["weightAll"], 6, ",", ".") + '</td>'
+                                        + '<td>' + accounting.formatNumber(value4["oweightAll"], 6, ",", ".") + '</td>'
                                         + '<td>' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
                                         + '</tr>';
                             }
@@ -666,7 +666,7 @@
                     html += '<tr>'
                             + '<td style="padding-left:20px;">' + siloName + '</td>'
                             + '<td>' + value2["bidderName"] + '</td>'
-                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["oweightAll"], 6, ",", ".") + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
                             + '</tr>';
 
@@ -727,7 +727,7 @@
                     html += '<tr>'
                             + '<td style="padding-left:20px;">' + siloName + '</td>'
                             + '<td>' + value2["bidderName"] + '</td>'
-                            + '<td class="text-center">' + accounting.formatNumber(value2["weightAll"], 6, ",", ".") + '</td>'
+                            + '<td class="text-center">' + accounting.formatNumber(value2["oweightAll"], 6, ",", ".") + '</td>'
                             + '<td class="text-center">' + accounting.formatNumber(value2["bidderPrice"], 2, ",", ".") + '</td>'
                             + '</tr>';
 
