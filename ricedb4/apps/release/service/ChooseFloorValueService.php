@@ -23,7 +23,7 @@ class ChooseFloorValueService extends CServiceBase implements IChooseFloorValueS
                 . " st.id, st.status, st.keyword"
                 . " FROM " . $this->ent . "\\Status st"
                 . " WHERE st.keyword like 'AU%'"
-                . " AND (st.active = 'Y' or st.active = 'YO' or st.active='YI' or st.active='YI2') "
+                . " AND (st.active = 'Y' or st.active = 'YO' or st.active='YA' or st.active='YI2') "
                 . " ORDER BY st.id DESC";
         $data = $this->datacontext->getObject($sql);
         return $data;
