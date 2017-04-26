@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02-07-01" language="groovy" pageWidth="1190" pageHeight="842" orientation="Landscape" columnWidth="1150" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a1da91c-587f-47a5-bc73-0820913508b1">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="67"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="12" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
@@ -39,11 +39,12 @@
 	<field name="bidderNo" class="java.lang.Integer"/>
 	<field name="bidderQueue" class="java.lang.Integer"/>
 	<field name="bidderName" class="java.lang.String"/>
-	<field name="weight" class="java.math.BigDecimal"/>
-	<field name="weightAll" class="java.math.BigDecimal"/>
-	<field name="oweightAll" class="java.math.BigDecimal"/>
-	<field name="bidderFirstPrice" class="java.math.BigDecimal"/>
-	<field name="bidderLastPrice" class="java.math.BigDecimal"/>
+	<field name="weight" class="java.lang.Double"/>
+	<field name="weightAll" class="java.lang.Double"/>
+	<field name="oweightAll" class="java.lang.Double"/>
+	<field name="bidderFirstPrice" class="java.lang.Double"/>
+	<field name="bidderLastPrice" class="java.lang.Double"/>
+	<field name="bidderCount" class="java.lang.Integer"/>
 	<variable name="CURRENT_PAGE" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
 		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
 		<initialValueExpression><![CDATA[new Integer(1)]]></initialValueExpression>
@@ -69,10 +70,6 @@
 	<variable name="groupCount" class="java.lang.Integer" incrementType="Group" incrementGroup="GroupByWarehouse" calculation="Count">
 		<variableExpression><![CDATA[$F{wareHouseCode}]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
-	</variable>
-	<variable name="bidderCount" class="java.lang.Integer" resetType="None" calculation="DistinctCount">
-		<variableExpression><![CDATA[$F{bidderName}]]></variableExpression>
-		<initialValueExpression><![CDATA[]]></initialValueExpression>
 	</variable>
 	<group name="GroupByWarehouse">
 		<groupExpression><![CDATA[$F{wareHouseCode}]]></groupExpression>
@@ -165,7 +162,7 @@
 	<columnHeader>
 		<band height="15" splitType="Stretch">
 			<staticText>
-				<reportElement style="Bold" x="0" y="0" width="31" height="15" uuid="175cf8fb-cd0c-4486-9d99-f4cdb15a53f6"/>
+				<reportElement style="Bold" x="0" y="0" width="40" height="15" uuid="175cf8fb-cd0c-4486-9d99-f4cdb15a53f6"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -176,7 +173,7 @@
 				<text><![CDATA[ที่]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="31" y="0" width="101" height="15" uuid="938a3b2f-7c8c-4d00-b0cf-d784a4632cf4"/>
+				<reportElement style="Bold" x="40" y="0" width="92" height="15" uuid="938a3b2f-7c8c-4d00-b0cf-d784a4632cf4"/>
 				<box>
 					<topPen lineWidth="0.5"/>
 					<leftPen lineWidth="0.5"/>
@@ -312,7 +309,7 @@
 	<detail>
 		<band height="15">
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="31" y="0" width="101" height="15" uuid="b054b1c5-2483-4d35-9869-2dde95c9033a"/>
+				<reportElement stretchType="RelativeToBandHeight" x="40" y="0" width="92" height="15" uuid="b054b1c5-2483-4d35-9869-2dde95c9033a"/>
 				<box leftPadding="2">
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -320,7 +317,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{province}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -332,7 +329,7 @@
 					<bottomPen lineWidth="0.5"/>
 					<rightPen lineWidth="0.5"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{project}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
@@ -456,7 +453,7 @@
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="31" height="15" uuid="69fb1fdc-07f8-4aa5-b7a4-7004b045fb6a"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="40" height="15" uuid="69fb1fdc-07f8-4aa5-b7a4-7004b045fb6a"/>
 				<box>
 					<pen lineWidth="0.5" lineColor="#000000"/>
 					<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -472,7 +469,7 @@
 	<pageFooter>
 		<band height="45" splitType="Stretch">
 			<textField>
-				<reportElement style="Default" x="0" y="2" width="533" height="20" uuid="89c57097-ae19-4b12-b0a6-40a2ba0efabf"/>
+				<reportElement x="0" y="2" width="533" height="20" uuid="89c57097-ae19-4b12-b0a6-40a2ba0efabf"/>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
@@ -484,7 +481,7 @@
 				<textFieldExpression><![CDATA["หน้า " + $V{CURRENT_PAGE}+" จาก " +$V{PAGE_NUMBER}+" หน้า"]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Default" x="0" y="22" width="1150" height="22" uuid="6e97aeb5-6c6b-4971-a0c2-1c53d9255f66"/>
+				<reportElement x="0" y="22" width="1150" height="22" uuid="6e97aeb5-6c6b-4971-a0c2-1c53d9255f66"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
@@ -557,7 +554,7 @@
 				<textElement textAlignment="Right" markup="none">
 					<font isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ผู้เสนอซื้อจำนวน "+ $V{bidderCount}+ " ราย"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ผู้เสนอซื้อจำนวน "+ $F{bidderCount}+ " ราย"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement stretchType="RelativeToBandHeight" x="417" y="0" width="251" height="20" uuid="556220f2-c4b6-40ba-9808-26d254dd2a15"/>

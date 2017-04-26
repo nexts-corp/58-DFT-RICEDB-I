@@ -15,12 +15,15 @@ public class RPT02_07_02_model extends BaseModel implements Serializable {
     private static final long serialVersionUID = 2278232562840069477L;
     @Column
     private String warehouse;
-    
+
     @Column
     private double weight;
-    
+
     @Column
     private String projectRound;
+
+    @Column
+    private int bidderCount;
 
     public String getWarehouse() {
         return warehouse;
@@ -45,8 +48,15 @@ public class RPT02_07_02_model extends BaseModel implements Serializable {
     public void setProjectRound(String projectRound) {
         this.projectRound = projectRound;
     }
+
+    public int getBidderCount() {
+        return bidderCount;
+    }
+
+    public void setBidderCount(int bidderCount) {
+        this.bidderCount = bidderCount;
+    }
     
     
-    
-    
+
 }

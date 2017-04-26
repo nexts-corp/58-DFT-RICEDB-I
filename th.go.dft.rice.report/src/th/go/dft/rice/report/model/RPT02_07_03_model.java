@@ -21,6 +21,9 @@ public class RPT02_07_03_model extends BaseModel implements Serializable {
     
     @Column
     private String projectRound;
+    
+    @Column
+    private int bidderCount;
 
     public String getWarehouse() {
         return warehouse;
@@ -44,6 +47,14 @@ public class RPT02_07_03_model extends BaseModel implements Serializable {
 
     public void setProjectRound(String projectRound) {
         this.projectRound = projectRound;
+    }
+
+    public int getBidderCount() {
+        return bidderCount;
+    }
+
+    public void setBidderCount(int bidderCount) {
+        this.bidderCount = bidderCount;
     }
     
     
