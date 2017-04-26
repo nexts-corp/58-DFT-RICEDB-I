@@ -77,6 +77,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="col-md-12 text-right" style="padding-top: 10px;">
+                    <button id="addToTable" class="btn btn-primary add"><i class="fa fa-plus-circle"></i> {{#i18n}}auction.buttonAdd{{/i18n}}</button>
+                </div>
             </div><!-- end table shown bidder information list -->
 
             <div id="bidderForm" class="col-md-12" style="display: none;"><!-- bidder info form -->
@@ -615,7 +618,7 @@
                                 + '<div class="form-group">'
                                 + '<label class="col-md-5 control-label req">ประเภทอุตสาหกรรม :</label>'
                                 + '<div class="col-md-6">'
-                                + '<input type="text" data-entity="history" class="form-control input-sm" name="typeOptional" id="typeOptional" value="' + typeOptional + '" required>'
+                                + '<input type="text" data-entity="history" class="form-control input-sm" name="typeOptional" id="typeOptional" value="' + typeOptional + '" autocomplete="off" required>'
                                 + '</div>'
                                 + '</div>'
 
@@ -986,9 +989,9 @@
             $("#remark5").val(value["remark5"]);
 
             $("#fileGroup").html('<div id="fileNew"></div><div id="fileBak"></div>');
-            
-            $("#remarkSpecial").val((value["remarkSpecial"]==null?'':value["remarkSpecial"]));
-            
+
+            $("#remarkSpecial").val((value["remarkSpecial"] == null ? '' : value["remarkSpecial"]));
+
             var fileUpload = 0;
             if (getTag(value["attachment"], "") != "") {
                 $("#fileNew").hide();
