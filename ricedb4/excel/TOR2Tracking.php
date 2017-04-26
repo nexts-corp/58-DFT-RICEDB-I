@@ -5,7 +5,7 @@ set_time_limit(0);
 ini_set('memory_limit', '-1');
 require("phpexcel/Classes/PHPExcel/IOFactory.php");
 
-$inputFileName = 'files/AU1_2560.xlsx';
+$inputFileName = 'files/AU2_2560_I.xlsx';
 //$extend = "2";
 
 $count = 0;
@@ -73,25 +73,25 @@ while ($data5 = $res5->fetch(PDO::FETCH_ASSOC)) {
 
 
 //  Get worksheet dimensions
-$sheet = $objPHPExcel->getSheet(1);
+$sheet = $objPHPExcel->getSheet(0);
 //$highestRow = $sheet->getHighestRow();
 $highestColumn = $sheet->getHighestColumn();
 //echo $highestRow."<br>";
-$highestRow = 1839;
+$highestRow = 700;
 //echo $highestRow;
 //exit();
 $count = 0;
-for ($row = 4; $row <= $highestRow; $row++) {
+for ($row = 3; $row <= $highestRow; $row++) {
     //  Read a row of data into an array
 
-    $rowData = $sheet->rangeToArray('A' . $row . ':' . 'S' . $row);
+    $rowData = $sheet->rangeToArray('A' . $row . ':' . 'Q' . $row);
 
     //if (strlen($rowData[0][1]) != 0) {
     /* print '<tr>';
       print '<td>'.(++$count).'</td>'; */
     $val = array();
 
-    $no = $rowData[0][0]; //ลำดับที่
+//    $no = $rowData[0][0]; //ลำดับที่
     $code = $rowData[0][1]; //รหัส
     $bag = $rowData[0][2]; //เลขถุง
     $prov = $rowData[0][3]; //จังหวัด
@@ -110,9 +110,9 @@ for ($row = 4; $row <= $highestRow; $row++) {
     $weightAll = str_replace(",", "", $rowData[0][13]); //น้ำหนักรวมกระสอบ จาก อตก อคส
     $samp = $rowData[0][14]; //คณะที่เก็บตัวอย่าง
     $grade = $rowData[0][15]; //เกรดข้าว
-    $disc = $rowData[0][16]; //อัตราส่วนลด
-    if ($rowData[0][17] != "") {
-        $grade = $rowData[0][17]; //เกรดข้าวหอมมะลิ
+//    $disc = $rowData[0][16]; //อัตราส่วนลด
+    if ($rowData[0][16] != "") {
+        $grade = $rowData[0][16]; //เกรดข้าวหอมมะลิ
     }
 //    $gradeOptional = $rowData[0][19];
 //    $remark = $rowData[0][17]; //หมายเหตุ
@@ -125,7 +125,7 @@ for ($row = 4; $row <= $highestRow; $row++) {
     // . "', '" .. "', '" . $val["discount"] . "', '" . $val["gradeOptional"] . "', '" . $val["canSelect"] . "');";
 
     $val = array(
-        "no" => $no,
+//        "no" => $no,
         "code" => $code,
         "bagNo" => $bag,
         "province" => $provArr[str_replace(" ", "", $prov)], // $prov,
@@ -140,7 +140,7 @@ for ($row = 4; $row <= $highestRow; $row++) {
         "weight" => $weight,
         "sampling" => $samp,
         "grade" => $gradeArr[str_replace(" ", "", $grade)], // $grade,
-        "discount" => $disc,
+        "discount" => "", //$disc,
         "remark" => '',
         // "gradeOptional" => $gradeOptional,
         // "canSelect" => $canSelect,
@@ -154,18 +154,12 @@ for ($row = 4; $row <= $highestRow; $row++) {
 $link = null;
 
 function insertData($val) {
-    $statusKeyword = "AU1/2560";
-    if ($val["grade"] == 10 && $val["type"] != 11) {
-        $val["useType"] = 20;
+    $statusKeyword = "AU2/2560-I";
+    if ($val["grade"] == 11 || $val["grade"] == 12 || $val["grade"] == 13) {
+        $val["useType"] = 21;
     } else {
-        $val["useType"] = $val["type"];
+        $val["useType"] = 20;
     }
-    $val["useGrade"] = $val["grade"];
-//    if ($val["grade"] >= 10) {
-//        $val["useType"] = 20;
-//    } else {
-//        $val["useType"] = $val["type"];
-//    }
     $val["useGrade"] = $val["grade"];
     $sqlIns = "INSERT INTO dft_Rice_Tracking (Code, Bag_No, LK_Province_Id, LK_Project_Id,Round, Silo,Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight,Weight_All,TWeight, Sampling_Id, LK_Grade_Id, Discount_Rate,Remark,LK_Status_Keyword,UseType,UseGrade)"
             . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "'," . $val["round"] . ", '" . $val["silo"] . "', '" . $val["address"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "','" . $val["weightAll"] . "'," . (float) $val["weightAll"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "','" . $val["remark"] . "','" . $statusKeyword . "','" . $val["useType"] . "','" . $val["useGrade"] . "');";
