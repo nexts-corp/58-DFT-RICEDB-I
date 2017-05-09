@@ -48,8 +48,8 @@ class Status extends EntityBase {
     /** @Column(type="integer",length=11,name="WeightDecimal") */
     public $weightDecimal;
 
-    /** @Column(type="string",length=50,name="Reserve_Keyword") */
-    public $reserveKeyword;
+    /** @Column(type="string",length=255,name="filename") */
+    public $filename;
 
     /** @Column(type="string",length=50,name="LK_Release_Code") */
     public $releaseCode;
@@ -117,8 +117,8 @@ class Status extends EntityBase {
         return $this->weightDecimal;
     }
 
-    function getReserveKeyword() {
-        return $this->reserveKeyword;
+    function getFilename() {
+        return $this->filename;
     }
 
     function getReleaseCode() {
@@ -193,8 +193,8 @@ class Status extends EntityBase {
         $this->weightDecimal = $weightDecimal;
     }
 
-    function setReserveKeyword($reserveKeyword) {
-        $this->reserveKeyword = $reserveKeyword;
+    function setFilename($filename) {
+        $this->filename = $filename;
     }
 
     function setReleaseCode($releaseCode) {
