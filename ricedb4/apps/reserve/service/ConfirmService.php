@@ -30,11 +30,28 @@ class ConfirmService extends CServiceBase implements IConfirmService {
 
     public function lkStatusReserv() {
 
-        $sql = "SELECT st "
-                . " FROM " . $this->ent . "\\Status st "
-                . " WHERE st.active like 'W%' "
-                . " ORDER BY st.id ASC";
-        return $this->datacontext->getObject($sql);
+//        $sql = "SELECT st,sum(rt.tWeight) as weight "
+//                . " FROM " . $this->ent . "\\Status st "
+//                . " left join ".$this->ent."\\RiceTracking rt "
+//                . " with st.keyword=rt.statusKeyword "
+//                . " WHERE st.active like 'R3%' "
+//                . " ORDER BY st.id ASC";
+        $sql = "SELECT st.id,
+            st.status,
+            st.keyword,
+            st.active,
+            st.filename,
+            st.date_created  as dateCreated,
+            rt.weight 
+		FROM   dft_lk_Status st 
+		left join (
+				select lk_status_keyword,sum(tweight) as weight
+				from dft_Rice_Tracking
+				group by LK_Status_Keyword
+                ) rt on st.keyword=rt.lk_status_keyword 
+		WHERE st.active like 'R3%' 
+		ORDER BY st.id ASC";
+        return $this->datacontext->pdoQuery($sql);
     }
 
     public function export($status_id) {

@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">{{#i18n}}system.home{{/i18n}}</a></li>
+                        <li><a href="{{_context_path}}/api/root/view/index">{{#i18n}}system.home{{/i18n}}</a></li>
                         <li class="active">{{#i18n}}reserve.title{{/i18n}}</li>
                     </ul>
                 </div>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label req text-right" for="detail">{{#i18n}}system.ordinal{{/i18n}} :</label>
+                        <label class="col-sm-3 control-label req text-right" for="detail">{{#i18n}}system.name{{/i18n}}{{#i18n}}reserve.manage.title{{/i18n}} :</label>
                         <div class="col-sm-6">
                             <input type="text" data-entity="list" class="form-control" name="name" id="name" required />
                         </div>
@@ -214,9 +214,9 @@
             if (isValid) {
                 var data = {};
                 data["status"] = preData["name"] + ($("#reserveCode").val() == "AU" ? " (" + $("#typeAuction option:selected").text() + ")" : "");
-                data["keyword"] = preData["reserveCode"] + preData["name"] + (preData["typeAuction"] != "" ? "-" + preData["typeAuction"] : "");
+                data["keyword"] = preData["reserveCode"] + (preData["typeAuction"] != "" ? "-" + preData["typeAuction"] : "");
                 data["saleBy"] = preData["typeSale"];
-                data["active"] = "R" + (preData["typeAuction"] != "" ? preData["typeAuction"] : "");
+                data["active"] = "R1" + (preData["typeAuction"] != "" ? preData["typeAuction"] : "");
                 var dataJSON = JSON.stringify({status: data});
                 var dataJSONEN = encodeURIComponent(dataJSON);
                 setTimeout(function () {
@@ -392,11 +392,11 @@
                         + '<td class="text-center">' + lkReserves[value['keyword'].substr(0, 2)] + '</td>'
                         + '<td>' + value["status"] + '</td>'
                         + '<td class="text-center">' + value["dateCreated"]['date'].substr(0, 10) + '</td>'
-                        + '<td class="text-center">' + (value['active'].indexOf('R') > -1 ? 'รอเลือกคลัง' : 'รอยืนยัน') + '</td>'
+                        + '<td class="text-center text-bold"><span class="' + (value['active'].indexOf('R1') > -1 ? 'text-warning">ยังไม่เลือกคลังสินค้า' : 'text-success">เลือกคลังสินค้าแล้ว') + '</span></td>'
                         + '<td class="text-center">'
                         + '<button class="btn btn-default select-silo" data-keyword="' + value['keyword'] + '" data-status="' + value["status"] + '" data-status_id="' + value["id"] + '"><i class="fa fa-home"></i> คลังสินค้า</button>'
-                        + ' <button class="btn btn-default confirm-status"' + (value['active'].indexOf('R') > -1 ? 'disabled' : '') + '  data-status_id="' + value["id"] + '"><i class="fa fa-check"></i> ยืนยัน</button>'
-                        + ' <button class="btn btn-default delete-status"' + (value['active'].indexOf('R') > -1 ? '' : 'disabled') + ' data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
+                        + ' <button class="btn btn-success confirm-status"' + (value['active'].indexOf('R1') > -1 ? 'disabled' : '') + '  data-status_id="' + value["id"] + '"><i class="fa fa-check"></i> ยืนยัน</button>'
+                        + ' <button class="btn btn-danger delete-status"' + (value['active'].indexOf('R1') > -1 ? '' : 'disabled') + ' data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
                         + '</td>'
                         + '</tr>';
             });

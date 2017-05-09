@@ -5,14 +5,15 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="breadcrumb">
-                        <li><a href="#">{{#i18n}}reserve.home{{/i18n}}</a></li>
-                        <li class="active">{{#i18n}}reserve.menu{{/i18n}}</li>
+                        <li><a href="{{_context_path}}/api/root/view/index">{{#i18n}}system.home{{/i18n}}</a></li>
+                        <li><a href="#">{{#i18n}}reserve.title{{/i18n}}</a></li>
+                        <li class="active"><a href="{{_context_path}}/api/reserve/view/confirm">{{#i18n}}reserve.confirm.title{{/i18n}}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="none-padding">{{#i18n}}reserve.import.title{{/i18n}}</h1>
+                    <h1 class="none-padding">{{#i18n}}reserve.import.title{{/i18n}} : {{statusName}}</h1>
                 </div>
             </div>
         </div>
@@ -21,290 +22,291 @@
     <hr class="tall dashboard">
 
     <div class="container">
-    <div class="row">
-    <div class="col-md-12" style="margin-bottom: 20px;">
-        <div class="form-group">
-            <form id="form" class="form-horizontal form-bordered" enctype="multipart/form-data" method="post">
-                <div class="col-md-4">
-                    <label class="col-md-3 control-label" for="fileNameDisplay">{{#i18n}}reserve.file{{/i18n}} :</label>
-                    <div class="col-md-7">
-                        <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
+        <div class="row">
+            <div class="col-md-12" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <form id="form" class="form-horizontal form-bordered" enctype="multipart/form-data" method="post">
+                        <div class="col-md-4">
+                            <label class="col-md-3 control-label" for="fileNameDisplay">{{#i18n}}system.file{{/i18n}} :</label>
+                            <div class="col-md-7">
+                                <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
+                            </div>
+                            <div class="col-md-2">
+                                <div class="fileUpload btn btn-primary">
+                                    <span><i class="fa fa-folder-open"></i> {{#i18n}}system.select{{/i18n}}{{#i18n}}system.file{{/i18n}}</span>
+                                    <input id="fileUpload" type="file" class="upload" required/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="col-md-6 control-label" for="sheet">{{#i18n}}system.sheet{{/i18n}} :</label>
+                            <div class="col-md-6">
+                                <input type="text" id="sheet" name="sheet" class="form-control" placeholder="ลำดับชีท" value="1" required/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="col-md-6 control-label" for="row">{{#i18n}}system.row{{/i18n}} :</label>
+                            <div class="col-md-6">
+                                <input type="text" id="row" name="row" class="form-control" placeholder="เริ่มบรรทัดที่" value="5" required/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 text-right">
+                            <a class="btn btn-success read"><i class="fa fa-spinner"></i> {{#i18n}}system.preview{{/i18n}}</a>
+                            <a class="btn btn-default cancel"><i class="fa fa-refresh"></i> {{#i18n}}system.reset{{/i18n}}</a>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-12 text-center" id="readLoading"></div>
+            </div>
+
+            <form id="form2" class="form-horizontal form-bordered" onsubmit="return(false)">
+                <div class="col-md-12">
+                    <div class="col-md-12" style="margin-bottom: 40px;">
+                        <div class="toggle" data-plugin-toggle>
+                            <section class="toggle active">
+                                <label>{{#i18n}}import.manage{{/i18n}} : <span id="fileNameDisplay"></span></label>
+                                <div class="toggle-content">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="code">{{#i18n}}reserve.code{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="code" id="code" data-col="1" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="bagNo">{{#i18n}}reserve.bagNo{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="bagNo" id="bagNo" data-col="2" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="province">{{#i18n}}reserve.province{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="province" id="province" data-col="3" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="project">{{#i18n}}reserve.project{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="project" id="project" data-col="4" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="round">{{#i18n}}reserve.round{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="round" id="round" data-col="5" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="silo">{{#i18n}}reserve.silo{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="silo" id="silo" data-col="6" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="address">{{#i18n}}reserve.address{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="address" id="address" data-col="7" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="associate">{{#i18n}}reserve.associate{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="associate" id="associate" data-col="8" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="type">{{#i18n}}reserve.type{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="type" id="type" data-col="9" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="warehouse">{{#i18n}}reserve.warehouse{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="warehouse" id="warehouse" data-col="10" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="stack">{{#i18n}}reserve.stack{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="stack" id="stack" data-col="11" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="weight">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="weight" id="weight" data-col="12" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="weightAll">{{#i18n}}reserve.weightAll{{/i18n}}({{#i18n}}reserve.ton{{/i18n}}) :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="weightAll" id="weightAll" data-col="13" required>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="samplingId">{{#i18n}}reserve.sampling{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="samplingId" id="samplingId" data-col="14" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="grade">{{#i18n}}reserve.grade{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="grade" id="grade" data-col="15" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="col-md-6 control-label" for="justin">{{#i18n}}reserve.grade{{/i18n}}C {{#i18n}}reserve.justin{{/i18n}} :</label>
+                                            <div class="col-md-6">
+                                                <select class="form-control input-sm" name="justin" id="justin" data-col="16" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <div class="fileUpload btn btn-primary">
-                            <span><i class="fa fa-folder-open"></i> {{#i18n}}reserve.buttonChoose{{/i18n}}</span>
-                            <input id="fileUpload" type="file" class="upload" required/>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-12" style="margin-bottom: 40px;">
+                        <div class="toggle" data-plugin-toggle>
+                            <section class="toggle active">
+                                <label>{{#i18n}}import.sample{{/i18n}}</label>
+                                <div class="toggle-content">
+                                    <div class="table-responsive">
+                                        <table id="table" class="table table-bordered table-striped table-condensed mb-none">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.code{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.bagNo{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.province{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.project{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.round{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.silo{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.address{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.associate{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.type{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.warehouse{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.stack{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weightAll{{/i18n}}({{#i18n}}reserve.ton{{/i18n}})</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.sampling{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.grade{{/i18n}}</th>
+                                                    <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.grade{{/i18n}}C<br>{{#i18n}}reserve.justin{{/i18n}}</th>
+
+                                                </tr>
+                                                <tr>
+                                                    <th class="text-center" style="vertical-align: middle;" id="codeDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="bagNoDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="provinceDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="projectDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="roundDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="siloDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="addressDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="associateDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="typeDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="warehouseDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="stackDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="weightDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="weightAllDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="samplingIdDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="gradeDiv">-</th>
+                                                    <th class="text-center" style="vertical-align: middle;" id="justinDiv">-</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="16" class="text-center">-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-3">
-                    <label class="col-md-4 control-label" for="sheet">{{#i18n}}reserve.sheet{{/i18n}} :</label>
-                    <div class="col-md-8">
-                        <input type="text" id="sheet" name="sheet" class="form-control" placeholder="ลำดับชีท" value="1" required/>
-                    </div>
-                </div>
 
-                <div class="col-md-3">
-                    <label class="col-md-4 control-label" for="row">{{#i18n}}reserve.row{{/i18n}} :</label>
-                    <div class="col-md-8">
-                        <input type="text" id="row" name="row" class="form-control" placeholder="เริ่มบรรทัดที่" value="5" required/>
-                    </div>
-                </div>
 
-                <div class="col-md-2 text-right">
-                    <a class="btn btn-success read"><i class="fa fa-eye"></i> {{#i18n}}reserve.buttonRead{{/i18n}}</a>&nbsp;
-                    <a class="btn btn-default cancel"><i class="fa fa-trash"></i> {{#i18n}}reserve.buttonCancel{{/i18n}}</a>
+                <div class="col-md-12 text-center" id="saveLoading"></div>
+
+                <div class="col-md-12 text-right" style="margin: 10px;">
+                    <input type="hidden" value="{{statusId}}" id="statusId" />
+                    <button class="btn btn-primary import disabled"><i class="fa fa-save"></i> {{#i18n}}system.save{{/i18n}}</button>
                 </div>
             </form>
-        </div>
-
-        <div class="col-md-12 text-center" id="readLoading"></div>
-    </div>
-
-    <form id="form2" class="form-horizontal form-bordered" onsubmit="return(false)">
-    <div class="col-md-12">
-        <div class="col-md-12" style="margin-bottom: 40px;">
-            <div class="toggle" data-plugin-toggle>
-                <section class="toggle active">
-                    <label>{{#i18n}}reserve.buttonRead{{/i18n}} : <span id="fileNameDisplay"></span></label>
-                    <div class="toggle-content">
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="code">{{#i18n}}reserve.code{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="code" id="code" data-col="1" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="bagNo">{{#i18n}}reserve.bagNo{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="bagNo" id="bagNo" data-col="2" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="province">{{#i18n}}reserve.province{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="province" id="province" data-col="3" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="project">{{#i18n}}reserve.project{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="project" id="project" data-col="4" required>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="round">{{#i18n}}reserve.round{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="round" id="round" data-col="5" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="silo">{{#i18n}}reserve.silo{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="silo" id="silo" data-col="6" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="address">{{#i18n}}reserve.address{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="address" id="address" data-col="7" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="associate">{{#i18n}}reserve.associate{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="associate" id="associate" data-col="8" required>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="type">{{#i18n}}reserve.type{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="type" id="type" data-col="9" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="warehouse">{{#i18n}}reserve.warehouse{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="warehouse" id="warehouse" data-col="10" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="stack">{{#i18n}}reserve.stack{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="stack" id="stack" data-col="11" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="weight">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}}) :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="weight" id="weight" data-col="12" required>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="samplingId">{{#i18n}}reserve.samplingId{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="samplingId" id="samplingId" data-col="13" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="grade">{{#i18n}}reserve.grade{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="grade" id="grade" data-col="14" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="discount">{{#i18n}}reserve.discount{{/i18n}} :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="discount" id="discount" data-col="15" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3">
-                                <label class="col-md-6 control-label" for="weightAll">{{#i18n}}reserve.weightAll{{/i18n}}({{#i18n}}reserve.ton{{/i18n}}) :</label>
-                                <div class="col-md-6">
-                                    <select class="form-control input-sm" name="weightAll" id="weightAll" data-col="16" required>
-                                    </select>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-12"><!-- table shown file detail -->
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1One">
-                            {{#i18n}}reserve.import.panelSample{{/i18n}}
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapse1One" class="accordion-body collapse in">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table id="table" class="table table-bordered table-striped table-condensed mb-none">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.code{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.bagNo{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.province{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.project{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.round{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.silo{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.address{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.associate{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.type{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.warehouse{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.stack{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weight{{/i18n}} ({{#i18n}}reserve.ton{{/i18n}})</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.samplingId{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.grade{{/i18n}}</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.discount{{/i18n}}<br>({{#i18n}}reserve.percent{{/i18n}})</th>
-                                        <th class="text-center" style="vertical-align: middle;">{{#i18n}}reserve.weightAll{{/i18n}}({{#i18n}}reserve.ton{{/i18n}})</th>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-center" style="vertical-align: middle;" id="codeDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="bagNoDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="provinceDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="projectDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="roundDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="siloDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="addressDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="associateDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="typeDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="warehouseDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="stackDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="weightDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="samplingIdDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="gradeDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="discountDiv">-</th>
-                                        <th class="text-center" style="vertical-align: middle;" id="weightAllDiv">-</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td colspan="16" class="text-center">-</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div><!-- end table shown file detail -->
-
-    <div class="col-md-12 text-center" id="saveLoading"></div>
-
-    <div class="col-md-12 text-right" style="margin: 10px;">
-        <button class="btn btn-primary import"><i class="fa fa-save"></i> {{#i18n}}reserve.buttonSave{{/i18n}}</button>
-    </div>
-    </form>
-    </div><!--  row  -->
+        </div><!--  row  -->
     </div><!--  container  -->
 </div><!-- main -->
 {{>footer}}
 <script type="text/javascript">
     var listArr = [];
     var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-
     $(function () {
-        $("#form2 select").each(function(){
+        $("#form2 select").each(function () {
             var pthis = $(this);
-            pthis.change(function(){
+            pthis.change(function () {
                 var val = pthis.val();
                 var option = pthis.attr("name");
                 var col = parseInt(pthis.attr("data-col"));
 
-                if(typeof alphabet[pthis.val()] === "undefined") alphabet[pthis.val()] = "-";
+                if (typeof alphabet[pthis.val()] === "undefined")
+                    alphabet[pthis.val()] = "-";
 
-                $("#"+option+"Div").html(alphabet[pthis.val()]);
+                $("#" + option + "Div").html(alphabet[pthis.val()]);
 
-                $("#table tbody tr td:nth-child("+(col)+")").each(function(i){
-                    if(typeof listArr[i][val] === "undefined") var data = '';
-                    else var data = listArr[i][val];
+                $("#table tbody tr td:nth-child(" + (col) + ")").each(function (i) {
+                    if (typeof listArr[i][val] === "undefined")
+                        var data = '';
+                    else
+                        var data = listArr[i][val];
 
                     $(this).html(data);
                 });
@@ -312,24 +314,30 @@
         });
 
 
-        $("#fileUpload").change(function(){
+        $("#fileUpload").change(function () {
             $("#fileName").val($(this).val());
         });
 
-        $("a.cancel").unbind().click(function(){
+        $("a.cancel").unbind().click(function () {
             toggleShow("form");
         });
 
-        $("a.read").unbind().click(function(){
+        $("a.read").unbind().click(function () {
             var isValid = true;
-            $('#form input[required]').each(function() {
-                if($(this).val() == "" && !$(this).prop("disabled")){
+            $('#form input[required]').each(function () {
+                if ($(this).val() == "" && !$(this).prop("disabled")) {
                     isValid = false;
-                    $(this).focus();
+//                    console.log($(this).attr('id'));
+                    if ($(this).attr('id').indexOf('Upload') > -1) {
+                        $(this).click();
+                    } else {
+                        $(this).focus();
+                    }
+                    return false;
                 }
             });
 
-            if(isValid){
+            if (isValid) {
                 toggleShow("form");
 
                 $("#readLoading").html('Loading...');
@@ -340,12 +348,12 @@
                 formData.append('row', $("#row").val());
 
                 var datas = callAjaxFile("{{_context_path}}/api/reserve/import/view", "post", formData, "json");
-                if(typeof datas !== "undefined" && datas !== null){
+                if (typeof datas !== "undefined" && datas !== null) {
                     $("#readLoading").html('');
                     $("#fileNameDisplay").html($("#fileUpload").val());
-
+                    $("button.import").removeClass("disabled");
                     var html = '';
-                    $.each(datas["lists"], function(key, value){
+                    $.each(datas["lists"], function (key, value) {
                         //console.log(value.length);
                         listArr[key] = value;
                         html += '<tr>'
@@ -374,65 +382,66 @@
             }
         });
 
-        $("button.import").unbind().click(function(){
+        $("button.import").unbind().click(function () {
+            $("#saveLoading").html('<h4 class="text-warning">กรุณารอสักครู่...ระบบกำลังบันทึกข้อมูล</h4>');
             var isValid = true;
-            $('#form input[required]').each(function() {
-                if($(this).val() == "" && !$(this).prop("disabled")){
+            $('#form input[required]').each(function () {
+                if ($(this).val() == "" && !$(this).prop("disabled")) {
                     isValid = false;
                     $(this).focus();
                 }
             });
 
-            $('#form2 select').each(function() {
-                if($(this).val() == null){
+            $('#form2 select').each(function () {
+                if ($(this).val() == null) {
                     isValid = false;
                 }
             });
 
-            if(isValid){
-                $("#saveLoading").html('Loading...');
-
+            if (isValid) {
                 var formData = new FormData();
                 formData.append('file', $('#fileUpload')[0].files[0]);
                 formData.append('sheet', $("#sheet").val());
                 formData.append('row', $("#row").val());
+                formData.append('statusId', $("#statusId").val());
 
                 var object = dataObject();
-                jQuery.each(object["Column"], function(key, value) {
-                    formData.append('column['+key+']', value);
+                jQuery.each(object["Column"], function (key, value) {
+                    formData.append('column[' + key + ']', value);
                 });
 
                 var datas = callAjaxFile("{{_context_path}}/api/reserve/import/import", "post", formData, "json");
-                if(typeof datas !== "undefined" && datas !== null){
-                    if(datas["import"] == true){
-                        $("#saveLoading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
-                        setTimeout(function(){
-                            toggleShow("form");
+                if (typeof datas !== "undefined" && datas !== null) {
+                    if (datas["import"] == true) {
+                        $("#saveLoading").html('<h4 class="text-success">บันทึกข้อมูลเรียบร้อย</h4>');
+                        setTimeout(function () {
+//                            toggleShow("form");
+                            window.location.href = "{{_context_path}}/api/reserve/view/confirm";
                         }, 500);
                     }
-                    else{
-                        $("#saveLoading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>'+datas["save"]+'</span>');
+                    else {
+                        $("#saveLoading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>' + datas["import"] + '</span>');
                     }
                 }
             }
         });
     });
 
-    function listsColumn(){
+    function listsColumn() {
         var html = '<option value="-">ไม่มี</option>';
-        $.each(alphabet, function(key, val){
-            html += '<option value="'+key+'">'+val+'</option>';
+        $.each(alphabet, function (key, val) {
+            html += '<option value="' + key + '">' + val + '</option>';
         });
-        $("#form2 select").each(function(){
+        $("#form2 select").each(function () {
             var col = $(this).attr("data-col");
 
             $(this).html(html).val(col).trigger("change");
         });
     }
 
-    function dataObject(){
+    function dataObject() {
         var dataInfo = {};
-        dataInfo["stackCode"] = 0;
+//        dataInfo["stackCode"] = 0;
 
         $("#form2 select").each(function (i) {
             var fname = $(this).attr("name");
@@ -446,12 +455,13 @@
         return fdata;
     }
 
-    function toggleShow(option){
-        if(option == "form"){
+    function toggleShow(option) {
+        if (option == "form") {
+            $("button.import").addClass("disabled");
             $("#form2 select").each(function (i) {
                 $(this).val('');
 
-                $("#"+$(this).attr("name")+"Div").html("-");
+                $("#" + $(this).attr("name") + "Div").html("-");
             });
 
             $("#fileNameDisplay").html('');

@@ -8,6 +8,7 @@ namespace apps\reserve\interfaces;
  * @description ประมูล
  */
 interface IImportService {
+
     /**
      * @name view
      * @uri /view
@@ -25,9 +26,10 @@ interface IImportService {
      * @param file file Description
      * @param integer sheet Description
      * @param integer row Description
+     * @param integer statusId
      * @param String[] column Description
      * @return boolean import Description
      * @description ผู้เสนอราคาสูงสุดต่อคลัง
      */
-    public function import($file, $sheet, $row, $column);
-} 
+    public function import($file, $sheet, $row, $statusId, $column);
+}

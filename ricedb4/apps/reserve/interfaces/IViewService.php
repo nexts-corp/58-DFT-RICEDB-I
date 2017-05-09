@@ -32,7 +32,7 @@ interface IViewService {
     /**
      * @name confirm
      * @uri /confirm
-     * @description M33 นำเข้าข้อมูลคลังสินค้า
+     * @description M33 ส่งออกและนำเข้าข้อมูลคลังสินค้า
      * @authen true
      * @resource 10000000
      * @sitemap true
@@ -47,15 +47,13 @@ interface IViewService {
      * @resource 10000000
      * @sitemap true
      */
-    public function exportReserve();
+    /* public function exportReserve(); */
 
     /**
      * @name importReserve
-     * @uri /importReserve
-     * @description M35 นำไฟล์เข้าจาก อคส./อตก.
+     * @uri /importReserve 
      * @authen true
      * @resource 10000000
-     * @sitemap true
      */
-    public function importReserve();
+    public function importReserve(); //@description M35 นำไฟล์เข้าจาก อคส./อตก.
 }

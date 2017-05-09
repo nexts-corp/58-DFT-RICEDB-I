@@ -37,8 +37,8 @@ class ManagesService extends CServiceBase implements IManagesService {
                 $status->id = $val_book['status_id'];
                 $data_status = $this->datacontext->getObject($status);
                 if (count($data_status) > 0) {
-                    if (strpos($data_status[0]->active, "R") > -1) {
-                        $data_status[0]->active = str_replace("R", "C", $data_status[0]->active);
+                    if (strpos($data_status[0]->active, "R1") > -1) {
+                        $data_status[0]->active = str_replace("R1", "R2", $data_status[0]->active);
                         $this->datacontext->updateObject($data_status);
                     }
                 }
@@ -46,7 +46,7 @@ class ManagesService extends CServiceBase implements IManagesService {
         }
         $sql = "SELECT st "
                 . " FROM " . $this->ent . "\\Status st "
-                . " WHERE st.active like 'R%' or st.active like 'C%' "
+                . " WHERE st.active like 'R1%' or st.active like 'R2%' "
                 . " ORDER BY st.id ASC";
         return $this->datacontext->getObject($sql);
     }
@@ -88,7 +88,7 @@ class ManagesService extends CServiceBase implements IManagesService {
             $status = new \apps\common\entity\Status();
             $status->id = $status_id;
             $data_status = $this->datacontext->getObject($status)[0];
-            $data_status->active = str_replace("C", "R", $data_status->active);
+            $data_status->active = str_replace("R2", "R1", $data_status->active);
             $this->datacontext->updateObject($data_status);
         }
         return true;
@@ -98,11 +98,36 @@ class ManagesService extends CServiceBase implements IManagesService {
         $status = new \apps\common\entity\Status();
         $status->id = $status_id;
         $data = $this->datacontext->getObject($status)[0];
-        $data->active = str_replace("C", "W", $data->active);
+        $data->active = str_replace("R2", "R3", $data->active);
         return $this->datacontext->updateObject($data);
     }
 
     public function insert($status) {
+        $prefix = substr($status->keyword, 0, 2); //sub AU or GG
+        $postfix = "";
+        $postsql = "";
+        if (strpos($status->keyword, "-")) { // set prefix -I,-I2,-O
+            $postfix = "-" . explode("-", $status->keyword)[1];
+            $postsql = " like '%" . $postfix . "' ";
+        } else {
+            $postsql = " not like '%-%'";
+        }
+        $year = date("Y") + 543; //this year (2017 => 2560)
+        $sql = " select st.keyword from " . $this->ent . "\\Status st "
+                . "where st.keyword like '%" . $year . "%' and "
+                . "st.keyword like '" . $prefix . "%' and "
+                . "st.keyword " . $postsql;
+        $list = $this->datacontext->getObject($sql);
+        $no = array();
+        if (count($list) > 0) { //convert to int
+            foreach ($list as &$value) {
+                array_push($no, (int) explode("/", substr($value['keyword'], 2))[0]);
+            }
+        } else {
+            array_push($no, 0);
+        }
+        $no = max($no) + 1; //find max +1
+        $status->keyword = $prefix . $no . "/" . $year . $postfix;
         $return = true;
         if (!($this->datacontext->saveObject($status))) {
             $return = $this->datacontext->getLastMessage();
@@ -110,7 +135,8 @@ class ManagesService extends CServiceBase implements IManagesService {
         return $return;
     }
 
-    public function export() {
+    public
+            function export() {
         set_time_limit(0);
         ini_set('memory_limit', '-1');
         $sql = "SELECT * FROM fn_product8()";
