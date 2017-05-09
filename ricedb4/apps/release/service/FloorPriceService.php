@@ -21,7 +21,7 @@ class FloorPriceService extends CServiceBase implements IFloorPriceService {
     public function listsAuction() {
         $sql = "SELECT st.id, st.status, st.keyword, st.ageStop, st.dateStart"
             ." FROM ".$this->ent."\\Status st"
-            ." WHERE st.keyword like 'AU%'"
+            ." WHERE st.keyword like 'AU%' and (st.active like 'Y%' or st.active like 'F%') "
             ." ORDER BY st.id DESC";
         $data = $this->datacontext->getObject($sql);
         return $data;
