@@ -10,8 +10,7 @@ class RiceTracking extends EntityBase {
 
     /**
      * @Id
-     * @Column(type="integer",length=11,name="Id")
-     * @GeneratedValue
+     * @Column(type="string",length=255,name="Id")
      */
     public $id;
 
