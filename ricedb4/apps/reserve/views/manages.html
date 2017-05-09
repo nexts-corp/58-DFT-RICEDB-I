@@ -39,11 +39,11 @@
                     <table id="tableList" class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
                             <tr>
-                                <th class="text-center col-md-1">{{#i18n}}system.no{{/i18n}}</th>
-                                <th class="text-center col-md-2">{{#i18n}}system.type{{/i18n}}</th>
+                                <th class="text-center">{{#i18n}}system.no{{/i18n}}</th>
+                                <th class="text-center col-md-1">{{#i18n}}system.type{{/i18n}}</th>
                                 <th class="text-center col-md-3">{{#i18n}}system.list{{/i18n}}</th>
                                 <th class="text-center col-md-2">{{#i18n}}system.date{{/i18n}}{{#i18n}}system.create{{/i18n}}</th>
-                                <th class="text-center col-md-1">{{#i18n}}system.status{{/i18n}}</th>
+                                <th class="text-center col-md-2">{{#i18n}}system.status{{/i18n}}</th>
                                 <th class="text-center col-md-3">{{#i18n}}system.tools{{/i18n}}</th>
                             </tr>
                         </thead>
@@ -391,12 +391,12 @@
                         + '<td class="text-center">' + (++i) + '</td>'
                         + '<td class="text-center">' + lkReserves[value['keyword'].substr(0, 2)] + '</td>'
                         + '<td>' + value["status"] + '</td>'
-                        + '<td class="text-center">' + value["dateCreated"]['date'].substr(0, 10) + '</td>'
-                        + '<td class="text-center text-bold"><span class="' + (value['active'].indexOf('R1') > -1 ? 'text-warning">ยังไม่เลือกคลังสินค้า' : 'text-success">เลือกคลังสินค้าแล้ว') + '</span></td>'
+                        + '<td class="text-center">' + value["dateCreated"].substr(0, 10) + '</td>'
+                        + '<td class="text-center text-bold"><span class="' + (value['active'].indexOf('R1') > -1 ? 'text-warning">ยังไม่เลือกคลังสินค้า' : 'text-success">เลือกคลังสินค้าแล้ว</span><br><span>' + accounting.formatNumber(value['weight'], 6, ",", ".") + ' ตัน') + '</span></td>'
                         + '<td class="text-center">'
                         + '<button class="btn btn-default select-silo" data-keyword="' + value['keyword'] + '" data-status="' + value["status"] + '" data-status_id="' + value["id"] + '"><i class="fa fa-home"></i> คลังสินค้า</button>'
                         + ' <button class="btn btn-success confirm-status"' + (value['active'].indexOf('R1') > -1 ? 'disabled' : '') + '  data-status_id="' + value["id"] + '"><i class="fa fa-check"></i> ยืนยัน</button>'
-                        + ' <button class="btn btn-danger delete-status"' + (value['active'].indexOf('R1') > -1 ? '' : 'disabled') + ' data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
+                        + ' <button class="btn btn-danger delete-status" data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
                         + '</td>'
                         + '</tr>';
             });

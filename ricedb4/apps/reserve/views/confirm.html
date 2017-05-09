@@ -144,10 +144,36 @@
         });
         $(".import-excel").click(function () {
             var i = $(this).data('key');
-            window.location.href = "{{_context_path}}/api/reserve/view/importReserve?status=" + dataPublic[i].id;
+            var cfm = $.confirm({
+                title: 'ยืนยันการนำเข้าข้อมูล!',
+                content: "รายการสำรอง " + dataPublic[i].status +" เดิมจะถูกทับ!",
+                confirmButton: 'ตกลง',
+                cancelButton: 'ยกเลิก',
+                confirmButtonClass: 'btn-primary',
+                cancelButtonClass: 'btn-default',
+                columnClass: 'col-md-4 col-md-offset-4',
+                autoClose: 'cancel|11000',
+                confirm: function () {
+                    cfm.close();
+                    window.location.href = "{{_context_path}}/api/reserve/view/importReserve?status=" + dataPublic[i].id;
+                }
+            });
         });
         $(".confirm-status").click(function () {
-            toggleShow("form");
+            var i = $(this).data('key');
+            var cfm = $.confirm({
+                title: 'การยืนยันข้อมูล!',
+                content: "ต้องการยืนยันรายการสำรอง " + dataPublic[i].status,
+                confirmButton: 'ตกลง',
+                cancelButton: 'ยกเลิก',
+                confirmButtonClass: 'btn-success',
+                cancelButtonClass: 'btn-default',
+                columnClass: 'col-md-4 col-md-offset-4',
+                autoClose: 'cancel|11000',
+                confirm: function () {
+                    cfm.close();
+                }
+            });
         });
         $(".delete-status").click(function () {
             var i = $(this).data('key');

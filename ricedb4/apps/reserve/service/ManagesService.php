@@ -44,11 +44,24 @@ class ManagesService extends CServiceBase implements IManagesService {
                 }
             }
         }
-        $sql = "SELECT st "
-                . " FROM " . $this->ent . "\\Status st "
-                . " WHERE st.active like 'R1%' or st.active like 'R2%' "
-                . " ORDER BY st.id ASC";
-        return $this->datacontext->getObject($sql);
+//        $sql = "SELECT st "
+//                . " FROM " . $this->ent . "\\Status st "
+//                . " WHERE st.active like 'R1%' or st.active like 'R2%' "
+//                . " ORDER BY st.id ASC";
+        $sql = "SELECT st.id,st.status,st.keyword,st.active,st.date_created as dateCreated,rt.weight 
+		FROM   dft_lk_Status st 
+		left join (
+				select b.status_id,sum(p.weight) as weight
+				from dft_booking b
+				left join (
+					select status as bookId,sum(tweight) as weight
+					from dft_product where status is not null group by status
+				)	p on b.book_id = p.bookId
+				group by b.status_id
+) rt on st.id=rt.status_id 
+		WHERE st.active like 'R1%' or st.active like 'R2%'
+		ORDER BY st.id ASC";
+        return $this->datacontext->pdoQuery($sql);
     }
 
     public function selectBook($status_id, $book_id) {
