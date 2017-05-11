@@ -425,10 +425,20 @@
                 autoClose: 'cancel|11000',
                 confirm: function () {
                     cfm.close();
-                    var result = callAjax("{{_context_path}}/api/reserve/manages/confirm/status", "post", {status_id: dataPublic[i].id}, "json")["confirm"];
-                    if (result) {
-                        lkStatusReserv(lkReserves);
-                    }
+                    setTimeout(function () {
+                        var result = callAjax("{{_context_path}}/api/reserve/manages/confirm/status", "post", {status_id: dataPublic[i].id}, "json")["confirm"];
+                        if (result) {
+                            $.alert({
+                                title: 'การยืนยันข้อมูล!',
+                                content: 'ยืนยันสำเร็จ!',
+                                confirmButton: "ตกลง",
+                                confirmButtonClass: 'btn-success',
+                                //theme: 'black',
+                                columnClass: 'col-md-4 col-md-offset-4'
+                            });
+                            lkStatusReserv(lkReserves);
+                        }
+                    }, 200);
                 }
             });
 
@@ -447,10 +457,20 @@
                 autoClose: 'cancel|11000',
                 confirm: function () {
                     cfm.close();
-                    var result = callAjax("{{_context_path}}/api/reserve/manages/delete/status", "post", {status_id: dataPublic[i].id}, "json")["delete"];
-                    if (result) {
-                        lkStatusReserv(lkReserves);
-                    }
+                    setTimeout(function () {
+                        var result = callAjax("{{_context_path}}/api/reserve/manages/delete/status", "post", {status_id: dataPublic[i].id}, "json")["delete"];
+                        if (result) {
+                            $.alert({
+                                title: 'การลบข้อมูล!',
+                                content: 'ลบสำเร็จ!',
+                                confirmButton: "ตกลง",
+                                confirmButtonClass: 'btn-danger',
+                                //theme: 'black',
+                                columnClass: 'col-md-4 col-md-offset-4'
+                            });
+                            lkStatusReserv(lkReserves);
+                        }
+                    }, 200);
                 }
             });
         });

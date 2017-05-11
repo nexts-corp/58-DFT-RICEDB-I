@@ -42,13 +42,23 @@ class ConfirmService extends CServiceBase implements IConfirmService {
             st.active,
             st.filename,
             st.date_created  as dateCreated,
-            rt.weight 
+            rt.weight as weightTrack,
+            bk.weight as weightBook
 		FROM   dft_lk_Status st 
 		left join (
 				select lk_status_keyword,sum(tweight) as weight
 				from dft_Rice_Tracking
 				group by LK_Status_Keyword
                 ) rt on st.keyword=rt.lk_status_keyword 
+                left join (
+                            select 
+                                b.status_id,
+                                sum(p.tweight) as weight
+                            from dft_product p
+                            left join dft_booking b on b.book_id=p.status
+                            where p.status is not null and b.status_id is not null
+                            group by b.status_id
+                ) bk on st.id=bk.status_id 
 		WHERE st.active like 'R3%' 
 		ORDER BY st.id ASC";
         return $this->datacontext->pdoQuery($sql);

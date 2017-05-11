@@ -1067,7 +1067,7 @@
                     cancelButton: 'ยกเลิก',
                     confirmButtonClass: 'btn-danger',
                     cancelButtonClass: 'btn-default',
-                   // theme: 'holodark',
+                    // theme: 'holodark',
                     columnClass: 'col-md-4 col-md-offset-4',
                     autoClose: 'cancel|11000',
                     confirm: function () {
@@ -1075,9 +1075,17 @@
                         setTimeout(function () {
                             var result = callAjax("{{_context_path}}/api/reserve/filter/delete", "post", {book_id: book_id}, "json")["delete"];
                             if (result) {
+                                $.alert({
+                                    title: 'การลบข้อมูล!',
+                                    content: 'ลบสำเร็จ!',
+                                    confirmButton: "ตกลง",
+                                    confirmButtonClass: 'btn-danger',
+                                    //theme: 'black',
+                                    columnClass: 'col-md-4 col-md-offset-4'
+                                });
                                 toggleShow("table");
                             }
-                        }, 1000);
+                        }, 200);
 
                     }
                 });
