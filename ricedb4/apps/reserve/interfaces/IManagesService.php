@@ -58,9 +58,18 @@ interface IManagesService {
      * @uri /confirm/status
      * @param String status_id
      * @return boolean confirm
-     * @description คลังที่เลือกแล้ว
+     * @description ยืนยันรายการสำรอง
      */
     public function confirmStatus($status_id);
+
+    /**
+     * @name deleteStatus
+     * @uri /delete/status
+     * @param String status_id
+     * @return boolean delete
+     * @description ลบรายการสำรอง
+     */
+    public function deleteStatus($status_id);
 
     /**
      * @name insert

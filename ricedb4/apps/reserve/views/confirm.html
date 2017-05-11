@@ -144,20 +144,25 @@
         });
         $(".import-excel").click(function () {
             var i = $(this).data('key');
-            var cfm = $.confirm({
-                title: 'ยืนยันการนำเข้าข้อมูล!',
-                content: "รายการสำรอง " + dataPublic[i].status +" เดิมจะถูกทับ!",
-                confirmButton: 'ตกลง',
-                cancelButton: 'ยกเลิก',
-                confirmButtonClass: 'btn-primary',
-                cancelButtonClass: 'btn-default',
-                columnClass: 'col-md-4 col-md-offset-4',
-                autoClose: 'cancel|11000',
-                confirm: function () {
-                    cfm.close();
-                    window.location.href = "{{_context_path}}/api/reserve/view/importReserve?status=" + dataPublic[i].id;
-                }
-            });
+            if (dataPublic[i].filename === null) {
+                window.location.href = "{{_context_path}}/api/reserve/view/importReserve?status=" + dataPublic[i].id;
+            } else {
+                var cfm = $.confirm({
+                    title: 'ยืนยันการนำเข้าข้อมูล!',
+                    content: "รายการสำรอง " + dataPublic[i].status + " เดิมจะถูกทับ!",
+                    confirmButton: 'ตกลง',
+                    cancelButton: 'ยกเลิก',
+                    confirmButtonClass: 'btn-primary',
+                    cancelButtonClass: 'btn-default',
+                    columnClass: 'col-md-4 col-md-offset-4',
+                    autoClose: 'cancel|11000',
+                    confirm: function () {
+                        cfm.close();
+                        window.location.href = "{{_context_path}}/api/reserve/view/importReserve?status=" + dataPublic[i].id;
+                    }
+                });
+            }
+
         });
         $(".confirm-status").click(function () {
             var i = $(this).data('key');
@@ -172,22 +177,30 @@
                 autoClose: 'cancel|11000',
                 confirm: function () {
                     cfm.close();
+                    var result = callAjax("{{_context_path}}/api/reserve/confirm/confirm", "post", {status_id: dataPublic[i].id}, "json")["confirm"];
+                    if (result) {
+                        lkStatusReserv(lkReserves);
+                    }
                 }
             });
         });
         $(".delete-status").click(function () {
             var i = $(this).data('key');
             var cfm = $.confirm({
-                title: 'ยืนยันการลบข้อมูล!',
-                content: "ต้องการลบรายการสำรอง " + dataPublic[i].status,
+                title: 'ยืนยันการยกเลิกข้อมูล!',
+                content: "ต้องการยกเลิกรายการสำรอง " + dataPublic[i].status,
                 confirmButton: 'ตกลง',
                 cancelButton: 'ยกเลิก',
-                confirmButtonClass: 'btn-danger',
+                confirmButtonClass: 'btn-warning',
                 cancelButtonClass: 'btn-default',
                 columnClass: 'col-md-4 col-md-offset-4',
                 autoClose: 'cancel|11000',
                 confirm: function () {
                     cfm.close();
+                    var result = callAjax("{{_context_path}}/api/reserve/confirm/cancel", "post", {status_id: dataPublic[i].id}, "json")["cancel"];
+                    if (result) {
+                        lkStatusReserv(lkReserves);
+                    }
                 }
             });
         })
@@ -230,7 +243,7 @@
                         + '</td>'
                         + '<td class="text-center">'
                         + ' <button class="btn confirm-status btn-success"' + (value['filename'] !== null ? '' : 'disabled') + '  data-key="' + key + '"><i class="fa fa-check"></i> ยืนยัน</button>'
-                        + ' <button class="btn delete-status btn-danger" data-key="' + key + '"><i class="fa fa-remove"></i> ลบ</button>'
+                        + ' <button class="btn delete-status btn-warning" data-key="' + key + '"><i class="fa fa-remove"></i> ยกเลิก</button>'
                         + '</td>'
                         + '</tr>';
             });

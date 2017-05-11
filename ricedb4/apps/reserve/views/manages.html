@@ -174,6 +174,7 @@
 <!--<script src="{{_context_path}}/asset/vendor/bootstrap-wizard/jquery.bootstrap.wizard.js"></script>-->
 
 <script type="text/javascript">
+    var dataPublic;
     $(function () {
         var lkReserves = listsReserve();
 
@@ -385,6 +386,7 @@
         var html = '<tr><td colspan="6" class="text-center">ไม่มีรายการสำรอง</td></tr>';
         if (typeof datas !== "undefined" && datas !== null && datas['lists'].length != 0) {
             html = '';
+            dataPublic = datas["lists"];
             var i = 0;
             $.each(datas["lists"], function (key, value) {
                 html += '<tr>'
@@ -394,9 +396,9 @@
                         + '<td class="text-center">' + value["dateCreated"].substr(0, 10) + '</td>'
                         + '<td class="text-center text-bold"><span class="' + (value['active'].indexOf('R1') > -1 ? 'text-warning">ยังไม่เลือกคลังสินค้า' : 'text-success">เลือกคลังสินค้าแล้ว</span><br><span>' + accounting.formatNumber(value['weight'], 6, ",", ".") + ' ตัน') + '</span></td>'
                         + '<td class="text-center">'
-                        + '<button class="btn btn-default select-silo" data-keyword="' + value['keyword'] + '" data-status="' + value["status"] + '" data-status_id="' + value["id"] + '"><i class="fa fa-home"></i> คลังสินค้า</button>'
-                        + ' <button class="btn btn-success confirm-status"' + (value['active'].indexOf('R1') > -1 ? 'disabled' : '') + '  data-status_id="' + value["id"] + '"><i class="fa fa-check"></i> ยืนยัน</button>'
-                        + ' <button class="btn btn-danger delete-status" data-status_id="' + value["id"] + '"><i class="fa fa-trash"></i> ลบ</button>'
+                        + '<button class="btn btn-default select-silo" data-key="' + key + '"><i class="fa fa-home"></i> คลังสินค้า</button>'
+                        + ' <button class="btn btn-success confirm-status"' + (value['active'].indexOf('R1') > -1 ? 'disabled' : '') + '  data-key="' + key + '"><i class="fa fa-check"></i> ยืนยัน</button>'
+                        + ' <button class="btn btn-danger delete-status" data-key="' + key + '"><i class="fa fa-remove"></i> ลบ</button>'
                         + '</td>'
                         + '</tr>';
             });
@@ -404,18 +406,53 @@
         $("#tableList tbody").html(html);
 
         $('.select-silo').unbind().click(function () {
-            var status_id = $(this).data('status_id');
-            listsBook(status_id, lkReserves);
+            var i = $(this).data('key');
+            listsBook(dataPublic[i].id, lkReserves);
             $("#siloModal").modal('show');
-            $(".modal-title").text(' [' + lkReserves[$(this).data('keyword').substr(0, 2)] + '] ' + $(this).data('status'));
+            $(".modal-title").text(' [' + lkReserves[dataPublic[i].keyword.substr(0, 2)] + '] ' + dataPublic[i].status);
         });
 
         $('.confirm-status').unbind().click(function () {
-            var status_id = $(this).data('status_id');
-            var result = callAjax("{{_context_path}}/api/reserve/manages/confirm/status", "post", {status_id: status_id}, "json")["confirm"];
-            if (result) {
-                lkStatusReserv(lkReserves);
-            }
+            var i = $(this).data('key');
+            var cfm = $.confirm({
+                title: 'การยืนยันข้อมูล!',
+                content: "ต้องการยืนยันรายการสำรอง " + dataPublic[i].status + "?",
+                confirmButton: 'ตกลง',
+                cancelButton: 'ยกเลิก',
+                confirmButtonClass: 'btn-success',
+                cancelButtonClass: 'btn-default',
+                columnClass: 'col-md-4 col-md-offset-4',
+                autoClose: 'cancel|11000',
+                confirm: function () {
+                    cfm.close();
+                    var result = callAjax("{{_context_path}}/api/reserve/manages/confirm/status", "post", {status_id: dataPublic[i].id}, "json")["confirm"];
+                    if (result) {
+                        lkStatusReserv(lkReserves);
+                    }
+                }
+            });
+
+        });
+
+        $(".delete-status").unbind().click(function () {
+            var i = $(this).data('key');
+            var cfm = $.confirm({
+                title: 'ยืนยันการลบข้อมูล!',
+                content: "ต้องการลบรายการสำรอง " + dataPublic[i].status + "?",
+                confirmButton: 'ตกลง',
+                cancelButton: 'ยกเลิก',
+                confirmButtonClass: 'btn-danger',
+                cancelButtonClass: 'btn-default',
+                columnClass: 'col-md-4 col-md-offset-4',
+                autoClose: 'cancel|11000',
+                confirm: function () {
+                    cfm.close();
+                    var result = callAjax("{{_context_path}}/api/reserve/manages/delete/status", "post", {status_id: dataPublic[i].id}, "json")["delete"];
+                    if (result) {
+                        lkStatusReserv(lkReserves);
+                    }
+                }
+            });
         });
     }
 

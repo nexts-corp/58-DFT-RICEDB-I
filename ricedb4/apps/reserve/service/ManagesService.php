@@ -115,6 +115,24 @@ class ManagesService extends CServiceBase implements IManagesService {
         return $this->datacontext->updateObject($data);
     }
 
+    public function deleteStatus($status_id) {
+        $book = new \apps\common\entity\Booking();
+        $book->status_id = $status_id;
+        $dataBook = $this->datacontext->getObject($book);
+        if (count($dataBook) > 0) {
+            foreach ($dataBook as &$value) {
+                $value->status_id = null;
+                $value->book_status = 'N';
+            }
+            if (!$this->datacontext->updateObject($dataBook)) {
+                return $this->datacontext->getLastMessage();
+            }
+        }
+        $status = new \apps\common\entity\Status();
+        $status->id = $status_id;
+        return $this->datacontext->removeObject($this->datacontext->getObject($status));
+    }
+
     public function insert($status) {
         $prefix = substr($status->keyword, 0, 2); //sub AU or GG
         $postfix = "";
@@ -148,8 +166,7 @@ class ManagesService extends CServiceBase implements IManagesService {
         return $return;
     }
 
-    public
-            function export() {
+    public function export() {
         set_time_limit(0);
         ini_set('memory_limit', '-1');
         $sql = "SELECT * FROM fn_product8()";

@@ -33,4 +33,22 @@ interface IConfirmService {
      * @description export excel
      */
     public function export($status_id);
+
+    /**
+     * @name confirm
+     * @uri /confirm
+     * @param String status_id
+     * @return boolean confirm
+     * @description ยืนยันรายการสำรอง
+     */
+    public function confirm($status_id);
+
+    /**
+     * @name cancel
+     * @uri /cancel
+     * @param String status_id
+     * @return boolean cancel
+     * @description ลบรายการสำรอง
+     */
+    public function cancel($status_id);
 }

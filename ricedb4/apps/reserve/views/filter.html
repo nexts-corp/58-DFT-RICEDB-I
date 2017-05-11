@@ -1018,9 +1018,9 @@
                         "sClass": "text-center col-md-4",
                         "render": function (data, key, full) {
                             return '<button class="btn btn-primary edit-book" data-id="' + full['book_id'] + '"><i class="fa fa-edit"></i> {{#i18n}}system.edit{{/i18n}}</button>'
-                                    + ' <button class="btn btn-default cut-stack" data-id="' + full['book_id'] + '"><i class="fa fa-cut"></i> {{#i18n}}reserve.cutstack{{/i18n}}</button>'
+                                    + ' <button class="btn btn-warning cut-stack" data-id="' + full['book_id'] + '"><i class="fa fa-cut"></i> {{#i18n}}reserve.cutstack{{/i18n}}</button>'
                                     + ' <button class="btn btn-default export-excel" data-id="' + full['book_id'] + '"><i class="fa fa-file-excel-o"></i> {{#i18n}}system.excel{{/i18n}}</button>'
-                                    + ' <button class="btn btn-default delete-book" data-id="' + full['book_id'] + '"><i class="fa fa-remove"></i> {{#i18n}}system.delete{{/i18n}}</button>'
+                                    + ' <button class="btn btn-danger delete-book" data-id="' + full['book_id'] + '"><i class="fa fa-remove"></i> {{#i18n}}system.delete{{/i18n}}</button>'
                         }
                     }
                 ]
@@ -1065,9 +1065,9 @@
                     content: "คุณต้องการลบการคัดคลังสินค้าครั้งนี้?",
                     confirmButton: 'ตกลง',
                     cancelButton: 'ยกเลิก',
-                    confirmButtonClass: 'btn-success',
-                    cancelButtonClass: 'btn-warning',
-                    theme: 'holodark',
+                    confirmButtonClass: 'btn-danger',
+                    cancelButtonClass: 'btn-default',
+                   // theme: 'holodark',
                     columnClass: 'col-md-4 col-md-offset-4',
                     autoClose: 'cancel|11000',
                     confirm: function () {

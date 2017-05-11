@@ -179,4 +179,30 @@ class ConfirmService extends CServiceBase implements IConfirmService {
 //}
     }
 
+    public function confirm($status_id) {
+        $status = new \apps\common\entity\Status();
+        $status->id = $status_id;
+        $dataStatus = $this->datacontext->getObject($status)[0];
+        $dataStatus->active = str_replace("R3", "W", $dataStatus->active);
+        return $this->datacontext->updateObject($dataStatus);
+    }
+
+    public function cancel($status_id) {
+        $status = new \apps\common\entity\Status();
+        $status->id = $status_id;
+        $dataStatus = $this->datacontext->getObject($status)[0];
+        $dataStatus->filename = null;
+        $dataStatus->active = str_replace("R3", "R2", $dataStatus->active);
+
+        $tracking = new \apps\common\entity\RiceTracking();
+        $tracking->statusKeyword = $dataStatus->keyword;
+        $dataRice = $this->datacontext->getObject($tracking);
+        if (count($dataRice) > 0) {
+            if (!$this->datacontext->removeObject($dataRice)) {
+                return $this->datacontext->getLastMessage();
+            }
+        }
+        return $this->datacontext->updateObject($dataStatus);
+    }
+
 }
