@@ -5,7 +5,7 @@ set_time_limit(0);
 ini_set('memory_limit', '-1');
 require("phpexcel/Classes/PHPExcel/IOFactory.php");
 
-$inputFileName = 'files/AU2_2560_I.xlsx';
+$inputFileName = 'files/AU2_2560.xlsx';
 //$extend = "2";
 
 $count = 0;
@@ -77,11 +77,11 @@ $sheet = $objPHPExcel->getSheet(0);
 //$highestRow = $sheet->getHighestRow();
 $highestColumn = $sheet->getHighestColumn();
 //echo $highestRow."<br>";
-$highestRow = 700;
+$highestRow = 1184;
 //echo $highestRow;
 //exit();
 $count = 0;
-for ($row = 3; $row <= $highestRow; $row++) {
+for ($row = 4; $row <= $highestRow; $row++) {
     //  Read a row of data into an array
 
     $rowData = $sheet->rangeToArray('A' . $row . ':' . 'Q' . $row);
@@ -154,19 +154,36 @@ for ($row = 3; $row <= $highestRow; $row++) {
 $link = null;
 
 function insertData($val) {
-    $statusKeyword = "AU2/2560-I";
-    if ($val["grade"] == 11 || $val["grade"] == 12 || $val["grade"] == 13) {
-        $val["useType"] = 21;
-    } else {
+    $statusKeyword = "AU2/2560";
+    $val["useType"] = $val["type"];
+    if ($val["grade"] == 10) {
         $val["useType"] = 20;
     }
     $val["useGrade"] = $val["grade"];
-    $sqlIns = "INSERT INTO dft_Rice_Tracking (Code, Bag_No, LK_Province_Id, LK_Project_Id,Round, Silo,Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight,Weight_All,TWeight, Sampling_Id, LK_Grade_Id, Discount_Rate,Remark,LK_Status_Keyword,UseType,UseGrade)"
-            . " VALUES( '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "'," . $val["round"] . ", '" . $val["silo"] . "', '" . $val["address"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "','" . $val["weightAll"] . "'," . (float) $val["weightAll"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "','" . $val["remark"] . "','" . $statusKeyword . "','" . $val["useType"] . "','" . $val["useGrade"] . "');";
+    $sqlIns = "INSERT INTO dft_Rice_Tracking (Id,Code, Bag_No, LK_Province_Id, LK_Project_Id,Round, Silo,Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight,Weight_All,TWeight, Sampling_Id, LK_Grade_Id, Discount_Rate,Remark,LK_Status_Keyword,UseType,UseGrade)"
+            . " VALUES('" . getGUID() . "', '" . $val["code"] . "', '" . $val["bagNo"] . "', '" . $val["province"] . "', '" . $val["project"] . "'," . $val["round"] . ", '" . $val["silo"] . "', '" . $val["address"] . "', '" . $val["associate"] . "', '" . $val["type"] . "', '" . $val["warehouse"] . "', '" . $val["stack"] . "', '" . $val["weight"] . "','" . $val["weightAll"] . "'," . (float) $val["weightAll"] . ", '" . $val["sampling"] . "', '" . $val["grade"] . "', '" . $val["discount"] . "','" . $val["remark"] . "','" . $statusKeyword . "','" . $val["useType"] . "','" . $val["useGrade"] . "');";
 
     print $sqlIns . "<br>";
 
     $link = null;
+}
+
+function getGUID() {
+    if (function_exists('com_create_guid')) {
+        return com_create_guid();
+    } else {
+        mt_srand((double) microtime() * 10000); //optional for php 4.2.0 and up.
+        $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45); // "-"
+        $uuid = ""//chr(123)// "{"
+                . substr($charid, 0, 8) . $hyphen
+                . substr($charid, 8, 4) . $hyphen
+                . substr($charid, 12, 4) . $hyphen
+                . substr($charid, 16, 4) . $hyphen
+                . substr($charid, 20, 12);
+        //. chr(125); // "}"
+        return $uuid;
+    }
 }
 
 /* function updateAddr($auction){
