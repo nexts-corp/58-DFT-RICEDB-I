@@ -30,8 +30,11 @@ class Status extends EntityBase {
     /** @Column(type="date",name="Date_End") */
     public $dateEnd;
 
-    /** @Column(type="string",length=1,name="Active") */
+    /** @Column(type="string",length=10,name="Active") */
     public $active;
+
+    /** @Column(type="string",length=50,name="activeBy") */
+    public $activeBy;
 
     /** @Column(type="string",length=10,name="Sale_By") */
     public $saleBy;
@@ -95,6 +98,10 @@ class Status extends EntityBase {
 
     function getActive() {
         return $this->active;
+    }
+
+    function getActiveBy() {
+        return $this->activeBy;
     }
 
     function getSaleBy() {
@@ -171,6 +178,10 @@ class Status extends EntityBase {
 
     function setActive($active) {
         $this->active = $active;
+    }
+
+    function setActiveBy($activeBy) {
+        $this->activeBy = $activeBy;
     }
 
     function setSaleBy($saleBy) {

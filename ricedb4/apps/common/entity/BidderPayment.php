@@ -15,6 +15,9 @@ class BidderPayment extends EntityBase {
      */
     public $id;
 
+    /** @Column(type="string",length=255, name="LK_Status_Keyword") */
+    public $statusKeyword;
+
     /** @Column(type="integer",length=11, name="Bidder_History_Id") */
     public $bidderHistoryId;
 
@@ -56,6 +59,10 @@ class BidderPayment extends EntityBase {
 
     function getId() {
         return $this->id;
+    }
+
+    function getStatusKeyword() {
+        return $this->statusKeyword;
     }
 
     function getBidderHistoryId() {
@@ -112,6 +119,10 @@ class BidderPayment extends EntityBase {
 
     function setId($id) {
         $this->id = $id;
+    }
+
+    function setStatusKeyword($statusKeyword) {
+        $this->statusKeyword = $statusKeyword;
     }
 
     function setBidderHistoryId($bidderHistoryId) {

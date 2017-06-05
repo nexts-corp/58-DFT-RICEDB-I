@@ -235,6 +235,7 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
                     $check->paymentNo = $bidderPayment[$key]->paymentNo;
                     $check->paymentDate = $bidderPayment[$key]->paymentDate;
                     $check->isReturn = 'N';
+                    $check->statusKeyword = $this->getStatus()->keyword;
 
                     $data = $this->datacontext->getObject($check);
 
@@ -248,6 +249,7 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         foreach ($final as $key => $value) {
             if ($final[$key]->paymentNo != "" && $final[$key]->amount != "" && $final[$key]->paymentDate) {
                 $final[$key]->isReturn = "N";
+                $final[$key]->statusKeyword = $this->getStatus()->keyword;
                 if ($this->datacontext->saveObject($final[$key])) {
                     $return = true;
                 } else {

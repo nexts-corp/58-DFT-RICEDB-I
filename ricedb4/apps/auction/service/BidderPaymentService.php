@@ -20,9 +20,9 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
 
     function getStatus() {
         $sql = "SELECT"
-                ." st"
-            ." FROM ".$this->ent."\\Status st"
-            ." WHERE st.active = :active";
+                . " st"
+                . " FROM " . $this->ent . "\\Status st"
+                . " WHERE st.active = :active";
         $param = array(
             "active" => "Y"
         );
@@ -128,49 +128,49 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         $data = $this->datacontext->getObject($history);
 
         $sql = "SELECT bt.id, bt.bidderHistoryId, bt.silo,bt.associateId,bps.round, bps.auctionPrice, bt.isReserved"
-            . " FROM " . $this->ent . "\\BidderItem bt "
-            . " join  " . $this->ent . "\\BidderPriceSilo bps "
-            . " with bps.bidderItemId = bt.id"
-            . " where bt.bidderHistoryId = :bidderHistoryId and bps.round =0";
+                . " FROM " . $this->ent . "\\BidderItem bt "
+                . " join  " . $this->ent . "\\BidderPriceSilo bps "
+                . " with bps.bidderItemId = bt.id"
+                . " where bt.bidderHistoryId = :bidderHistoryId and bps.round =0";
 
         $param = array(
             "bidderHistoryId" => $bidderHistory->id
-            //"round" => 0
+                //"round" => 0
         );
         $data = $this->datacontext->getObject($sql, $param);
         //return $data;
         foreach ($data as $key => $value) {
             //$data[$key]["bidderHistoryId"] = 0;
-            /*$sql = "exec sp_floor_value_warehouse :auctionId, :pProjectId, :pProvinceId, :pTypeId, :pGradeId, :pSilo,:pAssId"; //statusKeyword,projectId,province,type,grade,silo
-            $param = array(
-                "auctionId" => $this->getStatus()->keyword,
-                "pProjectId" => 0,
-                "pProvinceId" => 0,
-                "pTypeId" => 0,
-                "pGradeId" => 0,
-                "pSilo" => $data[$key]["silo"],
-                "pAssId"=> $data[$key]["associateId"]
-            );
-            if ($dataFV = $this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\FloorValue2")) { //sql,param,class
-                $data[$key]["province"] = $dataFV[0]->Province;
-                $data[$key]["associate"] = $dataFV[0]->Associate;
-                $data[$key]["weightAll"] = $dataFV[0]->Weight_All;
-                //$data[$key]["rfv"] = $dataFV[0]->RFV2;
-                $data[$key]["rfv"] = $dataFV[0]->RFV;
-            }*/
+            /* $sql = "exec sp_floor_value_warehouse :auctionId, :pProjectId, :pProvinceId, :pTypeId, :pGradeId, :pSilo,:pAssId"; //statusKeyword,projectId,province,type,grade,silo
+              $param = array(
+              "auctionId" => $this->getStatus()->keyword,
+              "pProjectId" => 0,
+              "pProvinceId" => 0,
+              "pTypeId" => 0,
+              "pGradeId" => 0,
+              "pSilo" => $data[$key]["silo"],
+              "pAssId"=> $data[$key]["associateId"]
+              );
+              if ($dataFV = $this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\FloorValue2")) { //sql,param,class
+              $data[$key]["province"] = $dataFV[0]->Province;
+              $data[$key]["associate"] = $dataFV[0]->Associate;
+              $data[$key]["weightAll"] = $dataFV[0]->Weight_All;
+              //$data[$key]["rfv"] = $dataFV[0]->RFV2;
+              $data[$key]["rfv"] = $dataFV[0]->RFV;
+              } */
             $sql = "SELECT"
-                ." aw.associate, aw.province, aw.oWeightAll, aw.rfv"
-                ." FROM ".$this->ent."\\AuctionWarehouse aw"
-                ." WHERE aw.auctionNo = :auction"
-                ." AND aw.wareHouseCode = :silo"
-                ." AND aw.associateId = :associateId";
+                    . " aw.associate, aw.province, aw.oWeightAll, aw.rfv"
+                    . " FROM " . $this->ent . "\\AuctionWarehouse aw"
+                    . " WHERE aw.auctionNo = :auction"
+                    . " AND aw.wareHouseCode = :silo"
+                    . " AND aw.associateId = :associateId";
             $param = array(
                 "auction" => $this->getStatus()->keyword,
                 "silo" => $data[$key]["silo"],
                 "associateId" => $data[$key]["associateId"]
             );
 
-            if($dataFV = $this->datacontext->getObject($sql, $param)){
+            if ($dataFV = $this->datacontext->getObject($sql, $param)) {
                 $data[$key]["associate"] = $dataFV[0]["associate"];
                 $data[$key]["province"] = $dataFV[0]["province"];
                 $data[$key]["weightAll"] = $dataFV[0]["oWeightAll"];
@@ -178,10 +178,10 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
 
                 if ($this->getStatus()->saleBy == "SILO") {
                     $sql2 = "SELECT"
-                        ." pl"
-                        ." FROM ".$this->ent."\\BidderPriceSilo pl"
-                        ." WHERE pl.bidderItemId = :itemId"
-                        ." AND pl.round = :round";
+                            . " pl"
+                            . " FROM " . $this->ent . "\\BidderPriceSilo pl"
+                            . " WHERE pl.bidderItemId = :itemId"
+                            . " AND pl.round = :round";
                     $param2 = array(
                         "itemId" => $data[$key]["id"],
                         "round" => "0"
@@ -214,13 +214,9 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         return $this->datacontext->getObject($sql, $param);
     }
 
-
-
-    function array_not_unique( $a = array() )
-    {
-        return array_diff_key( $a , array_unique( $a ) );
+    function array_not_unique($a = array()) {
+        return array_diff_key($a, array_unique($a));
     }
-
 
     public function saveBidderPayment($bidderPayment) {
         $return = true;
@@ -230,7 +226,7 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
             if ($bidderPayment[$key]->paymentNo != "" && $bidderPayment[$key]->amount != "" && $bidderPayment[$key]->paymentDate) {
                 $bidderPayment[$key]->paymentDate = new \DateTime(date($bidderPayment[$key]->paymentDate));
 
-                if ( ! in_array($bidderPayment[$key], $final)) {
+                if (!in_array($bidderPayment[$key], $final)) {
                     $final[] = $bidderPayment[$key];
 
                     $check = new \apps\common\entity\BidderPayment();
@@ -238,12 +234,12 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
                     $check->bankId = $bidderPayment[$key]->bankId;
                     $check->paymentNo = $bidderPayment[$key]->paymentNo;
                     $check->paymentDate = $bidderPayment[$key]->paymentDate;
-					$check->isReturn = 'N';
-
+                    $check->isReturn = 'N';
+                    $check->statusKeyword = $this->getStatus()->keyword;
                     $data = $this->datacontext->getObject($check);
 
                     if (count($data) > 0) {
-                        return "ข้อมูลเลขที่ ".$bidderPayment[$key]->paymentNo." ถูกบันทึกไปแล้ว";
+                        return "ข้อมูลเลขที่ " . $bidderPayment[$key]->paymentNo . " ถูกบันทึกไปแล้ว";
                     }
                 }
             }
@@ -252,6 +248,7 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         foreach ($final as $key => $value) {
             if ($final[$key]->paymentNo != "" && $final[$key]->amount != "" && $final[$key]->paymentDate) {
                 $final[$key]->isReturn = "N";
+                $final[$key]->statusKeyword = $this->getStatus()->keyword;
                 if ($this->datacontext->saveObject($final[$key])) {
                     $return = true;
                 } else {
@@ -284,8 +281,8 @@ class BidderPaymentService extends CServiceBase implements IBidderPaymentService
         } else {
             return $this->datacontext->getLastMessage();
         }
-
     }
+
 }
 
 ?>

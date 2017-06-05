@@ -18,7 +18,7 @@ class BidderItemDetail extends EntityBase {
     /** @Column(type="integer",length=11, name="Bidder_Item_Id") */
     public $bidderItemId;
 
-    /** @Column(type="integer",length=11, name="Rice_Tracking_Id") */
+    /** @Column(type="string",length=255, name="Rice_Tracking_Id") */
     public $riceTrackingId;
     
     

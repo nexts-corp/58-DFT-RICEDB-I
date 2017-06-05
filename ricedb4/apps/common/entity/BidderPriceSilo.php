@@ -15,6 +15,9 @@ class BidderPriceSilo extends EntityBase {
      */
     public $id;
 
+    /** @Column(type="string",length=255, name="LK_Status_Keyword") */
+    public $statusKeyword;
+
     /** @Column(type="integer",length=11, name="Bidder_Item_Id") */
     public $bidderItemId;
 
@@ -36,12 +39,12 @@ class BidderPriceSilo extends EntityBase {
     /** @Column(type="string",length=255, name="Remark") */
     public $remark;
 
-    function getIsSale() {
-        return $this->isSale;
+    function getId() {
+        return $this->id;
     }
 
-    function setIsSale($isSale) {
-        $this->isSale = $isSale;
+    function getStatusKeyword() {
+        return $this->statusKeyword;
     }
 
     function getBidderItemId() {
@@ -52,8 +55,8 @@ class BidderPriceSilo extends EntityBase {
         return $this->auctionPrice;
     }
 
-    function getId() {
-        return $this->id;
+    function getRound() {
+        return $this->round;
     }
 
     function getIsWinner() {
@@ -64,24 +67,32 @@ class BidderPriceSilo extends EntityBase {
         return $this->isPassFV;
     }
 
+    function getIsSale() {
+        return $this->isSale;
+    }
+
     function getRemark() {
         return $this->remark;
     }
 
-    function getRound() {
-        return $this->round;
+    function setId($id) {
+        $this->id = $id;
     }
 
-    function setAuctionPrice($auctionPrice) {
-        $this->auctionPrice = $auctionPrice;
+    function setStatusKeyword($statusKeyword) {
+        $this->statusKeyword = $statusKeyword;
     }
 
     function setBidderItemId($bidderItemId) {
         $this->bidderItemId = $bidderItemId;
     }
 
-    function setId($id) {
-        $this->id = $id;
+    function setAuctionPrice($auctionPrice) {
+        $this->auctionPrice = $auctionPrice;
+    }
+
+    function setRound($round) {
+        $this->round = $round;
     }
 
     function setIsWinner($isWinner) {
@@ -92,12 +103,12 @@ class BidderPriceSilo extends EntityBase {
         $this->isPassFV = $isPassFV;
     }
 
-    function setRemark($remark) {
-        $this->remark = $remark;
+    function setIsSale($isSale) {
+        $this->isSale = $isSale;
     }
 
-    function setRound($round) {
-        $this->round = $round;
+    function setRemark($remark) {
+        $this->remark = $remark;
     }
 
 }

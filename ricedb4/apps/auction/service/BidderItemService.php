@@ -215,7 +215,9 @@ class BidderItemService extends CServiceBase implements IBidderItemService {
         $item->bidderHistoryId = $bidderItem->bidderHistoryId;
         $item->silo = $bidderItem->silo;
         $item->associateId = $bidderItem->associateId;
+        $item->statusKeyword = $this->getStatus()->keyword;
         $bidderItem->isReserved = 'Y';
+        $bidderItem->statusKeyword = $this->getStatus()->keyword;
         $dataItem = $this->datacontext->getObject($item);
         if (count($dataItem) == 0) {
             if (!$this->datacontext->saveObject($bidderItem)) {

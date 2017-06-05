@@ -394,7 +394,7 @@
         }
         $("#btn_save").click(function () {
             $("#btn_save").prop("disabled", true);
-            
+
             $('.paymentDate').each(function () {
                 if (isValidDate(this.value) == false && this.value != "") {
                     var dateAr = this.value.split('-');
@@ -575,10 +575,10 @@
                         + '<td class="text-center">'
                         + '<label class="switch switch-green">'
                         + '<input class="switch-input" type="checkbox" data-item="' + value["id"] + '" onclick="return false" ' + checked + '>'
-
                         + '<span class="switch-label" data-on="ผ่าน" data-off="ไม่ผ่าน"></span>'
                         + '<span class="switch-handle"></span>'
                         + '</label>'
+                        + '</td>'
                         + '</tr>';
 
                 if (i == datas["bidderItem"].length - 1) {

@@ -127,10 +127,12 @@ class BidderPriceService extends CServiceBase implements IBidderPriceService {
         $price = new \apps\common\entity\BidderPriceSilo();
         $price->bidderItemId = $bidderPrice->bidderItemId;
         $price->round = $bidderPrice->round;
+        $price->statusKeyword = $this->getStatus()->keyword;
         //return $price;
         $dataPrice = $this->datacontext->getObject($price);
 
         if ($dataPrice == null) {
+            $bidderPrice->statusKeyword = $this->getStatus()->keyword;
             if (!$this->datacontext->saveObject($bidderPrice)) {
                 $return = $this->datacontext->getLastMessage();
             }

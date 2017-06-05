@@ -22,7 +22,7 @@ class AuctionStack {
 
     /**
      * @Id
-     * @Column(type="integer",length=11,name="stackId") 
+     * @Column(type="string",length=255,name="stackId") 
      */
     public $stackId;
 
@@ -73,9 +73,6 @@ class AuctionStack {
 
     /** @Column(type="string",length=255,name="wareHouseCode") */
     public $wareHouseCode;
-
-    /** @Column(type="string",length=255,name="wareHouseName") */
-    public $wareHouseName;
 
     /** @Column(type="string",length=255,name="wareHouseAddress") */
     public $wareHouseAddress;
@@ -250,10 +247,6 @@ class AuctionStack {
         return $this->wareHouseCode;
     }
 
-    function getWareHouseName() {
-        return $this->wareHouseName;
-    }
-
     function getWareHouseAddress() {
         return $this->wareHouseAddress;
     }
@@ -382,15 +375,15 @@ class AuctionStack {
         return $this->ofv4;
     }
 
-    function getFv(){
+    function getFv() {
         return $this->fv;
     }
 
-    function getUseFV(){
+    function getUseFV() {
         return $this->useFV;
     }
 
-    function getOfv(){
+    function getOfv() {
         return $this->ofv;
     }
 
@@ -460,10 +453,6 @@ class AuctionStack {
 
     function setWareHouseCode($wareHouseCode) {
         $this->wareHouseCode = $wareHouseCode;
-    }
-
-    function setWareHouseName($wareHouseName) {
-        $this->wareHouseName = $wareHouseName;
     }
 
     function setWareHouseAddress($wareHouseAddress) {
@@ -594,15 +583,16 @@ class AuctionStack {
         $this->ofv4 = $ofv4;
     }
 
-    function setFv($fv){
+    function setFv($fv) {
         $this->fv = $fv;
     }
 
-    function setOfv($ofv){
+    function setOfv($ofv) {
         $this->ofv = $ofv;
     }
 
-    function setUseFV($useFV){
+    function setUseFV($useFV) {
         $this->useFV = $useFV;
     }
+
 }

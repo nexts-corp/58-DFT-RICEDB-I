@@ -15,27 +15,32 @@ class BidderItem extends EntityBase {
      */
     public $id;
 
+    /** @Column(type="string",length=255, name="LK_Status_Keyword") */
+    public $statusKeyword;
+
     /** @Column(type="integer",length=11, name="Bidder_History_Id") */
     public $bidderHistoryId;
 
     /** @Column(type="string",length=255, name="Silo") */
     public $silo;
-    
+
     /** @Column(type="string",length=255, name="AssociateId") */
     public $associateId;
-    
+
     /** @Column(type="string",length=1, name="Is_Reserved") */
     public $isReserved;
-    
     public $rfv;
     public $weightAll;
-
     public $riceTrackingId;
+
     //public $round;
 //    public $auctionPrice;
-
     function getId() {
         return $this->id;
+    }
+
+    function getStatusKeyword() {
+        return $this->statusKeyword;
     }
 
     function getBidderHistoryId() {
@@ -46,6 +51,14 @@ class BidderItem extends EntityBase {
         return $this->silo;
     }
 
+    function getAssociateId() {
+        return $this->associateId;
+    }
+
+    function getIsReserved() {
+        return $this->isReserved;
+    }
+
     function getRfv() {
         return $this->rfv;
     }
@@ -54,12 +67,16 @@ class BidderItem extends EntityBase {
         return $this->weightAll;
     }
 
-    function getRiceTrackingId(){
+    function getRiceTrackingId() {
         return $this->riceTrackingId;
     }
 
     function setId($id) {
         $this->id = $id;
+    }
+
+    function setStatusKeyword($statusKeyword) {
+        $this->statusKeyword = $statusKeyword;
     }
 
     function setBidderHistoryId($bidderHistoryId) {
@@ -70,6 +87,14 @@ class BidderItem extends EntityBase {
         $this->silo = $silo;
     }
 
+    function setAssociateId($associateId) {
+        $this->associateId = $associateId;
+    }
+
+    function setIsReserved($isReserved) {
+        $this->isReserved = $isReserved;
+    }
+
     function setRfv($rfv) {
         $this->rfv = $rfv;
     }
@@ -78,20 +103,8 @@ class BidderItem extends EntityBase {
         $this->weightAll = $weightAll;
     }
 
-    function setRiceTrackingId($riceTrackingId){
+    function setRiceTrackingId($riceTrackingId) {
         $this->riceTrackingId = $riceTrackingId;
     }
-    function getAssociateId() {
-        return $this->associateId;
-    }
-
-    function setAssociateId($associateId) {
-        $this->associateId = $associateId;
-    }
-
-  
-    
-
-
 
 }
