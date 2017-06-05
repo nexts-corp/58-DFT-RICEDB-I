@@ -239,15 +239,17 @@ function auctionLatest() {
 
         //console.log(data["status"]);
         if (typeof data["status"] !== "undefined") {
+            var index = data["status"].indexOf('(');
             var auction = '<div>'
                     + '<div class="row text-center">'
                     + '<h4 class="text-dark">'
-                    + 'ประมูลครั้งที่ ' + data["status"]
+                    + 'ประมูลครั้งที่ ' + data["status"].substring(0, index)
+                    + '<br> ' + data["status"].substring(index, data["status"].length)
                     + '<div class="text-sm">วันที่ ' + data["auctionDate"] + '</div>'
                     + '</h4>'
                     + '</div>'
                     + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">น้ำหนัก :</div>'
+                    + '<div class="col-md-3 text-right text-bold">ปริมาณ :</div>'
                     + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["sumWeight"], 6, ",", ".") + ' ตัน</div>'
                     + '</div>'
                     + '<div class="row">'
@@ -324,12 +326,14 @@ function tracking() {
 
         //console.log(data["status"]);
         if (typeof data !== "no data") {
+            var index = data["status"].indexOf('(');
             var auction = '<div>'
                     + '<div class="row text-center">'
                     + '<h4 class="text-dark">'
-                    + 'ประมูลครั้งที่ ' + data["status"]
+                    + 'ประมูลครั้งที่ ' + data["status"].substring(0, index)
+                    + '<br> ' + data["status"].substring(index, data["status"].length)
                     + '<div class="text-sm">วันที่ ' + data["auctionDate"] + '</div>'
-             + '<div class="text-danger">ผ่านมาแล้ว ' + data["daysPass"] + ' วัน!</div>'
+                    + '<div class="text-danger">ผ่านมาแล้ว ' + data["daysPass"] + ' วัน!</div>'
                     + '</h4>'
                     + '</div>'
                     + '<div class="row">'
