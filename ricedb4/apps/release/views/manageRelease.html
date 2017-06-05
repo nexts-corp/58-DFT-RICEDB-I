@@ -32,499 +32,470 @@
 
     <div class="container">
         <div class="row">
-            <div id="divTable">
-                <div class="col-md-12">
-                    <div class="col-md-4 col-md-offset-8">
-                        <div class="btn-group btn-group-justified">
-                            <a class="btn btn-default" role="button"><i class="fa fa-file-pdf-o"></i> PDF</a>
-                            <a class="btn btn-default" role="button"><i class="fa fa-file-word-o"></i> Word</a>
-                            <a class="btn btn-default" role="button"><i class="fa fa-file-text-o"></i> CSV</a>
-                            <a class="btn btn-default" role="button"><i class="fa fa-file-excel-o"></i> Excel</a>
-                            <a class="btn btn-default" role="button"><i class="fa fa-print"></i> Print</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="dataTable" class="col-md-12" style="margin-top: 20px;"><!-- table shown file detail -->
-                    <table id="table" class="table table-bordered table-striped table-condensed mb-none">
-                        <thead>
-                            <tr>
-                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.no{{/i18n}}</th>
-                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.list{{/i18n}}</th>
-                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.date{{/i18n}}</th>
-                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.rWeight{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
-                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.status{{/i18n}}</th>
-                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}release.action{{/i18n}}</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dataBody">
-                            <tr class="text-center">
-                                <td colspan="6">-</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- end table shown file detail -->
-            </div>
-
-            <div id="divForm" style="display: none;">
-                <div class="col-md-12">
-                    <form id="form" class="form-horizontal form-bordered form-validation" onsubmit="return(false)">
-                        <div class="col-xs-12">
-                            <section class="panel">
-                                <header class="panel-heading">
-                                    <div class="panel-actions">
-                                        <a href="#" class="fa fa-caret-up"></a>
-                                    </div>
-                                    <h2 class="panel-title">{{#i18n}}release.manage.panelForm{{/i18n}}</h2>
-                                </header>
-
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label req" for="reserveKeyword">{{#i18n}}release.manage.reserveList{{/i18n}} :</label>
-                                        <div class="col-md-6">
-                                            <select class="form-control input-sm" name="reserveKeyword" id="reserveKeyword" required>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-3 control-label req" for="keyword">{{#i18n}}release.manage.releaseList{{/i18n}} :</label>
-                                        <div class="col-md-6">
-                                            <select class="form-control input-sm" name="keyword" id="keyword" required>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div id="switchForm"></div>
-
-                                    <div id="loading" class="col-xs-12" style="text-align: center;"></div>
-
-                                    <div class="form-group text-right">
-                                        <button class="btn btn-primary save"><i class="fa fa-save"></i> {{#i18n}}release.buttonSave{{/i18n}}</button>&nbsp;
-                                        <button class="btn btn-default cancel"> {{#i18n}}release.buttonCancel{{/i18n}}</button>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <div id="delModal" aria-labelledby="bidderLabel" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"><!-- delete bidder info form -->
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">{{#i18n}}release.manage.modalDelete{{/i18n}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="table-responsive">
-                                <table class="table mb-none">
-                                    <tbody>
-                                        <tr class="no-border">
-                                            <td class="col-md-4 text-right text-bold">{{#i18n}}release.list{{/i18n}} :</td>
-                                            <td class="col-md-8 text-left"><div id="detailDel"></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-4 text-right text-bold">{{#i18n}}release.date{{/i18n}} :</td>
-                                            <td class="col-md-8 text-left"><div id="dateDel"></div></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="col-md-4 text-right text-bold">{{#i18n}}release.rWeight{{/i18n}} ({{#i18n}}release.ton{{/i18n}}) :</td>
-                                            <td class="col-md-8 text-left"><div id="targetDel"></div></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}release.buttonCancel{{/i18n}}</button>
-                            <button type="button" id="confirmDelete" class="btn btn-primary" data-dismiss="modal">{{#i18n}}release.buttonDelete{{/i18n}}</button>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end delete reserve data-->
+            <div class="col-md-12" ><!-- table  -->
+                <table id="tableList" class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-md-1">{{#i18n}}system.no{{/i18n}}</th>
+                            <th class="text-center col-md-2">{{#i18n}}system.name{{/i18n}}</th>
+                            <th class="text-center col-md-2">{{#i18n}}release.rWeight{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                            <th class="text-center col-md-2">{{#i18n}}system.status{{/i18n}}</th>
+                            <th class="text-center col-md-1">{{#i18n}}system.status{{/i18n}}</th>   
+                            <th class="text-center col-md-2">{{#i18n}}system.tools{{/i18n}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td colspan="7" class="text-center">ไม่มีข้อมูล</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- end table  -->
         </div><!--  row  -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="modal fade" id="modalDetail">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">{{#i18n}}system.setting{{/i18n}}{{#i18n}}system.data{{/i18n}} <span id="modalTitle"></span></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="status" class="col-sm-4 control-label">{{#i18n}}release.manage.name{{/i18n}}</label>
+                                                <div class="col-sm-6">
+                                                    <input type="hidden" class="form-input" id="id" />
+                                                    <input type="text" class="form-control form-input" id="status" name="status" placeholder="{{#i18n}}release.manage.name{{/i18n}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="ageStop" class="col-sm-5 control-label">{{#i18n}}release.manage.ageStop{{/i18n}}</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control date-picker form-input" id="ageStop" name="ageStop" placeholder="{{#i18n}}release.manage.ageStop{{/i18n}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="dateStart" class="col-sm-5 control-label">{{#i18n}}release.manage.dateStart{{/i18n}}</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control date-picker form-input" id="dateStart" name="dateStart" placeholder="{{#i18n}}release.manage.dateStart{{/i18n}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="dateEnd" class="col-sm-5 control-label">{{#i18n}}release.manage.dateEnd{{/i18n}}</label>
+                                                <div class="col-sm-7">
+                                                    <input type="text" class="form-control date-picker form-input" id="dateEnd" name="dateEnd" placeholder="{{#i18n}}release.manage.dateEnd{{/i18n}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="lengthDecimal" class="col-sm-5 control-label">{{#i18n}}release.manage.lengthDecimal{{/i18n}}</label>
+                                                <div class="col-sm-7">
+                                                    <input type="number" class="form-control int-picker form-input" id="lengthDecimal" name="lengthDecimal" value="1" placeholder="1=หน่วย,2=สิบ,3=ร้อย">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="roundFun" class="col-sm-5 control-label">{{#i18n}}release.manage.roundFun{{/i18n}}</label>
+                                                <div class="col-sm-7">
+                                                    <input type="number" class="form-control int-picker form-input" id="roundFun" name="roundFun" value="1" placeholder="1=หน่วย,2=สิบ,3=ร้อย">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="weightDecimal" class="col-sm-5 control-label">{{#i18n}}release.manage.weightDecimal{{/i18n}}</label>
+                                                <div class="col-sm-7">
+                                                    <input type="number" class="form-control int-picker form-input" id="weightDecimal" name="weightDecimal" value="6" placeholder="{{#i18n}}release.manage.weightDecimal{{/i18n}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="auctionDate" class="col-sm-3 control-label">{{#i18n}}release.manage.auctionDate{{/i18n}}</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control form-input" id="auctionDate" name="auctionDate" placeholder="12-15 มกราคม 2560">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="auctionDay1" class="col-sm-3 control-label">{{#i18n}}release.manage.auctionDay1{{/i18n}}</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control form-input" id="auctionDay1" name="auctionDay1" placeholder="12 มกราคม 2560">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="auctionDay2" class="col-sm-3 control-label">{{#i18n}}release.manage.auctionDay2{{/i18n}}</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control form-input" id="auctionDay2" name="auctionDay2" placeholder="13 มกราคม 2560">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="auctionDay3" class="col-sm-3 control-label">{{#i18n}}release.manage.auctionDay3{{/i18n}}</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control form-input" id="auctionDay3" name="auctionDay3" placeholder="14 มกราคม 2560">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="auctionDay4" class="col-sm-3 control-label">{{#i18n}}release.manage.auctionDay4{{/i18n}}</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control form-input" id="auctionDay4" name="auctionDay4" placeholder="15 มกราคม 2560">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btnSave">{{#i18n}}system.save{{/i18n}}</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}system.cancel{{/i18n}}</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="modal fade" id="modalActive">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title">{{#i18n}}system.setting{{/i18n}}{{#i18n}}release.manage.activeBy{{/i18n}} <span class="modalTitle"></span></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="status" class="col-sm-4 control-label">{{#i18n}}release.manage.activeBy{{/i18n}}</label>
+                                                <div class="col-sm-6">
+                                                    <input type="hidden" class="form-active" id="id" />
+                                                    <input type="hidden" class="form-active" id="active" />
+                                                    <select class="form-control form-active" id="activeBy">
+                                                        <option value="test">ทดสอบระบบ</option>
+                                                        <option value="dft">ใช้งานจริง</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btnActive">{{#i18n}}system.save{{/i18n}}</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{#i18n}}system.cancel{{/i18n}}</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
     </div><!--  container  -->
 </div><!-- main -->
 {{>footer}}
 <script type="text/javascript">
-    var listArr = [];
-    var flagRelease = 0;
-
-    $(function () {
-        listsRelease();
-
-        $("button.add").unbind().click(function () {
-            toggleShow("form");
-
-            $("button.save").unbind().click(function () {
-                var isValid = true;
-                $('#form input[required]').each(function () {
-                    if ($(this).val() == "" && !$(this).prop("disabled"))
-                        isValid = false;
-                });
-                if (isValid) {
-                    var fdata = dataObject(null);
-                    var dataJSON = JSON.stringify({status: fdata["Status"]});
-                    var dataJSONEN = encodeURIComponent(dataJSON);
-
-                    insertRelease(dataJSONEN);
+    var dataPublic;
+    $(document).ready(function () {
+        lkStatusReserv();
+        $('.date-picker').datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true
+        });
+        $('.int-picker').numeric({
+            negative: false,
+            decimal: false
+        });
+        $("#status").unbind().keyup(function () {
+            if ($(this).val() == "") {
+                $("#btnSave").addClass("disabled");
+            } else {
+                $("#btnSave").removeClass("disabled");
+            }
+        });
+        $("#btnSave").unbind().click(function () {
+            var data = {};
+            $(".form-input").each(function () {
+                if ($(this).attr("id") === "status" && $(this).val() === "") {
+                    delete data.id;
+                    return false;
+                }
+                if ($(this).val() !== "") {
+                    data[$(this).attr('id')] = $(this).val();
                 }
             });
+            if (data.id && data.id != "") {
+                update(data, function () {
+                    $("#modalDetail").modal('hide');
+                });
+            }
         });
-
-        $("button.back, button.cancel").unbind().click(function () {
-            toggleShow("home");
+        $("#btnActive").unbind().click(function () {
+            var data = {};
+            $(".form-active").each(function () {
+                data[$(this).attr('id')] = $(this).val();
+            });
+            if (data.id && data.id != "") {
+                update(data, function () {
+                    $("#modalActive").modal('hide');
+                    location.reload();
+                });
+            }
         });
     });
-
-    function listsRelease() {
-        var dataSet = [];
-
-        var datas = callAjax("{{_context_path}}/api/release/manage/listsRelease", "post", {}, "json");
-        if (typeof datas !== "undefined" && datas !== null) {
-            $.each(datas["lists"], function (key, value) {
-                listArr[value["id"]] = value;
-
-                dataSet.push(value);
-            });
-        }
-
-        var t = $("#table").DataTable({
-            "destroy": true,
-            "data": dataSet,
-            "order": [[0, 'asc']],
-            "columnDefs": [
-                {
-                    "targets": 0,
-                    "searchable": false,
-                    "orderable": false,
-                    "data": "id",
-                    "sClass": "text-center"
-                },
-                {
-                    "targets": 1,
-                    "data": "id",
-                    "sClass": "text-center",
-                    "render": function (data, key, full) {
-                        var content = full["releaseName"] + ' ' + full["status"];
-                        return content;
+    function update(data, callback) {
+        var dataJSON = JSON.stringify({status: data});
+        var dataJSONEN = encodeURIComponent(dataJSON);
+        var cfm = $.confirm({
+            title: 'ยืนยันการบันทึกข้อมูล!',
+            content: "ต้องการบันทึกข้อมูล?",
+            confirmButton: 'ตกลง',
+            cancelButton: 'ยกเลิก',
+            confirmButtonClass: 'btn-primary',
+            cancelButtonClass: 'btn-default',
+            columnClass: 'col-md-4 col-md-offset-4',
+            autoClose: 'cancel|11000',
+            confirm: function () {
+                cfm.close();
+                setTimeout(function () {
+                    var result = callAjax("{{_context_path}}/api/release/manages/update", "post", dataJSONEN, "json")["update"];
+                    if (result === true) {
+                        $.alert({
+                            title: 'การบันทึกข้อมูล!',
+                            content: 'บันทึกสำเร็จ!',
+                            confirmButton: "ตกลง",
+                            confirmButtonClass: 'btn-success',
+                            //theme: 'black',
+                            columnClass: 'col-md-4 col-md-offset-4'
+                        });
+                        lkStatusReserv();
+                        callback();
+                    } else {
+                        $.alert({
+                            title: 'การบันทึกข้อมูลไม่สำเร็จ!',
+                            content: result,
+                            confirmButton: "ตกลง",
+                            confirmButtonClass: 'btn-danger',
+                            //theme: 'black',
+                            columnClass: 'col-md-4 col-md-offset-4'
+                        });
+                        lkStatusReserv();
+                        callback();
                     }
-                },
-                {
-                    "targets": 2,
-                    "data": "auctionDate",
-                    "sClass": "text-center"
-                },
-                {
-                    "targets": 3,
-                    "data": "target",
-                    "sClass": "text-right"
-                },
-                {
-                    "targets": 4,
-                    "data": "active",
-                    "sClass": "text-center"
-                },
-                {
-                    "targets": 5,
-                    "data": "id",
-                    "sClass": "text-left col-md-1",
-                    "render": function (data) {
-                        var content = '<button class="btn btn-primary edit" data-id="' + data + '"><i class="fa fa-pencil"></i></button>&nbsp;'
-                                + '<button class="btn btn-default delete" data-id="' + data + '"><i class="fa fa-trash"></i></button> ';
-
-                        return content;
+                }, 200);
+            }
+        });
+    }
+    function lkStatusReserv() {
+        var datas = callAjax("{{_context_path}}/api/release/manages/lkStatusReserv", "post", {}, "json");
+//        var html = '<tr><td colspan="6" class="text-center">ไม่มีรายการสำรอง</td></tr>';
+        if (typeof datas !== "undefined" && datas !== null && datas['lists'].length != 0) {
+            dataPublic = datas['lists'];
+            var index = 0;
+            var tb1 = $("#tableList").DataTable({
+                "destroy": true,
+                "processing": true,
+                "data": dataPublic,
+                "order": [[0, 'asc']],
+                "iDisplayLength": 10,
+                "columnDefs": [
+                    {
+                        "targets": 0,
+                        "data": "id",
+                        "sClass": "text-center col-md-1"
+                    },
+                    {
+                        "targets": 1,
+                        "data": "status",
+                        "sClass": "text-center col-md-3"
+                    },
+                    {
+                        "targets": 2,
+                        "data": "weight",
+                        "sClass": "text-right col-md-3",
+                        "render": function (data) {
+                            return accounting.formatNumber(data, 6, ",", ".");
+                        }
+                    },
+                    {
+                        "targets": 3,
+                        "data": "active",
+                        "sClass": "text-center col-md-2",
+                        "render": function (data, key, full) {
+                            var html = '<label class="label-switch switch switch-green" data-key="' + index + '" >'
+                                    + '<input class="switch-input" type="checkbox" data-key="' + index + '" id="checkbox' + index + '" '
+                                    + (data.indexOf('Y') > -1 ? "checked" : "")
+                                    + ' onclick = "return false" > '
+                                    + '<span class="switch-label" data-on="เปิด" data-off="ปิด"></span>'
+                                    + '<span class="switch-handle"></span>'
+                                    + '</label>';
+                            return html;
+                        }
+                    },
+                    {
+                        "targets": 4,
+                        "data": "activeBy",
+                        "sClass": "text-center col-md-1",
+                        "render": function (data) {
+                            if (data == "test") {
+                                return 'ทดสอบระบบ'
+                            } else if (data == "dft") {
+                                return 'ใช้งานจริง'
+                            } else {
+                                return 'ยังไม่ใช้งาน'
+                            }
+                        }
+                    },
+                    {
+                        "targets": 5,
+                        "orderable": false,
+                        "data": "id",
+                        "sClass": "text-center col-md-2",
+                        "render": function (data) {
+                            return ' <button class="btn btn-primary edit-status" data-key="' + (index++) + '"><i class="fa fa-gears"></i> {{#i18n}}system.setting{{/i18n}}</button>'
+                        }
                     }
-                }
-            ]
-        });
-
-        t.on('order.dt search.dt', function () {
-            t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
+                ]
             });
-        }).draw();
-
-        $("#table").off("click", "button.edit").on("click", "button.edit", function () {
-            toggleShow("form");
-
-            var id = $(this).attr("data-id");
-            var value = listArr[id];
-            var reservKey = callAjax("{{_context_path}}/api/release/manage/getReservName", "post", {keyword: value["reserveKeyword"]}, "json")["lists"];
-
-            $("#reserveKeyword").append("<option value='" + value["reserveKeyword"] + "' selected>" + reservKey.detail + "</option>");
-            $("#keyword").val(value["releaseCode"]).trigger("change");
-            $("#status").val(value["status"]);
-            $("#auctionDate").val(value["auctionDate"]);
-            $("#buyer").val(value["buyer"]);
-            if (value["releaseCode"] == "AU") {
-                $("#ageStop").val(value["ageStop"]["date"].substr(0, 10));
-                $("#dateStart").val(value["dateStart"]["date"].substr(0, 10));
-                $("#dateEnd").val(value["dateEnd"]["date"].substr(0, 10));
-                $("#lengthDecimal").val(value["lengthDecimal"]);
-                $("#roundFun").val(value["roundFun"]);
-                $("#weightDecimal").val(value["weightDecimal"]);
-            }
-
-            $("button.save").unbind().click(function () {
-                var isValid = true;
-                $('#form input[required]').each(function () {
-                    if ($(this).val() == "" && !$(this).prop("disabled"))
-                        isValid = false;
+            tb1.on('order.dt search.dt', function () {
+                tb1.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
                 });
-                if (isValid) {
-                    var fdata = dataObject(id);
-                    var dataJSON = JSON.stringify({status: fdata["Status"]});
-                    var dataJSONEN = encodeURIComponent(dataJSON);
-
-                    editRelease(dataJSONEN);
-                }
-            });
-
-        });
-
-        $("#table").off("click", "button.delete").on("click", "button.delete", function () {
-            $("#delModal").modal("show");
-
-            var id = $(this).attr("data-id");
-            var value = listArr[id];
-
-            $("#detailDel").html(value["releaseName"] + ' ' + value["status"]);
-            $("#dateDel").html(value["auctionDate"]);
-            $("#targetDel").html(value["target"]);
-
-            $("#confirmDelete").unbind().click(function () {
-                var dataStatus = {};
-
-                dataStatus["keyword"] = listArr[id]["keyword"];
-
-                var fdata = {};
-                fdata["Status"] = dataStatus;
-
-                var dataJSON = JSON.stringify({status: fdata["Status"]});
-                var dataJSONEN = encodeURIComponent(dataJSON);
-
-                deleteRelease(dataJSONEN);
-            });
-
-        });
-    }
-
-    function listsReserve() {
-        var html = '<option value="" selected="selected">เลือกรายการสำรองข้าว</option>';
-        var datas = callAjax("{{_context_path}}/api/release/manage/listsReserve", "post", {}, "json");
-        if (typeof datas !== "undefined" && datas !== null) {
-            $.each(datas["lists"], function (key, value) {
-                html += '<option value="' + value["keyword"] + '">' + value["detail"] + '</option>'
-            });
-
-            $("#reserveKeyword").html(html);
-        }
-    }
-
-    function lkRelease() {
-        if (flagRelease === 0) {
-            var html = '<option value="" selected="selected">เลือกรายการระบายข้าว</option>';
-            var datas = callAjax("{{_context_path}}/api/release/manage/lkRelease", "post", {}, "json");
-            if (typeof datas !== "undefined" && datas !== null) {
-                $.each(datas["lists"], function (key, value) {
-                    html += '<option value="' + value["releaseCode"] + '">' + value["releaseName"] + '</option>'
+            }).draw();
+            $("#tableList").on("click", "button.edit-status", function () {
+                var idx = $(this).data('key');
+//                $("#modelIndex").val(idx);
+                $("#modalDetail").modal({
+                    show: true,
+                    backdrop: 'static'
                 });
+                $(".modalTitle").text(dataPublic[idx].status);
+                $(".form-input").each(function () {
+                    var name = $(this).attr("id");
+                    $(this).val(dataPublic[idx][name]);
+                });
+                if (dataPublic[idx].activeBy != 'dft') {
+                    $(".form-input").prop('disabled', false);
+                    $("#btnSave").removeClass('disabled');
+                } else {
+                    $(".form-input").prop('disabled', true);
+                    $("#btnSave").addClass('disabled');
+                }
+            });
+            $("#tableList input.switch-input").unbind().click(function (e) {
+                var idx = $(this).data('key');
+                var thisSW = $("input#checkbox" + idx + ".switch-input");
+                if (dataPublic[idx].activeBy !== 'dft') {
+                    var check = thisSW.prop("checked");
+//                    setTimeout(function () {
+//                        $("input#checkbox" + idx + ".switch-input").prop("checked", check);
+//                    }, 200);
+                    if (check) {
+                        if (dataPublic[idx].ageStop === null ||
+                                dataPublic[idx].dateStart === null ||
+                                dataPublic[idx].dateEnd === null ||
+                                dataPublic[idx].lengthDecimal === null ||
+                                dataPublic[idx].roundFun === null ||
+                                dataPublic[idx].weightDecimal === null ||
+                                dataPublic[idx].auctionDate === null ||
+                                dataPublic[idx].auctionDay1 === null ||
+                                dataPublic[idx].auctionDay2 === null) {
+                            $.alert({
+                                title: '<span class="text-danger">' + dataPublic[idx].status + '</span>',
+                                content: 'กรุณาตรวจสอบข้อมูล<br>วันที่คิดราคา,อายุข้าว,จุดทศนิยม,วันที่ประมูล',
+                                confirmButton: "ตกลง",
+                                confirmButtonClass: 'btn-danger',
+                                columnClass: 'col-md-4 col-md-offset-4'
+                            });
+                        } else {
+                            var ac = dataPublic[idx].active.replace("W", "Y");
+                            var result = $.grep(dataPublic, function (o, i) {
+                                return o.active === ac;
+                            });
+                            if (result.length > 0) {
+                                $.alert({
+                                    title: '<span class="text-warning">ประเภทการใช้งานซ้ำ</span>',
+                                    content: 'เปิดใช้งานประเภทเดียวกับ' + result[0].status + '<br><span class="text-bold">*ประเภทการใช้งานไม่สามารถเปิดซ้ำได้</span>',
+                                    confirmButton: "ตกลง",
+                                    confirmButtonClass: 'btn-warning',
+                                    columnClass: 'col-md-4 col-md-offset-4'
+                                });
+                            } else {
+                                var cfm = $.confirm({
+                                    title: '<span class="text-success">ยืนยันการเปิดใช้งาน</span>',
+                                    content: 'ต้องการเปิดใช้งาน ' + dataPublic[idx].status + '?',
+                                    confirmButton: 'ตกลง',
+                                    cancelButton: 'ยกเลิก',
+                                    confirmButtonClass: 'btn-success',
+                                    cancelButtonClass: 'btn-default',
+                                    columnClass: 'col-md-4 col-md-offset-4',
+                                    autoClose: 'cancel|11000',
+                                    confirm: function () {
+                                        cfm.close();
+                                        $("#modalActive").modal({
+                                            show: true,
+                                            backdrop: 'static'
+                                        });
+                                        $(".modalTitle").text(dataPublic[idx].status);
+                                        $("#id.form-active").val(dataPublic[idx].id);
+                                        $("#active.form-active").val(dataPublic[idx].active.replace("W", "Y"));
+                                    }
+                                });
+                            }
+                        }
+                    } else {
+                        var cfm = $.confirm({
+                            title: '<span class="text-danger">ยืนยันการปิดใช้งาน</span>',
+                            content: 'ข้อมูลการเสนอซื้อทั้งหมดจะถูกลบ<br>ต้องการปิดใช้งาน ' + dataPublic[idx].status + '?',
+                            confirmButton: 'ตกลง',
+                            cancelButton: 'ยกเลิก',
+                            confirmButtonClass: 'btn-danger',
+                            cancelButtonClass: 'btn-default',
+                            columnClass: 'col-md-4 col-md-offset-4',
+                            autoClose: 'cancel|11000',
+                            confirm: function () {
+                                cfm.close();
+                                setTimeout(function () {
+                                    var result = callAjax("{{_context_path}}/api/release/manages/close", "post", {statusCode: dataPublic[idx].keyword}, "json")['close'];
+                                    if (result === true) {
+//                                        $("input#checkbox" + idx + ".switch-input").prop("checked", check);
+                                        location.reload();
+                                    }
+                                }, 200);
 
-                $("#keyword").html(html);
-            }
-            flagRelease = 1;
-        }
-    }
+                            }
+                        });
+                    }
+                } else {
+                    $.alert({
+                        title: '<span class="text-danger">' + dataPublic[idx].status + '</span>',
+                        content: 'รายการนี้กำลังใช้งานจริง กรุณาใช้เมนูปิดการประมูล',
+                        confirmButton: "ตกลง",
+                        confirmButtonClass: 'btn-danger',
+                        columnClass: 'col-md-4 col-md-offset-4',
+                        confirm: function () {
+                            var typeAuc = "";
+//                            console.log(dataPublic[idx].active);
+                            if (dataPublic[idx].active.indexOf('I2') > -1) {
+                                typeAuc = "industry2";
+                            } else if (dataPublic[idx].active.indexOf('A') > -1) {
+                                typeAuc = "industry";
+                            } else if (dataPublic[idx].active.indexOf('O') > -1) {
+                                typeAuc = "order";
+                            } else {
+                                typeAuc = "auction";
+                            }
+                            window.open('{{_context_path}}/api/' + typeAuc + '/view/closeAuction', '_blank');
+                        }
+                    });
+                }
 
-    function switchForm(option) {
-        var html = '';
-
-        if (option == "") {
-            html = '<div class="form-group text-center">'
-                    + '<label class="text-bold">** รายละเอียดการระบายข้าว **</label>'
-                    + '</div>';
-
-            $("#switchForm").html(html);
-        }
-
-        else if (option == "AU") {
-            html = '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="status">ประมูลครั้งที่</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="status" name="status" required>'
-                    + '</div>'
-                    + '</div>'
-
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ประมูล</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
-                    + '</div>'
-                    + '</div>'
-
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="ageStop">วันที่คิดอายุข้าว</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="ageStop" name="ageStop" required>'
-                    + '</div>'
-                    + '</div>'
-
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req">วันที่คิดราคาย้อนหลัง</label>'
-                    + '<div class="col-md-6">'
-                    + '<div class="input-daterange input-group">'
-                    + '<span class="input-group-addon"><i class="fa fa-calendar"></i></span>'
-                    + '<input type="text" class="form-control" id="dateStart" name="dateStart" required>'
-                    + '<span class="input-group-addon">ถึง</span>'
-                    + '<input type="text" class="form-control" id="dateEnd" name="dateEnd" required>'
-                    + '</div>'
-                    + '</div>'
-                    + '</div>'
-
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="lengthDecimal">Decimal Length</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="lengthDecimal" name="lengthDecimal">'
-                    + '</div>'
-                    + '</div>'
-
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="roundFun">Round Fun.</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="roundFun" name="roundFun">'
-                    + '</div>'
-                    + '</div>'
-
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="weightDecimal">Weight Decimal</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="weightDecimal" name="weightDecimal">'
-                    + '</div>'
-                    + '</div>';
-
-            $("#switchForm").html(html);
-
-            $("#ageStop, #dateStart, #dateEnd").datepicker({
-                format: "yyyy-mm-dd",
-                autoclose: true
             });
         }
-        else {
-            html = '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="buyer">ผู้เสนอซื้อ :</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="buyer" name="buyer" required>'
-                    + '</div>'
-                    + '</div>'
 
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="status">รายละเอียด :</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="status" name="status" required>'
-                    + '</div>'
-                    + '</div>'
 
-                    + '<div class="form-group">'
-                    + '<label class="col-md-3 control-label req" for="auctionDate">วันที่ระบายข้าว :</label>'
-                    + '<div class="col-md-6">'
-                    + '<input type="text" class="form-control" id="auctionDate" name="auctionDate" required>'
-                    + '</div>'
-                    + '</div>';
-
-            $("#switchForm").html(html);
-        }
-    }
-
-    function insertRelease(dataJSONEN) {
-        $("#loading").html("กำลังบันทึกข้อมูล...");
-
-        setTimeout(function () {
-            var datas = callAjax("{{_context_path}}/api/release/manage/insert", "post", dataJSONEN, "json");
-            if (typeof datas !== "undefined" && datas !== null) {
-                if (datas["add"] == true) {
-                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
-                    setTimeout(function () {
-                        toggleShow("home");
-                    }, 500);
-                }
-                else {
-                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>' + datas["add"] + '</span>');
-                }
-            }
-        }, 100);
-    }
-
-    function editRelease(dataJSONEN) {
-        $("#loading").html("กำลังบันทึกข้อมูล...");
-
-        setTimeout(function () {
-            var datas = callAjax("{{_context_path}}/api/release/manage/update", "post", dataJSONEN, "json");
-            if (typeof datas !== "undefined" && datas !== null) {
-                if (datas["update"] == true) {
-                    $("#loading").html('<span class="text-success">บันทึกข้อมูลเรียบร้อย</span>');
-                    setTimeout(function () {
-                        toggleShow("home");
-                    }, 500);
-                }
-                else {
-                    $("#loading").html('<span class="text-danger">ไม่สามารถบันทึกข้อมูลได้<br>' + datas["update"] + '</span>');
-                }
-            }
-        }, 100);
-    }
-
-    function deleteRelease(dataJSONEN) {
-        var datas = callAjax("{{_context_path}}/api/release/manage/delete", "post", dataJSONEN, "json");
-        if (typeof datas !== "undefined" && datas !== null) {
-            if (datas["delete"] == true) {
-                toggleShow("home");
-            }
-        }
-    }
-
-    function dataObject(id) {
-        var dataStatus = {};
-        if (id !== null) {
-            dataStatus["id"] = id;
-        }
-
-        $("#form input[type=text], #form select").each(function (i) {
-            var fname = $(this).attr("name");
-            var fvalue = $(this).val();
-
-            dataStatus[fname] = fvalue;
-        });
-        var fdata = {};
-        fdata["Status"] = dataStatus;
-
-        return fdata;
-    }
-
-    function toggleShow(option) {
-        if (option == "form") {
-            $("#divTable, button.add").hide();
-            $("#divForm, button.back").show();
-
-            $("#form input, #form select").each(function () {
-                $(this).val("").trigger("change");
-            });
-
-            listsReserve();
-            lkRelease();
-
-            $("#loading").empty();
-
-            $("#keyword").change(function () {
-                switchForm($("#keyword").val());
-            }).trigger("change");
-        }
-        else if (option == "home") {
-            $("#divForm, button.back").hide();
-            $("#divTable, button.add").show();
-
-            listsRelease();
-        }
     }
 </script>
