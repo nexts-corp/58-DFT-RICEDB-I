@@ -110,7 +110,7 @@ class ReportService extends CServiceBase implements IReportService {
                 . " FROM " . $this->ent . "\\Status st"
                 . " WHERE st.keyword LIKE :keyword "
                 . " and st.keyword NOT LIKE :keyword2 "
-                . " and st.active is not null"
+                . " and st.active in ('Y','F') "
                 . " ORDER BY st.id DESC";
         $param = array(
             "keyword" => "AU%",
@@ -166,7 +166,7 @@ class ReportService extends CServiceBase implements IReportService {
                 . " FROM " . $this->ent . "\\Status st"
                 . " WHERE st.keyword LIKE :keyword "
                 . " and st.keyword LIKE :keyword2 "
-                . " and st.active is not null"
+                . " and st.active in ('YA','FA') "
                 . " ORDER BY st.id DESC";
         $param = array(
             "keyword" => "AU%",
@@ -181,7 +181,7 @@ class ReportService extends CServiceBase implements IReportService {
                 . " FROM " . $this->ent . "\\Status st"
                 . " WHERE st.keyword LIKE :keyword "
                 . " and st.keyword LIKE :keyword2 "
-                . " and st.active is not null"
+                . " and st.active in ('YI2','FI2') "
                 . " ORDER BY st.id DESC";
         $param = array(
             "keyword" => "AU%",
@@ -196,7 +196,7 @@ class ReportService extends CServiceBase implements IReportService {
                 . " FROM " . $this->ent . "\\Status st"
                 . " WHERE st.keyword LIKE :keyword "
                 . " and st.keyword LIKE :keyword2 "
-                . " and st.active is not null"
+                . " and st.active in ('YO','FO') "
                 . " ORDER BY st.id DESC";
         $param = array(
             "keyword" => "AU%",
