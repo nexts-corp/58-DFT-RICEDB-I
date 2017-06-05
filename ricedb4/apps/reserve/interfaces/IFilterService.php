@@ -128,4 +128,12 @@ interface IFilterService {
      * @description ตัดกอง
      */
     public function cut($book_id, $data_cut);
+
+    /**
+     * @name pivot
+     * @uri /pivot
+     * @param string bookId
+     * @return string pivot
+     */
+    public function pivot($bookId);
 }

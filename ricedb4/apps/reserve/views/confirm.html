@@ -253,20 +253,24 @@
             dataPublic = datas["lists"];
             var i = 0;
             $.each(datas["lists"], function (key, value) {
-//                console.log(value['filename'] == null);   
-//                var txt = '<span>' + accounting.formatNumber(value['weightBook'], 6, ",", ".") + ' ตัน</span><br>'
-//                        + '<span class="text-primary">' + accounting.formatNumber(value['weightTrack'], 6, ",", ".") + ' ตัน</span>';
-
+                var txt = '<span class="text-warning">รอนำไฟล์เข้า</span>';
+                if (value['filename'] !== null) {
+                    txt = '<span class="text-success">นำไฟล์เข้าแล้ว</span>'
+                            + '<br>'
+                            + '<a href="{{_context_path}}/' + value['filename'] + '" target="_blank">Download File</a>';
+                }
                 html += '<tr>'
                         + '<td class="text-center align-middle" rowspan="2">' + (++i) + '</td>'
                         + '<td class="text-center" rowspan="2">' + lkReserves[value['keyword'].substr(0, 2)] + '</td>'
                         + '<td class="text-center" rowspan="2">' + value["status"] + '</td>'
                         + '<td class="text-center" rowspan="2">' + value["dateCreated"].substr(0, 10) + '</td>'
-                        + '<td class="text-center text-bold" rowspan="2">' + (value['filename'] !== null ? '<span class="text-success">นำไฟล์เข้าแล้ว</span>' : '<span class="text-warning">รอนำไฟล์เข้า</span>') + '</td>'
+                        + '<td class="text-center text-bold" rowspan="2">'
+                        + txt
+                        + '</td>'
                         + '<td class="text-center">'
                         + '<button class="btn btn-default export-excel" data-key="' + key + '"><i class="fa fa-rotate-left"></i> 1.ส่งไฟล์ออก</button> '
                         + '</td>'
-                        + '<td class="text-right text-bold">' + accounting.formatNumber(value['weightBook'], 6, ",", ".") + '</td>'
+                        + '<td class="text-right text-bold">' + accounting.formatNumber(value['weightBook'], 6, ",", ".") + '<br>(ไม่รวมกระสอบ)</td>'
                         + '<td class="text-center" rowspan="2">'
                         + ' <button class="btn confirm-status btn-success"' + (value['filename'] !== null ? '' : 'disabled') + '  data-key="' + key + '"><i class="fa fa-check"></i> ยืนยัน</button>'
                         + ' <button class="btn delete-status btn-warning" data-key="' + key + '"><i class="fa fa-remove"></i> ยกเลิก</button>'
@@ -276,7 +280,7 @@
                         + '<td class="text-center">'
                         + '<button class="btn btn-primary import-excel" data-key="' + key + '"><i class="fa fa-rotate-right"></i> 2.นำไฟล์เข้า</button> '
                         + '</td>'
-                        + '<td class="text-right text-bold">' + accounting.formatNumber(value['weightTrack'], 6, ",", ".") + '</td>'
+                        + '<td class="text-right text-bold">' + accounting.formatNumber(value['weightTrack'], 6, ",", ".") + '<br>(รวมกระสอบ)</td>'
                         + '</tr>';
             });
         }

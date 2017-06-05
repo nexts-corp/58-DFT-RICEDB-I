@@ -442,6 +442,7 @@
         var gGrade = lkGrade(); //, gType = lkType(), gProject = lkProject();
         var text = {"type": [], "noType": [], "project": [], "noProject": [], "grade": [], "noGrade": []};
         var obj4Query = "";
+        var dataGrade = {};
         lists();
         lkType();
         lkProject();
@@ -507,6 +508,7 @@
                     }
                 });
             }
+
             dGrade = dGrade.filter(function (e) {
                 return e
             });
@@ -566,6 +568,21 @@
                             }
                     );
                 });
+                //start other พี่เก๋ให้เพิ่ม % ข้าวอื่นๆ
+                text.grade.push('[other');
+                columns.push(
+                        {
+                            "title": 'other',
+                            "data": "percent" + dGrade.length,
+                            "targets": [(dGrade.length + 5)],
+                            "sClass": "col-sm-2 text-right",
+                            "render": function (data) {
+                                var content = accounting.formatNumber(data, 2, ",", ".") + "%";
+                                return content;
+                            }
+                        }
+                );
+                //end other พี่เก๋ให้เพิ่ม % ข้าวอื่นๆ
             } else {
                 columns.push(
                         {
@@ -615,6 +632,7 @@
                         "targets": [columns.length],
                         "sClass": "text-center",
                         "render": function (data, key, full) {
+//                            console.log(full);
                             var html = '<input type="checkbox" class="checkbok select-silo" '
                                     + 'data-silo="' + full['silo']
                                     + '" data-associateId="' + full['lk_associate_id']
@@ -625,17 +643,26 @@
                                     + '" ';
                             var i = 0;
                             var txt_percent = '';
+                            var xml = '\<condition\>';
                             do {
                                 if (full.hasOwnProperty('percent' + i)) {
                                     txt_percent += full['percent' + i] + ',';
+                                    xml += '\<param name\=\"' + text.grade[i].replace("<br>", "[") + '\]\" value\=\"' + full['percent' + i] + '\" \/\>';
                                     i++;
                                 } else {
+                                    if (i > 0) {
+                                        xml += '\<\/condition\>';
+                                    } else {
+                                        xml = '';
+                                    }
                                     i = 0;
                                 }
                             }
                             while (i != 0);
                             if (txt_percent != '') {
-                                html += ' data-percent="' + txt_percent.substring(0, txt_percent.length - 1) + '" ';
+//                                html += ' data-percent="' + txt_percent.substring(0, txt_percent.length - 1) + '" ';
+//                                html += ' data-percent="' + xml + '" ';
+                                dataGrade[full['silo'] + full['associate'] + full['province']] = xml;
                             }
                             if (full['status'] == "true") {
                                 html += ' checked ';
@@ -645,6 +672,7 @@
                         }
                     }
             );
+//            console.log(dataGrade);
             var data = {
                 "type": dType,
                 "noType": dNoType,
@@ -757,10 +785,15 @@
         var data_silo = [];
         $("#btnStep2").unbind().click(function () {
             data_silo = [];
+//            console.log(dataGrade);
             var oTable = $("#tableStep2").dataTable();
             $('.select-silo', oTable.fnGetNodes()).each(function () {
                 if ($(this).prop("checked")) {
-                    data_silo.push($(this).data());
+                    var thisData = $(this).data();
+                    thisData['percent'] = dataGrade[$(this).data('silo') + $(this).data('associate') + $(this).data('province')];
+//                    console.log(thisData);
+                    data_silo.push(thisData);
+//                    data_silo.push($(this).data());
                     //                    data_silo.push({silo: $(this).data('silo'), associateId: $(this).data('associateId')});
                 }
             });
@@ -1035,6 +1068,7 @@
                 var result = callAjax("{{_context_path}}/api/reserve/filter/get", "post", {book_id: old_book_id}, "json")["get"];
                 $("#book_id").val(old_book_id);
                 $("#remark").val(result.remark);
+                $("#divGrade").empty();
                 var obj = $.parseJSON(result.obj_query);
                 toggleShow("form");
                 $.each(obj, function (k, v) {
@@ -1044,11 +1078,11 @@
                             $("input.chk-" + k + "[value=" + vv + "]").prop("checked", true);
                         });
                     } else {
-                        cGrade = 1;
+                        cGrade = 0; //1
                         $.each(v, function (kk, vv) {
-                            if (kk > 0) {
-                                createGrade();
-                            }
+//                            if (kk >= 0) {
+                            createGrade();
+//                            }
                             $(".chk-start[row-index=" + kk + "]").val(vv.start);
                             $(".chk-end[row-index=" + kk + "]").val(vv.end);
                             $.each(vv.id, function (kkk, vvv) {

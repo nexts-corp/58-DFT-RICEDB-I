@@ -63,11 +63,14 @@ class FilterService extends CServiceBase implements IFilterService {
                 . " SUM(CASE WHEN lk_grade_id >=10 THEN tWeight ELSE 0 END) weightBad,";
         $whereG = "AND";
         $where = array();
+        $chkGrade = "";
         foreach ($selector->grade as $key => $val) {
+
             $query .= ", CASE WHEN a.weightAll != 0 "; //select percent
             $query .= " THEN(a.gradeSelect" . $key . "/a.weightAll) * 100 ";
             $query .= " ELSE 0 END AS percent" . $key . "";
 
+            $chkGrade .= "a.gradeSelect" . $key . "+";
 //            $str .= " SUM(CASE WHEN lk_grade_id = ";             //count select grade
 //            $str .= implode(" OR lk_grade_id = ", $val->id);
 //            $str .= " THEN 1 ELSE 0 END ) gradeSelect" . $key . ",";
@@ -77,6 +80,14 @@ class FilterService extends CServiceBase implements IFilterService {
             $str .= " THEN tWeight ELSE 0 END ) gradeSelect" . $key . ",";
 
             $whereG .= " percent" . $key . " > " . $val->start . " AND percent" . $key . " <= " . $val->end . " AND";
+        }
+        if ($chkGrade != "") {
+            $query .= ",CASE WHEN a.weightAll != 0 "
+                    . " THEN iif(100-((( " . rtrim($chkGrade, "+") . ")/a.weightAll) * 100)<=0"
+                    . ",0"
+                    . ",100-((( " . rtrim($chkGrade, "+") . ")/a.weightAll) * 100 ))"
+                    . " ELSE 0 END AS percent" . count($selector->grade) . "";
+            ;
         }
         $query = rtrim($query, ",") . " FROM ( ";
 
@@ -219,6 +230,20 @@ class FilterService extends CServiceBase implements IFilterService {
                 . "order by province,associate,silo,warehouse,stack";
         $data = $this->datacontext->pdoQuery($sql);
 
+        $pivot = $this->pivot($book_id);
+//        print_r($pivot);
+        if (count($pivot) > 0) {
+            $condition = array_keys($pivot[0]);
+            unset($condition[0]);
+            foreach ($data as $key => &$value) {
+                $data_filter = (array) array_filter($pivot, function($v) use ($value) {
+                            return $v['id'] == $value['Id'];
+                        });
+                $data_filter = $data_filter[array_keys($data_filter)[0]];
+                unset($data_filter['id']);
+                $value = array_merge($value, $data_filter);
+            }
+        }
         $sql2 = "SELECT * FROM dft_booking where book_id = '" . $book_id . "'";
         $data_book = $this->datacontext->pdoQuery($sql2);
 
@@ -281,7 +306,16 @@ class FilterService extends CServiceBase implements IFilterService {
         $objWorkSheet->mergeCells('U' . $row . ':U' . $row)->setCellValue('U' . $row, "กลุ่ม 1 ตามมติ นบข. ครั้งที่ 2/60 นำมาประมูล 1/60"); //remark5
         $objWorkSheet->mergeCells('V' . $row . ':V' . $row)->setCellValue('V' . $row, "หมายเหตุ"); //remark6
         $objWorkSheet->mergeCells('W' . $row . ':W' . $row)->setCellValue('W' . $row, "กลุ่ม ประมูล 1/60"); //remark7
-        $objWorkSheet->mergeCells('X' . $row . ':X' . $row)->setCellValue('X' . $row, "%"); //remark0
+
+        if (count($pivot) > 0) { //Title conditions grade from remark0 
+            $rowCondition = 23;
+            for ($i = 1; $i <= count($condition); $i++) {
+                $columnLetter = \PHPExcel_Cell::stringFromColumnIndex($rowCondition++);
+                $objWorkSheet->mergeCells($columnLetter . $row . ':' . $columnLetter . $row)->setCellValue($columnLetter . $row, $condition[$i]); //remark0
+//                echo $condition[$i];
+            }
+        }
+//        exit();
         $row = 4;
         foreach ($data as $k => $v) {
             $objWorkSheet->setCellValueExplicit('A' . $row, $k + 1)->getStyle('A' . $row)->getAlignment()->applyFromArray($center);
@@ -307,7 +341,14 @@ class FilterService extends CServiceBase implements IFilterService {
             $objWorkSheet->setCellValue('U' . $row, $v['remark5']);
             $objWorkSheet->setCellValue('V' . $row, $v['remark6']);
             $objWorkSheet->setCellValue('W' . $row, $v['remark7']);
-            $objWorkSheet->setCellValue('X' . $row, $v['remark0'])->getStyle('X' . $row)->getAlignment()->applyFromArray($center);
+            if (count($pivot) > 0) { //Detail conditions grade from remark0 
+                $rowCondition = 23;
+                for ($i = 1; $i <= count($condition); $i++) {
+                    $columnLetter = \PHPExcel_Cell::stringFromColumnIndex($rowCondition++);
+                    $objWorkSheet->setCellValue($columnLetter . $row, $v[$condition[$i]])->getStyle($columnLetter . $row)->getAlignment()->applyFromArray($center);
+                }
+            }
+
             $row++;
         }
         $objWorkSheet->getStyle('A1:L3')->getFont()->setBold(true);
@@ -329,8 +370,7 @@ class FilterService extends CServiceBase implements IFilterService {
         $objWorkSheet->getColumnDimension('N')->setWidth(20);
         $objWorkSheet->getColumnDimension('O')->setWidth(20);
         $objWorkSheet->getColumnDimension('P')->setWidth(20);
-        $objWorkSheet->getColumnDimension('X')->setWidth(20);
-
+        //$objWorkSheet->getColumnDimension('X')->setWidth(20);
 //        //set protection
 //        $objWorkSheet->getProtection()->setPassword('123456');
 //        $objWorkSheet->getProtection()->setSheet(true);
@@ -370,6 +410,17 @@ class FilterService extends CServiceBase implements IFilterService {
         } else {
             return false;
         };
+    }
+
+    public function pivot($bookId) {
+        $cmd = "EXEC sp_filter_pivot :book ";
+        $param = array(
+            "book" => $bookId
+        );
+        $data = $this->datacontext->pdoQuery($cmd, $param);
+        return $data;
+//        $array = get_object_vars($data[0]);
+//        $properties = array_keys($array);
     }
 
 }

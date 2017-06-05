@@ -96,6 +96,21 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label req text-right" for="target">{{#i18n}}reserve.choose{{/i18n}} :</label>
+                        <div class="col-md-6">
+                            <div class="radio">
+                                <label>
+                                    <input class="remarkControl"  type="radio" data-entity="list" name="choose" id="choose_1" value="R1" checked>
+                                    {{#i18n}}reserve.choose.yes{{/i18n}}
+                                </label>
+                                <label>
+                                    <input class="remarkControl" type="radio" data-entity="list" name="choose" id="choose_2" value="R3">
+                                    {{#i18n}}reserve.choose.no{{/i18n}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div id="loading" class="col-xs-12" style="text-align: center;"></div>
                     <ul class="nav nav-pills sort-source secundary pull-right" data-sort-id="portfolio" data-option-key="filter">
                         <li data-option-value="*" class="">
@@ -205,7 +220,7 @@
                     isValid = false;
                     return;
                 } else {
-                    if ($(this).attr("name") == "typeAuction" && $(this).val() == " ") {
+                    if ($(this).attr("name") == "typeAuction" && ($(this).val() == " " || $("#reserveCode").val() != "AU")) {
                         preData["typeAuction"] = "";
                     } else {
                         preData[$(this).attr("name")] = $(this).val();
@@ -217,7 +232,7 @@
                 data["status"] = preData["name"] + ($("#reserveCode").val() == "AU" ? " (" + $("#typeAuction option:selected").text() + ")" : "");
                 data["keyword"] = preData["reserveCode"] + (preData["typeAuction"] != "" ? "-" + preData["typeAuction"] : "");
                 data["saleBy"] = preData["typeSale"];
-                data["active"] = "R1" + (preData["typeAuction"] != "" ? preData["typeAuction"] : "");
+                data["active"] = preData["choose"] + (preData["typeAuction"] != "" ? preData["typeAuction"] : "");
                 var dataJSON = JSON.stringify({status: data});
                 var dataJSONEN = encodeURIComponent(dataJSON);
                 setTimeout(function () {

@@ -59,6 +59,7 @@ class ImportService extends CServiceBase implements IImportService {
     }
 
     public function import($file, $sheet, $row, $statusId, $column) {
+        $txt = "";
         $return = true;
         $status = new \apps\common\entity\Status();
         $status->id = $statusId;
@@ -88,7 +89,7 @@ class ImportService extends CServiceBase implements IImportService {
             $prov = new \apps\common\entity\Province();
             $data1 = $this->datacontext->getObject($prov);
             foreach ($data1 as $value) {
-                $provArr[str_replace(" ", "", $value->provinceNameTH)] = $value->id;
+                $provArr[strtoupper(str_replace(" ", "", $value->provinceNameTH))] = $value->id;
             }
 
             // project
@@ -96,7 +97,7 @@ class ImportService extends CServiceBase implements IImportService {
             $proj = new \apps\common\entity\Project();
             $data2 = $this->datacontext->getObject($proj);
             foreach ($data2 as $value) {
-                $projArr[str_replace(" ", "", $value->project)] = $value->id;
+                $projArr[strtoupper(str_replace(" ", "", $value->project))] = $value->id;
             }
 
             // associate
@@ -104,7 +105,7 @@ class ImportService extends CServiceBase implements IImportService {
             $asso = new \apps\common\entity\Associate();
             $data3 = $this->datacontext->getObject($asso);
             foreach ($data3 as $value) {
-                $assoArr[str_replace(" ", "", $value->associate)] = $value->id;
+                $assoArr[strtoupper(str_replace(" ", "", $value->associate))] = $value->id;
             }
 
             // type
@@ -112,7 +113,7 @@ class ImportService extends CServiceBase implements IImportService {
             $type = new \apps\common\entity\Type();
             $data4 = $this->datacontext->getObject($type);
             foreach ($data4 as $value) {
-                $typeArr[str_replace(" ", "", $value->type)] = $value->id;
+                $typeArr[strtoupper(str_replace(" ", "", $value->type))] = $value->id;
             }
 
             // grade
@@ -120,7 +121,7 @@ class ImportService extends CServiceBase implements IImportService {
             $grade = new \apps\common\entity\Grade();
             $data5 = $this->datacontext->getObject($grade);
             foreach ($data5 as $value) {
-                $gradeArr[str_replace(" ", "", $value->grade)] = $value->id;
+                $gradeArr[strtoupper(str_replace(" ", "", $value->grade))] = $value->id;
             }
 
             $sheet = $objPHPExcel->getSheet($sheetActive);
@@ -149,8 +150,8 @@ class ImportService extends CServiceBase implements IImportService {
                 $prov = $sheet->getCellByColumnAndRow($column["province"], $row)->getFormattedValue();
                 $proj = $sheet->getCellByColumnAndRow($column["project"], $row)->getFormattedValue();
                 $round = $sheet->getCellByColumnAndRow($column["round"], $row)->getFormattedValue();
-                $silo = $sheet->getCellByColumnAndRow($column["silo"], $row)->getFormattedValue();
-                $addr = $sheet->getCellByColumnAndRow($column["address"], $row)->getFormattedValue();
+                $silo = trim($sheet->getCellByColumnAndRow($column["silo"], $row)->getFormattedValue());
+                $addr = trim($sheet->getCellByColumnAndRow($column["address"], $row)->getFormattedValue());
                 $asso = $sheet->getCellByColumnAndRow($column["associate"], $row)->getFormattedValue();
                 $type = $sheet->getCellByColumnAndRow($column["type"], $row)->getFormattedValue();
                 $warehouse = $sheet->getCellByColumnAndRow($column["warehouse"], $row)->getFormattedValue();
@@ -161,12 +162,14 @@ class ImportService extends CServiceBase implements IImportService {
                 $justin = $sheet->getCellByColumnAndRow($column["justin"], $row)->getFormattedValue();
                 $weightAll = $sheet->getCellByColumnAndRow($column["weightAll"], $row)->getFormattedValue();
 
-                $tWeight = (float) str_replace(",", "", $weightAll);
+                $weight = str_replace(",", "", $weight);
+                $weightAll = str_replace(",", "", $weightAll);
+                $tWeight = (float) $weightAll;
 
-                if ($code != "") {
+                if ($silo != "") {
                     //หาชื่อจังหวัด
-                    if (isset($provArr[str_replace(" ", "", $prov)])) {
-                        $prov = $provArr[str_replace(" ", "", $prov)];
+                    if (isset($provArr[strtoupper(str_replace(" ", "", $prov))])) {
+                        $prov = $provArr[strtoupper(str_replace(" ", "", $prov))];
                     } else {
                         $this->datacontext->removeObject($dataRM);
                         return "กรุณาตรวจสอบข้อมูลจังหวัด";
@@ -185,8 +188,8 @@ class ImportService extends CServiceBase implements IImportService {
                         }
                     }
 //                    $proj = $projArr[str_replace(" ", "", $proj)];
-                    if (isset($projArr[str_replace(" ", "", $proj)])) {
-                        $proj = $projArr[str_replace(" ", "", $proj)];
+                    if (isset($projArr[strtoupper(str_replace(" ", "", $proj))])) {
+                        $proj = $projArr[strtoupper(str_replace(" ", "", $proj))];
                     } else {
                         $this->datacontext->removeObject($dataRM);
                         return "กรุณาตรวจสอบข้อมูลปีโครงการ";
@@ -199,8 +202,8 @@ class ImportService extends CServiceBase implements IImportService {
 
                     //หาผู้เข้าร่วม
 //                    $asso = $assoArr[str_replace(" ", "", $asso)];
-                    if (isset($assoArr[str_replace(" ", "", $asso)])) {
-                        $asso = $assoArr[str_replace(" ", "", $asso)];
+                    if (isset($assoArr[strtoupper(str_replace(" ", "", $asso))])) {
+                        $asso = $assoArr[strtoupper(str_replace(" ", "", $asso))];
                     } else {
                         $this->datacontext->removeObject($dataRM);
                         return "กรุณาตรวจสอบข้อมูลผู้เข้าร่วมฯ";
@@ -213,8 +216,8 @@ class ImportService extends CServiceBase implements IImportService {
 //                    if (str_replace(" ", "", $type) == "ข้าวเหนียวขาว10%(ร1)")
 //                        $type = "ข้าวเหนียวขาว10%";
 //                    $type = $typeArr[str_replace(" ", "", $type)];
-                    if (isset($typeArr[str_replace(" ", "", $type)])) {
-                        $type = $typeArr[str_replace(" ", "", $type)];
+                    if (isset($typeArr[strtoupper(str_replace(" ", "", $type))])) {
+                        $type = $typeArr[strtoupper(str_replace(" ", "", $type))];
                     } else {
                         $this->datacontext->removeObject($dataRM);
                         return "กรุณาตรวจสอบข้อมูลชนิดข้าว";
@@ -224,8 +227,8 @@ class ImportService extends CServiceBase implements IImportService {
                         $grade = $justin;
                     }
 //                    $grade = $gradeArr[str_replace(" ", "", $grade)];
-                    if (isset($gradeArr[str_replace(" ", "", $grade)])) {
-                        $grade = $gradeArr[str_replace(" ", "", $grade)];
+                    if (isset($gradeArr[strtoupper(str_replace(" ", "", $grade))])) {
+                        $grade = $gradeArr[strtoupper(str_replace(" ", "", $grade))];
                     } else {
                         $this->datacontext->removeObject($dataRM);
                         return "กรุณาตรวจสอบข้อมูลเกรดข้าว";
@@ -235,7 +238,7 @@ class ImportService extends CServiceBase implements IImportService {
                         return "กรุณาตรวจสอบข้อมูลปริมาณรวมกระสอบ";
                     }
                     $id = $this->getGUID();
-                    $command[] = "( '" . $id . "','" . $code . "', '" . $bag . "', '" . $prov . "', '" . $proj . "', '" . $round . "', '" . $silo . "', '" . $addr . "', '" . $asso . "', '" . $type . "', '" . $warehouse . "', '" . $stack . "', '" . $weight . "', '" . $samp . "', '" . $grade . "', '" . $dataStatus->keyword . "', '" . $weightAll . "', '" . $tWeight . "')";
+                    $command[] = "( '" . $id . "','" . $code . "', '" . $bag . "', '" . $prov . "', '" . $proj . "', '" . $round . "', '" . $silo . "', '" . $addr . "', '" . $asso . "', '" . $type . "', '" . $warehouse . "', '" . $stack . "', '" . $weight . "', '" . $samp . "', '" . $grade . "', '" . $dataStatus->keyword . "', '" . $weightAll . "', '" . $tWeight . "','" . $type . "','" . $grade . "')";
 
                     $count++;
                     $this->logger->info("Row : " . $row);
@@ -245,11 +248,12 @@ class ImportService extends CServiceBase implements IImportService {
 
                 if ($count == 10 || $row == $highestRow) {
                     if (count($command) > 0) {
-                        $insert = "INSERT INTO dft_Rice_Tracking(Id, Code, Bag_No, LK_Province_Id, LK_Project_Id, Round, Silo, Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight, Sampling_Id, LK_Grade_Id, lk_status_keyword, Weight_All, TWeight) VALUES " . implode(",", $command);
+                        $insert = "INSERT INTO dft_Rice_Tracking(Id, Code, Bag_No, LK_Province_Id, LK_Project_Id, Round, Silo, Address, LK_Associate_Id, LK_Type_Id, Warehouse, Stack, Weight, Sampling_Id, LK_Grade_Id, lk_status_keyword, Weight_All, TWeight,useType,useGrade) VALUES " . implode(",", $command);
                         $sql = "EXEC sp_batch_insert :cmd";
                         $param = array(
                             "cmd" => $insert
                         );
+//                        $txt .= $insert;
 
                         if (!$this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")) {
                             $this->datacontext->removeObject($dataRM);
