@@ -68,10 +68,10 @@ class WidgetService extends CServiceBase implements IWidgetService {
         $sqlSt = "SELECT"
                 . " st.status, st.auctionDate, st.keyword"
                 . " FROM " . $this->ent . "\\Status st"
-                . " WHERE st.keyword LIKE 'AU%' AND st.active = :active "
+                . " WHERE st.keyword LIKE 'AU%' AND st.active like :active "
                 . " ORDER BY st.dateCreated DESC";
         $paramSt = array(
-            "active" => "F"
+            "active" => "F%"
         );
 
         $dataSt = $this->datacontext->getObject($sqlSt, $paramSt, 1); //get STATUS is Active
@@ -89,9 +89,10 @@ class WidgetService extends CServiceBase implements IWidgetService {
             $sql = "SELECT"
                     . " st.typeName, sum(st.oweightAll) AS weight"
                     . " FROM fn_auction_info(:auction) fn"
-                    . " JOIN dft_auction_stack st ON st.wareHouseCode = fn.wareHouseCode AND st.associateId = fn.associateId AND st.auctionNo = fn.auctionNo"
+                    . " LEFT JOIN dft_auction_stack st ON st.wareHouseCode = fn.wareHouseCode AND st.associateId = fn.associateId AND st.auctionNo = fn.auctionNo"
                     . " WHERE isSale = 'Y'"
-                    . " GROUP BY st.typeName";
+                    . " GROUP BY st.typeName "
+                    . " ORDER BY sum(st.oweightAll) desc ";
 
             $param = array(
                 "auction" => $dataSt[0]["keyword"]
@@ -124,10 +125,12 @@ class WidgetService extends CServiceBase implements IWidgetService {
         $sqlSt = "SELECT"
                 . " st.status, st.auctionDate, st.keyword, st.auctionDate ,st.auctionDay2"
                 . " FROM " . $this->ent . "\\Status st"
-                . " WHERE st.keyword LIKE 'AU%' and st.keyword not like '%-%'"
+                . " WHERE st.keyword LIKE 'AU%' and st.active like :active "
                 . " ORDER BY st.dateCreated DESC";
-
-        $dataSt = $this->datacontext->getObject($sqlSt); //get list status
+        $paramSt = array(
+            "active" => 'F%'
+        );
+        $dataSt = $this->datacontext->getObject($sqlSt,$paramSt); //get list status
 
         $status = array();
         foreach ($dataSt as $key => $value) { //find rice_tracking is sale = Y by status_keyword
