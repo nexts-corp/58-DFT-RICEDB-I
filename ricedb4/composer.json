@@ -15,6 +15,6 @@
         "apache/log4php": "2.3.0",
         "firebase/php-jwt": "v3.0.0",
         "bpg/cde": "3.5.5.x-dev",
-        "phpexcel/phpexcel": "v1.7.7"
+        "phpoffice/phpexcel": "1.8.1"
     }
 }
