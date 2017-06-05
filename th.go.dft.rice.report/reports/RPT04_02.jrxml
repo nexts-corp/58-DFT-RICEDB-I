@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02_09" language="groovy" pageWidth="595" pageHeight="842" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="36" bottomMargin="36" isFloatColumnFooter="true" uuid="f33557b4-8855-4bf5-b73c-6a798e382634">
 	<property name="ireport.zoom" value="1.1269722013523664"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="96"/>
 	<style name="FBold" fill="Solid" hAlign="Left" vAlign="Top" fontName="TH SarabunPSK" fontSize="14" isBold="true" pdfFontName="THSarabun Bold.ttf" pdfEncoding="Identity-H"/>
 	<style name="Rpt" fontName="TH SarabunPSK" fontSize="10" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
 	<style name="Default" isDefault="true" fontName="TH SarabunPSK" fontSize="16" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H"/>
@@ -132,22 +132,24 @@ $P{auctionDate}.split("-")[0]
 					</textElement>
 					<text><![CDATA[จังหวัด .....................................................................]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="0" y="160" width="483" height="25" uuid="066be158-ce67-40ab-b99a-b05ac3148f77"/>
-					<box leftPadding="0" rightPadding="0"/>
-					<textElement verticalAlignment="Bottom">
+				<textField>
+					<reportElement x="0" y="160" width="483" height="55" uuid="08bd8972-669d-4aa8-a80a-af9778d5ab7a"/>
+					<textElement verticalAlignment="Top" markup="none">
 						<font size="18"/>
 					</textElement>
-					<text><![CDATA[การจำหน่ายข้าวสารในสต็อกของรัฐให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศเพื่อส่งออกต่างประเทศ ]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="0" y="185" width="427" height="22" uuid="588cffc9-d324-4359-93ee-08fd8602e1c8"/>
-					<box leftPadding="0" rightPadding="2"/>
-					<textElement verticalAlignment="Bottom">
-						<font size="18"/>
-					</textElement>
-					<text><![CDATA[ครั้งที่                    โดยมีรายละเอียด ดังนี้]]></text>
-				</staticText>
+					<textFieldExpression><![CDATA["การจำหน่ายข้าวสารในสต็อกของรัฐ"+
+(
+    $F{auctionNo}.contains("I2")?
+        "เป็นการทั่วไปเพื่อเข้าสู่อุตสาหกรรม":
+        $F{auctionNo}.contains("I")?
+            "เพื่อเข้าสู่อุตสาหกรรม":
+            $F{auctionNo}.contains("O")?
+                "ให้กับภาคเอกชนที่มีคำสั่งซื้อจากต่างประเทศเพื่อส่งออกต่างประเทศ":
+                "เป็นการทั่วไป"
+)+
+" ครั้งที่ "+$F{auctionCode}.split(" ")[0]+
+" โดยมีรายละเอียดดังนี้"]]></textFieldExpression>
+				</textField>
 				<textField>
 					<reportElement style="FBold" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="268" y="114" width="215" height="22" uuid="bce03472-ceed-4d1b-8aa5-cde9a5aa400c"/>
 					<box rightPadding="20"/>
@@ -155,14 +157,6 @@ $P{auctionDate}.split("-")[0]
 						<font size="18" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{bidderName}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement style="FBold" positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="33" y="185" width="55" height="22" uuid="82e5b816-ad02-4d84-b5f8-dd35cbb6f5c6"/>
-					<box rightPadding="20"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="16" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{auctionCode}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement positionType="FixRelativeToBottom" stretchType="RelativeToTallestObject" x="75" y="283" width="124" height="33" uuid="3866cf74-8bc7-4c73-94e0-e3e1ab4984b1"/>

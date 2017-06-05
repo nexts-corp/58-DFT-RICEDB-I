@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RPT02-06-07" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a1da91c-587f-47a5-bc73-0820913508b1">
-	<property name="ireport.zoom" value="1.0000000000000184"/>
-	<property name="ireport.x" value="78"/>
+	<property name="ireport.zoom" value="1.0000000000000187"/>
+	<property name="ireport.x" value="126"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Default" isDefault="true" fill="Solid" fontName="TH SarabunPSK" fontSize="14" pdfFontName="THSarabun.ttf" pdfEncoding="Identity-H" isPdfEmbedded="true">
 		<pen lineWidth="0.0"/>
@@ -76,6 +76,12 @@
 		<variableExpression><![CDATA[($F{associateId}==2?1:0)]]></variableExpression>
 		<initialValueExpression><![CDATA[0]]></initialValueExpression>
 	</variable>
+	<variable name="SUM_VALUE_FV" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{FV2}]]></variableExpression>
+	</variable>
+	<variable name="F_DIFF" class="java.lang.Double" calculation="Average">
+		<variableExpression><![CDATA[(($F{bidderLastPrice}/$F{oweightAll})-($F{FV2}/$F{oweightAll}))*100/($F{FV2}/$F{oweightAll})]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -111,7 +117,7 @@
 	<columnHeader>
 		<band height="40" splitType="Stretch">
 			<staticText>
-				<reportElement style="Bold" x="0" y="0" width="100" height="40" uuid="fcb7b787-c186-4b5f-b9fa-e4b6818e7f7b"/>
+				<reportElement style="Bold" x="0" y="0" width="63" height="40" uuid="fcb7b787-c186-4b5f-b9fa-e4b6818e7f7b"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -125,7 +131,7 @@
 				<text><![CDATA[คลังสินค้า]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="100" y="0" width="100" height="40" uuid="0dedc1fd-aec6-4b5f-ac62-665c2193e069"/>
+				<reportElement style="Bold" x="149" y="0" width="51" height="40" uuid="0dedc1fd-aec6-4b5f-ac62-665c2193e069"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -139,7 +145,7 @@
 				<text><![CDATA[ผู้เสนอราคา]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="549" y="0" width="50" height="40" uuid="d4357686-5d8d-45bd-8553-240759309ede"/>
+				<reportElement style="Bold" x="424" y="0" width="37" height="40" uuid="d4357686-5d8d-45bd-8553-240759309ede"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -154,7 +160,7 @@
 (บาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="489" y="0" width="60" height="40" uuid="8e776dc0-fa8f-4fb4-95c6-82a0d50c75c0"/>
+				<reportElement style="Bold" x="379" y="0" width="45" height="40" uuid="8e776dc0-fa8f-4fb4-95c6-82a0d50c75c0"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -170,7 +176,7 @@
 (บาท)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="419" y="0" width="70" height="40" uuid="295459f6-7f66-4a76-8904-43b62464e534"/>
+				<reportElement style="Bold" x="333" y="0" width="46" height="40" uuid="295459f6-7f66-4a76-8904-43b62464e534"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -185,7 +191,7 @@
 (ตัน)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="200" y="0" width="65" height="40" uuid="cb8b4b94-2275-40d3-ada2-870fb9ce219d"/>
+				<reportElement style="Bold" x="200" y="0" width="40" height="40" uuid="cb8b4b94-2275-40d3-ada2-870fb9ce219d"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -228,7 +234,7 @@ P/A/B]]></text>
 C/ผิดชนิด/ผิดมฐ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="325" y="0" width="94" height="40" uuid="300a89e5-3034-4737-aeeb-81da9c441bb6"/>
+				<reportElement style="Bold" x="285" y="0" width="48" height="40" uuid="300a89e5-3034-4737-aeeb-81da9c441bb6"/>
 				<box>
 					<pen lineWidth="0.5"/>
 					<topPen lineWidth="0.5"/>
@@ -239,10 +245,10 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
-				<text><![CDATA[ระดับชั้นคุณภาพ]]></text>
+				<text><![CDATA[เกรด]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Bold" x="265" y="0" width="60" height="40" uuid="1ac3829a-4d54-434b-8239-09fda08def54"/>
+				<reportElement style="Bold" x="240" y="0" width="45" height="40" uuid="1ac3829a-4d54-434b-8239-09fda08def54"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -254,12 +260,84 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				</textElement>
 				<text><![CDATA[ปีโครงการ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="63" y="0" width="47" height="40" uuid="a16fa849-a4ea-4184-9485-2ce85cfcec60"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[จังหวัด]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="110" y="0" width="39" height="40" uuid="8beac64d-bf5c-4ae2-b6bc-42ace15618d0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ผู้เข้าร่วม]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="461" y="0" width="47" height="40" uuid="4fbee4af-0477-4972-aece-ba28ffd8940a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FV
+(บาท)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="508" y="0" width="37" height="40" uuid="ed525892-9df1-49f4-a37d-3cedfc8c88a1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FP/ตัน
+(บาท)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Bold" x="545" y="0" width="54" height="40" uuid="c5c298fa-c8bc-47fa-bcd1-2cc400df6c5c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[%ส่วนต่าง]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="40">
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="40" uuid="47eeadc2-db4e-4cd4-a46b-962f5059a1ed"/>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="63" height="40" uuid="47eeadc2-db4e-4cd4-a46b-962f5059a1ed"/>
 				<box leftPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -269,11 +347,10 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textElement verticalAlignment="Middle">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{REPORT_COUNT}+". "+$F{wareHouseCode}+"\n"+
-"["+$F{province}+"] ["+$F{associate}+"]"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{wareHouseCode}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="100" y="0" width="100" height="40" uuid="cfd7fd4f-f716-4bf2-aa29-5a0d3b5ad348"/>
+				<reportElement stretchType="RelativeToBandHeight" x="149" y="0" width="51" height="40" uuid="cfd7fd4f-f716-4bf2-aa29-5a0d3b5ad348"/>
 				<box leftPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -286,7 +363,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[$F{bidderName}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.000000">
-				<reportElement stretchType="RelativeToBandHeight" x="419" y="0" width="70" height="40" uuid="3d3ec4ed-b9f7-4b1e-ad5d-10079f745462"/>
+				<reportElement stretchType="RelativeToBandHeight" x="333" y="0" width="46" height="40" uuid="3d3ec4ed-b9f7-4b1e-ad5d-10079f745462"/>
 				<box rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -299,7 +376,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[$F{oweightAll}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="489" y="0" width="60" height="40" uuid="816fe714-0097-4ba4-ba17-0049503d54a3"/>
+				<reportElement stretchType="RelativeToBandHeight" x="379" y="0" width="45" height="40" uuid="816fe714-0097-4ba4-ba17-0049503d54a3"/>
 				<box rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -312,7 +389,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[$F{bidderLastPrice}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="549" y="0" width="50" height="40" uuid="2e8661a3-9d75-413d-8ff6-54d9e679f3ec"/>
+				<reportElement stretchType="RelativeToBandHeight" x="424" y="0" width="37" height="40" uuid="2e8661a3-9d75-413d-8ff6-54d9e679f3ec"/>
 				<box rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -325,7 +402,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[$F{bidderLastPrice}/$F{oweightAll}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="200" y="0" width="65" height="40" uuid="dedb478a-9a6b-40b9-996b-121d0c69092c"/>
+				<reportElement stretchType="RelativeToBandHeight" x="200" y="0" width="40" height="40" uuid="dedb478a-9a6b-40b9-996b-121d0c69092c"/>
 				<box leftPadding="0">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -349,19 +426,6 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{weightGood}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="###0.00">
-				<reportElement stretchType="RelativeToBandHeight" x="654" y="0" width="25" height="40" uuid="b6838a19-226b-42b3-a67e-484778b78173"/>
-				<box rightPadding="2">
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{percentGood}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###0.00">
 				<reportElement x="759" y="0" width="40" height="20" uuid="9dccd340-6784-46f0-8dd1-010b60d92ce5"/>
@@ -442,7 +506,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[$F{weightWrong}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="325" y="0" width="94" height="40" uuid="b5baf73a-722a-491d-8a90-0e080d9a3789"/>
+				<reportElement stretchType="RelativeToBandHeight" x="285" y="0" width="48" height="40" uuid="b5baf73a-722a-491d-8a90-0e080d9a3789"/>
 				<box leftPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -455,7 +519,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[$F{grades}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement stretchType="RelativeToBandHeight" x="265" y="0" width="60" height="40" uuid="df8c854c-ed1f-44fa-882d-ecae7e92d389"/>
+				<reportElement stretchType="RelativeToBandHeight" x="240" y="0" width="45" height="40" uuid="df8c854c-ed1f-44fa-882d-ecae7e92d389"/>
 				<box leftPadding="0">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -466,6 +530,84 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{projects}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.00">
+				<reportElement stretchType="RelativeToBandHeight" x="654" y="0" width="25" height="40" uuid="b6838a19-226b-42b3-a67e-484778b78173"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percentGood}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="63" y="0" width="47" height="40" uuid="4d2c7668-a29a-4351-b1ae-56a01c104637"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{province}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="110" y="0" width="39" height="40" uuid="16841dec-a70a-4e9c-85b4-044bf9c86d59"/>
+				<box leftPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{associate}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement stretchType="RelativeToBandHeight" x="461" y="0" width="47" height="40" uuid="0e02bd8c-eb22-4e5c-9873-73dce50782cd"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FV2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement stretchType="RelativeToBandHeight" x="508" y="0" width="37" height="40" uuid="d152f622-ca78-418e-8a00-9ad682a3c2c5"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FV2}/$F{oweightAll}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement stretchType="RelativeToBandHeight" x="545" y="0" width="54" height="40" uuid="befc6abd-6696-4c58-95a5-4f2c94d5700b"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($F{bidderLastPrice}/$F{oweightAll})-($F{FV2}/$F{oweightAll}))*100/($F{FV2}/$F{oweightAll})]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
@@ -495,7 +637,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 	<summary>
 		<band height="20" splitType="Stretch">
 			<textField isStretchWithOverflow="true" pattern="#,##0.000000">
-				<reportElement style="Default" stretchType="RelativeToBandHeight" x="419" y="0" width="70" height="20" uuid="e931edf8-5892-40ad-9bc3-7b45b8aa2689"/>
+				<reportElement style="Default" stretchType="RelativeToBandHeight" x="333" y="0" width="46" height="20" uuid="e931edf8-5892-40ad-9bc3-7b45b8aa2689"/>
 				<box rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -508,7 +650,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[$V{SUM_AMOUNT}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement style="Default" stretchType="RelativeToBandHeight" x="489" y="0" width="60" height="20" uuid="96c534fb-c203-4b5a-8b30-d780dd671db9"/>
+				<reportElement style="Default" stretchType="RelativeToBandHeight" x="379" y="0" width="45" height="20" uuid="96c534fb-c203-4b5a-8b30-d780dd671db9"/>
 				<box rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -518,7 +660,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_VALUE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_VALUE_FINAL}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
 				<reportElement style="Default" stretchType="RelativeToBandHeight" x="599" y="0" width="203" height="20" uuid="8179ce95-2b89-4e58-82c1-411228c2c02b"/>
@@ -534,7 +676,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="0" y="0" width="419" height="20" uuid="76de830d-e5f2-4b57-b1da-47dd80c5126a"/>
+				<reportElement style="Bold" stretchType="RelativeToBandHeight" x="0" y="0" width="333" height="20" uuid="76de830d-e5f2-4b57-b1da-47dd80c5126a"/>
 				<box rightPadding="20">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -545,7 +687,7 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textFieldExpression><![CDATA["รวมทั้งสิ้น "+$V{REPORT_COUNT}+" คลังฯ (อคส. " + $V{COUNT_ASSO1} +" คลัง , อ.ต.ก. "+ $V{COUNT_ASSO2} +" คลัง)  ผู้เสนอซื้อ "+$V{COUNT_BIDDER}+" ราย"]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.00">
-				<reportElement style="Default" stretchType="RelativeToBandHeight" x="549" y="0" width="50" height="20" uuid="ceebcf85-5bfd-4202-a77d-4046f8936c7d"/>
+				<reportElement style="Default" stretchType="RelativeToBandHeight" x="424" y="0" width="37" height="20" uuid="ceebcf85-5bfd-4202-a77d-4046f8936c7d"/>
 				<box rightPadding="2">
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -555,7 +697,46 @@ C/ผิดชนิด/ผิดมฐ]]></text>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{SUM_VALUE}/$V{SUM_AMOUNT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{SUM_VALUE_FINAL}/$V{SUM_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement style="Default" stretchType="RelativeToBandHeight" x="461" y="0" width="47" height="20" uuid="b5013d56-a76f-4a25-9f73-1a112385fd45"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_VALUE_FV}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement style="Default" stretchType="RelativeToBandHeight" x="508" y="0" width="37" height="20" uuid="48ab09f3-e7b8-4d50-bf28-7bf396b3860c"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUM_VALUE_FV}/$V{SUM_AMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00">
+				<reportElement style="Default" stretchType="RelativeToBandHeight" x="545" y="0" width="54" height="20" uuid="e90d6837-bc8c-4be9-af2d-1cd0cffa48c0"/>
+				<box rightPadding="2">
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.75"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($V{SUM_VALUE_FINAL}/$V{SUM_AMOUNT})-($V{SUM_VALUE_FV}/$V{SUM_AMOUNT}))*100/($V{SUM_VALUE_FV}/$V{SUM_AMOUNT})]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
