@@ -192,7 +192,7 @@ class FloorValueService extends CServiceBase implements IFloorValueService {
             ob_clean();
 
             header('Content-Type: application/vnd.ms-excel');
-            header("Content-Disposition: attachment;filename=รายละเอียดคลังสินค้ากลางสำหรับการจำหน่ายข้าวสารในสต็อกของรัฐ ครั้งที่" . str_replace("/", "_", $name) . ".xls");
+            header("Content-Disposition: attachment;filename=การจำหน่ายข้าวสารในสต็อกของรัฐ ครั้งที่" . str_replace("/", "_", $name) . ".xls");
 
             $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
             $objWriter->save('php://output');
