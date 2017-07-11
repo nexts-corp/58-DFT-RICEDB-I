@@ -17,7 +17,7 @@ interface IBidderReturnService {
      * @authen true
      */
     public function listsBidder();
-    
+
     /**
      * @name listsPayment
      * @uri /listsPayment
@@ -27,7 +27,7 @@ interface IBidderReturnService {
      * @authen true
      */
     public function listsPayment($bidderHistoryId);
-    
+
     /**
      * @name listsWarehouse
      * @uri /listsWarehouse
@@ -37,7 +37,17 @@ interface IBidderReturnService {
      * @authen true
      */
     public function listsWarehouse($bidderId);
-    
+
+    /**
+     * @name listsNoWarehouse
+     * @uri /listsNoWarehouse
+     * @param integer bidderId Description
+     * @return String[] lists Description
+     * @description รายชื่อคลังสินค้าที่ผู้เสนอซื้อเสนอราคา
+     * @authen true
+     */
+    public function listsNoWarehouse($bidderId);
+
     /**
      * @name update
      * @uri /update

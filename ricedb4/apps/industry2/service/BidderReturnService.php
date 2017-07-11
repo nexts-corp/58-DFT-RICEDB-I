@@ -29,32 +29,32 @@ class BidderReturnService extends CServiceBase implements IBidderReturnService {
     }
 
     public function listsBidder() {
-    //        $sql = "select "
-    //                . " bh.bidderId,"
-    //                . " bp.bidderHistoryId,"
-    //                . "  bh.statusKeyword,"
-    //                . " bh.queue,"
-    //                . " bi.bidderName,"
-    //                . " bh.agentName,"
-    //                . " bh.mobile"
-    //                . " from " . $this->ent . "\\BidderHistory bh"
-    //                . " inner join " . $this->ent . "\\BidderInfo bi"
-    //                . " with bi.id = bh.bidderId"
-    //                . " inner join " . $this->ent . "\\BidderPayment bp"
-    //                . " with bp.bidderHistoryId = bh.id"
-    //                . " where"
-    //                . " bh.statusKeyword = :auctionCode"
-    //                . " group by"
-    //                . " bh.bidderId,"
-    //                . " bp.bidderHistoryId,"
-    //                . " bh.statusKeyword,"
-    //                . " bh.queue,"
-    //                . " bi.bidderName,"
-    //                . " bh.agentName,"
-    //                . " bh.mobile"
-    //                . " order by"
-    //                . " bh.queue";
-            $sql = "select
+        //        $sql = "select "
+        //                . " bh.bidderId,"
+        //                . " bp.bidderHistoryId,"
+        //                . "  bh.statusKeyword,"
+        //                . " bh.queue,"
+        //                . " bi.bidderName,"
+        //                . " bh.agentName,"
+        //                . " bh.mobile"
+        //                . " from " . $this->ent . "\\BidderHistory bh"
+        //                . " inner join " . $this->ent . "\\BidderInfo bi"
+        //                . " with bi.id = bh.bidderId"
+        //                . " inner join " . $this->ent . "\\BidderPayment bp"
+        //                . " with bp.bidderHistoryId = bh.id"
+        //                . " where"
+        //                . " bh.statusKeyword = :auctionCode"
+        //                . " group by"
+        //                . " bh.bidderId,"
+        //                . " bp.bidderHistoryId,"
+        //                . " bh.statusKeyword,"
+        //                . " bh.queue,"
+        //                . " bi.bidderName,"
+        //                . " bh.agentName,"
+        //                . " bh.mobile"
+        //                . " order by"
+        //                . " bh.queue";
+        $sql = "select
                             ai.bidderNo as bidderId,
                             ai.bidderAuctionNo as bidderHistoryId,
                             ai.bidderQueue as queue,
@@ -75,9 +75,9 @@ class BidderReturnService extends CServiceBase implements IBidderReturnService {
                     left join (
                             select
                                     bidderAuctionNo,
-                                    count(bidderPrice) as countSilo,
-                                    sum(bidderPrice) as bidderPrice,
-                                    sum(bidderPrice*0.02)  as guarantee
+                                    count(bidderFirstPrice) as countSilo,
+                                    sum(bidderFirstPrice) as bidderPrice,
+                                    sum(bidderFirstPrice*0.02)  as guarantee
                             from
                                     fn_auction_info(:auctionCode2)
                             where
@@ -87,13 +87,13 @@ class BidderReturnService extends CServiceBase implements IBidderReturnService {
                     left join (
                             select
                                     bidderAuctionNo,
-                                    count(bidderPrice) as countSiloY,
-                                    sum(bidderPrice) as bidderPriceY,
-                                    sum(bidderPrice*0.02)  as guaranteeY
+                                    count(bidderFirstPrice) as countSiloY,
+                                    sum(bidderFirstPrice) as bidderPriceY,
+                                    sum(bidderFirstPrice*0.02)  as guaranteeY
                             from
                                     fn_auction_info(:auctionCode3)
                             where
-                                    bidderMaxPrice = 'Y' and isReserved = 'Y'
+                                    bidderMaxPrice = 'Y' and isReserved = 'Y' and bidderWinner = 'Y'
                             group by bidderAuctionNo
                     ) pby on ai.bidderAuctionNo = pby.bidderAuctionNo
                     left join (
@@ -135,15 +135,15 @@ class BidderReturnService extends CServiceBase implements IBidderReturnService {
                             pm.countPayment,
                             pmn.amountN,
                             pm.amount";
-            $param = array(
-                "auctionCode1" => $this->getStatus()->keyword,
-                "auctionCode2" => $this->getStatus()->keyword,
-                "auctionCode3" => $this->getStatus()->keyword,
-                "auctionCode4" => $this->getStatus()->keyword,
-                "auctionCode5" => $this->getStatus()->keyword
-            );
-            return $this->datacontext->pdoQuery($sql, $param);
-        }
+        $param = array(
+            "auctionCode1" => $this->getStatus()->keyword,
+            "auctionCode2" => $this->getStatus()->keyword,
+            "auctionCode3" => $this->getStatus()->keyword,
+            "auctionCode4" => $this->getStatus()->keyword,
+            "auctionCode5" => $this->getStatus()->keyword
+        );
+        return $this->datacontext->pdoQuery($sql, $param);
+    }
 
     public function listsPayment($bidderHistoryId) {
         $sql = "select
@@ -195,6 +195,27 @@ class BidderReturnService extends CServiceBase implements IBidderReturnService {
 	from
 		fn_auction_info('" . $this->getStatus()->keyword . "')
 	where bidderNo = " . $bidderId . " and bidderMaxPrice = 'Y'
+
+	order by province,associateId,warehouseCode";
+        return $this->datacontext->pdoQuery($sql);
+    }
+
+    public function listsNoWarehouse($bidderId) {
+        $sql = "select
+
+	province,
+	associateId,
+	associate,
+	wareHouseCode,
+	weightAll,
+    oweightAll,
+	RFV,
+	bidderFirstPrice,
+	bidderFirstPrice*0.02  as guarantee
+	from
+		fn_auction_info('" . $this->getStatus()->keyword . "')
+	where bidderNo = " . $bidderId . " and bidderMaxPrice = 'N'
+            and bidderWinner = 'N' and bidderRound = 0
 
 	order by province,associateId,warehouseCode";
         return $this->datacontext->pdoQuery($sql);

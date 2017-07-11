@@ -37,7 +37,15 @@ interface IBidderReturnService {
      * @authen true
      */
     public function listsWarehouse($bidderId);
-    
+      /**
+     * @name listsNoWarehouse
+     * @uri /listsNoWarehouse
+     * @param integer bidderId Description
+     * @return String[] lists Description
+     * @description รายชื่อคลังสินค้าที่ผู้เสนอซื้อเสนอราคา
+     * @authen true
+     */
+    public function listsNoWarehouse($bidderId);
     /**
      * @name update
      * @uri /update

@@ -133,7 +133,36 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-md-12 table-responsive">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <div class="panel-actions">
+                                        <a href="#" class="fa fa-caret-up"></a>
+                                    </div>
+                                    <h2 class="panel-title">{{#i18n}}auction.return.panelLose{{/i18n}}</h2>
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table table-bordered table-striped table-condensed mb-none">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">{{#i18n}}auction.no{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.province{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.associate{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.silo{{/i18n}}</th>
+                                                <th class="text-center">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.priceLast{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                <th class="text-center">{{#i18n}}auction.countPayment{{/i18n}} 2%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="whNoBody">
+                                            <tr>
+                                                <td colspan="7" class="text-center">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12 table-responsive">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -374,6 +403,7 @@
             var historyId = $(this).attr("data-hid");
             bindBidder(historyId);
             listWarehouse(historyId);
+            listNoWarehouse(historyId);
             listPayment(historyId);
         });
     }
@@ -442,6 +472,43 @@
                     + '</tr>';
 
             $("#whBody").html(html);
+        }
+    }
+    function listNoWarehouse(hId) {
+        var datas = callAjax("{{_context_path}}/api/industry/return/listsNoWarehouse", "post", {bidderId: listArr[hId]["bidderId"]}, "json");
+        if (typeof datas !== "undefined" && datas !== null) {
+            var html = "";
+            var sumBidderPrice = 0;
+            var sumWeight = 0;
+            var xsumGuarantee = 0;
+
+            if (datas["lists"].length == 0) {
+                html = "<tr><td colspan='7' class='text-center'>ไม่มีคลังสินค้าที่แพ้การประมูล</td></tr>";
+            }
+            $.each(datas["lists"], function (key, value) {
+                html += '<tr>'
+                        + '<td class="text-center">' + (key + 1) + '</td>'
+                        + '<td class="text-center">' + value["province"] + '</td>'
+                        + '<td class="text-center">' + value["associate"] + '</td>'
+                        + '<td class="text-center">' + value["wareHouseCode"] + '</td>'
+                        + '<td class="text-center text-tertiary">' + accounting.formatNumber(value["oweightAll"], 6, ",", ".") + '</td>'
+                        + '<td class="text-center">' + accounting.formatNumber(value["bidderFirstPrice"], 2, ",", ".") + '</td>'
+                        + '<td class="text-center text-bold">' + accounting.formatNumber(value["guarantee"], 2, ",", ".") + '</td>'
+                        + '</tr>';
+
+                sumBidderPrice += parseFloat(value.bidderFirstPrice);
+                sumWeight += parseFloat(value.weightAll);
+                xsumGuarantee += parseFloat(value.guarantee);
+            });
+
+            html += '<tr>'
+                    + '<td colspan="4" class="text-center">รวมจำนวนหลักค้ำประกัน</td>'
+                    + '<td class="text-center text-bold text-tertiary">' + accounting.formatNumber(sumWeight, 6, ",", ".") + '</td>'
+                    + '<td class="text-center text-bold">' + accounting.formatNumber(sumBidderPrice, 2, ",", ".") + '</td>'
+                    + '<td class="text-center text-bold">' + accounting.formatNumber(xsumGuarantee, 2, ",", ".") + '</td>'
+                    + '</tr>';
+
+            $("#whNoBody").html(html);
         }
     }
 
@@ -561,7 +628,7 @@
              console.log("1");
              countCheck++;
              sumReturn += parseFloat($(this).val());
-
+             
              //$(this).prop("checked", true);
              }
              else{
@@ -569,25 +636,25 @@
              countCheck--;
              sumReturn -= parseFloat($(this).val());
              }
-
+             
              if (parseInt(sumPayment - sumReturn) < parseInt(sumGuarantee)) {
              //$(this).removeAttr("checked");
              //event.stopImmediatePropagation();
              alert("จำนวนหลักค้ำประกันไม่พอ");
-
+             
              countCheck--;
              sumReturn -= parseFloat($(this).val());
-
+             
              $(this).prop("checked", false);
              $("#checkall").prop("checked", false);
-
+             
              }
-
+             
              $("#countCheckbox").html(countCheck);
              $("#txtSelect").text(accounting.formatNumber(sumReturn, 2, ",", "."));
              $("#txtBalance").text(accounting.formatNumber(sumPayment - sumReturn, 2, ",", "."));
              });
-
+             
              $("#checkall").prop("checked", false);
              $("#checkall").unbind().click(function(){
              if ($("#checkall").is(":checked")) {
@@ -606,10 +673,10 @@
              });
              }
              });
-
+             
              $(".row-tr").unbind().click(function (event) {
              //event.stopPropagation();
-
+             
              //var input = $(this).find("td label input.switch-input");
              //input.trigger("click");
              if (event.target.type !== 'checkbox') {
