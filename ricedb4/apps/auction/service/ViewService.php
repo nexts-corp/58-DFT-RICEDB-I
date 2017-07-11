@@ -96,20 +96,36 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
-
     public function closeAuction() {
         $view = new CJView("closeAuction", CJViewType::HTML_VIEW_ENGINE);
         $status = "select st from apps\\common\\entity\\Status st "
                 . "where st.active = 'Y' or st.active = 'T' ";
         $data = $this->datacontext->getObject($status);
-        if(count($data) > 0){
+        if (count($data) > 0) {
             $view->auction = $data[0];
-        }
-        else{
+        } else {
             $view->auction = "";
         }
 
         return $view;
+    }
+
+    public function news($auctionCode) {
+        $sql = "EXEC sp_auction_news :auctionNo";
+        $param = array(
+            "auctionNo" => $auctionCode
+        );
+
+        $data = $this->datacontext->pdoQuery($sql, $param, "apps\\common\\model\\SQLUpdate")[0];
+        $res = "โดยผลจากการเปิดซองเสนอราคาซื้อในช่วงบ่ายปรากฏว่ามีผู้สนใจมายื่นซอง จำนวน "
+                . $data->checkIn . " ราย <br>โดยมีผู้เสนอราคาซื้อสูงสุด จำนวน " . $data->winner . " ราย "
+                . "ใน " . $data->warehouse . " คลัง ปริมาณ " . number_format($data->weightAuc, 2, '.', ',') . " ล้านตัน "
+                . "(คิดเป็นร้อยละ " . number_format($data->weightPercent, 2, '.', ',') . " ของปริมาณที่เปิดประมูลทั้งหมด) <br>"
+                . "มูลค่าที่เสนอซื้อประมาณ " . number_format($data->priceAuc, 2, '.', ',') . " ล้านบาท "
+                . "โดยช่วงราคาเสนอซื้อสูงสุด " . number_format($data->minPrice, 2, '.', ',') . " – " . number_format($data->maxPrice, 2, '.', ',') . " บาท/ตัน "
+                . "<br>สำหรับชนิดข้าวที่มีผู้เสนอราคาซื้อมากที่สุดเป็น <br>" . $data->detail;
+        print $res;
+        exit();
     }
 
 }

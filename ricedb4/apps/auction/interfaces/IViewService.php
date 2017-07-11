@@ -169,4 +169,12 @@ interface IViewService {
      * @resource 10000000
      */
     public function bidderWinner2();
+    
+    /**
+     * @name news
+     * @uri /news
+     * @param string auctionCode
+     * @return string news
+     */
+    public function news($auctionCode);
 }
