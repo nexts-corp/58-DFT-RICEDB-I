@@ -30,31 +30,34 @@ class FollowService extends CServiceBase implements IFollowService {
         $get = $this->datacontext->getObject($sql, $param);
 
         if (empty($get)) {
-            $group = new \apps\common\model\GroupFollow();
-            $group->associateId = $associateId;
-            $group->statusKeyword = $auccode;
-            $data = $this->datacontext->getObject($group);
+//            $group = new \apps\common\model\GroupFollow();
+//            $group->associateId = $associateId;
+//            $group->statusKeyword = $auccode;
+//            $data = $this->datacontext->getObject($group);
+            $sqlGroup = "select * from fn_follow_group_rice(:keyword,:associateId) ";
+            $data = $this->datacontext->pdoQuery($sqlGroup, $param);
             $siloCode = 0;
             $silo = "";
             foreach ($data as $index => $value) {
-                if ($silo == "" || $silo != $value->silo) {
-                    $silo = $value->silo;
+                if ($silo == "" || $silo != $value['silo']) {
+                    $silo = $value['silo'];
                     $siloCode++;
                 }
                 $lotCode = date('Ymd');
-                $code = $lotCode . $value->associateId . $value->provinceId . $value->projectId . $value->typeId . $siloCode;
+                $code = $lotCode . $value['associateId'] . $value['provinceId'] . $value['projectId'] . $value['typeId'] . $siloCode;
 
                 $follow = new RiceFollow();
                 $follow->followCode = $code;
                 $follow->lotCode = $lotCode;
                 $follow->statusKeyword = $auccode;
-                $follow->bidderId = $value->bidderNo;
-                $follow->associateId = $value->associateId;
-                $follow->provinceId = $value->provinceId;
-                $follow->projectId = $value->projectId;
-                $follow->typeId = $value->typeId;
-                $follow->silo = $value->silo;
-                $follow->weightApprove = $value->weightApprove;
+                $follow->bidderId = $value['bidderNo'];
+                $follow->associateId = $value['associateId'];
+                $follow->provinceId = $value['provinceId'];
+                $follow->projectId = $value['projectId'];
+                $follow->typeId = $value['typeId'];
+                $follow->silo = $value['silo'];
+                $follow->weightApprove = $value['weightApprove'];
+//                return $follow;
                 if (!$this->datacontext->saveObject($follow)) {
                     $this->getResponse()->add("msg", $this->datacontext->getLastMessage());
                     return false;
