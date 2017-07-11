@@ -8,16 +8,17 @@ namespace apps\industry\interfaces;
  * @description ประมวลผลการประมูล
  */
 interface IBidderAuctionService {
+
     /**
      * @name listsAuction
      * @uri /listsAuction
+     * @param String bidderHistoryId
      * @return String[] lists Description
      * @description ผู้เสนอราคาสูงสุดต่อคลัง
      * @authen true
-     
      */
-    public function listsAuction();
-    
+    public function listsAuction($bidderHistoryId);
+
     /**
      * @name listsBidderPriceCF
      * @uri /listsBidderPriceCF
@@ -26,10 +27,9 @@ interface IBidderAuctionService {
      * @return string[] lists Description
      * @description คลังที่ถูกเสนอซื้อ + FV
      * @authen true
-     
      */
     public function listsBidderPriceCF($bidderItem, $bidderInfo);
-    
+
     /**
      * @name savePriceCF
      * @uri /savePriceCF
@@ -37,10 +37,9 @@ interface IBidderAuctionService {
      * @return string save Description
      * @description บันทึกราคาที่เสนอซื้อ
      * @authen true
-     
      */
     public function savePriceCF($bidderPrice);
-    
+
     /**
      * @name deletePriceCF
      * @uri /deletePriceCF
@@ -48,7 +47,16 @@ interface IBidderAuctionService {
      * @return string delete Description
      * @description ลบราคาที่เสนอซื้อ
      * @authen true
-     
      */
     public function deletePriceCF($bidderPrice);
+
+    /**
+     * @name listsBidderMax
+     * @uri /listsBidderMax
+     * @return String[] lists
+     * @description รายชื่อผู้เสนอราคาสูงสุด
+     * @authen true
+
+     */
+    public function listsBidderMax();
 }

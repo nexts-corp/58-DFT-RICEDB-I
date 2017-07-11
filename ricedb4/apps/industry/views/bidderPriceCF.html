@@ -31,24 +31,32 @@
     </div><!-- end button action on header -->
 
     <div class="container">
+
+        <div class="form-group" >
+            <label class="col-md-3 control-label text-right" for="bidderHistoryId">{{#i18n}}auction.bidder{{/i18n}} :</label>
+            <div class="col-md-6">
+                <select class="form-control input-sm" name="bidderHistoryId" id="bidderHistoryId">
+                </select>
+            </div>
+        </div>
         <div class="row">
             <div id="bidderTable" class="col-md-12"><!-- table shown bidder winner -->
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-condensed mb-none">
                         <thead>
-                        <tr>
-                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.no{{/i18n}}</th>
-                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.silo{{/i18n}}</th>
-                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidder{{/i18n}} ({{#i18n}}auction.max{{/i18n}})</th>
-                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
-                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.diffFloorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
-                            <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.priceMore{{/i18n}}</th>
-                        </tr>
+                            <tr>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.no{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.silo{{/i18n}}</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidder{{/i18n}} ({{#i18n}}auction.max{{/i18n}})</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.diffFloorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                <th class="text-center" style="vertical-align: middle;">{{#i18n}}auction.priceMore{{/i18n}}</th>
+                            </tr>
                         </thead>
                         <tbody id="bidderBody">
-                        <tr>
-                            <td colspan="6" class="text-center">-</td>
-                        </tr>
+                            <tr>
+                                <td colspan="6" class="text-center">-</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -71,19 +79,19 @@
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped table-condensed mb-none">
                                             <thead>
-                                            <tr>
-                                                <th class="text-center">{{#i18n}}auction.no{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}auction.bidder{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
-                                                <th class="text-center">{{#i18n}}auction.priceMore{{/i18n}}</th>
-                                                <th class="text-center">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
-                                                <th class="text-center">{{#i18n}}auction.action{{/i18n}}</th>
-                                            </tr>
+                                                <tr>
+                                                    <th class="text-center">{{#i18n}}auction.no{{/i18n}}</th>
+                                                    <th class="text-center">{{#i18n}}auction.bidder{{/i18n}}</th>
+                                                    <th class="text-center">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                    <th class="text-center">{{#i18n}}auction.priceMore{{/i18n}}</th>
+                                                    <th class="text-center">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}})</th>
+                                                    <th class="text-center">{{#i18n}}auction.action{{/i18n}}</th>
+                                                </tr>
                                             </thead>
                                             <tbody class="itemListBody">
-                                            <tr>
-                                                <td colspan="7" class="text-center">-</td>
-                                            </tr>
+                                                <tr>
+                                                    <td colspan="7" class="text-center">-</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -101,34 +109,34 @@
                                             <div class="table-responsive">
                                                 <table class="table mb-none">
                                                     <tbody>
-                                                    <tr class="no-border">
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
-                                                        <td class="col-md-8 text-left"><div id="bidderNameAdd"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
-                                                        <td class="col-md-8 text-left"><div id="siloAdd"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.associate{{/i18n}} :</td>
-                                                        <td class="col-md-8 text-left"><div id="assoAdd"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}}) :</td>
-                                                        <td class="col-md-8 text-left"><div id="weightAllAdd"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
-                                                        <td class="text-left"><div id="rfvAdd"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.priceBefore{{/i18n}} :</td>
-                                                        <td class="col-md-8 text-left"><div id="oldPriceAdd"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
-                                                        <td class="col-md-8 text-left"><input type="text" name="auctionPrice" id="auctionPrice" value="0.00"></td>
-                                                    </tr>
+                                                        <tr class="no-border">
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
+                                                            <td class="col-md-8 text-left"><div id="bidderNameAdd"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
+                                                            <td class="col-md-8 text-left"><div id="siloAdd"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.associate{{/i18n}} :</td>
+                                                            <td class="col-md-8 text-left"><div id="assoAdd"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.weightAll{{/i18n}} ({{#i18n}}auction.ton{{/i18n}}) :</td>
+                                                            <td class="col-md-8 text-left"><div id="weightAllAdd"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.floorValue{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                            <td class="text-left"><div id="rfvAdd"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.priceBefore{{/i18n}} :</td>
+                                                            <td class="col-md-8 text-left"><div id="oldPriceAdd"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                            <td class="col-md-8 text-left"><input type="text" name="auctionPrice" id="auctionPrice" value="0.00"></td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -158,22 +166,22 @@
                                             <div class="table-responsive">
                                                 <table class="table mb-none">
                                                     <tbody>
-                                                    <tr class="no-border">
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
-                                                        <td class="col-md-8 text-left"><div id="bidderNameDel"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
-                                                        <td class="col-md-8 text-left"><div id="siloDel"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.priceMore{{/i18n}} :</td>
-                                                        <td class="col-md-8 text-left"><div id="roundDel"></div></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
-                                                        <td class="col-md-8 text-left"><div id="priceDel"></div></td>
-                                                    </tr>
+                                                        <tr class="no-border">
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidder{{/i18n}} :</td>
+                                                            <td class="col-md-8 text-left"><div id="bidderNameDel"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.silo{{/i18n}} :</td>
+                                                            <td class="col-md-8 text-left"><div id="siloDel"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.priceMore{{/i18n}} :</td>
+                                                            <td class="col-md-8 text-left"><div id="roundDel"></div></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="col-md-4 text-right text-bold">{{#i18n}}auction.bidderPrice{{/i18n}} ({{#i18n}}auction.bath{{/i18n}}) :</td>
+                                                            <td class="col-md-8 text-left"><div id="priceDel"></div></td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -196,61 +204,67 @@
 <script type="text/javascript">
     var siloArr = {};
     var listArr = [];
-    $(function(){
-        showAllAuction();
-
-        $("button.table").click(function(){
+    $(function () {
+        showAllAuction(0);
+        //console.log('zz');
+        $("button.table").click(function () {
             toggleShow("list");
+        });
+        $("#bidderHistoryId").html(listBidder()).select2().unbind().on("change", function () {
+            toggleShow("list");
+//            //console.log('xx');
+//            showAllAuction($("#bidderHistoryId").val());
         });
     });
 
-    function showAllAuction(){
-        var datas = callAjax("{{_context_path}}/api/industry/bidderAuction/listsAuction", "post", {}, "json");
-        if (typeof datas !== 'undefined' && datas !== null){
+    function showAllAuction(bidderHistoryId) {
+
+        $("#bidderHistoryId").val(bidderHistoryId);
+        var datas = callAjax("{{_context_path}}/api/industry/bidderAuction/listsAuction", "post", {bidderHistoryId: bidderHistoryId}, "json");
+
+        if (typeof datas !== 'undefined' && datas !== null) {
             var html = '';
             var i = 0;
-            $.each(datas["lists"], function(province, value1){
-                $.each(value1, function(silo, value2){
+            $.each(datas["lists"], function (province, value1) {
+                $.each(value1, function (silo, value2) {
                     siloArr[silo] = {};
-                    $.each(value2, function(asso, value3){
+                    $.each(value2, function (asso, value3) {
                         siloArr[silo][asso] = value3;
-                    
-                    
-                        $.each(value3, function(count, value4){
+                        $.each(value3, function (count, value4) {
                             var diff = value4["bidderPrice"] - value4["rfv"];
 
-                            if(diff > 0){
+                            if (diff > 0) {
                                 var bg = "bg-green";
                                 var icon = "fa fa-thumbs-o-up"
                             }
-                            else if(diff < 0){
+                            else if (diff < 0) {
                                 var bg = "bg-red";
                                 var icon = "fa fa-thumbs-o-down"
                             }
-                            else{
+                            else {
                                 var bg = "";
                                 var icon = "";
                             }
 
-                            if(count == 0){
+                            if (count == 0) {
                                 html += '<tr>'
-                                    + '<td class="text-center" style="vertical-align: middle;">'+(++i)+'</td>'
-                                    + '<td class="text-center" style="vertical-align: middle;">'+silo+' ['+province+'] ['+asso+']</td>'
-                                    + '<td class="text-center" style="vertical-align: middle;">'+value4["bidderName"]+'</td>'
-                                    + '<td class="text-center" style="vertical-align: middle;">'+accounting.formatNumber(value4["bidderPrice"], 2, ",", ".")+'</td>'
-                                    + '<td class="text-center '+bg+'"><i class="'+icon+'"></i><br>'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
-                                    + '<td class="text-center"><button class="btn btn-primary plus" data-silo="'+silo+'" data-asso="'+asso+'"><i class="fa fa-plus-circle"></i></button></td>'
-                                + '</tr>';
+                                        + '<td class="text-center" style="vertical-align: middle;">' + (++i) + '</td>'
+                                        + '<td class="text-center" style="vertical-align: middle;">' + silo + ' [' + province + '] [' + asso + ']</td>'
+                                        + '<td class="text-center" style="vertical-align: middle;">' + value4["bidderName"] + '</td>'
+                                        + '<td class="text-center" style="vertical-align: middle;">' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '<td class="text-center ' + bg + '"><i class="' + icon + '"></i><br>' + accounting.formatNumber(diff, 2, ",", ".") + '</td>'
+                                        + '<td class="text-center"><button class="btn btn-primary plus" data-silo="' + silo + '" data-asso="' + asso + '"><i class="fa fa-plus-circle"></i></button></td>'
+                                        + '</tr>';
                             }
-                            else{
+                            else {
                                 html += '<tr>'
-                                    + '<td class="text-center" style="vertical-align: middle;"></td>'
-                                    + '<td class="text-center" style="vertical-align: middle;"></td>'
-                                    + '<td class="text-center" style="vertical-align: middle;">'+value4["bidderName"]+'</td>'
-                                    + '<td class="text-center" style="vertical-align: middle;">'+accounting.formatNumber(value4["bidderPrice"], 2, ",", ".")+'</td>'
-                                    + '<td class="text-center '+bg+'"><i class="'+icon+'"></i><br>'+accounting.formatNumber(diff, 2, ",", ".")+'</td>'
-                                    + '<td class="text-center"><button class="btn btn-primary plus" data-silo="'+silo+'" data-asso="'+asso+'"><i class="fa fa-plus-circle"></i></button></td>'
-                                + '</tr>';
+                                        + '<td class="text-center" style="vertical-align: middle;"></td>'
+                                        + '<td class="text-center" style="vertical-align: middle;"></td>'
+                                        + '<td class="text-center" style="vertical-align: middle;">' + value4["bidderName"] + '</td>'
+                                        + '<td class="text-center" style="vertical-align: middle;">' + accounting.formatNumber(value4["bidderPrice"], 2, ",", ".") + '</td>'
+                                        + '<td class="text-center ' + bg + '"><i class="' + icon + '"></i><br>' + accounting.formatNumber(diff, 2, ",", ".") + '</td>'
+                                        + '<td class="text-center"><button class="btn btn-primary plus" data-silo="' + silo + '" data-asso="' + asso + '"><i class="fa fa-plus-circle"></i></button></td>'
+                                        + '</tr>';
                             }
                         });
                     });
@@ -259,6 +273,7 @@
             $("#bidderBody").html(html);
 
             $("button.plus").unbind().click(function () {
+                //console.log('aa');
                 toggleShow("form", $(this).attr("data-silo"), $(this).attr("data-asso"));
             });
         }
@@ -273,37 +288,39 @@
 
                 listArr[value["bidderItemId"]] = value;
                 html += '<tr>'
-                    + '<td class="text-center">' + (i + 1) + '</td>'
-                    + '<td class="text-center">' + value["bidderName"] + '</td>'
-                    //+ '<td class="text-center">' + accounting.formatNumber(value["weightAll"], 6, ",", ".") + '</td>'
-                    + '<td class="text-center">' + accounting.formatNumber(siloArr[silo][asso][0]["rfv"], 2, ",", ".") + '</td>';
+                        + '<td class="text-center">' + (i + 1) + '</td>'
+                        + '<td class="text-center">' + value["bidderName"] + '</td>'
+                        //+ '<td class="text-center">' + accounting.formatNumber(value["weightAll"], 6, ",", ".") + '</td>'
+                        + '<td class="text-center">' + accounting.formatNumber(siloArr[silo][asso][0]["rfv"], 2, ",", ".") + '</td>';
 
-                for(var j = 0; j < value["round"].length; j++){
+                for (var j = 0; j < value["round"].length; j++) {
                     var value2 = value["round"][j];
 
-                    if(value2["round"] == 0) var round = "-";
-                    else var round = "ครั้งที่ "+value2["round"];
-                    if(j == 0){
-                        html += '<td class="text-center">' +round+ '</td>'
-                            + '<td class="text-center" id="price-'+value["id"]+'-'+value2["round"]+'">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
-                            + '<td class="text-center"><button class="btn btn-primary add" data-itemid="' + value["bidderItemId"] +'"><i class="fa fa-plus-circle"></i></button></td>'
-                            + '</tr>';
+                    if (value2["round"] == 0)
+                        var round = "-";
+                    else
+                        var round = "ครั้งที่ " + value2["round"];
+                    if (j == 0) {
+                        html += '<td class="text-center">' + round + '</td>'
+                                + '<td class="text-center" id="price-' + value["id"] + '-' + value2["round"] + '">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
+                                + '<td class="text-center"><button class="btn btn-primary add" data-itemid="' + value["bidderItemId"] + '"><i class="fa fa-plus-circle"></i></button></td>'
+                                + '</tr>';
                     }
-                    else if(j == value["round"].length - 1){
+                    else if (j == value["round"].length - 1) {
                         html += '<tr>'
-                            + '<td></td><td></td><td></td>'
-                            + '<td class="text-center">' + round + '</td>'
-                            + '<td class="text-center" id="price-'+value["id"]+'-'+value2["round"]+'">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
-                            + '<td class="text-center"><button class="btn btn-default delete" data-itemid="' + value["bidderItemId"] + '" data-roundid="'+value2["round"]+'"><i class="fa fa-trash"></i></button></td>'
-                            + '</tr>';
+                                + '<td></td><td></td><td></td>'
+                                + '<td class="text-center">' + round + '</td>'
+                                + '<td class="text-center" id="price-' + value["id"] + '-' + value2["round"] + '">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
+                                + '<td class="text-center"><button class="btn btn-default delete" data-itemid="' + value["bidderItemId"] + '" data-roundid="' + value2["round"] + '"><i class="fa fa-trash"></i></button></td>'
+                                + '</tr>';
                     }
-                    else{
+                    else {
                         html += '<tr>'
-                            + '<td></td><td></td><td></td>'
-                            + '<td class="text-center">' + round + '</td>'
-                            + '<td class="text-center" id="price-'+value["id"]+'-'+value2["round"]+'">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
-                            + '<td></td>'
-                            + '</tr>';
+                                + '<td></td><td></td><td></td>'
+                                + '<td class="text-center">' + round + '</td>'
+                                + '<td class="text-center" id="price-' + value["id"] + '-' + value2["round"] + '">' + accounting.formatNumber(value2["auctionPrice"], 2, ",", ".") + '</td>'
+                                + '<td></td>'
+                                + '</tr>';
                     }
                 }
             }
@@ -311,7 +328,7 @@
 
             $("button.add").unbind().click(function () {
                 $("#addModal").modal("show");
-                
+
                 var index = $(this).attr("data-itemid");
                 var dt = listArr[index];
 
@@ -320,30 +337,32 @@
                 $("#assoAdd").html(asso);
                 $("#weightAllAdd").html(accounting.formatNumber(siloArr[silo][asso][0]["weightAll"], 6, ",", "."));
                 $("#rfvAdd").html(accounting.formatNumber(siloArr[silo][asso][0]["rfv"], 2, ",", "."));
-                $("#oldPriceAdd").html(accounting.formatNumber(dt["round"][dt["round"].length-1]["auctionPrice"], 2, ",", "."));
+                $("#oldPriceAdd").html(accounting.formatNumber(dt["round"][dt["round"].length - 1]["auctionPrice"], 2, ",", "."));
                 $("#auctionPrice").val("");
 
-                $("#auctionPrice").keyup(function(){
-                    if( parseFloat($("#auctionPrice").val().replace(/,/g, "")) <= parseFloat(dt["round"][dt["round"].length-1]["auctionPrice"]) || $("#auctionPrice").val() == ""){
+                $("#auctionPrice").keyup(function () {
+                    if (parseFloat($("#auctionPrice").val().replace(/,/g, "")) <= parseFloat(dt["round"][dt["round"].length - 1]["auctionPrice"]) || $("#auctionPrice").val() == "") {
                         $("#submit").prop("disabled", true);
                     }
-                    else{
+                    else {
                         $("#submit").prop("disabled", false);
                     }
                 });
 
-                $("#submit").unbind().click(function(){
+                $("#submit").unbind().click(function () {
                     var pdata = {};
                     pdata["bidderItemId"] = dt["bidderItemId"];
                     //  pdata["round"] = "";
                     pdata["auctionPrice"] = $("#auctionPrice").val().replace(/,/g, "");
 
                     var diff = parseFloat($("#auctionPrice").val().replace(/,/g, "")) - parseFloat(siloArr[silo][asso][0]["rfv"]);
-                    if(diff >= 0) var isPass = "Y";
-                    else var isPass = "N";
+                    if (diff >= 0)
+                        var isPass = "Y";
+                    else
+                        var isPass = "N";
 
                     pdata["isPassFV"] = isPass;
-                   // pdata["isSale"] = "N";
+                    //pdata["isSale"] = "N";
                     var fdata = {};
                     fdata["BidderPriceSilo"] = pdata;
                     var dataJSON = JSON.stringify({bidderPrice: fdata["BidderPriceSilo"]});
@@ -367,7 +386,7 @@
                 $("#roundDel").html(dt["round"][round]["round"]);
                 $("#priceDel").html(accounting.formatNumber(dt["round"][round]["auctionPrice"], 2, ",", "."));
 
-                $("#confirmDelete").unbind().click(function(){
+                $("#confirmDelete").unbind().click(function () {
                     var pdata = {};
                     pdata["bidderItemId"] = index;
                     pdata["round"] = dt["round"][round]["round"];
@@ -382,7 +401,7 @@
         }
     }
 
-    function toggleShow(option, silo, asso){
+    function toggleShow(option, silo, asso) {
         if (option == "form") {
             $("#bidderForm, #showTable, #header2").show();
             $("#bidderTable, #header1").hide();
@@ -394,30 +413,32 @@
             $("#itemListBody").html('<tr><td colspan="5" class="text-center">-</td></tr>');
             $("#bidderHead").html("");
 
-            $("#siloHead").html(silo+' ['+asso+']');
+            $("#siloHead").html(silo + ' [' + asso + ']');
 
             var tdata = {};
             var assoId = 0;
-            if(asso == "อคส.") assoId = 1;
-            else if(asso == "อ.ต.ก.") assoId = 2;
+            if (asso == "อคส.")
+                assoId = 1;
+            else if (asso == "อ.ต.ก.")
+                assoId = 2;
             tdata["silo"] = silo;
             tdata["associateId"] = assoId;
 
             var idata = {};
-            
+
             var idata = [];
-            for(var i = 0; i < siloArr[silo][asso].length; i++){
+            for (var i = 0; i < siloArr[silo][asso].length; i++) {
                 var bidder = siloArr[silo][asso][i];
                 idata[i] = {
                     bidderName: bidder["bidderName"]
                 }
 
             }
-            
+
             var fdata = {};
             fdata["BidderItem"] = tdata;
             fdata["BidderInfo"] = idata;
-            
+
             var dataJSON = JSON.stringify({bidderItem: fdata["BidderItem"], bidderInfo: fdata["BidderInfo"]});
             var dataJSONEN = encodeURIComponent(dataJSON);
 
@@ -426,25 +447,42 @@
         else if (option == "list") {
             $("#bidderTable, #header1").show();
             $("#bidderForm, #showTable, #header2").hide();
-            showAllAuction();
+
+            showAllAuction($("#bidderHistoryId").val());
+            //console.log('yy');
+
         }
     }
 
-    function saveAuctionPrice(dataJSONEN, silo, asso){
+    function saveAuctionPrice(dataJSONEN, silo, asso) {
         var datas = callAjax("{{_context_path}}/api/industry/bidderAuction/savePriceCF", "post", dataJSONEN, "json");
         if (typeof datas !== undefined && datas !== null) {
-            if(datas["save"] == true){
+            if (datas["save"] == true) {
                 toggleShow("form", silo, asso);
             }
         }
     }
 
-    function deleteAuctionPrice(dataJSONEN, silo, asso){
+    function deleteAuctionPrice(dataJSONEN, silo, asso) {
         var datas = callAjax("{{_context_path}}/api/industry/bidderAuction/deletePriceCF", "post", dataJSONEN, "json");
         if (typeof datas !== undefined && datas !== null) {
-            if(datas["delete"] == true){
+            if (datas["delete"] == true) {
                 toggleShow("form", silo, asso);
             }
         }
+    }
+
+    function listBidder() {
+        var html = '<option value="0">เลือกทั้งหมด</option>';
+
+        var datas = callAjax("{{_context_path}}/api/industry/bidderAuction/listsBidderMax", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+
+                html += '<option value="' + value["bidderHistoryId"] + '">' + value["bidderName"] + '</option>';
+            }
+        }
+        return html;
     }
 </script>

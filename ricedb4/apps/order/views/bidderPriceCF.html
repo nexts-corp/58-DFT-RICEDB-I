@@ -206,17 +206,19 @@
     var listArr = [];
     $(function () {
         showAllAuction(0);
-
+        //console.log('zz');
         $("button.table").click(function () {
             toggleShow("list");
         });
-        $("#bidderHistoryId").html(listBidder()).select2().change(function () {
+        $("#bidderHistoryId").html(listBidder()).select2().unbind().on("change", function () {
             toggleShow("list");
-            showAllAuction($("#bidderHistoryId").val());
+//            //console.log('xx');
+//            showAllAuction($("#bidderHistoryId").val());
         });
     });
 
     function showAllAuction(bidderHistoryId) {
+
         $("#bidderHistoryId").val(bidderHistoryId);
         var datas = callAjax("{{_context_path}}/api/order/bidderAuction/listsAuction", "post", {bidderHistoryId: bidderHistoryId}, "json");
 
@@ -228,8 +230,6 @@
                     siloArr[silo] = {};
                     $.each(value2, function (asso, value3) {
                         siloArr[silo][asso] = value3;
-
-
                         $.each(value3, function (count, value4) {
                             var diff = value4["bidderPrice"] - value4["rfv"];
 
@@ -273,6 +273,7 @@
             $("#bidderBody").html(html);
 
             $("button.plus").unbind().click(function () {
+                //console.log('aa');
                 toggleShow("form", $(this).attr("data-silo"), $(this).attr("data-asso"));
             });
         }
@@ -448,6 +449,8 @@
             $("#bidderForm, #showTable, #header2").hide();
 
             showAllAuction($("#bidderHistoryId").val());
+            //console.log('yy');
+
         }
     }
 

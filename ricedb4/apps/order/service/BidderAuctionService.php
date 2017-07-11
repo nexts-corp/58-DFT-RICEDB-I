@@ -32,7 +32,8 @@ class BidderAuctionService extends CServiceBase implements IBidderAuctionService
     }
 
     public function listsAuction($bidderHistoryId) {
-        $sql1 = "SELECT *"
+        $sql1 = "SELECT province,wareHouseCode,associate,weightAll,RFV,bidderQueue,bidderName"
+                . ",bidderAgent,bidderRound,bidderPrice,bidderPriceNo"
                 . " FROM fn_auction_info(:auctionId)"
                 . " WHERE bidderPassFV='Y'"
                 . " AND isReserved='Y'"
@@ -79,7 +80,7 @@ class BidderAuctionService extends CServiceBase implements IBidderAuctionService
                     . " WHERE bt.silo = :silo"
                     . " AND bt.associateId = :associateId"
                     . " AND bi.bidderName = :bidderName"
-                    . " AND bh.statusKeyword = :keyword";
+                    . " AND pl.statusKeyword = :keyword";
 
             $param = array(
                 "silo" => $bidderItem->silo,
@@ -116,12 +117,13 @@ class BidderAuctionService extends CServiceBase implements IBidderAuctionService
         $price->bidderItemId = $bidderPrice->bidderItemId;
         $price->auctionPrice = $bidderPrice->auctionPrice;
         $price->isPassFV = $bidderPrice->isPassFV;
-
+        $price->statusKeyword = $this->getStatus()->keyword;
         $sql = "SELECT max(pl.round)+1 AS round"
                 . " FROM " . $this->ent . "\\BidderPriceSilo pl"
-                . " WHERE pl.bidderItemId = :itemId";
+                . " WHERE pl.bidderItemId = :itemId and pl.statusKeyword = :keyword";
         $param = array(
-            "itemId" => $bidderPrice->bidderItemId
+            "itemId" => $bidderPrice->bidderItemId,
+            "keyword" => $this->getStatus()->keyword
         );
         $dataPrice = $this->datacontext->getObject($sql, $param);
 
@@ -144,12 +146,13 @@ class BidderAuctionService extends CServiceBase implements IBidderAuctionService
             "bidderItemId" => $bidderPrice->bidderItemId
         );
         $data1 = $this->datacontext->getObject($sql1, $param1);
-
+//
         $price = new \apps\common\entity\BidderPriceSilo();
         $price->bidderItemId = $bidderPrice->bidderItemId;
         $price->round = $bidderPrice->round;
-        $dataPrice = $this->datacontext->getObject($price);
-        if (!$this->datacontext->removeObject($dataPrice[0])) {
+        $dataPrice = $this->datacontext->getObject($price)[0];
+//        $dataPrice->statusKeyword = $dataPrice->statusKeyword . "_CUT";
+        if (!$this->datacontext->removeObject($dataPrice)) {
             $return = $this->datacontext->getLastMessage();
         }
 
