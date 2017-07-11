@@ -19,7 +19,7 @@
     </section>
 
     <hr class="tall dashboard">
-    <div class="sort-source-wrapper"><!-- button action on header -->
+<!--    <div class="sort-source-wrapper"> button action on header 
         <div class="container">
             <ul class="nav nav-pills sort-source menu-top pull-right" data-sort-id="portfolio" data-option-key="filter">
                 <li class="active">
@@ -28,7 +28,7 @@
                 </li>
             </ul>
         </div>
-    </div><!-- end button action on header -->
+    </div> end button action on header -->
 
     <div class="container">
         <div class="row">
@@ -37,8 +37,8 @@
                     <thead>
                         <tr>
                             <th class="text-center col-md-1">{{#i18n}}system.no{{/i18n}}</th>
-                            <th class="text-center col-md-2">{{#i18n}}system.name{{/i18n}}</th>
-                            <th class="text-center col-md-2">{{#i18n}}release.rWeight{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
+                            <th class="text-left col-md-3">{{#i18n}}system.name{{/i18n}}</th>
+                            <th class="text-right col-md-2">{{#i18n}}release.rWeight{{/i18n}} ({{#i18n}}release.ton{{/i18n}})</th>
                             <th class="text-center col-md-2">{{#i18n}}system.status{{/i18n}}</th>
                             <th class="text-center col-md-1">{{#i18n}}system.status{{/i18n}}</th>   
                             <th class="text-center col-md-2">{{#i18n}}system.tools{{/i18n}}</th>
@@ -310,12 +310,12 @@
                     {
                         "targets": 1,
                         "data": "status",
-                        "sClass": "text-center col-md-3"
+                        "sClass": "text-left col-md-4"
                     },
                     {
                         "targets": 2,
                         "data": "weight",
-                        "sClass": "text-right col-md-3",
+                        "sClass": "text-right col-md-2",
                         "render": function (data) {
                             return accounting.formatNumber(data, 6, ",", ".");
                         }
