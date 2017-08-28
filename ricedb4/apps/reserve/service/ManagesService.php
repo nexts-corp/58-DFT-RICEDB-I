@@ -54,8 +54,8 @@ class ManagesService extends CServiceBase implements IManagesService {
 				select b.status_id,sum(p.weight) as weight
 				from dft_booking b
 				left join (
-					select status as bookId,sum(tweight) as weight
-					from dft_product where status is not null group by status
+					select book_id as bookId,sum(tweight) as weight
+					from dft_product where book_id is not null group by book_id
 				)	p on b.book_id = p.bookId
 				group by b.status_id
 ) rt on st.id=rt.status_id 
@@ -80,7 +80,7 @@ class ManagesService extends CServiceBase implements IManagesService {
     public function listsBook($status_id) {
         $sql = "select b.book_id,b.remark,b.book_status,sum(p.tWeight) as weightAll,b.Date_Created as dateCreated "
                 . " from dft_booking b "
-                . " inner join dft_product p on p.status = b.book_id "
+                . " inner join dft_product p on p.book_id = b.book_id "
                 . " where b.status_id = '" . $status_id . "' "
                 . " group by b.book_id,b.remark,b.book_status,b.Date_Created ";
         return $this->datacontext->pdoQuery($sql);

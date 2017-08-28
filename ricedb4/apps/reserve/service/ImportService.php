@@ -234,8 +234,8 @@ class ImportService extends CServiceBase implements IImportService {
                         return "กรุณาตรวจสอบข้อมูลเกรดข้าว";
                     }
 
-                    if ($tWeight == 0) {
-                        return "กรุณาตรวจสอบข้อมูลปริมาณรวมกระสอบ";
+                    if ($tWeight < 0) {
+                        return "กรุณาตรวจสอบข้อมูลปริมาณรวมกระสอบ แถวที่".$row;
                     }
                     $id = $this->getGUID();
                     $command[] = "( '" . $id . "','" . $code . "', '" . $bag . "', '" . $prov . "', '" . $proj . "', '" . $round . "', '" . $silo . "', '" . $addr . "', '" . $asso . "', '" . $type . "', '" . $warehouse . "', '" . $stack . "', '" . $weight . "', '" . $samp . "', '" . $grade . "', '" . $dataStatus->keyword . "', '" . $weightAll . "', '" . $tWeight . "','" . $type . "','" . $grade . "')";

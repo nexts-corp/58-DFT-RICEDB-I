@@ -34,13 +34,13 @@ class NavWidget extends CWidget {
         $strMonth = date("n");
         $strDay = date("j");
 
-        $strMonthCut = Array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤภษาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+        $strMonthCut = Array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
         $strMonthThai = $strMonthCut[$strMonth];
         return "$strDay $strMonthThai $strYear";
     }
 
     function dateThaiToTimeStamp($dateThai) {
-        $strMonthCut = Array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤภษาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
+        $strMonthCut = Array("", "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม");
 
         $date = explode(" ", $dateThai);
         $dateEng = intval($date[2] - 543) . "-" . array_search($date[1], $strMonthCut) . "-" . intVal($date[0]);
@@ -52,7 +52,7 @@ class NavWidget extends CWidget {
         $sql = "SELECT"
                 . " st"
                 . " FROM " . $this->ent . "\\Status st"
-                . " WHERE st.active = :active ";
+                . " WHERE st.active = :active";
         $param = array(
             "active" => $status
         );

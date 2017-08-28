@@ -681,7 +681,7 @@
                 "grade": dGrade,
                 "noGrade": dNoGrade
             };
-            var dataJSON = JSON.stringify({selector: data, status: old_book_id});
+            var dataJSON = JSON.stringify({selector: data, book_id: old_book_id});
             var dataJSONEN = encodeURIComponent(dataJSON);
             obj4Query = JSON.stringify(data);
             //            console.log("obj4Query");
@@ -691,6 +691,7 @@
             //            console.log(columns);
             //            console.log(dataJSON);
             // return false;
+            console.log(dataJSON);
             $("#loading").html("กำลังโหลดข้อมูล...");
             setTimeout(function () {
 
@@ -813,7 +814,7 @@
                 if (text.grade.length > 0) {
                     $("#conGrade").text(text.grade.reduce(function (l, r) {
                         return l.replace("<br>", " ") + ', ' + r.replace("<br>", " ");
-                    }).replace("<br>", " "));
+                    }).replace("<br>", " ").replace("[", ""));
                 }
                 var html_silo = '';
                 var sum_weight = 0;
@@ -1328,6 +1329,8 @@
         function resetForm() {
             if (old_book_id == "") {
                 var book_id = "B" + new Date().getTime();
+                text = {"type": [], "noType": [], "project": [], "noProject": [], "grade": [], "noGrade": []};
+                $("#remark").val("");
                 $("#book_id").val(book_id);
             }
             $(".chk-type,.chk-noType,.chk-project,.chk-noProject,.chk-noGrade,.chk-grade,.chk-start,.chk-end").each(function () {

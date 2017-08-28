@@ -48,16 +48,16 @@ class FilterService extends CServiceBase implements IFilterService {
 
         $sql = "select b.book_id,b.remark,b.book_status,sum(p.tWeight) as weightAll,b.Date_Created as dateCreated "
                 . " from dft_booking b "
-                . " inner join dft_product p on p.status = b.book_id "
+                . " inner join dft_product p on p.book_id = b.book_id "
                 . " where b.book_status = 'N' "
                 . " group by b.book_id,b.remark,b.book_status,b.Date_Created ";
         return $this->datacontext->pdoQuery($sql);
     }
 
-    public function selector($selector, $status) {
+    public function selector($selector, $book_id) {
         $query = "SELECT * FROM ( SELECT * ";
         $str = "SELECT province,lk_province_id,associate,lk_associate_id,silo, "
-                . " CASE WHEN status is null or status = '' then 'false' else 'true' end as status, "
+                . " CASE WHEN book_id is null or book_id = '' then 'false' else 'true' end as status, "
                 . " COUNT(*) AS countAll,SUM(tWeight) AS weightAll,"
                 . " SUM(CASE WHEN lk_grade_id > 0 and lk_grade_id <10 THEN tWeight ELSE 0 END) weightGood,"
                 . " SUM(CASE WHEN lk_grade_id >=10 THEN tWeight ELSE 0 END) weightBad,";
@@ -129,11 +129,11 @@ class FilterService extends CServiceBase implements IFilterService {
         } else {
             $where = "WHERE " . implode(" AND ", $where);
         }
-        $str = rtrim($str, ",") . " FROM dft_product WHERE status = '' OR status IS NULL ";
-        if ($status != "") {
-            $str .= " OR status = '" . $status . "' ";
+        $str = rtrim($str, ",") . " FROM dft_product WHERE book_id = '' OR book_id IS NULL ";
+        if ($book_id != "") {
+            $str .= " OR book_id = '" . $book_id . "' ";
         }
-        $str .= " GROUP BY province,lk_province_id,associate,lk_associate_id,silo,status ";
+        $str .= " GROUP BY province,lk_province_id,associate,lk_associate_id,silo,book_id ";
 
         $query .= $str . ") a ) data " . $where . rtrim($whereG, "AND");
         $query .= " ORDER BY province,associate,silo ";
@@ -146,9 +146,9 @@ class FilterService extends CServiceBase implements IFilterService {
 
         $sql = "SELECT * "
                 . " FROM dft_product "
-                . " WHERE silo = '" . $silo . "' and lk_associate_id='" . $associateId . "' and lk_province_id='" . $provinceId . "'  and (status is null or status = '' ";
+                . " WHERE silo = '" . $silo . "' and lk_associate_id='" . $associateId . "' and lk_province_id='" . $provinceId . "'  and (book_id is null or book_id = '' ";
         if ($book_id != "") {
-            $sql .= " or status = '" . $book_id . "' ";
+            $sql .= " or book_id = '" . $book_id . "' ";
         }
         $sql .= ") ";
         return $this->datacontext->pdoQuery($sql);
@@ -175,8 +175,8 @@ class FilterService extends CServiceBase implements IFilterService {
         if (count($dataBook) > 0) {
             $res = $this->datacontext->updateObject($book);
             $clear = "update dft_product "
-                    . "set status = null,remark0 = null "
-                    . "where status = '" . $book_id . "' ";
+                    . "set book_id = null,remark0 = null "
+                    . "where book_id = '" . $book_id . "' ";
             $this->datacontext->pdoQuery($clear);
         } else {
             $res = $this->datacontext->saveObject($book);
@@ -186,14 +186,14 @@ class FilterService extends CServiceBase implements IFilterService {
             $sql = "";
             foreach ($silo as $key => $value) {
                 $sql .= "update dft_product "
-                        . "set status = '" . $book_id . "' ";
+                        . "set book_id = '" . $book_id . "' ";
                 if (property_exists($value, 'percent')) {
                     $sql .= ",remark0 ='" . $value->percent . "' ";
                 }
                 $sql .= " where silo = '" . $value->silo . "' "
                         . "and lk_associate_id = '" . $value->associateid . "' "
                         . "and lk_province_id = '" . $value->provinceid . "' "
-                        . "and (status='' or status is null); ";
+                        . "and (book_id='' or book_id is null); ";
 //                $this->datacontext->pdoQuery($sql);
             }
 //            $nocount = "SET NOCOUNT OFF;";
@@ -215,8 +215,8 @@ class FilterService extends CServiceBase implements IFilterService {
 
     public function delete($book_id) {
         $sql = "update dft_product "
-                . "set status = null,remark0 = null "
-                . "where status = '" . $book_id . "' ";
+                . "set book_id = null,remark0 = null "
+                . "where book_id = '" . $book_id . "' ";
         $this->datacontext->pdoQuery($sql);
         $book = new \apps\common\entity\Booking();
         $book->book_id = $book_id;
@@ -226,14 +226,17 @@ class FilterService extends CServiceBase implements IFilterService {
     public function export($book_id) {
         set_time_limit(0);
         ini_set('memory_limit', '-1');
-        $sql = "SELECT * FROM dft_product where status = '" . $book_id . "' "
+        $sql = "SELECT * FROM dft_product where book_id = '" . $book_id . "' "
                 . "order by province,associate,silo,warehouse,stack";
         $data = $this->datacontext->pdoQuery($sql);
 
         $pivot = $this->pivot($book_id);
 //        print_r($pivot);
+//        exit();
         if (count($pivot) > 0) {
             $condition = array_keys($pivot[0]);
+//            print_r($condition);
+//            exit();
             unset($condition[0]);
             foreach ($data as $key => &$value) {
                 $data_filter = (array) array_filter($pivot, function($v) use ($value) {
@@ -393,14 +396,14 @@ class FilterService extends CServiceBase implements IFilterService {
 
     public function stack($book_id) {
         $product = new \apps\common\entity\Product();
-        $product->status = $book_id;
+        $product->bookId = $book_id;
         return $this->datacontext->getObject($product);
     }
 
     public function cut($book_id, $data_cut) {
         $update = "update dft_product "
-                . "set status = null,remark0 = null "
-                . "where status = '" . $book_id . "' and Id in (" . $data_cut . ") ";
+                . "set book_id = null,remark0 = null "
+                . "where book_id = '" . $book_id . "' and Id in (" . $data_cut . ") ";
         $sql = "EXEC sp_batch_exce :data";
         $param = array(
             "data" => $update

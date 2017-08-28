@@ -55,8 +55,8 @@ class ConfirmService extends CServiceBase implements IConfirmService {
                                 b.status_id,
                                 sum(p.tweight) as weight
                             from dft_product p
-                            left join dft_booking b on b.book_id=p.status
-                            where p.status is not null and b.status_id is not null
+                            left join dft_booking b on b.book_id=p.book_id
+                            where p.book_id is not null and b.status_id is not null
                             group by b.status_id
                 ) bk on st.id=bk.status_id 
 		WHERE st.active like 'R3%' 
@@ -74,7 +74,7 @@ class ConfirmService extends CServiceBase implements IConfirmService {
         $data_book = $this->datacontext->getObject($sql, $param);
 //
         $sql = "SELECT p FROM " . $this->ent . "\\Product p "
-                . " where p.status in ( :book_id ) "
+                . " where p.bookId in ( :book_id ) "
                 . "order by p.province,p.associate,p.silo,p.warehouse,p.stack";
         $param2 = array("book_id" => $data_book);
         $data = $this->datacontext->getObject($sql, $param2);

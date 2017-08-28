@@ -64,11 +64,13 @@ class Product extends EntityBase {
 
     /** @Column(type="string",length=255, name="stack") */
     public $stack;
-    
+
     /** @Column(type="string",length=255, name="sampling") */
     public $sampling;
+
     /** @Column(type="string",length=255, name="weight") */
     public $weight;
+
     /** @Column(type="float", name="tWeight") */
     public $tWeight;
 
@@ -84,8 +86,8 @@ class Product extends EntityBase {
     /** @Column(type="string",length=10, name="useGrade") */
     public $useGrade;
 
-    /** @Column(type="string",length=255, name="status") */
-    public $status;
+    /** @Column(type="string",length=255, name="book_id") */
+    public $bookId;
 
     /** @Column(type="string",length=10, name="isBid") */
     public $isBid;
@@ -98,14 +100,6 @@ class Product extends EntityBase {
 
     function getId() {
         return $this->id;
-    }
-
-    function getWarehouseCode() {
-        return $this->warehouseCode;
-    }
-
-    function getStackCode() {
-        return $this->stackCode;
     }
 
     function getCode() {
@@ -167,12 +161,15 @@ class Product extends EntityBase {
     function getStack() {
         return $this->stack;
     }
-function getSampling() {
+
+    function getSampling() {
         return $this->sampling;
     }
+
     function getWeight() {
         return $this->weight;
     }
+
     function getTWeight() {
         return $this->tWeight;
     }
@@ -193,8 +190,8 @@ function getSampling() {
         return $this->useGrade;
     }
 
-    function getStatus() {
-        return $this->status;
+    function getBookId() {
+        return $this->bookId;
     }
 
     function getIsBid() {
@@ -211,14 +208,6 @@ function getSampling() {
 
     function setId($id) {
         $this->id = $id;
-    }
-
-    function setWarehouseCode($warehouseCode) {
-        $this->warehouseCode = $warehouseCode;
-    }
-
-    function setStackCode($stackCode) {
-        $this->stackCode = $stackCode;
     }
 
     function setCode($code) {
@@ -280,13 +269,15 @@ function getSampling() {
     function setStack($stack) {
         $this->stack = $stack;
     }
-    
+
     function setSampling($sampling) {
         $this->sampling = $sampling;
     }
+
     function setWeight($weight) {
         $this->weight = $weight;
     }
+
     function setTWeight($tWeight) {
         $this->tWeight = $tWeight;
     }
@@ -307,8 +298,8 @@ function getSampling() {
         $this->useGrade = $useGrade;
     }
 
-    function setStatus($status) {
-        $this->status = $status;
+    function setBookId($bookId) {
+        $this->bookId = $bookId;
     }
 
     function setIsBid($isBid) {
@@ -322,5 +313,8 @@ function getSampling() {
     function setRemark0($remark0) {
         $this->remark0 = $remark0;
     }
+
+
+   
 
 }

@@ -40,7 +40,13 @@ class BidderAuctionService extends CServiceBase implements IBidderAuctionService
                 . " AND bidderMaxPrice='Y'";
 
         if ($bidderHistoryId != 0) {
-            $sql1 .= " AND bidderAuctionNo = '" . $bidderHistoryId . "' ";
+            $sql1 = "SELECT province,wareHouseCode,associate,weightAll,RFV,bidderQueue,bidderName"
+                    . ",bidderAgent,bidderRound,bidderLastPrice as bidderPrice,bidderPriceNo"
+                    . " FROM fn_auction_info(:auctionId)"
+                    . " WHERE bidderPassFV='Y'"
+                    . " AND isReserved='Y'"
+                    . " AND bidderRoundMaxprice='Y' AND bidderRound=0 "
+                    . " AND bidderAuctionNo = '" . $bidderHistoryId . "' ";
         }
 
         $sql1 .= " ORDER BY province, wareHouseCode, associate ASC";
@@ -192,7 +198,7 @@ class BidderAuctionService extends CServiceBase implements IBidderAuctionService
                 . " FROM fn_auction_info(:auctionId)"
                 . " WHERE bidderPassFV='Y'"
                 . " AND isReserved='Y'"
-                . " AND bidderMaxPrice='Y'"
+                . " AND bidderRoundMaxprice='Y' AND bidderRound=0"
                 . " group by bidderNo,bidderName,bidderAuctionNo "
 // ." ORDER BY province, wareHouseCode, associate ASC";
                 . " ORDER BY bidderAuctionNo ASC ";

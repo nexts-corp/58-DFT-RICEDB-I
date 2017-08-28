@@ -53,11 +53,11 @@ interface IFilterService {
      * @name selector
      * @uri /selector
      * @param String[] selector
-     * @param String status
+     * @param String book_id
      * @return boolean selector
      * @description คัดเลือกคลังสินค้า
      */
-    public function selector($selector, $status);
+    public function selector($selector, $book_id);
 
     /**
      * @name detail

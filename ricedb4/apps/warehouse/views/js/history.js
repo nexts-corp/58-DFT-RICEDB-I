@@ -145,5 +145,9 @@ $(document).ready(function () {
         $("#divLists").show();
         $("#divHistory").hide();
     });
+    $(".btn-excel").unbind().click(function () {
+        window.open(js_context_path + "/api/warehouse/history/export/" + $("#curWareHouse").text());
+    });
+
 });
 

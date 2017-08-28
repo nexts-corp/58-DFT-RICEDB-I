@@ -28,4 +28,13 @@ interface IHistoryService {
      * @authen true
      */
     public function get($warehouse);
+    
+    /**
+     * @name export
+     * @uri /export
+     * @param string warehouse
+     * @return file export
+     * @description  exportExcel
+     */
+    public function export($warehouse);
 }

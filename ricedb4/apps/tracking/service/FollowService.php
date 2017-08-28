@@ -158,8 +158,7 @@ class FollowService extends CServiceBase implements IFollowService {
                 $objWorkSheet = $objPHPExcel->getActiveSheet();
 
                 $name = $follow[0]->statusName;
-                $objWorkSheet->setTitle(str_replace("/", "_", $name));
-
+                $objWorkSheet->setTitle(str_replace("/", "_", $value));
                 //column name
                 $row = 1;
                 $objWorkSheet->mergeCells('A1:P1')
@@ -247,7 +246,6 @@ class FollowService extends CServiceBase implements IFollowService {
                 print "fail <br>";
             }
         }
-
         //create excel file
         ob_clean();
 
@@ -255,7 +253,8 @@ class FollowService extends CServiceBase implements IFollowService {
         if ($auccode == "all") {
             $name = "ทั้งหมด";
         }
-        header("Content-Disposition: attachment;filename=สรุปปริมาณรับมอบข้าว_" . str_replace("/", "_", $name) . ".xls");
+
+        header("Content-Disposition: attachment;filename=" . "สรุปปริมาณรับมอบข้าว_" . str_replace("/", "_", $name) . ".xls");
 
         $objWriter = \PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
@@ -332,21 +331,29 @@ class FollowService extends CServiceBase implements IFollowService {
 
         $keyCell = $sheet->getCell('A2')->getFormattedValue();
         $key = explode("-", str_replace("Code:", "", $keyCell));
-
-        $auccode = $key[0];
-        $associateId = $key[1];
+        
+        if(count($key)<=2){
+            $auccode = $key[0];
+            $associateId = $key[1];
+        }else{
+            $auccode = $key[0]."-".$key[1];
+            $associateId = $key[2];
+        }
+        
+        
 
         $check = new \apps\common\entity\RiceFollow();
         $check->statusKeyword = $auccode;
         $check->associateId = $associateId;
-
+        
         for ($row = $rowStart; $row <= $highestRow; $row++) {
-            $followCode = $sheet->getCell('A' . $row)->getFormattedValue();
-
+                $followCode = $sheet->getCell('A' . $row)->getFormattedValue();
+                
             if ($followCode != "") {
                 $check->followCode = $followCode;
-                $data = $this->datacontext->getObject($check, array(), 1)[0];
-
+                $data = $this->datacontext->getObject($check)[0];//, array(), 1)[0];
+//                print_r($data);
+//                exit();
                 $lotCode = $data->lotCode;
                 $statusKeyword = $data->statusKeyword;
                 $bidderId = $data->bidderId;
