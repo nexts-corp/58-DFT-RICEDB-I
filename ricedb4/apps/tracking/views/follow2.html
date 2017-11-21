@@ -1,0 +1,139 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li class="active">ระบบติดตาม</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding">ปริมาณที่ส่งมอบข้าวสาร</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container">
+        <div class="row">
+            <div class="form-group">
+                <form id="form" class="form-horizontal form-bordered" onsubmit="return(false)">
+                    <div class="col-md-10">
+                        <label class="col-md-2 control-label" for="fileName">ไฟล์ :</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="fileName" placeholder="Choose File" disabled="disabled" />
+                        </div>
+                        <div class="col-md-2">
+                            <div class="fileUpload btn btn-primary">
+                                <span><i class="fa fa-folder-open"></i> เลือก</span>
+                                <input id="fileUpload" type="file" class="upload" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label" for="fileName">วันที่ :</label>
+                            <input type="text" class="col-md-8 datepicker" name="uploadDate" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 text-right">
+                        <button class="btn btn-success upload" disabled><i class="fa fa-upload"></i> อัพโหลด</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-12 text-center" id="readLoading"></div>
+
+            <div class="col-md-12">
+                <table  class="table table-bordered table-striped table-condensed mb-none">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="vertical-align: middle;">ผู้เข้าร่วม</th>
+                            <th class="text-center" style="vertical-align: middle;">ครั้งที่</th>
+                            <th class="text-center" style="vertical-align: middle;">ปี พ.ศ.</th>
+                            <th class="text-center" style="vertical-align: middle;">ประเภท</th>
+                            <th class="text-center" style="vertical-align: middle;">ตามอนุมัติ</th>
+                            <th class="text-center" style="vertical-align: middle;">ทำสัญญาแล้ว</th>
+                            <th class="text-center" style="vertical-align: middle;">รับมอบแล้ว</th>
+                            <th class="text-center" style="vertical-align: middle;">คงเหลือ</th>
+                            <th class="text-center" style="vertical-align: middle;">น้ำหนักสูญหาย</th>
+                            <th class="text-center" style="vertical-align: middle;">%การรับมอบ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                        <tr>
+                            <td colspan="10" class="text-center">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{>footer}}
+<script type="text/javascript">
+    $(document).ready(function () {
+        lists();
+        $(".datepicker").datepicker({
+            format: "yyyy-mm-dd",
+            autoclose: true
+        });
+        $(".datepicker").change(function () {
+            checkBtnUpload();
+        });
+        function checkBtnUpload() {
+            if ($(".datepicker").val() == "" || $("#fileName").val() == "") {
+                $("button.upload").prop('disabled', true);
+            } else {
+                $("button.upload").prop('disabled', false);
+            }
+        }
+        $("#fileUpload").change(function () {
+            $("#fileName").val($(this).val());
+            checkBtnUpload();
+        });
+        $("button.upload").click(function () {
+            var formData = new FormData();
+            formData.append('file', $('#fileUpload')[0].files[0]);
+            formData.append('uploadDate', $('.datepicker').val());
+            callbackAjaxFile("{{_context_path}}/api/tracking/follow2/upload", "post", formData, "json"
+                    , function (datas) {
+                        if (datas["upload"] == "uploaded") {
+                            lists();
+                        }
+                    });
+
+        });
+
+        function lists() {
+            callbackAjax("{{_context_path}}/api/tracking/follow2/lists", "post", {}, "json",
+                    function (datas) {
+                        var html = datas["lists"].length > 0 ? '' : '<tr><td colspan="10" class="text-center">ไม่มีข้อมูล</td></tr>';
+                        $.each(datas["lists"], function (k, v) {
+                            html += '<tr>'
+                                    + '<td class="text-center">' + v.associate + '</td>'
+                                    + '<td class="text-center">' + v.follow_no + '</td>'
+                                    + '<td class="text-center">' + v.follow_year + '</td>'
+                                    + '<td class="text-center">' + v.follow_type + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(v.weight_approve, 6, ",", ".") + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(v.weight_contract, 6, ",", ".") + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(v.weight_received, 6, ",", ".") + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(v.weight_balance, 6, ",", ".") + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(v.weight_lost, 6, ",", ".") + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(v.percent_received, 2, ",", ".") + '</td>'
+                                    + '</tr>';
+                        });
+                        $("#table").html(html);
+                    });
+
+        }
+    });
+</script>
+

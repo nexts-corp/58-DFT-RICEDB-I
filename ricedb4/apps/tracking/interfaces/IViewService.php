@@ -70,5 +70,15 @@ interface IViewService {
      */
     public function follow();
     
+    /**
+     * @name follow2
+     * @uri /follow2
+     * @description M77 ปริมาณการส่งมอบ(ใหม่)
+     * @authen true
+     * @resource 10001000
+     * @sitemap true
+     */
+    public function follow2();
+    
     
 }

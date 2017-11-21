@@ -14,6 +14,7 @@ $(function () {
     viewReserve();
 
     tracking();
+
 });
 
 function viewInventory(option) {
@@ -172,60 +173,62 @@ function drawGraph(option, dataX, dataY) {
 
 function ricePrice() {
     var price = '';
-    var datas = callAjax(js_context_path + "/api/home/widget/ricePrice", "post", {}, "json");
-    if (typeof datas !== "undefined" && datas !== null) {
-        $.each(datas["lists"], function (key, value) {
-            price += '<div>'
-                    + '<h4 class="text-dark">' + value["Type"] + '</h4>'
-                    + '<table class="table">'
-                    + '<thead>'
-                    + '<tr>'
-                    + '<th class="text-center">ราคา (บาท/ตัน)</th>'
-                    + '<th class="text-center">ชนิดข้าว</th>'
-                    + '<th class="text-right">ต่ำสุด</th>'
-                    + '<th class="text-right">สูงสุด</th>'
-                    + '</tr>'
-                    + '</thead>'
-                    + '<tbody>'
-                    + '<tr>'
-                    + '<td rowspan="2">กรมการค้าภายใน</td>'
-                    + '<td class="text-center">เก่า</td>'
-                    + '<td class="text-right">' + checkZero(value["OldPriceMin1"]) + '</td>'
-                    + '<td class="text-right">' + checkZero(value["OldPriceMax1"]) + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                    + '<td class="text-center">ใหม่</td>'
-                    + '<td class="text-right">' + checkZero(value["NewPriceMin1"]) + '</td>'
-                    + '<td class="text-right">' + checkZero(value["NewPriceMax1"]) + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                    + '<td rowspan="2">สมาคมโรงสี</td>'
-                    + '<td class="text-center">เก่า</td>'
-                    + '<td class="text-right">' + checkZero(value["OldPriceMin2"]) + '</td>'
-                    + '<td class="text-right">' + checkZero(value["OldPriceMax2"]) + '</td>'
-                    + '</tr>'
-                    + '<tr>'
-                    + '<td class="text-center">ใหม่</td>'
-                    + '<td class="text-right">' + checkZero(value["NewPriceMin2"]) + '</td>'
-                    + '<td class="text-right">' + checkZero(value["NewPriceMax2"]) + '</td>'
-                    + '</tr>'
-                    + '</tbody>'
-                    + '</table>'
-                    + '<div class="text-right text-sm">ข้อมูล ณ วันที่ ' + thaiDate(value["Date"].substr(8, 2), value["Date"].substr(5, 2), value["Date"].substr(0, 4)) + '</div>'
-                    + '</div>';
-        });
+    callbackAjax(js_context_path + "/api/home/widget/ricePrice", "post", {}, "json",
+            function (datas) {
+                if (typeof datas !== "undefined" && datas !== null) {
+                    $.each(datas["lists"], function (key, value) {
+                        price += '<div>'
+                                + '<h4 class="text-dark">' + value["Type"] + '</h4>'
+                                + '<table class="table">'
+                                + '<thead>'
+                                + '<tr>'
+                                + '<th class="text-center">ราคา (บาท/ตัน)</th>'
+                                + '<th class="text-center">ชนิดข้าว</th>'
+                                + '<th class="text-right">ต่ำสุด</th>'
+                                + '<th class="text-right">สูงสุด</th>'
+                                + '</tr>'
+                                + '</thead>'
+                                + '<tbody>'
+                                + '<tr>'
+                                + '<td rowspan="2">กรมการค้าภายใน</td>'
+                                + '<td class="text-center">เก่า</td>'
+                                + '<td class="text-right">' + checkZero(value["OldPriceMin1"]) + '</td>'
+                                + '<td class="text-right">' + checkZero(value["OldPriceMax1"]) + '</td>'
+                                + '</tr>'
+                                + '<tr>'
+                                + '<td class="text-center">ใหม่</td>'
+                                + '<td class="text-right">' + checkZero(value["NewPriceMin1"]) + '</td>'
+                                + '<td class="text-right">' + checkZero(value["NewPriceMax1"]) + '</td>'
+                                + '</tr>'
+                                + '<tr>'
+                                + '<td rowspan="2">สมาคมโรงสี</td>'
+                                + '<td class="text-center">เก่า</td>'
+                                + '<td class="text-right">' + checkZero(value["OldPriceMin2"]) + '</td>'
+                                + '<td class="text-right">' + checkZero(value["OldPriceMax2"]) + '</td>'
+                                + '</tr>'
+                                + '<tr>'
+                                + '<td class="text-center">ใหม่</td>'
+                                + '<td class="text-right">' + checkZero(value["NewPriceMin2"]) + '</td>'
+                                + '<td class="text-right">' + checkZero(value["NewPriceMax2"]) + '</td>'
+                                + '</tr>'
+                                + '</tbody>'
+                                + '</table>'
+                                + '<div class="text-right text-sm">ข้อมูล ณ วันที่ ' + thaiDate(value["Date"].substr(8, 2), value["Date"].substr(5, 2), value["Date"].substr(0, 4)) + '</div>'
+                                + '</div>';
+                    });
 
-    }
+                }
 
-    $("#price").html(price);
+                $("#price").html(price);
+            });
+
 }
 
 function checkZero(input) {
     var output = '';
     if (input == 0.0) {
         output = '-';
-    }
-    else {
+    } else {
         output = accounting.formatNumber(input, 2, ",", ".");
     }
 
@@ -233,143 +236,148 @@ function checkZero(input) {
 }
 
 function auctionLatest() {
-    var datas = callAjax(js_context_path + "/api/home/widget/auctionLatest", "post", {}, "json");
-    if (typeof datas !== "undefined" && datas !== null) {
-        var data = datas["lists"];
+    callbackAjax(js_context_path + "/api/home/widget/auctionLatest", "post", {}, "json",
+            function (datas) {
+                if (typeof datas !== "undefined" && datas !== null) {
+                    var data = datas["lists"];
 
-        //console.log(data["status"]);
-        if (typeof data["status"] !== "undefined") {
-            var index = data["status"].indexOf('(');
-            var auction = '<div>'
-                    + '<div class="row text-center">'
-                    + '<h4 class="text-dark">'
-                    + 'ประมูลครั้งที่ ' + data["status"].substring(0, index)
-                    + '<br> ' + data["status"].substring(index, data["status"].length)
-                    + '<div class="text-sm">วันที่ ' + data["auctionDate"] + '</div>'
-                    + '</h4>'
-                    + '</div>'
-                    + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">ปริมาณ :</div>'
-                    + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["sumWeight"], 6, ",", ".") + ' ตัน</div>'
-                    + '</div>'
-                    + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">มูลค่า :</div>'
-                    + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["sumPrice"], 2, ",", ".") + ' บาท</div>'
-                    + '</div>'
+                    //console.log(data["status"]);
+                    if (typeof data["status"] !== "undefined") {
+                        var index = data["status"].indexOf('(');
+                        var auction = '<div>'
+                                + '<div class="row text-center">'
+                                + '<h4 class="text-dark">'
+                                + 'ประมูลครั้งที่ ' + data["status"].substring(0, index)
+                                + '<br> ' + data["status"].substring(index, data["status"].length)
+                                + '<div class="text-sm">วันที่ ' + data["auctionDate"] + '</div>'
+                                + '</h4>'
+                                + '</div>'
+                                + '<div class="row">'
+                                + '<div class="col-md-3 text-right text-bold">ปริมาณ :</div>'
+                                + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["sumWeight"], 6, ",", ".") + ' ตัน</div>'
+                                + '</div>'
+                                + '<div class="row">'
+                                + '<div class="col-md-3 text-right text-bold">มูลค่า :</div>'
+                                + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["sumPrice"], 2, ",", ".") + ' บาท</div>'
+                                + '</div>'
+                                + '<table class="table">'
+                                + '<thead>'
+                                + '<tr>'
+                                + '<th class="text-center">ลำดับ</th>'
+                                + '<th class="text-center">ชนิด</th>'
+                                + '<th class="text-right">ปริมาณ (ตัน)</th>'
+                                + '</tr>'
+                                + '</thead>'
+                                + '<tbody>';
+
+                        var count = 0;
+                        $.each(data["riceGroup"], function (key, val) {
+                            auction += '<tr>'
+                                    + '<td class="text-center">' + (++count) + '</td>'
+                                    + '<td class="text-left">' + val["typeName"] + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(val["weight"], 6, ",", ".") + '</td>'
+                                    + '</tr>';
+                        });
+
+                        auction += '</tbody>'
+                                + '</table>'
+                                + '</div>';
+
+                    }
+                }
+
+                $("#auction").html(auction);
+            });
+
+}
+
+function viewReserve() {
+    callbackAjax(js_context_path + "/api/home/widget/viewReserve", "post", {}, "json", function (datas) {
+        if (typeof datas !== "undefined" && datas !== null) {
+            var reserve = '<div>'
                     + '<table class="table">'
                     + '<thead>'
                     + '<tr>'
                     + '<th class="text-center">ลำดับ</th>'
-                    + '<th class="text-center">ชนิด</th>'
+                    + '<th class="text-center">รายละเอียด</th>'
                     + '<th class="text-right">ปริมาณ (ตัน)</th>'
                     + '</tr>'
                     + '</thead>'
                     + '<tbody>';
 
             var count = 0;
-            $.each(data["riceGroup"], function (key, val) {
-                auction += '<tr>'
-                        + '<td class="text-center">' + (++count) + '</td>'
-                        + '<td class="text-left">' + val["typeName"] + '</td>'
-                        + '<td class="text-right">' + accounting.formatNumber(val["weight"], 6, ",", ".") + '</td>'
+            $.each(datas["lists"], function (key, val) {
+                reserve += '<tr>'
+                        + '<td class="text-center col-md-1">' + (++count) + '</td>'
+                        + '<td class="text-left col-md-7">' + val["reserveName"] + ' - ' + val["detail"] + '</td>'
+                        + '<td class="text-right col-md-4">' + accounting.formatNumber(val["target"], 2, ",", ".") + '</td>'
                         + '</tr>';
             });
 
-            auction += '</tbody>'
+            reserve += '</tbody>'
                     + '</table>'
                     + '</div>';
 
+            $("#reserve").html(reserve);
         }
-    }
 
-    $("#auction").html(auction);
-}
-
-function viewReserve() {
-    var datas = callAjax(js_context_path + "/api/home/widget/viewReserve", "post", {}, "json");
-    if (typeof datas !== "undefined" && datas !== null) {
-        var reserve = '<div>'
-                + '<table class="table">'
-                + '<thead>'
-                + '<tr>'
-                + '<th class="text-center">ลำดับ</th>'
-                + '<th class="text-center">รายละเอียด</th>'
-                + '<th class="text-right">ปริมาณ (ตัน)</th>'
-                + '</tr>'
-                + '</thead>'
-                + '<tbody>';
-
-        var count = 0;
-        $.each(datas["lists"], function (key, val) {
-            reserve += '<tr>'
-                    + '<td class="text-center col-md-1">' + (++count) + '</td>'
-                    + '<td class="text-left col-md-7">' + val["reserveName"] + ' - ' + val["detail"] + '</td>'
-                    + '<td class="text-right col-md-4">' + accounting.formatNumber(val["target"], 2, ",", ".") + '</td>'
-                    + '</tr>';
-        });
-
-        reserve += '</tbody>'
-                + '</table>'
-                + '</div>';
-
-        $("#reserve").html(reserve);
-    }
+    });
 
 
 }
 
 function tracking() {
 
-    var datas = callAjax(js_context_path + "/api/home/widget/tracking", "post", {}, "json");
-    if (typeof datas !== "undefined" && datas !== null) {
-        var data = datas["lists"];
+    callbackAjax(js_context_path + "/api/home/widget/tracking", "post", {}, "json",
+            function (datas) {
+                if (typeof datas !== "undefined" && datas !== null) {
+                    var data = datas["lists"];
 
-        //console.log(data["status"]);
-        if (typeof data !== "no data") {
-            var index = data["status"].indexOf('(');
-            var auction = '<div>'
-                    + '<div class="row text-center">'
-                    + '<h4 class="text-dark">'
-                    + 'ประมูลครั้งที่ ' + data["status"].substring(0, index)
-                    + '<br> ' + data["status"].substring(index, data["status"].length)
-                    + '<div class="text-sm">วันที่ ' + data["auctionDate"] + '</div>'
-                    + '<div class="text-danger">ผ่านมาแล้ว ' + data["daysPass"] + ' วัน!</div>'
-                    + '</h4>'
-                    + '</div>'
-                    + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">ทำสัญญา :</div>'
-                    + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["weightApprove"], 6, ",", ".") + ' ตัน</div>'
-                    + '</div>'
-                    + '<div class="row">'
-                    + '<div class="col-md-3 text-right text-bold">ส่งมอบ :</div>'
-                    + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["weightReceived"], 2, ",", ".") + ' ตัน</div>'
-                    + '</div>'
-                    + '<table class="table">'
-                    + '<thead>'
-                    + '<tr>'
-                    + '<th class="text-center">ลำดับ</th>'
-                    + '<th class="text-center">ผู้เข้าร่วม</th>'
-                    + '<th class="text-right">ปริมาณ (ตัน)</th>'
-                    + '</tr>'
-                    + '</thead>'
-                    + '<tbody>';
+                    //console.log(data["status"]);
+                    if (typeof data !== "no data") {
+                        var index = data["status"].indexOf('(');
+                        var auction = '<div>'
+                                + '<div class="row text-center">'
+                                + '<h4 class="text-dark">'
+                                + 'ประมูลครั้งที่ ' + data["status"].substring(0, index)
+                                + '<br> ' + data["status"].substring(index, data["status"].length)
+                                + '<div class="text-sm">วันที่ ' + data["auctionDate"] + '</div>'
+                                + '<div class="text-danger">ผ่านมาแล้ว ' + data["daysPass"] + ' วัน!</div>'
+                                + '</h4>'
+                                + '</div>'
+                                + '<div class="row">'
+                                + '<div class="col-md-3 text-right text-bold">ทำสัญญา :</div>'
+                                + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["weightApprove"], 6, ",", ".") + ' ตัน</div>'
+                                + '</div>'
+                                + '<div class="row">'
+                                + '<div class="col-md-3 text-right text-bold">ส่งมอบ :</div>'
+                                + '<div class="col-md-9 text-left">' + accounting.formatNumber(data["weightReceived"], 2, ",", ".") + ' ตัน</div>'
+                                + '</div>'
+                                + '<table class="table">'
+                                + '<thead>'
+                                + '<tr>'
+                                + '<th class="text-center">ลำดับ</th>'
+                                + '<th class="text-center">ผู้เข้าร่วม</th>'
+                                + '<th class="text-right">ปริมาณ (ตัน)</th>'
+                                + '</tr>'
+                                + '</thead>'
+                                + '<tbody>';
 
-            var count = 0;
-            $.each(data["tracking"], function (key, val) {
-                auction += '<tr>'
-                        + '<td class="text-center">' + (++count) + '</td>'
-                        + '<td class="text-left">' + val["associate"] + '</td>'
-                        + '<td class="text-right">' + accounting.formatNumber(val["weightApprove"], 6, ",", ".") + '</td>'
-                        + '</tr>';
+                        var count = 0;
+                        $.each(data["tracking"], function (key, val) {
+                            auction += '<tr>'
+                                    + '<td class="text-center">' + (++count) + '</td>'
+                                    + '<td class="text-left">' + val["associate"] + '</td>'
+                                    + '<td class="text-right">' + accounting.formatNumber(val["weightApprove"], 6, ",", ".") + '</td>'
+                                    + '</tr>';
+                        });
+
+                        auction += '</tbody>'
+                                + '</table>'
+                                + '</div>';
+
+                    }
+                }
+                $("#tracking").html(auction);
             });
-
-            auction += '</tbody>'
-                    + '</table>'
-                    + '</div>';
-
-        }
-    }
-    $("#tracking").html(auction);
-
-
 }

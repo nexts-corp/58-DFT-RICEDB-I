@@ -1,0 +1,76 @@
+{{>header}}
+<div role="main" class="main">
+    <section class="page-top none-margin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="breadcrumb">
+                        <li><a href="{{_context_path}}/api/root/view/index">{{#i18n}}system.home{{/i18n}}</a></li>
+                        <li class="active">{{#i18n}}report.menu{{/i18n}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="none-padding" id="header1">{{#i18n}}report.auction.title{{/i18n}}</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="tall dashboard">
+
+    <div class="container"><!-- table shown bidder information list -->
+        <div class="row">
+            <div class="col-md-12" style="text-align: center; margin: 15px;">
+                <div class="form-group">
+                    <label class="col-md-3 control-label text-right req" for="auCode">{{#i18n}}report.auctionNo{{/i18n}} :</label>
+                    <div class="col-md-6">
+                        <select class="form-control input-sm" name="auCode" id="auCode" required>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bidderTable" class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed mb-none">
+                        <thead>
+                            <tr>
+                                <th class="text-center">{{#i18n}}report.no{{/i18n}}</th>
+                                <th class="text-center">{{#i18n}}report.bidder{{/i18n}}</th>
+                                <th class="text-center">{{#i18n}}report.export{{/i18n}}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bidderBody">
+                            <tr>
+                                <td colspan="3" class="text-center">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><!-- col-md-12 -->
+        </div><!--  row  -->
+    </div><!--  container  -->
+</div><!-- main -->
+{{>footer}}
+<script type="text/javascript">
+    $(function () {
+        $("#auCode").html(listAuction());
+    });
+
+    function listAuction() {
+        var html = '';
+
+        var datas = callAjax("{{_context_path}}/api/report/report/listsIndustry", "post", {}, "json");
+        if (typeof datas !== 'undefined' && datas !== null) {
+            for (var i = 0; i < datas["lists"].length; i++) {
+                var value = datas["lists"][i];
+
+                html += '<option value="' + value["keyword"] + '">' + value["status"] + '</option>';
+            }
+        }
+        return html;
+    }
+
+</script>

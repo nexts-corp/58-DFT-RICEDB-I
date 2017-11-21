@@ -39,4 +39,9 @@ class ViewService extends CServiceBase implements IViewService {
         return $view;
     }
 
+    public function follow2() {
+        $view = new CJView("follow2", CJViewType::HTML_VIEW_ENGINE);
+        return $view;
+    }
+
 }

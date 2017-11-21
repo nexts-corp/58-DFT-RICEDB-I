@@ -1,10 +1,10 @@
 $.extend(true, $.fn.dataTable.defaults, {
-    "destroy": true,                 
+    "destroy": true,
     "iDisplayLength": 50,
     "oLanguage": {
         "sInfo": "<span style='font-size: 120%;'>รายการที่ _START_ ถึง _END_ จาก <span style='color: blue;'>_TOTAL_</span> รายการ</span>",
         "sInfoEmpty": "",
-        "sInfoFiltered" : "(จากทั้งหมด _MAX_ รายการ)",
+        "sInfoFiltered": "(จากทั้งหมด _MAX_ รายการ)",
         "sEmptyTable": "ไม่มีข้อมูล",
         "sLengthMenu": "_MENU_ รายการต่อหน้า"
     }
@@ -60,9 +60,8 @@ function sendData(formId, callback) {
         error: function (xhr) {
             if (xhr.status == 401) {
                 window.location.href = xhr.getResponseHeader('Location');
-            }
-            else if (xhr.status == 403) {
-               alert("ไม่มีสิทธิ์ใช้งานส่วนนี้");
+            } else if (xhr.status == 403) {
+                alert("ไม่มีสิทธิ์ใช้งานส่วนนี้");
             }
             value = "Time Out!!";
 
@@ -97,6 +96,10 @@ function dataJson(formId) {
 
 function callAjax(url, type, data, dataType) {
     var value = "";
+    $.loader({
+        className: "blue-with-image-2",
+        content: ''
+    });
     $.ajax({
         url: url,
         type: type,
@@ -107,12 +110,14 @@ function callAjax(url, type, data, dataType) {
         error: function (xhr) {
             if (xhr.status == 401) {
                 window.location.href = xhr.getResponseHeader('Location');
-            }
-            else if (xhr.status == 403) {
-               alert("ไม่มีสิทธิ์ใช้งานส่วนนี้");
+            } else if (xhr.status == 403) {
+                alert("ไม่มีสิทธิ์ใช้งานส่วนนี้");
             }
             value = "Time Out!!";
 
+        },
+        complete: function () {
+            $.loader('close');
         },
         success: function (result) {
             value = result;
@@ -127,17 +132,16 @@ function callAjaxFile(url, type, data, dataType) {
         url: url,
         type: type,
         async: false,
-        timeout: 60000, // 1000 = 1 s
+//        timeout: 60000, // 1000 = 1 s
         dataType: dataType,
         data: data,
         enctype: 'multipart/form-data',
-        processData: false,  // tell jQuery not to process the data
-        contentType: false,  // tell jQuery not to set contentType
+        processData: false, // tell jQuery not to process the data
+        contentType: false, // tell jQuery not to set contentType
         error: function (xhr) {
             if (xhr.status == 401) {
                 window.location.href = xhr.getResponseHeader('Location');
-            }
-            else if (xhr.status == 403) {
+            } else if (xhr.status == 403) {
                 alert("ไม่มีสิทธิ์ใช้งานส่วนนี้");
             }
             value = "Time Out!!";
@@ -156,22 +160,87 @@ function getTag(param, defaultValue) {
 
     return param;
 }
+function callbackAjax(url, type, data, dataType, callback) {
 
+    $.ajax({
+        url: url,
+        type: type,
+        async: true,
+        timeout: 20000, // 1000 = 1 s
+        dataType: dataType,
+        data: data,
+        error: function (xhr) {
+            if (xhr.status == 401) {
+                window.location.href = xhr.getResponseHeader('Location');
+            } else if (xhr.status == 403) {
+                alert("ไม่มีสิทธิ์ใช้งานส่วนนี้");
+            }
+        },
+        beforeSend: function () {
+            $.loader({
+                className: "blue-with-image-2",
+                content: ''
+            });
+        },
+        complete: function () {
+            $.loader('close');
+        },
+        success: function (result) {
+            callback(result);
+        }
+    });
+}
 
-function logout(){
-    $.removeCookie("token", { path: '/' });
-    $.removeCookie("userinfo", { path: '/' });
+function callbackAjaxFile(url, type, data, dataType, callback) {
+//    var value = "";
+    $.ajax({
+        url: url,
+        type: type,
+        async: true,
+//        timeout: 60000, // 1000 = 1 s
+        dataType: dataType,
+        data: data,
+        enctype: 'multipart/form-data',
+        processData: false, // tell jQuery not to process the data
+        contentType: false, // tell jQuery not to set contentType
+        error: function (xhr) {
+            if (xhr.status == 401) {
+                window.location.href = xhr.getResponseHeader('Location');
+            } else if (xhr.status == 403) {
+                alert("ไม่มีสิทธิ์ใช้งานส่วนนี้");
+            }
+//            value = "Time Out!!";
+
+        },
+        beforeSend: function () {
+            $.loader({
+                className: "blue-with-image-2",
+                content: ''
+            });
+        },
+        complete: function () {
+            $.loader('close');
+        },
+        success: function (result) {
+            callback(result);
+        }
+    });
+//    return value;
+}
+function logout() {
+    $.removeCookie("token", {path: '/'});
+    $.removeCookie("userinfo", {path: '/'});
     window.location.href = '/ricedb4/api/root/view/index';
 }
 
-function thaiDate(day, month, year){
+function thaiDate(day, month, year) {
     var monthArr = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
 
     var dayT = parseInt(day);
     var monthT = monthArr[parseInt(month) - 1];
     var yearT = parseInt(year) + 543;
 
-    var dateT = dayT+" "+monthT+" "+yearT;
+    var dateT = dayT + " " + monthT + " " + yearT;
 
     return dateT;
 }

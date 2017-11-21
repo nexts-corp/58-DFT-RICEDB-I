@@ -8,7 +8,7 @@
             "contextType": "data",
             "propertys": [
                 {"name": "driver","value": "pdo_sqlsrv"},
-                {"name": "host","value": "10.3.1.173"},
+                {"name": "host","value": "10.3.231.39"},
                 {"name": "port","value": "1433"},
                 {"name": "dbname","value": "RiceDB"},
                 {"name": "user","value": "riceuser"},
